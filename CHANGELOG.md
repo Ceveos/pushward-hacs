@@ -1,5 +1,14 @@
 # Changelog
 
+## 0.2.0
+
+- Replace the multi-page post-template setup with one form containing
+  collapsible lifecycle, content, appearance, and refresh sections.
+- Replace ambiguous Steps lists with per-step rows that distinguish parallel
+  jobs from relative duration/width and optional color.
+- Add current-step live progress, duration weighting, and per-step colors.
+- Require Home Assistant 2026.6 or newer for native config-flow sections.
+
 ## 0.1.0
 
 - Fork the full PushWard Home Assistant integration under the MIT license.

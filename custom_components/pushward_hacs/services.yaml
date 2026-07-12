@@ -390,6 +390,19 @@ update_activity_generic:
     display_options:
       collapsed: true
       fields:
+        live_progress:
+          description: Animate progress toward the estimated completion between pushes. Requires an end date or duration.
+          selector:
+            boolean:
+        duration:
+          description: Estimated remaining duration in seconds or a value such as 10m or 1h30m.
+          selector:
+            text:
+        end_date:
+          description: Estimated completion as a Unix timestamp. Overrides duration.
+          selector:
+            number:
+              mode: box
         completion_message:
           example: "Download complete!"
           selector:
@@ -636,6 +649,27 @@ update_activity_steps:
         step_rows:
           selector:
             object:
+        step_weights:
+          description: Relative duration/width for every step. Length must equal total steps.
+          selector:
+            object:
+        step_colors:
+          description: Optional named or hex color for every step. Length must equal total steps.
+          selector:
+            object:
+        live_progress:
+          description: Animate progress within the current step. Requires an end date or duration.
+          selector:
+            boolean:
+        duration:
+          description: Expected duration of the current step, such as 90m.
+          selector:
+            text:
+        end_date:
+          description: Expected finish time of the current step as a Unix timestamp.
+          selector:
+            number:
+              mode: box
     action_buttons:
       collapsed: true
       fields:
@@ -1165,6 +1199,16 @@ update_activity_board:
       example: '{"url": "homeassistant://navigate/lovelace/0"}'
       selector:
         object:
+    url_action:
+      description: Primary button action, including foreground links or silent HTTP webhooks.
+      example: '{"url": "https://example.com/ack", "title": "Acknowledge", "method": "POST"}'
+      selector:
+        object:
+    secondary_url_action:
+      description: Secondary button action.
+      example: '{"url": "https://example.com/details", "title": "Details", "foreground": true}'
+      selector:
+        object:
     sound:
       example: "chime"
       selector:
@@ -1236,6 +1280,16 @@ update_activity_log:
         text:
     tap_action:
       example: '{"url": "homeassistant://navigate/lovelace/0"}'
+      selector:
+        object:
+    url_action:
+      description: Primary button action, including foreground links or silent HTTP webhooks.
+      example: '{"url": "https://example.com/ack", "title": "Acknowledge", "method": "POST"}'
+      selector:
+        object:
+    secondary_url_action:
+      description: Secondary button action.
+      example: '{"url": "https://example.com/details", "title": "Details", "foreground": true}'
       selector:
         object:
     sound:

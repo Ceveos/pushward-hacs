@@ -58,6 +58,7 @@ from custom_components.pushward_hacs.const import (
     CONF_ICON_ATTRIBUTE,
     CONF_INTEGRATION_KEY,
     CONF_LABEL,
+    CONF_LIVE_PROGRESS,
     CONF_LOG_COLUMNS,
     CONF_LOG_LEVEL_ATTRIBUTE,
     CONF_MAX_VALUE,
@@ -81,8 +82,11 @@ from custom_components.pushward_hacs.const import (
     CONF_START_STATES,
     CONF_STAT_ROWS,
     CONF_STATE_LABELS,
+    CONF_STEP_COLORS,
+    CONF_STEP_CONFIGURATION,
     CONF_STEP_LABELS,
     CONF_STEP_ROWS,
+    CONF_STEP_WEIGHTS,
     CONF_SUBTITLE_ATTRIBUTE,
     CONF_SUBTITLE_ENTITY,
     CONF_TAP_ACTION_FOREGROUND,
@@ -151,7 +155,9 @@ def _mock_details_input(template: str = "generic", **overrides) -> dict:
     if template in ("generic", "countdown"):
         data[CONF_REMAINING_TIME_ATTR] = ""
     if template == "steps":
-        data[CONF_TOTAL_STEPS] = 1
+        data[CONF_STEP_CONFIGURATION] = [
+            {"label": "Step 1", "parallel_jobs": 1, "weight": 1, "color": ""}
+        ]
         data[CONF_CURRENT_STEP_ATTR] = ""
     if template == "alert":
         data[CONF_SEVERITY] = "info"
@@ -246,11 +252,39 @@ async def _add_entity_subentry(
     assert result["step_id"] == "details"
 
     # Step 2 → Create
+    details = _section_user_input(result["data_schema"], details)
     result = await hass.config_entries.subentries.async_configure(
         result["flow_id"],
         user_input=details,
     )
     return result
+
+
+def _section_user_input(schema: vol.Schema, flat: dict) -> dict:
+    """Place flat test values into the section that owns each field."""
+    nested: dict = {}
+    for marker, validator in schema.schema.items():
+        section_name = str(marker.schema if isinstance(marker, vol.Marker) else marker)
+        nested[section_name] = {
+            str(field.schema if isinstance(field, vol.Marker) else field): flat[
+                str(field.schema if isinstance(field, vol.Marker) else field)
+            ]
+            for field in validator.schema.schema
+            if str(field.schema if isinstance(field, vol.Marker) else field) in flat
+        }
+    return nested
+
+
+def _all_schema_keys(schema: vol.Schema) -> set[str]:
+    """Return field names from a flat or one-level sectioned schema."""
+    keys: set[str] = set()
+    for marker, validator in schema.schema.items():
+        name = str(marker.schema if isinstance(marker, vol.Marker) else marker)
+        if hasattr(validator, "schema") and isinstance(validator.schema, vol.Schema):
+            keys.update(_schema_keys(validator.schema))
+        else:
+            keys.add(name)
+    return keys
 
 
 @pytest.fixture
@@ -596,7 +630,13 @@ async def test_subentry_add_steps_entity(hass: HomeAssistant) -> None:
         hass,
         entry,
         template="steps",
-        details_overrides={CONF_TOTAL_STEPS: 5, CONF_CURRENT_STEP_ATTR: "step"},
+        details_overrides={
+            CONF_STEP_CONFIGURATION: [
+                {"label": label, "parallel_jobs": 1, "weight": weight, "color": ""}
+                for label, weight in [("Pre-wash", 1), ("Wash", 4), ("Rinse", 1), ("Dry", 2), ("Done", 1)]
+            ],
+            CONF_CURRENT_STEP_ATTR: "step",
+        },
     )
     assert result["type"] is FlowResultType.CREATE_ENTRY
     subentries = list(entry.subentries.values())
@@ -660,7 +700,7 @@ async def test_subentry_generic_hides_steps_alert_fields(hass: HomeAssistant) ->
     assert result["step_id"] == "details"
 
     # Check which fields are in the schema
-    schema_keys = {str(k) for k in result["data_schema"].schema}
+    schema_keys = _all_schema_keys(result["data_schema"])
     assert CONF_PROGRESS_ATTRIBUTE in schema_keys
     assert CONF_REMAINING_TIME_ATTR in schema_keys
     assert CONF_TOTAL_STEPS not in schema_keys
@@ -683,11 +723,11 @@ async def test_subentry_steps_shows_steps_fields(hass: HomeAssistant) -> None:
     )
     assert result["step_id"] == "details"
 
-    schema_keys = {str(k) for k in result["data_schema"].schema}
-    assert CONF_TOTAL_STEPS in schema_keys
+    schema_keys = _all_schema_keys(result["data_schema"])
+    assert CONF_STEP_CONFIGURATION in schema_keys
     assert CONF_CURRENT_STEP_ATTR in schema_keys
     assert CONF_PROGRESS_ATTRIBUTE in schema_keys
-    assert CONF_REMAINING_TIME_ATTR not in schema_keys
+    assert CONF_REMAINING_TIME_ATTR in schema_keys
     assert CONF_SEVERITY not in schema_keys
 
 
@@ -706,7 +746,7 @@ async def test_subentry_alert_shows_severity(hass: HomeAssistant) -> None:
     )
     assert result["step_id"] == "details"
 
-    schema_keys = {str(k) for k in result["data_schema"].schema}
+    schema_keys = _all_schema_keys(result["data_schema"])
     assert CONF_SEVERITY in schema_keys
     assert CONF_TOTAL_STEPS not in schema_keys
     assert CONF_CURRENT_STEP_ATTR not in schema_keys
@@ -729,7 +769,7 @@ async def test_subentry_countdown_shows_remaining_time(hass: HomeAssistant) -> N
     )
     assert result["step_id"] == "details"
 
-    schema_keys = {str(k) for k in result["data_schema"].schema}
+    schema_keys = _all_schema_keys(result["data_schema"])
     assert CONF_REMAINING_TIME_ATTR in schema_keys
     assert CONF_PROGRESS_ATTRIBUTE not in schema_keys
     assert CONF_TOTAL_STEPS not in schema_keys
@@ -801,7 +841,7 @@ async def test_subentry_gauge_shows_gauge_fields(hass: HomeAssistant) -> None:
     )
     assert result["step_id"] == "details"
 
-    schema_keys = {str(k) for k in result["data_schema"].schema}
+    schema_keys = _all_schema_keys(result["data_schema"])
     assert CONF_VALUE_ATTRIBUTE in schema_keys
     assert CONF_MIN_VALUE in schema_keys
     assert CONF_MAX_VALUE in schema_keys
@@ -1127,7 +1167,7 @@ async def test_subentry_completion_message_only_for_countdown(hass: HomeAssistan
             user_input=_mock_core_input(**{CONF_TEMPLATE: template}),
         )
         assert result["step_id"] == "details"
-        schema_keys = {str(k) for k in result["data_schema"].schema}
+        schema_keys = _all_schema_keys(result["data_schema"])
         assert (CONF_COMPLETION_MESSAGE in schema_keys) is expected, (
             f"template={template} expected completion_message={expected} but got keys={schema_keys}"
         )
@@ -1319,7 +1359,7 @@ async def test_subentry_rejects_dangerous_url_scheme(hass: HomeAssistant) -> Non
         user_input=_mock_details_input("alert", **{CONF_URL: "javascript:alert(1)"}),
     )
     assert result["type"] is FlowResultType.FORM
-    assert result["errors"] == {CONF_URL: "invalid_url"}
+    assert result["errors"] == {"base": "invalid_url"}
 
 
 async def test_subentry_rejects_dangerous_secondary_url(hass: HomeAssistant) -> None:
@@ -1344,7 +1384,7 @@ async def test_subentry_rejects_dangerous_secondary_url(hass: HomeAssistant) -> 
         user_input=_mock_details_input("alert", **{CONF_SECONDARY_URL: "data:text/html,bad"}),
     )
     assert result["type"] is FlowResultType.FORM
-    assert result["errors"] == {CONF_SECONDARY_URL: "invalid_url"}
+    assert result["errors"] == {"base": "invalid_url"}
 
 
 # --- _parse_thresholds / _serialize_thresholds ---
@@ -1519,12 +1559,32 @@ def test_details_schema_countdown_has_warning_threshold_and_alarm() -> None:
     assert CONF_ALARM in keys
 
 
-def test_details_schema_steps_has_step_labels_and_rows() -> None:
-    """Steps template includes step_labels and step_rows fields."""
+def test_details_schema_steps_has_structured_step_configuration() -> None:
+    """Steps template exposes an unambiguous repeatable per-step form."""
     schema = _details_schema("binary_sensor.foo", "steps", defaults={})
     keys = _schema_keys(schema)
-    assert CONF_STEP_LABELS in keys
-    assert CONF_STEP_ROWS in keys
+    assert CONF_STEP_CONFIGURATION in keys
+    assert CONF_LIVE_PROGRESS in keys
+    assert CONF_REMAINING_TIME_ATTR in keys
+
+
+def test_parse_entity_input_structured_steps_separates_rows_and_weights() -> None:
+    """Parallel job rows and relative duration weights persist independently."""
+    result = _parse_entity_input(
+        _base_user_input(
+            **{
+                CONF_TEMPLATE: "steps",
+                CONF_STEP_CONFIGURATION: [
+                    {"label": "Wash", "parallel_jobs": 1, "weight": 4, "color": "blue"},
+                    {"label": "Rinse", "parallel_jobs": 2, "weight": 1, "color": "teal"},
+                ],
+            }
+        )
+    )
+    assert result[CONF_TOTAL_STEPS] == 2
+    assert result[CONF_STEP_ROWS] == [1, 2]
+    assert result[CONF_STEP_WEIGHTS] == [4.0, 1.0]
+    assert result[CONF_STEP_COLORS] == ["blue", "teal"]
 
 
 def test_details_schema_alert_has_fired_at_attribute() -> None:
@@ -1726,7 +1786,7 @@ async def test_subentry_countdown_shows_remaining_time_entity(hass: HomeAssistan
     )
     assert result["step_id"] == "details"
 
-    schema_keys = {str(k) for k in result["data_schema"].schema}
+    schema_keys = _all_schema_keys(result["data_schema"])
     assert CONF_REMAINING_TIME_ENTITY in schema_keys
     assert CONF_SUBTITLE_ENTITY in schema_keys  # common field, always present
 
@@ -1746,7 +1806,7 @@ async def test_subentry_gauge_shows_value_entity(hass: HomeAssistant) -> None:
     )
     assert result["step_id"] == "details"
 
-    schema_keys = {str(k) for k in result["data_schema"].schema}
+    schema_keys = _all_schema_keys(result["data_schema"])
     assert CONF_VALUE_ENTITY in schema_keys
 
 

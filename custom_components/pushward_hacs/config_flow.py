@@ -12,6 +12,7 @@ import aiohttp
 import voluptuous as vol
 from homeassistant import config_entries
 from homeassistant.core import HomeAssistant, callback
+from homeassistant.data_entry_flow import section
 from homeassistant.helpers.aiohttp_client import async_get_clientsession
 from homeassistant.helpers.selector import (
     AttributeSelector,
@@ -88,8 +89,11 @@ from .const import (
     CONF_START_STATES,
     CONF_STAT_ROWS,
     CONF_STATE_LABELS,
+    CONF_STEP_COLORS,
+    CONF_STEP_CONFIGURATION,
     CONF_STEP_LABELS,
     CONF_STEP_ROWS,
+    CONF_STEP_WEIGHTS,
     CONF_SUBTITLE_ATTRIBUTE,
     CONF_SUBTITLE_ENTITY,
     CONF_TAP_ACTION_FOREGROUND,
@@ -399,7 +403,7 @@ def _details_schema(
                 description={"suggested_value": d.get(CONF_PROGRESS_ATTRIBUTE, "")},
             )
         ] = attr_selector
-    if template in ("generic", "countdown"):
+    if template in ("generic", "countdown", "steps"):
         fields[_entity_source_key(CONF_REMAINING_TIME_ENTITY, d)] = entity_selector
         fields[
             vol.Optional(
@@ -407,7 +411,7 @@ def _details_schema(
                 description={"suggested_value": d.get(CONF_REMAINING_TIME_ATTR, "")},
             )
         ] = attr_selector
-    if template == "generic":
+    if template in ("generic", "steps"):
         # Only meaningful with a remaining-time source above: interpolate the bar
         # to full and count down an ETA. Server accepts live_progress on generic only.
         fields[
@@ -417,12 +421,6 @@ def _details_schema(
             )
         ] = BooleanSelector()
     if template == "steps":
-        fields[
-            vol.Optional(
-                CONF_TOTAL_STEPS,
-                default=d.get(CONF_TOTAL_STEPS, DEFAULT_TOTAL_STEPS),
-            )
-        ] = vol.All(vol.Coerce(int), vol.Range(min=1, max=TOTAL_STEPS_MAX))
         fields[_entity_source_key(CONF_CURRENT_STEP_ENTITY, d)] = entity_selector
         fields[
             vol.Optional(
@@ -430,18 +428,46 @@ def _details_schema(
                 description={"suggested_value": d.get(CONF_CURRENT_STEP_ATTR, "")},
             )
         ] = attr_selector
-        fields[
-            vol.Optional(
-                CONF_STEP_LABELS,
-                default=d.get(CONF_STEP_LABELS, ""),
+        step_default = d.get(CONF_STEP_CONFIGURATION)
+        if not isinstance(step_default, list):
+            total = int(d.get(CONF_TOTAL_STEPS, DEFAULT_TOTAL_STEPS))
+            labels = d.get(CONF_STEP_LABELS) or {}
+            rows = d.get(CONF_STEP_ROWS) or []
+            weights = d.get(CONF_STEP_WEIGHTS) or []
+            colors = d.get(CONF_STEP_COLORS) or []
+            step_default = []
+            for index in range(1, total + 1):
+                item = {"label": labels.get(str(index), "") if isinstance(labels, dict) else ""}
+                if index <= len(rows):
+                    item["parallel_jobs"] = rows[index - 1]
+                if index <= len(weights):
+                    item["weight"] = weights[index - 1]
+                if index <= len(colors):
+                    item["color"] = colors[index - 1]
+                step_default.append(item)
+        fields[vol.Required(CONF_STEP_CONFIGURATION, default=step_default)] = ObjectSelector(
+            ObjectSelectorConfig(
+                multiple=True,
+                label_field="label",
+                description_field="weight",
+                fields={
+                    "label": {"label": "Step label", "selector": TextSelector()},
+                    "parallel_jobs": {
+                        "label": "Parallel rows/jobs (1-10)",
+                        "selector": NumberSelector(
+                            NumberSelectorConfig(min=1, max=10, mode=NumberSelectorMode.BOX)
+                        ),
+                    },
+                    "weight": {
+                        "label": "Relative duration/width",
+                        "selector": NumberSelector(
+                            NumberSelectorConfig(min=0.1, max=10000, step=0.1, mode=NumberSelectorMode.BOX)
+                        ),
+                    },
+                    "color": {"label": "Color (optional)", "selector": TextSelector()},
+                },
             )
-        ] = vol.All(str, vol.Length(max=MAX_LONG_TEXT_LEN))
-        fields[
-            vol.Optional(
-                CONF_STEP_ROWS,
-                default=d.get(CONF_STEP_ROWS, ""),
-            )
-        ] = vol.All(str, vol.Length(max=MAX_TEXT_LEN))
+        )
     if template == "alert":
         fields[
             vol.Optional(
@@ -626,6 +652,14 @@ def _details_schema(
                     CONF_VALUE_ATTRIBUTE: {"label": "Attribute (optional)", "selector": TextSelector()},
                     CONF_UNIT: {"label": "Unit (optional)", "selector": TextSelector()},
                     CONF_ICON: {"label": "Icon (optional)", "selector": IconSelector(IconSelectorConfig())},
+                    CONF_ACCENT_COLOR: {"label": "Color (optional)", "selector": TextSelector()},
+                    "trend": {
+                        "label": "Trend (optional)",
+                        "selector": SelectSelector(
+                            SelectSelectorConfig(options=["", "up", "down", "flat"])
+                        ),
+                    },
+                    CONF_URL: {"label": "Tap URL (optional)", "selector": TextSelector()},
                 },
             )
         )
@@ -794,7 +828,7 @@ def _details_schema(
             default=d.get(CONF_TAP_ACTION_FOREGROUND, DEFAULT_TAP_ACTION_FOREGROUND),
         )
     ] = BooleanSelector()
-    if template in ("steps", "alert"):
+    if template not in ("board", "log"):
         fields[
             vol.Optional(
                 CONF_URL,
@@ -919,6 +953,49 @@ def _entity_staged_schemas(
         }
     )
     return lifecycle, content, appearance
+
+
+def _sectioned_schema(*sections: tuple[str, vol.Schema, bool]) -> vol.Schema:
+    """Combine flat schemas into one form with collapsible sections."""
+    return vol.Schema(
+        {
+            vol.Optional(name, default={}): section(schema, {"collapsed": collapsed})
+            for name, schema, collapsed in sections
+            if schema.schema
+        },
+        extra=vol.ALLOW_EXTRA,
+    )
+
+
+def _flatten_sections(user_input: dict[str, Any]) -> dict[str, Any]:
+    """Flatten one level of data-entry-flow sections for existing parsers."""
+    flattened: dict[str, Any] = {}
+    for key, value in user_input.items():
+        if isinstance(value, dict) and key in {
+            "lifecycle",
+            "content",
+            "appearance",
+            "refresh",
+        }:
+            flattened.update(value)
+        else:
+            flattened[key] = value
+    return flattened
+
+
+def _entity_sectioned_schema(
+    entity_id: str,
+    template: str,
+    defaults: dict | None = None,
+    hass: HomeAssistant | None = None,
+) -> vol.Schema:
+    """Build the single post-template entity form."""
+    lifecycle, content, appearance = _entity_staged_schemas(entity_id, template, defaults, hass)
+    return _sectioned_schema(
+        ("lifecycle", lifecycle, False),
+        ("content", content, False),
+        ("appearance", appearance, True),
+    )
 
 
 def _tap_action_url_error(url: str, foreground: bool) -> str | None:
@@ -1296,6 +1373,39 @@ def _parse_entity_input(user_input: dict, hass: HomeAssistant | None = None) -> 
     thresholds = _parse_thresholds(thresholds_raw) if isinstance(thresholds_raw, str) else thresholds_raw or []
     history_period_raw = user_input.get(CONF_HISTORY_PERIOD, DEFAULT_HISTORY_PERIOD)
 
+    step_configuration = user_input.get(CONF_STEP_CONFIGURATION, [])
+    if not isinstance(step_configuration, list):
+        step_configuration = []
+    step_configuration = [item for item in step_configuration if isinstance(item, dict)][:TOTAL_STEPS_MAX]
+    if user_input.get(CONF_TEMPLATE) == "steps" and not step_configuration:
+        legacy_total = int(user_input.get(CONF_TOTAL_STEPS, DEFAULT_TOTAL_STEPS))
+        legacy_labels = _parse_state_labels(user_input.get(CONF_STEP_LABELS, ""))
+        legacy_rows = _parse_int_list(user_input.get(CONF_STEP_ROWS, ""))
+        step_configuration = []
+        for index in range(1, max(1, min(TOTAL_STEPS_MAX, legacy_total)) + 1):
+            item = {"label": legacy_labels.get(str(index), "")}
+            if index <= len(legacy_rows):
+                item["parallel_jobs"] = legacy_rows[index - 1]
+            step_configuration.append(item)
+    step_labels = {
+        str(index): str(item.get("label") or "")
+        for index, item in enumerate(step_configuration, 1)
+        if item.get("label")
+    }
+    has_step_rows = any(item.get("parallel_jobs") is not None for item in step_configuration)
+    step_rows = (
+        [max(1, min(10, int(item.get("parallel_jobs") or 1))) for item in step_configuration]
+        if has_step_rows
+        else []
+    )
+    has_step_weights = any(item.get("weight") is not None for item in step_configuration)
+    step_weights = (
+        [max(0.1, float(item.get("weight") or 1)) for item in step_configuration]
+        if has_step_weights
+        else []
+    )
+    step_colors = [str(item.get("color") or "") for item in step_configuration]
+
     # Board tiles: a board needs at least one tile to render.
     tiles = _parse_board_tiles(user_input.get(CONF_TILES, ""))
     if user_input.get(CONF_TEMPLATE) == "board" and not tiles:
@@ -1321,7 +1431,7 @@ def _parse_entity_input(user_input: dict, hass: HomeAssistant | None = None) -> 
         CONF_SUBTITLE_ENTITY: user_input.get(CONF_SUBTITLE_ENTITY, ""),
         CONF_STATE_LABELS: _parse_state_labels(user_input.get(CONF_STATE_LABELS, "")),
         CONF_COMPLETION_MESSAGE: user_input.get(CONF_COMPLETION_MESSAGE, ""),
-        CONF_TOTAL_STEPS: user_input.get(CONF_TOTAL_STEPS, DEFAULT_TOTAL_STEPS),
+        CONF_TOTAL_STEPS: len(step_configuration) or user_input.get(CONF_TOTAL_STEPS, DEFAULT_TOTAL_STEPS),
         CONF_CURRENT_STEP_ATTR: user_input.get(CONF_CURRENT_STEP_ATTR, ""),
         CONF_CURRENT_STEP_ENTITY: user_input.get(CONF_CURRENT_STEP_ENTITY, ""),
         CONF_SEVERITY: user_input.get(CONF_SEVERITY, DEFAULT_SEVERITY),
@@ -1359,8 +1469,11 @@ def _parse_entity_input(user_input: dict, hass: HomeAssistant | None = None) -> 
         CONF_SNOOZE_SECONDS: int(user_input[CONF_SNOOZE_SECONDS])
         if user_input.get(CONF_SNOOZE_SECONDS) is not None
         else None,
-        CONF_STEP_LABELS: _parse_state_labels(user_input.get(CONF_STEP_LABELS, "")),
-        CONF_STEP_ROWS: _parse_int_list(user_input.get(CONF_STEP_ROWS, "")),
+        CONF_STEP_CONFIGURATION: step_configuration,
+        CONF_STEP_LABELS: step_labels or _parse_state_labels(user_input.get(CONF_STEP_LABELS, "")),
+        CONF_STEP_ROWS: step_rows or _parse_int_list(user_input.get(CONF_STEP_ROWS, "")),
+        CONF_STEP_WEIGHTS: step_weights,
+        CONF_STEP_COLORS: step_colors,
         CONF_FIRED_AT_ATTRIBUTE: user_input.get(CONF_FIRED_AT_ATTRIBUTE, ""),
         CONF_FIRED_AT_ENTITY: user_input.get(CONF_FIRED_AT_ENTITY, ""),
         CONF_UNITS: _parse_state_labels(user_input.get(CONF_UNITS, "")),
@@ -1469,7 +1582,7 @@ class PushWardConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
 
 
 class PushWardEntitySubentryFlow(config_entries.ConfigSubentryFlow):
-    """Handle adding and reconfiguring tracked entities with a staged flow."""
+    """Handle tracked entities with a template picker and one sectioned form."""
 
     def __init__(self) -> None:
         """Initialize the subentry flow."""
@@ -1477,7 +1590,6 @@ class PushWardEntitySubentryFlow(config_entries.ConfigSubentryFlow):
         self._step1_input: dict[str, Any] = {}
         self._is_reconfigure: bool = False
         self._details_defaults: dict[str, Any] = {}
-        self._staged_input: dict[str, Any] = {}
         self._suggestion_offered: bool = False
 
     async def async_step_user(self, user_input: dict[str, Any] | None = None) -> config_entries.SubentryFlowResult:
@@ -1500,7 +1612,6 @@ class PushWardEntitySubentryFlow(config_entries.ConfigSubentryFlow):
 
             self._step1_input = user_input
             self._is_reconfigure = False
-            self._staged_input = {}
             return await self.async_step_details()
 
         return self.async_show_form(
@@ -1517,7 +1628,6 @@ class PushWardEntitySubentryFlow(config_entries.ConfigSubentryFlow):
         if user_input is not None:
             self._step1_input = user_input
             self._is_reconfigure = True
-            self._staged_input = {}
             # Prepare defaults for step 2 from existing config
             current = dict(subentry.data)
             labels = current.get(CONF_STATE_LABELS)
@@ -1526,12 +1636,6 @@ class PushWardEntitySubentryFlow(config_entries.ConfigSubentryFlow):
             series = current.get(CONF_SERIES)
             if isinstance(series, dict):
                 current[CONF_SERIES] = _serialize_key_value_pairs(series)
-            step_labels = current.get(CONF_STEP_LABELS)
-            if isinstance(step_labels, dict):
-                current[CONF_STEP_LABELS] = _serialize_key_value_pairs(step_labels)
-            step_rows = current.get(CONF_STEP_ROWS)
-            if isinstance(step_rows, list):
-                current[CONF_STEP_ROWS] = _serialize_int_list(step_rows)
             units = current.get(CONF_UNITS)
             if isinstance(units, dict):
                 current[CONF_UNITS] = _serialize_key_value_pairs(units)
@@ -1545,104 +1649,49 @@ class PushWardEntitySubentryFlow(config_entries.ConfigSubentryFlow):
         )
 
     async def async_step_details(self, user_input: dict[str, Any] | None = None) -> config_entries.SubentryFlowResult:
-        """Step 2: Lifecycle, identity, retention, and update behavior."""
+        """Step 2: Configure all template options in collapsible sections."""
         entity_id = self._step1_input.get(CONF_ENTITY_ID, "")
         template = self._step1_input.get(CONF_TEMPLATE, "generic")
         if user_input is not None:
-            # Backward compatibility for automations/tests that submit the old
-            # all-in-one details form in one request.
-            if any(key not in _ENTITY_LIFECYCLE_FIELDS for key in user_input):
-                merged = {**self._step1_input, **user_input}
-                try:
-                    entity_cfg = _parse_entity_input(merged, hass=self.hass)
-                except vol.Invalid as exc:
-                    errors = {str(field): str(exc.msg) for field in exc.path} or {"base": str(exc.msg)}
-                    defaults = self._details_defaults if self._is_reconfigure else None
-                    return self.async_show_form(
-                        step_id="details",
-                        data_schema=_details_schema(entity_id, template, defaults=defaults, hass=self.hass),
-                        errors=errors,
-                    )
-                if self._is_reconfigure:
-                    return self.async_update_and_abort(
-                        self._get_entry(),
-                        self._get_reconfigure_subentry(),
-                        data=entity_cfg,
-                        title=entity_cfg[CONF_ACTIVITY_NAME],
-                    )
-                return self.async_create_entry(
-                    title=entity_cfg[CONF_ACTIVITY_NAME],
-                    data=entity_cfg,
-                    unique_id=entity_cfg[CONF_ENTITY_ID],
+            merged = {**self._step1_input, **_flatten_sections(user_input)}
+            try:
+                entity_cfg = _parse_entity_input(merged, hass=self.hass)
+            except vol.Invalid as exc:
+                defaults = self._details_defaults if self._is_reconfigure else None
+                return self.async_show_form(
+                    step_id="details",
+                    data_schema=_entity_sectioned_schema(entity_id, template, defaults, self.hass),
+                    errors={"base": str(exc.msg)},
                 )
-            self._staged_input.update(user_input)
-            return await self.async_step_content()
+            if self._is_reconfigure:
+                return self.async_update_and_abort(
+                    self._get_entry(),
+                    self._get_reconfigure_subentry(),
+                    data=entity_cfg,
+                    title=entity_cfg[CONF_ACTIVITY_NAME],
+                )
+            return self.async_create_entry(
+                title=entity_cfg[CONF_ACTIVITY_NAME],
+                data=entity_cfg,
+                unique_id=entity_cfg[CONF_ENTITY_ID],
+            )
 
         defaults = self._details_defaults if self._is_reconfigure else None
-        lifecycle, _, _ = _entity_staged_schemas(entity_id, template, defaults=defaults, hass=self.hass)
         return self.async_show_form(
             step_id="details",
-            data_schema=lifecycle,
+            data_schema=_entity_sectioned_schema(entity_id, template, defaults, self.hass),
             description_placeholders={"entity": entity_id, "template": template},
         )
 
     async def async_step_content(self, user_input: dict[str, Any] | None = None) -> config_entries.SubentryFlowResult:
-        """Step 3: Only fields used by the selected activity template."""
-        entity_id = self._step1_input.get(CONF_ENTITY_ID, "")
-        template = self._step1_input.get(CONF_TEMPLATE, "generic")
-        if user_input is not None:
-            self._staged_input.update(user_input)
-            return await self.async_step_appearance()
-
-        defaults = self._details_defaults if self._is_reconfigure else None
-        _, content, _ = _entity_staged_schemas(entity_id, template, defaults=defaults, hass=self.hass)
-        return self.async_show_form(
-            step_id="content",
-            data_schema=content,
-            description_placeholders={"entity": entity_id, "template": template},
-        )
+        """Redirect an in-progress legacy staged flow to the unified form."""
+        return await self.async_step_details(user_input)
 
     async def async_step_appearance(
         self, user_input: dict[str, Any] | None = None
     ) -> config_entries.SubentryFlowResult:
-        """Step 4: Labels, colors, icons, and tap behavior, then save."""
-        entity_id = self._step1_input.get(CONF_ENTITY_ID, "")
-        template = self._step1_input.get(CONF_TEMPLATE, "generic")
-        errors: dict[str, str] = {}
-        if user_input is not None:
-            merged = {**self._step1_input, **self._staged_input, **user_input}
-            try:
-                entity_cfg = _parse_entity_input(merged, hass=self.hass)
-            except vol.Invalid as exc:
-                # Cross-field checks can refer to a previous step. Keep the user
-                # on the final page with a clear banner instead of silently losing
-                # the values they already entered.
-                field = str(exc.path[0]) if exc.path else "base"
-                errors[field if field in _ENTITY_APPEARANCE_FIELDS else "base"] = str(exc.msg)
-            else:
-                if self._is_reconfigure:
-                    entry = self._get_entry()
-                    subentry = self._get_reconfigure_subentry()
-                    return self.async_update_and_abort(
-                        entry,
-                        subentry,
-                        data=entity_cfg,
-                        title=entity_cfg[CONF_ACTIVITY_NAME],
-                    )
-                return self.async_create_entry(
-                    title=entity_cfg[CONF_ACTIVITY_NAME],
-                    data=entity_cfg,
-                    unique_id=entity_cfg[CONF_ENTITY_ID],
-                )
-
-        defaults = self._details_defaults if self._is_reconfigure else None
-        _, _, appearance = _entity_staged_schemas(entity_id, template, defaults=defaults, hass=self.hass)
-        return self.async_show_form(
-            step_id="appearance",
-            data_schema=appearance,
-            errors=errors,
-            description_placeholders={"entity": entity_id, "template": template},
-        )
+        """Redirect an in-progress legacy staged flow to the unified form."""
+        return await self.async_step_details(user_input)
 
 
 # --- Widget subentry flow ---
@@ -1883,6 +1932,16 @@ def _widget_staged_schemas(
     return content, appearance, refresh
 
 
+def _widget_sectioned_schema(entity_id: str, template: str, defaults: dict | None = None) -> vol.Schema:
+    """Build the single post-template widget form."""
+    content, appearance, refresh = _widget_staged_schemas(entity_id, template, defaults)
+    return _sectioned_schema(
+        ("content", content, False),
+        ("appearance", appearance, True),
+        ("refresh", refresh, True),
+    )
+
+
 def _parse_widget_stat_rows(raw: object) -> list[dict]:
     """Parse stat_rows from string ('label=entity_id[:attr[:unit]], ...') or list."""
     if isinstance(raw, list):
@@ -1981,21 +2040,19 @@ def _parse_widget_input(user_input: dict, step1: dict) -> dict:
 
 
 class PushWardWidgetSubentryFlow(config_entries.ConfigSubentryFlow):
-    """Staged flow for adding or reconfiguring a tracked widget."""
+    """Configure a tracked widget with one sectioned post-template form."""
 
     def __init__(self) -> None:
         super().__init__()
         self._step1_input: dict[str, Any] = {}
         self._is_reconfigure: bool = False
         self._details_defaults: dict[str, Any] = {}
-        self._staged_input: dict[str, Any] = {}
 
     async def async_step_user(self, user_input: dict[str, Any] | None = None) -> config_entries.SubentryFlowResult:
         """Step 1: entity + template + slug."""
         if user_input is not None:
             self._step1_input = user_input
             self._is_reconfigure = False
-            self._staged_input = {}
             return await self.async_step_details()
         return self.async_show_form(
             step_id="user",
@@ -2009,7 +2066,6 @@ class PushWardWidgetSubentryFlow(config_entries.ConfigSubentryFlow):
         if user_input is not None:
             self._step1_input = user_input
             self._is_reconfigure = True
-            self._staged_input = {}
             current = dict(subentry.data)
             self._details_defaults = current
             return await self.async_step_details()
@@ -2020,91 +2076,43 @@ class PushWardWidgetSubentryFlow(config_entries.ConfigSubentryFlow):
         )
 
     async def async_step_details(self, user_input: dict[str, Any] | None = None) -> config_entries.SubentryFlowResult:
-        """Step 2: Values used by the selected widget layout."""
+        """Step 2: Configure all widget options in collapsible sections."""
         entity_id = self._step1_input.get(CONF_ENTITY_ID, "")
         template = self._step1_input.get(CONF_WIDGET_TEMPLATE, WIDGET_TEMPLATE_VALUE)
         if user_input is not None:
-            # Accept the former one-page payload for backward compatibility.
-            content, _, _ = _widget_staged_schemas(entity_id, template)
-            content_fields = {_schema_field_name(marker) for marker in content.schema}
-            if any(key not in content_fields for key in user_input):
-                try:
-                    widget_cfg = _parse_widget_input(user_input, self._step1_input)
-                except vol.Invalid as exc:
-                    errors = {str(field): str(exc.msg) for field in exc.path} or {"base": str(exc.msg)}
-                    defaults = self._details_defaults if self._is_reconfigure else None
-                    return self.async_show_form(
-                        step_id="details",
-                        data_schema=_widget_details_schema(entity_id, template, defaults=defaults),
-                        errors=errors,
-                    )
-                title = widget_cfg.get(CONF_WIDGET_NAME) or widget_cfg[CONF_SLUG]
-                if self._is_reconfigure:
-                    return self.async_update_and_abort(
-                        self._get_entry(), self._get_reconfigure_subentry(), data=widget_cfg, title=title
-                    )
-                return self.async_create_entry(title=title, data=widget_cfg, unique_id=widget_cfg[CONF_SLUG])
-            self._staged_input.update(user_input)
-            return await self.async_step_appearance()
+            flattened = _flatten_sections(user_input)
+            try:
+                widget_cfg = _parse_widget_input(flattened, self._step1_input)
+            except vol.Invalid as exc:
+                defaults = self._details_defaults if self._is_reconfigure else None
+                return self.async_show_form(
+                    step_id="details",
+                    data_schema=_widget_sectioned_schema(entity_id, template, defaults),
+                    errors={"base": str(exc.msg)},
+                )
+            title = widget_cfg.get(CONF_WIDGET_NAME) or widget_cfg[CONF_SLUG]
+            if self._is_reconfigure:
+                return self.async_update_and_abort(
+                    self._get_entry(), self._get_reconfigure_subentry(), data=widget_cfg, title=title
+                )
+            return self.async_create_entry(title=title, data=widget_cfg, unique_id=widget_cfg[CONF_SLUG])
 
         defaults = self._details_defaults if self._is_reconfigure else None
-        content, _, _ = _widget_staged_schemas(entity_id, template, defaults=defaults)
         return self.async_show_form(
             step_id="details",
-            data_schema=content,
+            data_schema=_widget_sectioned_schema(entity_id, template, defaults),
             description_placeholders={"entity": entity_id, "template": template},
         )
 
     async def async_step_appearance(
         self, user_input: dict[str, Any] | None = None
     ) -> config_entries.SubentryFlowResult:
-        """Step 3: Widget name, labels, icon, colors, and tap action."""
-        entity_id = self._step1_input.get(CONF_ENTITY_ID, "")
-        template = self._step1_input.get(CONF_WIDGET_TEMPLATE, WIDGET_TEMPLATE_VALUE)
-        if user_input is not None:
-            self._staged_input.update(user_input)
-            return await self.async_step_refresh()
-
-        defaults = self._details_defaults if self._is_reconfigure else None
-        _, appearance, _ = _widget_staged_schemas(entity_id, template, defaults=defaults)
-        return self.async_show_form(
-            step_id="appearance",
-            data_schema=appearance,
-            description_placeholders={"entity": entity_id, "template": template},
-        )
+        """Redirect an in-progress legacy staged flow to the unified form."""
+        return await self.async_step_details(user_input)
 
     async def async_step_refresh(self, user_input: dict[str, Any] | None = None) -> config_entries.SubentryFlowResult:
-        """Step 4: Refresh behavior, validation, and save."""
-        entity_id = self._step1_input.get(CONF_ENTITY_ID, "")
-        template = self._step1_input.get(CONF_WIDGET_TEMPLATE, WIDGET_TEMPLATE_VALUE)
-        errors: dict[str, str] = {}
-        if user_input is not None:
-            merged = {**self._staged_input, **user_input}
-            try:
-                widget_cfg = _parse_widget_input(merged, self._step1_input)
-            except vol.Invalid as exc:
-                field = str(exc.path[0]) if exc.path else "base"
-                errors[field if field in _WIDGET_REFRESH_FIELDS else "base"] = str(exc.msg)
-            else:
-                title = widget_cfg.get(CONF_WIDGET_NAME) or widget_cfg[CONF_SLUG]
-                if self._is_reconfigure:
-                    entry = self._get_entry()
-                    subentry = self._get_reconfigure_subentry()
-                    return self.async_update_and_abort(entry, subentry, data=widget_cfg, title=title)
-                return self.async_create_entry(
-                    title=title,
-                    data=widget_cfg,
-                    unique_id=widget_cfg[CONF_SLUG],
-                )
-
-        defaults = self._details_defaults if self._is_reconfigure else None
-        _, _, refresh = _widget_staged_schemas(entity_id, template, defaults=defaults)
-        return self.async_show_form(
-            step_id="refresh",
-            data_schema=refresh,
-            errors=errors,
-            description_placeholders={"entity": entity_id, "template": template},
-        )
+        """Redirect an in-progress legacy staged flow to the unified form."""
+        return await self.async_step_details(user_input)
 
 
 def _rgb_to_hex(rgb: list[int] | None) -> str:

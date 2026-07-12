@@ -183,6 +183,16 @@ async def test_update_activity_success():
     assert call_args[1]["json"] == {"state": "ongoing", "content": {"progress": 0.5}}
 
 
+async def test_update_activity_upsert_uses_query_flag():
+    resp = _mock_response(201)
+    session = _make_session(resp)
+    client = _make_client(session)
+
+    await client.update_activity("new-slug", "ongoing", {"template": "generic"}, upsert=True)
+
+    assert session.request.call_args[0][1].endswith("/activities/new-slug?upsert=true")
+
+
 # --- delete_activity ---
 
 

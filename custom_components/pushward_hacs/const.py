@@ -56,8 +56,8 @@ CONF_SERIES = "series"
 # Timeline template: bind SEPARATE entities as named series (each its own line),
 # alongside or instead of the CONF_SERIES attribute map. Stored as a list of
 # series dicts ({label, entity_id, attribute?}) with the label frozen at config
-# time (the server merges series by label); the config flow edits them as a
-# comma-separated `[Label=]entity_id[:attribute]` string (mirrors board tiles).
+# time (the server merges series by label); the config flow edits them as
+# repeatable entity rows while the legacy parser still accepts the old string.
 CONF_SERIES_ENTITIES = "series_entities"
 # Timeline template: label of the series whose value drives the headline number
 # and the compact high/low range on iOS. Empty = auto (the tracked entity's own
@@ -74,20 +74,20 @@ CONF_ALARM = "alarm"
 CONF_SNOOZE_SECONDS = "snooze_seconds"
 CONF_STEP_LABELS = "step_labels"
 CONF_STEP_ROWS = "step_rows"
+CONF_STEP_WEIGHTS = "step_weights"
+CONF_STEP_COLORS = "step_colors"
+CONF_STEP_CONFIGURATION = "step_configuration"
 CONF_FIRED_AT_ATTRIBUTE = "fired_at_attribute"
 CONF_UNITS = "units"
 # Board template: 1-4 tiles, each bound to a separate entity. Stored as a list of
-# tile dicts ({label, entity_id, value_attribute?, unit?, icon?}); the config flow
-# edits them as a comma-separated string (mirrors widget stat_rows).
+# tile dicts ({label, entity_id, value_attribute?, unit?, icon?, color?, trend?,
+# url?}); the config flow edits them as repeatable rows.
 CONF_TILES = "tiles"
 # Log template: optional attribute supplying the per-line level (info/warn/error).
 CONF_LOG_LEVEL_ATTRIBUTE = "log_level_attribute"
-# Log template: optional extra columns composed into each line's text. A freeform
-# comma-separated string mirroring the board-tile format — each column is
-# `[Label=]source[|unit]`, where source is a bare attribute of the tracked entity
-# (`brightness`), another entity's state (`binary_sensor.door`), or another
-# entity's attribute (`sensor.temp:temperature`). Stored as a list of column dicts
-# ({label?, entity_id?, attribute?, unit?}); the config flow edits them as a string.
+# Log template: optional extra columns composed into each line's text. Stored as
+# repeatable rows ({label?, entity_id?, attribute?, unit?}); the legacy parser
+# still accepts the former comma-delimited syntax.
 CONF_LOG_COLUMNS = "log_columns"
 
 # Companion source entities — read a value from a SEPARATE entity instead of an

@@ -180,11 +180,21 @@ _COUNTDOWN_TEMPLATE_FIELDS = {
     vol.Optional("alarm"): cv.boolean,
     vol.Optional("snooze_seconds"): vol.All(vol.Coerce(int), vol.Range(min=60, max=3600)),
 }
+_GENERIC_TEMPLATE_FIELDS = {
+    vol.Optional("end_date"): vol.Coerce(int),
+    vol.Optional("duration"): validate_duration,
+    vol.Optional("live_progress"): cv.boolean,
+}
 _STEPS_TEMPLATE_FIELDS = {
     vol.Optional("total_steps"): vol.Coerce(int),
     vol.Optional("current_step"): vol.Coerce(int),
     vol.Optional("step_labels"): list,
     vol.Optional("step_rows"): list,
+    vol.Optional("step_weights"): list,
+    vol.Optional("step_colors"): list,
+    vol.Optional("end_date"): vol.Coerce(int),
+    vol.Optional("duration"): validate_duration,
+    vol.Optional("live_progress"): cv.boolean,
 }
 _ALERT_TEMPLATE_FIELDS = {
     vol.Optional("severity"): vol.In(SEVERITIES),
@@ -261,7 +271,7 @@ _BOARD_LOG_APPEARANCE_FIELDS = {
     vol.Optional("sound"): vol.In(SOUNDS),
     vol.Optional("priority"): vol.All(vol.Coerce(int), vol.Range(min=0, max=10)),
 }
-_BOARD_LOG_ACTION_FIELDS = {vol.Optional("tap_action"): _TAP_ACTION_SCHEMA}  # whole-activity tap only
+_BOARD_LOG_ACTION_FIELDS = _UNIVERSAL_ACTION_FIELDS
 
 
 def _board_log_schema(template_fields: dict) -> vol.Schema:
@@ -291,7 +301,7 @@ def _update_template_schema(*template_fields: dict) -> vol.Schema:
 
 
 _UPDATE_TEMPLATE_SCHEMAS = {
-    "generic": _update_template_schema(),
+    "generic": _update_template_schema(_GENERIC_TEMPLATE_FIELDS),
     "countdown": _update_template_schema(_COUNTDOWN_TEMPLATE_FIELDS),
     "steps": _update_template_schema(_STEPS_TEMPLATE_FIELDS),
     "alert": _update_template_schema(_ALERT_TEMPLATE_FIELDS),
@@ -306,6 +316,7 @@ _UPDATE_TEMPLATE_SCHEMAS = {
 # `template` selector) — i.e. the union of all per-template schemas.
 SCHEMA_UPDATE_ACTIVITY = _update_template_schema(
     {vol.Optional("template"): str},
+    _GENERIC_TEMPLATE_FIELDS,
     _COUNTDOWN_TEMPLATE_FIELDS,
     _STEPS_TEMPLATE_FIELDS,
     _ALERT_TEMPLATE_FIELDS,
@@ -478,7 +489,7 @@ async def _send_activity_update(hass: HomeAssistant, call: ServiceCall, *, templ
     if template is not None:
         content["template"] = template
     with _surface_api_errors():
-        await api.update_activity(slug, state, content, sound=sound, priority=priority)
+        await api.update_activity(slug, state, content, sound=sound, priority=priority, upsert=True)
 
 
 async def _async_handle_update_activity(hass: HomeAssistant, call: ServiceCall) -> None:

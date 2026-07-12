@@ -148,14 +148,16 @@ class PushWardApiClient:
         *,
         sound: str | None = None,
         priority: int | None = None,
+        upsert: bool = False,
     ) -> None:
-        """PATCH /activities/{slug} — sound and priority are top-level, not content fields."""
+        """PATCH an activity; optionally create a missing slug with upsert=true."""
         body: dict = {"state": state, "content": content}
         if sound is not None:
             body["sound"] = sound
         if priority is not None:
             body["priority"] = priority
-        await self._request_with_retry("PATCH", f"/activities/{slug}", json=body)
+        path = f"/activities/{slug}?upsert=true" if upsert else f"/activities/{slug}"
+        await self._request_with_retry("PATCH", path, json=body)
 
     async def delete_activity(self, slug: str) -> None:
         """Delete an activity via DELETE /activities/{slug}."""

@@ -42,8 +42,10 @@ from custom_components.pushward_hacs.const import (
     CONF_SEVERITY_LABEL,
     CONF_SMOOTHING,
     CONF_STATE_LABELS,
+    CONF_STEP_COLORS,
     CONF_STEP_LABELS,
     CONF_STEP_ROWS,
+    CONF_STEP_WEIGHTS,
     CONF_SUBTITLE_ATTRIBUTE,
     CONF_SUBTITLE_ENTITY,
     CONF_TAP_ACTION_FOREGROUND,
@@ -341,7 +343,8 @@ def test_map_completion_content_generic_stops_live_progress():
     content = map_completion_content(config, last_content=last)
 
     # Completion must switch interpolation off so the done card stops counting down.
-    assert content["live_progress"] is False
+    assert content["live_progress"] is None
+    assert content["end_date"] is None
     assert_valid_activity_content(content)
 
 
@@ -804,8 +807,8 @@ def test_map_content_custom_scheme_no_method_injection():
     assert "method" not in content["tap_action"]
 
 
-def test_map_content_url_action_skipped_on_non_steps_alert():
-    """url_action / secondary_url_action are emitted only for steps/alert."""
+def test_map_content_url_actions_supported_on_every_template():
+    """Every current PushWard template accepts both button action slots."""
     state = _make_state("on", {"friendly_name": "Foo"})
     for template in ("generic", "countdown", "gauge", "timeline"):
         config = {
@@ -814,8 +817,8 @@ def test_map_content_url_action_skipped_on_non_steps_alert():
             CONF_SECONDARY_URL: "https://ha.local/secondary",
         }
         content = map_content(state, config)
-        assert "url_action" not in content, template
-        assert "secondary_url_action" not in content, template
+        assert content["url_action"]["url"] == "https://ha.local", template
+        assert content["secondary_url_action"]["url"] == "https://ha.local/secondary", template
 
 
 # --- Feature 6: conditional icon/color via attributes ---
@@ -1905,6 +1908,28 @@ def test_steps_step_rows_omitted_when_length_mismatch():
     content = map_content(state, config)
 
     assert "step_rows" not in content
+
+
+def test_steps_emits_duration_weights_colors_and_live_progress():
+    state = _make_state("running", {"remaining": 900})
+    config = make_entity_config(
+        **{
+            CONF_TEMPLATE: "steps",
+            CONF_TOTAL_STEPS: 3,
+            CONF_STEP_WEIGHTS: [4, 1, 2],
+            CONF_STEP_COLORS: ["blue", "teal", "orange"],
+            CONF_LIVE_PROGRESS: True,
+            CONF_REMAINING_TIME_ATTR: "remaining",
+        }
+    )
+
+    with patch("custom_components.pushward_hacs.content_mapper.time.time", return_value=1_700_000_000):
+        content = map_content(state, config)
+
+    assert content["step_weights"] == [4.0, 1.0, 2.0]
+    assert content["step_colors"] == ["blue", "teal", "orange"]
+    assert content["live_progress"] is True
+    assert content["end_date"] == 1_700_000_900
 
 
 # Alert: fired_at

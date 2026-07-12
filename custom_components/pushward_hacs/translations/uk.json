@@ -1090,7 +1090,7 @@
           }
         },
         "details": {
-          "title": "2 of 4 · Lifecycle and updates",
+          "title": "Configure {template} activity",
           "data": {
             "start_states": "Стани запуску",
             "end_states": "Стани завершення",
@@ -1148,7 +1148,8 @@
             "secondary_url_title": "Назва додаткової кнопки",
             "snooze_seconds": "Секунди відкладання (iOS 26+)",
             "fired_at_entity": "Сутність часу спрацювання",
-            "log_columns": "Стовпці журналу"
+            "log_columns": "Стовпці журналу",
+            "step_configuration": "Steps"
           },
           "data_description": {
             "start_states": "Стани сутності, що запускають Live Activity. Виберіть зі списку або введіть власні значення.",
@@ -1207,9 +1208,152 @@
             "secondary_url_title": "Підпис додаткової кнопки (макс. 64 символи).",
             "snooze_seconds": "На скільки кнопка «Відкласти» в iOS подовжує відлік (60–3600). Залиште порожнім для типового значення 300 с (5 хв). Потребує будильника. Лише шаблон відліку.",
             "fired_at_entity": "Зчитувати час спрацювання сповіщення з окремої сутності. Залиште порожнім, щоб використовувати відстежувану сутність. Приймає unix-час або датчик з ISO-часом. Лише шаблон сповіщення.",
-            "log_columns": "Додаткові значення, що додаються до кожного рядка журналу (макс. 6), розділені комами. Формат: [Label=]source[|unit]. source = атрибут цієї сутності (brightness), стан іншої сутності (binary_sensor.door) або атрибут іншої сутності (sensor.temp:temperature). Приклад: color_temp_kelvin|K, brightness → 'On · 4000K · 153'. Лише шаблон журналу."
+            "log_columns": "Додаткові значення, що додаються до кожного рядка журналу (макс. 6), розділені комами. Формат: [Label=]source[|unit]. source = атрибут цієї сутності (brightness), стан іншої сутності (binary_sensor.door) або атрибут іншої сутності (sensor.temp:temperature). Приклад: color_temp_kelvin|K, brightness → 'On · 4000K · 153'. Лише шаблон журналу.",
+            "step_configuration": "Add one row per step. Parallel jobs controls the number of stacked rows; relative duration/width makes longer stages wider; color is optional."
           },
-          "description": "Choose when this activity starts and ends, how often it updates, and how PushWard retains it."
+          "description": "Everything is on this page. Open only the sections you need.",
+          "sections": {
+            "lifecycle": {
+              "name": "Lifecycle and delivery",
+              "description": "Choose when the activity runs and how PushWard updates and retains it.",
+              "data": {
+                "start_states": "Стани запуску",
+                "end_states": "Стани завершення",
+                "slug": "Slug активності",
+                "activity_name": "Назва активності",
+                "priority": "Пріоритет (0–10)",
+                "sound": "Звук",
+                "update_interval": "Мін. інтервал оновлення (секунди)",
+                "ended_ttl": "Автовидалення після завершення (секунди)",
+                "stale_ttl": "Автозавершення після простою (секунди)"
+              },
+              "data_description": {
+                "start_states": "Стани сутності, що запускають Live Activity. Виберіть зі списку або введіть власні значення.",
+                "end_states": "Стани сутності, що завершують Live Activity. Виберіть зі списку або введіть власні значення.",
+                "slug": "Унікальний ідентифікатор цієї активності. Залиште порожнім для автоматичного генерування з ID сутності. Приклад: ha-living-room-lamp",
+                "activity_name": "Відображувана назва на iPhone Live Activity. За замовчуванням — зрозуміла назва сутності.",
+                "priority": "Активності з вищим пріоритетом зберігаються довше при досягненні ліміту пристрою (0 = найнижчий, 10 = найвищий).",
+                "sound": "Назва звуку сповіщення для цього оновлення. Залиште порожнім для системного звуку iOS.",
+                "update_interval": "Мінімальний інтервал між оновленнями у секундах. Часті зміни стану обмежуються.",
+                "ended_ttl": "Секунди після завершення активності до її автовидалення з сервера. Залиште порожнім, щоб зберігати необмежено. Приклад: 300",
+                "stale_ttl": "Секунди бездіяльності до автоматичного завершення активності сервером. Залиште порожнім, щоб вимкнути. Приклад: 1800"
+              }
+            },
+            "content": {
+              "name": "Layout content",
+              "description": "Values used by the selected Live Activity layout.",
+              "data": {
+                "progress_attribute": "Атрибут прогресу",
+                "remaining_time_attribute": "Атрибут часу, що залишився",
+                "total_steps": "Усього кроків",
+                "current_step_attribute": "Атрибут поточного кроку",
+                "severity": "Серйозність",
+                "value_attribute": "Атрибут значення",
+                "min_value": "Мінімальне значення",
+                "max_value": "Максимальне значення",
+                "unit": "Одиниця",
+                "series": "Серії",
+                "scale": "Масштаб",
+                "decimals": "Знаки після коми",
+                "smoothing": "Згладжені лінії",
+                "thresholds": "Пороги",
+                "history_period": "Період попередньої історії",
+                "state_labels": "Мітки станів",
+                "completion_message": "Повідомлення про завершення",
+                "warning_threshold": "Попередній поріг",
+                "alarm": "Сигнал",
+                "step_labels": "Мітки кроків",
+                "step_rows": "Рядки кроків",
+                "fired_at_attribute": "Атрибут часу спрацювання",
+                "units": "Одиниці",
+                "progress_entity": "Сутність прогресу",
+                "remaining_time_entity": "Сутність часу, що залишився",
+                "current_step_entity": "Сутність поточного кроку",
+                "value_entity": "Сутність значення",
+                "snooze_seconds": "Секунди відкладання (iOS 26+)",
+                "fired_at_entity": "Сутність часу спрацювання",
+                "log_columns": "Стовпці журналу",
+                "step_configuration": "Steps"
+              },
+              "data_description": {
+                "progress_attribute": "Атрибут сутності зі значенням прогресу від 0 до 100. Приклад: percentage",
+                "remaining_time_attribute": "Атрибут сутності з часом, що залишився, у секундах. Приклад: remaining",
+                "total_steps": "Загальна кількість steps.",
+                "current_step_attribute": "Атрибут сутності з поточним кроком у вигляді цілого числа.",
+                "severity": "Рівень серйозності Alert.",
+                "value_attribute": "Атрибут сутності з поточним числовим значенням gauge. Залиште порожнім, щоб використовувати стан сутності.",
+                "min_value": "Мінімальне значення діапазону gauge.",
+                "max_value": "Максимальне значення діапазону gauge.",
+                "unit": "Одиниця вимірювання поруч із значенням (наприклад, °C, %, кВт). Максимум 32 символи.",
+                "series": "Зіставлення атрибутів сутності з іменованими серіями. Формат: attribute=Мітка, attribute2=Мітка2. Залиште порожнім, щоб використовувати стан сутності як єдину серію.",
+                "scale": "Режим масштабу осі Y для спарклайн-графіка.",
+                "decimals": "Кількість знаків після коми для відображення значень (0–10).",
+                "smoothing": "Увімкнути інтерполяцію кривої між точками даних для плавнішого спарклайну.",
+                "thresholds": "Горизонтальні опорні лінії на спарклайні. Формат: значення:колір:мітка. Приклад: 25:red:Жарко, 18:blue:Холодно. Максимум 5.",
+                "history_period": "Хвилини попередніх даних для ініціалізації спарклайну з рекордера Home Assistant. Встановіть 0, щоб почати без історії.",
+                "state_labels": "Власний текст для відображення станів. Формат: стан=Мітка, стан2=Мітка 2. Приклад: heating=Нагрів, idle=Очікування",
+                "completion_message": "Текст при завершенні активності. Залиште порожнім для 'Complete'. Приклад: Прання завершено",
+                "warning_threshold": "При досягненні або перевищенні цього значення спрацьовує попереджувальне забарвлення. Шаблони gauge та timeline.",
+                "alarm": "Активує сигнал AlarmKit при перевищенні попереднього порогу. Лише для iOS 26+.",
+                "step_labels": "Власні мітки для кроків шаблону steps. Формат: 1=Мітка, 2=Мітка. Якщо порожньо — використовуються номери кроків.",
+                "step_rows": "Кількість кроків для відображення в одному рядку в шаблоні steps.",
+                "fired_at_attribute": "Атрибут сутності з Unix-міткою часу спрацювання. Використовується для відображення відносного часу.",
+                "units": "Мітки одиниць для серій timeline. Формат: attribute=Одиниця. Приклад: temp=°C, humidity=%",
+                "progress_entity": "Зчитувати прогрес з окремої сутності замість відстежуваної. Залиште порожнім, щоб використовувати відстежувану сутність. Якщо задано поле атрибута, зчитує цей атрибут даної сутності; інакше — її стан.",
+                "remaining_time_entity": "Зчитувати час, що залишився, з окремої сутності (напр., датчика часу пральної машини). Залиште порожнім, щоб використовувати відстежувану сутність. Автоматично розпізнає датчик з часовою міткою (час завершення), датчик тривалості з одиницями, рядок H:MM:SS або звичайні секунди.",
+                "current_step_entity": "Зчитувати поточний крок з окремої сутності. Залиште порожнім, щоб використовувати відстежувану сутність.",
+                "value_entity": "Зчитувати значення шкали з окремої сутності. Залиште порожнім, щоб використовувати відстежувану сутність. Використовує стан сутності-джерела, якщо не задано атрибут.",
+                "snooze_seconds": "На скільки кнопка «Відкласти» в iOS подовжує відлік (60–3600). Залиште порожнім для типового значення 300 с (5 хв). Потребує будильника. Лише шаблон відліку.",
+                "fired_at_entity": "Зчитувати час спрацювання сповіщення з окремої сутності. Залиште порожнім, щоб використовувати відстежувану сутність. Приймає unix-час або датчик з ISO-часом. Лише шаблон сповіщення.",
+                "log_columns": "Додаткові значення, що додаються до кожного рядка журналу (макс. 6), розділені комами. Формат: [Label=]source[|unit]. source = атрибут цієї сутності (brightness), стан іншої сутності (binary_sensor.door) або атрибут іншої сутності (sensor.temp:temperature). Приклад: color_temp_kelvin|K, brightness → 'On · 4000K · 153'. Лише шаблон журналу.",
+                "step_configuration": "Add one row per step. Parallel jobs controls the number of stacked rows; relative duration/width makes longer stages wider; color is optional."
+              }
+            },
+            "appearance": {
+              "name": "Appearance and tap actions",
+              "description": "Optional labels, icons, colors, buttons, and background tap behavior.",
+              "data": {
+                "subtitle_entity": "Сутність підзаголовка",
+                "subtitle_attribute": "Атрибут підзаголовка",
+                "icon": "Значок",
+                "icon_attribute": "Атрибут значка",
+                "accent_color": "Акцентний колір",
+                "accent_color_attribute": "Атрибут акцентного кольору",
+                "background_color": "Колір фону",
+                "background_color_attribute": "Атрибут кольору фону",
+                "text_color": "Колір тексту",
+                "text_color_attribute": "Атрибут кольору тексту",
+                "tap_action_url": "URL дії при дотику",
+                "tap_action_foreground": "Відкривати URL дії при дотику",
+                "url": "URL",
+                "url_foreground": "Відкривати URL основної кнопки",
+                "url_title": "Назва основної кнопки",
+                "secondary_url": "Додатковий URL",
+                "secondary_url_foreground": "Відкривати URL додаткової кнопки",
+                "secondary_url_title": "Назва додаткової кнопки"
+              },
+              "data_description": {
+                "subtitle_entity": "Показувати підзаголовок з окремої сутності (напр., датчика програми/режиму). Залиште порожнім, щоб використовувати відстежувану сутність. Використовує стан сутності-джерела, якщо не задано атрибут.",
+                "subtitle_attribute": "Атрибут сутності для підзаголовка. Залиште порожнім, щоб використовувати зрозумілу назву сутності.",
+                "icon": "Замінити значок. Залиште порожнім, щоб використовувати рідний значок сутності (наприклад, mdi:thermometer). Також підтримуються SF Symbols (наприклад, lamp.desk.fill).",
+                "icon_attribute": "Атрибут сутності для динамічного значка. Перевизначає статичний значок і значок сутності, якщо встановлено.",
+                "accent_color": "Акцентний колір для Live Activity. Залиште порожнім для синього за замовчуванням.",
+                "accent_color_attribute": "Атрибут сутності для динамічного акцентного кольору. Перевизначає статичний колір. Підтримує RGB, HS, XY, Kelvin, іменовані кольори та hex.",
+                "background_color": "Колір фону Live Activity. #RRGGBB або ім'я кольору. Залиште порожнім для системного значення за замовчуванням.",
+                "background_color_attribute": "Атрибут сутності для динамічного кольору фону. Перевизначає статичний колір фону.",
+                "text_color": "Колір тексту Live Activity. #RRGGBB або ім'я кольору. Залиште порожнім для системного значення за замовчуванням.",
+                "text_color_attribute": "Атрибут сутності для динамічного кольору тексту. Перевизначає статичний колір тексту.",
+                "tap_action_url": "Необов’язковий URL, що відкривається при дотику до тла Live Activity. Підтримує http(s) (відкриває Safari) або власні схеми на кшталт homeassistant://navigate/lovelace/0 (відкриває відповідний застосунок).",
+                "tap_action_foreground": "Увімкнено: дотик відкриває URL. Вимкнено: тихий вебхук (лише http(s)) — надсилає POST у фоні, не залишаючи екран блокування.",
+                "url": "Посилання, що відкривається при натисканні на Live Activity. Має починатися з http:// або https://. Лише для шаблонів steps та alert.",
+                "url_foreground": "Увімкнено: дотик відкриває URL. Вимкнено: тихий вебхук (лише http(s)).",
+                "url_title": "Підпис основної кнопки (макс. 64 символи).",
+                "secondary_url": "Додаткове посилання для Live Activity. Лише для шаблонів steps та alert.",
+                "secondary_url_foreground": "Увімкнено: дотик відкриває URL. Вимкнено: тихий вебхук (лише http(s)).",
+                "secondary_url_title": "Підпис додаткової кнопки (макс. 64 символи)."
+              }
+            }
+          }
         },
         "reconfigure": {
           "title": "Редагувати конфігурацію сутності",
@@ -1507,7 +1651,7 @@
           }
         },
         "details": {
-          "title": "2 of 4 · {template} content",
+          "title": "Configure {template} widget",
           "data": {
             "widget_name": "Назва віджета",
             "value_attribute": "Атрибут значення",
@@ -1552,7 +1696,73 @@
             "tap_action_url": "Необов’язковий URL, що відкривається при дотику до віджета. Підтримує http(s) (відкриває Safari) або власні схеми на кшталт homeassistant://navigate/lovelace/0.",
             "tap_action_foreground": "Увімкнено: дотик відкриває URL. Вимкнено: тихий вебхук (лише http(s)) — надсилає POST у фоні."
           },
-          "description": "Choose the values shown by this widget."
+          "description": "Everything is on this page. Open only the sections you need.",
+          "sections": {
+            "content": {
+              "name": "Widget content",
+              "description": "Values rendered by the selected widget layout.",
+              "data": {
+                "value_attribute": "Атрибут значення",
+                "unit": "Одиниця",
+                "min_value": "Мінімальне значення",
+                "max_value": "Максимальне значення",
+                "severity": "Важливість",
+                "stat_rows": "Рядки статистики"
+              },
+              "data_description": {
+                "value_attribute": "Атрибут сутності, що містить значення. Залиште порожнім, щоб використовувати основний стан сутності.",
+                "unit": "Одиниця, що показується поряд зі значенням. Макс. 32 символи.",
+                "min_value": "Мінімальне значення діапазону шкали.",
+                "max_value": "Максимальне значення діапазону шкали.",
+                "severity": "Важливість статусу (info, warning, critical, success).",
+                "stat_rows": "До 6 рядків. Формат: `Label=entity_id[:attribute[:unit]]`, через кому. Приклад: `Users=sensor.user_count, Active=sensor.active_devices:count`."
+              }
+            },
+            "appearance": {
+              "name": "Appearance and tap action",
+              "description": "Optional labels, icon, colors, and tap behavior.",
+              "data": {
+                "widget_name": "Назва віджета",
+                "label": "Мітка",
+                "label_attribute": "Атрибут мітки",
+                "subtitle_attribute": "Атрибут підзаголовка",
+                "icon": "Значок",
+                "icon_attribute": "Атрибут значка",
+                "accent_color": "Акцентний колір",
+                "accent_color_attribute": "Атрибут акцентного кольору",
+                "background_color": "Колір тла",
+                "text_color": "Колір тексту",
+                "tap_action_url": "URL дії при дотику",
+                "tap_action_foreground": "Відкривати URL дії при дотику"
+              },
+              "data_description": {
+                "widget_name": "Відображувана назва в засобі вибору віджетів iOS. Типово — зрозуміла назва сутності.",
+                "label": "Статична мітка, що показується на віджеті. Залиште порожнім, щоб взяти із сутності.",
+                "label_attribute": "Атрибут сутності, що використовується як мітка. Перевизначає статичну мітку.",
+                "subtitle_attribute": "Атрибут сутності, що показується як підзаголовок віджета.",
+                "icon": "Статичний значок. Підтримуються SF Symbols та назви MDI.",
+                "icon_attribute": "Атрибут сутності для динамічного значка. Перевизначає статичний значок.",
+                "accent_color": "Акцентний колір віджета. Залиште порожнім для типового.",
+                "accent_color_attribute": "Атрибут сутності для динамічного акцентного кольору.",
+                "background_color": "Необов’язковий колір тла.",
+                "text_color": "Необов’язковий колір тексту.",
+                "tap_action_url": "Необов’язковий URL, що відкривається при дотику до віджета. Підтримує http(s) (відкриває Safari) або власні схеми на кшталт homeassistant://navigate/lovelace/0.",
+                "tap_action_foreground": "Увімкнено: дотик відкриває URL. Вимкнено: тихий вебхук (лише http(s)) — надсилає POST у фоні."
+              }
+            },
+            "refresh": {
+              "name": "Refresh behavior",
+              "description": "Choose event-driven updates or periodic polling.",
+              "data": {
+                "widget_trigger_mode": "Режим спрацювання",
+                "widget_poll_interval": "Інтервал опитування (секунди)"
+              },
+              "data_description": {
+                "widget_trigger_mode": "Як запускаються оновлення. `event` реагує на зміни стану; `poll` переобчислює через фіксований інтервал.",
+                "widget_poll_interval": "Інтервал між опитуваннями (10–3600 секунд). Використовується лише коли режим спрацювання — `poll`."
+              }
+            }
+          }
         },
         "appearance": {
           "title": "3 of 4 · Appearance and tap action",

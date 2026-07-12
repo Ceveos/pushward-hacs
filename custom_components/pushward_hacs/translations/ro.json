@@ -1090,7 +1090,7 @@
           }
         },
         "details": {
-          "title": "2 of 4 · Lifecycle and updates",
+          "title": "Configure {template} activity",
           "data": {
             "start_states": "Stări de pornire",
             "end_states": "Stări de încheiere",
@@ -1148,7 +1148,8 @@
             "secondary_url_title": "Titlu buton secundar",
             "snooze_seconds": "Secunde amânare (iOS 26+)",
             "fired_at_entity": "Entitate moment declanșare",
-            "log_columns": "Coloane jurnal"
+            "log_columns": "Coloane jurnal",
+            "step_configuration": "Steps"
           },
           "data_description": {
             "start_states": "Stările entității care pornesc Live Activity. Selectați din listă sau introduceți valori personalizate.",
@@ -1207,9 +1208,152 @@
             "secondary_url_title": "Eticheta butonului secundar (maximum 64 de caractere).",
             "snooze_seconds": "Cât prelungește numărătoarea inversă butonul Snooze din iOS (60–3600). Lăsați gol pentru valoarea implicită de 300s (5 min). Necesită Alarmă. Doar șablonul countdown.",
             "fired_at_entity": "Citește momentul declanșării alertei dintr-o entitate separată. Lăsați gol pentru a folosi entitatea urmărită. Acceptă o marcă temporală Unix sau un senzor de marcă temporală ISO. Doar șablonul alert.",
-            "log_columns": "Valori suplimentare adăugate la fiecare linie de jurnal (max. 6), separate prin virgulă. Format: [Label=]source[|unit]. source = un atribut al acestei entități (brightness), starea altei entități (binary_sensor.door) sau un atribut al altei entități (sensor.temp:temperature). Exemplu: color_temp_kelvin|K, brightness → 'On · 4000K · 153'. Doar șablon jurnal."
+            "log_columns": "Valori suplimentare adăugate la fiecare linie de jurnal (max. 6), separate prin virgulă. Format: [Label=]source[|unit]. source = un atribut al acestei entități (brightness), starea altei entități (binary_sensor.door) sau un atribut al altei entități (sensor.temp:temperature). Exemplu: color_temp_kelvin|K, brightness → 'On · 4000K · 153'. Doar șablon jurnal.",
+            "step_configuration": "Add one row per step. Parallel jobs controls the number of stacked rows; relative duration/width makes longer stages wider; color is optional."
           },
-          "description": "Choose when this activity starts and ends, how often it updates, and how PushWard retains it."
+          "description": "Everything is on this page. Open only the sections you need.",
+          "sections": {
+            "lifecycle": {
+              "name": "Lifecycle and delivery",
+              "description": "Choose when the activity runs and how PushWard updates and retains it.",
+              "data": {
+                "start_states": "Stări de pornire",
+                "end_states": "Stări de încheiere",
+                "slug": "Slug activitate",
+                "activity_name": "Nume activitate",
+                "priority": "Prioritate (0-10)",
+                "sound": "Sunet",
+                "update_interval": "Interval minim de actualizare (secunde)",
+                "ended_ttl": "Ștergere automată după încheiere (secunde)",
+                "stale_ttl": "Încheiere automată după inactivitate (secunde)"
+              },
+              "data_description": {
+                "start_states": "Stările entității care pornesc Live Activity. Selectați din listă sau introduceți valori personalizate.",
+                "end_states": "Stările entității care încheie Live Activity. Selectați din listă sau introduceți valori personalizate.",
+                "slug": "Identificator unic pentru această activitate. Lăsați gol pentru a genera automat din ID-ul entității. Exemplu: ha-living-room-lamp",
+                "activity_name": "Numele de afișare pe iPhone Live Activity. Implicit este numele prietenos al entității.",
+                "priority": "Activitățile cu prioritate mai mare sunt păstrate mai mult timp când se atinge limita dispozitivului (0 = cea mai mică, 10 = cea mai mare).",
+                "sound": "Numele sunetului de notificare pentru această actualizare. Lăsați gol pentru sunetul sistem iOS.",
+                "update_interval": "Numărul minim de secunde între actualizări. Modificările rapide ale stării sunt limitate ca rată.",
+                "ended_ttl": "Secunde după încheierea activității înainte de a fi ștearsă automat de pe server. Lăsați gol pentru a păstra indefinit. Exemplu: 300",
+                "stale_ttl": "Secunde de inactivitate înainte ca serverul să încheie automat activitatea. Lăsați gol pentru a dezactiva. Exemplu: 1800"
+              }
+            },
+            "content": {
+              "name": "Layout content",
+              "description": "Values used by the selected Live Activity layout.",
+              "data": {
+                "progress_attribute": "Atribut progres",
+                "remaining_time_attribute": "Atribut timp rămas",
+                "total_steps": "Total steps",
+                "current_step_attribute": "Atribut pas curent",
+                "severity": "Severitate",
+                "value_attribute": "Atribut valoare",
+                "min_value": "Valoare minimă",
+                "max_value": "Valoare maximă",
+                "unit": "Unitate",
+                "series": "Serii",
+                "scale": "Scală",
+                "decimals": "Zecimale",
+                "smoothing": "Linii netezite",
+                "thresholds": "Praguri",
+                "history_period": "Perioadă istoric retroactiv",
+                "state_labels": "Etichete stări",
+                "completion_message": "Mesaj de finalizare",
+                "warning_threshold": "Prag de avertizare",
+                "alarm": "Alarmă",
+                "step_labels": "Etichete pași",
+                "step_rows": "Rânduri pași",
+                "fired_at_attribute": "Atribut timp declanșare",
+                "units": "Unități",
+                "progress_entity": "Entitate progres",
+                "remaining_time_entity": "Entitate timp rămas",
+                "current_step_entity": "Entitate pas curent",
+                "value_entity": "Entitate valoare",
+                "snooze_seconds": "Secunde amânare (iOS 26+)",
+                "fired_at_entity": "Entitate moment declanșare",
+                "log_columns": "Coloane jurnal",
+                "step_configuration": "Steps"
+              },
+              "data_description": {
+                "progress_attribute": "Atributul entității care conține o valoare de progres între 0 și 100. Exemplu: percentage",
+                "remaining_time_attribute": "Atributul entității care conține timpul rămas în secunde. Exemplu: remaining",
+                "total_steps": "Numărul total de steps.",
+                "current_step_attribute": "Atributul entității care conține pasul curent ca număr întreg.",
+                "severity": "Nivelul de severitate alert.",
+                "value_attribute": "Atributul entității care conține valoarea curentă a gauge-ului ca număr. Lăsați gol pentru a folosi starea entității.",
+                "min_value": "Valoarea minimă a intervalului gauge-ului.",
+                "max_value": "Valoarea maximă a intervalului gauge-ului.",
+                "unit": "Unitatea de afișare lângă valoare (ex. °C, %, kW). Maxim 32 de caractere.",
+                "series": "Asociați atributele entității cu serii denumite. Format: atribut=Etichetă, atribut2=Etichetă2. Lăsați gol pentru a folosi starea entității ca serie unică.",
+                "scale": "Modul de scală al axei Y pentru graficul sparkline.",
+                "decimals": "Numărul de zecimale afișate pentru valori (0–10).",
+                "smoothing": "Activați interpolarea curbei între punctele de date pentru un sparkline mai fluid.",
+                "thresholds": "Linii de referință orizontale pe sparkline. Format: valoare:culoare:etichetă. Exemplu: 25:red:Cald, 18:blue:Rece. Maxim 5.",
+                "history_period": "Minute de date anterioare pentru inițializarea sparkline-ului din înregistrările Home Assistant. Setați 0 pentru a începe fără istoric.",
+                "state_labels": "Text de afișare personalizat pentru stări. Format: stare=Etichetă, stare2=Etichetă 2. Exemplu: heating=Se încălzește, idle=Standby",
+                "completion_message": "Textul afișat la încheierea activității. Lăsați gol pentru 'Complet'. Exemplu: Spălare terminată",
+                "warning_threshold": "Când valoarea atinge sau depășește aceasta, colorarea de avertizare este declanșată. Șabloane gauge și timeline.",
+                "alarm": "Declanșează alarma AlarmKit când pragul de avertizare este depășit. Doar pentru iOS 26+.",
+                "step_labels": "Etichete personalizate pentru pașii șablonului steps. Format: 1=Etichetă, 2=Etichetă. Gol folosește numerele pașilor.",
+                "step_rows": "Numărul de pași afișați pe un rând în șablonul steps.",
+                "fired_at_attribute": "Atribut entitate care conține marca temporală Unix a declanșării. Folosit pentru afișarea timpului relativ.",
+                "units": "Etichete de unități pentru seriile timeline. Format: attribute=Unitate. Exemplu: temp=°C, humidity=%",
+                "progress_entity": "Citește progresul dintr-o entitate separată în loc de entitatea urmărită. Lăsați gol pentru a folosi entitatea urmărită. Dacă este setat câmpul de atribut, citește acel atribut al acestei entități; altfel starea ei.",
+                "remaining_time_entity": "Citește timpul rămas dintr-o entitate separată (de ex. senzorul de timp al unei mașini de spălat). Lăsați gol pentru a folosi entitatea urmărită. Analizează automat un senzor de marcă temporală (ora de finalizare), un senzor de durată cu unități, un șir H:MM:SS sau secunde simple.",
+                "current_step_entity": "Citește pasul curent dintr-o entitate separată. Lăsați gol pentru a folosi entitatea urmărită.",
+                "value_entity": "Citește valoarea gauge dintr-o entitate separată. Lăsați gol pentru a folosi entitatea urmărită. Folosește starea entității sursă dacă nu este setat un atribut.",
+                "snooze_seconds": "Cât prelungește numărătoarea inversă butonul Snooze din iOS (60–3600). Lăsați gol pentru valoarea implicită de 300s (5 min). Necesită Alarmă. Doar șablonul countdown.",
+                "fired_at_entity": "Citește momentul declanșării alertei dintr-o entitate separată. Lăsați gol pentru a folosi entitatea urmărită. Acceptă o marcă temporală Unix sau un senzor de marcă temporală ISO. Doar șablonul alert.",
+                "log_columns": "Valori suplimentare adăugate la fiecare linie de jurnal (max. 6), separate prin virgulă. Format: [Label=]source[|unit]. source = un atribut al acestei entități (brightness), starea altei entități (binary_sensor.door) sau un atribut al altei entități (sensor.temp:temperature). Exemplu: color_temp_kelvin|K, brightness → 'On · 4000K · 153'. Doar șablon jurnal.",
+                "step_configuration": "Add one row per step. Parallel jobs controls the number of stacked rows; relative duration/width makes longer stages wider; color is optional."
+              }
+            },
+            "appearance": {
+              "name": "Appearance and tap actions",
+              "description": "Optional labels, icons, colors, buttons, and background tap behavior.",
+              "data": {
+                "subtitle_entity": "Entitate subtitrare",
+                "subtitle_attribute": "Atribut subtitrare",
+                "icon": "Pictogramă",
+                "icon_attribute": "Atribut pictogramă",
+                "accent_color": "Culoare accent",
+                "accent_color_attribute": "Atribut culoare accent",
+                "background_color": "Culoare fundal",
+                "background_color_attribute": "Atribut culoare fundal",
+                "text_color": "Culoare text",
+                "text_color_attribute": "Atribut culoare text",
+                "tap_action_url": "URL acțiune la atingere",
+                "tap_action_foreground": "Deschideți URL-ul acțiunii la atingere",
+                "url": "URL",
+                "url_foreground": "Deschideți URL-ul butonului principal",
+                "url_title": "Titlu buton principal",
+                "secondary_url": "URL secundar",
+                "secondary_url_foreground": "Deschideți URL-ul butonului secundar",
+                "secondary_url_title": "Titlu buton secundar"
+              },
+              "data_description": {
+                "subtitle_entity": "Afișează subtitrarea dintr-o entitate separată (de ex. un senzor de program/mod). Lăsați gol pentru a folosi entitatea urmărită. Folosește starea entității sursă dacă nu este setat un atribut.",
+                "subtitle_attribute": "Atributul entității de afișat ca subtitrare. Lăsați gol pentru a folosi numele prietenos al entității.",
+                "icon": "Înlocuiți pictograma. Lăsați gol pentru a folosi pictograma nativă a entității (ex. mdi:thermometer). SF Symbols sunt de asemenea acceptate (ex. lamp.desk.fill).",
+                "icon_attribute": "Atributul entității pentru pictogramă dinamică. Suprascrie pictograma statică și cea a entității când este setat.",
+                "accent_color": "Culoarea de accent pentru Live Activity. Lăsați gol pentru albastrul implicit.",
+                "accent_color_attribute": "Atributul entității pentru culoarea de accent dinamică. Suprascrie culoarea statică. Acceptă RGB, HS, XY, Kelvin, culori denumite și hex.",
+                "background_color": "Culoarea de fundal a Live Activity. #RRGGBB sau culoare numită. Lăsați gol pentru valoarea implicită a sistemului.",
+                "background_color_attribute": "Atribut entitate pentru culoarea de fundal dinamică. Înlocuiește culoarea de fundal statică.",
+                "text_color": "Culoarea textului Live Activity. #RRGGBB sau culoare numită. Lăsați gol pentru valoarea implicită a sistemului.",
+                "text_color_attribute": "Atribut entitate pentru culoarea textului dinamic. Înlocuiește culoarea textului static.",
+                "tap_action_url": "URL opțional deschis la atingerea fundalului Live Activity. Acceptă http(s) (deschide Safari) sau scheme personalizate precum homeassistant://navigate/lovelace/0 (deschide aplicația respectivă).",
+                "tap_action_foreground": "Activat: atingerea deschide URL-ul. Dezactivat: webhook silențios (doar http(s)) — declanșează un POST în fundal fără a părăsi ecranul de blocare.",
+                "url": "Linkul deschis la apăsarea Live Activity. Trebuie să înceapă cu http:// sau https://. Numai pentru șabloanele steps și alert.",
+                "url_foreground": "Activat: atingerea deschide URL-ul. Dezactivat: webhook silențios (doar http(s)).",
+                "url_title": "Eticheta butonului principal (maximum 64 de caractere).",
+                "secondary_url": "Link secundar pentru Live Activity. Numai pentru șabloanele steps și alert.",
+                "secondary_url_foreground": "Activat: atingerea deschide URL-ul. Dezactivat: webhook silențios (doar http(s)).",
+                "secondary_url_title": "Eticheta butonului secundar (maximum 64 de caractere)."
+              }
+            }
+          }
         },
         "reconfigure": {
           "title": "Editați configurația entității",
@@ -1507,7 +1651,7 @@
           }
         },
         "details": {
-          "title": "2 of 4 · {template} content",
+          "title": "Configure {template} widget",
           "data": {
             "widget_name": "Nume widget",
             "value_attribute": "Atribut valoare",
@@ -1552,7 +1696,73 @@
             "tap_action_url": "URL opțional deschis la atingerea widget-ului. Acceptă http(s) (deschide Safari) sau scheme personalizate precum homeassistant://navigate/lovelace/0.",
             "tap_action_foreground": "Activat: atingerea deschide URL-ul. Dezactivat: webhook silențios (doar http(s)) — declanșează un POST în fundal."
           },
-          "description": "Choose the values shown by this widget."
+          "description": "Everything is on this page. Open only the sections you need.",
+          "sections": {
+            "content": {
+              "name": "Widget content",
+              "description": "Values rendered by the selected widget layout.",
+              "data": {
+                "value_attribute": "Atribut valoare",
+                "unit": "Unitate",
+                "min_value": "Valoare minimă",
+                "max_value": "Valoare maximă",
+                "severity": "Severitate",
+                "stat_rows": "Rânduri statistici"
+              },
+              "data_description": {
+                "value_attribute": "Atributul entității care conține valoarea. Lăsați gol pentru a folosi starea principală a entității.",
+                "unit": "Unitatea de afișare arătată lângă valoare. Maximum 32 de caractere.",
+                "min_value": "Valoarea minimă pentru intervalul gauge.",
+                "max_value": "Valoarea maximă pentru intervalul gauge.",
+                "severity": "Severitatea stării (info, warning, critical, success).",
+                "stat_rows": "Până la 6 rânduri. Format: `Label=entity_id[:attribute[:unit]]`, separate prin virgulă. Exemplu: `Users=sensor.user_count, Active=sensor.active_devices:count`."
+              }
+            },
+            "appearance": {
+              "name": "Appearance and tap action",
+              "description": "Optional labels, icon, colors, and tap behavior.",
+              "data": {
+                "widget_name": "Nume widget",
+                "label": "Etichetă",
+                "label_attribute": "Atribut etichetă",
+                "subtitle_attribute": "Atribut subtitrare",
+                "icon": "Pictogramă",
+                "icon_attribute": "Atribut pictogramă",
+                "accent_color": "Culoare accent",
+                "accent_color_attribute": "Atribut culoare accent",
+                "background_color": "Culoare fundal",
+                "text_color": "Culoare text",
+                "tap_action_url": "URL acțiune la atingere",
+                "tap_action_foreground": "Deschideți URL-ul acțiunii la atingere"
+              },
+              "data_description": {
+                "widget_name": "Numele afișat în selectorul de widget-uri din iOS. Implicit, numele prietenos al entității.",
+                "label": "Etichetă statică afișată pe widget. Lăsați gol pentru a o deriva din entitate.",
+                "label_attribute": "Atributul entității folosit ca etichetă. Suprascrie eticheta statică.",
+                "subtitle_attribute": "Atributul entității afișat ca subtitrare a widget-ului.",
+                "icon": "Pictogramă statică. Sunt acceptate denumiri SF Symbols și MDI.",
+                "icon_attribute": "Atributul entității pentru o pictogramă dinamică. Suprascrie pictograma statică.",
+                "accent_color": "Culoarea de accent pentru widget. Lăsați gol pentru valoarea implicită.",
+                "accent_color_attribute": "Atributul entității pentru o culoare de accent dinamică.",
+                "background_color": "Culoare de fundal opțională.",
+                "text_color": "Culoare de text opțională.",
+                "tap_action_url": "URL opțional deschis la atingerea widget-ului. Acceptă http(s) (deschide Safari) sau scheme personalizate precum homeassistant://navigate/lovelace/0.",
+                "tap_action_foreground": "Activat: atingerea deschide URL-ul. Dezactivat: webhook silențios (doar http(s)) — declanșează un POST în fundal."
+              }
+            },
+            "refresh": {
+              "name": "Refresh behavior",
+              "description": "Choose event-driven updates or periodic polling.",
+              "data": {
+                "widget_trigger_mode": "Mod declanșare",
+                "widget_poll_interval": "Interval interogare (secunde)"
+              },
+              "data_description": {
+                "widget_trigger_mode": "Cum sunt declanșate actualizările. `event` reacționează la schimbările de stare; `poll` reevaluează la un interval fix.",
+                "widget_poll_interval": "Intervalul dintre interogări (10–3600 secunde). Folosit doar când modul de declanșare este `poll`."
+              }
+            }
+          }
         },
         "appearance": {
           "title": "3 of 4 · Appearance and tap action",

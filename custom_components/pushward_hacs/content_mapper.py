@@ -63,8 +63,10 @@ from .const import (
     CONF_SMOOTHING,
     CONF_SNOOZE_SECONDS,
     CONF_STATE_LABELS,
+    CONF_STEP_COLORS,
     CONF_STEP_LABELS,
     CONF_STEP_ROWS,
+    CONF_STEP_WEIGHTS,
     CONF_SUBTITLE_ATTRIBUTE,
     CONF_SUBTITLE_ENTITY,
     CONF_TAP_ACTION_FOREGROUND,
@@ -234,13 +236,9 @@ _BUTTON_SLOTS: tuple[tuple[str, str, str, str], ...] = (
 def _add_tap_actions(content: dict, entity_config: dict) -> None:
     """Add structured tap_action / url_action / secondary_url_action to content.
 
-    tap_action is universal (every template); url_action and secondary_url_action
-    are emitted only for steps/alert templates that render button affordances.
+    All three action slots are accepted by every PushWard activity template.
     """
     add_tap_action(content, entity_config)
-
-    if entity_config.get(CONF_TEMPLATE, "generic") not in ("steps", "alert"):
-        return
 
     for slot_key, url_key, foreground_key, title_key in _BUTTON_SLOTS:
         action = build_tap_action(
@@ -462,6 +460,9 @@ def _build_board_tiles(entity_config: dict, hass: HomeAssistant | None) -> list[
         trend = tile.get("trend")
         if trend in BOARD_TRENDS:
             out["trend"] = trend
+        tile_action = build_tap_action(tile.get(CONF_URL, ""), True)
+        if tile_action:
+            out["url_action"] = tile_action
         tiles_out.append(out)
         if len(tiles_out) >= BOARD_MAX_TILES:
             break
@@ -558,6 +559,15 @@ def map_content(
         step_rows = entity_config.get(CONF_STEP_ROWS) or []
         if len(step_rows) == total:
             content["step_rows"] = [max(1, min(10, int(r))) for r in step_rows]
+        step_weights = entity_config.get(CONF_STEP_WEIGHTS) or []
+        if len(step_weights) == total:
+            content["step_weights"] = [max(0.1, float(weight)) for weight in step_weights]
+        step_colors = entity_config.get(CONF_STEP_COLORS) or []
+        if len(step_colors) == total and any(step_colors):
+            content["step_colors"] = [str(color) for color in step_colors]
+        if entity_config.get(CONF_LIVE_PROGRESS) and (absolute_end is not None or remaining is not None):
+            content["live_progress"] = True
+            content["end_date"] = absolute_end if absolute_end is not None else now + remaining
     elif template == "alert":
         content["severity"] = entity_config.get(CONF_SEVERITY, DEFAULT_SEVERITY)
         if label := entity_config.get(CONF_SEVERITY_LABEL):
@@ -658,6 +668,9 @@ def map_completion_content(entity_config: dict, last_content: dict | None = None
         content["total_steps"] = total
         content["current_step"] = total
         content["progress"] = 1.0
+        if last_content and last_content.get("live_progress"):
+            content["live_progress"] = None
+            content["end_date"] = None
     elif template == "alert":
         content["severity"] = entity_config.get(CONF_SEVERITY, DEFAULT_SEVERITY)
         if label := entity_config.get(CONF_SEVERITY_LABEL):
@@ -686,7 +699,8 @@ def map_completion_content(entity_config: dict, last_content: dict | None = None
     elif template == "generic" and last_content and last_content.get("live_progress"):
         # The activity is done, so stop the opt-in ETA interpolation. Without this
         # it keeps counting toward a now-past end_date on the completion frame.
-        content["live_progress"] = False
+        content["live_progress"] = None
+        content["end_date"] = None
 
     if last_content:
         for key in _COMMON_CARRY_FIELDS:

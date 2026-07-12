@@ -24,17 +24,14 @@ Unlike a blueprint, PushWard HACS can:
 
 ## Guided configuration
 
-Adding a Live Activity uses four short pages:
+Adding a Live Activity uses two pages:
 
 1. **Entity and layout** — choose the lifecycle entity and one of eight layouts.
-2. **Lifecycle and updates** — start/end states, slug, name, priority, update
-   interval, sound, and retention.
-3. **Layout content** — only fields relevant to the selected template, with
-   direct entity and attribute selectors.
-4. **Appearance and actions** — subtitle, icon, colors, and tap behavior.
+2. **Configuration** — one form with lifecycle, layout content, appearance, tap
+   actions, and advanced behavior grouped into collapsible sections.
 
-Widgets use the same pattern: entity/layout, content, appearance, then refresh
-behavior.
+Widgets use the same pattern: choose the entity/layout, then configure content,
+appearance, and refresh behavior in one sectioned form.
 
 Compound layouts use repeatable forms:
 
@@ -44,6 +41,52 @@ Compound layouts use repeatable forms:
 - Board tiles: add label/entity/attribute/unit/icon rows.
 - Log columns: add source entity/attribute/label/unit rows.
 - Widget stat lists: add label/entity/attribute/unit rows.
+- Steps: add one row per step with separate controls for parallel jobs, relative
+  duration/width, and color. This makes a long dishwasher wash stage independent
+  from the number of visual job rows.
+
+## Delivery channels
+
+PushWard HACS exposes each channel independently, so an automation can use any
+combination:
+
+| Goal | Home Assistant action |
+| --- | --- |
+| Live Activity only | `pushward_hacs.update_activity_<layout>` (upserts automatically) |
+| Notification only | `pushward_hacs.send_notification` |
+| Live Activity and notification | Call both actions in the same automation sequence |
+| Email only | `pushward_hacs.send_email` |
+| Entity-driven Live Activity | Add a tracked entity in Devices & services |
+| Entity-driven widget | Add a tracked widget in Devices & services |
+
+The notification action includes interruption level, critical volume, grouping
+and collapse IDs, rich media, icon, metadata, activity linking, up to ten action
+buttons, foreground links or silent webhooks, and inbox-only delivery. Live
+Activity actions cover every layout plus structured tap targets, priority,
+sound, lifecycle, TTLs, AlarmKit, timelines, boards, logs, and current-step live
+progress.
+
+For both channels, add the two actions consecutively in one automation. The
+Live Activity update uses API upsert automatically, so a separate create action
+is optional unless you want to set a display name or TTL metadata first:
+
+```yaml
+actions:
+  - action: pushward_hacs.update_activity_steps
+    data:
+      slug: dishwasher
+      state: ongoing
+      total_steps: 3
+      current_step: 1
+      step_labels: [Wash, Rinse, Dry]
+      step_weights: [4, 1, 2]
+      progress: 0.25
+  - action: pushward_hacs.send_notification
+    data:
+      title: Dishwasher
+      body: Wash cycle started
+      activity_slug: dishwasher
+```
 
 ## Supported features
 
@@ -92,7 +135,7 @@ Restart Home Assistant and add **PushWard HACS** from **Devices & services**.
 
 ## Development
 
-The project targets Home Assistant 2025.7 or newer and Python 3.13.
+The project targets Home Assistant 2026.6 or newer and Python 3.13.
 
 ```bash
 python -m pip install -e . --group dev
