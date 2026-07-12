@@ -1,0 +1,1716 @@
+{
+  "services": {
+    "update_activity": {
+      "name": "Cập Nhật Hoạt Động (deprecated)",
+      "description": "Cập nhật trạng thái và nội dung của PushWard Live Activity.",
+      "fields": {
+        "slug": {
+          "name": "Slug",
+          "description": "Mã định danh slug của hoạt động."
+        },
+        "state": {
+          "name": "Trạng Thái",
+          "description": "Trạng thái hoạt động mong muốn."
+        },
+        "template": {
+          "name": "Mẫu",
+          "description": "Mẫu bố cục hoạt động."
+        },
+        "progress": {
+          "name": "Tiến Độ",
+          "description": "Giá trị tiến độ từ 0.0 đến 1.0."
+        },
+        "state_text": {
+          "name": "Văn Bản Trạng Thái",
+          "description": "Văn bản hiển thị làm trạng thái hoạt động."
+        },
+        "icon": {
+          "name": "Biểu Tượng",
+          "description": "Tên biểu tượng SF Symbol hoặc MDI (ví dụ: arrow.down.circle.fill, mdi:download)."
+        },
+        "subtitle": {
+          "name": "Phụ Đề",
+          "description": "Văn bản phụ đề hiển thị trên hoạt động."
+        },
+        "accent_color": {
+          "name": "Màu Nhấn",
+          "description": "Tên màu nhấn cho hoạt động."
+        },
+        "remaining_time": {
+          "name": "Thời Gian Còn Lại",
+          "description": "Thời gian còn lại tính bằng giây."
+        },
+        "url": {
+          "name": "URL",
+          "description": "URL chính hiển thị dưới dạng nút có thể nhấn. Chỉ hỗ trợ trên mẫu steps và alert."
+        },
+        "secondary_url": {
+          "name": "URL Phụ",
+          "description": "URL phụ hiển thị dưới dạng nút thứ hai có thể nhấn. Chỉ hỗ trợ trên mẫu steps và alert."
+        },
+        "end_date": {
+          "name": "Ngày Kết Thúc",
+          "description": "Dấu thời gian Unix cho ngày kết thúc countdown."
+        },
+        "total_steps": {
+          "name": "Tổng Số steps",
+          "description": "Tổng số steps hiện có."
+        },
+        "current_step": {
+          "name": "Bước Hiện Tại",
+          "description": "Số thứ tự bước hiện tại."
+        },
+        "severity": {
+          "name": "Mức Độ Nghiêm Trọng",
+          "description": "Mức độ nghiêm trọng của alert."
+        },
+        "value": {
+          "name": "Giá Trị",
+          "description": "Gauge: giá trị số. Timeline: đối tượng giá trị có nhãn (ví dụ: Temp=22.5)."
+        },
+        "min_value": {
+          "name": "Giá Trị Tối Thiểu",
+          "description": "Giá trị tối thiểu của gauge."
+        },
+        "max_value": {
+          "name": "Giá Trị Tối Đa",
+          "description": "Giá trị tối đa của gauge."
+        },
+        "unit": {
+          "name": "Đơn Vị",
+          "description": "Đơn vị hiển thị cho giá trị (ví dụ: °C, %)."
+        },
+        "completion_message": {
+          "name": "Thông Báo Hoàn Thành",
+          "description": "Thông báo hiển thị khi hoạt động kết thúc."
+        },
+        "scale": {
+          "name": "Tỉ Lệ",
+          "description": "Chế độ tỉ lệ trục Y (linear hoặc logarithmic). Chỉ dành cho mẫu Timeline."
+        },
+        "decimals": {
+          "name": "Số Thập Phân",
+          "description": "Số chữ số thập phân hiển thị cho giá trị (0-10). Chỉ dành cho mẫu Timeline."
+        },
+        "smoothing": {
+          "name": "Làm Mịn Đường",
+          "description": "Bật nội suy đường cong giữa các điểm dữ liệu. Chỉ dành cho mẫu Timeline."
+        },
+        "thresholds": {
+          "name": "Ngưỡng",
+          "description": "Đường tham chiếu ngang trên biểu đồ sparkline. Chỉ dành cho mẫu Timeline."
+        },
+        "sound": {
+          "name": "Âm Thanh",
+          "description": "Tên âm thanh thông báo cho bản cập nhật. Để trống để dùng âm thanh hệ thống iOS."
+        },
+        "priority": {
+          "name": "Ưu Tiên",
+          "description": "Mức ưu tiên của hoạt động (0 = thấp nhất, 10 = cao nhất)."
+        },
+        "background_color": {
+          "name": "Màu Nền",
+          "description": "Màu nền Live Activity. #RRGGBB hoặc tên màu. Để trống để dùng giá trị mặc định của hệ thống."
+        },
+        "text_color": {
+          "name": "Màu Chữ",
+          "description": "Màu chữ Live Activity. #RRGGBB hoặc tên màu. Để trống để dùng giá trị mặc định của hệ thống."
+        },
+        "warning_threshold": {
+          "name": "Ngưỡng Cảnh Báo",
+          "description": "Khi giá trị gauge hoặc timeline đạt hoặc vượt qua ngưỡng này, màu cảnh báo sẽ được hiển thị."
+        },
+        "alarm": {
+          "name": "Chuông Báo",
+          "description": "Kích hoạt chuông báo AlarmKit khi vượt ngưỡng cảnh báo. Chỉ hoạt động trên iOS 26+."
+        },
+        "step_labels": {
+          "name": "Nhãn Bước",
+          "description": "Danh sách có thứ tự các nhãn bước. Độ dài phải bằng total_steps. Chỉ dành cho mẫu steps."
+        },
+        "step_rows": {
+          "name": "Số Hàng Bước",
+          "description": "Danh sách có thứ tự chiều cao hàng (1-10) cho mỗi bước. Độ dài phải bằng total_steps. Chỉ dành cho mẫu steps."
+        },
+        "fired_at": {
+          "name": "Thời Điểm Kích Hoạt",
+          "description": "Dấu thời gian Unix khi hoạt động được kích hoạt. Dùng để hiển thị thời gian tương đối."
+        },
+        "units": {
+          "name": "Đơn Vị",
+          "description": "Nhãn đơn vị cho chuỗi timeline. Định dạng: attribute=Đơn vị. Ví dụ: temp=°C, humidity=%"
+        },
+        "snooze_seconds": {
+          "name": "Số giây hoãn",
+          "description": "Khoảng thời gian nút Hoãn trên iOS kéo dài đếm ngược (60–3600). Mặc định là 300 (5 phút). Yêu cầu báo thức (iOS 26+, chỉ mẫu đếm ngược)."
+        },
+        "duration": {
+          "name": "Thời lượng",
+          "description": "Tùy chọn thay thế cho Ngày kết thúc, đặt một lần là xong: số giây (>=1) hoặc một chuỗi thời lượng như \"1h30m\". Máy chủ neo lại thời điểm bắt đầu/kết thúc về hiện tại. Gửi Thời lượng hoặc Ngày kết thúc — Thời lượng được ưu tiên nếu cả hai cùng được đặt."
+        },
+        "start_date": {
+          "name": "Ngày bắt đầu",
+          "description": "Dấu thời gian Unix khi bắt đầu đếm ngược (neo thanh thời gian đã trôi qua/còn lại). Máy chủ mặc định đặt giá trị này về hiện tại."
+        },
+        "history": {
+          "name": "Lịch sử (dữ liệu khởi tạo)",
+          "description": "Dữ liệu khởi tạo cho biểu đồ sparkline: một đối tượng ánh xạ tên chuỗi tới danh sách (timestamp, value). Chỉ dùng để khởi tạo — máy chủ tiếp quản sau lần cập nhật đầu tiên."
+        },
+        "tap_action": {
+          "name": "Hành động khi chạm",
+          "description": "Mục tiêu chạm cho toàn bộ activity dưới dạng đối tượng: url (bắt buộc), foreground tùy chọn, và với url http(s) là một webhook im lặng qua method/headers/body."
+        },
+        "url_action": {
+          "name": "Nút chính",
+          "description": "Nút chính có thể chạm dưới dạng đối tượng: url (bắt buộc), title, icon, foreground tùy chọn, và method/headers/body http(s) cho một webhook im lặng."
+        },
+        "secondary_url_action": {
+          "name": "Nút phụ",
+          "description": "Nút phụ có thể chạm — cùng dạng đối tượng như Nút chính."
+        }
+      },
+      "sections": {
+        "countdown_options": {
+          "name": "Tùy chọn countdown",
+          "description": "Chỉ dành cho mẫu countdown."
+        },
+        "steps_options": {
+          "name": "Tùy chọn steps",
+          "description": "Chỉ dành cho mẫu steps."
+        },
+        "alert_options": {
+          "name": "Tùy chọn alert",
+          "description": "Chỉ dành cho mẫu alert."
+        },
+        "gauge_timeline_options": {
+          "name": "Tùy chọn gauge và timeline",
+          "description": "Chỉ dành cho mẫu gauge và timeline."
+        },
+        "action_buttons": {
+          "name": "Nút hành động",
+          "description": "Nút URL có thể nhấn. Chỉ dành cho mẫu steps và alert."
+        },
+        "display_options": {
+          "name": "Hiển thị, màu sắc và âm thanh",
+          "description": "Tùy chọn định kiểu và ghi đè theo từng cập nhật. Áp dụng cho mọi mẫu."
+        }
+      }
+    },
+    "update_activity_generic": {
+      "name": "Cập Nhật Hoạt Động (Generic)",
+      "description": "Cập nhật trạng thái và nội dung của PushWard Live Activity.",
+      "fields": {
+        "slug": {
+          "name": "Slug",
+          "description": "Mã định danh slug của hoạt động."
+        },
+        "state": {
+          "name": "Trạng Thái",
+          "description": "Trạng thái hoạt động mong muốn."
+        },
+        "state_text": {
+          "name": "Văn Bản Trạng Thái",
+          "description": "Văn bản hiển thị làm trạng thái hoạt động."
+        },
+        "subtitle": {
+          "name": "Phụ Đề",
+          "description": "Văn bản phụ đề hiển thị trên hoạt động."
+        },
+        "icon": {
+          "name": "Biểu Tượng",
+          "description": "Tên biểu tượng SF Symbol hoặc MDI (ví dụ: arrow.down.circle.fill, mdi:download)."
+        },
+        "progress": {
+          "name": "Tiến Độ",
+          "description": "Giá trị tiến độ từ 0.0 đến 1.0."
+        },
+        "completion_message": {
+          "name": "Thông Báo Hoàn Thành",
+          "description": "Thông báo hiển thị khi hoạt động kết thúc."
+        },
+        "accent_color": {
+          "name": "Màu Nhấn",
+          "description": "Tên màu nhấn cho hoạt động."
+        },
+        "background_color": {
+          "name": "Màu Nền",
+          "description": "Màu nền Live Activity. #RRGGBB hoặc tên màu. Để trống để dùng giá trị mặc định của hệ thống."
+        },
+        "text_color": {
+          "name": "Màu Chữ",
+          "description": "Màu chữ Live Activity. #RRGGBB hoặc tên màu. Để trống để dùng giá trị mặc định của hệ thống."
+        },
+        "remaining_time": {
+          "name": "Thời Gian Còn Lại",
+          "description": "Thời gian còn lại tính bằng giây."
+        },
+        "sound": {
+          "name": "Âm Thanh",
+          "description": "Tên âm thanh thông báo cho bản cập nhật. Để trống để dùng âm thanh hệ thống iOS."
+        },
+        "priority": {
+          "name": "Ưu Tiên",
+          "description": "Mức ưu tiên của hoạt động (0 = thấp nhất, 10 = cao nhất)."
+        },
+        "url": {
+          "name": "URL",
+          "description": "URL chính hiển thị dưới dạng nút có thể chạm. http(s) hoặc một scheme tùy chỉnh như homeassistant://."
+        },
+        "secondary_url": {
+          "name": "URL phụ",
+          "description": "URL phụ hiển thị dưới dạng nút thứ hai có thể chạm."
+        },
+        "tap_action": {
+          "name": "Hành động khi chạm",
+          "description": "Mục tiêu chạm cho toàn bộ activity dưới dạng đối tượng: url (bắt buộc), foreground tùy chọn, và với url http(s) là một webhook im lặng qua method/headers/body."
+        },
+        "url_action": {
+          "name": "Nút chính",
+          "description": "Nút chính có thể chạm dưới dạng đối tượng: url (bắt buộc), title, icon, foreground tùy chọn, và method/headers/body http(s) cho một webhook im lặng."
+        },
+        "secondary_url_action": {
+          "name": "Nút phụ",
+          "description": "Nút phụ có thể chạm — cùng dạng đối tượng như Nút chính."
+        }
+      },
+      "sections": {
+        "labels": {
+          "name": "Nhãn & biểu tượng",
+          "description": "Nhãn văn bản và biểu tượng tùy chọn. Áp dụng cho mọi mẫu."
+        },
+        "action_buttons": {
+          "name": "Nút hành động",
+          "description": "Nút URL có thể nhấn. Chỉ dành cho mẫu steps và alert."
+        },
+        "display_options": {
+          "name": "Hiển thị, màu sắc và âm thanh",
+          "description": "Tùy chọn định kiểu và ghi đè theo từng cập nhật. Áp dụng cho mọi mẫu."
+        }
+      }
+    },
+    "update_activity_countdown": {
+      "name": "Cập Nhật Hoạt Động (Countdown)",
+      "description": "Cập nhật trạng thái và nội dung của PushWard Live Activity.",
+      "fields": {
+        "slug": {
+          "name": "Slug",
+          "description": "Mã định danh slug của hoạt động."
+        },
+        "state": {
+          "name": "Trạng Thái",
+          "description": "Trạng thái hoạt động mong muốn."
+        },
+        "end_date": {
+          "name": "Ngày Kết Thúc",
+          "description": "Dấu thời gian Unix cho ngày kết thúc countdown."
+        },
+        "completion_message": {
+          "name": "Thông Báo Hoàn Thành",
+          "description": "Thông báo hiển thị khi hoạt động kết thúc."
+        },
+        "state_text": {
+          "name": "Văn Bản Trạng Thái",
+          "description": "Văn bản hiển thị làm trạng thái hoạt động."
+        },
+        "subtitle": {
+          "name": "Phụ Đề",
+          "description": "Văn bản phụ đề hiển thị trên hoạt động."
+        },
+        "icon": {
+          "name": "Biểu Tượng",
+          "description": "Tên biểu tượng SF Symbol hoặc MDI (ví dụ: arrow.down.circle.fill, mdi:download)."
+        },
+        "progress": {
+          "name": "Tiến Độ",
+          "description": "Giá trị tiến độ từ 0.0 đến 1.0."
+        },
+        "warning_threshold": {
+          "name": "Ngưỡng Cảnh Báo",
+          "description": "Khi giá trị gauge hoặc timeline đạt hoặc vượt qua ngưỡng này, màu cảnh báo sẽ được hiển thị."
+        },
+        "alarm": {
+          "name": "Chuông Báo",
+          "description": "Kích hoạt chuông báo AlarmKit khi vượt ngưỡng cảnh báo. Chỉ hoạt động trên iOS 26+."
+        },
+        "snooze_seconds": {
+          "name": "Số giây hoãn",
+          "description": "How long the iOS Snooze button extends the countdown (60–3600). Defaults to 300 (5 min). Only applies with alarm enabled (iOS 26+)."
+        },
+        "accent_color": {
+          "name": "Màu Nhấn",
+          "description": "Tên màu nhấn cho hoạt động."
+        },
+        "background_color": {
+          "name": "Màu Nền",
+          "description": "Màu nền Live Activity. #RRGGBB hoặc tên màu. Để trống để dùng giá trị mặc định của hệ thống."
+        },
+        "text_color": {
+          "name": "Màu Chữ",
+          "description": "Màu chữ Live Activity. #RRGGBB hoặc tên màu. Để trống để dùng giá trị mặc định của hệ thống."
+        },
+        "remaining_time": {
+          "name": "Thời Gian Còn Lại",
+          "description": "Thời gian còn lại tính bằng giây."
+        },
+        "sound": {
+          "name": "Âm Thanh",
+          "description": "Tên âm thanh thông báo cho bản cập nhật. Để trống để dùng âm thanh hệ thống iOS."
+        },
+        "priority": {
+          "name": "Ưu Tiên",
+          "description": "Mức ưu tiên của hoạt động (0 = thấp nhất, 10 = cao nhất)."
+        },
+        "duration": {
+          "name": "Thời lượng",
+          "description": "Tùy chọn thay thế cho Ngày kết thúc, đặt một lần là xong: số giây (>=1) hoặc một chuỗi thời lượng như \"1h30m\". Máy chủ neo lại thời điểm bắt đầu/kết thúc về hiện tại. Gửi Thời lượng hoặc Ngày kết thúc — Thời lượng được ưu tiên nếu cả hai cùng được đặt."
+        },
+        "start_date": {
+          "name": "Ngày bắt đầu",
+          "description": "Dấu thời gian Unix khi bắt đầu đếm ngược (neo thanh thời gian đã trôi qua/còn lại). Máy chủ mặc định đặt giá trị này về hiện tại."
+        },
+        "url": {
+          "name": "URL",
+          "description": "URL chính hiển thị dưới dạng nút có thể chạm. http(s) hoặc một scheme tùy chỉnh như homeassistant://."
+        },
+        "secondary_url": {
+          "name": "URL phụ",
+          "description": "URL phụ hiển thị dưới dạng nút thứ hai có thể chạm."
+        },
+        "tap_action": {
+          "name": "Hành động khi chạm",
+          "description": "Mục tiêu chạm cho toàn bộ activity dưới dạng đối tượng: url (bắt buộc), foreground tùy chọn, và với url http(s) là một webhook im lặng qua method/headers/body."
+        },
+        "url_action": {
+          "name": "Nút chính",
+          "description": "Nút chính có thể chạm dưới dạng đối tượng: url (bắt buộc), title, icon, foreground tùy chọn, và method/headers/body http(s) cho một webhook im lặng."
+        },
+        "secondary_url_action": {
+          "name": "Nút phụ",
+          "description": "Nút phụ có thể chạm — cùng dạng đối tượng như Nút chính."
+        }
+      },
+      "sections": {
+        "labels": {
+          "name": "Nhãn & biểu tượng",
+          "description": "Nhãn văn bản và biểu tượng tùy chọn. Áp dụng cho mọi mẫu."
+        },
+        "countdown_options": {
+          "name": "Tùy chọn countdown",
+          "description": "Chỉ dành cho mẫu countdown."
+        },
+        "action_buttons": {
+          "name": "Nút hành động",
+          "description": "Nút URL có thể nhấn. Chỉ dành cho mẫu steps và alert."
+        },
+        "display_options": {
+          "name": "Hiển thị, màu sắc và âm thanh",
+          "description": "Tùy chọn định kiểu và ghi đè theo từng cập nhật. Áp dụng cho mọi mẫu."
+        }
+      }
+    },
+    "update_activity_steps": {
+      "name": "Cập Nhật Hoạt Động (Steps)",
+      "description": "Cập nhật trạng thái và nội dung của PushWard Live Activity.",
+      "fields": {
+        "slug": {
+          "name": "Slug",
+          "description": "Mã định danh slug của hoạt động."
+        },
+        "state": {
+          "name": "Trạng Thái",
+          "description": "Trạng thái hoạt động mong muốn."
+        },
+        "total_steps": {
+          "name": "Tổng Số steps",
+          "description": "Tổng số steps hiện có."
+        },
+        "current_step": {
+          "name": "Bước Hiện Tại",
+          "description": "Số thứ tự bước hiện tại."
+        },
+        "state_text": {
+          "name": "Văn Bản Trạng Thái",
+          "description": "Văn bản hiển thị làm trạng thái hoạt động."
+        },
+        "subtitle": {
+          "name": "Phụ Đề",
+          "description": "Văn bản phụ đề hiển thị trên hoạt động."
+        },
+        "icon": {
+          "name": "Biểu Tượng",
+          "description": "Tên biểu tượng SF Symbol hoặc MDI (ví dụ: arrow.down.circle.fill, mdi:download)."
+        },
+        "progress": {
+          "name": "Tiến Độ",
+          "description": "Giá trị tiến độ từ 0.0 đến 1.0."
+        },
+        "step_labels": {
+          "name": "Nhãn Bước",
+          "description": "Danh sách có thứ tự các nhãn bước. Độ dài phải bằng total_steps. Chỉ dành cho mẫu steps."
+        },
+        "step_rows": {
+          "name": "Số Hàng Bước",
+          "description": "Danh sách có thứ tự chiều cao hàng (1-10) cho mỗi bước. Độ dài phải bằng total_steps. Chỉ dành cho mẫu steps."
+        },
+        "url": {
+          "name": "URL",
+          "description": "URL chính hiển thị dưới dạng nút có thể nhấn. Chỉ hỗ trợ trên mẫu steps và alert."
+        },
+        "secondary_url": {
+          "name": "URL Phụ",
+          "description": "URL phụ hiển thị dưới dạng nút thứ hai có thể nhấn. Chỉ hỗ trợ trên mẫu steps và alert."
+        },
+        "completion_message": {
+          "name": "Thông Báo Hoàn Thành",
+          "description": "Thông báo hiển thị khi hoạt động kết thúc."
+        },
+        "accent_color": {
+          "name": "Màu Nhấn",
+          "description": "Tên màu nhấn cho hoạt động."
+        },
+        "background_color": {
+          "name": "Màu Nền",
+          "description": "Màu nền Live Activity. #RRGGBB hoặc tên màu. Để trống để dùng giá trị mặc định của hệ thống."
+        },
+        "text_color": {
+          "name": "Màu Chữ",
+          "description": "Màu chữ Live Activity. #RRGGBB hoặc tên màu. Để trống để dùng giá trị mặc định của hệ thống."
+        },
+        "remaining_time": {
+          "name": "Thời Gian Còn Lại",
+          "description": "Thời gian còn lại tính bằng giây."
+        },
+        "sound": {
+          "name": "Âm Thanh",
+          "description": "Tên âm thanh thông báo cho bản cập nhật. Để trống để dùng âm thanh hệ thống iOS."
+        },
+        "priority": {
+          "name": "Ưu Tiên",
+          "description": "Mức ưu tiên của hoạt động (0 = thấp nhất, 10 = cao nhất)."
+        },
+        "tap_action": {
+          "name": "Hành động khi chạm",
+          "description": "Mục tiêu chạm cho toàn bộ activity dưới dạng đối tượng: url (bắt buộc), foreground tùy chọn, và với url http(s) là một webhook im lặng qua method/headers/body."
+        },
+        "url_action": {
+          "name": "Nút chính",
+          "description": "Nút chính có thể chạm dưới dạng đối tượng: url (bắt buộc), title, icon, foreground tùy chọn, và method/headers/body http(s) cho một webhook im lặng."
+        },
+        "secondary_url_action": {
+          "name": "Nút phụ",
+          "description": "Nút phụ có thể chạm — cùng dạng đối tượng như Nút chính."
+        }
+      },
+      "sections": {
+        "labels": {
+          "name": "Nhãn & biểu tượng",
+          "description": "Nhãn văn bản và biểu tượng tùy chọn. Áp dụng cho mọi mẫu."
+        },
+        "steps_options": {
+          "name": "Tùy chọn steps",
+          "description": "Chỉ dành cho mẫu steps."
+        },
+        "action_buttons": {
+          "name": "Nút hành động",
+          "description": "Nút URL có thể nhấn. Chỉ dành cho mẫu steps và alert."
+        },
+        "display_options": {
+          "name": "Hiển thị, màu sắc và âm thanh",
+          "description": "Tùy chọn định kiểu và ghi đè theo từng cập nhật. Áp dụng cho mọi mẫu."
+        }
+      }
+    },
+    "update_activity_alert": {
+      "name": "Cập Nhật Hoạt Động (Alert)",
+      "description": "Cập nhật trạng thái và nội dung của PushWard Live Activity.",
+      "fields": {
+        "slug": {
+          "name": "Slug",
+          "description": "Mã định danh slug của hoạt động."
+        },
+        "state": {
+          "name": "Trạng Thái",
+          "description": "Trạng thái hoạt động mong muốn."
+        },
+        "severity": {
+          "name": "Mức Độ Nghiêm Trọng",
+          "description": "Mức độ nghiêm trọng của alert."
+        },
+        "state_text": {
+          "name": "Văn Bản Trạng Thái",
+          "description": "Văn bản hiển thị làm trạng thái hoạt động."
+        },
+        "subtitle": {
+          "name": "Phụ Đề",
+          "description": "Văn bản phụ đề hiển thị trên hoạt động."
+        },
+        "icon": {
+          "name": "Biểu Tượng",
+          "description": "Tên biểu tượng SF Symbol hoặc MDI (ví dụ: arrow.down.circle.fill, mdi:download)."
+        },
+        "progress": {
+          "name": "Tiến Độ",
+          "description": "Giá trị tiến độ từ 0.0 đến 1.0."
+        },
+        "fired_at": {
+          "name": "Thời Điểm Kích Hoạt",
+          "description": "Dấu thời gian Unix khi hoạt động được kích hoạt. Dùng để hiển thị thời gian tương đối."
+        },
+        "url": {
+          "name": "URL",
+          "description": "URL chính hiển thị dưới dạng nút có thể nhấn. Chỉ hỗ trợ trên mẫu steps và alert."
+        },
+        "secondary_url": {
+          "name": "URL Phụ",
+          "description": "URL phụ hiển thị dưới dạng nút thứ hai có thể nhấn. Chỉ hỗ trợ trên mẫu steps và alert."
+        },
+        "completion_message": {
+          "name": "Thông Báo Hoàn Thành",
+          "description": "Thông báo hiển thị khi hoạt động kết thúc."
+        },
+        "accent_color": {
+          "name": "Màu Nhấn",
+          "description": "Tên màu nhấn cho hoạt động."
+        },
+        "background_color": {
+          "name": "Màu Nền",
+          "description": "Màu nền Live Activity. #RRGGBB hoặc tên màu. Để trống để dùng giá trị mặc định của hệ thống."
+        },
+        "text_color": {
+          "name": "Màu Chữ",
+          "description": "Màu chữ Live Activity. #RRGGBB hoặc tên màu. Để trống để dùng giá trị mặc định của hệ thống."
+        },
+        "remaining_time": {
+          "name": "Thời Gian Còn Lại",
+          "description": "Thời gian còn lại tính bằng giây."
+        },
+        "sound": {
+          "name": "Âm Thanh",
+          "description": "Tên âm thanh thông báo cho bản cập nhật. Để trống để dùng âm thanh hệ thống iOS."
+        },
+        "priority": {
+          "name": "Ưu Tiên",
+          "description": "Mức ưu tiên của hoạt động (0 = thấp nhất, 10 = cao nhất)."
+        },
+        "tap_action": {
+          "name": "Hành động khi chạm",
+          "description": "Mục tiêu chạm cho toàn bộ activity dưới dạng đối tượng: url (bắt buộc), foreground tùy chọn, và với url http(s) là một webhook im lặng qua method/headers/body."
+        },
+        "url_action": {
+          "name": "Nút chính",
+          "description": "Nút chính có thể chạm dưới dạng đối tượng: url (bắt buộc), title, icon, foreground tùy chọn, và method/headers/body http(s) cho một webhook im lặng."
+        },
+        "secondary_url_action": {
+          "name": "Nút phụ",
+          "description": "Nút phụ có thể chạm — cùng dạng đối tượng như Nút chính."
+        }
+      },
+      "sections": {
+        "labels": {
+          "name": "Nhãn & biểu tượng",
+          "description": "Nhãn văn bản và biểu tượng tùy chọn. Áp dụng cho mọi mẫu."
+        },
+        "alert_options": {
+          "name": "Tùy chọn alert",
+          "description": "Chỉ dành cho mẫu alert."
+        },
+        "action_buttons": {
+          "name": "Nút hành động",
+          "description": "Nút URL có thể nhấn. Chỉ dành cho mẫu steps và alert."
+        },
+        "display_options": {
+          "name": "Hiển thị, màu sắc và âm thanh",
+          "description": "Tùy chọn định kiểu và ghi đè theo từng cập nhật. Áp dụng cho mọi mẫu."
+        }
+      }
+    },
+    "update_activity_gauge": {
+      "name": "Cập Nhật Hoạt Động (Gauge)",
+      "description": "Cập nhật trạng thái và nội dung của PushWard Live Activity.",
+      "fields": {
+        "slug": {
+          "name": "Slug",
+          "description": "Mã định danh slug của hoạt động."
+        },
+        "state": {
+          "name": "Trạng Thái",
+          "description": "Trạng thái hoạt động mong muốn."
+        },
+        "value": {
+          "name": "Giá Trị",
+          "description": "Gauge: giá trị số. Timeline: đối tượng giá trị có nhãn (ví dụ: Temp=22.5)."
+        },
+        "min_value": {
+          "name": "Giá Trị Tối Thiểu",
+          "description": "Giá trị tối thiểu của gauge."
+        },
+        "max_value": {
+          "name": "Giá Trị Tối Đa",
+          "description": "Giá trị tối đa của gauge."
+        },
+        "unit": {
+          "name": "Đơn Vị",
+          "description": "Đơn vị hiển thị cho giá trị (ví dụ: °C, %)."
+        },
+        "state_text": {
+          "name": "Văn Bản Trạng Thái",
+          "description": "Văn bản hiển thị làm trạng thái hoạt động."
+        },
+        "subtitle": {
+          "name": "Phụ Đề",
+          "description": "Văn bản phụ đề hiển thị trên hoạt động."
+        },
+        "icon": {
+          "name": "Biểu Tượng",
+          "description": "Tên biểu tượng SF Symbol hoặc MDI (ví dụ: arrow.down.circle.fill, mdi:download)."
+        },
+        "progress": {
+          "name": "Tiến Độ",
+          "description": "Giá trị tiến độ từ 0.0 đến 1.0."
+        },
+        "completion_message": {
+          "name": "Thông Báo Hoàn Thành",
+          "description": "Thông báo hiển thị khi hoạt động kết thúc."
+        },
+        "accent_color": {
+          "name": "Màu Nhấn",
+          "description": "Tên màu nhấn cho hoạt động."
+        },
+        "background_color": {
+          "name": "Màu Nền",
+          "description": "Màu nền Live Activity. #RRGGBB hoặc tên màu. Để trống để dùng giá trị mặc định của hệ thống."
+        },
+        "text_color": {
+          "name": "Màu Chữ",
+          "description": "Màu chữ Live Activity. #RRGGBB hoặc tên màu. Để trống để dùng giá trị mặc định của hệ thống."
+        },
+        "remaining_time": {
+          "name": "Thời Gian Còn Lại",
+          "description": "Thời gian còn lại tính bằng giây."
+        },
+        "sound": {
+          "name": "Âm Thanh",
+          "description": "Tên âm thanh thông báo cho bản cập nhật. Để trống để dùng âm thanh hệ thống iOS."
+        },
+        "priority": {
+          "name": "Ưu Tiên",
+          "description": "Mức ưu tiên của hoạt động (0 = thấp nhất, 10 = cao nhất)."
+        },
+        "url": {
+          "name": "URL",
+          "description": "URL chính hiển thị dưới dạng nút có thể chạm. http(s) hoặc một scheme tùy chỉnh như homeassistant://."
+        },
+        "secondary_url": {
+          "name": "URL phụ",
+          "description": "URL phụ hiển thị dưới dạng nút thứ hai có thể chạm."
+        },
+        "tap_action": {
+          "name": "Hành động khi chạm",
+          "description": "Mục tiêu chạm cho toàn bộ activity dưới dạng đối tượng: url (bắt buộc), foreground tùy chọn, và với url http(s) là một webhook im lặng qua method/headers/body."
+        },
+        "url_action": {
+          "name": "Nút chính",
+          "description": "Nút chính có thể chạm dưới dạng đối tượng: url (bắt buộc), title, icon, foreground tùy chọn, và method/headers/body http(s) cho một webhook im lặng."
+        },
+        "secondary_url_action": {
+          "name": "Nút phụ",
+          "description": "Nút phụ có thể chạm — cùng dạng đối tượng như Nút chính."
+        }
+      },
+      "sections": {
+        "labels": {
+          "name": "Nhãn & biểu tượng",
+          "description": "Nhãn văn bản và biểu tượng tùy chọn. Áp dụng cho mọi mẫu."
+        },
+        "action_buttons": {
+          "name": "Nút hành động",
+          "description": "Nút URL có thể nhấn. Chỉ dành cho mẫu steps và alert."
+        },
+        "display_options": {
+          "name": "Hiển thị, màu sắc và âm thanh",
+          "description": "Tùy chọn định kiểu và ghi đè theo từng cập nhật. Áp dụng cho mọi mẫu."
+        }
+      }
+    },
+    "update_activity_timeline": {
+      "name": "Cập Nhật Hoạt Động (Timeline)",
+      "description": "Cập nhật trạng thái và nội dung của PushWard Live Activity.",
+      "fields": {
+        "slug": {
+          "name": "Slug",
+          "description": "Mã định danh slug của hoạt động."
+        },
+        "state": {
+          "name": "Trạng Thái",
+          "description": "Trạng thái hoạt động mong muốn."
+        },
+        "value": {
+          "name": "Giá Trị",
+          "description": "Gauge: giá trị số. Timeline: đối tượng giá trị có nhãn (ví dụ: Temp=22.5)."
+        },
+        "unit": {
+          "name": "Đơn Vị",
+          "description": "Đơn vị hiển thị cho giá trị (ví dụ: °C, %)."
+        },
+        "state_text": {
+          "name": "Văn Bản Trạng Thái",
+          "description": "Văn bản hiển thị làm trạng thái hoạt động."
+        },
+        "subtitle": {
+          "name": "Phụ Đề",
+          "description": "Văn bản phụ đề hiển thị trên hoạt động."
+        },
+        "icon": {
+          "name": "Biểu Tượng",
+          "description": "Tên biểu tượng SF Symbol hoặc MDI (ví dụ: arrow.down.circle.fill, mdi:download)."
+        },
+        "progress": {
+          "name": "Tiến Độ",
+          "description": "Giá trị tiến độ từ 0.0 đến 1.0."
+        },
+        "units": {
+          "name": "Đơn Vị",
+          "description": "Nhãn đơn vị cho chuỗi timeline. Định dạng: attribute=Đơn vị. Ví dụ: temp=°C, humidity=%"
+        },
+        "scale": {
+          "name": "Tỉ Lệ",
+          "description": "Chế độ tỉ lệ trục Y (linear hoặc logarithmic). Chỉ dành cho mẫu Timeline."
+        },
+        "decimals": {
+          "name": "Số Thập Phân",
+          "description": "Số chữ số thập phân hiển thị cho giá trị (0-10). Chỉ dành cho mẫu Timeline."
+        },
+        "smoothing": {
+          "name": "Làm Mịn Đường",
+          "description": "Bật nội suy đường cong giữa các điểm dữ liệu. Chỉ dành cho mẫu Timeline."
+        },
+        "thresholds": {
+          "name": "Ngưỡng",
+          "description": "Đường tham chiếu ngang trên biểu đồ sparkline. Chỉ dành cho mẫu Timeline."
+        },
+        "completion_message": {
+          "name": "Thông Báo Hoàn Thành",
+          "description": "Thông báo hiển thị khi hoạt động kết thúc."
+        },
+        "accent_color": {
+          "name": "Màu Nhấn",
+          "description": "Tên màu nhấn cho hoạt động."
+        },
+        "background_color": {
+          "name": "Màu Nền",
+          "description": "Màu nền Live Activity. #RRGGBB hoặc tên màu. Để trống để dùng giá trị mặc định của hệ thống."
+        },
+        "text_color": {
+          "name": "Màu Chữ",
+          "description": "Màu chữ Live Activity. #RRGGBB hoặc tên màu. Để trống để dùng giá trị mặc định của hệ thống."
+        },
+        "remaining_time": {
+          "name": "Thời Gian Còn Lại",
+          "description": "Thời gian còn lại tính bằng giây."
+        },
+        "sound": {
+          "name": "Âm Thanh",
+          "description": "Tên âm thanh thông báo cho bản cập nhật. Để trống để dùng âm thanh hệ thống iOS."
+        },
+        "priority": {
+          "name": "Ưu Tiên",
+          "description": "Mức ưu tiên của hoạt động (0 = thấp nhất, 10 = cao nhất)."
+        },
+        "history": {
+          "name": "Lịch sử (dữ liệu khởi tạo)",
+          "description": "Dữ liệu khởi tạo cho biểu đồ sparkline: một đối tượng ánh xạ tên chuỗi tới danh sách (timestamp, value). Chỉ dùng để khởi tạo — máy chủ tiếp quản sau lần cập nhật đầu tiên."
+        },
+        "url": {
+          "name": "URL",
+          "description": "URL chính hiển thị dưới dạng nút có thể chạm. http(s) hoặc một scheme tùy chỉnh như homeassistant://."
+        },
+        "secondary_url": {
+          "name": "URL phụ",
+          "description": "URL phụ hiển thị dưới dạng nút thứ hai có thể chạm."
+        },
+        "tap_action": {
+          "name": "Hành động khi chạm",
+          "description": "Mục tiêu chạm cho toàn bộ activity dưới dạng đối tượng: url (bắt buộc), foreground tùy chọn, và với url http(s) là một webhook im lặng qua method/headers/body."
+        },
+        "url_action": {
+          "name": "Nút chính",
+          "description": "Nút chính có thể chạm dưới dạng đối tượng: url (bắt buộc), title, icon, foreground tùy chọn, và method/headers/body http(s) cho một webhook im lặng."
+        },
+        "secondary_url_action": {
+          "name": "Nút phụ",
+          "description": "Nút phụ có thể chạm — cùng dạng đối tượng như Nút chính."
+        }
+      },
+      "sections": {
+        "labels": {
+          "name": "Nhãn & biểu tượng",
+          "description": "Nhãn văn bản và biểu tượng tùy chọn. Áp dụng cho mọi mẫu."
+        },
+        "gauge_timeline_options": {
+          "name": "Tùy chọn gauge và timeline",
+          "description": "Chỉ dành cho mẫu gauge và timeline."
+        },
+        "action_buttons": {
+          "name": "Nút hành động",
+          "description": "Nút URL có thể nhấn. Chỉ dành cho mẫu steps và alert."
+        },
+        "display_options": {
+          "name": "Hiển thị, màu sắc và âm thanh",
+          "description": "Tùy chọn định kiểu và ghi đè theo từng cập nhật. Áp dụng cho mọi mẫu."
+        }
+      }
+    },
+    "create_activity": {
+      "name": "Tạo Hoạt Động",
+      "description": "Tạo PushWard Live Activity mới.",
+      "fields": {
+        "slug": {
+          "name": "Slug",
+          "description": "Mã định danh slug duy nhất cho hoạt động."
+        },
+        "name": {
+          "name": "Tên",
+          "description": "Tên hiển thị của hoạt động."
+        },
+        "priority": {
+          "name": "Ưu Tiên",
+          "description": "Mức ưu tiên của hoạt động (0 = thấp nhất, 10 = cao nhất)."
+        },
+        "ended_ttl": {
+          "name": "TTL Kết Thúc",
+          "description": "Số giây giữ hoạt động sau khi kết thúc."
+        },
+        "stale_ttl": {
+          "name": "TTL Hết Hạn",
+          "description": "Số giây trước khi hoạt động được coi là hết hạn."
+        }
+      }
+    },
+    "end_activity": {
+      "name": "Kết Thúc Hoạt Động",
+      "description": "Kết thúc PushWard Live Activity.",
+      "fields": {
+        "slug": {
+          "name": "Slug",
+          "description": "Mã định danh slug của hoạt động cần kết thúc."
+        },
+        "completion_message": {
+          "name": "Thông Báo Hoàn Thành",
+          "description": "Thông báo tùy chọn hiển thị khi hoạt động kết thúc."
+        }
+      }
+    },
+    "delete_activity": {
+      "name": "Xóa Hoạt Động",
+      "description": "Xóa PushWard Live Activity.",
+      "fields": {
+        "slug": {
+          "name": "Slug",
+          "description": "Mã định danh slug của hoạt động cần xóa."
+        }
+      }
+    },
+    "send_notification": {
+      "name": "Gửi Thông Báo",
+      "description": "Gửi thông báo đẩy qua PushWard.",
+      "fields": {
+        "title": {
+          "name": "Tiêu Đề",
+          "description": "Tiêu đề thông báo."
+        },
+        "body": {
+          "name": "Nội Dung",
+          "description": "Nội dung văn bản của thông báo."
+        },
+        "subtitle": {
+          "name": "Phụ Đề",
+          "description": "Phụ đề tùy chọn hiển thị bên dưới tiêu đề."
+        },
+        "level": {
+          "name": "Mức Độ",
+          "description": "Mức độ gián đoạn iOS. Kiểm soát cách thông báo được gửi."
+        },
+        "thread_id": {
+          "name": "ID Luồng",
+          "description": "Nhóm các thông báo lại trong Trung tâm Thông báo."
+        },
+        "collapse_id": {
+          "name": "ID Thu Gọn",
+          "description": "Khóa loại trùng lặp APNs. Thay thế thông báo trước có cùng khóa."
+        },
+        "source": {
+          "name": "Nguồn",
+          "description": "Mã định danh nguồn để nhóm trong hộp thư PushWard."
+        },
+        "source_display_name": {
+          "name": "Tên Hiển Thị Nguồn",
+          "description": "Tên nguồn dễ đọc hiển thị trong hộp thư PushWard."
+        },
+        "activity_slug": {
+          "name": "Slug Hoạt Động",
+          "description": "Liên kết thông báo này với Live Activity hiện có."
+        },
+        "push": {
+          "name": "Đẩy",
+          "description": "Gửi dưới dạng APNs push alert đến tất cả thiết bị. Khi tắt, thông báo chỉ được lưu trong hộp thư."
+        },
+        "url": {
+          "name": "URL",
+          "description": "URL mở khi nhấn vào thông báo. Yêu cầu HTTPS."
+        },
+        "icon_url": {
+          "name": "URL Biểu Tượng",
+          "description": "URL biểu tượng thông báo. Yêu cầu HTTPS."
+        },
+        "metadata": {
+          "name": "Dữ Liệu Phụ",
+          "description": "Dữ liệu meta dạng cặp khóa-giá trị bổ sung gửi kèm thông báo."
+        },
+        "media": {
+          "name": "Phương tiện",
+          "description": "Tệp đính kèm phương tiện dưới dạng đối tượng với `url` (HTTPS) và `type` (image, video hoặc audio)."
+        },
+        "actions": {
+          "name": "Hành động",
+          "description": "Danh sách các nút hành động. Mỗi hành động là một đối tượng với id, title, và url, foreground, destructive, authentication_required, icon tùy chọn. Với url http(s) bạn cũng có thể gửi một webhook im lặng với method (GET/POST/PUT/PATCH/DELETE/HEAD), headers và body."
+        }
+      }
+    },
+    "widget_refresh": {
+      "name": "Làm mới widget",
+      "description": "Buộc làm mới một widget PushWard đang được theo dõi. Bỏ qua bộ nhớ đệm khác biệt trong bộ nhớ để widget được kết xuất lại và đẩy tới iOS ngay cả khi giá trị không thay đổi.",
+      "fields": {
+        "slug": {
+          "name": "Slug",
+          "description": "Định danh slug của widget. Phải cung cấp slug hoặc entity_id."
+        },
+        "entity_id": {
+          "name": "Thực thể",
+          "description": "Thực thể HA gắn với widget. Phải cung cấp slug hoặc entity_id."
+        }
+      }
+    },
+    "send_email": {
+      "name": "Gửi email",
+      "description": "Gửi một email giao dịch qua PushWard. Cung cấp nội dung văn bản, nội dung HTML, hoặc cả hai. Khóa tích hợp cần có quyền \"emails\".",
+      "fields": {
+        "to": {
+          "name": "Đến",
+          "description": "Địa chỉ email người nhận. Phải là địa chỉ bạn đã thêm và xác nhận trong ứng dụng PushWard trên iOS — các địa chỉ chưa xác minh sẽ bị từ chối."
+        },
+        "subject": {
+          "name": "Tiêu đề",
+          "description": "Dòng tiêu đề email."
+        },
+        "body": {
+          "name": "Nội dung",
+          "description": "Nội dung email dạng văn bản thuần. Cung cấp mục này, nội dung HTML, hoặc cả hai."
+        },
+        "html_body": {
+          "name": "Nội dung HTML",
+          "description": "Nội dung email dạng HTML. Cung cấp mục này, nội dung văn bản thuần, hoặc cả hai."
+        }
+      }
+    },
+    "delete_widget": {
+      "name": "Xóa widget",
+      "description": "Xóa một widget PushWard khỏi máy chủ. Nếu một mục cấu hình widget được theo dõi vẫn điều khiển slug này, widget sẽ được tạo lại ở lần khởi động lại/đồng bộ tiếp theo — hãy gỡ mục cấu hình để xóa vĩnh viễn. Cung cấp slug hoặc entity_id.",
+      "fields": {
+        "slug": {
+          "name": "Slug",
+          "description": "Định danh slug của widget. Phải cung cấp slug hoặc entity_id."
+        },
+        "entity_id": {
+          "name": "Thực thể",
+          "description": "Thực thể HA gắn với widget. Được phân giải tới widget tương ứng theo cấu hình. Phải cung cấp slug hoặc entity_id."
+        }
+      }
+    }
+  },
+  "config": {
+    "step": {
+      "user": {
+        "title": "Kết Nối với PushWard",
+        "data": {
+          "integration_key": "Khóa Tích Hợp"
+        },
+        "description": "Nhập khóa tích hợp PushWard của bạn để bắt đầu. Tải ứng dụng PushWard cho iOS từ App Store: {app_store_url}",
+        "data_description": {
+          "integration_key": "Mở ứng dụng PushWard trên iOS (App Store: {app_store_url}) → Cài đặt → Khóa tích hợp. Bạn có thể dán khóa mặc định, hoặc tạo khóa mới với phạm vi 'ha-*'."
+        }
+      },
+      "reconfigure": {
+        "title": "Cấu Hình Lại PushWard",
+        "description": "Cập nhật khóa tích hợp PushWard của bạn.",
+        "data": {
+          "integration_key": "Khóa Tích Hợp"
+        },
+        "data_description": {
+          "integration_key": "Tạo trong ứng dụng PushWard iOS tại Cài đặt → Khóa Tích Hợp với phạm vi 'ha-*'."
+        }
+      },
+      "reauth_confirm": {
+        "title": "Xác Thực Lại",
+        "description": "Khóa tích hợp PushWard không hợp lệ. Vui lòng cung cấp khóa mới.",
+        "data": {
+          "integration_key": "Khóa Tích Hợp"
+        },
+        "data_description": {
+          "integration_key": "Tạo trong ứng dụng PushWard iOS tại Cài đặt → Khóa Tích Hợp với phạm vi 'ha-*'."
+        }
+      }
+    },
+    "error": {
+      "cannot_connect": "Không thể kết nối với máy chủ PushWard.",
+      "invalid_auth": "Khóa tích hợp không hợp lệ.",
+      "invalid_url": "URL phải sử dụng giao thức http:// hoặc https://.",
+      "unknown": "Đã xảy ra lỗi không mong muốn."
+    },
+    "abort": {
+      "already_configured": "PushWard đã được cấu hình.",
+      "reconfigure_successful": "Đã cập nhật cấu hình PushWard.",
+      "reauth_successful": "Xác thực lại thành công."
+    }
+  },
+  "config_subentries": {
+    "tracked_entity": {
+      "entry_type": "Thực Thể Được Theo Dõi",
+      "initiate_flow": {
+        "user": "Thêm thực thể được theo dõi"
+      },
+      "step": {
+        "user": {
+          "title": "Thêm Thực Thể vào PushWard",
+          "data": {
+            "entity_id": "Thực Thể",
+            "template": "Mẫu"
+          },
+          "data_description": {
+            "template": "Mẫu bố cục hoạt động. 'generic' phù hợp với hầu hết các thực thể."
+          }
+        },
+        "details": {
+          "title": "2 of 4 · Lifecycle and updates",
+          "data": {
+            "start_states": "Trạng Thái Bắt Đầu",
+            "end_states": "Trạng Thái Kết Thúc",
+            "progress_attribute": "Thuộc Tính Tiến Độ",
+            "remaining_time_attribute": "Thuộc Tính Thời Gian Còn Lại",
+            "total_steps": "Tổng Số steps",
+            "current_step_attribute": "Thuộc Tính Bước Hiện Tại",
+            "severity": "Mức Độ Nghiêm Trọng",
+            "value_attribute": "Thuộc Tính Giá Trị",
+            "min_value": "Giá Trị Tối Thiểu",
+            "max_value": "Giá Trị Tối Đa",
+            "unit": "Đơn Vị",
+            "series": "Chuỗi Dữ Liệu",
+            "scale": "Tỉ Lệ",
+            "decimals": "Số Thập Phân",
+            "smoothing": "Làm Mịn Đường",
+            "thresholds": "Ngưỡng",
+            "history_period": "Khoảng Thời Gian Lịch Sử",
+            "slug": "Slug Hoạt Động",
+            "activity_name": "Tên Hoạt Động",
+            "icon": "Biểu Tượng",
+            "icon_attribute": "Thuộc Tính Biểu Tượng",
+            "priority": "Ưu Tiên (0-10)",
+            "update_interval": "Khoảng Cập Nhật Tối Thiểu (giây)",
+            "subtitle_attribute": "Thuộc Tính Phụ Đề",
+            "state_labels": "Nhãn Trạng Thái",
+            "completion_message": "Thông Báo Hoàn Thành",
+            "accent_color": "Màu Nhấn",
+            "accent_color_attribute": "Thuộc Tính Màu Nhấn",
+            "url": "URL",
+            "secondary_url": "URL Phụ",
+            "ended_ttl": "Tự Động Xóa Sau Khi Kết Thúc (giây)",
+            "stale_ttl": "Tự Động Kết Thúc Khi Không Hoạt Động (giây)",
+            "sound": "Âm Thanh",
+            "background_color": "Màu Nền",
+            "background_color_attribute": "Thuộc Tính Màu Nền",
+            "text_color": "Màu Chữ",
+            "text_color_attribute": "Thuộc Tính Màu Chữ",
+            "warning_threshold": "Ngưỡng Cảnh Báo",
+            "alarm": "Chuông Báo",
+            "step_labels": "Nhãn Bước",
+            "step_rows": "Số Hàng Bước",
+            "fired_at_attribute": "Thuộc Tính Thời Điểm Kích Hoạt",
+            "units": "Đơn Vị",
+            "progress_entity": "Thực thể tiến trình",
+            "remaining_time_entity": "Thực thể thời gian còn lại",
+            "current_step_entity": "Thực thể bước hiện tại",
+            "value_entity": "Thực thể giá trị",
+            "subtitle_entity": "Thực thể phụ đề",
+            "tap_action_url": "URL hành động khi chạm",
+            "tap_action_foreground": "Mở URL hành động khi chạm",
+            "url_foreground": "Mở URL nút chính",
+            "url_title": "Tiêu đề nút chính",
+            "secondary_url_foreground": "Mở URL nút phụ",
+            "secondary_url_title": "Tiêu đề nút phụ",
+            "snooze_seconds": "Số giây hoãn (iOS 26+)",
+            "fired_at_entity": "Thực thể thời điểm kích hoạt",
+            "log_columns": "Cột nhật ký"
+          },
+          "data_description": {
+            "start_states": "Trạng thái thực thể khởi động Live Activity. Chọn từ danh sách hoặc nhập giá trị tùy chỉnh.",
+            "end_states": "Trạng thái thực thể kết thúc Live Activity. Chọn từ danh sách hoặc nhập giá trị tùy chỉnh.",
+            "progress_attribute": "Thuộc tính thực thể chứa giá trị tiến độ 0–100. Ví dụ: percentage",
+            "remaining_time_attribute": "Thuộc tính thực thể chứa thời gian còn lại tính bằng giây. Ví dụ: remaining",
+            "total_steps": "Tổng số steps hiện có.",
+            "current_step_attribute": "Thuộc tính thực thể chứa bước hiện tại dưới dạng số nguyên.",
+            "severity": "Mức độ nghiêm trọng của alert.",
+            "value_attribute": "Thuộc tính thực thể chứa giá trị gauge hiện tại dưới dạng số. Để trống để dùng trạng thái của thực thể.",
+            "min_value": "Giá trị tối thiểu cho dải gauge.",
+            "max_value": "Giá trị tối đa cho dải gauge.",
+            "unit": "Đơn vị hiển thị bên cạnh giá trị (ví dụ: °C, %, kW). Tối đa 32 ký tự.",
+            "series": "Ánh xạ thuộc tính thực thể sang chuỗi có tên. Định dạng: attribute=Label, attribute2=Label2. Để trống để dùng trạng thái của thực thể làm chuỗi duy nhất.",
+            "scale": "Chế độ tỉ lệ trục Y cho biểu đồ sparkline.",
+            "decimals": "Số chữ số thập phân hiển thị cho giá trị (0–10).",
+            "smoothing": "Bật nội suy đường cong giữa các điểm dữ liệu để sparkline mượt hơn.",
+            "thresholds": "Đường tham chiếu ngang trên sparkline. Định dạng: value:color:label. Ví dụ: 25:red:Hot, 18:blue:Cold. Tối đa 5.",
+            "history_period": "Số phút dữ liệu quá khứ để khởi tạo sparkline từ recorder của Home Assistant. Đặt 0 để bắt đầu không có lịch sử.",
+            "slug": "Mã định danh duy nhất cho hoạt động này. Để trống để tự tạo từ ID thực thể. Ví dụ: ha-living-room-lamp",
+            "activity_name": "Tên hiển thị trên iPhone Live Activity. Mặc định là tên thân thiện của thực thể.",
+            "icon": "Ghi đè biểu tượng. Để trống để dùng biểu tượng gốc của thực thể (ví dụ: mdi:thermometer). Cũng hỗ trợ SF Symbols (ví dụ: lamp.desk.fill).",
+            "icon_attribute": "Thuộc tính thực thể cho biểu tượng động. Ghi đè biểu tượng tĩnh và biểu tượng thực thể khi được đặt.",
+            "priority": "Hoạt động có mức ưu tiên cao hơn được giữ lâu hơn khi đạt giới hạn thiết bị (0 = thấp nhất, 10 = cao nhất).",
+            "update_interval": "Số giây tối thiểu giữa các lần cập nhật. Các thay đổi trạng thái nhanh sẽ bị giới hạn tốc độ.",
+            "subtitle_attribute": "Thuộc tính thực thể hiển thị làm phụ đề. Để trống để dùng tên thân thiện của thực thể.",
+            "state_labels": "Văn bản hiển thị tùy chỉnh cho các trạng thái. Định dạng: state=Label, state2=Label 2. Ví dụ: heating=Đang Sưởi, idle=Chờ",
+            "completion_message": "Văn bản hiển thị khi hoạt động kết thúc. Để trống cho 'Hoàn thành'. Ví dụ: Giặt Xong",
+            "accent_color": "Màu nhấn cho Live Activity. Để trống để dùng màu xanh mặc định.",
+            "accent_color_attribute": "Thuộc tính thực thể cho màu nhấn động. Ghi đè màu tĩnh. Hỗ trợ RGB, HS, XY, Kelvin, tên màu và hex.",
+            "url": "Liên kết mở khi nhấn vào Live Activity. Phải bắt đầu bằng http:// hoặc https://. Chỉ dành cho mẫu steps và alert.",
+            "secondary_url": "Liên kết phụ cho Live Activity. Chỉ dành cho mẫu steps và alert.",
+            "ended_ttl": "Số giây sau khi hoạt động kết thúc trước khi tự động xóa khỏi máy chủ. Để trống để giữ vô thời hạn. Ví dụ: 300",
+            "stale_ttl": "Số giây không hoạt động trước khi máy chủ tự động kết thúc hoạt động. Để trống để tắt. Ví dụ: 1800",
+            "sound": "Tên âm thanh thông báo cho bản cập nhật này. Để trống để dùng âm thanh hệ thống iOS.",
+            "background_color": "Màu nền Live Activity. #RRGGBB hoặc tên màu. Để trống để dùng giá trị mặc định của hệ thống.",
+            "background_color_attribute": "Thuộc tính thực thể cho màu nền động. Ghi đè màu nền tĩnh.",
+            "text_color": "Màu chữ Live Activity. #RRGGBB hoặc tên màu. Để trống để dùng giá trị mặc định của hệ thống.",
+            "text_color_attribute": "Thuộc tính thực thể cho màu chữ động. Ghi đè màu chữ tĩnh.",
+            "warning_threshold": "Khi đạt hoặc vượt giá trị này, màu cảnh báo được kích hoạt. Mẫu gauge và timeline.",
+            "alarm": "Kích hoạt chuông báo AlarmKit khi vượt ngưỡng cảnh báo. Chỉ dành cho iOS 26+.",
+            "step_labels": "Nhãn tùy chỉnh cho các bước trong mẫu steps. Định dạng: 1=Nhãn, 2=Nhãn. Để trống để dùng số bước.",
+            "step_rows": "Số bước hiển thị trong một hàng trong mẫu steps.",
+            "fired_at_attribute": "Thuộc tính thực thể chứa dấu thời gian Unix khi kích hoạt. Dùng để hiển thị thời gian tương đối.",
+            "units": "Nhãn đơn vị cho chuỗi timeline. Định dạng: attribute=Đơn vị. Ví dụ: temp=°C, humidity=%",
+            "progress_entity": "Đọc tiến trình từ một thực thể riêng thay vì thực thể được theo dõi. Để trống để dùng thực thể được theo dõi. Nếu đặt trường thuộc tính, đọc thuộc tính đó của thực thể này; nếu không thì đọc trạng thái của nó.",
+            "remaining_time_entity": "Đọc thời gian còn lại từ một thực thể riêng (ví dụ cảm biến thời gian của máy giặt). Để trống để dùng thực thể được theo dõi. Tự động phân tích cảm biến dấu thời gian (thời điểm hoàn thành), cảm biến thời lượng có đơn vị, chuỗi H:MM:SS, hoặc số giây thuần.",
+            "current_step_entity": "Đọc bước hiện tại từ một thực thể riêng. Để trống để dùng thực thể được theo dõi.",
+            "value_entity": "Đọc giá trị đồng hồ đo từ một thực thể riêng. Để trống để dùng thực thể được theo dõi. Dùng trạng thái của thực thể nguồn trừ khi đặt một thuộc tính.",
+            "subtitle_entity": "Hiển thị phụ đề từ một thực thể riêng (ví dụ cảm biến chương trình/chế độ). Để trống để dùng thực thể được theo dõi. Dùng trạng thái của thực thể nguồn trừ khi đặt một thuộc tính.",
+            "tap_action_url": "URL tùy chọn được mở khi chạm vào nền của Live Activity. Hỗ trợ http(s) (mở Safari) hoặc scheme tùy chỉnh như homeassistant://navigate/lovelace/0 (mở ứng dụng đó).",
+            "tap_action_foreground": "Bật: chạm mở URL. Tắt: webhook im lặng (chỉ http(s)) — gửi một POST ở chế độ nền mà không rời khỏi Màn hình khóa.",
+            "url_foreground": "Bật: chạm mở URL. Tắt: webhook im lặng (chỉ http(s)).",
+            "url_title": "Nhãn nút chính (tối đa 64 ký tự).",
+            "secondary_url_foreground": "Bật: chạm mở URL. Tắt: webhook im lặng (chỉ http(s)).",
+            "secondary_url_title": "Nhãn nút phụ (tối đa 64 ký tự).",
+            "snooze_seconds": "Khoảng thời gian nút Hoãn trên iOS kéo dài đếm ngược (60–3600). Để trống để dùng mặc định 300s (5 phút). Yêu cầu Báo thức. Chỉ mẫu đếm ngược.",
+            "fired_at_entity": "Đọc thời điểm kích hoạt của cảnh báo từ một thực thể riêng. Để trống để dùng thực thể được theo dõi. Chấp nhận dấu thời gian unix hoặc cảm biến dấu thời gian ISO. Chỉ mẫu cảnh báo.",
+            "log_columns": "Các giá trị bổ sung được thêm vào mỗi dòng nhật ký (tối đa 6), phân tách bằng dấu phẩy. Định dạng: [Label=]source[|unit]. source = một thuộc tính của thực thể này (brightness), trạng thái của thực thể khác (binary_sensor.door), hoặc một thuộc tính của thực thể khác (sensor.temp:temperature). Ví dụ: color_temp_kelvin|K, brightness → 'On · 4000K · 153'. Chỉ dành cho mẫu nhật ký."
+          },
+          "description": "Choose when this activity starts and ends, how often it updates, and how PushWard retains it."
+        },
+        "reconfigure": {
+          "title": "Chỉnh Sửa Cấu Hình Thực Thể",
+          "data": {
+            "entity_id": "Thực Thể",
+            "template": "Mẫu"
+          },
+          "data_description": {
+            "template": "Mẫu bố cục hoạt động. 'generic' phù hợp với hầu hết các thực thể."
+          }
+        },
+        "content": {
+          "title": "3 of 4 · {template} content",
+          "data": {
+            "start_states": "Trạng Thái Bắt Đầu",
+            "end_states": "Trạng Thái Kết Thúc",
+            "progress_attribute": "Thuộc Tính Tiến Độ",
+            "remaining_time_attribute": "Thuộc Tính Thời Gian Còn Lại",
+            "total_steps": "Tổng Số steps",
+            "current_step_attribute": "Thuộc Tính Bước Hiện Tại",
+            "severity": "Mức Độ Nghiêm Trọng",
+            "value_attribute": "Thuộc Tính Giá Trị",
+            "min_value": "Giá Trị Tối Thiểu",
+            "max_value": "Giá Trị Tối Đa",
+            "unit": "Đơn Vị",
+            "series": "Chuỗi Dữ Liệu",
+            "scale": "Tỉ Lệ",
+            "decimals": "Số Thập Phân",
+            "smoothing": "Làm Mịn Đường",
+            "thresholds": "Ngưỡng",
+            "history_period": "Khoảng Thời Gian Lịch Sử",
+            "slug": "Slug Hoạt Động",
+            "activity_name": "Tên Hoạt Động",
+            "icon": "Biểu Tượng",
+            "icon_attribute": "Thuộc Tính Biểu Tượng",
+            "priority": "Ưu Tiên (0-10)",
+            "update_interval": "Khoảng Cập Nhật Tối Thiểu (giây)",
+            "subtitle_attribute": "Thuộc Tính Phụ Đề",
+            "state_labels": "Nhãn Trạng Thái",
+            "completion_message": "Thông Báo Hoàn Thành",
+            "accent_color": "Màu Nhấn",
+            "accent_color_attribute": "Thuộc Tính Màu Nhấn",
+            "url": "URL",
+            "secondary_url": "URL Phụ",
+            "ended_ttl": "Tự Động Xóa Sau Khi Kết Thúc (giây)",
+            "stale_ttl": "Tự Động Kết Thúc Khi Không Hoạt Động (giây)",
+            "sound": "Âm Thanh",
+            "background_color": "Màu Nền",
+            "background_color_attribute": "Thuộc Tính Màu Nền",
+            "text_color": "Màu Chữ",
+            "text_color_attribute": "Thuộc Tính Màu Chữ",
+            "warning_threshold": "Ngưỡng Cảnh Báo",
+            "alarm": "Chuông Báo",
+            "step_labels": "Nhãn Bước",
+            "step_rows": "Số Hàng Bước",
+            "fired_at_attribute": "Thuộc Tính Thời Điểm Kích Hoạt",
+            "units": "Đơn Vị",
+            "progress_entity": "Thực thể tiến trình",
+            "remaining_time_entity": "Thực thể thời gian còn lại",
+            "current_step_entity": "Thực thể bước hiện tại",
+            "value_entity": "Thực thể giá trị",
+            "subtitle_entity": "Thực thể phụ đề",
+            "tap_action_url": "URL hành động khi chạm",
+            "tap_action_foreground": "Mở URL hành động khi chạm",
+            "url_foreground": "Mở URL nút chính",
+            "url_title": "Tiêu đề nút chính",
+            "secondary_url_foreground": "Mở URL nút phụ",
+            "secondary_url_title": "Tiêu đề nút phụ",
+            "snooze_seconds": "Số giây hoãn (iOS 26+)",
+            "fired_at_entity": "Thực thể thời điểm kích hoạt",
+            "log_columns": "Cột nhật ký"
+          },
+          "data_description": {
+            "start_states": "Trạng thái thực thể khởi động Live Activity. Chọn từ danh sách hoặc nhập giá trị tùy chỉnh.",
+            "end_states": "Trạng thái thực thể kết thúc Live Activity. Chọn từ danh sách hoặc nhập giá trị tùy chỉnh.",
+            "progress_attribute": "Thuộc tính thực thể chứa giá trị tiến độ 0–100. Ví dụ: percentage",
+            "remaining_time_attribute": "Thuộc tính thực thể chứa thời gian còn lại tính bằng giây. Ví dụ: remaining",
+            "total_steps": "Tổng số steps hiện có.",
+            "current_step_attribute": "Thuộc tính thực thể chứa bước hiện tại dưới dạng số nguyên.",
+            "severity": "Mức độ nghiêm trọng của alert.",
+            "value_attribute": "Thuộc tính thực thể chứa giá trị gauge hiện tại dưới dạng số. Để trống để dùng trạng thái của thực thể.",
+            "min_value": "Giá trị tối thiểu cho dải gauge.",
+            "max_value": "Giá trị tối đa cho dải gauge.",
+            "unit": "Đơn vị hiển thị bên cạnh giá trị (ví dụ: °C, %, kW). Tối đa 32 ký tự.",
+            "series": "Ánh xạ thuộc tính thực thể sang chuỗi có tên. Định dạng: attribute=Label, attribute2=Label2. Để trống để dùng trạng thái của thực thể làm chuỗi duy nhất.",
+            "scale": "Chế độ tỉ lệ trục Y cho biểu đồ sparkline.",
+            "decimals": "Số chữ số thập phân hiển thị cho giá trị (0–10).",
+            "smoothing": "Bật nội suy đường cong giữa các điểm dữ liệu để sparkline mượt hơn.",
+            "thresholds": "Đường tham chiếu ngang trên sparkline. Định dạng: value:color:label. Ví dụ: 25:red:Hot, 18:blue:Cold. Tối đa 5.",
+            "history_period": "Số phút dữ liệu quá khứ để khởi tạo sparkline từ recorder của Home Assistant. Đặt 0 để bắt đầu không có lịch sử.",
+            "slug": "Mã định danh duy nhất cho hoạt động này. Để trống để tự tạo từ ID thực thể. Ví dụ: ha-living-room-lamp",
+            "activity_name": "Tên hiển thị trên iPhone Live Activity. Mặc định là tên thân thiện của thực thể.",
+            "icon": "Ghi đè biểu tượng. Để trống để dùng biểu tượng gốc của thực thể (ví dụ: mdi:thermometer). Cũng hỗ trợ SF Symbols (ví dụ: lamp.desk.fill).",
+            "icon_attribute": "Thuộc tính thực thể cho biểu tượng động. Ghi đè biểu tượng tĩnh và biểu tượng thực thể khi được đặt.",
+            "priority": "Hoạt động có mức ưu tiên cao hơn được giữ lâu hơn khi đạt giới hạn thiết bị (0 = thấp nhất, 10 = cao nhất).",
+            "update_interval": "Số giây tối thiểu giữa các lần cập nhật. Các thay đổi trạng thái nhanh sẽ bị giới hạn tốc độ.",
+            "subtitle_attribute": "Thuộc tính thực thể hiển thị làm phụ đề. Để trống để dùng tên thân thiện của thực thể.",
+            "state_labels": "Văn bản hiển thị tùy chỉnh cho các trạng thái. Định dạng: state=Label, state2=Label 2. Ví dụ: heating=Đang Sưởi, idle=Chờ",
+            "completion_message": "Văn bản hiển thị khi hoạt động kết thúc. Để trống cho 'Hoàn thành'. Ví dụ: Giặt Xong",
+            "accent_color": "Màu nhấn cho Live Activity. Để trống để dùng màu xanh mặc định.",
+            "accent_color_attribute": "Thuộc tính thực thể cho màu nhấn động. Ghi đè màu tĩnh. Hỗ trợ RGB, HS, XY, Kelvin, tên màu và hex.",
+            "url": "Liên kết mở khi nhấn vào Live Activity. Phải bắt đầu bằng http:// hoặc https://. Chỉ dành cho mẫu steps và alert.",
+            "secondary_url": "Liên kết phụ cho Live Activity. Chỉ dành cho mẫu steps và alert.",
+            "ended_ttl": "Số giây sau khi hoạt động kết thúc trước khi tự động xóa khỏi máy chủ. Để trống để giữ vô thời hạn. Ví dụ: 300",
+            "stale_ttl": "Số giây không hoạt động trước khi máy chủ tự động kết thúc hoạt động. Để trống để tắt. Ví dụ: 1800",
+            "sound": "Tên âm thanh thông báo cho bản cập nhật này. Để trống để dùng âm thanh hệ thống iOS.",
+            "background_color": "Màu nền Live Activity. #RRGGBB hoặc tên màu. Để trống để dùng giá trị mặc định của hệ thống.",
+            "background_color_attribute": "Thuộc tính thực thể cho màu nền động. Ghi đè màu nền tĩnh.",
+            "text_color": "Màu chữ Live Activity. #RRGGBB hoặc tên màu. Để trống để dùng giá trị mặc định của hệ thống.",
+            "text_color_attribute": "Thuộc tính thực thể cho màu chữ động. Ghi đè màu chữ tĩnh.",
+            "warning_threshold": "Khi đạt hoặc vượt giá trị này, màu cảnh báo được kích hoạt. Mẫu gauge và timeline.",
+            "alarm": "Kích hoạt chuông báo AlarmKit khi vượt ngưỡng cảnh báo. Chỉ dành cho iOS 26+.",
+            "step_labels": "Nhãn tùy chỉnh cho các bước trong mẫu steps. Định dạng: 1=Nhãn, 2=Nhãn. Để trống để dùng số bước.",
+            "step_rows": "Số bước hiển thị trong một hàng trong mẫu steps.",
+            "fired_at_attribute": "Thuộc tính thực thể chứa dấu thời gian Unix khi kích hoạt. Dùng để hiển thị thời gian tương đối.",
+            "units": "Nhãn đơn vị cho chuỗi timeline. Định dạng: attribute=Đơn vị. Ví dụ: temp=°C, humidity=%",
+            "progress_entity": "Đọc tiến trình từ một thực thể riêng thay vì thực thể được theo dõi. Để trống để dùng thực thể được theo dõi. Nếu đặt trường thuộc tính, đọc thuộc tính đó của thực thể này; nếu không thì đọc trạng thái của nó.",
+            "remaining_time_entity": "Đọc thời gian còn lại từ một thực thể riêng (ví dụ cảm biến thời gian của máy giặt). Để trống để dùng thực thể được theo dõi. Tự động phân tích cảm biến dấu thời gian (thời điểm hoàn thành), cảm biến thời lượng có đơn vị, chuỗi H:MM:SS, hoặc số giây thuần.",
+            "current_step_entity": "Đọc bước hiện tại từ một thực thể riêng. Để trống để dùng thực thể được theo dõi.",
+            "value_entity": "Đọc giá trị đồng hồ đo từ một thực thể riêng. Để trống để dùng thực thể được theo dõi. Dùng trạng thái của thực thể nguồn trừ khi đặt một thuộc tính.",
+            "subtitle_entity": "Hiển thị phụ đề từ một thực thể riêng (ví dụ cảm biến chương trình/chế độ). Để trống để dùng thực thể được theo dõi. Dùng trạng thái của thực thể nguồn trừ khi đặt một thuộc tính.",
+            "tap_action_url": "URL tùy chọn được mở khi chạm vào nền của Live Activity. Hỗ trợ http(s) (mở Safari) hoặc scheme tùy chỉnh như homeassistant://navigate/lovelace/0 (mở ứng dụng đó).",
+            "tap_action_foreground": "Bật: chạm mở URL. Tắt: webhook im lặng (chỉ http(s)) — gửi một POST ở chế độ nền mà không rời khỏi Màn hình khóa.",
+            "url_foreground": "Bật: chạm mở URL. Tắt: webhook im lặng (chỉ http(s)).",
+            "url_title": "Nhãn nút chính (tối đa 64 ký tự).",
+            "secondary_url_foreground": "Bật: chạm mở URL. Tắt: webhook im lặng (chỉ http(s)).",
+            "secondary_url_title": "Nhãn nút phụ (tối đa 64 ký tự).",
+            "snooze_seconds": "Khoảng thời gian nút Hoãn trên iOS kéo dài đếm ngược (60–3600). Để trống để dùng mặc định 300s (5 phút). Yêu cầu Báo thức. Chỉ mẫu đếm ngược.",
+            "fired_at_entity": "Đọc thời điểm kích hoạt của cảnh báo từ một thực thể riêng. Để trống để dùng thực thể được theo dõi. Chấp nhận dấu thời gian unix hoặc cảm biến dấu thời gian ISO. Chỉ mẫu cảnh báo.",
+            "log_columns": "Các giá trị bổ sung được thêm vào mỗi dòng nhật ký (tối đa 6), phân tách bằng dấu phẩy. Định dạng: [Label=]source[|unit]. source = một thuộc tính của thực thể này (brightness), trạng thái của thực thể khác (binary_sensor.door), hoặc một thuộc tính của thực thể khác (sensor.temp:temperature). Ví dụ: color_temp_kelvin|K, brightness → 'On · 4000K · 153'. Chỉ dành cho mẫu nhật ký."
+          },
+          "description": "Configure only the values used by the selected Live Activity layout."
+        },
+        "appearance": {
+          "title": "4 of 4 · Appearance and actions",
+          "data": {
+            "start_states": "Trạng Thái Bắt Đầu",
+            "end_states": "Trạng Thái Kết Thúc",
+            "progress_attribute": "Thuộc Tính Tiến Độ",
+            "remaining_time_attribute": "Thuộc Tính Thời Gian Còn Lại",
+            "total_steps": "Tổng Số steps",
+            "current_step_attribute": "Thuộc Tính Bước Hiện Tại",
+            "severity": "Mức Độ Nghiêm Trọng",
+            "value_attribute": "Thuộc Tính Giá Trị",
+            "min_value": "Giá Trị Tối Thiểu",
+            "max_value": "Giá Trị Tối Đa",
+            "unit": "Đơn Vị",
+            "series": "Chuỗi Dữ Liệu",
+            "scale": "Tỉ Lệ",
+            "decimals": "Số Thập Phân",
+            "smoothing": "Làm Mịn Đường",
+            "thresholds": "Ngưỡng",
+            "history_period": "Khoảng Thời Gian Lịch Sử",
+            "slug": "Slug Hoạt Động",
+            "activity_name": "Tên Hoạt Động",
+            "icon": "Biểu Tượng",
+            "icon_attribute": "Thuộc Tính Biểu Tượng",
+            "priority": "Ưu Tiên (0-10)",
+            "update_interval": "Khoảng Cập Nhật Tối Thiểu (giây)",
+            "subtitle_attribute": "Thuộc Tính Phụ Đề",
+            "state_labels": "Nhãn Trạng Thái",
+            "completion_message": "Thông Báo Hoàn Thành",
+            "accent_color": "Màu Nhấn",
+            "accent_color_attribute": "Thuộc Tính Màu Nhấn",
+            "url": "URL",
+            "secondary_url": "URL Phụ",
+            "ended_ttl": "Tự Động Xóa Sau Khi Kết Thúc (giây)",
+            "stale_ttl": "Tự Động Kết Thúc Khi Không Hoạt Động (giây)",
+            "sound": "Âm Thanh",
+            "background_color": "Màu Nền",
+            "background_color_attribute": "Thuộc Tính Màu Nền",
+            "text_color": "Màu Chữ",
+            "text_color_attribute": "Thuộc Tính Màu Chữ",
+            "warning_threshold": "Ngưỡng Cảnh Báo",
+            "alarm": "Chuông Báo",
+            "step_labels": "Nhãn Bước",
+            "step_rows": "Số Hàng Bước",
+            "fired_at_attribute": "Thuộc Tính Thời Điểm Kích Hoạt",
+            "units": "Đơn Vị",
+            "progress_entity": "Thực thể tiến trình",
+            "remaining_time_entity": "Thực thể thời gian còn lại",
+            "current_step_entity": "Thực thể bước hiện tại",
+            "value_entity": "Thực thể giá trị",
+            "subtitle_entity": "Thực thể phụ đề",
+            "tap_action_url": "URL hành động khi chạm",
+            "tap_action_foreground": "Mở URL hành động khi chạm",
+            "url_foreground": "Mở URL nút chính",
+            "url_title": "Tiêu đề nút chính",
+            "secondary_url_foreground": "Mở URL nút phụ",
+            "secondary_url_title": "Tiêu đề nút phụ",
+            "snooze_seconds": "Số giây hoãn (iOS 26+)",
+            "fired_at_entity": "Thực thể thời điểm kích hoạt",
+            "log_columns": "Cột nhật ký"
+          },
+          "data_description": {
+            "start_states": "Trạng thái thực thể khởi động Live Activity. Chọn từ danh sách hoặc nhập giá trị tùy chỉnh.",
+            "end_states": "Trạng thái thực thể kết thúc Live Activity. Chọn từ danh sách hoặc nhập giá trị tùy chỉnh.",
+            "progress_attribute": "Thuộc tính thực thể chứa giá trị tiến độ 0–100. Ví dụ: percentage",
+            "remaining_time_attribute": "Thuộc tính thực thể chứa thời gian còn lại tính bằng giây. Ví dụ: remaining",
+            "total_steps": "Tổng số steps hiện có.",
+            "current_step_attribute": "Thuộc tính thực thể chứa bước hiện tại dưới dạng số nguyên.",
+            "severity": "Mức độ nghiêm trọng của alert.",
+            "value_attribute": "Thuộc tính thực thể chứa giá trị gauge hiện tại dưới dạng số. Để trống để dùng trạng thái của thực thể.",
+            "min_value": "Giá trị tối thiểu cho dải gauge.",
+            "max_value": "Giá trị tối đa cho dải gauge.",
+            "unit": "Đơn vị hiển thị bên cạnh giá trị (ví dụ: °C, %, kW). Tối đa 32 ký tự.",
+            "series": "Ánh xạ thuộc tính thực thể sang chuỗi có tên. Định dạng: attribute=Label, attribute2=Label2. Để trống để dùng trạng thái của thực thể làm chuỗi duy nhất.",
+            "scale": "Chế độ tỉ lệ trục Y cho biểu đồ sparkline.",
+            "decimals": "Số chữ số thập phân hiển thị cho giá trị (0–10).",
+            "smoothing": "Bật nội suy đường cong giữa các điểm dữ liệu để sparkline mượt hơn.",
+            "thresholds": "Đường tham chiếu ngang trên sparkline. Định dạng: value:color:label. Ví dụ: 25:red:Hot, 18:blue:Cold. Tối đa 5.",
+            "history_period": "Số phút dữ liệu quá khứ để khởi tạo sparkline từ recorder của Home Assistant. Đặt 0 để bắt đầu không có lịch sử.",
+            "slug": "Mã định danh duy nhất cho hoạt động này. Để trống để tự tạo từ ID thực thể. Ví dụ: ha-living-room-lamp",
+            "activity_name": "Tên hiển thị trên iPhone Live Activity. Mặc định là tên thân thiện của thực thể.",
+            "icon": "Ghi đè biểu tượng. Để trống để dùng biểu tượng gốc của thực thể (ví dụ: mdi:thermometer). Cũng hỗ trợ SF Symbols (ví dụ: lamp.desk.fill).",
+            "icon_attribute": "Thuộc tính thực thể cho biểu tượng động. Ghi đè biểu tượng tĩnh và biểu tượng thực thể khi được đặt.",
+            "priority": "Hoạt động có mức ưu tiên cao hơn được giữ lâu hơn khi đạt giới hạn thiết bị (0 = thấp nhất, 10 = cao nhất).",
+            "update_interval": "Số giây tối thiểu giữa các lần cập nhật. Các thay đổi trạng thái nhanh sẽ bị giới hạn tốc độ.",
+            "subtitle_attribute": "Thuộc tính thực thể hiển thị làm phụ đề. Để trống để dùng tên thân thiện của thực thể.",
+            "state_labels": "Văn bản hiển thị tùy chỉnh cho các trạng thái. Định dạng: state=Label, state2=Label 2. Ví dụ: heating=Đang Sưởi, idle=Chờ",
+            "completion_message": "Văn bản hiển thị khi hoạt động kết thúc. Để trống cho 'Hoàn thành'. Ví dụ: Giặt Xong",
+            "accent_color": "Màu nhấn cho Live Activity. Để trống để dùng màu xanh mặc định.",
+            "accent_color_attribute": "Thuộc tính thực thể cho màu nhấn động. Ghi đè màu tĩnh. Hỗ trợ RGB, HS, XY, Kelvin, tên màu và hex.",
+            "url": "Liên kết mở khi nhấn vào Live Activity. Phải bắt đầu bằng http:// hoặc https://. Chỉ dành cho mẫu steps và alert.",
+            "secondary_url": "Liên kết phụ cho Live Activity. Chỉ dành cho mẫu steps và alert.",
+            "ended_ttl": "Số giây sau khi hoạt động kết thúc trước khi tự động xóa khỏi máy chủ. Để trống để giữ vô thời hạn. Ví dụ: 300",
+            "stale_ttl": "Số giây không hoạt động trước khi máy chủ tự động kết thúc hoạt động. Để trống để tắt. Ví dụ: 1800",
+            "sound": "Tên âm thanh thông báo cho bản cập nhật này. Để trống để dùng âm thanh hệ thống iOS.",
+            "background_color": "Màu nền Live Activity. #RRGGBB hoặc tên màu. Để trống để dùng giá trị mặc định của hệ thống.",
+            "background_color_attribute": "Thuộc tính thực thể cho màu nền động. Ghi đè màu nền tĩnh.",
+            "text_color": "Màu chữ Live Activity. #RRGGBB hoặc tên màu. Để trống để dùng giá trị mặc định của hệ thống.",
+            "text_color_attribute": "Thuộc tính thực thể cho màu chữ động. Ghi đè màu chữ tĩnh.",
+            "warning_threshold": "Khi đạt hoặc vượt giá trị này, màu cảnh báo được kích hoạt. Mẫu gauge và timeline.",
+            "alarm": "Kích hoạt chuông báo AlarmKit khi vượt ngưỡng cảnh báo. Chỉ dành cho iOS 26+.",
+            "step_labels": "Nhãn tùy chỉnh cho các bước trong mẫu steps. Định dạng: 1=Nhãn, 2=Nhãn. Để trống để dùng số bước.",
+            "step_rows": "Số bước hiển thị trong một hàng trong mẫu steps.",
+            "fired_at_attribute": "Thuộc tính thực thể chứa dấu thời gian Unix khi kích hoạt. Dùng để hiển thị thời gian tương đối.",
+            "units": "Nhãn đơn vị cho chuỗi timeline. Định dạng: attribute=Đơn vị. Ví dụ: temp=°C, humidity=%",
+            "progress_entity": "Đọc tiến trình từ một thực thể riêng thay vì thực thể được theo dõi. Để trống để dùng thực thể được theo dõi. Nếu đặt trường thuộc tính, đọc thuộc tính đó của thực thể này; nếu không thì đọc trạng thái của nó.",
+            "remaining_time_entity": "Đọc thời gian còn lại từ một thực thể riêng (ví dụ cảm biến thời gian của máy giặt). Để trống để dùng thực thể được theo dõi. Tự động phân tích cảm biến dấu thời gian (thời điểm hoàn thành), cảm biến thời lượng có đơn vị, chuỗi H:MM:SS, hoặc số giây thuần.",
+            "current_step_entity": "Đọc bước hiện tại từ một thực thể riêng. Để trống để dùng thực thể được theo dõi.",
+            "value_entity": "Đọc giá trị đồng hồ đo từ một thực thể riêng. Để trống để dùng thực thể được theo dõi. Dùng trạng thái của thực thể nguồn trừ khi đặt một thuộc tính.",
+            "subtitle_entity": "Hiển thị phụ đề từ một thực thể riêng (ví dụ cảm biến chương trình/chế độ). Để trống để dùng thực thể được theo dõi. Dùng trạng thái của thực thể nguồn trừ khi đặt một thuộc tính.",
+            "tap_action_url": "URL tùy chọn được mở khi chạm vào nền của Live Activity. Hỗ trợ http(s) (mở Safari) hoặc scheme tùy chỉnh như homeassistant://navigate/lovelace/0 (mở ứng dụng đó).",
+            "tap_action_foreground": "Bật: chạm mở URL. Tắt: webhook im lặng (chỉ http(s)) — gửi một POST ở chế độ nền mà không rời khỏi Màn hình khóa.",
+            "url_foreground": "Bật: chạm mở URL. Tắt: webhook im lặng (chỉ http(s)).",
+            "url_title": "Nhãn nút chính (tối đa 64 ký tự).",
+            "secondary_url_foreground": "Bật: chạm mở URL. Tắt: webhook im lặng (chỉ http(s)).",
+            "secondary_url_title": "Nhãn nút phụ (tối đa 64 ký tự).",
+            "snooze_seconds": "Khoảng thời gian nút Hoãn trên iOS kéo dài đếm ngược (60–3600). Để trống để dùng mặc định 300s (5 phút). Yêu cầu Báo thức. Chỉ mẫu đếm ngược.",
+            "fired_at_entity": "Đọc thời điểm kích hoạt của cảnh báo từ một thực thể riêng. Để trống để dùng thực thể được theo dõi. Chấp nhận dấu thời gian unix hoặc cảm biến dấu thời gian ISO. Chỉ mẫu cảnh báo.",
+            "log_columns": "Các giá trị bổ sung được thêm vào mỗi dòng nhật ký (tối đa 6), phân tách bằng dấu phẩy. Định dạng: [Label=]source[|unit]. source = một thuộc tính của thực thể này (brightness), trạng thái của thực thể khác (binary_sensor.door), hoặc một thuộc tính của thực thể khác (sensor.temp:temperature). Ví dụ: color_temp_kelvin|K, brightness → 'On · 4000K · 153'. Chỉ dành cho mẫu nhật ký."
+          },
+          "description": "Finish with labels, colors, icons, and tap behavior."
+        }
+      },
+      "error": {
+        "invalid_url": "URL phải sử dụng giao thức http:// hoặc https://.",
+        "invalid_gauge_range": "Giá trị tối thiểu phải nhỏ hơn giá trị tối đa.",
+        "silent_requires_http": "Webhook im lặng (tắt foreground) yêu cầu URL http:// hoặc https://."
+      },
+      "abort": {
+        "already_configured": "Thực thể này đã được theo dõi.",
+        "reconfigure_successful": "Đã cập nhật cấu hình thực thể."
+      }
+    },
+    "tracked_widget": {
+      "entry_type": "Widget được theo dõi",
+      "initiate_flow": {
+        "user": "Thêm widget được theo dõi"
+      },
+      "step": {
+        "user": {
+          "title": "Thêm widget vào PushWard",
+          "data": {
+            "entity_id": "Thực thể",
+            "widget_template": "Mẫu",
+            "slug": "Slug của widget"
+          },
+          "data_description": {
+            "widget_template": "Bố cục widget. Dùng `value` cho một số đơn, `progress` cho thanh 0–1, `gauge` cho giá trị trong khoảng, `status` cho huy hiệu mức độ nghiêm trọng, hoặc `stat_list` cho tối đa 6 hàng.",
+            "slug": "Định danh duy nhất cho widget này. Để trống để tự động tạo từ ID thực thể."
+          }
+        },
+        "reconfigure": {
+          "title": "Chỉnh sửa widget",
+          "data": {
+            "entity_id": "Thực thể",
+            "widget_template": "Mẫu",
+            "slug": "Slug của widget"
+          },
+          "data_description": {
+            "widget_template": "Bố cục widget.",
+            "slug": "Định danh duy nhất cho widget này."
+          }
+        },
+        "details": {
+          "title": "2 of 4 · {template} content",
+          "data": {
+            "widget_name": "Tên widget",
+            "value_attribute": "Thuộc tính giá trị",
+            "unit": "Đơn vị",
+            "min_value": "Giá trị tối thiểu",
+            "max_value": "Giá trị tối đa",
+            "severity": "Mức độ nghiêm trọng",
+            "stat_rows": "Hàng thống kê",
+            "label": "Nhãn",
+            "label_attribute": "Thuộc tính nhãn",
+            "subtitle_attribute": "Thuộc tính phụ đề",
+            "icon": "Biểu tượng",
+            "icon_attribute": "Thuộc tính biểu tượng",
+            "accent_color": "Màu nhấn",
+            "accent_color_attribute": "Thuộc tính màu nhấn",
+            "background_color": "Màu nền",
+            "text_color": "Màu chữ",
+            "widget_trigger_mode": "Chế độ kích hoạt",
+            "widget_poll_interval": "Khoảng thời gian thăm dò (giây)",
+            "tap_action_url": "URL hành động khi chạm",
+            "tap_action_foreground": "Mở URL hành động khi chạm"
+          },
+          "data_description": {
+            "widget_name": "Tên hiển thị trong bộ chọn widget trên iOS. Mặc định là tên thân thiện của thực thể.",
+            "value_attribute": "Thuộc tính của thực thể chứa giá trị. Để trống để dùng trạng thái chính của thực thể.",
+            "unit": "Đơn vị hiển thị bên cạnh giá trị. Tối đa 32 ký tự.",
+            "min_value": "Giá trị tối thiểu cho khoảng đồng hồ đo.",
+            "max_value": "Giá trị tối đa cho khoảng đồng hồ đo.",
+            "severity": "Mức độ nghiêm trọng của trạng thái (info, warning, critical, success).",
+            "stat_rows": "Tối đa 6 hàng. Định dạng: `Label=entity_id[:attribute[:unit]]`, phân tách bằng dấu phẩy. Ví dụ: `Users=sensor.user_count, Active=sensor.active_devices:count`.",
+            "label": "Nhãn tĩnh hiển thị trên widget. Để trống để lấy từ thực thể.",
+            "label_attribute": "Thuộc tính của thực thể được dùng làm nhãn. Ghi đè nhãn tĩnh.",
+            "subtitle_attribute": "Thuộc tính của thực thể hiển thị làm phụ đề widget.",
+            "icon": "Biểu tượng tĩnh. Hỗ trợ tên SF Symbols và MDI.",
+            "icon_attribute": "Thuộc tính của thực thể cho biểu tượng động. Ghi đè biểu tượng tĩnh.",
+            "accent_color": "Màu nhấn cho widget. Để trống để dùng mặc định.",
+            "accent_color_attribute": "Thuộc tính của thực thể cho màu nhấn động.",
+            "background_color": "Màu nền tùy chọn.",
+            "text_color": "Màu chữ tùy chọn.",
+            "widget_trigger_mode": "Cách cập nhật được kích hoạt. `event` phản ứng với thay đổi trạng thái; `poll` đánh giá lại theo khoảng thời gian cố định.",
+            "widget_poll_interval": "Khoảng thời gian giữa các lần thăm dò (10–3600 giây). Chỉ dùng khi chế độ kích hoạt là `poll`.",
+            "tap_action_url": "URL tùy chọn được mở khi chạm vào widget. Hỗ trợ http(s) (mở Safari) hoặc scheme tùy chỉnh như homeassistant://navigate/lovelace/0.",
+            "tap_action_foreground": "Bật: chạm mở URL. Tắt: webhook im lặng (chỉ http(s)) — gửi một POST ở chế độ nền."
+          },
+          "description": "Choose the values shown by this widget."
+        },
+        "appearance": {
+          "title": "3 of 4 · Appearance and tap action",
+          "data": {
+            "widget_name": "Tên widget",
+            "value_attribute": "Thuộc tính giá trị",
+            "unit": "Đơn vị",
+            "min_value": "Giá trị tối thiểu",
+            "max_value": "Giá trị tối đa",
+            "severity": "Mức độ nghiêm trọng",
+            "stat_rows": "Hàng thống kê",
+            "label": "Nhãn",
+            "label_attribute": "Thuộc tính nhãn",
+            "subtitle_attribute": "Thuộc tính phụ đề",
+            "icon": "Biểu tượng",
+            "icon_attribute": "Thuộc tính biểu tượng",
+            "accent_color": "Màu nhấn",
+            "accent_color_attribute": "Thuộc tính màu nhấn",
+            "background_color": "Màu nền",
+            "text_color": "Màu chữ",
+            "widget_trigger_mode": "Chế độ kích hoạt",
+            "widget_poll_interval": "Khoảng thời gian thăm dò (giây)",
+            "tap_action_url": "URL hành động khi chạm",
+            "tap_action_foreground": "Mở URL hành động khi chạm"
+          },
+          "data_description": {
+            "widget_name": "Tên hiển thị trong bộ chọn widget trên iOS. Mặc định là tên thân thiện của thực thể.",
+            "value_attribute": "Thuộc tính của thực thể chứa giá trị. Để trống để dùng trạng thái chính của thực thể.",
+            "unit": "Đơn vị hiển thị bên cạnh giá trị. Tối đa 32 ký tự.",
+            "min_value": "Giá trị tối thiểu cho khoảng đồng hồ đo.",
+            "max_value": "Giá trị tối đa cho khoảng đồng hồ đo.",
+            "severity": "Mức độ nghiêm trọng của trạng thái (info, warning, critical, success).",
+            "stat_rows": "Tối đa 6 hàng. Định dạng: `Label=entity_id[:attribute[:unit]]`, phân tách bằng dấu phẩy. Ví dụ: `Users=sensor.user_count, Active=sensor.active_devices:count`.",
+            "label": "Nhãn tĩnh hiển thị trên widget. Để trống để lấy từ thực thể.",
+            "label_attribute": "Thuộc tính của thực thể được dùng làm nhãn. Ghi đè nhãn tĩnh.",
+            "subtitle_attribute": "Thuộc tính của thực thể hiển thị làm phụ đề widget.",
+            "icon": "Biểu tượng tĩnh. Hỗ trợ tên SF Symbols và MDI.",
+            "icon_attribute": "Thuộc tính của thực thể cho biểu tượng động. Ghi đè biểu tượng tĩnh.",
+            "accent_color": "Màu nhấn cho widget. Để trống để dùng mặc định.",
+            "accent_color_attribute": "Thuộc tính của thực thể cho màu nhấn động.",
+            "background_color": "Màu nền tùy chọn.",
+            "text_color": "Màu chữ tùy chọn.",
+            "widget_trigger_mode": "Cách cập nhật được kích hoạt. `event` phản ứng với thay đổi trạng thái; `poll` đánh giá lại theo khoảng thời gian cố định.",
+            "widget_poll_interval": "Khoảng thời gian giữa các lần thăm dò (10–3600 giây). Chỉ dùng khi chế độ kích hoạt là `poll`.",
+            "tap_action_url": "URL tùy chọn được mở khi chạm vào widget. Hỗ trợ http(s) (mở Safari) hoặc scheme tùy chỉnh như homeassistant://navigate/lovelace/0.",
+            "tap_action_foreground": "Bật: chạm mở URL. Tắt: webhook im lặng (chỉ http(s)) — gửi một POST ở chế độ nền."
+          },
+          "description": "Set the widget labels, icon, colors, and tap behavior."
+        },
+        "refresh": {
+          "title": "4 of 4 · Refresh behavior",
+          "data": {
+            "widget_name": "Tên widget",
+            "value_attribute": "Thuộc tính giá trị",
+            "unit": "Đơn vị",
+            "min_value": "Giá trị tối thiểu",
+            "max_value": "Giá trị tối đa",
+            "severity": "Mức độ nghiêm trọng",
+            "stat_rows": "Hàng thống kê",
+            "label": "Nhãn",
+            "label_attribute": "Thuộc tính nhãn",
+            "subtitle_attribute": "Thuộc tính phụ đề",
+            "icon": "Biểu tượng",
+            "icon_attribute": "Thuộc tính biểu tượng",
+            "accent_color": "Màu nhấn",
+            "accent_color_attribute": "Thuộc tính màu nhấn",
+            "background_color": "Màu nền",
+            "text_color": "Màu chữ",
+            "widget_trigger_mode": "Chế độ kích hoạt",
+            "widget_poll_interval": "Khoảng thời gian thăm dò (giây)",
+            "tap_action_url": "URL hành động khi chạm",
+            "tap_action_foreground": "Mở URL hành động khi chạm"
+          },
+          "data_description": {
+            "widget_name": "Tên hiển thị trong bộ chọn widget trên iOS. Mặc định là tên thân thiện của thực thể.",
+            "value_attribute": "Thuộc tính của thực thể chứa giá trị. Để trống để dùng trạng thái chính của thực thể.",
+            "unit": "Đơn vị hiển thị bên cạnh giá trị. Tối đa 32 ký tự.",
+            "min_value": "Giá trị tối thiểu cho khoảng đồng hồ đo.",
+            "max_value": "Giá trị tối đa cho khoảng đồng hồ đo.",
+            "severity": "Mức độ nghiêm trọng của trạng thái (info, warning, critical, success).",
+            "stat_rows": "Tối đa 6 hàng. Định dạng: `Label=entity_id[:attribute[:unit]]`, phân tách bằng dấu phẩy. Ví dụ: `Users=sensor.user_count, Active=sensor.active_devices:count`.",
+            "label": "Nhãn tĩnh hiển thị trên widget. Để trống để lấy từ thực thể.",
+            "label_attribute": "Thuộc tính của thực thể được dùng làm nhãn. Ghi đè nhãn tĩnh.",
+            "subtitle_attribute": "Thuộc tính của thực thể hiển thị làm phụ đề widget.",
+            "icon": "Biểu tượng tĩnh. Hỗ trợ tên SF Symbols và MDI.",
+            "icon_attribute": "Thuộc tính của thực thể cho biểu tượng động. Ghi đè biểu tượng tĩnh.",
+            "accent_color": "Màu nhấn cho widget. Để trống để dùng mặc định.",
+            "accent_color_attribute": "Thuộc tính của thực thể cho màu nhấn động.",
+            "background_color": "Màu nền tùy chọn.",
+            "text_color": "Màu chữ tùy chọn.",
+            "widget_trigger_mode": "Cách cập nhật được kích hoạt. `event` phản ứng với thay đổi trạng thái; `poll` đánh giá lại theo khoảng thời gian cố định.",
+            "widget_poll_interval": "Khoảng thời gian giữa các lần thăm dò (10–3600 giây). Chỉ dùng khi chế độ kích hoạt là `poll`.",
+            "tap_action_url": "URL tùy chọn được mở khi chạm vào widget. Hỗ trợ http(s) (mở Safari) hoặc scheme tùy chỉnh như homeassistant://navigate/lovelace/0.",
+            "tap_action_foreground": "Bật: chạm mở URL. Tắt: webhook im lặng (chỉ http(s)) — gửi một POST ở chế độ nền."
+          },
+          "description": "Choose whether Home Assistant pushes changes or the PushWard app polls for them."
+        }
+      },
+      "error": {
+        "invalid_url": "URL phải bao gồm một scheme hợp lệ. Dùng http(s):// hoặc một scheme ứng dụng tùy chỉnh như homeassistant://.",
+        "silent_requires_http": "Webhook im lặng (tắt foreground) yêu cầu URL http:// hoặc https://.",
+        "invalid_gauge_range": "Giá trị tối thiểu phải nhỏ hơn giá trị tối đa.",
+        "stat_rows_required": "Cần ít nhất một hàng thống kê cho mẫu stat_list."
+      },
+      "abort": {
+        "already_configured": "Đã tồn tại một widget với slug này.",
+        "reconfigure_successful": "Đã cập nhật cấu hình widget."
+      }
+    }
+  },
+  "entity": {
+    "sensor": {
+      "notifications_used": {
+        "name": "Thông báo đã dùng"
+      },
+      "live_activity_updates_used": {
+        "name": "Cập nhật Live Activity đã dùng"
+      },
+      "widget_updates_used": {
+        "name": "Cập nhật widget đã dùng"
+      },
+      "emails_used": {
+        "name": "Email đã dùng"
+      },
+      "subscription_tier": {
+        "name": "Gói đăng ký",
+        "state": {
+          "free": "Miễn phí",
+          "premium": "Premium"
+        }
+      }
+    }
+  },
+  "exceptions": {
+    "widget_not_found": {
+      "message": "Không có widget PushWard nào khớp với slug={slug} entity_id={entity_id}."
+    }
+  },
+  "issues": {
+    "deprecated_update_activity": {
+      "title": "Hành động update_activity của PushWard đã lỗi thời",
+      "description": "Hành động `pushward.update_activity` đã lỗi thời. Hãy chuyển các tự động hóa của bạn sang hành động dành riêng cho từng mẫu — ví dụ `pushward.update_activity_countdown` hoặc `pushward.update_activity_gauge`. Hành động cũ vẫn hoạt động hiện tại nhưng sẽ bị gỡ bỏ trong một bản phát hành tương lai."
+    },
+    "usage_limit_notifications": {
+      "title": "Đã đạt giới hạn thông báo của PushWard",
+      "description": "Tài khoản PushWard của bạn đã dùng {used} trên {limit} thông báo cho kỳ hiện tại, nên các thông báo mới sẽ bị từ chối cho đến khi hạn mức đặt lại ({resets_at}). Nâng cấp gói đăng ký trong ứng dụng PushWard trên iOS để tăng giới hạn."
+    },
+    "usage_limit_live_activity": {
+      "title": "Đã đạt giới hạn cập nhật Live Activity của PushWard",
+      "description": "Tài khoản PushWard của bạn đã dùng {used} trên {limit} cập nhật Live Activity cho kỳ hiện tại, nên các cập nhật mới sẽ bị từ chối cho đến khi hạn mức đặt lại ({resets_at}). Nâng cấp gói đăng ký trong ứng dụng PushWard trên iOS để tăng giới hạn."
+    },
+    "usage_limit_widgets": {
+      "title": "Đã đạt giới hạn cập nhật widget của PushWard",
+      "description": "Tài khoản PushWard của bạn đã dùng {used} trên {limit} cập nhật widget cho kỳ hiện tại, nên các cập nhật mới sẽ bị từ chối cho đến khi hạn mức đặt lại ({resets_at}). Nâng cấp gói đăng ký trong ứng dụng PushWard trên iOS để tăng giới hạn."
+    },
+    "usage_limit_emails": {
+      "title": "Đã đạt giới hạn email của PushWard",
+      "description": "Tài khoản PushWard của bạn đã dùng {used} trên {limit} email cho kỳ hiện tại, nên các email mới sẽ bị từ chối cho đến khi hạn mức đặt lại ({resets_at}). Nâng cấp gói đăng ký trong ứng dụng PushWard trên iOS để tăng giới hạn."
+    }
+  }
+}

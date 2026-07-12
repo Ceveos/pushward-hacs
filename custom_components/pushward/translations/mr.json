@@ -1,0 +1,1716 @@
+{
+  "services": {
+    "update_activity": {
+      "name": "Activity अपडेट करा (deprecated)",
+      "description": "PushWard Live Activity ची स्थिती आणि सामग्री अपडेट करा.",
+      "fields": {
+        "slug": {
+          "name": "स्लग",
+          "description": "Activity चा slug ओळखकर्ता."
+        },
+        "state": {
+          "name": "स्थिती",
+          "description": "Activity ची इच्छित स्थिती."
+        },
+        "template": {
+          "name": "टेम्पलेट",
+          "description": "Activity लेआउट टेम्पलेट."
+        },
+        "progress": {
+          "name": "प्रगती",
+          "description": "0.0 ते 1.0 दरम्यानचे प्रगती मूल्य."
+        },
+        "state_text": {
+          "name": "स्थिती मजकूर",
+          "description": "Activity च्या स्थितीत दाखवला जाणारा मजकूर."
+        },
+        "icon": {
+          "name": "आयकॉन",
+          "description": "SF Symbol किंवा MDI आयकॉनचे नाव (उदा. arrow.down.circle.fill, mdi:download)."
+        },
+        "subtitle": {
+          "name": "उपशीर्षक",
+          "description": "Activity वर दाखवला जाणारा उपशीर्षक मजकूर."
+        },
+        "accent_color": {
+          "name": "Accent रंग",
+          "description": "Activity साठी accent रंगाचे नाव."
+        },
+        "remaining_time": {
+          "name": "उरलेला वेळ",
+          "description": "सेकंदांमध्ये उरलेला वेळ."
+        },
+        "url": {
+          "name": "URL",
+          "description": "टॅप करता येण्याजोगे बटण म्हणून दाखवला जाणारा प्राथमिक URL. फक्त steps आणि alert टेम्पलेटवर समर्थित."
+        },
+        "secondary_url": {
+          "name": "दुय्यम URL",
+          "description": "दुसरे टॅप करता येण्याजोगे बटण म्हणून दाखवला जाणारा दुय्यम URL. फक्त steps आणि alert टेम्पलेटवर समर्थित."
+        },
+        "end_date": {
+          "name": "समाप्ती तारीख",
+          "description": "countdown समाप्तीच्या तारखेसाठी Unix timestamp."
+        },
+        "total_steps": {
+          "name": "एकूण steps",
+          "description": "एकूण steps ची संख्या."
+        },
+        "current_step": {
+          "name": "सध्याचा चरण",
+          "description": "सध्याचा चरण क्रमांक."
+        },
+        "severity": {
+          "name": "तीव्रता",
+          "description": "Alert तीव्रता पातळी."
+        },
+        "value": {
+          "name": "मूल्य",
+          "description": "Gauge: संख्यात्मक मूल्य. Timeline: लेबल केलेल्या मूल्यांचा ऑब्जेक्ट (उदा. Temp=22.5)."
+        },
+        "min_value": {
+          "name": "किमान मूल्य",
+          "description": "Gauge चे किमान मूल्य."
+        },
+        "max_value": {
+          "name": "कमाल मूल्य",
+          "description": "Gauge चे कमाल मूल्य."
+        },
+        "unit": {
+          "name": "एकक",
+          "description": "मूल्यासाठी प्रदर्शन एकक (उदा. °C, %)."
+        },
+        "completion_message": {
+          "name": "पूर्णता संदेश",
+          "description": "Activity समाप्त झाल्यावर दाखवला जाणारा संदेश."
+        },
+        "scale": {
+          "name": "स्केल",
+          "description": "Y-अक्ष स्केल मोड (linear किंवा logarithmic). फक्त Timeline टेम्पलेटसाठी."
+        },
+        "decimals": {
+          "name": "दशांश स्थाने",
+          "description": "मूल्य प्रदर्शनासाठी दशांश स्थाने (0-10). फक्त Timeline टेम्पलेटसाठी."
+        },
+        "smoothing": {
+          "name": "रेषा गुळगुळीत करा",
+          "description": "डेटा बिंदूंमध्ये वक्र प्रक्षेपण सक्षम करा. फक्त Timeline टेम्पलेटसाठी."
+        },
+        "thresholds": {
+          "name": "थ्रेशोल्ड",
+          "description": "Sparkline वरील क्षैतिज संदर्भ रेषा. फक्त Timeline टेम्पलेटसाठी."
+        },
+        "sound": {
+          "name": "ध्वनी",
+          "description": "या अपडेटसाठी सूचना ध्वनीचे नाव. iOS सिस्टम ध्वनी वापरण्यासाठी रिकामे सोडा."
+        },
+        "priority": {
+          "name": "प्राधान्य",
+          "description": "Activity ची प्राधान्यता (0 = किमान, 10 = कमाल)."
+        },
+        "background_color": {
+          "name": "पार्श्वभूमी रंग",
+          "description": "Live Activity पार्श्वभूमी रंग. #RRGGBB किंवा नामित रंग. सिस्टम डिफॉल्टसाठी रिकामे सोडा."
+        },
+        "text_color": {
+          "name": "मजकूर रंग",
+          "description": "Live Activity मजकूर रंग. #RRGGBB किंवा नामित रंग. सिस्टम डिफॉल्टसाठी रिकामे सोडा."
+        },
+        "warning_threshold": {
+          "name": "इशारा थ्रेशोल्ड",
+          "description": "gauge किंवा timeline मूल्य या मूल्यापर्यंत पोहोचल्यावर किंवा ओलांडल्यावर इशारा रंग दाखवला जातो."
+        },
+        "alarm": {
+          "name": "अलार्म",
+          "description": "इशारा थ्रेशोल्ड ओलांडल्यावर AlarmKit अलार्म सक्रिय करतो. फक्त iOS 26+ वर कार्य करतो."
+        },
+        "step_labels": {
+          "name": "पायऱ्यांचे लेबल",
+          "description": "पायरी लेबलांची क्रमबद्ध यादी. लांबी total_steps इतकी असावी. फक्त steps टेम्पलेट."
+        },
+        "step_rows": {
+          "name": "पायऱ्यांच्या ओळी",
+          "description": "प्रत्येक पायरीसाठी ओळ उंचीची (1-10) क्रमबद्ध यादी. लांबी total_steps इतकी असावी. फक्त steps टेम्पलेट."
+        },
+        "fired_at": {
+          "name": "सक्रियण वेळ",
+          "description": "Activity सक्रिय झाल्याचा Unix टाइमस्टॅम्प. सापेक्ष वेळ दाखवण्यासाठी वापरला जातो."
+        },
+        "units": {
+          "name": "एकके",
+          "description": "Timeline मालिकांसाठी एकक लेबल. स्वरूप: attribute=एकक. उदाहरण: temp=°C, humidity=%"
+        },
+        "snooze_seconds": {
+          "name": "स्नूझ सेकंद",
+          "description": "iOS स्नूझ बटण काउंटडाउन किती वेळ वाढवते (60–3600). डीफॉल्ट 300 (5 मिनिटे). अलार्म आवश्यक (iOS 26+, फक्त काउंटडाउन टेम्पलेट)."
+        },
+        "duration": {
+          "name": "कालावधी",
+          "description": "शेवटच्या तारखेला सेट-अँड-फरगेट पर्याय: सेकंद (>=1) किंवा \"1h30m\" सारखी कालावधी स्ट्रिंग. सर्व्हर सुरुवात/शेवट आता पुन्हा अँकर करतो. कालावधी किंवा शेवटची तारीख यापैकी एक पाठवा — दोन्ही सेट असल्यास कालावधी प्राधान्य घेतो."
+        },
+        "start_date": {
+          "name": "सुरुवातीची तारीख",
+          "description": "काउंटडाउन सुरू झाल्याचा Unix टाइमस्टॅम्प (गेलेला/उरलेला बार अँकर करतो). सर्व्हर यासाठी डीफॉल्ट आता वापरतो."
+        },
+        "history": {
+          "name": "इतिहास (सीड)",
+          "description": "प्रारंभिक स्पार्कलाइन सीड: सिरीज नावाचे (timestamp, value) च्या यादीशी मॅपिंग करणारा ऑब्जेक्ट. फक्त सीड — पहिल्या अपडेटनंतर सर्व्हर ताबा घेतो."
+        },
+        "tap_action": {
+          "name": "टॅप क्रिया",
+          "description": "संपूर्ण activity टॅप लक्ष्य एक ऑब्जेक्ट म्हणून: url (आवश्यक), पर्यायी foreground, आणि http(s) url साठी method/headers/body द्वारे सायलेंट वेबहूक."
+        },
+        "url_action": {
+          "name": "प्राथमिक बटण",
+          "description": "प्राथमिक टॅप करण्यायोग्य बटण एक ऑब्जेक्ट म्हणून: url (आवश्यक), पर्यायी title, icon, foreground, आणि सायलेंट वेबहूकसाठी http(s) method/headers/body."
+        },
+        "secondary_url_action": {
+          "name": "दुय्यम बटण",
+          "description": "दुय्यम टॅप करण्यायोग्य बटण — प्राथमिक बटणासारखीच ऑब्जेक्ट रचना."
+        }
+      },
+      "sections": {
+        "countdown_options": {
+          "name": "countdown पर्याय",
+          "description": "फक्त countdown टेम्पलेटसाठी."
+        },
+        "steps_options": {
+          "name": "steps पर्याय",
+          "description": "फक्त steps टेम्पलेटसाठी."
+        },
+        "alert_options": {
+          "name": "alert पर्याय",
+          "description": "फक्त alert टेम्पलेटसाठी."
+        },
+        "gauge_timeline_options": {
+          "name": "gauge आणि timeline पर्याय",
+          "description": "फक्त gauge आणि timeline टेम्पलेटसाठी."
+        },
+        "action_buttons": {
+          "name": "क्रिया बटणे",
+          "description": "टॅप करता येण्याजोगी URL बटणे. फक्त steps आणि alert टेम्पलेटसाठी."
+        },
+        "display_options": {
+          "name": "प्रदर्शन, रंग आणि ध्वनी",
+          "description": "पर्यायी शैली आणि प्रति-अपडेट ओव्हरराइड्स. कोणत्याही टेम्पलेटला लागू."
+        }
+      }
+    },
+    "update_activity_generic": {
+      "name": "Activity अपडेट करा (Generic)",
+      "description": "PushWard Live Activity ची स्थिती आणि सामग्री अपडेट करा.",
+      "fields": {
+        "slug": {
+          "name": "स्लग",
+          "description": "Activity चा slug ओळखकर्ता."
+        },
+        "state": {
+          "name": "स्थिती",
+          "description": "Activity ची इच्छित स्थिती."
+        },
+        "state_text": {
+          "name": "स्थिती मजकूर",
+          "description": "Activity च्या स्थितीत दाखवला जाणारा मजकूर."
+        },
+        "subtitle": {
+          "name": "उपशीर्षक",
+          "description": "Activity वर दाखवला जाणारा उपशीर्षक मजकूर."
+        },
+        "icon": {
+          "name": "आयकॉन",
+          "description": "SF Symbol किंवा MDI आयकॉनचे नाव (उदा. arrow.down.circle.fill, mdi:download)."
+        },
+        "progress": {
+          "name": "प्रगती",
+          "description": "0.0 ते 1.0 दरम्यानचे प्रगती मूल्य."
+        },
+        "completion_message": {
+          "name": "पूर्णता संदेश",
+          "description": "Activity समाप्त झाल्यावर दाखवला जाणारा संदेश."
+        },
+        "accent_color": {
+          "name": "Accent रंग",
+          "description": "Activity साठी accent रंगाचे नाव."
+        },
+        "background_color": {
+          "name": "पार्श्वभूमी रंग",
+          "description": "Live Activity पार्श्वभूमी रंग. #RRGGBB किंवा नामित रंग. सिस्टम डिफॉल्टसाठी रिकामे सोडा."
+        },
+        "text_color": {
+          "name": "मजकूर रंग",
+          "description": "Live Activity मजकूर रंग. #RRGGBB किंवा नामित रंग. सिस्टम डिफॉल्टसाठी रिकामे सोडा."
+        },
+        "remaining_time": {
+          "name": "उरलेला वेळ",
+          "description": "सेकंदांमध्ये उरलेला वेळ."
+        },
+        "sound": {
+          "name": "ध्वनी",
+          "description": "या अपडेटसाठी सूचना ध्वनीचे नाव. iOS सिस्टम ध्वनी वापरण्यासाठी रिकामे सोडा."
+        },
+        "priority": {
+          "name": "प्राधान्य",
+          "description": "Activity ची प्राधान्यता (0 = किमान, 10 = कमाल)."
+        },
+        "url": {
+          "name": "URL",
+          "description": "टॅप करण्यायोग्य बटण म्हणून दाखवलेले प्राथमिक URL. http(s) किंवा homeassistant:// सारखी कस्टम स्कीम."
+        },
+        "secondary_url": {
+          "name": "दुय्यम URL",
+          "description": "दुसरे टॅप करण्यायोग्य बटण म्हणून दाखवलेले दुय्यम URL."
+        },
+        "tap_action": {
+          "name": "टॅप क्रिया",
+          "description": "संपूर्ण activity टॅप लक्ष्य एक ऑब्जेक्ट म्हणून: url (आवश्यक), पर्यायी foreground, आणि http(s) url साठी method/headers/body द्वारे सायलेंट वेबहूक."
+        },
+        "url_action": {
+          "name": "प्राथमिक बटण",
+          "description": "प्राथमिक टॅप करण्यायोग्य बटण एक ऑब्जेक्ट म्हणून: url (आवश्यक), पर्यायी title, icon, foreground, आणि सायलेंट वेबहूकसाठी http(s) method/headers/body."
+        },
+        "secondary_url_action": {
+          "name": "दुय्यम बटण",
+          "description": "दुय्यम टॅप करण्यायोग्य बटण — प्राथमिक बटणासारखीच ऑब्जेक्ट रचना."
+        }
+      },
+      "sections": {
+        "labels": {
+          "name": "लेबल आणि चिन्ह",
+          "description": "पर्यायी मजकूर लेबल आणि चिन्ह. कोणत्याही टेम्पलेटला लागू."
+        },
+        "action_buttons": {
+          "name": "क्रिया बटणे",
+          "description": "टॅप करता येण्याजोगी URL बटणे. फक्त steps आणि alert टेम्पलेटसाठी."
+        },
+        "display_options": {
+          "name": "प्रदर्शन, रंग आणि ध्वनी",
+          "description": "पर्यायी शैली आणि प्रति-अपडेट ओव्हरराइड्स. कोणत्याही टेम्पलेटला लागू."
+        }
+      }
+    },
+    "update_activity_countdown": {
+      "name": "Activity अपडेट करा (Countdown)",
+      "description": "PushWard Live Activity ची स्थिती आणि सामग्री अपडेट करा.",
+      "fields": {
+        "slug": {
+          "name": "स्लग",
+          "description": "Activity चा slug ओळखकर्ता."
+        },
+        "state": {
+          "name": "स्थिती",
+          "description": "Activity ची इच्छित स्थिती."
+        },
+        "end_date": {
+          "name": "समाप्ती तारीख",
+          "description": "countdown समाप्तीच्या तारखेसाठी Unix timestamp."
+        },
+        "completion_message": {
+          "name": "पूर्णता संदेश",
+          "description": "Activity समाप्त झाल्यावर दाखवला जाणारा संदेश."
+        },
+        "state_text": {
+          "name": "स्थिती मजकूर",
+          "description": "Activity च्या स्थितीत दाखवला जाणारा मजकूर."
+        },
+        "subtitle": {
+          "name": "उपशीर्षक",
+          "description": "Activity वर दाखवला जाणारा उपशीर्षक मजकूर."
+        },
+        "icon": {
+          "name": "आयकॉन",
+          "description": "SF Symbol किंवा MDI आयकॉनचे नाव (उदा. arrow.down.circle.fill, mdi:download)."
+        },
+        "progress": {
+          "name": "प्रगती",
+          "description": "0.0 ते 1.0 दरम्यानचे प्रगती मूल्य."
+        },
+        "warning_threshold": {
+          "name": "इशारा थ्रेशोल्ड",
+          "description": "gauge किंवा timeline मूल्य या मूल्यापर्यंत पोहोचल्यावर किंवा ओलांडल्यावर इशारा रंग दाखवला जातो."
+        },
+        "alarm": {
+          "name": "अलार्म",
+          "description": "इशारा थ्रेशोल्ड ओलांडल्यावर AlarmKit अलार्म सक्रिय करतो. फक्त iOS 26+ वर कार्य करतो."
+        },
+        "snooze_seconds": {
+          "name": "स्नूझ सेकंद",
+          "description": "How long the iOS Snooze button extends the countdown (60–3600). Defaults to 300 (5 min). Only applies with alarm enabled (iOS 26+)."
+        },
+        "accent_color": {
+          "name": "Accent रंग",
+          "description": "Activity साठी accent रंगाचे नाव."
+        },
+        "background_color": {
+          "name": "पार्श्वभूमी रंग",
+          "description": "Live Activity पार्श्वभूमी रंग. #RRGGBB किंवा नामित रंग. सिस्टम डिफॉल्टसाठी रिकामे सोडा."
+        },
+        "text_color": {
+          "name": "मजकूर रंग",
+          "description": "Live Activity मजकूर रंग. #RRGGBB किंवा नामित रंग. सिस्टम डिफॉल्टसाठी रिकामे सोडा."
+        },
+        "remaining_time": {
+          "name": "उरलेला वेळ",
+          "description": "सेकंदांमध्ये उरलेला वेळ."
+        },
+        "sound": {
+          "name": "ध्वनी",
+          "description": "या अपडेटसाठी सूचना ध्वनीचे नाव. iOS सिस्टम ध्वनी वापरण्यासाठी रिकामे सोडा."
+        },
+        "priority": {
+          "name": "प्राधान्य",
+          "description": "Activity ची प्राधान्यता (0 = किमान, 10 = कमाल)."
+        },
+        "duration": {
+          "name": "कालावधी",
+          "description": "शेवटच्या तारखेला सेट-अँड-फरगेट पर्याय: सेकंद (>=1) किंवा \"1h30m\" सारखी कालावधी स्ट्रिंग. सर्व्हर सुरुवात/शेवट आता पुन्हा अँकर करतो. कालावधी किंवा शेवटची तारीख यापैकी एक पाठवा — दोन्ही सेट असल्यास कालावधी प्राधान्य घेतो."
+        },
+        "start_date": {
+          "name": "सुरुवातीची तारीख",
+          "description": "काउंटडाउन सुरू झाल्याचा Unix टाइमस्टॅम्प (गेलेला/उरलेला बार अँकर करतो). सर्व्हर यासाठी डीफॉल्ट आता वापरतो."
+        },
+        "url": {
+          "name": "URL",
+          "description": "टॅप करण्यायोग्य बटण म्हणून दाखवलेले प्राथमिक URL. http(s) किंवा homeassistant:// सारखी कस्टम स्कीम."
+        },
+        "secondary_url": {
+          "name": "दुय्यम URL",
+          "description": "दुसरे टॅप करण्यायोग्य बटण म्हणून दाखवलेले दुय्यम URL."
+        },
+        "tap_action": {
+          "name": "टॅप क्रिया",
+          "description": "संपूर्ण activity टॅप लक्ष्य एक ऑब्जेक्ट म्हणून: url (आवश्यक), पर्यायी foreground, आणि http(s) url साठी method/headers/body द्वारे सायलेंट वेबहूक."
+        },
+        "url_action": {
+          "name": "प्राथमिक बटण",
+          "description": "प्राथमिक टॅप करण्यायोग्य बटण एक ऑब्जेक्ट म्हणून: url (आवश्यक), पर्यायी title, icon, foreground, आणि सायलेंट वेबहूकसाठी http(s) method/headers/body."
+        },
+        "secondary_url_action": {
+          "name": "दुय्यम बटण",
+          "description": "दुय्यम टॅप करण्यायोग्य बटण — प्राथमिक बटणासारखीच ऑब्जेक्ट रचना."
+        }
+      },
+      "sections": {
+        "labels": {
+          "name": "लेबल आणि चिन्ह",
+          "description": "पर्यायी मजकूर लेबल आणि चिन्ह. कोणत्याही टेम्पलेटला लागू."
+        },
+        "countdown_options": {
+          "name": "countdown पर्याय",
+          "description": "फक्त countdown टेम्पलेटसाठी."
+        },
+        "action_buttons": {
+          "name": "क्रिया बटणे",
+          "description": "टॅप करता येण्याजोगी URL बटणे. फक्त steps आणि alert टेम्पलेटसाठी."
+        },
+        "display_options": {
+          "name": "प्रदर्शन, रंग आणि ध्वनी",
+          "description": "पर्यायी शैली आणि प्रति-अपडेट ओव्हरराइड्स. कोणत्याही टेम्पलेटला लागू."
+        }
+      }
+    },
+    "update_activity_steps": {
+      "name": "Activity अपडेट करा (Steps)",
+      "description": "PushWard Live Activity ची स्थिती आणि सामग्री अपडेट करा.",
+      "fields": {
+        "slug": {
+          "name": "स्लग",
+          "description": "Activity चा slug ओळखकर्ता."
+        },
+        "state": {
+          "name": "स्थिती",
+          "description": "Activity ची इच्छित स्थिती."
+        },
+        "total_steps": {
+          "name": "एकूण steps",
+          "description": "एकूण steps ची संख्या."
+        },
+        "current_step": {
+          "name": "सध्याचा चरण",
+          "description": "सध्याचा चरण क्रमांक."
+        },
+        "state_text": {
+          "name": "स्थिती मजकूर",
+          "description": "Activity च्या स्थितीत दाखवला जाणारा मजकूर."
+        },
+        "subtitle": {
+          "name": "उपशीर्षक",
+          "description": "Activity वर दाखवला जाणारा उपशीर्षक मजकूर."
+        },
+        "icon": {
+          "name": "आयकॉन",
+          "description": "SF Symbol किंवा MDI आयकॉनचे नाव (उदा. arrow.down.circle.fill, mdi:download)."
+        },
+        "progress": {
+          "name": "प्रगती",
+          "description": "0.0 ते 1.0 दरम्यानचे प्रगती मूल्य."
+        },
+        "step_labels": {
+          "name": "पायऱ्यांचे लेबल",
+          "description": "पायरी लेबलांची क्रमबद्ध यादी. लांबी total_steps इतकी असावी. फक्त steps टेम्पलेट."
+        },
+        "step_rows": {
+          "name": "पायऱ्यांच्या ओळी",
+          "description": "प्रत्येक पायरीसाठी ओळ उंचीची (1-10) क्रमबद्ध यादी. लांबी total_steps इतकी असावी. फक्त steps टेम्पलेट."
+        },
+        "url": {
+          "name": "URL",
+          "description": "टॅप करता येण्याजोगे बटण म्हणून दाखवला जाणारा प्राथमिक URL. फक्त steps आणि alert टेम्पलेटवर समर्थित."
+        },
+        "secondary_url": {
+          "name": "दुय्यम URL",
+          "description": "दुसरे टॅप करता येण्याजोगे बटण म्हणून दाखवला जाणारा दुय्यम URL. फक्त steps आणि alert टेम्पलेटवर समर्थित."
+        },
+        "completion_message": {
+          "name": "पूर्णता संदेश",
+          "description": "Activity समाप्त झाल्यावर दाखवला जाणारा संदेश."
+        },
+        "accent_color": {
+          "name": "Accent रंग",
+          "description": "Activity साठी accent रंगाचे नाव."
+        },
+        "background_color": {
+          "name": "पार्श्वभूमी रंग",
+          "description": "Live Activity पार्श्वभूमी रंग. #RRGGBB किंवा नामित रंग. सिस्टम डिफॉल्टसाठी रिकामे सोडा."
+        },
+        "text_color": {
+          "name": "मजकूर रंग",
+          "description": "Live Activity मजकूर रंग. #RRGGBB किंवा नामित रंग. सिस्टम डिफॉल्टसाठी रिकामे सोडा."
+        },
+        "remaining_time": {
+          "name": "उरलेला वेळ",
+          "description": "सेकंदांमध्ये उरलेला वेळ."
+        },
+        "sound": {
+          "name": "ध्वनी",
+          "description": "या अपडेटसाठी सूचना ध्वनीचे नाव. iOS सिस्टम ध्वनी वापरण्यासाठी रिकामे सोडा."
+        },
+        "priority": {
+          "name": "प्राधान्य",
+          "description": "Activity ची प्राधान्यता (0 = किमान, 10 = कमाल)."
+        },
+        "tap_action": {
+          "name": "टॅप क्रिया",
+          "description": "संपूर्ण activity टॅप लक्ष्य एक ऑब्जेक्ट म्हणून: url (आवश्यक), पर्यायी foreground, आणि http(s) url साठी method/headers/body द्वारे सायलेंट वेबहूक."
+        },
+        "url_action": {
+          "name": "प्राथमिक बटण",
+          "description": "प्राथमिक टॅप करण्यायोग्य बटण एक ऑब्जेक्ट म्हणून: url (आवश्यक), पर्यायी title, icon, foreground, आणि सायलेंट वेबहूकसाठी http(s) method/headers/body."
+        },
+        "secondary_url_action": {
+          "name": "दुय्यम बटण",
+          "description": "दुय्यम टॅप करण्यायोग्य बटण — प्राथमिक बटणासारखीच ऑब्जेक्ट रचना."
+        }
+      },
+      "sections": {
+        "labels": {
+          "name": "लेबल आणि चिन्ह",
+          "description": "पर्यायी मजकूर लेबल आणि चिन्ह. कोणत्याही टेम्पलेटला लागू."
+        },
+        "steps_options": {
+          "name": "steps पर्याय",
+          "description": "फक्त steps टेम्पलेटसाठी."
+        },
+        "action_buttons": {
+          "name": "क्रिया बटणे",
+          "description": "टॅप करता येण्याजोगी URL बटणे. फक्त steps आणि alert टेम्पलेटसाठी."
+        },
+        "display_options": {
+          "name": "प्रदर्शन, रंग आणि ध्वनी",
+          "description": "पर्यायी शैली आणि प्रति-अपडेट ओव्हरराइड्स. कोणत्याही टेम्पलेटला लागू."
+        }
+      }
+    },
+    "update_activity_alert": {
+      "name": "Activity अपडेट करा (Alert)",
+      "description": "PushWard Live Activity ची स्थिती आणि सामग्री अपडेट करा.",
+      "fields": {
+        "slug": {
+          "name": "स्लग",
+          "description": "Activity चा slug ओळखकर्ता."
+        },
+        "state": {
+          "name": "स्थिती",
+          "description": "Activity ची इच्छित स्थिती."
+        },
+        "severity": {
+          "name": "तीव्रता",
+          "description": "Alert तीव्रता पातळी."
+        },
+        "state_text": {
+          "name": "स्थिती मजकूर",
+          "description": "Activity च्या स्थितीत दाखवला जाणारा मजकूर."
+        },
+        "subtitle": {
+          "name": "उपशीर्षक",
+          "description": "Activity वर दाखवला जाणारा उपशीर्षक मजकूर."
+        },
+        "icon": {
+          "name": "आयकॉन",
+          "description": "SF Symbol किंवा MDI आयकॉनचे नाव (उदा. arrow.down.circle.fill, mdi:download)."
+        },
+        "progress": {
+          "name": "प्रगती",
+          "description": "0.0 ते 1.0 दरम्यानचे प्रगती मूल्य."
+        },
+        "fired_at": {
+          "name": "सक्रियण वेळ",
+          "description": "Activity सक्रिय झाल्याचा Unix टाइमस्टॅम्प. सापेक्ष वेळ दाखवण्यासाठी वापरला जातो."
+        },
+        "url": {
+          "name": "URL",
+          "description": "टॅप करता येण्याजोगे बटण म्हणून दाखवला जाणारा प्राथमिक URL. फक्त steps आणि alert टेम्पलेटवर समर्थित."
+        },
+        "secondary_url": {
+          "name": "दुय्यम URL",
+          "description": "दुसरे टॅप करता येण्याजोगे बटण म्हणून दाखवला जाणारा दुय्यम URL. फक्त steps आणि alert टेम्पलेटवर समर्थित."
+        },
+        "completion_message": {
+          "name": "पूर्णता संदेश",
+          "description": "Activity समाप्त झाल्यावर दाखवला जाणारा संदेश."
+        },
+        "accent_color": {
+          "name": "Accent रंग",
+          "description": "Activity साठी accent रंगाचे नाव."
+        },
+        "background_color": {
+          "name": "पार्श्वभूमी रंग",
+          "description": "Live Activity पार्श्वभूमी रंग. #RRGGBB किंवा नामित रंग. सिस्टम डिफॉल्टसाठी रिकामे सोडा."
+        },
+        "text_color": {
+          "name": "मजकूर रंग",
+          "description": "Live Activity मजकूर रंग. #RRGGBB किंवा नामित रंग. सिस्टम डिफॉल्टसाठी रिकामे सोडा."
+        },
+        "remaining_time": {
+          "name": "उरलेला वेळ",
+          "description": "सेकंदांमध्ये उरलेला वेळ."
+        },
+        "sound": {
+          "name": "ध्वनी",
+          "description": "या अपडेटसाठी सूचना ध्वनीचे नाव. iOS सिस्टम ध्वनी वापरण्यासाठी रिकामे सोडा."
+        },
+        "priority": {
+          "name": "प्राधान्य",
+          "description": "Activity ची प्राधान्यता (0 = किमान, 10 = कमाल)."
+        },
+        "tap_action": {
+          "name": "टॅप क्रिया",
+          "description": "संपूर्ण activity टॅप लक्ष्य एक ऑब्जेक्ट म्हणून: url (आवश्यक), पर्यायी foreground, आणि http(s) url साठी method/headers/body द्वारे सायलेंट वेबहूक."
+        },
+        "url_action": {
+          "name": "प्राथमिक बटण",
+          "description": "प्राथमिक टॅप करण्यायोग्य बटण एक ऑब्जेक्ट म्हणून: url (आवश्यक), पर्यायी title, icon, foreground, आणि सायलेंट वेबहूकसाठी http(s) method/headers/body."
+        },
+        "secondary_url_action": {
+          "name": "दुय्यम बटण",
+          "description": "दुय्यम टॅप करण्यायोग्य बटण — प्राथमिक बटणासारखीच ऑब्जेक्ट रचना."
+        }
+      },
+      "sections": {
+        "labels": {
+          "name": "लेबल आणि चिन्ह",
+          "description": "पर्यायी मजकूर लेबल आणि चिन्ह. कोणत्याही टेम्पलेटला लागू."
+        },
+        "alert_options": {
+          "name": "alert पर्याय",
+          "description": "फक्त alert टेम्पलेटसाठी."
+        },
+        "action_buttons": {
+          "name": "क्रिया बटणे",
+          "description": "टॅप करता येण्याजोगी URL बटणे. फक्त steps आणि alert टेम्पलेटसाठी."
+        },
+        "display_options": {
+          "name": "प्रदर्शन, रंग आणि ध्वनी",
+          "description": "पर्यायी शैली आणि प्रति-अपडेट ओव्हरराइड्स. कोणत्याही टेम्पलेटला लागू."
+        }
+      }
+    },
+    "update_activity_gauge": {
+      "name": "Activity अपडेट करा (Gauge)",
+      "description": "PushWard Live Activity ची स्थिती आणि सामग्री अपडेट करा.",
+      "fields": {
+        "slug": {
+          "name": "स्लग",
+          "description": "Activity चा slug ओळखकर्ता."
+        },
+        "state": {
+          "name": "स्थिती",
+          "description": "Activity ची इच्छित स्थिती."
+        },
+        "value": {
+          "name": "मूल्य",
+          "description": "Gauge: संख्यात्मक मूल्य. Timeline: लेबल केलेल्या मूल्यांचा ऑब्जेक्ट (उदा. Temp=22.5)."
+        },
+        "min_value": {
+          "name": "किमान मूल्य",
+          "description": "Gauge चे किमान मूल्य."
+        },
+        "max_value": {
+          "name": "कमाल मूल्य",
+          "description": "Gauge चे कमाल मूल्य."
+        },
+        "unit": {
+          "name": "एकक",
+          "description": "मूल्यासाठी प्रदर्शन एकक (उदा. °C, %)."
+        },
+        "state_text": {
+          "name": "स्थिती मजकूर",
+          "description": "Activity च्या स्थितीत दाखवला जाणारा मजकूर."
+        },
+        "subtitle": {
+          "name": "उपशीर्षक",
+          "description": "Activity वर दाखवला जाणारा उपशीर्षक मजकूर."
+        },
+        "icon": {
+          "name": "आयकॉन",
+          "description": "SF Symbol किंवा MDI आयकॉनचे नाव (उदा. arrow.down.circle.fill, mdi:download)."
+        },
+        "progress": {
+          "name": "प्रगती",
+          "description": "0.0 ते 1.0 दरम्यानचे प्रगती मूल्य."
+        },
+        "completion_message": {
+          "name": "पूर्णता संदेश",
+          "description": "Activity समाप्त झाल्यावर दाखवला जाणारा संदेश."
+        },
+        "accent_color": {
+          "name": "Accent रंग",
+          "description": "Activity साठी accent रंगाचे नाव."
+        },
+        "background_color": {
+          "name": "पार्श्वभूमी रंग",
+          "description": "Live Activity पार्श्वभूमी रंग. #RRGGBB किंवा नामित रंग. सिस्टम डिफॉल्टसाठी रिकामे सोडा."
+        },
+        "text_color": {
+          "name": "मजकूर रंग",
+          "description": "Live Activity मजकूर रंग. #RRGGBB किंवा नामित रंग. सिस्टम डिफॉल्टसाठी रिकामे सोडा."
+        },
+        "remaining_time": {
+          "name": "उरलेला वेळ",
+          "description": "सेकंदांमध्ये उरलेला वेळ."
+        },
+        "sound": {
+          "name": "ध्वनी",
+          "description": "या अपडेटसाठी सूचना ध्वनीचे नाव. iOS सिस्टम ध्वनी वापरण्यासाठी रिकामे सोडा."
+        },
+        "priority": {
+          "name": "प्राधान्य",
+          "description": "Activity ची प्राधान्यता (0 = किमान, 10 = कमाल)."
+        },
+        "url": {
+          "name": "URL",
+          "description": "टॅप करण्यायोग्य बटण म्हणून दाखवलेले प्राथमिक URL. http(s) किंवा homeassistant:// सारखी कस्टम स्कीम."
+        },
+        "secondary_url": {
+          "name": "दुय्यम URL",
+          "description": "दुसरे टॅप करण्यायोग्य बटण म्हणून दाखवलेले दुय्यम URL."
+        },
+        "tap_action": {
+          "name": "टॅप क्रिया",
+          "description": "संपूर्ण activity टॅप लक्ष्य एक ऑब्जेक्ट म्हणून: url (आवश्यक), पर्यायी foreground, आणि http(s) url साठी method/headers/body द्वारे सायलेंट वेबहूक."
+        },
+        "url_action": {
+          "name": "प्राथमिक बटण",
+          "description": "प्राथमिक टॅप करण्यायोग्य बटण एक ऑब्जेक्ट म्हणून: url (आवश्यक), पर्यायी title, icon, foreground, आणि सायलेंट वेबहूकसाठी http(s) method/headers/body."
+        },
+        "secondary_url_action": {
+          "name": "दुय्यम बटण",
+          "description": "दुय्यम टॅप करण्यायोग्य बटण — प्राथमिक बटणासारखीच ऑब्जेक्ट रचना."
+        }
+      },
+      "sections": {
+        "labels": {
+          "name": "लेबल आणि चिन्ह",
+          "description": "पर्यायी मजकूर लेबल आणि चिन्ह. कोणत्याही टेम्पलेटला लागू."
+        },
+        "action_buttons": {
+          "name": "क्रिया बटणे",
+          "description": "टॅप करता येण्याजोगी URL बटणे. फक्त steps आणि alert टेम्पलेटसाठी."
+        },
+        "display_options": {
+          "name": "प्रदर्शन, रंग आणि ध्वनी",
+          "description": "पर्यायी शैली आणि प्रति-अपडेट ओव्हरराइड्स. कोणत्याही टेम्पलेटला लागू."
+        }
+      }
+    },
+    "update_activity_timeline": {
+      "name": "Activity अपडेट करा (Timeline)",
+      "description": "PushWard Live Activity ची स्थिती आणि सामग्री अपडेट करा.",
+      "fields": {
+        "slug": {
+          "name": "स्लग",
+          "description": "Activity चा slug ओळखकर्ता."
+        },
+        "state": {
+          "name": "स्थिती",
+          "description": "Activity ची इच्छित स्थिती."
+        },
+        "value": {
+          "name": "मूल्य",
+          "description": "Gauge: संख्यात्मक मूल्य. Timeline: लेबल केलेल्या मूल्यांचा ऑब्जेक्ट (उदा. Temp=22.5)."
+        },
+        "unit": {
+          "name": "एकक",
+          "description": "मूल्यासाठी प्रदर्शन एकक (उदा. °C, %)."
+        },
+        "state_text": {
+          "name": "स्थिती मजकूर",
+          "description": "Activity च्या स्थितीत दाखवला जाणारा मजकूर."
+        },
+        "subtitle": {
+          "name": "उपशीर्षक",
+          "description": "Activity वर दाखवला जाणारा उपशीर्षक मजकूर."
+        },
+        "icon": {
+          "name": "आयकॉन",
+          "description": "SF Symbol किंवा MDI आयकॉनचे नाव (उदा. arrow.down.circle.fill, mdi:download)."
+        },
+        "progress": {
+          "name": "प्रगती",
+          "description": "0.0 ते 1.0 दरम्यानचे प्रगती मूल्य."
+        },
+        "units": {
+          "name": "एकके",
+          "description": "Timeline मालिकांसाठी एकक लेबल. स्वरूप: attribute=एकक. उदाहरण: temp=°C, humidity=%"
+        },
+        "scale": {
+          "name": "स्केल",
+          "description": "Y-अक्ष स्केल मोड (linear किंवा logarithmic). फक्त Timeline टेम्पलेटसाठी."
+        },
+        "decimals": {
+          "name": "दशांश स्थाने",
+          "description": "मूल्य प्रदर्शनासाठी दशांश स्थाने (0-10). फक्त Timeline टेम्पलेटसाठी."
+        },
+        "smoothing": {
+          "name": "रेषा गुळगुळीत करा",
+          "description": "डेटा बिंदूंमध्ये वक्र प्रक्षेपण सक्षम करा. फक्त Timeline टेम्पलेटसाठी."
+        },
+        "thresholds": {
+          "name": "थ्रेशोल्ड",
+          "description": "Sparkline वरील क्षैतिज संदर्भ रेषा. फक्त Timeline टेम्पलेटसाठी."
+        },
+        "completion_message": {
+          "name": "पूर्णता संदेश",
+          "description": "Activity समाप्त झाल्यावर दाखवला जाणारा संदेश."
+        },
+        "accent_color": {
+          "name": "Accent रंग",
+          "description": "Activity साठी accent रंगाचे नाव."
+        },
+        "background_color": {
+          "name": "पार्श्वभूमी रंग",
+          "description": "Live Activity पार्श्वभूमी रंग. #RRGGBB किंवा नामित रंग. सिस्टम डिफॉल्टसाठी रिकामे सोडा."
+        },
+        "text_color": {
+          "name": "मजकूर रंग",
+          "description": "Live Activity मजकूर रंग. #RRGGBB किंवा नामित रंग. सिस्टम डिफॉल्टसाठी रिकामे सोडा."
+        },
+        "remaining_time": {
+          "name": "उरलेला वेळ",
+          "description": "सेकंदांमध्ये उरलेला वेळ."
+        },
+        "sound": {
+          "name": "ध्वनी",
+          "description": "या अपडेटसाठी सूचना ध्वनीचे नाव. iOS सिस्टम ध्वनी वापरण्यासाठी रिकामे सोडा."
+        },
+        "priority": {
+          "name": "प्राधान्य",
+          "description": "Activity ची प्राधान्यता (0 = किमान, 10 = कमाल)."
+        },
+        "history": {
+          "name": "इतिहास (सीड)",
+          "description": "प्रारंभिक स्पार्कलाइन सीड: सिरीज नावाचे (timestamp, value) च्या यादीशी मॅपिंग करणारा ऑब्जेक्ट. फक्त सीड — पहिल्या अपडेटनंतर सर्व्हर ताबा घेतो."
+        },
+        "url": {
+          "name": "URL",
+          "description": "टॅप करण्यायोग्य बटण म्हणून दाखवलेले प्राथमिक URL. http(s) किंवा homeassistant:// सारखी कस्टम स्कीम."
+        },
+        "secondary_url": {
+          "name": "दुय्यम URL",
+          "description": "दुसरे टॅप करण्यायोग्य बटण म्हणून दाखवलेले दुय्यम URL."
+        },
+        "tap_action": {
+          "name": "टॅप क्रिया",
+          "description": "संपूर्ण activity टॅप लक्ष्य एक ऑब्जेक्ट म्हणून: url (आवश्यक), पर्यायी foreground, आणि http(s) url साठी method/headers/body द्वारे सायलेंट वेबहूक."
+        },
+        "url_action": {
+          "name": "प्राथमिक बटण",
+          "description": "प्राथमिक टॅप करण्यायोग्य बटण एक ऑब्जेक्ट म्हणून: url (आवश्यक), पर्यायी title, icon, foreground, आणि सायलेंट वेबहूकसाठी http(s) method/headers/body."
+        },
+        "secondary_url_action": {
+          "name": "दुय्यम बटण",
+          "description": "दुय्यम टॅप करण्यायोग्य बटण — प्राथमिक बटणासारखीच ऑब्जेक्ट रचना."
+        }
+      },
+      "sections": {
+        "labels": {
+          "name": "लेबल आणि चिन्ह",
+          "description": "पर्यायी मजकूर लेबल आणि चिन्ह. कोणत्याही टेम्पलेटला लागू."
+        },
+        "gauge_timeline_options": {
+          "name": "gauge आणि timeline पर्याय",
+          "description": "फक्त gauge आणि timeline टेम्पलेटसाठी."
+        },
+        "action_buttons": {
+          "name": "क्रिया बटणे",
+          "description": "टॅप करता येण्याजोगी URL बटणे. फक्त steps आणि alert टेम्पलेटसाठी."
+        },
+        "display_options": {
+          "name": "प्रदर्शन, रंग आणि ध्वनी",
+          "description": "पर्यायी शैली आणि प्रति-अपडेट ओव्हरराइड्स. कोणत्याही टेम्पलेटला लागू."
+        }
+      }
+    },
+    "create_activity": {
+      "name": "Activity तयार करा",
+      "description": "नवीन PushWard Live Activity तयार करा.",
+      "fields": {
+        "slug": {
+          "name": "स्लग",
+          "description": "Activity साठी अद्वितीय slug ओळखकर्ता."
+        },
+        "name": {
+          "name": "नाव",
+          "description": "Activity साठी प्रदर्शन नाव."
+        },
+        "priority": {
+          "name": "प्राधान्य",
+          "description": "Activity प्राधान्य (0 = सर्वात कमी, 10 = सर्वात जास्त)."
+        },
+        "ended_ttl": {
+          "name": "समाप्त TTL",
+          "description": "Activity समाप्त झाल्यानंतर ती किती सेकंद ठेवायची."
+        },
+        "stale_ttl": {
+          "name": "जुना TTL",
+          "description": "Activity जुनी मानली जाण्यापूर्वीचे सेकंद."
+        }
+      }
+    },
+    "end_activity": {
+      "name": "Activity समाप्त करा",
+      "description": "PushWard Live Activity समाप्त करा.",
+      "fields": {
+        "slug": {
+          "name": "स्लग",
+          "description": "समाप्त करण्यासाठी Activity चा slug ओळखकर्ता."
+        },
+        "completion_message": {
+          "name": "पूर्णता संदेश",
+          "description": "Activity समाप्त झाल्यावर दाखवला जाणारा वैकल्पिक संदेश."
+        }
+      }
+    },
+    "delete_activity": {
+      "name": "Activity हटवा",
+      "description": "PushWard Live Activity हटवा.",
+      "fields": {
+        "slug": {
+          "name": "स्लग",
+          "description": "हटवण्यासाठी Activity चा slug ओळखकर्ता."
+        }
+      }
+    },
+    "send_notification": {
+      "name": "सूचना पाठवा",
+      "description": "PushWard द्वारे push notification पाठवा.",
+      "fields": {
+        "title": {
+          "name": "शीर्षक",
+          "description": "सूचनेचे शीर्षक."
+        },
+        "body": {
+          "name": "मुख्य मजकूर",
+          "description": "सूचनेचा मुख्य मजकूर."
+        },
+        "subtitle": {
+          "name": "उपशीर्षक",
+          "description": "शीर्षकाखाली दाखवला जाणारा वैकल्पिक उपशीर्षक."
+        },
+        "level": {
+          "name": "पातळी",
+          "description": "iOS व्यत्यय पातळी. सूचना कशी वितरित केली जाते ते नियंत्रित करते."
+        },
+        "thread_id": {
+          "name": "थ्रेड आयडी",
+          "description": "Notification Center मध्ये सूचना एकत्र गटबद्ध करते."
+        },
+        "collapse_id": {
+          "name": "कोलॅप्स आयडी",
+          "description": "APNs डिडुप्लिकेशन की. समान की असलेल्या मागील सूचनेची जागा घेते."
+        },
+        "source": {
+          "name": "स्रोत",
+          "description": "PushWard inbox मध्ये गटबद्ध करण्यासाठी स्रोत ओळखकर्ता."
+        },
+        "source_display_name": {
+          "name": "स्रोत प्रदर्शन नाव",
+          "description": "PushWard inbox मध्ये दाखवले जाणारे मानव-वाचनीय स्रोत नाव."
+        },
+        "activity_slug": {
+          "name": "Activity स्लग",
+          "description": "ही सूचना विद्यमान Live Activity शी जोडा."
+        },
+        "push": {
+          "name": "पुश",
+          "description": "सर्व डिव्हाइसवर APNs push alert म्हणून पाठवा. खोटे असल्यास, सूचना फक्त inbox मध्ये संग्रहित केली जाते."
+        },
+        "url": {
+          "name": "URL",
+          "description": "सूचनेवर टॅप केल्यावर उघडणारा URL. HTTPS आवश्यक आहे."
+        },
+        "icon_url": {
+          "name": "चिन्ह URL",
+          "description": "सूचना चिन्हासाठी URL. HTTPS आवश्यक आहे."
+        },
+        "metadata": {
+          "name": "मेटाडेटा",
+          "description": "सूचनेसोबत पाठवलेला अतिरिक्त की-मूल्य जोडी मेटाडेटा."
+        },
+        "media": {
+          "name": "मीडिया",
+          "description": "`url` (HTTPS) आणि `type` (image, video, किंवा audio) असलेल्या ऑब्जेक्ट म्हणून मीडिया संलग्नक."
+        },
+        "actions": {
+          "name": "क्रिया",
+          "description": "क्रिया बटणांची यादी. प्रत्येक क्रिया id, title, पर्यायी url, foreground, destructive, authentication_required, आणि icon असलेला ऑब्जेक्ट आहे. http(s) url साठी तुम्ही method (GET/POST/PUT/PATCH/DELETE/HEAD), headers, आणि body सह सायलेंट वेबहूक देखील पाठवू शकता."
+        }
+      }
+    },
+    "widget_refresh": {
+      "name": "विजेट रिफ्रेश करा",
+      "description": "ट्रॅक केलेले PushWard विजेट सक्तीने रिफ्रेश करा. इन-मेमरी diff कॅशला बायपास करते जेणेकरून मूल्य बदलले नसले तरी विजेट पुन्हा रेंडर होऊन iOS ला पाठवले जाते.",
+      "fields": {
+        "slug": {
+          "name": "स्लग",
+          "description": "विजेट स्लग आयडेंटिफायर. slug किंवा entity_id यापैकी एक देणे आवश्यक आहे."
+        },
+        "entity_id": {
+          "name": "घटक",
+          "description": "विजेटशी जोडलेला HA घटक. slug किंवा entity_id यापैकी एक देणे आवश्यक आहे."
+        }
+      }
+    },
+    "send_email": {
+      "name": "ईमेल पाठवा",
+      "description": "PushWard द्वारे ट्रान्झॅक्शनल ईमेल पाठवा. टेक्स्ट मजकूर, HTML मजकूर, किंवा दोन्ही द्या. इंटिग्रेशन कीला \"emails\" क्षमता आवश्यक आहे.",
+      "fields": {
+        "to": {
+          "name": "प्रति",
+          "description": "प्राप्तकर्त्याचा ईमेल पत्ता. तुम्ही PushWard iOS अॅपमध्ये आधीच जोडलेला आणि पुष्टी केलेला पत्ता असावा — असत्यापित पत्ते नाकारले जातात."
+        },
+        "subject": {
+          "name": "विषय",
+          "description": "ईमेल विषय ओळ."
+        },
+        "body": {
+          "name": "मजकूर",
+          "description": "साध्या मजकुराचा ईमेल मजकूर. हा, HTML मजकूर, किंवा दोन्ही द्या."
+        },
+        "html_body": {
+          "name": "HTML मजकूर",
+          "description": "HTML ईमेल मजकूर. हा, साध्या-मजकुराचा मजकूर, किंवा दोन्ही द्या."
+        }
+      }
+    },
+    "delete_widget": {
+      "name": "विजेट हटवा",
+      "description": "सर्व्हरवरून PushWard विजेट हटवा. ट्रॅक-केलेल्या विजेटची कॉन्फिग एन्ट्री अजूनही हा स्लग चालवत असल्यास, पुढील रीस्टार्ट/सिंकवर विजेट पुन्हा तयार होते — कायमचे हटवण्यासाठी कॉन्फिग एन्ट्री काढा. slug किंवा entity_id यापैकी एक द्या.",
+      "fields": {
+        "slug": {
+          "name": "स्लग",
+          "description": "विजेट स्लग आयडेंटिफायर. slug किंवा entity_id यापैकी एक देणे आवश्यक आहे."
+        },
+        "entity_id": {
+          "name": "घटक",
+          "description": "विजेटशी जोडलेला HA घटक. कॉन्फिगद्वारे जुळणाऱ्या विजेटशी रिझॉल्व्ह केले जाते. slug किंवा entity_id यापैकी एक देणे आवश्यक आहे."
+        }
+      }
+    }
+  },
+  "config": {
+    "step": {
+      "user": {
+        "title": "PushWard शी कनेक्ट करा",
+        "data": {
+          "integration_key": "इंटिग्रेशन की"
+        },
+        "description": "सुरू करण्यासाठी तुमची PushWard इंटिग्रेशन की प्रविष्ट करा. App Store वरून PushWard iOS अॅप मिळवा: {app_store_url}",
+        "data_description": {
+          "integration_key": "PushWard iOS अॅप उघडा (App Store: {app_store_url}) → Settings → Integration Keys. तुम्ही डीफॉल्ट की पेस्ट करू शकता, किंवा 'ha-*' स्कोपसह नवीन तयार करू शकता."
+        }
+      },
+      "reconfigure": {
+        "title": "PushWard पुन्हा कॉन्फिगर करा",
+        "description": "आपली PushWard इंटिग्रेशन की अपडेट करा.",
+        "data": {
+          "integration_key": "इंटिग्रेशन की"
+        },
+        "data_description": {
+          "integration_key": "PushWard iOS app मध्ये Settings → Integration Keys अंतर्गत 'ha-*' स्कोपसह एक तयार करा."
+        }
+      },
+      "reauth_confirm": {
+        "title": "पुन्हा प्रमाणीकरण करा",
+        "description": "PushWard इंटिग्रेशन की अवैध आहे. कृपया नवीन की द्या.",
+        "data": {
+          "integration_key": "इंटिग्रेशन की"
+        },
+        "data_description": {
+          "integration_key": "PushWard iOS app मध्ये Settings → Integration Keys अंतर्गत 'ha-*' स्कोपसह एक तयार करा."
+        }
+      }
+    },
+    "error": {
+      "cannot_connect": "PushWard सर्व्हरशी कनेक्ट होण्यात अयशस्वी.",
+      "invalid_auth": "अवैध इंटिग्रेशन की.",
+      "invalid_url": "URL ने http:// किंवा https:// स्कीम वापरणे आवश्यक आहे.",
+      "unknown": "अनपेक्षित त्रुटी आली."
+    },
+    "abort": {
+      "already_configured": "PushWard आधीच कॉन्फिगर केले आहे.",
+      "reconfigure_successful": "PushWard कॉन्फिगरेशन अपडेट झाले.",
+      "reauth_successful": "पुन्हा प्रमाणीकरण यशस्वी."
+    }
+  },
+  "config_subentries": {
+    "tracked_entity": {
+      "entry_type": "ट्रॅक केलेली एंटिटी",
+      "initiate_flow": {
+        "user": "ट्रॅक केलेली एंटिटी जोडा"
+      },
+      "step": {
+        "user": {
+          "title": "PushWard मध्ये एंटिटी जोडा",
+          "data": {
+            "entity_id": "एंटिटी",
+            "template": "टेम्पलेट"
+          },
+          "data_description": {
+            "template": "Activity लेआउट टेम्पलेट. बहुतेक एंटिटींसाठी 'generic' काम करते."
+          }
+        },
+        "details": {
+          "title": "2 of 4 · Lifecycle and updates",
+          "data": {
+            "start_states": "प्रारंभ स्थिती",
+            "end_states": "समाप्ती स्थिती",
+            "progress_attribute": "प्रगती गुणधर्म",
+            "remaining_time_attribute": "उरलेल्या वेळाचा गुणधर्म",
+            "total_steps": "एकूण steps",
+            "current_step_attribute": "सध्याच्या चरणाचा गुणधर्म",
+            "severity": "तीव्रता",
+            "value_attribute": "मूल्य गुणधर्म",
+            "min_value": "किमान मूल्य",
+            "max_value": "कमाल मूल्य",
+            "unit": "एकक",
+            "series": "मालिका",
+            "scale": "स्केल",
+            "decimals": "दशांश स्थाने",
+            "smoothing": "रेषा गुळगुळीत करा",
+            "thresholds": "थ्रेशोल्ड",
+            "history_period": "मागील इतिहास कालावधी",
+            "slug": "Activity स्लग",
+            "activity_name": "Activity नाव",
+            "icon": "आयकॉन",
+            "icon_attribute": "आयकॉन गुणधर्म",
+            "priority": "प्राधान्य (0-10)",
+            "update_interval": "किमान अपडेट मध्यांतर (सेकंद)",
+            "subtitle_attribute": "उपशीर्षक गुणधर्म",
+            "state_labels": "स्थिती लेबले",
+            "completion_message": "पूर्णता संदेश",
+            "accent_color": "Accent रंग",
+            "accent_color_attribute": "Accent रंग गुणधर्म",
+            "url": "URL",
+            "secondary_url": "दुय्यम URL",
+            "ended_ttl": "समाप्तीनंतर स्वयं-हटवा (सेकंद)",
+            "stale_ttl": "निष्क्रियतेनंतर स्वयं-समाप्त (सेकंद)",
+            "sound": "ध्वनी",
+            "background_color": "पार्श्वभूमी रंग",
+            "background_color_attribute": "पार्श्वभूमी रंग गुणधर्म",
+            "text_color": "मजकूर रंग",
+            "text_color_attribute": "मजकूर रंग गुणधर्म",
+            "warning_threshold": "इशारा थ्रेशोल्ड",
+            "alarm": "अलार्म",
+            "step_labels": "पायऱ्यांचे लेबल",
+            "step_rows": "पायऱ्यांच्या ओळी",
+            "fired_at_attribute": "सक्रियण वेळ गुणधर्म",
+            "units": "एकके",
+            "progress_entity": "प्रगती घटक",
+            "remaining_time_entity": "उरलेला वेळ घटक",
+            "current_step_entity": "सध्याची पायरी घटक",
+            "value_entity": "मूल्य घटक",
+            "subtitle_entity": "उपशीर्षक घटक",
+            "tap_action_url": "टॅप क्रिया URL",
+            "tap_action_foreground": "टॅप क्रिया URL उघडा",
+            "url_foreground": "प्राथमिक बटण URL उघडा",
+            "url_title": "प्राथमिक बटण शीर्षक",
+            "secondary_url_foreground": "दुय्यम बटण URL उघडा",
+            "secondary_url_title": "दुय्यम बटण शीर्षक",
+            "snooze_seconds": "स्नूझ सेकंद (iOS 26+)",
+            "fired_at_entity": "फायर झाल्याची वेळ घटक",
+            "log_columns": "लॉग स्तंभ"
+          },
+          "data_description": {
+            "start_states": "Live Activity सुरू करणाऱ्या एंटिटी स्थिती. यादीतून निवडा किंवा कस्टम मूल्ये टाइप करा.",
+            "end_states": "Live Activity समाप्त करणाऱ्या एंटिटी स्थिती. यादीतून निवडा किंवा कस्टम मूल्ये टाइप करा.",
+            "progress_attribute": "0–100 प्रगती मूल्य ठेवणारा एंटिटी गुणधर्म. उदाहरण: percentage",
+            "remaining_time_attribute": "सेकंदांमध्ये उरलेला वेळ ठेवणारा एंटिटी गुणधर्म. उदाहरण: remaining",
+            "total_steps": "एकूण steps ची संख्या.",
+            "current_step_attribute": "पूर्णांक म्हणून सध्याचा चरण ठेवणारा एंटिटी गुणधर्म.",
+            "severity": "Alert तीव्रता पातळी.",
+            "value_attribute": "संख्या म्हणून सध्याचे gauge मूल्य ठेवणारा एंटिटी गुणधर्म. एंटिटीची स्थिती वापरण्यासाठी रिकामे ठेवा.",
+            "min_value": "Gauge श्रेणीसाठी किमान मूल्य.",
+            "max_value": "Gauge श्रेणीसाठी कमाल मूल्य.",
+            "unit": "मूल्याच्या पुढे दाखवले जाणारे प्रदर्शन एकक (उदा. °C, %, kW). कमाल 32 अक्षरे.",
+            "series": "एंटिटी गुणधर्मांना नावाच्या मालिकांशी मॅप करा. स्वरूप: attribute=Label, attribute2=Label2. एकल मालिका म्हणून एंटिटीची स्थिती वापरण्यासाठी रिकामे ठेवा.",
+            "scale": "Sparkline चार्टसाठी Y-अक्ष स्केल मोड.",
+            "decimals": "मूल्यांसाठी दाखवल्या जाणाऱ्या दशांश स्थानांची संख्या (0–10).",
+            "smoothing": "अधिक गुळगुळीत sparkline साठी डेटा बिंदूंमध्ये वक्र प्रक्षेपण सक्षम करा.",
+            "thresholds": "Sparkline वरील क्षैतिज संदर्भ रेषा. स्वरूप: value:color:label. उदाहरण: 25:red:Hot, 18:blue:Cold. कमाल 5.",
+            "history_period": "Home Assistant च्या recorder मधून sparkline seed करण्यासाठी भूतकाळातील डेटाचे मिनिटे. कोणताही इतिहास न घेण्यासाठी 0 सेट करा.",
+            "slug": "या activity साठी अद्वितीय ओळखकर्ता. entity ID वरून स्वयं-निर्मितीसाठी रिकामे ठेवा. उदाहरण: ha-living-room-lamp",
+            "activity_name": "iPhone Live Activity वर दाखवले जाणारे प्रदर्शन नाव. डीफॉल्टनुसार एंटिटीचे friendly name वापरते.",
+            "icon": "आयकॉन बदला. एंटिटीचा native आयकॉन वापरण्यासाठी रिकामे ठेवा (उदा. mdi:thermometer). SF Symbols देखील समर्थित आहेत (उदा. lamp.desk.fill).",
+            "icon_attribute": "डायनॅमिक आयकॉनसाठी एंटिटी गुणधर्म. सेट केल्यावर static आयकॉन आणि एंटिटी आयकॉन ओव्हररायड करतो.",
+            "priority": "डिव्हाइसची मर्यादा गाठल्यावर उच्च प्राधान्य activities जास्त काळ ठेवल्या जातात (0 = सर्वात कमी, 10 = सर्वात जास्त).",
+            "update_interval": "अपडेटमधील किमान सेकंद. जलद स्थिती बदल throttle केले जातात.",
+            "subtitle_attribute": "उपशीर्षक म्हणून दाखवण्यासाठी एंटिटी गुणधर्म. एंटिटीचे friendly name वापरण्यासाठी रिकामे ठेवा.",
+            "state_labels": "स्थितींसाठी कस्टम प्रदर्शन मजकूर. स्वरूप: state=Label, state2=Label 2. उदाहरण: heating=Heating Up, idle=Standby",
+            "completion_message": "Activity समाप्त झाल्यावर दाखवला जाणारा मजकूर. 'Complete' साठी रिकामे ठेवा. उदाहरण: Wash Done",
+            "accent_color": "Live Activity साठी accent रंग. डीफॉल्ट निळ्यासाठी रिकामे ठेवा.",
+            "accent_color_attribute": "डायनॅमिक accent रंगासाठी एंटिटी गुणधर्म. Static रंग ओव्हररायड करतो. RGB, HS, XY, Kelvin, named colors, आणि hex समर्थित.",
+            "url": "Live Activity टॅप केल्यावर उघडणारी लिंक. http:// किंवा https:// ने सुरू होणे आवश्यक. फक्त steps आणि alert टेम्पलेटसाठी.",
+            "secondary_url": "Live Activity साठी दुय्यम लिंक. फक्त steps आणि alert टेम्पलेटसाठी.",
+            "ended_ttl": "Activity समाप्त झाल्यानंतर सर्व्हरमधून स्वयं-हटवण्यापूर्वीचे सेकंद. अनिश्चित काळासाठी ठेवण्यासाठी रिकामे ठेवा. उदाहरण: 300",
+            "stale_ttl": "सर्व्हर activity स्वयं-समाप्त करण्यापूर्वी निष्क्रियतेचे सेकंद. अक्षम करण्यासाठी रिकामे ठेवा. उदाहरण: 1800",
+            "sound": "या अपडेटसाठी सूचना ध्वनीचे नाव. iOS सिस्टम ध्वनी वापरण्यासाठी रिकामे सोडा.",
+            "background_color": "Live Activity पार्श्वभूमी रंग. #RRGGBB किंवा नामित रंग. सिस्टम डिफॉल्टसाठी रिकामे सोडा.",
+            "background_color_attribute": "डायनॅमिक पार्श्वभूमी रंगासाठी एन्टिटी गुणधर्म. स्थिर पार्श्वभूमी रंग बदलतो.",
+            "text_color": "Live Activity मजकूर रंग. #RRGGBB किंवा नामित रंग. सिस्टम डिफॉल्टसाठी रिकामे सोडा.",
+            "text_color_attribute": "डायनॅमिक मजकूर रंगासाठी एन्टिटी गुणधर्म. स्थिर मजकूर रंग बदलतो.",
+            "warning_threshold": "मूल्य या पातळीपर्यंत पोहोचल्यावर किंवा ओलांडल्यावर इशारा रंग सक्रिय होतो. gauge आणि timeline टेम्पलेट.",
+            "alarm": "इशारा थ्रेशोल्ड ओलांडल्यावर AlarmKit अलार्म सक्रिय करतो. फक्त iOS 26+.",
+            "step_labels": "steps टेम्पलेट पायऱ्यांसाठी सानुकूल लेबल. स्वरूप: 1=लेबल, 2=लेबल. रिकामे असल्यास पायरी क्रमांक वापरले जातात.",
+            "step_rows": "steps टेम्पलेटमध्ये एका ओळीत दाखवल्या जाणाऱ्या पायऱ्यांची संख्या.",
+            "fired_at_attribute": "ट्रिगर Unix टाइमस्टॅम्प धारण करणारा एन्टिटी गुणधर्म. सापेक्ष वेळ प्रदर्शनासाठी वापरला जातो.",
+            "units": "Timeline मालिकांसाठी एकक लेबल. स्वरूप: attribute=एकक. उदाहरण: temp=°C, humidity=%",
+            "progress_entity": "ट्रॅक केलेल्या घटकाऐवजी वेगळ्या घटकातून प्रगती वाचा. ट्रॅक केलेला घटक वापरण्यासाठी रिकामे ठेवा. गुणधर्म फील्ड सेट असल्यास, या घटकाचा तो गुणधर्म वाचते; अन्यथा त्याची स्थिती.",
+            "remaining_time_entity": "वेगळ्या घटकातून उरलेला वेळ वाचा (उदा. वॉशरचा वेळ सेन्सर). ट्रॅक केलेला घटक वापरण्यासाठी रिकामे ठेवा. टाइमस्टॅम्प (समाप्ती-वेळ) सेन्सर, युनिटसह कालावधी सेन्सर, H:MM:SS स्ट्रिंग, किंवा साधे सेकंद आपोआप पार्स करते.",
+            "current_step_entity": "वेगळ्या घटकातून सध्याची पायरी वाचा. ट्रॅक केलेला घटक वापरण्यासाठी रिकामे ठेवा.",
+            "value_entity": "वेगळ्या घटकातून गेज मूल्य वाचा. ट्रॅक केलेला घटक वापरण्यासाठी रिकामे ठेवा. गुणधर्म सेट नसल्यास स्रोत घटकाची स्थिती वापरते.",
+            "subtitle_entity": "वेगळ्या घटकातून उपशीर्षक दाखवा (उदा. प्रोग्राम/मोड सेन्सर). ट्रॅक केलेला घटक वापरण्यासाठी रिकामे ठेवा. गुणधर्म सेट नसल्यास स्रोत घटकाची स्थिती वापरते.",
+            "tap_action_url": "Live Activity पार्श्वभूमीवर टॅप केल्यावर उघडले जाणारे पर्यायी URL. http(s) (Safari उघडते) किंवा homeassistant://navigate/lovelace/0 सारख्या कस्टम स्कीम (ते अॅप उघडते) समर्थित.",
+            "tap_action_foreground": "चालू: टॅप URL उघडते. बंद: सायलेंट वेबहूक (फक्त http(s)) — Lock Screen न सोडता पार्श्वभूमीत POST फायर करते.",
+            "url_foreground": "चालू: टॅप URL उघडते. बंद: सायलेंट वेबहूक (फक्त http(s)).",
+            "url_title": "प्राथमिक बटण लेबल (कमाल 64 अक्षरे).",
+            "secondary_url_foreground": "चालू: टॅप URL उघडते. बंद: सायलेंट वेबहूक (फक्त http(s)).",
+            "secondary_url_title": "दुय्यम बटण लेबल (कमाल 64 अक्षरे).",
+            "snooze_seconds": "iOS स्नूझ बटण काउंटडाउन किती वेळ वाढवते (60–3600). 300s (5 मिनिटे) डीफॉल्टसाठी रिकामे ठेवा. अलार्म आवश्यक. फक्त काउंटडाउन टेम्पलेट.",
+            "fired_at_entity": "वेगळ्या घटकातून अलर्टची फायर-झाल्याची वेळ वाचा. ट्रॅक केलेला घटक वापरण्यासाठी रिकामे ठेवा. unix टाइमस्टॅम्प किंवा ISO टाइमस्टॅम्प सेन्सर स्वीकारते. फक्त अलर्ट टेम्पलेट.",
+            "log_columns": "प्रत्येक लॉग ओळीला जोडलेली अतिरिक्त मूल्ये (कमाल 6), स्वल्पविरामाने विभक्त. Format: [Label=]source[|unit]. source = या एंटिटीचा गुणधर्म (brightness), दुसऱ्या एंटिटीची स्थिती (binary_sensor.door), किंवा दुसऱ्या एंटिटीचा गुणधर्म (sensor.temp:temperature). उदाहरण: color_temp_kelvin|K, brightness → 'On · 4000K · 153'. फक्त लॉग टेम्प्लेट."
+          },
+          "description": "Choose when this activity starts and ends, how often it updates, and how PushWard retains it."
+        },
+        "reconfigure": {
+          "title": "एंटिटी कॉन्फिगरेशन संपादित करा",
+          "data": {
+            "entity_id": "एंटिटी",
+            "template": "टेम्पलेट"
+          },
+          "data_description": {
+            "template": "Activity लेआउट टेम्पलेट. बहुतेक एंटिटींसाठी 'generic' काम करते."
+          }
+        },
+        "content": {
+          "title": "3 of 4 · {template} content",
+          "data": {
+            "start_states": "प्रारंभ स्थिती",
+            "end_states": "समाप्ती स्थिती",
+            "progress_attribute": "प्रगती गुणधर्म",
+            "remaining_time_attribute": "उरलेल्या वेळाचा गुणधर्म",
+            "total_steps": "एकूण steps",
+            "current_step_attribute": "सध्याच्या चरणाचा गुणधर्म",
+            "severity": "तीव्रता",
+            "value_attribute": "मूल्य गुणधर्म",
+            "min_value": "किमान मूल्य",
+            "max_value": "कमाल मूल्य",
+            "unit": "एकक",
+            "series": "मालिका",
+            "scale": "स्केल",
+            "decimals": "दशांश स्थाने",
+            "smoothing": "रेषा गुळगुळीत करा",
+            "thresholds": "थ्रेशोल्ड",
+            "history_period": "मागील इतिहास कालावधी",
+            "slug": "Activity स्लग",
+            "activity_name": "Activity नाव",
+            "icon": "आयकॉन",
+            "icon_attribute": "आयकॉन गुणधर्म",
+            "priority": "प्राधान्य (0-10)",
+            "update_interval": "किमान अपडेट मध्यांतर (सेकंद)",
+            "subtitle_attribute": "उपशीर्षक गुणधर्म",
+            "state_labels": "स्थिती लेबले",
+            "completion_message": "पूर्णता संदेश",
+            "accent_color": "Accent रंग",
+            "accent_color_attribute": "Accent रंग गुणधर्म",
+            "url": "URL",
+            "secondary_url": "दुय्यम URL",
+            "ended_ttl": "समाप्तीनंतर स्वयं-हटवा (सेकंद)",
+            "stale_ttl": "निष्क्रियतेनंतर स्वयं-समाप्त (सेकंद)",
+            "sound": "ध्वनी",
+            "background_color": "पार्श्वभूमी रंग",
+            "background_color_attribute": "पार्श्वभूमी रंग गुणधर्म",
+            "text_color": "मजकूर रंग",
+            "text_color_attribute": "मजकूर रंग गुणधर्म",
+            "warning_threshold": "इशारा थ्रेशोल्ड",
+            "alarm": "अलार्म",
+            "step_labels": "पायऱ्यांचे लेबल",
+            "step_rows": "पायऱ्यांच्या ओळी",
+            "fired_at_attribute": "सक्रियण वेळ गुणधर्म",
+            "units": "एकके",
+            "progress_entity": "प्रगती घटक",
+            "remaining_time_entity": "उरलेला वेळ घटक",
+            "current_step_entity": "सध्याची पायरी घटक",
+            "value_entity": "मूल्य घटक",
+            "subtitle_entity": "उपशीर्षक घटक",
+            "tap_action_url": "टॅप क्रिया URL",
+            "tap_action_foreground": "टॅप क्रिया URL उघडा",
+            "url_foreground": "प्राथमिक बटण URL उघडा",
+            "url_title": "प्राथमिक बटण शीर्षक",
+            "secondary_url_foreground": "दुय्यम बटण URL उघडा",
+            "secondary_url_title": "दुय्यम बटण शीर्षक",
+            "snooze_seconds": "स्नूझ सेकंद (iOS 26+)",
+            "fired_at_entity": "फायर झाल्याची वेळ घटक",
+            "log_columns": "लॉग स्तंभ"
+          },
+          "data_description": {
+            "start_states": "Live Activity सुरू करणाऱ्या एंटिटी स्थिती. यादीतून निवडा किंवा कस्टम मूल्ये टाइप करा.",
+            "end_states": "Live Activity समाप्त करणाऱ्या एंटिटी स्थिती. यादीतून निवडा किंवा कस्टम मूल्ये टाइप करा.",
+            "progress_attribute": "0–100 प्रगती मूल्य ठेवणारा एंटिटी गुणधर्म. उदाहरण: percentage",
+            "remaining_time_attribute": "सेकंदांमध्ये उरलेला वेळ ठेवणारा एंटिटी गुणधर्म. उदाहरण: remaining",
+            "total_steps": "एकूण steps ची संख्या.",
+            "current_step_attribute": "पूर्णांक म्हणून सध्याचा चरण ठेवणारा एंटिटी गुणधर्म.",
+            "severity": "Alert तीव्रता पातळी.",
+            "value_attribute": "संख्या म्हणून सध्याचे gauge मूल्य ठेवणारा एंटिटी गुणधर्म. एंटिटीची स्थिती वापरण्यासाठी रिकामे ठेवा.",
+            "min_value": "Gauge श्रेणीसाठी किमान मूल्य.",
+            "max_value": "Gauge श्रेणीसाठी कमाल मूल्य.",
+            "unit": "मूल्याच्या पुढे दाखवले जाणारे प्रदर्शन एकक (उदा. °C, %, kW). कमाल 32 अक्षरे.",
+            "series": "एंटिटी गुणधर्मांना नावाच्या मालिकांशी मॅप करा. स्वरूप: attribute=Label, attribute2=Label2. एकल मालिका म्हणून एंटिटीची स्थिती वापरण्यासाठी रिकामे ठेवा.",
+            "scale": "Sparkline चार्टसाठी Y-अक्ष स्केल मोड.",
+            "decimals": "मूल्यांसाठी दाखवल्या जाणाऱ्या दशांश स्थानांची संख्या (0–10).",
+            "smoothing": "अधिक गुळगुळीत sparkline साठी डेटा बिंदूंमध्ये वक्र प्रक्षेपण सक्षम करा.",
+            "thresholds": "Sparkline वरील क्षैतिज संदर्भ रेषा. स्वरूप: value:color:label. उदाहरण: 25:red:Hot, 18:blue:Cold. कमाल 5.",
+            "history_period": "Home Assistant च्या recorder मधून sparkline seed करण्यासाठी भूतकाळातील डेटाचे मिनिटे. कोणताही इतिहास न घेण्यासाठी 0 सेट करा.",
+            "slug": "या activity साठी अद्वितीय ओळखकर्ता. entity ID वरून स्वयं-निर्मितीसाठी रिकामे ठेवा. उदाहरण: ha-living-room-lamp",
+            "activity_name": "iPhone Live Activity वर दाखवले जाणारे प्रदर्शन नाव. डीफॉल्टनुसार एंटिटीचे friendly name वापरते.",
+            "icon": "आयकॉन बदला. एंटिटीचा native आयकॉन वापरण्यासाठी रिकामे ठेवा (उदा. mdi:thermometer). SF Symbols देखील समर्थित आहेत (उदा. lamp.desk.fill).",
+            "icon_attribute": "डायनॅमिक आयकॉनसाठी एंटिटी गुणधर्म. सेट केल्यावर static आयकॉन आणि एंटिटी आयकॉन ओव्हररायड करतो.",
+            "priority": "डिव्हाइसची मर्यादा गाठल्यावर उच्च प्राधान्य activities जास्त काळ ठेवल्या जातात (0 = सर्वात कमी, 10 = सर्वात जास्त).",
+            "update_interval": "अपडेटमधील किमान सेकंद. जलद स्थिती बदल throttle केले जातात.",
+            "subtitle_attribute": "उपशीर्षक म्हणून दाखवण्यासाठी एंटिटी गुणधर्म. एंटिटीचे friendly name वापरण्यासाठी रिकामे ठेवा.",
+            "state_labels": "स्थितींसाठी कस्टम प्रदर्शन मजकूर. स्वरूप: state=Label, state2=Label 2. उदाहरण: heating=Heating Up, idle=Standby",
+            "completion_message": "Activity समाप्त झाल्यावर दाखवला जाणारा मजकूर. 'Complete' साठी रिकामे ठेवा. उदाहरण: Wash Done",
+            "accent_color": "Live Activity साठी accent रंग. डीफॉल्ट निळ्यासाठी रिकामे ठेवा.",
+            "accent_color_attribute": "डायनॅमिक accent रंगासाठी एंटिटी गुणधर्म. Static रंग ओव्हररायड करतो. RGB, HS, XY, Kelvin, named colors, आणि hex समर्थित.",
+            "url": "Live Activity टॅप केल्यावर उघडणारी लिंक. http:// किंवा https:// ने सुरू होणे आवश्यक. फक्त steps आणि alert टेम्पलेटसाठी.",
+            "secondary_url": "Live Activity साठी दुय्यम लिंक. फक्त steps आणि alert टेम्पलेटसाठी.",
+            "ended_ttl": "Activity समाप्त झाल्यानंतर सर्व्हरमधून स्वयं-हटवण्यापूर्वीचे सेकंद. अनिश्चित काळासाठी ठेवण्यासाठी रिकामे ठेवा. उदाहरण: 300",
+            "stale_ttl": "सर्व्हर activity स्वयं-समाप्त करण्यापूर्वी निष्क्रियतेचे सेकंद. अक्षम करण्यासाठी रिकामे ठेवा. उदाहरण: 1800",
+            "sound": "या अपडेटसाठी सूचना ध्वनीचे नाव. iOS सिस्टम ध्वनी वापरण्यासाठी रिकामे सोडा.",
+            "background_color": "Live Activity पार्श्वभूमी रंग. #RRGGBB किंवा नामित रंग. सिस्टम डिफॉल्टसाठी रिकामे सोडा.",
+            "background_color_attribute": "डायनॅमिक पार्श्वभूमी रंगासाठी एन्टिटी गुणधर्म. स्थिर पार्श्वभूमी रंग बदलतो.",
+            "text_color": "Live Activity मजकूर रंग. #RRGGBB किंवा नामित रंग. सिस्टम डिफॉल्टसाठी रिकामे सोडा.",
+            "text_color_attribute": "डायनॅमिक मजकूर रंगासाठी एन्टिटी गुणधर्म. स्थिर मजकूर रंग बदलतो.",
+            "warning_threshold": "मूल्य या पातळीपर्यंत पोहोचल्यावर किंवा ओलांडल्यावर इशारा रंग सक्रिय होतो. gauge आणि timeline टेम्पलेट.",
+            "alarm": "इशारा थ्रेशोल्ड ओलांडल्यावर AlarmKit अलार्म सक्रिय करतो. फक्त iOS 26+.",
+            "step_labels": "steps टेम्पलेट पायऱ्यांसाठी सानुकूल लेबल. स्वरूप: 1=लेबल, 2=लेबल. रिकामे असल्यास पायरी क्रमांक वापरले जातात.",
+            "step_rows": "steps टेम्पलेटमध्ये एका ओळीत दाखवल्या जाणाऱ्या पायऱ्यांची संख्या.",
+            "fired_at_attribute": "ट्रिगर Unix टाइमस्टॅम्प धारण करणारा एन्टिटी गुणधर्म. सापेक्ष वेळ प्रदर्शनासाठी वापरला जातो.",
+            "units": "Timeline मालिकांसाठी एकक लेबल. स्वरूप: attribute=एकक. उदाहरण: temp=°C, humidity=%",
+            "progress_entity": "ट्रॅक केलेल्या घटकाऐवजी वेगळ्या घटकातून प्रगती वाचा. ट्रॅक केलेला घटक वापरण्यासाठी रिकामे ठेवा. गुणधर्म फील्ड सेट असल्यास, या घटकाचा तो गुणधर्म वाचते; अन्यथा त्याची स्थिती.",
+            "remaining_time_entity": "वेगळ्या घटकातून उरलेला वेळ वाचा (उदा. वॉशरचा वेळ सेन्सर). ट्रॅक केलेला घटक वापरण्यासाठी रिकामे ठेवा. टाइमस्टॅम्प (समाप्ती-वेळ) सेन्सर, युनिटसह कालावधी सेन्सर, H:MM:SS स्ट्रिंग, किंवा साधे सेकंद आपोआप पार्स करते.",
+            "current_step_entity": "वेगळ्या घटकातून सध्याची पायरी वाचा. ट्रॅक केलेला घटक वापरण्यासाठी रिकामे ठेवा.",
+            "value_entity": "वेगळ्या घटकातून गेज मूल्य वाचा. ट्रॅक केलेला घटक वापरण्यासाठी रिकामे ठेवा. गुणधर्म सेट नसल्यास स्रोत घटकाची स्थिती वापरते.",
+            "subtitle_entity": "वेगळ्या घटकातून उपशीर्षक दाखवा (उदा. प्रोग्राम/मोड सेन्सर). ट्रॅक केलेला घटक वापरण्यासाठी रिकामे ठेवा. गुणधर्म सेट नसल्यास स्रोत घटकाची स्थिती वापरते.",
+            "tap_action_url": "Live Activity पार्श्वभूमीवर टॅप केल्यावर उघडले जाणारे पर्यायी URL. http(s) (Safari उघडते) किंवा homeassistant://navigate/lovelace/0 सारख्या कस्टम स्कीम (ते अॅप उघडते) समर्थित.",
+            "tap_action_foreground": "चालू: टॅप URL उघडते. बंद: सायलेंट वेबहूक (फक्त http(s)) — Lock Screen न सोडता पार्श्वभूमीत POST फायर करते.",
+            "url_foreground": "चालू: टॅप URL उघडते. बंद: सायलेंट वेबहूक (फक्त http(s)).",
+            "url_title": "प्राथमिक बटण लेबल (कमाल 64 अक्षरे).",
+            "secondary_url_foreground": "चालू: टॅप URL उघडते. बंद: सायलेंट वेबहूक (फक्त http(s)).",
+            "secondary_url_title": "दुय्यम बटण लेबल (कमाल 64 अक्षरे).",
+            "snooze_seconds": "iOS स्नूझ बटण काउंटडाउन किती वेळ वाढवते (60–3600). 300s (5 मिनिटे) डीफॉल्टसाठी रिकामे ठेवा. अलार्म आवश्यक. फक्त काउंटडाउन टेम्पलेट.",
+            "fired_at_entity": "वेगळ्या घटकातून अलर्टची फायर-झाल्याची वेळ वाचा. ट्रॅक केलेला घटक वापरण्यासाठी रिकामे ठेवा. unix टाइमस्टॅम्प किंवा ISO टाइमस्टॅम्प सेन्सर स्वीकारते. फक्त अलर्ट टेम्पलेट.",
+            "log_columns": "प्रत्येक लॉग ओळीला जोडलेली अतिरिक्त मूल्ये (कमाल 6), स्वल्पविरामाने विभक्त. Format: [Label=]source[|unit]. source = या एंटिटीचा गुणधर्म (brightness), दुसऱ्या एंटिटीची स्थिती (binary_sensor.door), किंवा दुसऱ्या एंटिटीचा गुणधर्म (sensor.temp:temperature). उदाहरण: color_temp_kelvin|K, brightness → 'On · 4000K · 153'. फक्त लॉग टेम्प्लेट."
+          },
+          "description": "Configure only the values used by the selected Live Activity layout."
+        },
+        "appearance": {
+          "title": "4 of 4 · Appearance and actions",
+          "data": {
+            "start_states": "प्रारंभ स्थिती",
+            "end_states": "समाप्ती स्थिती",
+            "progress_attribute": "प्रगती गुणधर्म",
+            "remaining_time_attribute": "उरलेल्या वेळाचा गुणधर्म",
+            "total_steps": "एकूण steps",
+            "current_step_attribute": "सध्याच्या चरणाचा गुणधर्म",
+            "severity": "तीव्रता",
+            "value_attribute": "मूल्य गुणधर्म",
+            "min_value": "किमान मूल्य",
+            "max_value": "कमाल मूल्य",
+            "unit": "एकक",
+            "series": "मालिका",
+            "scale": "स्केल",
+            "decimals": "दशांश स्थाने",
+            "smoothing": "रेषा गुळगुळीत करा",
+            "thresholds": "थ्रेशोल्ड",
+            "history_period": "मागील इतिहास कालावधी",
+            "slug": "Activity स्लग",
+            "activity_name": "Activity नाव",
+            "icon": "आयकॉन",
+            "icon_attribute": "आयकॉन गुणधर्म",
+            "priority": "प्राधान्य (0-10)",
+            "update_interval": "किमान अपडेट मध्यांतर (सेकंद)",
+            "subtitle_attribute": "उपशीर्षक गुणधर्म",
+            "state_labels": "स्थिती लेबले",
+            "completion_message": "पूर्णता संदेश",
+            "accent_color": "Accent रंग",
+            "accent_color_attribute": "Accent रंग गुणधर्म",
+            "url": "URL",
+            "secondary_url": "दुय्यम URL",
+            "ended_ttl": "समाप्तीनंतर स्वयं-हटवा (सेकंद)",
+            "stale_ttl": "निष्क्रियतेनंतर स्वयं-समाप्त (सेकंद)",
+            "sound": "ध्वनी",
+            "background_color": "पार्श्वभूमी रंग",
+            "background_color_attribute": "पार्श्वभूमी रंग गुणधर्म",
+            "text_color": "मजकूर रंग",
+            "text_color_attribute": "मजकूर रंग गुणधर्म",
+            "warning_threshold": "इशारा थ्रेशोल्ड",
+            "alarm": "अलार्म",
+            "step_labels": "पायऱ्यांचे लेबल",
+            "step_rows": "पायऱ्यांच्या ओळी",
+            "fired_at_attribute": "सक्रियण वेळ गुणधर्म",
+            "units": "एकके",
+            "progress_entity": "प्रगती घटक",
+            "remaining_time_entity": "उरलेला वेळ घटक",
+            "current_step_entity": "सध्याची पायरी घटक",
+            "value_entity": "मूल्य घटक",
+            "subtitle_entity": "उपशीर्षक घटक",
+            "tap_action_url": "टॅप क्रिया URL",
+            "tap_action_foreground": "टॅप क्रिया URL उघडा",
+            "url_foreground": "प्राथमिक बटण URL उघडा",
+            "url_title": "प्राथमिक बटण शीर्षक",
+            "secondary_url_foreground": "दुय्यम बटण URL उघडा",
+            "secondary_url_title": "दुय्यम बटण शीर्षक",
+            "snooze_seconds": "स्नूझ सेकंद (iOS 26+)",
+            "fired_at_entity": "फायर झाल्याची वेळ घटक",
+            "log_columns": "लॉग स्तंभ"
+          },
+          "data_description": {
+            "start_states": "Live Activity सुरू करणाऱ्या एंटिटी स्थिती. यादीतून निवडा किंवा कस्टम मूल्ये टाइप करा.",
+            "end_states": "Live Activity समाप्त करणाऱ्या एंटिटी स्थिती. यादीतून निवडा किंवा कस्टम मूल्ये टाइप करा.",
+            "progress_attribute": "0–100 प्रगती मूल्य ठेवणारा एंटिटी गुणधर्म. उदाहरण: percentage",
+            "remaining_time_attribute": "सेकंदांमध्ये उरलेला वेळ ठेवणारा एंटिटी गुणधर्म. उदाहरण: remaining",
+            "total_steps": "एकूण steps ची संख्या.",
+            "current_step_attribute": "पूर्णांक म्हणून सध्याचा चरण ठेवणारा एंटिटी गुणधर्म.",
+            "severity": "Alert तीव्रता पातळी.",
+            "value_attribute": "संख्या म्हणून सध्याचे gauge मूल्य ठेवणारा एंटिटी गुणधर्म. एंटिटीची स्थिती वापरण्यासाठी रिकामे ठेवा.",
+            "min_value": "Gauge श्रेणीसाठी किमान मूल्य.",
+            "max_value": "Gauge श्रेणीसाठी कमाल मूल्य.",
+            "unit": "मूल्याच्या पुढे दाखवले जाणारे प्रदर्शन एकक (उदा. °C, %, kW). कमाल 32 अक्षरे.",
+            "series": "एंटिटी गुणधर्मांना नावाच्या मालिकांशी मॅप करा. स्वरूप: attribute=Label, attribute2=Label2. एकल मालिका म्हणून एंटिटीची स्थिती वापरण्यासाठी रिकामे ठेवा.",
+            "scale": "Sparkline चार्टसाठी Y-अक्ष स्केल मोड.",
+            "decimals": "मूल्यांसाठी दाखवल्या जाणाऱ्या दशांश स्थानांची संख्या (0–10).",
+            "smoothing": "अधिक गुळगुळीत sparkline साठी डेटा बिंदूंमध्ये वक्र प्रक्षेपण सक्षम करा.",
+            "thresholds": "Sparkline वरील क्षैतिज संदर्भ रेषा. स्वरूप: value:color:label. उदाहरण: 25:red:Hot, 18:blue:Cold. कमाल 5.",
+            "history_period": "Home Assistant च्या recorder मधून sparkline seed करण्यासाठी भूतकाळातील डेटाचे मिनिटे. कोणताही इतिहास न घेण्यासाठी 0 सेट करा.",
+            "slug": "या activity साठी अद्वितीय ओळखकर्ता. entity ID वरून स्वयं-निर्मितीसाठी रिकामे ठेवा. उदाहरण: ha-living-room-lamp",
+            "activity_name": "iPhone Live Activity वर दाखवले जाणारे प्रदर्शन नाव. डीफॉल्टनुसार एंटिटीचे friendly name वापरते.",
+            "icon": "आयकॉन बदला. एंटिटीचा native आयकॉन वापरण्यासाठी रिकामे ठेवा (उदा. mdi:thermometer). SF Symbols देखील समर्थित आहेत (उदा. lamp.desk.fill).",
+            "icon_attribute": "डायनॅमिक आयकॉनसाठी एंटिटी गुणधर्म. सेट केल्यावर static आयकॉन आणि एंटिटी आयकॉन ओव्हररायड करतो.",
+            "priority": "डिव्हाइसची मर्यादा गाठल्यावर उच्च प्राधान्य activities जास्त काळ ठेवल्या जातात (0 = सर्वात कमी, 10 = सर्वात जास्त).",
+            "update_interval": "अपडेटमधील किमान सेकंद. जलद स्थिती बदल throttle केले जातात.",
+            "subtitle_attribute": "उपशीर्षक म्हणून दाखवण्यासाठी एंटिटी गुणधर्म. एंटिटीचे friendly name वापरण्यासाठी रिकामे ठेवा.",
+            "state_labels": "स्थितींसाठी कस्टम प्रदर्शन मजकूर. स्वरूप: state=Label, state2=Label 2. उदाहरण: heating=Heating Up, idle=Standby",
+            "completion_message": "Activity समाप्त झाल्यावर दाखवला जाणारा मजकूर. 'Complete' साठी रिकामे ठेवा. उदाहरण: Wash Done",
+            "accent_color": "Live Activity साठी accent रंग. डीफॉल्ट निळ्यासाठी रिकामे ठेवा.",
+            "accent_color_attribute": "डायनॅमिक accent रंगासाठी एंटिटी गुणधर्म. Static रंग ओव्हररायड करतो. RGB, HS, XY, Kelvin, named colors, आणि hex समर्थित.",
+            "url": "Live Activity टॅप केल्यावर उघडणारी लिंक. http:// किंवा https:// ने सुरू होणे आवश्यक. फक्त steps आणि alert टेम्पलेटसाठी.",
+            "secondary_url": "Live Activity साठी दुय्यम लिंक. फक्त steps आणि alert टेम्पलेटसाठी.",
+            "ended_ttl": "Activity समाप्त झाल्यानंतर सर्व्हरमधून स्वयं-हटवण्यापूर्वीचे सेकंद. अनिश्चित काळासाठी ठेवण्यासाठी रिकामे ठेवा. उदाहरण: 300",
+            "stale_ttl": "सर्व्हर activity स्वयं-समाप्त करण्यापूर्वी निष्क्रियतेचे सेकंद. अक्षम करण्यासाठी रिकामे ठेवा. उदाहरण: 1800",
+            "sound": "या अपडेटसाठी सूचना ध्वनीचे नाव. iOS सिस्टम ध्वनी वापरण्यासाठी रिकामे सोडा.",
+            "background_color": "Live Activity पार्श्वभूमी रंग. #RRGGBB किंवा नामित रंग. सिस्टम डिफॉल्टसाठी रिकामे सोडा.",
+            "background_color_attribute": "डायनॅमिक पार्श्वभूमी रंगासाठी एन्टिटी गुणधर्म. स्थिर पार्श्वभूमी रंग बदलतो.",
+            "text_color": "Live Activity मजकूर रंग. #RRGGBB किंवा नामित रंग. सिस्टम डिफॉल्टसाठी रिकामे सोडा.",
+            "text_color_attribute": "डायनॅमिक मजकूर रंगासाठी एन्टिटी गुणधर्म. स्थिर मजकूर रंग बदलतो.",
+            "warning_threshold": "मूल्य या पातळीपर्यंत पोहोचल्यावर किंवा ओलांडल्यावर इशारा रंग सक्रिय होतो. gauge आणि timeline टेम्पलेट.",
+            "alarm": "इशारा थ्रेशोल्ड ओलांडल्यावर AlarmKit अलार्म सक्रिय करतो. फक्त iOS 26+.",
+            "step_labels": "steps टेम्पलेट पायऱ्यांसाठी सानुकूल लेबल. स्वरूप: 1=लेबल, 2=लेबल. रिकामे असल्यास पायरी क्रमांक वापरले जातात.",
+            "step_rows": "steps टेम्पलेटमध्ये एका ओळीत दाखवल्या जाणाऱ्या पायऱ्यांची संख्या.",
+            "fired_at_attribute": "ट्रिगर Unix टाइमस्टॅम्प धारण करणारा एन्टिटी गुणधर्म. सापेक्ष वेळ प्रदर्शनासाठी वापरला जातो.",
+            "units": "Timeline मालिकांसाठी एकक लेबल. स्वरूप: attribute=एकक. उदाहरण: temp=°C, humidity=%",
+            "progress_entity": "ट्रॅक केलेल्या घटकाऐवजी वेगळ्या घटकातून प्रगती वाचा. ट्रॅक केलेला घटक वापरण्यासाठी रिकामे ठेवा. गुणधर्म फील्ड सेट असल्यास, या घटकाचा तो गुणधर्म वाचते; अन्यथा त्याची स्थिती.",
+            "remaining_time_entity": "वेगळ्या घटकातून उरलेला वेळ वाचा (उदा. वॉशरचा वेळ सेन्सर). ट्रॅक केलेला घटक वापरण्यासाठी रिकामे ठेवा. टाइमस्टॅम्प (समाप्ती-वेळ) सेन्सर, युनिटसह कालावधी सेन्सर, H:MM:SS स्ट्रिंग, किंवा साधे सेकंद आपोआप पार्स करते.",
+            "current_step_entity": "वेगळ्या घटकातून सध्याची पायरी वाचा. ट्रॅक केलेला घटक वापरण्यासाठी रिकामे ठेवा.",
+            "value_entity": "वेगळ्या घटकातून गेज मूल्य वाचा. ट्रॅक केलेला घटक वापरण्यासाठी रिकामे ठेवा. गुणधर्म सेट नसल्यास स्रोत घटकाची स्थिती वापरते.",
+            "subtitle_entity": "वेगळ्या घटकातून उपशीर्षक दाखवा (उदा. प्रोग्राम/मोड सेन्सर). ट्रॅक केलेला घटक वापरण्यासाठी रिकामे ठेवा. गुणधर्म सेट नसल्यास स्रोत घटकाची स्थिती वापरते.",
+            "tap_action_url": "Live Activity पार्श्वभूमीवर टॅप केल्यावर उघडले जाणारे पर्यायी URL. http(s) (Safari उघडते) किंवा homeassistant://navigate/lovelace/0 सारख्या कस्टम स्कीम (ते अॅप उघडते) समर्थित.",
+            "tap_action_foreground": "चालू: टॅप URL उघडते. बंद: सायलेंट वेबहूक (फक्त http(s)) — Lock Screen न सोडता पार्श्वभूमीत POST फायर करते.",
+            "url_foreground": "चालू: टॅप URL उघडते. बंद: सायलेंट वेबहूक (फक्त http(s)).",
+            "url_title": "प्राथमिक बटण लेबल (कमाल 64 अक्षरे).",
+            "secondary_url_foreground": "चालू: टॅप URL उघडते. बंद: सायलेंट वेबहूक (फक्त http(s)).",
+            "secondary_url_title": "दुय्यम बटण लेबल (कमाल 64 अक्षरे).",
+            "snooze_seconds": "iOS स्नूझ बटण काउंटडाउन किती वेळ वाढवते (60–3600). 300s (5 मिनिटे) डीफॉल्टसाठी रिकामे ठेवा. अलार्म आवश्यक. फक्त काउंटडाउन टेम्पलेट.",
+            "fired_at_entity": "वेगळ्या घटकातून अलर्टची फायर-झाल्याची वेळ वाचा. ट्रॅक केलेला घटक वापरण्यासाठी रिकामे ठेवा. unix टाइमस्टॅम्प किंवा ISO टाइमस्टॅम्प सेन्सर स्वीकारते. फक्त अलर्ट टेम्पलेट.",
+            "log_columns": "प्रत्येक लॉग ओळीला जोडलेली अतिरिक्त मूल्ये (कमाल 6), स्वल्पविरामाने विभक्त. Format: [Label=]source[|unit]. source = या एंटिटीचा गुणधर्म (brightness), दुसऱ्या एंटिटीची स्थिती (binary_sensor.door), किंवा दुसऱ्या एंटिटीचा गुणधर्म (sensor.temp:temperature). उदाहरण: color_temp_kelvin|K, brightness → 'On · 4000K · 153'. फक्त लॉग टेम्प्लेट."
+          },
+          "description": "Finish with labels, colors, icons, and tap behavior."
+        }
+      },
+      "error": {
+        "invalid_url": "URL ने http:// किंवा https:// स्कीम वापरणे आवश्यक आहे.",
+        "invalid_gauge_range": "किमान मूल्य कमाल मूल्यापेक्षा कमी असणे आवश्यक आहे.",
+        "silent_requires_http": "सायलेंट वेबहूक (foreground बंद) साठी http:// किंवा https:// URL आवश्यक आहे."
+      },
+      "abort": {
+        "already_configured": "ही एंटिटी आधीच ट्रॅक केली जात आहे.",
+        "reconfigure_successful": "एंटिटी कॉन्फिगरेशन अपडेट झाले."
+      }
+    },
+    "tracked_widget": {
+      "entry_type": "ट्रॅक केलेले विजेट",
+      "initiate_flow": {
+        "user": "ट्रॅक केलेले विजेट जोडा"
+      },
+      "step": {
+        "user": {
+          "title": "PushWard ला विजेट जोडा",
+          "data": {
+            "entity_id": "घटक",
+            "widget_template": "टेम्पलेट",
+            "slug": "विजेट स्लग"
+          },
+          "data_description": {
+            "widget_template": "विजेट लेआउट. एका संख्येसाठी `value`, 0–1 बारसाठी `progress`, श्रेणीतील-मूल्यासाठी `gauge`, तीव्रता बॅजसाठी `status`, किंवा 6 पर्यंत ओळींसाठी `stat_list` वापरा.",
+            "slug": "या विजेटसाठी अद्वितीय आयडेंटिफायर. entity ID वरून आपोआप तयार करण्यासाठी रिकामे ठेवा."
+          }
+        },
+        "reconfigure": {
+          "title": "विजेट संपादित करा",
+          "data": {
+            "entity_id": "घटक",
+            "widget_template": "टेम्पलेट",
+            "slug": "विजेट स्लग"
+          },
+          "data_description": {
+            "widget_template": "विजेट लेआउट.",
+            "slug": "या विजेटसाठी अद्वितीय आयडेंटिफायर."
+          }
+        },
+        "details": {
+          "title": "2 of 4 · {template} content",
+          "data": {
+            "widget_name": "विजेट नाव",
+            "value_attribute": "मूल्य गुणधर्म",
+            "unit": "एकक",
+            "min_value": "किमान मूल्य",
+            "max_value": "कमाल मूल्य",
+            "severity": "तीव्रता",
+            "stat_rows": "स्टॅट ओळी",
+            "label": "लेबल",
+            "label_attribute": "लेबल गुणधर्म",
+            "subtitle_attribute": "उपशीर्षक गुणधर्म",
+            "icon": "चिन्ह",
+            "icon_attribute": "चिन्ह गुणधर्म",
+            "accent_color": "अॅक्सेंट रंग",
+            "accent_color_attribute": "अॅक्सेंट रंग गुणधर्म",
+            "background_color": "पार्श्वभूमी रंग",
+            "text_color": "मजकूर रंग",
+            "widget_trigger_mode": "ट्रिगर मोड",
+            "widget_poll_interval": "पोल अंतराल (सेकंद)",
+            "tap_action_url": "टॅप क्रिया URL",
+            "tap_action_foreground": "टॅप क्रिया URL उघडा"
+          },
+          "data_description": {
+            "widget_name": "iOS विजेट पिकरमध्ये दाखवले जाणारे प्रदर्शन नाव. डीफॉल्ट घटकाचे फ्रेंडली नाव.",
+            "value_attribute": "मूल्य धारण करणारा घटक गुणधर्म. घटकाची प्राथमिक स्थिती वापरण्यासाठी रिकामे ठेवा.",
+            "unit": "मूल्याशेजारी दाखवले जाणारे प्रदर्शन एकक. कमाल 32 अक्षरे.",
+            "min_value": "गेज श्रेणीसाठी किमान मूल्य.",
+            "max_value": "गेज श्रेणीसाठी कमाल मूल्य.",
+            "severity": "स्थिती तीव्रता (info, warning, critical, success).",
+            "stat_rows": "6 पर्यंत ओळी. स्वरूप: `Label=entity_id[:attribute[:unit]]`, स्वल्पविरामाने विभक्त. उदाहरण: `Users=sensor.user_count, Active=sensor.active_devices:count`.",
+            "label": "विजेटवर दाखवले जाणारे स्थिर लेबल. घटकातून मिळवण्यासाठी रिकामे ठेवा.",
+            "label_attribute": "लेबल म्हणून वापरलेला घटक गुणधर्म. स्थिर लेबलला ओव्हरराइड करते.",
+            "subtitle_attribute": "विजेट उपशीर्षक म्हणून दाखवलेला घटक गुणधर्म.",
+            "icon": "स्थिर चिन्ह. SF Symbols आणि MDI नावे समर्थित.",
+            "icon_attribute": "डायनॅमिक चिन्हासाठी घटक गुणधर्म. स्थिर चिन्हाला ओव्हरराइड करते.",
+            "accent_color": "विजेटसाठी अॅक्सेंट रंग. डीफॉल्टसाठी रिकामे ठेवा.",
+            "accent_color_attribute": "डायनॅमिक अॅक्सेंट रंगासाठी घटक गुणधर्म.",
+            "background_color": "पर्यायी पार्श्वभूमी रंग.",
+            "text_color": "पर्यायी मजकूर रंग.",
+            "widget_trigger_mode": "अपडेट्स कसे ट्रिगर होतात. `event` स्थिती बदलांना प्रतिसाद देतो; `poll` निश्चित अंतरालावर पुन्हा मूल्यांकन करतो.",
+            "widget_poll_interval": "पोल्समधील अंतराल (10–3600 सेकंद). फक्त ट्रिगर मोड `poll` असताना वापरले जाते.",
+            "tap_action_url": "विजेटवर टॅप केल्यावर उघडले जाणारे पर्यायी URL. http(s) (Safari उघडते) किंवा homeassistant://navigate/lovelace/0 सारख्या कस्टम स्कीम समर्थित.",
+            "tap_action_foreground": "चालू: टॅप URL उघडते. बंद: सायलेंट वेबहूक (फक्त http(s)) — पार्श्वभूमीत POST फायर करते."
+          },
+          "description": "Choose the values shown by this widget."
+        },
+        "appearance": {
+          "title": "3 of 4 · Appearance and tap action",
+          "data": {
+            "widget_name": "विजेट नाव",
+            "value_attribute": "मूल्य गुणधर्म",
+            "unit": "एकक",
+            "min_value": "किमान मूल्य",
+            "max_value": "कमाल मूल्य",
+            "severity": "तीव्रता",
+            "stat_rows": "स्टॅट ओळी",
+            "label": "लेबल",
+            "label_attribute": "लेबल गुणधर्म",
+            "subtitle_attribute": "उपशीर्षक गुणधर्म",
+            "icon": "चिन्ह",
+            "icon_attribute": "चिन्ह गुणधर्म",
+            "accent_color": "अॅक्सेंट रंग",
+            "accent_color_attribute": "अॅक्सेंट रंग गुणधर्म",
+            "background_color": "पार्श्वभूमी रंग",
+            "text_color": "मजकूर रंग",
+            "widget_trigger_mode": "ट्रिगर मोड",
+            "widget_poll_interval": "पोल अंतराल (सेकंद)",
+            "tap_action_url": "टॅप क्रिया URL",
+            "tap_action_foreground": "टॅप क्रिया URL उघडा"
+          },
+          "data_description": {
+            "widget_name": "iOS विजेट पिकरमध्ये दाखवले जाणारे प्रदर्शन नाव. डीफॉल्ट घटकाचे फ्रेंडली नाव.",
+            "value_attribute": "मूल्य धारण करणारा घटक गुणधर्म. घटकाची प्राथमिक स्थिती वापरण्यासाठी रिकामे ठेवा.",
+            "unit": "मूल्याशेजारी दाखवले जाणारे प्रदर्शन एकक. कमाल 32 अक्षरे.",
+            "min_value": "गेज श्रेणीसाठी किमान मूल्य.",
+            "max_value": "गेज श्रेणीसाठी कमाल मूल्य.",
+            "severity": "स्थिती तीव्रता (info, warning, critical, success).",
+            "stat_rows": "6 पर्यंत ओळी. स्वरूप: `Label=entity_id[:attribute[:unit]]`, स्वल्पविरामाने विभक्त. उदाहरण: `Users=sensor.user_count, Active=sensor.active_devices:count`.",
+            "label": "विजेटवर दाखवले जाणारे स्थिर लेबल. घटकातून मिळवण्यासाठी रिकामे ठेवा.",
+            "label_attribute": "लेबल म्हणून वापरलेला घटक गुणधर्म. स्थिर लेबलला ओव्हरराइड करते.",
+            "subtitle_attribute": "विजेट उपशीर्षक म्हणून दाखवलेला घटक गुणधर्म.",
+            "icon": "स्थिर चिन्ह. SF Symbols आणि MDI नावे समर्थित.",
+            "icon_attribute": "डायनॅमिक चिन्हासाठी घटक गुणधर्म. स्थिर चिन्हाला ओव्हरराइड करते.",
+            "accent_color": "विजेटसाठी अॅक्सेंट रंग. डीफॉल्टसाठी रिकामे ठेवा.",
+            "accent_color_attribute": "डायनॅमिक अॅक्सेंट रंगासाठी घटक गुणधर्म.",
+            "background_color": "पर्यायी पार्श्वभूमी रंग.",
+            "text_color": "पर्यायी मजकूर रंग.",
+            "widget_trigger_mode": "अपडेट्स कसे ट्रिगर होतात. `event` स्थिती बदलांना प्रतिसाद देतो; `poll` निश्चित अंतरालावर पुन्हा मूल्यांकन करतो.",
+            "widget_poll_interval": "पोल्समधील अंतराल (10–3600 सेकंद). फक्त ट्रिगर मोड `poll` असताना वापरले जाते.",
+            "tap_action_url": "विजेटवर टॅप केल्यावर उघडले जाणारे पर्यायी URL. http(s) (Safari उघडते) किंवा homeassistant://navigate/lovelace/0 सारख्या कस्टम स्कीम समर्थित.",
+            "tap_action_foreground": "चालू: टॅप URL उघडते. बंद: सायलेंट वेबहूक (फक्त http(s)) — पार्श्वभूमीत POST फायर करते."
+          },
+          "description": "Set the widget labels, icon, colors, and tap behavior."
+        },
+        "refresh": {
+          "title": "4 of 4 · Refresh behavior",
+          "data": {
+            "widget_name": "विजेट नाव",
+            "value_attribute": "मूल्य गुणधर्म",
+            "unit": "एकक",
+            "min_value": "किमान मूल्य",
+            "max_value": "कमाल मूल्य",
+            "severity": "तीव्रता",
+            "stat_rows": "स्टॅट ओळी",
+            "label": "लेबल",
+            "label_attribute": "लेबल गुणधर्म",
+            "subtitle_attribute": "उपशीर्षक गुणधर्म",
+            "icon": "चिन्ह",
+            "icon_attribute": "चिन्ह गुणधर्म",
+            "accent_color": "अॅक्सेंट रंग",
+            "accent_color_attribute": "अॅक्सेंट रंग गुणधर्म",
+            "background_color": "पार्श्वभूमी रंग",
+            "text_color": "मजकूर रंग",
+            "widget_trigger_mode": "ट्रिगर मोड",
+            "widget_poll_interval": "पोल अंतराल (सेकंद)",
+            "tap_action_url": "टॅप क्रिया URL",
+            "tap_action_foreground": "टॅप क्रिया URL उघडा"
+          },
+          "data_description": {
+            "widget_name": "iOS विजेट पिकरमध्ये दाखवले जाणारे प्रदर्शन नाव. डीफॉल्ट घटकाचे फ्रेंडली नाव.",
+            "value_attribute": "मूल्य धारण करणारा घटक गुणधर्म. घटकाची प्राथमिक स्थिती वापरण्यासाठी रिकामे ठेवा.",
+            "unit": "मूल्याशेजारी दाखवले जाणारे प्रदर्शन एकक. कमाल 32 अक्षरे.",
+            "min_value": "गेज श्रेणीसाठी किमान मूल्य.",
+            "max_value": "गेज श्रेणीसाठी कमाल मूल्य.",
+            "severity": "स्थिती तीव्रता (info, warning, critical, success).",
+            "stat_rows": "6 पर्यंत ओळी. स्वरूप: `Label=entity_id[:attribute[:unit]]`, स्वल्पविरामाने विभक्त. उदाहरण: `Users=sensor.user_count, Active=sensor.active_devices:count`.",
+            "label": "विजेटवर दाखवले जाणारे स्थिर लेबल. घटकातून मिळवण्यासाठी रिकामे ठेवा.",
+            "label_attribute": "लेबल म्हणून वापरलेला घटक गुणधर्म. स्थिर लेबलला ओव्हरराइड करते.",
+            "subtitle_attribute": "विजेट उपशीर्षक म्हणून दाखवलेला घटक गुणधर्म.",
+            "icon": "स्थिर चिन्ह. SF Symbols आणि MDI नावे समर्थित.",
+            "icon_attribute": "डायनॅमिक चिन्हासाठी घटक गुणधर्म. स्थिर चिन्हाला ओव्हरराइड करते.",
+            "accent_color": "विजेटसाठी अॅक्सेंट रंग. डीफॉल्टसाठी रिकामे ठेवा.",
+            "accent_color_attribute": "डायनॅमिक अॅक्सेंट रंगासाठी घटक गुणधर्म.",
+            "background_color": "पर्यायी पार्श्वभूमी रंग.",
+            "text_color": "पर्यायी मजकूर रंग.",
+            "widget_trigger_mode": "अपडेट्स कसे ट्रिगर होतात. `event` स्थिती बदलांना प्रतिसाद देतो; `poll` निश्चित अंतरालावर पुन्हा मूल्यांकन करतो.",
+            "widget_poll_interval": "पोल्समधील अंतराल (10–3600 सेकंद). फक्त ट्रिगर मोड `poll` असताना वापरले जाते.",
+            "tap_action_url": "विजेटवर टॅप केल्यावर उघडले जाणारे पर्यायी URL. http(s) (Safari उघडते) किंवा homeassistant://navigate/lovelace/0 सारख्या कस्टम स्कीम समर्थित.",
+            "tap_action_foreground": "चालू: टॅप URL उघडते. बंद: सायलेंट वेबहूक (फक्त http(s)) — पार्श्वभूमीत POST फायर करते."
+          },
+          "description": "Choose whether Home Assistant pushes changes or the PushWard app polls for them."
+        }
+      },
+      "error": {
+        "invalid_url": "URL मध्ये वैध स्कीम असावी. http(s):// किंवा homeassistant:// सारखी कस्टम अॅप स्कीम वापरा.",
+        "silent_requires_http": "सायलेंट वेबहूक (foreground बंद) साठी http:// किंवा https:// URL आवश्यक आहे.",
+        "invalid_gauge_range": "किमान मूल्य कमाल मूल्यापेक्षा कमी असावे.",
+        "stat_rows_required": "stat_list टेम्पलेटसाठी किमान एक स्टॅट ओळ आवश्यक आहे."
+      },
+      "abort": {
+        "already_configured": "या स्लगसह विजेट आधीच अस्तित्वात आहे.",
+        "reconfigure_successful": "विजेट कॉन्फिगरेशन अपडेट केले."
+      }
+    }
+  },
+  "entity": {
+    "sensor": {
+      "notifications_used": {
+        "name": "वापरलेल्या सूचना"
+      },
+      "live_activity_updates_used": {
+        "name": "वापरलेली Live Activity अपडेट्स"
+      },
+      "widget_updates_used": {
+        "name": "वापरलेली विजेट अपडेट्स"
+      },
+      "emails_used": {
+        "name": "वापरलेले ईमेल"
+      },
+      "subscription_tier": {
+        "name": "सदस्यता स्तर",
+        "state": {
+          "free": "मोफत",
+          "premium": "प्रीमियम"
+        }
+      }
+    }
+  },
+  "exceptions": {
+    "widget_not_found": {
+      "message": "slug={slug} entity_id={entity_id} शी जुळणारे कोणतेही PushWard विजेट नाही."
+    }
+  },
+  "issues": {
+    "deprecated_update_activity": {
+      "title": "PushWard update_activity क्रिया कालबाह्य झाली आहे",
+      "description": "`pushward.update_activity` क्रिया कालबाह्य झाली आहे. त्याऐवजी तुमची ऑटोमेशन्स टेम्पलेट-विशिष्ट क्रियेवर स्विच करा — उदाहरणार्थ `pushward.update_activity_countdown` किंवा `pushward.update_activity_gauge`. जुनी क्रिया सध्या कार्यरत आहे पण भविष्यातील रिलीझमध्ये काढून टाकली जाईल."
+    },
+    "usage_limit_notifications": {
+      "title": "PushWard सूचना मर्यादा गाठली",
+      "description": "तुमच्या PushWard खात्याने सध्याच्या कालावधीसाठी त्याच्या {limit} पैकी {used} सूचना वापरल्या आहेत, त्यामुळे कोटा रीसेट होईपर्यंत ({resets_at}) नवीन सूचना नाकारल्या जातील. मर्यादा वाढवण्यासाठी PushWard iOS अॅपमध्ये तुमची सदस्यता अपग्रेड करा."
+    },
+    "usage_limit_live_activity": {
+      "title": "PushWard Live Activity अपडेट मर्यादा गाठली",
+      "description": "तुमच्या PushWard खात्याने सध्याच्या कालावधीसाठी त्याच्या {limit} पैकी {used} Live Activity अपडेट्स वापरल्या आहेत, त्यामुळे कोटा रीसेट होईपर्यंत ({resets_at}) नवीन अपडेट्स नाकारल्या जातील. मर्यादा वाढवण्यासाठी PushWard iOS अॅपमध्ये तुमची सदस्यता अपग्रेड करा."
+    },
+    "usage_limit_widgets": {
+      "title": "PushWard विजेट अपडेट मर्यादा गाठली",
+      "description": "तुमच्या PushWard खात्याने सध्याच्या कालावधीसाठी त्याच्या {limit} पैकी {used} विजेट अपडेट्स वापरल्या आहेत, त्यामुळे कोटा रीसेट होईपर्यंत ({resets_at}) नवीन अपडेट्स नाकारल्या जातील. मर्यादा वाढवण्यासाठी PushWard iOS अॅपमध्ये तुमची सदस्यता अपग्रेड करा."
+    },
+    "usage_limit_emails": {
+      "title": "PushWard ईमेल मर्यादा गाठली",
+      "description": "तुमच्या PushWard खात्याने सध्याच्या कालावधीसाठी त्याच्या {limit} पैकी {used} ईमेल वापरले आहेत, त्यामुळे कोटा रीसेट होईपर्यंत ({resets_at}) नवीन ईमेल नाकारले जातील. मर्यादा वाढवण्यासाठी PushWard iOS अॅपमध्ये तुमची सदस्यता अपग्रेड करा."
+    }
+  }
+}

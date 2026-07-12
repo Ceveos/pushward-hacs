@@ -1,0 +1,1716 @@
+{
+  "services": {
+    "update_activity": {
+      "name": "سرگرمی اپڈیٹ کریں (deprecated)",
+      "description": "PushWard Live Activity کی حالت اور مواد کو اپڈیٹ کریں۔",
+      "fields": {
+        "slug": {
+          "name": "Slug",
+          "description": "سرگرمی کی slug شناخت۔"
+        },
+        "state": {
+          "name": "حالت",
+          "description": "سرگرمی کی مطلوبہ حالت۔"
+        },
+        "template": {
+          "name": "ٹیمپلیٹ",
+          "description": "سرگرمی کا لے آؤٹ ٹیمپلیٹ۔"
+        },
+        "progress": {
+          "name": "پیش رفت",
+          "description": "0.0 سے 1.0 کے درمیان پیش رفت کی قدر۔"
+        },
+        "state_text": {
+          "name": "حالت کا متن",
+          "description": "سرگرمی کی حالت کے طور پر دکھایا جانے والا متن۔"
+        },
+        "icon": {
+          "name": "آئیکن",
+          "description": "SF Symbol یا MDI آئیکن کا نام (مثلاً arrow.down.circle.fill، mdi:download)۔"
+        },
+        "subtitle": {
+          "name": "ذیلی عنوان",
+          "description": "سرگرمی پر دکھایا جانے والا ذیلی عنوان۔"
+        },
+        "accent_color": {
+          "name": "لہجے کا رنگ",
+          "description": "سرگرمی کے لیے لہجے کے رنگ کا نام۔"
+        },
+        "remaining_time": {
+          "name": "بقیہ وقت",
+          "description": "سیکنڈوں میں بقیہ وقت۔"
+        },
+        "url": {
+          "name": "URL",
+          "description": "بنیادی URL جو ٹیپ کیے جانے والے بٹن کے طور پر ظاہر ہوتا ہے۔ صرف steps اور alert ٹیمپلیٹس پر سپورٹ ہے۔"
+        },
+        "secondary_url": {
+          "name": "ثانوی URL",
+          "description": "ثانوی URL جو دوسرے ٹیپ کیے جانے والے بٹن کے طور پر ظاہر ہوتا ہے۔ صرف steps اور alert ٹیمپلیٹس پر سپورٹ ہے۔"
+        },
+        "end_date": {
+          "name": "اختتام کی تاریخ",
+          "description": "countdown اختتامی تاریخ کے لیے Unix ٹائم اسٹیمپ۔"
+        },
+        "total_steps": {
+          "name": "کل steps",
+          "description": "steps کی کل تعداد۔"
+        },
+        "current_step": {
+          "name": "موجودہ مرحلہ",
+          "description": "موجودہ مرحلے کا نمبر۔"
+        },
+        "severity": {
+          "name": "شدت",
+          "description": "alert کی شدت کی سطح۔"
+        },
+        "value": {
+          "name": "قدر",
+          "description": "Gauge: عددی قدر۔ Timeline: لیبل شدہ قدروں کی آبجیکٹ (مثلاً Temp=22.5)۔"
+        },
+        "min_value": {
+          "name": "کم از کم قدر",
+          "description": "Gauge کی کم از کم قدر۔"
+        },
+        "max_value": {
+          "name": "زیادہ سے زیادہ قدر",
+          "description": "Gauge کی زیادہ سے زیادہ قدر۔"
+        },
+        "unit": {
+          "name": "اکائی",
+          "description": "قدر کے ساتھ ظاہر ہونے والی اکائی (مثلاً °C، %)۔"
+        },
+        "completion_message": {
+          "name": "تکمیل کا پیغام",
+          "description": "سرگرمی ختم ہونے پر دکھایا جانے والا پیغام۔"
+        },
+        "scale": {
+          "name": "پیمانہ",
+          "description": "Y-محور کا پیمانہ (linear یا logarithmic)۔ صرف Timeline ٹیمپلیٹ کے لیے۔"
+        },
+        "decimals": {
+          "name": "اعشاریہ مقامات",
+          "description": "قدر ظاہر کرنے کے لیے اعشاریہ مقامات (0-10)۔ صرف Timeline ٹیمپلیٹ کے لیے۔"
+        },
+        "smoothing": {
+          "name": "ہموار لکیریں",
+          "description": "ڈیٹا پوائنٹس کے درمیان منحنی انٹرپولیشن فعال کریں۔ صرف Timeline ٹیمپلیٹ کے لیے۔"
+        },
+        "thresholds": {
+          "name": "حدود",
+          "description": "sparkline پر افقی حوالہ لکیریں۔ صرف Timeline ٹیمپلیٹ کے لیے۔"
+        },
+        "sound": {
+          "name": "آواز",
+          "description": "اس اپڈیٹ کے لیے اطلاع کی آواز کا نام۔ iOS کی کیڑے آواز کے لیے خالی چھوڑیں۔"
+        },
+        "priority": {
+          "name": "ترجیح",
+          "description": "سرگرمی کی ترجیح (0 = کم ترین، 10 = سب سے زیادہ)۔"
+        },
+        "background_color": {
+          "name": "پس منظر کا رنگ",
+          "description": "Live Activity کا پس منظر رنگ۔ #RRGGBB یا نامزد رنگ۔ کیڑے ڈیفالٹ کے لیے خالی چھوڑیں۔"
+        },
+        "text_color": {
+          "name": "متن کا رنگ",
+          "description": "Live Activity کا متن رنگ۔ #RRGGBB یا نامزد رنگ۔ کیڑے ڈیفالٹ کے لیے خالی چھوڑیں۔"
+        },
+        "warning_threshold": {
+          "name": "انتباہ کی حد",
+          "description": "gauge یا timeline قدر اس قدر کو پہنچنے یا اس سے تجاوز کرنے پر انتباہ رنگ ظاہر ہوتا ہے۔"
+        },
+        "alarm": {
+          "name": "الارم",
+          "description": "انتباہ کی حد تجاوز کرنے پر AlarmKit الارم کو متحرک کرتا ہے۔ صرف iOS 26+ پر کام کرتا ہے۔"
+        },
+        "step_labels": {
+          "name": "مرحلے کے لیبل",
+          "description": "مرحلوں کے لیبلز کی ترتیب شدہ فہرست۔ لمبائی total_steps کے برابر ہونی چاہیے۔ صرف steps ٹیمپلیٹ۔"
+        },
+        "step_rows": {
+          "name": "مرحلے کی قطاریں",
+          "description": "ہر مرحلے کے لیے قطار کی اونچائیوں (1-10) کی ترتیب شدہ فہرست۔ لمبائی total_steps کے برابر ہونی چاہیے۔ صرف steps ٹیمپلیٹ۔"
+        },
+        "fired_at": {
+          "name": "فعال ہونے کا وقت",
+          "description": "سرگرمی فعال ہونے کی Unix ٹائم اسٹیمپ۔ ملتوی وقت ظاہر کرنے کے لیے استعمال ہوتی ہے۔"
+        },
+        "units": {
+          "name": "اکائیاں",
+          "description": "Timeline سیریز کے لیے اکائی لیبل۔ فارمیٹ: attribute=اکائی۔ مثال: temp=°C، humidity=%"
+        },
+        "snooze_seconds": {
+          "name": "Snooze Seconds",
+          "description": "iOS Snooze بٹن کاؤنٹ ڈاؤن کو کتنا بڑھاتا ہے (60–3600)۔ بطور ڈیفالٹ 300 (5 منٹ)۔ alarm درکار ہے (iOS 26+، صرف countdown ٹیمپلیٹ)۔"
+        },
+        "duration": {
+          "name": "دورانیہ",
+          "description": "End Date کا متبادل جسے سیٹ کر کے بھول جائیں: سیکنڈ (>=1) یا دورانیہ سٹرنگ جیسے \"1h30m\"۔ سرور start/end کو ابھی کے وقت پر دوبارہ سیٹ کر دیتا ہے۔ یا تو Duration بھیجیں یا End Date — دونوں سیٹ ہوں تو Duration ترجیح پاتا ہے۔"
+        },
+        "start_date": {
+          "name": "آغاز کی تاریخ",
+          "description": "Unix ٹائم اسٹیمپ جب کاؤنٹ ڈاؤن شروع ہوا (گزرے/باقی وقت کی بار کو لنگر کرتا ہے)۔ سرور اسے بطور ڈیفالٹ ابھی کے وقت پر رکھتا ہے۔"
+        },
+        "history": {
+          "name": "ہسٹری (سیڈ)",
+          "description": "ابتدائی sparkline سیڈ: سیریز نام سے (timestamp, value) کی فہرست تک کا آبجیکٹ۔ صرف سیڈ — پہلی اپڈیٹ کے بعد سرور سنبھال لیتا ہے۔"
+        },
+        "tap_action": {
+          "name": "ٹیپ ایکشن",
+          "description": "پوری سرگرمی کا ٹیپ ہدف بطور آبجیکٹ: url (لازمی)، اختیاری foreground، اور http(s) url کے لیے method/headers/body کے ذریعے خاموش webhook۔"
+        },
+        "url_action": {
+          "name": "پرائمری بٹن",
+          "description": "پرائمری ٹیپ ایبل بٹن بطور آبجیکٹ: url (لازمی)، اختیاری title، icon، foreground، اور خاموش webhook کے لیے http(s) method/headers/body۔"
+        },
+        "secondary_url_action": {
+          "name": "ثانوی بٹن",
+          "description": "ثانوی ٹیپ ایبل بٹن — وہی آبجیکٹ ساخت جو پرائمری بٹن کی ہے۔"
+        }
+      },
+      "sections": {
+        "countdown_options": {
+          "name": "countdown اختیارات",
+          "description": "صرف countdown ٹیمپلیٹ کے لیے۔"
+        },
+        "steps_options": {
+          "name": "steps اختیارات",
+          "description": "صرف steps ٹیمپلیٹ کے لیے۔"
+        },
+        "alert_options": {
+          "name": "alert اختیارات",
+          "description": "صرف alert ٹیمپلیٹ کے لیے۔"
+        },
+        "gauge_timeline_options": {
+          "name": "gauge اور timeline اختیارات",
+          "description": "صرف gauge اور timeline ٹیمپلیٹس کے لیے۔"
+        },
+        "action_buttons": {
+          "name": "ایکشن بٹن",
+          "description": "ٹیپ کیے جانے والے URL بٹن۔ صرف steps اور alert ٹیمپلیٹس کے لیے۔"
+        },
+        "display_options": {
+          "name": "ڈسپلے، رنگ اور آواز",
+          "description": "اختیاری اسٹائلنگ اور فی اپڈیٹ اوور رائیڈز۔ کسی بھی ٹیمپلیٹ پر لاگو۔"
+        }
+      }
+    },
+    "update_activity_generic": {
+      "name": "سرگرمی اپڈیٹ کریں (Generic)",
+      "description": "PushWard Live Activity کی حالت اور مواد کو اپڈیٹ کریں۔",
+      "fields": {
+        "slug": {
+          "name": "Slug",
+          "description": "سرگرمی کی slug شناخت۔"
+        },
+        "state": {
+          "name": "حالت",
+          "description": "سرگرمی کی مطلوبہ حالت۔"
+        },
+        "state_text": {
+          "name": "حالت کا متن",
+          "description": "سرگرمی کی حالت کے طور پر دکھایا جانے والا متن۔"
+        },
+        "subtitle": {
+          "name": "ذیلی عنوان",
+          "description": "سرگرمی پر دکھایا جانے والا ذیلی عنوان۔"
+        },
+        "icon": {
+          "name": "آئیکن",
+          "description": "SF Symbol یا MDI آئیکن کا نام (مثلاً arrow.down.circle.fill، mdi:download)۔"
+        },
+        "progress": {
+          "name": "پیش رفت",
+          "description": "0.0 سے 1.0 کے درمیان پیش رفت کی قدر۔"
+        },
+        "completion_message": {
+          "name": "تکمیل کا پیغام",
+          "description": "سرگرمی ختم ہونے پر دکھایا جانے والا پیغام۔"
+        },
+        "accent_color": {
+          "name": "لہجے کا رنگ",
+          "description": "سرگرمی کے لیے لہجے کے رنگ کا نام۔"
+        },
+        "background_color": {
+          "name": "پس منظر کا رنگ",
+          "description": "Live Activity کا پس منظر رنگ۔ #RRGGBB یا نامزد رنگ۔ کیڑے ڈیفالٹ کے لیے خالی چھوڑیں۔"
+        },
+        "text_color": {
+          "name": "متن کا رنگ",
+          "description": "Live Activity کا متن رنگ۔ #RRGGBB یا نامزد رنگ۔ کیڑے ڈیفالٹ کے لیے خالی چھوڑیں۔"
+        },
+        "remaining_time": {
+          "name": "بقیہ وقت",
+          "description": "سیکنڈوں میں بقیہ وقت۔"
+        },
+        "sound": {
+          "name": "آواز",
+          "description": "اس اپڈیٹ کے لیے اطلاع کی آواز کا نام۔ iOS کی کیڑے آواز کے لیے خالی چھوڑیں۔"
+        },
+        "priority": {
+          "name": "ترجیح",
+          "description": "سرگرمی کی ترجیح (0 = کم ترین، 10 = سب سے زیادہ)۔"
+        },
+        "url": {
+          "name": "URL",
+          "description": "پرائمری URL جو ٹیپ ایبل بٹن کے طور پر دکھایا جاتا ہے۔ http(s) یا کوئی کسٹم اسکیم جیسے homeassistant://۔"
+        },
+        "secondary_url": {
+          "name": "ثانوی URL",
+          "description": "ثانوی URL جو دوسرے ٹیپ ایبل بٹن کے طور پر دکھایا جاتا ہے۔"
+        },
+        "tap_action": {
+          "name": "ٹیپ ایکشن",
+          "description": "پوری سرگرمی کا ٹیپ ہدف بطور آبجیکٹ: url (لازمی)، اختیاری foreground، اور http(s) url کے لیے method/headers/body کے ذریعے خاموش webhook۔"
+        },
+        "url_action": {
+          "name": "پرائمری بٹن",
+          "description": "پرائمری ٹیپ ایبل بٹن بطور آبجیکٹ: url (لازمی)، اختیاری title، icon، foreground، اور خاموش webhook کے لیے http(s) method/headers/body۔"
+        },
+        "secondary_url_action": {
+          "name": "ثانوی بٹن",
+          "description": "ثانوی ٹیپ ایبل بٹن — وہی آبجیکٹ ساخت جو پرائمری بٹن کی ہے۔"
+        }
+      },
+      "sections": {
+        "labels": {
+          "name": "لیبلز اور آئیکن",
+          "description": "اختیاری ٹیکسٹ لیبلز اور آئیکن۔ کسی بھی ٹیمپلیٹ پر لاگو۔"
+        },
+        "action_buttons": {
+          "name": "ایکشن بٹن",
+          "description": "ٹیپ کیے جانے والے URL بٹن۔ صرف steps اور alert ٹیمپلیٹس کے لیے۔"
+        },
+        "display_options": {
+          "name": "ڈسپلے، رنگ اور آواز",
+          "description": "اختیاری اسٹائلنگ اور فی اپڈیٹ اوور رائیڈز۔ کسی بھی ٹیمپلیٹ پر لاگو۔"
+        }
+      }
+    },
+    "update_activity_countdown": {
+      "name": "سرگرمی اپڈیٹ کریں (Countdown)",
+      "description": "PushWard Live Activity کی حالت اور مواد کو اپڈیٹ کریں۔",
+      "fields": {
+        "slug": {
+          "name": "Slug",
+          "description": "سرگرمی کی slug شناخت۔"
+        },
+        "state": {
+          "name": "حالت",
+          "description": "سرگرمی کی مطلوبہ حالت۔"
+        },
+        "end_date": {
+          "name": "اختتام کی تاریخ",
+          "description": "countdown اختتامی تاریخ کے لیے Unix ٹائم اسٹیمپ۔"
+        },
+        "completion_message": {
+          "name": "تکمیل کا پیغام",
+          "description": "سرگرمی ختم ہونے پر دکھایا جانے والا پیغام۔"
+        },
+        "state_text": {
+          "name": "حالت کا متن",
+          "description": "سرگرمی کی حالت کے طور پر دکھایا جانے والا متن۔"
+        },
+        "subtitle": {
+          "name": "ذیلی عنوان",
+          "description": "سرگرمی پر دکھایا جانے والا ذیلی عنوان۔"
+        },
+        "icon": {
+          "name": "آئیکن",
+          "description": "SF Symbol یا MDI آئیکن کا نام (مثلاً arrow.down.circle.fill، mdi:download)۔"
+        },
+        "progress": {
+          "name": "پیش رفت",
+          "description": "0.0 سے 1.0 کے درمیان پیش رفت کی قدر۔"
+        },
+        "warning_threshold": {
+          "name": "انتباہ کی حد",
+          "description": "gauge یا timeline قدر اس قدر کو پہنچنے یا اس سے تجاوز کرنے پر انتباہ رنگ ظاہر ہوتا ہے۔"
+        },
+        "alarm": {
+          "name": "الارم",
+          "description": "انتباہ کی حد تجاوز کرنے پر AlarmKit الارم کو متحرک کرتا ہے۔ صرف iOS 26+ پر کام کرتا ہے۔"
+        },
+        "snooze_seconds": {
+          "name": "Snooze Seconds",
+          "description": "How long the iOS Snooze button extends the countdown (60–3600). Defaults to 300 (5 min). Only applies with alarm enabled (iOS 26+)."
+        },
+        "accent_color": {
+          "name": "لہجے کا رنگ",
+          "description": "سرگرمی کے لیے لہجے کے رنگ کا نام۔"
+        },
+        "background_color": {
+          "name": "پس منظر کا رنگ",
+          "description": "Live Activity کا پس منظر رنگ۔ #RRGGBB یا نامزد رنگ۔ کیڑے ڈیفالٹ کے لیے خالی چھوڑیں۔"
+        },
+        "text_color": {
+          "name": "متن کا رنگ",
+          "description": "Live Activity کا متن رنگ۔ #RRGGBB یا نامزد رنگ۔ کیڑے ڈیفالٹ کے لیے خالی چھوڑیں۔"
+        },
+        "remaining_time": {
+          "name": "بقیہ وقت",
+          "description": "سیکنڈوں میں بقیہ وقت۔"
+        },
+        "sound": {
+          "name": "آواز",
+          "description": "اس اپڈیٹ کے لیے اطلاع کی آواز کا نام۔ iOS کی کیڑے آواز کے لیے خالی چھوڑیں۔"
+        },
+        "priority": {
+          "name": "ترجیح",
+          "description": "سرگرمی کی ترجیح (0 = کم ترین، 10 = سب سے زیادہ)۔"
+        },
+        "duration": {
+          "name": "دورانیہ",
+          "description": "End Date کا متبادل جسے سیٹ کر کے بھول جائیں: سیکنڈ (>=1) یا دورانیہ سٹرنگ جیسے \"1h30m\"۔ سرور start/end کو ابھی کے وقت پر دوبارہ سیٹ کر دیتا ہے۔ یا تو Duration بھیجیں یا End Date — دونوں سیٹ ہوں تو Duration ترجیح پاتا ہے۔"
+        },
+        "start_date": {
+          "name": "آغاز کی تاریخ",
+          "description": "Unix ٹائم اسٹیمپ جب کاؤنٹ ڈاؤن شروع ہوا (گزرے/باقی وقت کی بار کو لنگر کرتا ہے)۔ سرور اسے بطور ڈیفالٹ ابھی کے وقت پر رکھتا ہے۔"
+        },
+        "url": {
+          "name": "URL",
+          "description": "پرائمری URL جو ٹیپ ایبل بٹن کے طور پر دکھایا جاتا ہے۔ http(s) یا کوئی کسٹم اسکیم جیسے homeassistant://۔"
+        },
+        "secondary_url": {
+          "name": "ثانوی URL",
+          "description": "ثانوی URL جو دوسرے ٹیپ ایبل بٹن کے طور پر دکھایا جاتا ہے۔"
+        },
+        "tap_action": {
+          "name": "ٹیپ ایکشن",
+          "description": "پوری سرگرمی کا ٹیپ ہدف بطور آبجیکٹ: url (لازمی)، اختیاری foreground، اور http(s) url کے لیے method/headers/body کے ذریعے خاموش webhook۔"
+        },
+        "url_action": {
+          "name": "پرائمری بٹن",
+          "description": "پرائمری ٹیپ ایبل بٹن بطور آبجیکٹ: url (لازمی)، اختیاری title، icon، foreground، اور خاموش webhook کے لیے http(s) method/headers/body۔"
+        },
+        "secondary_url_action": {
+          "name": "ثانوی بٹن",
+          "description": "ثانوی ٹیپ ایبل بٹن — وہی آبجیکٹ ساخت جو پرائمری بٹن کی ہے۔"
+        }
+      },
+      "sections": {
+        "labels": {
+          "name": "لیبلز اور آئیکن",
+          "description": "اختیاری ٹیکسٹ لیبلز اور آئیکن۔ کسی بھی ٹیمپلیٹ پر لاگو۔"
+        },
+        "countdown_options": {
+          "name": "countdown اختیارات",
+          "description": "صرف countdown ٹیمپلیٹ کے لیے۔"
+        },
+        "action_buttons": {
+          "name": "ایکشن بٹن",
+          "description": "ٹیپ کیے جانے والے URL بٹن۔ صرف steps اور alert ٹیمپلیٹس کے لیے۔"
+        },
+        "display_options": {
+          "name": "ڈسپلے، رنگ اور آواز",
+          "description": "اختیاری اسٹائلنگ اور فی اپڈیٹ اوور رائیڈز۔ کسی بھی ٹیمپلیٹ پر لاگو۔"
+        }
+      }
+    },
+    "update_activity_steps": {
+      "name": "سرگرمی اپڈیٹ کریں (Steps)",
+      "description": "PushWard Live Activity کی حالت اور مواد کو اپڈیٹ کریں۔",
+      "fields": {
+        "slug": {
+          "name": "Slug",
+          "description": "سرگرمی کی slug شناخت۔"
+        },
+        "state": {
+          "name": "حالت",
+          "description": "سرگرمی کی مطلوبہ حالت۔"
+        },
+        "total_steps": {
+          "name": "کل steps",
+          "description": "steps کی کل تعداد۔"
+        },
+        "current_step": {
+          "name": "موجودہ مرحلہ",
+          "description": "موجودہ مرحلے کا نمبر۔"
+        },
+        "state_text": {
+          "name": "حالت کا متن",
+          "description": "سرگرمی کی حالت کے طور پر دکھایا جانے والا متن۔"
+        },
+        "subtitle": {
+          "name": "ذیلی عنوان",
+          "description": "سرگرمی پر دکھایا جانے والا ذیلی عنوان۔"
+        },
+        "icon": {
+          "name": "آئیکن",
+          "description": "SF Symbol یا MDI آئیکن کا نام (مثلاً arrow.down.circle.fill، mdi:download)۔"
+        },
+        "progress": {
+          "name": "پیش رفت",
+          "description": "0.0 سے 1.0 کے درمیان پیش رفت کی قدر۔"
+        },
+        "step_labels": {
+          "name": "مرحلے کے لیبل",
+          "description": "مرحلوں کے لیبلز کی ترتیب شدہ فہرست۔ لمبائی total_steps کے برابر ہونی چاہیے۔ صرف steps ٹیمپلیٹ۔"
+        },
+        "step_rows": {
+          "name": "مرحلے کی قطاریں",
+          "description": "ہر مرحلے کے لیے قطار کی اونچائیوں (1-10) کی ترتیب شدہ فہرست۔ لمبائی total_steps کے برابر ہونی چاہیے۔ صرف steps ٹیمپلیٹ۔"
+        },
+        "url": {
+          "name": "URL",
+          "description": "بنیادی URL جو ٹیپ کیے جانے والے بٹن کے طور پر ظاہر ہوتا ہے۔ صرف steps اور alert ٹیمپلیٹس پر سپورٹ ہے۔"
+        },
+        "secondary_url": {
+          "name": "ثانوی URL",
+          "description": "ثانوی URL جو دوسرے ٹیپ کیے جانے والے بٹن کے طور پر ظاہر ہوتا ہے۔ صرف steps اور alert ٹیمپلیٹس پر سپورٹ ہے۔"
+        },
+        "completion_message": {
+          "name": "تکمیل کا پیغام",
+          "description": "سرگرمی ختم ہونے پر دکھایا جانے والا پیغام۔"
+        },
+        "accent_color": {
+          "name": "لہجے کا رنگ",
+          "description": "سرگرمی کے لیے لہجے کے رنگ کا نام۔"
+        },
+        "background_color": {
+          "name": "پس منظر کا رنگ",
+          "description": "Live Activity کا پس منظر رنگ۔ #RRGGBB یا نامزد رنگ۔ کیڑے ڈیفالٹ کے لیے خالی چھوڑیں۔"
+        },
+        "text_color": {
+          "name": "متن کا رنگ",
+          "description": "Live Activity کا متن رنگ۔ #RRGGBB یا نامزد رنگ۔ کیڑے ڈیفالٹ کے لیے خالی چھوڑیں۔"
+        },
+        "remaining_time": {
+          "name": "بقیہ وقت",
+          "description": "سیکنڈوں میں بقیہ وقت۔"
+        },
+        "sound": {
+          "name": "آواز",
+          "description": "اس اپڈیٹ کے لیے اطلاع کی آواز کا نام۔ iOS کی کیڑے آواز کے لیے خالی چھوڑیں۔"
+        },
+        "priority": {
+          "name": "ترجیح",
+          "description": "سرگرمی کی ترجیح (0 = کم ترین، 10 = سب سے زیادہ)۔"
+        },
+        "tap_action": {
+          "name": "ٹیپ ایکشن",
+          "description": "پوری سرگرمی کا ٹیپ ہدف بطور آبجیکٹ: url (لازمی)، اختیاری foreground، اور http(s) url کے لیے method/headers/body کے ذریعے خاموش webhook۔"
+        },
+        "url_action": {
+          "name": "پرائمری بٹن",
+          "description": "پرائمری ٹیپ ایبل بٹن بطور آبجیکٹ: url (لازمی)، اختیاری title، icon، foreground، اور خاموش webhook کے لیے http(s) method/headers/body۔"
+        },
+        "secondary_url_action": {
+          "name": "ثانوی بٹن",
+          "description": "ثانوی ٹیپ ایبل بٹن — وہی آبجیکٹ ساخت جو پرائمری بٹن کی ہے۔"
+        }
+      },
+      "sections": {
+        "labels": {
+          "name": "لیبلز اور آئیکن",
+          "description": "اختیاری ٹیکسٹ لیبلز اور آئیکن۔ کسی بھی ٹیمپلیٹ پر لاگو۔"
+        },
+        "steps_options": {
+          "name": "steps اختیارات",
+          "description": "صرف steps ٹیمپلیٹ کے لیے۔"
+        },
+        "action_buttons": {
+          "name": "ایکشن بٹن",
+          "description": "ٹیپ کیے جانے والے URL بٹن۔ صرف steps اور alert ٹیمپلیٹس کے لیے۔"
+        },
+        "display_options": {
+          "name": "ڈسپلے، رنگ اور آواز",
+          "description": "اختیاری اسٹائلنگ اور فی اپڈیٹ اوور رائیڈز۔ کسی بھی ٹیمپلیٹ پر لاگو۔"
+        }
+      }
+    },
+    "update_activity_alert": {
+      "name": "سرگرمی اپڈیٹ کریں (Alert)",
+      "description": "PushWard Live Activity کی حالت اور مواد کو اپڈیٹ کریں۔",
+      "fields": {
+        "slug": {
+          "name": "Slug",
+          "description": "سرگرمی کی slug شناخت۔"
+        },
+        "state": {
+          "name": "حالت",
+          "description": "سرگرمی کی مطلوبہ حالت۔"
+        },
+        "severity": {
+          "name": "شدت",
+          "description": "alert کی شدت کی سطح۔"
+        },
+        "state_text": {
+          "name": "حالت کا متن",
+          "description": "سرگرمی کی حالت کے طور پر دکھایا جانے والا متن۔"
+        },
+        "subtitle": {
+          "name": "ذیلی عنوان",
+          "description": "سرگرمی پر دکھایا جانے والا ذیلی عنوان۔"
+        },
+        "icon": {
+          "name": "آئیکن",
+          "description": "SF Symbol یا MDI آئیکن کا نام (مثلاً arrow.down.circle.fill، mdi:download)۔"
+        },
+        "progress": {
+          "name": "پیش رفت",
+          "description": "0.0 سے 1.0 کے درمیان پیش رفت کی قدر۔"
+        },
+        "fired_at": {
+          "name": "فعال ہونے کا وقت",
+          "description": "سرگرمی فعال ہونے کی Unix ٹائم اسٹیمپ۔ ملتوی وقت ظاہر کرنے کے لیے استعمال ہوتی ہے۔"
+        },
+        "url": {
+          "name": "URL",
+          "description": "بنیادی URL جو ٹیپ کیے جانے والے بٹن کے طور پر ظاہر ہوتا ہے۔ صرف steps اور alert ٹیمپلیٹس پر سپورٹ ہے۔"
+        },
+        "secondary_url": {
+          "name": "ثانوی URL",
+          "description": "ثانوی URL جو دوسرے ٹیپ کیے جانے والے بٹن کے طور پر ظاہر ہوتا ہے۔ صرف steps اور alert ٹیمپلیٹس پر سپورٹ ہے۔"
+        },
+        "completion_message": {
+          "name": "تکمیل کا پیغام",
+          "description": "سرگرمی ختم ہونے پر دکھایا جانے والا پیغام۔"
+        },
+        "accent_color": {
+          "name": "لہجے کا رنگ",
+          "description": "سرگرمی کے لیے لہجے کے رنگ کا نام۔"
+        },
+        "background_color": {
+          "name": "پس منظر کا رنگ",
+          "description": "Live Activity کا پس منظر رنگ۔ #RRGGBB یا نامزد رنگ۔ کیڑے ڈیفالٹ کے لیے خالی چھوڑیں۔"
+        },
+        "text_color": {
+          "name": "متن کا رنگ",
+          "description": "Live Activity کا متن رنگ۔ #RRGGBB یا نامزد رنگ۔ کیڑے ڈیفالٹ کے لیے خالی چھوڑیں۔"
+        },
+        "remaining_time": {
+          "name": "بقیہ وقت",
+          "description": "سیکنڈوں میں بقیہ وقت۔"
+        },
+        "sound": {
+          "name": "آواز",
+          "description": "اس اپڈیٹ کے لیے اطلاع کی آواز کا نام۔ iOS کی کیڑے آواز کے لیے خالی چھوڑیں۔"
+        },
+        "priority": {
+          "name": "ترجیح",
+          "description": "سرگرمی کی ترجیح (0 = کم ترین، 10 = سب سے زیادہ)۔"
+        },
+        "tap_action": {
+          "name": "ٹیپ ایکشن",
+          "description": "پوری سرگرمی کا ٹیپ ہدف بطور آبجیکٹ: url (لازمی)، اختیاری foreground، اور http(s) url کے لیے method/headers/body کے ذریعے خاموش webhook۔"
+        },
+        "url_action": {
+          "name": "پرائمری بٹن",
+          "description": "پرائمری ٹیپ ایبل بٹن بطور آبجیکٹ: url (لازمی)، اختیاری title، icon، foreground، اور خاموش webhook کے لیے http(s) method/headers/body۔"
+        },
+        "secondary_url_action": {
+          "name": "ثانوی بٹن",
+          "description": "ثانوی ٹیپ ایبل بٹن — وہی آبجیکٹ ساخت جو پرائمری بٹن کی ہے۔"
+        }
+      },
+      "sections": {
+        "labels": {
+          "name": "لیبلز اور آئیکن",
+          "description": "اختیاری ٹیکسٹ لیبلز اور آئیکن۔ کسی بھی ٹیمپلیٹ پر لاگو۔"
+        },
+        "alert_options": {
+          "name": "alert اختیارات",
+          "description": "صرف alert ٹیمپلیٹ کے لیے۔"
+        },
+        "action_buttons": {
+          "name": "ایکشن بٹن",
+          "description": "ٹیپ کیے جانے والے URL بٹن۔ صرف steps اور alert ٹیمپلیٹس کے لیے۔"
+        },
+        "display_options": {
+          "name": "ڈسپلے، رنگ اور آواز",
+          "description": "اختیاری اسٹائلنگ اور فی اپڈیٹ اوور رائیڈز۔ کسی بھی ٹیمپلیٹ پر لاگو۔"
+        }
+      }
+    },
+    "update_activity_gauge": {
+      "name": "سرگرمی اپڈیٹ کریں (Gauge)",
+      "description": "PushWard Live Activity کی حالت اور مواد کو اپڈیٹ کریں۔",
+      "fields": {
+        "slug": {
+          "name": "Slug",
+          "description": "سرگرمی کی slug شناخت۔"
+        },
+        "state": {
+          "name": "حالت",
+          "description": "سرگرمی کی مطلوبہ حالت۔"
+        },
+        "value": {
+          "name": "قدر",
+          "description": "Gauge: عددی قدر۔ Timeline: لیبل شدہ قدروں کی آبجیکٹ (مثلاً Temp=22.5)۔"
+        },
+        "min_value": {
+          "name": "کم از کم قدر",
+          "description": "Gauge کی کم از کم قدر۔"
+        },
+        "max_value": {
+          "name": "زیادہ سے زیادہ قدر",
+          "description": "Gauge کی زیادہ سے زیادہ قدر۔"
+        },
+        "unit": {
+          "name": "اکائی",
+          "description": "قدر کے ساتھ ظاہر ہونے والی اکائی (مثلاً °C، %)۔"
+        },
+        "state_text": {
+          "name": "حالت کا متن",
+          "description": "سرگرمی کی حالت کے طور پر دکھایا جانے والا متن۔"
+        },
+        "subtitle": {
+          "name": "ذیلی عنوان",
+          "description": "سرگرمی پر دکھایا جانے والا ذیلی عنوان۔"
+        },
+        "icon": {
+          "name": "آئیکن",
+          "description": "SF Symbol یا MDI آئیکن کا نام (مثلاً arrow.down.circle.fill، mdi:download)۔"
+        },
+        "progress": {
+          "name": "پیش رفت",
+          "description": "0.0 سے 1.0 کے درمیان پیش رفت کی قدر۔"
+        },
+        "completion_message": {
+          "name": "تکمیل کا پیغام",
+          "description": "سرگرمی ختم ہونے پر دکھایا جانے والا پیغام۔"
+        },
+        "accent_color": {
+          "name": "لہجے کا رنگ",
+          "description": "سرگرمی کے لیے لہجے کے رنگ کا نام۔"
+        },
+        "background_color": {
+          "name": "پس منظر کا رنگ",
+          "description": "Live Activity کا پس منظر رنگ۔ #RRGGBB یا نامزد رنگ۔ کیڑے ڈیفالٹ کے لیے خالی چھوڑیں۔"
+        },
+        "text_color": {
+          "name": "متن کا رنگ",
+          "description": "Live Activity کا متن رنگ۔ #RRGGBB یا نامزد رنگ۔ کیڑے ڈیفالٹ کے لیے خالی چھوڑیں۔"
+        },
+        "remaining_time": {
+          "name": "بقیہ وقت",
+          "description": "سیکنڈوں میں بقیہ وقت۔"
+        },
+        "sound": {
+          "name": "آواز",
+          "description": "اس اپڈیٹ کے لیے اطلاع کی آواز کا نام۔ iOS کی کیڑے آواز کے لیے خالی چھوڑیں۔"
+        },
+        "priority": {
+          "name": "ترجیح",
+          "description": "سرگرمی کی ترجیح (0 = کم ترین، 10 = سب سے زیادہ)۔"
+        },
+        "url": {
+          "name": "URL",
+          "description": "پرائمری URL جو ٹیپ ایبل بٹن کے طور پر دکھایا جاتا ہے۔ http(s) یا کوئی کسٹم اسکیم جیسے homeassistant://۔"
+        },
+        "secondary_url": {
+          "name": "ثانوی URL",
+          "description": "ثانوی URL جو دوسرے ٹیپ ایبل بٹن کے طور پر دکھایا جاتا ہے۔"
+        },
+        "tap_action": {
+          "name": "ٹیپ ایکشن",
+          "description": "پوری سرگرمی کا ٹیپ ہدف بطور آبجیکٹ: url (لازمی)، اختیاری foreground، اور http(s) url کے لیے method/headers/body کے ذریعے خاموش webhook۔"
+        },
+        "url_action": {
+          "name": "پرائمری بٹن",
+          "description": "پرائمری ٹیپ ایبل بٹن بطور آبجیکٹ: url (لازمی)، اختیاری title، icon، foreground، اور خاموش webhook کے لیے http(s) method/headers/body۔"
+        },
+        "secondary_url_action": {
+          "name": "ثانوی بٹن",
+          "description": "ثانوی ٹیپ ایبل بٹن — وہی آبجیکٹ ساخت جو پرائمری بٹن کی ہے۔"
+        }
+      },
+      "sections": {
+        "labels": {
+          "name": "لیبلز اور آئیکن",
+          "description": "اختیاری ٹیکسٹ لیبلز اور آئیکن۔ کسی بھی ٹیمپلیٹ پر لاگو۔"
+        },
+        "action_buttons": {
+          "name": "ایکشن بٹن",
+          "description": "ٹیپ کیے جانے والے URL بٹن۔ صرف steps اور alert ٹیمپلیٹس کے لیے۔"
+        },
+        "display_options": {
+          "name": "ڈسپلے، رنگ اور آواز",
+          "description": "اختیاری اسٹائلنگ اور فی اپڈیٹ اوور رائیڈز۔ کسی بھی ٹیمپلیٹ پر لاگو۔"
+        }
+      }
+    },
+    "update_activity_timeline": {
+      "name": "سرگرمی اپڈیٹ کریں (Timeline)",
+      "description": "PushWard Live Activity کی حالت اور مواد کو اپڈیٹ کریں۔",
+      "fields": {
+        "slug": {
+          "name": "Slug",
+          "description": "سرگرمی کی slug شناخت۔"
+        },
+        "state": {
+          "name": "حالت",
+          "description": "سرگرمی کی مطلوبہ حالت۔"
+        },
+        "value": {
+          "name": "قدر",
+          "description": "Gauge: عددی قدر۔ Timeline: لیبل شدہ قدروں کی آبجیکٹ (مثلاً Temp=22.5)۔"
+        },
+        "unit": {
+          "name": "اکائی",
+          "description": "قدر کے ساتھ ظاہر ہونے والی اکائی (مثلاً °C، %)۔"
+        },
+        "state_text": {
+          "name": "حالت کا متن",
+          "description": "سرگرمی کی حالت کے طور پر دکھایا جانے والا متن۔"
+        },
+        "subtitle": {
+          "name": "ذیلی عنوان",
+          "description": "سرگرمی پر دکھایا جانے والا ذیلی عنوان۔"
+        },
+        "icon": {
+          "name": "آئیکن",
+          "description": "SF Symbol یا MDI آئیکن کا نام (مثلاً arrow.down.circle.fill، mdi:download)۔"
+        },
+        "progress": {
+          "name": "پیش رفت",
+          "description": "0.0 سے 1.0 کے درمیان پیش رفت کی قدر۔"
+        },
+        "units": {
+          "name": "اکائیاں",
+          "description": "Timeline سیریز کے لیے اکائی لیبل۔ فارمیٹ: attribute=اکائی۔ مثال: temp=°C، humidity=%"
+        },
+        "scale": {
+          "name": "پیمانہ",
+          "description": "Y-محور کا پیمانہ (linear یا logarithmic)۔ صرف Timeline ٹیمپلیٹ کے لیے۔"
+        },
+        "decimals": {
+          "name": "اعشاریہ مقامات",
+          "description": "قدر ظاہر کرنے کے لیے اعشاریہ مقامات (0-10)۔ صرف Timeline ٹیمپلیٹ کے لیے۔"
+        },
+        "smoothing": {
+          "name": "ہموار لکیریں",
+          "description": "ڈیٹا پوائنٹس کے درمیان منحنی انٹرپولیشن فعال کریں۔ صرف Timeline ٹیمپلیٹ کے لیے۔"
+        },
+        "thresholds": {
+          "name": "حدود",
+          "description": "sparkline پر افقی حوالہ لکیریں۔ صرف Timeline ٹیمپلیٹ کے لیے۔"
+        },
+        "completion_message": {
+          "name": "تکمیل کا پیغام",
+          "description": "سرگرمی ختم ہونے پر دکھایا جانے والا پیغام۔"
+        },
+        "accent_color": {
+          "name": "لہجے کا رنگ",
+          "description": "سرگرمی کے لیے لہجے کے رنگ کا نام۔"
+        },
+        "background_color": {
+          "name": "پس منظر کا رنگ",
+          "description": "Live Activity کا پس منظر رنگ۔ #RRGGBB یا نامزد رنگ۔ کیڑے ڈیفالٹ کے لیے خالی چھوڑیں۔"
+        },
+        "text_color": {
+          "name": "متن کا رنگ",
+          "description": "Live Activity کا متن رنگ۔ #RRGGBB یا نامزد رنگ۔ کیڑے ڈیفالٹ کے لیے خالی چھوڑیں۔"
+        },
+        "remaining_time": {
+          "name": "بقیہ وقت",
+          "description": "سیکنڈوں میں بقیہ وقت۔"
+        },
+        "sound": {
+          "name": "آواز",
+          "description": "اس اپڈیٹ کے لیے اطلاع کی آواز کا نام۔ iOS کی کیڑے آواز کے لیے خالی چھوڑیں۔"
+        },
+        "priority": {
+          "name": "ترجیح",
+          "description": "سرگرمی کی ترجیح (0 = کم ترین، 10 = سب سے زیادہ)۔"
+        },
+        "history": {
+          "name": "ہسٹری (سیڈ)",
+          "description": "ابتدائی sparkline سیڈ: سیریز نام سے (timestamp, value) کی فہرست تک کا آبجیکٹ۔ صرف سیڈ — پہلی اپڈیٹ کے بعد سرور سنبھال لیتا ہے۔"
+        },
+        "url": {
+          "name": "URL",
+          "description": "پرائمری URL جو ٹیپ ایبل بٹن کے طور پر دکھایا جاتا ہے۔ http(s) یا کوئی کسٹم اسکیم جیسے homeassistant://۔"
+        },
+        "secondary_url": {
+          "name": "ثانوی URL",
+          "description": "ثانوی URL جو دوسرے ٹیپ ایبل بٹن کے طور پر دکھایا جاتا ہے۔"
+        },
+        "tap_action": {
+          "name": "ٹیپ ایکشن",
+          "description": "پوری سرگرمی کا ٹیپ ہدف بطور آبجیکٹ: url (لازمی)، اختیاری foreground، اور http(s) url کے لیے method/headers/body کے ذریعے خاموش webhook۔"
+        },
+        "url_action": {
+          "name": "پرائمری بٹن",
+          "description": "پرائمری ٹیپ ایبل بٹن بطور آبجیکٹ: url (لازمی)، اختیاری title، icon، foreground، اور خاموش webhook کے لیے http(s) method/headers/body۔"
+        },
+        "secondary_url_action": {
+          "name": "ثانوی بٹن",
+          "description": "ثانوی ٹیپ ایبل بٹن — وہی آبجیکٹ ساخت جو پرائمری بٹن کی ہے۔"
+        }
+      },
+      "sections": {
+        "labels": {
+          "name": "لیبلز اور آئیکن",
+          "description": "اختیاری ٹیکسٹ لیبلز اور آئیکن۔ کسی بھی ٹیمپلیٹ پر لاگو۔"
+        },
+        "gauge_timeline_options": {
+          "name": "gauge اور timeline اختیارات",
+          "description": "صرف gauge اور timeline ٹیمپلیٹس کے لیے۔"
+        },
+        "action_buttons": {
+          "name": "ایکشن بٹن",
+          "description": "ٹیپ کیے جانے والے URL بٹن۔ صرف steps اور alert ٹیمپلیٹس کے لیے۔"
+        },
+        "display_options": {
+          "name": "ڈسپلے، رنگ اور آواز",
+          "description": "اختیاری اسٹائلنگ اور فی اپڈیٹ اوور رائیڈز۔ کسی بھی ٹیمپلیٹ پر لاگو۔"
+        }
+      }
+    },
+    "create_activity": {
+      "name": "سرگرمی بنائیں",
+      "description": "نئی PushWard Live Activity بنائیں۔",
+      "fields": {
+        "slug": {
+          "name": "Slug",
+          "description": "سرگرمی کی منفرد slug شناخت۔"
+        },
+        "name": {
+          "name": "نام",
+          "description": "سرگرمی کا ظاہری نام۔"
+        },
+        "priority": {
+          "name": "ترجیح",
+          "description": "سرگرمی کی ترجیح (0 = کم ترین، 10 = سب سے زیادہ)۔"
+        },
+        "ended_ttl": {
+          "name": "Ended TTL",
+          "description": "سرگرمی ختم ہونے کے بعد اسے برقرار رکھنے کے سیکنڈ۔"
+        },
+        "stale_ttl": {
+          "name": "Stale TTL",
+          "description": "سرگرمی کو پرانا سمجھے جانے سے پہلے کے سیکنڈ۔"
+        }
+      }
+    },
+    "end_activity": {
+      "name": "سرگرمی ختم کریں",
+      "description": "PushWard Live Activity ختم کریں۔",
+      "fields": {
+        "slug": {
+          "name": "Slug",
+          "description": "ختم کی جانے والی سرگرمی کی slug شناخت۔"
+        },
+        "completion_message": {
+          "name": "تکمیل کا پیغام",
+          "description": "سرگرمی ختم ہونے پر دکھایا جانے والا اختیاری پیغام۔"
+        }
+      }
+    },
+    "delete_activity": {
+      "name": "سرگرمی حذف کریں",
+      "description": "PushWard Live Activity حذف کریں۔",
+      "fields": {
+        "slug": {
+          "name": "Slug",
+          "description": "حذف کی جانے والی سرگرمی کی slug شناخت۔"
+        }
+      }
+    },
+    "send_notification": {
+      "name": "اطلاع بھیجیں",
+      "description": "PushWard کے ذریعے push notification بھیجیں۔",
+      "fields": {
+        "title": {
+          "name": "عنوان",
+          "description": "اطلاع کا عنوان۔"
+        },
+        "body": {
+          "name": "متن",
+          "description": "اطلاع کا بنیادی متن۔"
+        },
+        "subtitle": {
+          "name": "ذیلی عنوان",
+          "description": "عنوان کے نیچے دکھایا جانے والا اختیاری ذیلی عنوان۔"
+        },
+        "level": {
+          "name": "سطح",
+          "description": "iOS کی مداخلت کی سطح۔ اطلاع کی ترسیل کا طریقہ کنٹرول کرتی ہے۔"
+        },
+        "thread_id": {
+          "name": "Thread ID",
+          "description": "Notification Center میں اطلاعات کو گروپ کرتا ہے۔"
+        },
+        "collapse_id": {
+          "name": "Collapse ID",
+          "description": "APNs ڈی ڈپلیکیشن کلید۔ ایک ہی کلید والی پچھلی اطلاع کو بدل دیتا ہے۔"
+        },
+        "source": {
+          "name": "ماخذ",
+          "description": "PushWard inbox میں گروپ بندی کے لیے ماخذ شناخت۔"
+        },
+        "source_display_name": {
+          "name": "ماخذ کا ظاہری نام",
+          "description": "PushWard inbox میں دکھایا جانے والا انسانی پڑھنے کے قابل ماخذ نام۔"
+        },
+        "activity_slug": {
+          "name": "Activity Slug",
+          "description": "اس اطلاع کو کسی موجودہ Live Activity سے منسلک کریں۔"
+        },
+        "push": {
+          "name": "Push",
+          "description": "تمام آلات پر APNs push alert کے طور پر بھیجیں۔ جب غلط ہو تو اطلاع صرف inbox میں محفوظ ہوتی ہے۔"
+        },
+        "url": {
+          "name": "URL",
+          "description": "اطلاع پر ٹیپ کرنے پر کھلنے والا URL۔ HTTPS ضروری ہے۔"
+        },
+        "icon_url": {
+          "name": "آئیکن URL",
+          "description": "اطلاع کے آئیکن کے لیے URL۔ HTTPS ضروری ہے۔"
+        },
+        "metadata": {
+          "name": "میٹا ڈیٹا",
+          "description": "اطلاع کے ساتھ بھیجا جانے والا اضافی کلید-قدر جوڑا میٹا ڈیٹا۔"
+        },
+        "media": {
+          "name": "میڈیا",
+          "description": "میڈیا منسلکہ بطور آبجیکٹ جس میں `url` (HTTPS) اور `type` (image، video، یا audio) ہو۔"
+        },
+        "actions": {
+          "name": "ایکشنز",
+          "description": "ایکشن بٹنوں کی فہرست۔ ہر ایکشن ایک آبجیکٹ ہے جس میں id، title، اختیاری url، foreground، destructive، authentication_required، اور icon ہوتے ہیں۔ http(s) url کے لیے آپ method (GET/POST/PUT/PATCH/DELETE/HEAD)، headers، اور body کے ساتھ خاموش webhook بھی بھیج سکتے ہیں۔"
+        }
+      }
+    },
+    "widget_refresh": {
+      "name": "ویجٹ ریفریش کریں",
+      "description": "کسی ٹریک شدہ PushWard ویجٹ کو زبردستی ریفریش کریں۔ ان-میموری diff کیش کو نظر انداز کرتا ہے تاکہ قدر تبدیل نہ ہونے کے باوجود ویجٹ دوبارہ رینڈر ہو کر iOS پر بھیجا جائے۔",
+      "fields": {
+        "slug": {
+          "name": "Slug",
+          "description": "ویجٹ کا slug شناخت کنندہ۔ slug یا entity_id میں سے ایک لازمی فراہم کرنا ہوگا۔"
+        },
+        "entity_id": {
+          "name": "اینٹٹی",
+          "description": "ویجٹ سے منسلک HA اینٹٹی۔ slug یا entity_id میں سے ایک لازمی فراہم کرنا ہوگا۔"
+        }
+      }
+    },
+    "send_email": {
+      "name": "ای میل بھیجیں",
+      "description": "PushWard کے ذریعے ٹرانزیکشنل ای میل بھیجیں۔ ایک text باڈی، ایک HTML باڈی، یا دونوں فراہم کریں۔ انٹیگریشن کلید کو \"emails\" صلاحیت درکار ہے۔",
+      "fields": {
+        "to": {
+          "name": "بنام",
+          "description": "وصول کنندہ کا ای میل پتہ۔ یہ ایسا پتہ ہونا چاہیے جسے آپ پہلے ہی PushWard iOS ایپ میں شامل اور تصدیق کر چکے ہوں — غیر تصدیق شدہ پتے مسترد کر دیے جاتے ہیں۔"
+        },
+        "subject": {
+          "name": "موضوع",
+          "description": "ای میل کی موضوع لائن۔"
+        },
+        "body": {
+          "name": "متن",
+          "description": "سادہ متن کی ای میل باڈی۔ یہ، ایک HTML باڈی، یا دونوں فراہم کریں۔"
+        },
+        "html_body": {
+          "name": "HTML باڈی",
+          "description": "HTML ای میل باڈی۔ یہ، ایک سادہ متن باڈی، یا دونوں فراہم کریں۔"
+        }
+      }
+    },
+    "delete_widget": {
+      "name": "ویجٹ حذف کریں",
+      "description": "سرور سے کوئی PushWard ویجٹ حذف کریں۔ اگر کوئی ٹریک شدہ ویجٹ کنفگ انٹری اب بھی اس slug کو چلا رہی ہے، تو اگلے ری اسٹارٹ/سنک پر ویجٹ دوبارہ بن جائے گا — اسے مستقل حذف کرنے کے لیے کنفگ انٹری ہٹا دیں۔ slug یا entity_id میں سے ایک فراہم کریں۔",
+      "fields": {
+        "slug": {
+          "name": "Slug",
+          "description": "ویجٹ کا slug شناخت کنندہ۔ slug یا entity_id میں سے ایک لازمی فراہم کرنا ہوگا۔"
+        },
+        "entity_id": {
+          "name": "اینٹٹی",
+          "description": "ویجٹ سے منسلک HA اینٹٹی۔ کنفگ کے ذریعے مماثل ویجٹ سے حل کی جاتی ہے۔ slug یا entity_id میں سے ایک لازمی فراہم کرنا ہوگا۔"
+        }
+      }
+    }
+  },
+  "config": {
+    "step": {
+      "user": {
+        "title": "PushWard سے جڑیں",
+        "data": {
+          "integration_key": "انٹیگریشن کی"
+        },
+        "description": "شروع کرنے کے لیے اپنی PushWard انٹیگریشن کلید درج کریں۔ PushWard iOS ایپ App Store سے حاصل کریں: {app_store_url}",
+        "data_description": {
+          "integration_key": "PushWard iOS ایپ کھولیں (App Store: {app_store_url}) → Settings → Integration Keys۔ آپ ڈیفالٹ کلید پیسٹ کر سکتے ہیں، یا 'ha-*' اسکوپ کے ساتھ نئی بنا سکتے ہیں۔"
+        }
+      },
+      "reconfigure": {
+        "title": "PushWard دوبارہ ترتیب دیں",
+        "description": "اپنی PushWard انٹیگریشن کی اپڈیٹ کریں۔",
+        "data": {
+          "integration_key": "انٹیگریشن کی"
+        },
+        "data_description": {
+          "integration_key": "PushWard iOS ایپ میں Settings → Integration Keys کے تحت 'ha-*' scope کے ساتھ ایک بنائیں۔"
+        }
+      },
+      "reauth_confirm": {
+        "title": "دوبارہ توثیق کریں",
+        "description": "PushWard انٹیگریشن کی غلط ہے۔ براہ کرم نئی کی فراہم کریں۔",
+        "data": {
+          "integration_key": "انٹیگریشن کی"
+        },
+        "data_description": {
+          "integration_key": "PushWard iOS ایپ میں Settings → Integration Keys کے تحت 'ha-*' scope کے ساتھ ایک بنائیں۔"
+        }
+      }
+    },
+    "error": {
+      "cannot_connect": "PushWard سرور سے کنکشن ناکام رہا۔",
+      "invalid_auth": "انٹیگریشن کی غلط ہے۔",
+      "invalid_url": "URL کو http:// یا https:// scheme استعمال کرنی چاہیے۔",
+      "unknown": "ایک غیر متوقع خرابی پیش آئی۔"
+    },
+    "abort": {
+      "already_configured": "PushWard پہلے سے ترتیب شدہ ہے۔",
+      "reconfigure_successful": "PushWard کی ترتیب اپڈیٹ ہو گئی۔",
+      "reauth_successful": "دوبارہ توثیق کامیاب رہی۔"
+    }
+  },
+  "config_subentries": {
+    "tracked_entity": {
+      "entry_type": "ٹریک شدہ اینٹٹی",
+      "initiate_flow": {
+        "user": "ٹریک شدہ اینٹٹی شامل کریں"
+      },
+      "step": {
+        "user": {
+          "title": "PushWard میں اینٹٹی شامل کریں",
+          "data": {
+            "entity_id": "اینٹٹی",
+            "template": "ٹیمپلیٹ"
+          },
+          "data_description": {
+            "template": "سرگرمی کا لے آؤٹ ٹیمپلیٹ۔ 'generic' زیادہ تر اینٹٹیز کے لیے کام کرتا ہے۔"
+          }
+        },
+        "details": {
+          "title": "2 of 4 · Lifecycle and updates",
+          "data": {
+            "start_states": "شروع کرنے والی حالتیں",
+            "end_states": "ختم کرنے والی حالتیں",
+            "progress_attribute": "پیش رفت کی خصوصیت",
+            "remaining_time_attribute": "بقیہ وقت کی خصوصیت",
+            "total_steps": "کل steps",
+            "current_step_attribute": "موجودہ مرحلے کی خصوصیت",
+            "severity": "شدت",
+            "value_attribute": "قدر کی خصوصیت",
+            "min_value": "کم از کم قدر",
+            "max_value": "زیادہ سے زیادہ قدر",
+            "unit": "اکائی",
+            "series": "سیریز",
+            "scale": "پیمانہ",
+            "decimals": "اعشاریہ مقامات",
+            "smoothing": "ہموار لکیریں",
+            "thresholds": "حدود",
+            "history_period": "پچھلی تاریخ کی مدت",
+            "slug": "Activity Slug",
+            "activity_name": "سرگرمی کا نام",
+            "icon": "آئیکن",
+            "icon_attribute": "آئیکن کی خصوصیت",
+            "priority": "ترجیح (0-10)",
+            "update_interval": "کم از کم اپڈیٹ وقفہ (سیکنڈ)",
+            "subtitle_attribute": "ذیلی عنوان کی خصوصیت",
+            "state_labels": "حالت کے لیبل",
+            "completion_message": "تکمیل کا پیغام",
+            "accent_color": "لہجے کا رنگ",
+            "accent_color_attribute": "لہجے کے رنگ کی خصوصیت",
+            "url": "URL",
+            "secondary_url": "ثانوی URL",
+            "ended_ttl": "اختتام کے بعد خودکار حذف (سیکنڈ)",
+            "stale_ttl": "غیر فعال رہنے کے بعد خودکار اختتام (سیکنڈ)",
+            "sound": "آواز",
+            "background_color": "پس منظر کا رنگ",
+            "background_color_attribute": "پس منظر رنگ کی خصوصیت",
+            "text_color": "متن کا رنگ",
+            "text_color_attribute": "متن رنگ کی خصوصیت",
+            "warning_threshold": "انتباہ کی حد",
+            "alarm": "الارم",
+            "step_labels": "مرحلے کے لیبل",
+            "step_rows": "مرحلے کی قطاریں",
+            "fired_at_attribute": "فعال ہونے کے وقت کی خصوصیت",
+            "units": "اکائیاں",
+            "progress_entity": "پیش رفت اینٹٹی",
+            "remaining_time_entity": "بقیہ وقت اینٹٹی",
+            "current_step_entity": "موجودہ مرحلہ اینٹٹی",
+            "value_entity": "قدر اینٹٹی",
+            "subtitle_entity": "ذیلی عنوان اینٹٹی",
+            "tap_action_url": "ٹیپ ایکشن URL",
+            "tap_action_foreground": "ٹیپ ایکشن URL کھولیں",
+            "url_foreground": "پرائمری بٹن URL کھولیں",
+            "url_title": "پرائمری بٹن کا عنوان",
+            "secondary_url_foreground": "ثانوی بٹن URL کھولیں",
+            "secondary_url_title": "ثانوی بٹن کا عنوان",
+            "snooze_seconds": "Snooze Seconds (iOS 26+)",
+            "fired_at_entity": "Fired At اینٹٹی",
+            "log_columns": "لاگ کالم"
+          },
+          "data_description": {
+            "start_states": "اینٹٹی کی وہ حالتیں جو Live Activity شروع کرتی ہیں۔ فہرست سے منتخب کریں یا اپنی مرضی کی قدریں ٹائپ کریں۔",
+            "end_states": "اینٹٹی کی وہ حالتیں جو Live Activity ختم کرتی ہیں۔ فہرست سے منتخب کریں یا اپنی مرضی کی قدریں ٹائپ کریں۔",
+            "progress_attribute": "اینٹٹی کی وہ خصوصیت جو 0–100 پیش رفت کی قدر رکھتی ہے۔ مثال: percentage",
+            "remaining_time_attribute": "اینٹٹی کی وہ خصوصیت جو سیکنڈوں میں بقیہ وقت رکھتی ہے۔ مثال: remaining",
+            "total_steps": "steps کی کل تعداد۔",
+            "current_step_attribute": "موجودہ مرحلہ integer کے طور پر رکھنے والی اینٹٹی کی خصوصیت۔",
+            "severity": "alert کی شدت کی سطح۔",
+            "value_attribute": "موجودہ gauge قدر بطور نمبر رکھنے والی اینٹٹی کی خصوصیت۔ اینٹٹی کی حالت استعمال کرنے کے لیے خالی چھوڑیں۔",
+            "min_value": "gauge کی حد کے لیے کم از کم قدر۔",
+            "max_value": "gauge کی حد کے لیے زیادہ سے زیادہ قدر۔",
+            "unit": "قدر کے ساتھ ظاہر ہونے والی اکائی (مثلاً °C، %، kW)۔ زیادہ سے زیادہ 32 حروف۔",
+            "series": "اینٹٹی کی خصوصیات کو نامزد سیریز سے منسلک کریں۔ فارمیٹ: attribute=Label, attribute2=Label2۔ ایک سیریز کے طور پر اینٹٹی کی حالت استعمال کرنے کے لیے خالی چھوڑیں۔",
+            "scale": "sparkline چارٹ کے لیے Y-محور کا پیمانہ۔",
+            "decimals": "قدریں ظاہر کرنے کے لیے اعشاریہ مقامات کی تعداد (0–10)۔",
+            "smoothing": "ہموار sparkline کے لیے ڈیٹا پوائنٹس کے درمیان منحنی انٹرپولیشن فعال کریں۔",
+            "thresholds": "sparkline پر افقی حوالہ لکیریں۔ فارمیٹ: value:color:label۔ مثال: 25:red:Hot, 18:blue:Cold۔ زیادہ سے زیادہ 5۔",
+            "history_period": "Home Assistant کے recorder سے sparkline میں ماضی کا ڈیٹا بھرنے کے منٹ۔ بغیر تاریخ کے شروع کرنے کے لیے 0 سیٹ کریں۔",
+            "slug": "اس سرگرمی کی منفرد شناخت۔ entity ID سے خودکار تخلیق کے لیے خالی چھوڑیں۔ مثال: ha-living-room-lamp",
+            "activity_name": "iPhone Live Activity پر دکھایا جانے والا ظاہری نام۔ پہلے سے طے اینٹٹی کا دوستانہ نام ہے۔",
+            "icon": "آئیکن کو اوور رائڈ کریں۔ اینٹٹی کا اصل آئیکن استعمال کرنے کے لیے خالی چھوڑیں (مثلاً mdi:thermometer)۔ SF Symbols بھی سپورٹ ہیں (مثلاً lamp.desk.fill)۔",
+            "icon_attribute": "متحرک آئیکن کے لیے اینٹٹی کی خصوصیت۔ سیٹ ہونے پر static آئیکن اور اینٹٹی آئیکن کو اوور رائڈ کرتی ہے۔",
+            "priority": "زیادہ ترجیح والی سرگرمیاں آلے کی حد پوری ہونے پر زیادہ دیر تک رکھی جاتی ہیں (0 = کم ترین، 10 = سب سے زیادہ)۔",
+            "update_interval": "اپڈیٹس کے درمیان کم از کم سیکنڈ۔ تیز رفتار حالت تبدیلیوں کو محدود کیا جاتا ہے۔",
+            "subtitle_attribute": "ذیلی عنوان کے طور پر دکھانے کے لیے اینٹٹی کی خصوصیت۔ اینٹٹی کا دوستانہ نام استعمال کرنے کے لیے خالی چھوڑیں۔",
+            "state_labels": "حالتوں کے لیے اپنی مرضی کا ظاہری متن۔ فارمیٹ: state=Label, state2=Label 2۔ مثال: heating=Heating Up, idle=Standby",
+            "completion_message": "سرگرمی ختم ہونے پر دکھایا جانے والا متن۔ 'Complete' کے لیے خالی چھوڑیں۔ مثال: Wash Done",
+            "accent_color": "Live Activity کے لیے لہجے کا رنگ۔ پہلے سے طے نیلے رنگ کے لیے خالی چھوڑیں۔",
+            "accent_color_attribute": "متحرک لہجے کے رنگ کے لیے اینٹٹی کی خصوصیت۔ static رنگ کو اوور رائڈ کرتی ہے۔ RGB، HS، XY، Kelvin، نامزد رنگ اور hex سپورٹ کرتا ہے۔",
+            "url": "Live Activity ٹیپ کرنے پر کھلنے والا لنک۔ http:// یا https:// سے شروع ہونا ضروری ہے۔ صرف steps اور alert ٹیمپلیٹس۔",
+            "secondary_url": "Live Activity کے لیے ثانوی لنک۔ صرف steps اور alert ٹیمپلیٹس۔",
+            "ended_ttl": "سرگرمی ختم ہونے کے بعد سرور سے خودکار حذف سے پہلے کے سیکنڈ۔ غیر معینہ مدت تک رکھنے کے لیے خالی چھوڑیں۔ مثال: 300",
+            "stale_ttl": "سرور کے ذریعے سرگرمی خودکار ختم کرنے سے پہلے غیر فعالیت کے سیکنڈ۔ غیر فعال کرنے کے لیے خالی چھوڑیں۔ مثال: 1800",
+            "sound": "اس اپڈیٹ کے لیے اطلاع کی آواز کا نام۔ iOS کی سسٹم آواز کے لیے خالی چھوڑیں۔",
+            "background_color": "Live Activity کا پس منظر رنگ۔ #RRGGBB یا نامزد رنگ۔ سسٹم ڈیفالٹ کے لیے خالی چھوڑیں۔",
+            "background_color_attribute": "متحرک پس منظر رنگ کے لیے اینٹٹی کی خصوصیت۔ static پس منظر رنگ کو اوور رائڈ کرتی ہے۔",
+            "text_color": "Live Activity کا متن رنگ۔ #RRGGBB یا نامزد رنگ۔ سسٹم ڈیفالٹ کے لیے خالی چھوڑیں۔",
+            "text_color_attribute": "متحرک متن رنگ کے لیے اینٹٹی کی خصوصیت۔ static متن رنگ کو اوور رائڈ کرتی ہے۔",
+            "warning_threshold": "جب مان اس قدر پر پہنچے یا اس سے تجاوز کرے تو انتباہ رنگ متحرک ہوتا ہے۔ gauge اور timeline ٹیمپلیٹس۔",
+            "alarm": "انتباہ کی حد تجاوز ہونے پر AlarmKit الارم متحرک کرتا ہے۔ صرف iOS 26+۔",
+            "step_labels": "steps ٹیمپلیٹ کے مراحل کے لیے کسٹم لیبل۔ فارمیٹ: 1=لیبل، 2=لیبل۔ خالی ہونے پر مرحلے کے نمبر استعمال ہوتے ہیں۔",
+            "step_rows": "steps ٹیمپلیٹ میں ایک قطار میں دکھائے جانے والے مراحل کی تعداد۔",
+            "fired_at_attribute": "ٹرگر کی Unix ٹائم اسٹیمپ رکھنے والی اینٹٹی کی خصوصیت۔ ملتوی وقت ظاہر کرنے کے لیے استعمال۔",
+            "units": "Timeline سیریز کے لیے اکائی لیبل۔ فارمیٹ: attribute=اکائی۔ مثال: temp=°C، humidity=%",
+            "progress_entity": "ٹریک شدہ اینٹٹی کے بجائے کسی الگ اینٹٹی سے پیش رفت پڑھیں۔ ٹریک شدہ اینٹٹی استعمال کرنے کے لیے خالی چھوڑیں۔ attribute فیلڈ سیٹ ہونے پر اس اینٹٹی کی وہی خصوصیت پڑھتا ہے؛ ورنہ اس کی state۔",
+            "remaining_time_entity": "کسی الگ اینٹٹی (مثلاً واشر کے ٹائم سینسر) سے بقیہ وقت پڑھیں۔ ٹریک شدہ اینٹٹی استعمال کرنے کے لیے خالی چھوڑیں۔ ایک timestamp (مکمل ہونے کا وقت) سینسر، اکائیوں والا duration سینسر، H:MM:SS سٹرنگ، یا سادہ سیکنڈ خودکار پارس کرتا ہے۔",
+            "current_step_entity": "کسی الگ اینٹٹی سے موجودہ مرحلہ پڑھیں۔ ٹریک شدہ اینٹٹی استعمال کرنے کے لیے خالی چھوڑیں۔",
+            "value_entity": "کسی الگ اینٹٹی سے gauge قدر پڑھیں۔ ٹریک شدہ اینٹٹی استعمال کرنے کے لیے خالی چھوڑیں۔ جب تک کوئی attribute سیٹ نہ ہو، ماخذ اینٹٹی کی state استعمال کرتا ہے۔",
+            "subtitle_entity": "کسی الگ اینٹٹی (مثلاً program/mode سینسر) سے ذیلی عنوان دکھائیں۔ ٹریک شدہ اینٹٹی استعمال کرنے کے لیے خالی چھوڑیں۔ جب تک کوئی attribute سیٹ نہ ہو، ماخذ اینٹٹی کی state استعمال کرتا ہے۔",
+            "tap_action_url": "اختیاری URL جو Live Activity کے پس منظر پر ٹیپ کرنے پر کھلتا ہے۔ http(s) (Safari کھولتا ہے) یا کسٹم اسکیمیں جیسے homeassistant://navigate/lovelace/0 (وہ ایپ کھولتی ہے) سپورٹ کرتا ہے۔",
+            "tap_action_foreground": "آن: ٹیپ سے URL کھلتا ہے۔ آف: خاموش webhook (صرف http(s)) — Lock Screen چھوڑے بغیر پس منظر میں POST چلاتا ہے۔",
+            "url_foreground": "آن: ٹیپ سے URL کھلتا ہے۔ آف: خاموش webhook (صرف http(s))۔",
+            "url_title": "پرائمری بٹن کا لیبل (زیادہ سے زیادہ 64 حروف)۔",
+            "secondary_url_foreground": "آن: ٹیپ سے URL کھلتا ہے۔ آف: خاموش webhook (صرف http(s))۔",
+            "secondary_url_title": "ثانوی بٹن کا لیبل (زیادہ سے زیادہ 64 حروف)۔",
+            "snooze_seconds": "iOS Snooze بٹن کاؤنٹ ڈاؤن کو کتنا بڑھاتا ہے (60–3600)۔ 300s (5 منٹ) ڈیفالٹ کے لیے خالی چھوڑیں۔ Alarm درکار ہے۔ صرف Countdown ٹیمپلیٹ۔",
+            "fired_at_entity": "کسی الگ اینٹٹی سے alert کے fired-at وقت کو پڑھیں۔ ٹریک شدہ اینٹٹی استعمال کرنے کے لیے خالی چھوڑیں۔ ایک unix timestamp یا ISO timestamp سینسر قبول کرتا ہے۔ صرف Alert ٹیمپلیٹ۔",
+            "log_columns": "ہر لاگ لائن میں شامل کی جانے والی اضافی اقدار (زیادہ سے زیادہ 6)، کوما سے الگ۔ فارمیٹ: [Label=]source[|unit]. source = اس اینٹٹی کی ایک خصوصیت (brightness)، کسی دوسری اینٹٹی کی حالت (binary_sensor.door)، یا کسی دوسری اینٹٹی کی خصوصیت (sensor.temp:temperature)۔ مثال: color_temp_kelvin|K, brightness → 'On · 4000K · 153'۔ صرف لاگ ٹیمپلیٹ۔"
+          },
+          "description": "Choose when this activity starts and ends, how often it updates, and how PushWard retains it."
+        },
+        "reconfigure": {
+          "title": "اینٹٹی کی ترتیب تبدیل کریں",
+          "data": {
+            "entity_id": "اینٹٹی",
+            "template": "ٹیمپلیٹ"
+          },
+          "data_description": {
+            "template": "سرگرمی کا لے آؤٹ ٹیمپلیٹ۔ 'generic' زیادہ تر اینٹٹیز کے لیے کام کرتا ہے۔"
+          }
+        },
+        "content": {
+          "title": "3 of 4 · {template} content",
+          "data": {
+            "start_states": "شروع کرنے والی حالتیں",
+            "end_states": "ختم کرنے والی حالتیں",
+            "progress_attribute": "پیش رفت کی خصوصیت",
+            "remaining_time_attribute": "بقیہ وقت کی خصوصیت",
+            "total_steps": "کل steps",
+            "current_step_attribute": "موجودہ مرحلے کی خصوصیت",
+            "severity": "شدت",
+            "value_attribute": "قدر کی خصوصیت",
+            "min_value": "کم از کم قدر",
+            "max_value": "زیادہ سے زیادہ قدر",
+            "unit": "اکائی",
+            "series": "سیریز",
+            "scale": "پیمانہ",
+            "decimals": "اعشاریہ مقامات",
+            "smoothing": "ہموار لکیریں",
+            "thresholds": "حدود",
+            "history_period": "پچھلی تاریخ کی مدت",
+            "slug": "Activity Slug",
+            "activity_name": "سرگرمی کا نام",
+            "icon": "آئیکن",
+            "icon_attribute": "آئیکن کی خصوصیت",
+            "priority": "ترجیح (0-10)",
+            "update_interval": "کم از کم اپڈیٹ وقفہ (سیکنڈ)",
+            "subtitle_attribute": "ذیلی عنوان کی خصوصیت",
+            "state_labels": "حالت کے لیبل",
+            "completion_message": "تکمیل کا پیغام",
+            "accent_color": "لہجے کا رنگ",
+            "accent_color_attribute": "لہجے کے رنگ کی خصوصیت",
+            "url": "URL",
+            "secondary_url": "ثانوی URL",
+            "ended_ttl": "اختتام کے بعد خودکار حذف (سیکنڈ)",
+            "stale_ttl": "غیر فعال رہنے کے بعد خودکار اختتام (سیکنڈ)",
+            "sound": "آواز",
+            "background_color": "پس منظر کا رنگ",
+            "background_color_attribute": "پس منظر رنگ کی خصوصیت",
+            "text_color": "متن کا رنگ",
+            "text_color_attribute": "متن رنگ کی خصوصیت",
+            "warning_threshold": "انتباہ کی حد",
+            "alarm": "الارم",
+            "step_labels": "مرحلے کے لیبل",
+            "step_rows": "مرحلے کی قطاریں",
+            "fired_at_attribute": "فعال ہونے کے وقت کی خصوصیت",
+            "units": "اکائیاں",
+            "progress_entity": "پیش رفت اینٹٹی",
+            "remaining_time_entity": "بقیہ وقت اینٹٹی",
+            "current_step_entity": "موجودہ مرحلہ اینٹٹی",
+            "value_entity": "قدر اینٹٹی",
+            "subtitle_entity": "ذیلی عنوان اینٹٹی",
+            "tap_action_url": "ٹیپ ایکشن URL",
+            "tap_action_foreground": "ٹیپ ایکشن URL کھولیں",
+            "url_foreground": "پرائمری بٹن URL کھولیں",
+            "url_title": "پرائمری بٹن کا عنوان",
+            "secondary_url_foreground": "ثانوی بٹن URL کھولیں",
+            "secondary_url_title": "ثانوی بٹن کا عنوان",
+            "snooze_seconds": "Snooze Seconds (iOS 26+)",
+            "fired_at_entity": "Fired At اینٹٹی",
+            "log_columns": "لاگ کالم"
+          },
+          "data_description": {
+            "start_states": "اینٹٹی کی وہ حالتیں جو Live Activity شروع کرتی ہیں۔ فہرست سے منتخب کریں یا اپنی مرضی کی قدریں ٹائپ کریں۔",
+            "end_states": "اینٹٹی کی وہ حالتیں جو Live Activity ختم کرتی ہیں۔ فہرست سے منتخب کریں یا اپنی مرضی کی قدریں ٹائپ کریں۔",
+            "progress_attribute": "اینٹٹی کی وہ خصوصیت جو 0–100 پیش رفت کی قدر رکھتی ہے۔ مثال: percentage",
+            "remaining_time_attribute": "اینٹٹی کی وہ خصوصیت جو سیکنڈوں میں بقیہ وقت رکھتی ہے۔ مثال: remaining",
+            "total_steps": "steps کی کل تعداد۔",
+            "current_step_attribute": "موجودہ مرحلہ integer کے طور پر رکھنے والی اینٹٹی کی خصوصیت۔",
+            "severity": "alert کی شدت کی سطح۔",
+            "value_attribute": "موجودہ gauge قدر بطور نمبر رکھنے والی اینٹٹی کی خصوصیت۔ اینٹٹی کی حالت استعمال کرنے کے لیے خالی چھوڑیں۔",
+            "min_value": "gauge کی حد کے لیے کم از کم قدر۔",
+            "max_value": "gauge کی حد کے لیے زیادہ سے زیادہ قدر۔",
+            "unit": "قدر کے ساتھ ظاہر ہونے والی اکائی (مثلاً °C، %، kW)۔ زیادہ سے زیادہ 32 حروف۔",
+            "series": "اینٹٹی کی خصوصیات کو نامزد سیریز سے منسلک کریں۔ فارمیٹ: attribute=Label, attribute2=Label2۔ ایک سیریز کے طور پر اینٹٹی کی حالت استعمال کرنے کے لیے خالی چھوڑیں۔",
+            "scale": "sparkline چارٹ کے لیے Y-محور کا پیمانہ۔",
+            "decimals": "قدریں ظاہر کرنے کے لیے اعشاریہ مقامات کی تعداد (0–10)۔",
+            "smoothing": "ہموار sparkline کے لیے ڈیٹا پوائنٹس کے درمیان منحنی انٹرپولیشن فعال کریں۔",
+            "thresholds": "sparkline پر افقی حوالہ لکیریں۔ فارمیٹ: value:color:label۔ مثال: 25:red:Hot, 18:blue:Cold۔ زیادہ سے زیادہ 5۔",
+            "history_period": "Home Assistant کے recorder سے sparkline میں ماضی کا ڈیٹا بھرنے کے منٹ۔ بغیر تاریخ کے شروع کرنے کے لیے 0 سیٹ کریں۔",
+            "slug": "اس سرگرمی کی منفرد شناخت۔ entity ID سے خودکار تخلیق کے لیے خالی چھوڑیں۔ مثال: ha-living-room-lamp",
+            "activity_name": "iPhone Live Activity پر دکھایا جانے والا ظاہری نام۔ پہلے سے طے اینٹٹی کا دوستانہ نام ہے۔",
+            "icon": "آئیکن کو اوور رائڈ کریں۔ اینٹٹی کا اصل آئیکن استعمال کرنے کے لیے خالی چھوڑیں (مثلاً mdi:thermometer)۔ SF Symbols بھی سپورٹ ہیں (مثلاً lamp.desk.fill)۔",
+            "icon_attribute": "متحرک آئیکن کے لیے اینٹٹی کی خصوصیت۔ سیٹ ہونے پر static آئیکن اور اینٹٹی آئیکن کو اوور رائڈ کرتی ہے۔",
+            "priority": "زیادہ ترجیح والی سرگرمیاں آلے کی حد پوری ہونے پر زیادہ دیر تک رکھی جاتی ہیں (0 = کم ترین، 10 = سب سے زیادہ)۔",
+            "update_interval": "اپڈیٹس کے درمیان کم از کم سیکنڈ۔ تیز رفتار حالت تبدیلیوں کو محدود کیا جاتا ہے۔",
+            "subtitle_attribute": "ذیلی عنوان کے طور پر دکھانے کے لیے اینٹٹی کی خصوصیت۔ اینٹٹی کا دوستانہ نام استعمال کرنے کے لیے خالی چھوڑیں۔",
+            "state_labels": "حالتوں کے لیے اپنی مرضی کا ظاہری متن۔ فارمیٹ: state=Label, state2=Label 2۔ مثال: heating=Heating Up, idle=Standby",
+            "completion_message": "سرگرمی ختم ہونے پر دکھایا جانے والا متن۔ 'Complete' کے لیے خالی چھوڑیں۔ مثال: Wash Done",
+            "accent_color": "Live Activity کے لیے لہجے کا رنگ۔ پہلے سے طے نیلے رنگ کے لیے خالی چھوڑیں۔",
+            "accent_color_attribute": "متحرک لہجے کے رنگ کے لیے اینٹٹی کی خصوصیت۔ static رنگ کو اوور رائڈ کرتی ہے۔ RGB، HS، XY، Kelvin، نامزد رنگ اور hex سپورٹ کرتا ہے۔",
+            "url": "Live Activity ٹیپ کرنے پر کھلنے والا لنک۔ http:// یا https:// سے شروع ہونا ضروری ہے۔ صرف steps اور alert ٹیمپلیٹس۔",
+            "secondary_url": "Live Activity کے لیے ثانوی لنک۔ صرف steps اور alert ٹیمپلیٹس۔",
+            "ended_ttl": "سرگرمی ختم ہونے کے بعد سرور سے خودکار حذف سے پہلے کے سیکنڈ۔ غیر معینہ مدت تک رکھنے کے لیے خالی چھوڑیں۔ مثال: 300",
+            "stale_ttl": "سرور کے ذریعے سرگرمی خودکار ختم کرنے سے پہلے غیر فعالیت کے سیکنڈ۔ غیر فعال کرنے کے لیے خالی چھوڑیں۔ مثال: 1800",
+            "sound": "اس اپڈیٹ کے لیے اطلاع کی آواز کا نام۔ iOS کی سسٹم آواز کے لیے خالی چھوڑیں۔",
+            "background_color": "Live Activity کا پس منظر رنگ۔ #RRGGBB یا نامزد رنگ۔ سسٹم ڈیفالٹ کے لیے خالی چھوڑیں۔",
+            "background_color_attribute": "متحرک پس منظر رنگ کے لیے اینٹٹی کی خصوصیت۔ static پس منظر رنگ کو اوور رائڈ کرتی ہے۔",
+            "text_color": "Live Activity کا متن رنگ۔ #RRGGBB یا نامزد رنگ۔ سسٹم ڈیفالٹ کے لیے خالی چھوڑیں۔",
+            "text_color_attribute": "متحرک متن رنگ کے لیے اینٹٹی کی خصوصیت۔ static متن رنگ کو اوور رائڈ کرتی ہے۔",
+            "warning_threshold": "جب مان اس قدر پر پہنچے یا اس سے تجاوز کرے تو انتباہ رنگ متحرک ہوتا ہے۔ gauge اور timeline ٹیمپلیٹس۔",
+            "alarm": "انتباہ کی حد تجاوز ہونے پر AlarmKit الارم متحرک کرتا ہے۔ صرف iOS 26+۔",
+            "step_labels": "steps ٹیمپلیٹ کے مراحل کے لیے کسٹم لیبل۔ فارمیٹ: 1=لیبل، 2=لیبل۔ خالی ہونے پر مرحلے کے نمبر استعمال ہوتے ہیں۔",
+            "step_rows": "steps ٹیمپلیٹ میں ایک قطار میں دکھائے جانے والے مراحل کی تعداد۔",
+            "fired_at_attribute": "ٹرگر کی Unix ٹائم اسٹیمپ رکھنے والی اینٹٹی کی خصوصیت۔ ملتوی وقت ظاہر کرنے کے لیے استعمال۔",
+            "units": "Timeline سیریز کے لیے اکائی لیبل۔ فارمیٹ: attribute=اکائی۔ مثال: temp=°C، humidity=%",
+            "progress_entity": "ٹریک شدہ اینٹٹی کے بجائے کسی الگ اینٹٹی سے پیش رفت پڑھیں۔ ٹریک شدہ اینٹٹی استعمال کرنے کے لیے خالی چھوڑیں۔ attribute فیلڈ سیٹ ہونے پر اس اینٹٹی کی وہی خصوصیت پڑھتا ہے؛ ورنہ اس کی state۔",
+            "remaining_time_entity": "کسی الگ اینٹٹی (مثلاً واشر کے ٹائم سینسر) سے بقیہ وقت پڑھیں۔ ٹریک شدہ اینٹٹی استعمال کرنے کے لیے خالی چھوڑیں۔ ایک timestamp (مکمل ہونے کا وقت) سینسر، اکائیوں والا duration سینسر، H:MM:SS سٹرنگ، یا سادہ سیکنڈ خودکار پارس کرتا ہے۔",
+            "current_step_entity": "کسی الگ اینٹٹی سے موجودہ مرحلہ پڑھیں۔ ٹریک شدہ اینٹٹی استعمال کرنے کے لیے خالی چھوڑیں۔",
+            "value_entity": "کسی الگ اینٹٹی سے gauge قدر پڑھیں۔ ٹریک شدہ اینٹٹی استعمال کرنے کے لیے خالی چھوڑیں۔ جب تک کوئی attribute سیٹ نہ ہو، ماخذ اینٹٹی کی state استعمال کرتا ہے۔",
+            "subtitle_entity": "کسی الگ اینٹٹی (مثلاً program/mode سینسر) سے ذیلی عنوان دکھائیں۔ ٹریک شدہ اینٹٹی استعمال کرنے کے لیے خالی چھوڑیں۔ جب تک کوئی attribute سیٹ نہ ہو، ماخذ اینٹٹی کی state استعمال کرتا ہے۔",
+            "tap_action_url": "اختیاری URL جو Live Activity کے پس منظر پر ٹیپ کرنے پر کھلتا ہے۔ http(s) (Safari کھولتا ہے) یا کسٹم اسکیمیں جیسے homeassistant://navigate/lovelace/0 (وہ ایپ کھولتی ہے) سپورٹ کرتا ہے۔",
+            "tap_action_foreground": "آن: ٹیپ سے URL کھلتا ہے۔ آف: خاموش webhook (صرف http(s)) — Lock Screen چھوڑے بغیر پس منظر میں POST چلاتا ہے۔",
+            "url_foreground": "آن: ٹیپ سے URL کھلتا ہے۔ آف: خاموش webhook (صرف http(s))۔",
+            "url_title": "پرائمری بٹن کا لیبل (زیادہ سے زیادہ 64 حروف)۔",
+            "secondary_url_foreground": "آن: ٹیپ سے URL کھلتا ہے۔ آف: خاموش webhook (صرف http(s))۔",
+            "secondary_url_title": "ثانوی بٹن کا لیبل (زیادہ سے زیادہ 64 حروف)۔",
+            "snooze_seconds": "iOS Snooze بٹن کاؤنٹ ڈاؤن کو کتنا بڑھاتا ہے (60–3600)۔ 300s (5 منٹ) ڈیفالٹ کے لیے خالی چھوڑیں۔ Alarm درکار ہے۔ صرف Countdown ٹیمپلیٹ۔",
+            "fired_at_entity": "کسی الگ اینٹٹی سے alert کے fired-at وقت کو پڑھیں۔ ٹریک شدہ اینٹٹی استعمال کرنے کے لیے خالی چھوڑیں۔ ایک unix timestamp یا ISO timestamp سینسر قبول کرتا ہے۔ صرف Alert ٹیمپلیٹ۔",
+            "log_columns": "ہر لاگ لائن میں شامل کی جانے والی اضافی اقدار (زیادہ سے زیادہ 6)، کوما سے الگ۔ فارمیٹ: [Label=]source[|unit]. source = اس اینٹٹی کی ایک خصوصیت (brightness)، کسی دوسری اینٹٹی کی حالت (binary_sensor.door)، یا کسی دوسری اینٹٹی کی خصوصیت (sensor.temp:temperature)۔ مثال: color_temp_kelvin|K, brightness → 'On · 4000K · 153'۔ صرف لاگ ٹیمپلیٹ۔"
+          },
+          "description": "Configure only the values used by the selected Live Activity layout."
+        },
+        "appearance": {
+          "title": "4 of 4 · Appearance and actions",
+          "data": {
+            "start_states": "شروع کرنے والی حالتیں",
+            "end_states": "ختم کرنے والی حالتیں",
+            "progress_attribute": "پیش رفت کی خصوصیت",
+            "remaining_time_attribute": "بقیہ وقت کی خصوصیت",
+            "total_steps": "کل steps",
+            "current_step_attribute": "موجودہ مرحلے کی خصوصیت",
+            "severity": "شدت",
+            "value_attribute": "قدر کی خصوصیت",
+            "min_value": "کم از کم قدر",
+            "max_value": "زیادہ سے زیادہ قدر",
+            "unit": "اکائی",
+            "series": "سیریز",
+            "scale": "پیمانہ",
+            "decimals": "اعشاریہ مقامات",
+            "smoothing": "ہموار لکیریں",
+            "thresholds": "حدود",
+            "history_period": "پچھلی تاریخ کی مدت",
+            "slug": "Activity Slug",
+            "activity_name": "سرگرمی کا نام",
+            "icon": "آئیکن",
+            "icon_attribute": "آئیکن کی خصوصیت",
+            "priority": "ترجیح (0-10)",
+            "update_interval": "کم از کم اپڈیٹ وقفہ (سیکنڈ)",
+            "subtitle_attribute": "ذیلی عنوان کی خصوصیت",
+            "state_labels": "حالت کے لیبل",
+            "completion_message": "تکمیل کا پیغام",
+            "accent_color": "لہجے کا رنگ",
+            "accent_color_attribute": "لہجے کے رنگ کی خصوصیت",
+            "url": "URL",
+            "secondary_url": "ثانوی URL",
+            "ended_ttl": "اختتام کے بعد خودکار حذف (سیکنڈ)",
+            "stale_ttl": "غیر فعال رہنے کے بعد خودکار اختتام (سیکنڈ)",
+            "sound": "آواز",
+            "background_color": "پس منظر کا رنگ",
+            "background_color_attribute": "پس منظر رنگ کی خصوصیت",
+            "text_color": "متن کا رنگ",
+            "text_color_attribute": "متن رنگ کی خصوصیت",
+            "warning_threshold": "انتباہ کی حد",
+            "alarm": "الارم",
+            "step_labels": "مرحلے کے لیبل",
+            "step_rows": "مرحلے کی قطاریں",
+            "fired_at_attribute": "فعال ہونے کے وقت کی خصوصیت",
+            "units": "اکائیاں",
+            "progress_entity": "پیش رفت اینٹٹی",
+            "remaining_time_entity": "بقیہ وقت اینٹٹی",
+            "current_step_entity": "موجودہ مرحلہ اینٹٹی",
+            "value_entity": "قدر اینٹٹی",
+            "subtitle_entity": "ذیلی عنوان اینٹٹی",
+            "tap_action_url": "ٹیپ ایکشن URL",
+            "tap_action_foreground": "ٹیپ ایکشن URL کھولیں",
+            "url_foreground": "پرائمری بٹن URL کھولیں",
+            "url_title": "پرائمری بٹن کا عنوان",
+            "secondary_url_foreground": "ثانوی بٹن URL کھولیں",
+            "secondary_url_title": "ثانوی بٹن کا عنوان",
+            "snooze_seconds": "Snooze Seconds (iOS 26+)",
+            "fired_at_entity": "Fired At اینٹٹی",
+            "log_columns": "لاگ کالم"
+          },
+          "data_description": {
+            "start_states": "اینٹٹی کی وہ حالتیں جو Live Activity شروع کرتی ہیں۔ فہرست سے منتخب کریں یا اپنی مرضی کی قدریں ٹائپ کریں۔",
+            "end_states": "اینٹٹی کی وہ حالتیں جو Live Activity ختم کرتی ہیں۔ فہرست سے منتخب کریں یا اپنی مرضی کی قدریں ٹائپ کریں۔",
+            "progress_attribute": "اینٹٹی کی وہ خصوصیت جو 0–100 پیش رفت کی قدر رکھتی ہے۔ مثال: percentage",
+            "remaining_time_attribute": "اینٹٹی کی وہ خصوصیت جو سیکنڈوں میں بقیہ وقت رکھتی ہے۔ مثال: remaining",
+            "total_steps": "steps کی کل تعداد۔",
+            "current_step_attribute": "موجودہ مرحلہ integer کے طور پر رکھنے والی اینٹٹی کی خصوصیت۔",
+            "severity": "alert کی شدت کی سطح۔",
+            "value_attribute": "موجودہ gauge قدر بطور نمبر رکھنے والی اینٹٹی کی خصوصیت۔ اینٹٹی کی حالت استعمال کرنے کے لیے خالی چھوڑیں۔",
+            "min_value": "gauge کی حد کے لیے کم از کم قدر۔",
+            "max_value": "gauge کی حد کے لیے زیادہ سے زیادہ قدر۔",
+            "unit": "قدر کے ساتھ ظاہر ہونے والی اکائی (مثلاً °C، %، kW)۔ زیادہ سے زیادہ 32 حروف۔",
+            "series": "اینٹٹی کی خصوصیات کو نامزد سیریز سے منسلک کریں۔ فارمیٹ: attribute=Label, attribute2=Label2۔ ایک سیریز کے طور پر اینٹٹی کی حالت استعمال کرنے کے لیے خالی چھوڑیں۔",
+            "scale": "sparkline چارٹ کے لیے Y-محور کا پیمانہ۔",
+            "decimals": "قدریں ظاہر کرنے کے لیے اعشاریہ مقامات کی تعداد (0–10)۔",
+            "smoothing": "ہموار sparkline کے لیے ڈیٹا پوائنٹس کے درمیان منحنی انٹرپولیشن فعال کریں۔",
+            "thresholds": "sparkline پر افقی حوالہ لکیریں۔ فارمیٹ: value:color:label۔ مثال: 25:red:Hot, 18:blue:Cold۔ زیادہ سے زیادہ 5۔",
+            "history_period": "Home Assistant کے recorder سے sparkline میں ماضی کا ڈیٹا بھرنے کے منٹ۔ بغیر تاریخ کے شروع کرنے کے لیے 0 سیٹ کریں۔",
+            "slug": "اس سرگرمی کی منفرد شناخت۔ entity ID سے خودکار تخلیق کے لیے خالی چھوڑیں۔ مثال: ha-living-room-lamp",
+            "activity_name": "iPhone Live Activity پر دکھایا جانے والا ظاہری نام۔ پہلے سے طے اینٹٹی کا دوستانہ نام ہے۔",
+            "icon": "آئیکن کو اوور رائڈ کریں۔ اینٹٹی کا اصل آئیکن استعمال کرنے کے لیے خالی چھوڑیں (مثلاً mdi:thermometer)۔ SF Symbols بھی سپورٹ ہیں (مثلاً lamp.desk.fill)۔",
+            "icon_attribute": "متحرک آئیکن کے لیے اینٹٹی کی خصوصیت۔ سیٹ ہونے پر static آئیکن اور اینٹٹی آئیکن کو اوور رائڈ کرتی ہے۔",
+            "priority": "زیادہ ترجیح والی سرگرمیاں آلے کی حد پوری ہونے پر زیادہ دیر تک رکھی جاتی ہیں (0 = کم ترین، 10 = سب سے زیادہ)۔",
+            "update_interval": "اپڈیٹس کے درمیان کم از کم سیکنڈ۔ تیز رفتار حالت تبدیلیوں کو محدود کیا جاتا ہے۔",
+            "subtitle_attribute": "ذیلی عنوان کے طور پر دکھانے کے لیے اینٹٹی کی خصوصیت۔ اینٹٹی کا دوستانہ نام استعمال کرنے کے لیے خالی چھوڑیں۔",
+            "state_labels": "حالتوں کے لیے اپنی مرضی کا ظاہری متن۔ فارمیٹ: state=Label, state2=Label 2۔ مثال: heating=Heating Up, idle=Standby",
+            "completion_message": "سرگرمی ختم ہونے پر دکھایا جانے والا متن۔ 'Complete' کے لیے خالی چھوڑیں۔ مثال: Wash Done",
+            "accent_color": "Live Activity کے لیے لہجے کا رنگ۔ پہلے سے طے نیلے رنگ کے لیے خالی چھوڑیں۔",
+            "accent_color_attribute": "متحرک لہجے کے رنگ کے لیے اینٹٹی کی خصوصیت۔ static رنگ کو اوور رائڈ کرتی ہے۔ RGB، HS، XY، Kelvin، نامزد رنگ اور hex سپورٹ کرتا ہے۔",
+            "url": "Live Activity ٹیپ کرنے پر کھلنے والا لنک۔ http:// یا https:// سے شروع ہونا ضروری ہے۔ صرف steps اور alert ٹیمپلیٹس۔",
+            "secondary_url": "Live Activity کے لیے ثانوی لنک۔ صرف steps اور alert ٹیمپلیٹس۔",
+            "ended_ttl": "سرگرمی ختم ہونے کے بعد سرور سے خودکار حذف سے پہلے کے سیکنڈ۔ غیر معینہ مدت تک رکھنے کے لیے خالی چھوڑیں۔ مثال: 300",
+            "stale_ttl": "سرور کے ذریعے سرگرمی خودکار ختم کرنے سے پہلے غیر فعالیت کے سیکنڈ۔ غیر فعال کرنے کے لیے خالی چھوڑیں۔ مثال: 1800",
+            "sound": "اس اپڈیٹ کے لیے اطلاع کی آواز کا نام۔ iOS کی سسٹم آواز کے لیے خالی چھوڑیں۔",
+            "background_color": "Live Activity کا پس منظر رنگ۔ #RRGGBB یا نامزد رنگ۔ سسٹم ڈیفالٹ کے لیے خالی چھوڑیں۔",
+            "background_color_attribute": "متحرک پس منظر رنگ کے لیے اینٹٹی کی خصوصیت۔ static پس منظر رنگ کو اوور رائڈ کرتی ہے۔",
+            "text_color": "Live Activity کا متن رنگ۔ #RRGGBB یا نامزد رنگ۔ سسٹم ڈیفالٹ کے لیے خالی چھوڑیں۔",
+            "text_color_attribute": "متحرک متن رنگ کے لیے اینٹٹی کی خصوصیت۔ static متن رنگ کو اوور رائڈ کرتی ہے۔",
+            "warning_threshold": "جب مان اس قدر پر پہنچے یا اس سے تجاوز کرے تو انتباہ رنگ متحرک ہوتا ہے۔ gauge اور timeline ٹیمپلیٹس۔",
+            "alarm": "انتباہ کی حد تجاوز ہونے پر AlarmKit الارم متحرک کرتا ہے۔ صرف iOS 26+۔",
+            "step_labels": "steps ٹیمپلیٹ کے مراحل کے لیے کسٹم لیبل۔ فارمیٹ: 1=لیبل، 2=لیبل۔ خالی ہونے پر مرحلے کے نمبر استعمال ہوتے ہیں۔",
+            "step_rows": "steps ٹیمپلیٹ میں ایک قطار میں دکھائے جانے والے مراحل کی تعداد۔",
+            "fired_at_attribute": "ٹرگر کی Unix ٹائم اسٹیمپ رکھنے والی اینٹٹی کی خصوصیت۔ ملتوی وقت ظاہر کرنے کے لیے استعمال۔",
+            "units": "Timeline سیریز کے لیے اکائی لیبل۔ فارمیٹ: attribute=اکائی۔ مثال: temp=°C، humidity=%",
+            "progress_entity": "ٹریک شدہ اینٹٹی کے بجائے کسی الگ اینٹٹی سے پیش رفت پڑھیں۔ ٹریک شدہ اینٹٹی استعمال کرنے کے لیے خالی چھوڑیں۔ attribute فیلڈ سیٹ ہونے پر اس اینٹٹی کی وہی خصوصیت پڑھتا ہے؛ ورنہ اس کی state۔",
+            "remaining_time_entity": "کسی الگ اینٹٹی (مثلاً واشر کے ٹائم سینسر) سے بقیہ وقت پڑھیں۔ ٹریک شدہ اینٹٹی استعمال کرنے کے لیے خالی چھوڑیں۔ ایک timestamp (مکمل ہونے کا وقت) سینسر، اکائیوں والا duration سینسر، H:MM:SS سٹرنگ، یا سادہ سیکنڈ خودکار پارس کرتا ہے۔",
+            "current_step_entity": "کسی الگ اینٹٹی سے موجودہ مرحلہ پڑھیں۔ ٹریک شدہ اینٹٹی استعمال کرنے کے لیے خالی چھوڑیں۔",
+            "value_entity": "کسی الگ اینٹٹی سے gauge قدر پڑھیں۔ ٹریک شدہ اینٹٹی استعمال کرنے کے لیے خالی چھوڑیں۔ جب تک کوئی attribute سیٹ نہ ہو، ماخذ اینٹٹی کی state استعمال کرتا ہے۔",
+            "subtitle_entity": "کسی الگ اینٹٹی (مثلاً program/mode سینسر) سے ذیلی عنوان دکھائیں۔ ٹریک شدہ اینٹٹی استعمال کرنے کے لیے خالی چھوڑیں۔ جب تک کوئی attribute سیٹ نہ ہو، ماخذ اینٹٹی کی state استعمال کرتا ہے۔",
+            "tap_action_url": "اختیاری URL جو Live Activity کے پس منظر پر ٹیپ کرنے پر کھلتا ہے۔ http(s) (Safari کھولتا ہے) یا کسٹم اسکیمیں جیسے homeassistant://navigate/lovelace/0 (وہ ایپ کھولتی ہے) سپورٹ کرتا ہے۔",
+            "tap_action_foreground": "آن: ٹیپ سے URL کھلتا ہے۔ آف: خاموش webhook (صرف http(s)) — Lock Screen چھوڑے بغیر پس منظر میں POST چلاتا ہے۔",
+            "url_foreground": "آن: ٹیپ سے URL کھلتا ہے۔ آف: خاموش webhook (صرف http(s))۔",
+            "url_title": "پرائمری بٹن کا لیبل (زیادہ سے زیادہ 64 حروف)۔",
+            "secondary_url_foreground": "آن: ٹیپ سے URL کھلتا ہے۔ آف: خاموش webhook (صرف http(s))۔",
+            "secondary_url_title": "ثانوی بٹن کا لیبل (زیادہ سے زیادہ 64 حروف)۔",
+            "snooze_seconds": "iOS Snooze بٹن کاؤنٹ ڈاؤن کو کتنا بڑھاتا ہے (60–3600)۔ 300s (5 منٹ) ڈیفالٹ کے لیے خالی چھوڑیں۔ Alarm درکار ہے۔ صرف Countdown ٹیمپلیٹ۔",
+            "fired_at_entity": "کسی الگ اینٹٹی سے alert کے fired-at وقت کو پڑھیں۔ ٹریک شدہ اینٹٹی استعمال کرنے کے لیے خالی چھوڑیں۔ ایک unix timestamp یا ISO timestamp سینسر قبول کرتا ہے۔ صرف Alert ٹیمپلیٹ۔",
+            "log_columns": "ہر لاگ لائن میں شامل کی جانے والی اضافی اقدار (زیادہ سے زیادہ 6)، کوما سے الگ۔ فارمیٹ: [Label=]source[|unit]. source = اس اینٹٹی کی ایک خصوصیت (brightness)، کسی دوسری اینٹٹی کی حالت (binary_sensor.door)، یا کسی دوسری اینٹٹی کی خصوصیت (sensor.temp:temperature)۔ مثال: color_temp_kelvin|K, brightness → 'On · 4000K · 153'۔ صرف لاگ ٹیمپلیٹ۔"
+          },
+          "description": "Finish with labels, colors, icons, and tap behavior."
+        }
+      },
+      "error": {
+        "invalid_url": "URL کو http:// یا https:// scheme استعمال کرنی چاہیے۔",
+        "invalid_gauge_range": "کم از کم قدر زیادہ سے زیادہ قدر سے کم ہونی چاہیے۔",
+        "silent_requires_http": "خاموش webhook (foreground آف) کے لیے http:// یا https:// URL درکار ہے۔"
+      },
+      "abort": {
+        "already_configured": "یہ اینٹٹی پہلے سے ٹریک ہو رہی ہے۔",
+        "reconfigure_successful": "اینٹٹی کی ترتیب اپڈیٹ ہو گئی۔"
+      }
+    },
+    "tracked_widget": {
+      "entry_type": "ٹریک شدہ ویجٹ",
+      "initiate_flow": {
+        "user": "ٹریک شدہ ویجٹ شامل کریں"
+      },
+      "step": {
+        "user": {
+          "title": "PushWard میں ویجٹ شامل کریں",
+          "data": {
+            "entity_id": "اینٹٹی",
+            "widget_template": "ٹیمپلیٹ",
+            "slug": "ویجٹ Slug"
+          },
+          "data_description": {
+            "widget_template": "ویجٹ کا لے آؤٹ۔ ایک واحد عدد کے لیے `value`، 0–1 بار کے لیے `progress`، رینج میں قدر کے لیے `gauge`، شدت بیج کے لیے `status`، یا 6 تک قطاروں کے لیے `stat_list` استعمال کریں۔",
+            "slug": "اس ویجٹ کا منفرد شناخت کنندہ۔ entity ID سے خودکار بنانے کے لیے خالی چھوڑیں۔"
+          }
+        },
+        "reconfigure": {
+          "title": "ویجٹ میں ترمیم کریں",
+          "data": {
+            "entity_id": "اینٹٹی",
+            "widget_template": "ٹیمپلیٹ",
+            "slug": "ویجٹ Slug"
+          },
+          "data_description": {
+            "widget_template": "ویجٹ کا لے آؤٹ۔",
+            "slug": "اس ویجٹ کا منفرد شناخت کنندہ۔"
+          }
+        },
+        "details": {
+          "title": "2 of 4 · {template} content",
+          "data": {
+            "widget_name": "ویجٹ کا نام",
+            "value_attribute": "قدر خصوصیت",
+            "unit": "اکائی",
+            "min_value": "کم از کم قدر",
+            "max_value": "زیادہ سے زیادہ قدر",
+            "severity": "شدت",
+            "stat_rows": "Stat قطاریں",
+            "label": "لیبل",
+            "label_attribute": "لیبل خصوصیت",
+            "subtitle_attribute": "ذیلی عنوان خصوصیت",
+            "icon": "آئیکن",
+            "icon_attribute": "آئیکن خصوصیت",
+            "accent_color": "لہجے کا رنگ",
+            "accent_color_attribute": "لہجے کے رنگ کی خصوصیت",
+            "background_color": "پس منظر کا رنگ",
+            "text_color": "متن کا رنگ",
+            "widget_trigger_mode": "ٹرگر موڈ",
+            "widget_poll_interval": "Poll وقفہ (سیکنڈ)",
+            "tap_action_url": "ٹیپ ایکشن URL",
+            "tap_action_foreground": "ٹیپ ایکشن URL کھولیں"
+          },
+          "data_description": {
+            "widget_name": "iOS ویجٹ پکر میں دکھایا جانے والا ڈسپلے نام۔ بطور ڈیفالٹ اینٹٹی کا friendly نام۔",
+            "value_attribute": "قدر رکھنے والی اینٹٹی خصوصیت۔ اینٹٹی کی پرائمری state استعمال کرنے کے لیے خالی چھوڑیں۔",
+            "unit": "قدر کے ساتھ دکھائی جانے والی ڈسپلے اکائی۔ زیادہ سے زیادہ 32 حروف۔",
+            "min_value": "gauge رینج کے لیے کم از کم قدر۔",
+            "max_value": "gauge رینج کے لیے زیادہ سے زیادہ قدر۔",
+            "severity": "اسٹیٹس شدت (info، warning، critical، success)۔",
+            "stat_rows": "6 تک قطاریں۔ فارمیٹ: `Label=entity_id[:attribute[:unit]]`، کاما سے جدا۔ مثال: `Users=sensor.user_count, Active=sensor.active_devices:count`۔",
+            "label": "ویجٹ پر دکھایا جانے والا static لیبل۔ اینٹٹی سے اخذ کرنے کے لیے خالی چھوڑیں۔",
+            "label_attribute": "لیبل کے طور پر استعمال ہونے والی اینٹٹی خصوصیت۔ static لیبل کو اوور رائڈ کرتی ہے۔",
+            "subtitle_attribute": "ویجٹ کے ذیلی عنوان کے طور پر دکھائی جانے والی اینٹٹی خصوصیت۔",
+            "icon": "static آئیکن۔ SF Symbols اور MDI نام سپورٹ شدہ۔",
+            "icon_attribute": "متحرک آئیکن کے لیے اینٹٹی خصوصیت۔ static آئیکن کو اوور رائڈ کرتی ہے۔",
+            "accent_color": "ویجٹ کے لیے لہجے کا رنگ۔ ڈیفالٹ کے لیے خالی چھوڑیں۔",
+            "accent_color_attribute": "متحرک لہجے کے رنگ کے لیے اینٹٹی خصوصیت۔",
+            "background_color": "اختیاری پس منظر کا رنگ۔",
+            "text_color": "اختیاری متن کا رنگ۔",
+            "widget_trigger_mode": "اپڈیٹس کیسے ٹرگر ہوتی ہیں۔ `event` state تبدیلیوں پر ردِعمل دیتا ہے؛ `poll` ایک مقررہ وقفے پر دوبارہ جانچتا ہے۔",
+            "widget_poll_interval": "polls کے درمیان وقفہ (10–3600 سیکنڈ)۔ صرف اس وقت استعمال ہوتا ہے جب ٹرگر موڈ `poll` ہو۔",
+            "tap_action_url": "اختیاری URL جو ویجٹ پر ٹیپ کرنے پر کھلتا ہے۔ http(s) (Safari کھولتا ہے) یا کسٹم اسکیمیں جیسے homeassistant://navigate/lovelace/0 سپورٹ کرتا ہے۔",
+            "tap_action_foreground": "آن: ٹیپ سے URL کھلتا ہے۔ آف: خاموش webhook (صرف http(s)) — پس منظر میں POST چلاتا ہے۔"
+          },
+          "description": "Choose the values shown by this widget."
+        },
+        "appearance": {
+          "title": "3 of 4 · Appearance and tap action",
+          "data": {
+            "widget_name": "ویجٹ کا نام",
+            "value_attribute": "قدر خصوصیت",
+            "unit": "اکائی",
+            "min_value": "کم از کم قدر",
+            "max_value": "زیادہ سے زیادہ قدر",
+            "severity": "شدت",
+            "stat_rows": "Stat قطاریں",
+            "label": "لیبل",
+            "label_attribute": "لیبل خصوصیت",
+            "subtitle_attribute": "ذیلی عنوان خصوصیت",
+            "icon": "آئیکن",
+            "icon_attribute": "آئیکن خصوصیت",
+            "accent_color": "لہجے کا رنگ",
+            "accent_color_attribute": "لہجے کے رنگ کی خصوصیت",
+            "background_color": "پس منظر کا رنگ",
+            "text_color": "متن کا رنگ",
+            "widget_trigger_mode": "ٹرگر موڈ",
+            "widget_poll_interval": "Poll وقفہ (سیکنڈ)",
+            "tap_action_url": "ٹیپ ایکشن URL",
+            "tap_action_foreground": "ٹیپ ایکشن URL کھولیں"
+          },
+          "data_description": {
+            "widget_name": "iOS ویجٹ پکر میں دکھایا جانے والا ڈسپلے نام۔ بطور ڈیفالٹ اینٹٹی کا friendly نام۔",
+            "value_attribute": "قدر رکھنے والی اینٹٹی خصوصیت۔ اینٹٹی کی پرائمری state استعمال کرنے کے لیے خالی چھوڑیں۔",
+            "unit": "قدر کے ساتھ دکھائی جانے والی ڈسپلے اکائی۔ زیادہ سے زیادہ 32 حروف۔",
+            "min_value": "gauge رینج کے لیے کم از کم قدر۔",
+            "max_value": "gauge رینج کے لیے زیادہ سے زیادہ قدر۔",
+            "severity": "اسٹیٹس شدت (info، warning، critical، success)۔",
+            "stat_rows": "6 تک قطاریں۔ فارمیٹ: `Label=entity_id[:attribute[:unit]]`، کاما سے جدا۔ مثال: `Users=sensor.user_count, Active=sensor.active_devices:count`۔",
+            "label": "ویجٹ پر دکھایا جانے والا static لیبل۔ اینٹٹی سے اخذ کرنے کے لیے خالی چھوڑیں۔",
+            "label_attribute": "لیبل کے طور پر استعمال ہونے والی اینٹٹی خصوصیت۔ static لیبل کو اوور رائڈ کرتی ہے۔",
+            "subtitle_attribute": "ویجٹ کے ذیلی عنوان کے طور پر دکھائی جانے والی اینٹٹی خصوصیت۔",
+            "icon": "static آئیکن۔ SF Symbols اور MDI نام سپورٹ شدہ۔",
+            "icon_attribute": "متحرک آئیکن کے لیے اینٹٹی خصوصیت۔ static آئیکن کو اوور رائڈ کرتی ہے۔",
+            "accent_color": "ویجٹ کے لیے لہجے کا رنگ۔ ڈیفالٹ کے لیے خالی چھوڑیں۔",
+            "accent_color_attribute": "متحرک لہجے کے رنگ کے لیے اینٹٹی خصوصیت۔",
+            "background_color": "اختیاری پس منظر کا رنگ۔",
+            "text_color": "اختیاری متن کا رنگ۔",
+            "widget_trigger_mode": "اپڈیٹس کیسے ٹرگر ہوتی ہیں۔ `event` state تبدیلیوں پر ردِعمل دیتا ہے؛ `poll` ایک مقررہ وقفے پر دوبارہ جانچتا ہے۔",
+            "widget_poll_interval": "polls کے درمیان وقفہ (10–3600 سیکنڈ)۔ صرف اس وقت استعمال ہوتا ہے جب ٹرگر موڈ `poll` ہو۔",
+            "tap_action_url": "اختیاری URL جو ویجٹ پر ٹیپ کرنے پر کھلتا ہے۔ http(s) (Safari کھولتا ہے) یا کسٹم اسکیمیں جیسے homeassistant://navigate/lovelace/0 سپورٹ کرتا ہے۔",
+            "tap_action_foreground": "آن: ٹیپ سے URL کھلتا ہے۔ آف: خاموش webhook (صرف http(s)) — پس منظر میں POST چلاتا ہے۔"
+          },
+          "description": "Set the widget labels, icon, colors, and tap behavior."
+        },
+        "refresh": {
+          "title": "4 of 4 · Refresh behavior",
+          "data": {
+            "widget_name": "ویجٹ کا نام",
+            "value_attribute": "قدر خصوصیت",
+            "unit": "اکائی",
+            "min_value": "کم از کم قدر",
+            "max_value": "زیادہ سے زیادہ قدر",
+            "severity": "شدت",
+            "stat_rows": "Stat قطاریں",
+            "label": "لیبل",
+            "label_attribute": "لیبل خصوصیت",
+            "subtitle_attribute": "ذیلی عنوان خصوصیت",
+            "icon": "آئیکن",
+            "icon_attribute": "آئیکن خصوصیت",
+            "accent_color": "لہجے کا رنگ",
+            "accent_color_attribute": "لہجے کے رنگ کی خصوصیت",
+            "background_color": "پس منظر کا رنگ",
+            "text_color": "متن کا رنگ",
+            "widget_trigger_mode": "ٹرگر موڈ",
+            "widget_poll_interval": "Poll وقفہ (سیکنڈ)",
+            "tap_action_url": "ٹیپ ایکشن URL",
+            "tap_action_foreground": "ٹیپ ایکشن URL کھولیں"
+          },
+          "data_description": {
+            "widget_name": "iOS ویجٹ پکر میں دکھایا جانے والا ڈسپلے نام۔ بطور ڈیفالٹ اینٹٹی کا friendly نام۔",
+            "value_attribute": "قدر رکھنے والی اینٹٹی خصوصیت۔ اینٹٹی کی پرائمری state استعمال کرنے کے لیے خالی چھوڑیں۔",
+            "unit": "قدر کے ساتھ دکھائی جانے والی ڈسپلے اکائی۔ زیادہ سے زیادہ 32 حروف۔",
+            "min_value": "gauge رینج کے لیے کم از کم قدر۔",
+            "max_value": "gauge رینج کے لیے زیادہ سے زیادہ قدر۔",
+            "severity": "اسٹیٹس شدت (info، warning، critical، success)۔",
+            "stat_rows": "6 تک قطاریں۔ فارمیٹ: `Label=entity_id[:attribute[:unit]]`، کاما سے جدا۔ مثال: `Users=sensor.user_count, Active=sensor.active_devices:count`۔",
+            "label": "ویجٹ پر دکھایا جانے والا static لیبل۔ اینٹٹی سے اخذ کرنے کے لیے خالی چھوڑیں۔",
+            "label_attribute": "لیبل کے طور پر استعمال ہونے والی اینٹٹی خصوصیت۔ static لیبل کو اوور رائڈ کرتی ہے۔",
+            "subtitle_attribute": "ویجٹ کے ذیلی عنوان کے طور پر دکھائی جانے والی اینٹٹی خصوصیت۔",
+            "icon": "static آئیکن۔ SF Symbols اور MDI نام سپورٹ شدہ۔",
+            "icon_attribute": "متحرک آئیکن کے لیے اینٹٹی خصوصیت۔ static آئیکن کو اوور رائڈ کرتی ہے۔",
+            "accent_color": "ویجٹ کے لیے لہجے کا رنگ۔ ڈیفالٹ کے لیے خالی چھوڑیں۔",
+            "accent_color_attribute": "متحرک لہجے کے رنگ کے لیے اینٹٹی خصوصیت۔",
+            "background_color": "اختیاری پس منظر کا رنگ۔",
+            "text_color": "اختیاری متن کا رنگ۔",
+            "widget_trigger_mode": "اپڈیٹس کیسے ٹرگر ہوتی ہیں۔ `event` state تبدیلیوں پر ردِعمل دیتا ہے؛ `poll` ایک مقررہ وقفے پر دوبارہ جانچتا ہے۔",
+            "widget_poll_interval": "polls کے درمیان وقفہ (10–3600 سیکنڈ)۔ صرف اس وقت استعمال ہوتا ہے جب ٹرگر موڈ `poll` ہو۔",
+            "tap_action_url": "اختیاری URL جو ویجٹ پر ٹیپ کرنے پر کھلتا ہے۔ http(s) (Safari کھولتا ہے) یا کسٹم اسکیمیں جیسے homeassistant://navigate/lovelace/0 سپورٹ کرتا ہے۔",
+            "tap_action_foreground": "آن: ٹیپ سے URL کھلتا ہے۔ آف: خاموش webhook (صرف http(s)) — پس منظر میں POST چلاتا ہے۔"
+          },
+          "description": "Choose whether Home Assistant pushes changes or the PushWard app polls for them."
+        }
+      },
+      "error": {
+        "invalid_url": "URL میں ایک درست اسکیم ہونی چاہیے۔ http(s):// یا کوئی کسٹم ایپ اسکیم جیسے homeassistant:// استعمال کریں۔",
+        "silent_requires_http": "خاموش webhook (foreground آف) کے لیے http:// یا https:// URL درکار ہے۔",
+        "invalid_gauge_range": "کم از کم قدر زیادہ سے زیادہ قدر سے کم ہونی چاہیے۔",
+        "stat_rows_required": "stat_list ٹیمپلیٹ کے لیے کم از کم ایک stat قطار درکار ہے۔"
+      },
+      "abort": {
+        "already_configured": "اس slug والا ویجٹ پہلے سے موجود ہے۔",
+        "reconfigure_successful": "ویجٹ کنفیگریشن اپڈیٹ ہو گئی۔"
+      }
+    }
+  },
+  "entity": {
+    "sensor": {
+      "notifications_used": {
+        "name": "استعمال شدہ اطلاعات"
+      },
+      "live_activity_updates_used": {
+        "name": "استعمال شدہ Live Activity اپڈیٹس"
+      },
+      "widget_updates_used": {
+        "name": "استعمال شدہ ویجٹ اپڈیٹس"
+      },
+      "emails_used": {
+        "name": "استعمال شدہ ای میلز"
+      },
+      "subscription_tier": {
+        "name": "سبسکرپشن ٹیئر",
+        "state": {
+          "free": "مفت",
+          "premium": "پریمیم"
+        }
+      }
+    }
+  },
+  "exceptions": {
+    "widget_not_found": {
+      "message": "کوئی PushWard ویجٹ slug={slug} entity_id={entity_id} سے مماثل نہیں۔"
+    }
+  },
+  "issues": {
+    "deprecated_update_activity": {
+      "title": "PushWard update_activity ایکشن متروک ہے",
+      "description": "`pushward.update_activity` ایکشن متروک ہے۔ اپنی آٹومیشنز کو اس کے بجائے ٹیمپلیٹ کے مخصوص ایکشن پر منتقل کریں — مثلاً `pushward.update_activity_countdown` یا `pushward.update_activity_gauge`۔ پرانا ایکشن فی الحال کام کرتا رہے گا لیکن مستقبل کی ریلیز میں ہٹا دیا جائے گا۔"
+    },
+    "usage_limit_notifications": {
+      "title": "PushWard اطلاعات کی حد پہنچ گئی",
+      "description": "آپ کے PushWard اکاؤنٹ نے موجودہ مدت کے لیے اپنی {limit} اطلاعات میں سے {used} استعمال کر لی ہیں، اس لیے کوٹا ری سیٹ ہونے ({resets_at}) تک نئی اطلاعات مسترد کر دی جائیں گی۔ حد بڑھانے کے لیے PushWard iOS ایپ میں اپنی سبسکرپشن اپ گریڈ کریں۔"
+    },
+    "usage_limit_live_activity": {
+      "title": "PushWard Live Activity اپڈیٹ کی حد پہنچ گئی",
+      "description": "آپ کے PushWard اکاؤنٹ نے موجودہ مدت کے لیے اپنی {limit} Live Activity اپڈیٹس میں سے {used} استعمال کر لی ہیں، اس لیے کوٹا ری سیٹ ہونے ({resets_at}) تک نئی اپڈیٹس مسترد کر دی جائیں گی۔ حد بڑھانے کے لیے PushWard iOS ایپ میں اپنی سبسکرپشن اپ گریڈ کریں۔"
+    },
+    "usage_limit_widgets": {
+      "title": "PushWard ویجٹ اپڈیٹ کی حد پہنچ گئی",
+      "description": "آپ کے PushWard اکاؤنٹ نے موجودہ مدت کے لیے اپنی {limit} ویجٹ اپڈیٹس میں سے {used} استعمال کر لی ہیں، اس لیے کوٹا ری سیٹ ہونے ({resets_at}) تک نئی اپڈیٹس مسترد کر دی جائیں گی۔ حد بڑھانے کے لیے PushWard iOS ایپ میں اپنی سبسکرپشن اپ گریڈ کریں۔"
+    },
+    "usage_limit_emails": {
+      "title": "PushWard ای میل کی حد پہنچ گئی",
+      "description": "آپ کے PushWard اکاؤنٹ نے موجودہ مدت کے لیے اپنی {limit} ای میلز میں سے {used} استعمال کر لی ہیں، اس لیے کوٹا ری سیٹ ہونے ({resets_at}) تک نئی ای میلز مسترد کر دی جائیں گی۔ حد بڑھانے کے لیے PushWard iOS ایپ میں اپنی سبسکرپشن اپ گریڈ کریں۔"
+    }
+  }
+}

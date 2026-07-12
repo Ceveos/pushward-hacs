@@ -1,0 +1,17 @@
+{
+  "domain": "pushward",
+  "name": "PushWard Studio",
+  "after_dependencies": [
+    "recorder"
+  ],
+  "codeowners": [
+    "@Ceveos"
+  ],
+  "config_flow": true,
+  "documentation": "https://git.casasola.dev/Ceveos/Komodo/src/branch/main/home-assistant/pushward-studio",
+  "integration_type": "service",
+  "iot_class": "cloud_push",
+  "issue_tracker": "https://git.casasola.dev/Ceveos/Komodo/issues",
+  "requirements": [],
+  "version": "0.1.0"
+}
