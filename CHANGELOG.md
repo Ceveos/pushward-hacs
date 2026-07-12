@@ -8,6 +8,10 @@
   jobs from relative duration/width and optional color.
 - Add current-step live progress, duration weighting, and per-step colors.
 - Require Home Assistant 2026.6 or newer for native config-flow sections.
+- Add friendly field titles, valid ranges, units, and named-option labels across
+  the guided forms.
+- Pre-populate PushWard's 12 named colors while retaining custom RGB/RGBA hex
+  input and compatibility with previously saved RGB picker values.
 
 ## 0.1.0
 

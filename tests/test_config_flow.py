@@ -15,6 +15,8 @@ from pytest_homeassistant_custom_component.common import MockConfigEntry
 
 from custom_components.pushward_hacs.api import PushWardAuthError
 from custom_components.pushward_hacs.config_flow import (
+    _color_input_to_str,
+    _color_selector,
     _details_schema,
     _entity_staged_schemas,
     _hex_to_rgb,
@@ -1085,6 +1087,20 @@ def test_hex_to_rgb(hex_color: str, expected: list[int] | None) -> None:
 def test_rgb_to_hex(rgb: list[int] | None, expected: str) -> None:
     """Test _rgb_to_hex converts RGB lists to hex strings."""
     assert _rgb_to_hex(rgb) == expected
+
+
+def test_color_input_accepts_named_hex_and_legacy_rgb() -> None:
+    """Color inputs preserve named/hex values and migrate old RGB picker lists."""
+    assert _color_input_to_str("teal") == "teal"
+    assert _color_input_to_str(" #FF573380 ") == "#FF573380"
+    assert _color_input_to_str([255, 59, 48]) == "#ff3b30"
+
+
+def test_color_selector_prepopulates_pushward_palette_and_allows_hex() -> None:
+    """The form suggests every named PushWard color without blocking custom hex."""
+    config = _color_selector().config
+    assert config["custom_value"] is True
+    assert {option["value"] for option in config["options"]} >= {"red", "blue", "teal", "mint", "brown"}
 
 
 @pytest.mark.parametrize(

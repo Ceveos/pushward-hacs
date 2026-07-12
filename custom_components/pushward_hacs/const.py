@@ -252,6 +252,20 @@ SCALES = ["linear", "logarithmic"]
 
 # Must stay in sync with server UpdateActivityRequest.sound.
 SOUNDS = ("default", "chime", "alert", "success", "warning", "bell", "ding", "buzz", "notification")
+PUSHWARD_NAMED_COLORS = (
+    "red",
+    "orange",
+    "yellow",
+    "green",
+    "blue",
+    "purple",
+    "pink",
+    "indigo",
+    "teal",
+    "cyan",
+    "mint",
+    "brown",
+)
 
 # Usage/quota coordinator poll interval (seconds). Usage moves slowly and
 # /auth/me is per-IP rate-limited, so poll conservatively.

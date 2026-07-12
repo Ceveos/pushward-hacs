@@ -277,22 +277,64 @@ update_activity:
       fields:
         accent_color:
           name: Accent Color
-          description: Accent color name for the activity.
+          description: "Accent color: choose a named PushWard color or enter 6/8-digit RGB/RGBA hex."
           example: "blue"
           selector:
-            text:
+            select:
+              custom_value: true
+              options:
+                - red
+                - orange
+                - yellow
+                - green
+                - blue
+                - purple
+                - pink
+                - indigo
+                - teal
+                - cyan
+                - mint
+                - brown
         background_color:
           name: Background Color
           description: Background color as a hex value (e.g. #1a2b3c) or named color (e.g. blue).
           example: "#1a2b3c"
           selector:
-            text:
+            select:
+              custom_value: true
+              options:
+                - red
+                - orange
+                - yellow
+                - green
+                - blue
+                - purple
+                - pink
+                - indigo
+                - teal
+                - cyan
+                - mint
+                - brown
         text_color:
           name: Text Color
-          description: Text color as a hex value (e.g. #ffffff) or named color (e.g. white).
+          description: Text color as a hex value (e.g. #ffffff) or named color (e.g. blue).
           example: "#ffffff"
           selector:
-            text:
+            select:
+              custom_value: true
+              options:
+                - red
+                - orange
+                - yellow
+                - green
+                - blue
+                - purple
+                - pink
+                - indigo
+                - teal
+                - cyan
+                - mint
+                - brown
         remaining_time:
           name: Remaining Time
           description: Remaining time in seconds.
@@ -410,15 +452,57 @@ update_activity_generic:
         accent_color:
           example: "blue"
           selector:
-            text:
+            select:
+              custom_value: true
+              options:
+                - red
+                - orange
+                - yellow
+                - green
+                - blue
+                - purple
+                - pink
+                - indigo
+                - teal
+                - cyan
+                - mint
+                - brown
         background_color:
           example: "#1a2b3c"
           selector:
-            text:
+            select:
+              custom_value: true
+              options:
+                - red
+                - orange
+                - yellow
+                - green
+                - blue
+                - purple
+                - pink
+                - indigo
+                - teal
+                - cyan
+                - mint
+                - brown
         text_color:
           example: "#ffffff"
           selector:
-            text:
+            select:
+              custom_value: true
+              options:
+                - red
+                - orange
+                - yellow
+                - green
+                - blue
+                - purple
+                - pink
+                - indigo
+                - teal
+                - cyan
+                - mint
+                - brown
         remaining_time:
           example: 120
           selector:
@@ -554,15 +638,57 @@ update_activity_countdown:
         accent_color:
           example: "blue"
           selector:
-            text:
+            select:
+              custom_value: true
+              options:
+                - red
+                - orange
+                - yellow
+                - green
+                - blue
+                - purple
+                - pink
+                - indigo
+                - teal
+                - cyan
+                - mint
+                - brown
         background_color:
           example: "#1a2b3c"
           selector:
-            text:
+            select:
+              custom_value: true
+              options:
+                - red
+                - orange
+                - yellow
+                - green
+                - blue
+                - purple
+                - pink
+                - indigo
+                - teal
+                - cyan
+                - mint
+                - brown
         text_color:
           example: "#ffffff"
           selector:
-            text:
+            select:
+              custom_value: true
+              options:
+                - red
+                - orange
+                - yellow
+                - green
+                - blue
+                - purple
+                - pink
+                - indigo
+                - teal
+                - cyan
+                - mint
+                - brown
         remaining_time:
           example: 120
           selector:
@@ -703,15 +829,57 @@ update_activity_steps:
         accent_color:
           example: "blue"
           selector:
-            text:
+            select:
+              custom_value: true
+              options:
+                - red
+                - orange
+                - yellow
+                - green
+                - blue
+                - purple
+                - pink
+                - indigo
+                - teal
+                - cyan
+                - mint
+                - brown
         background_color:
           example: "#1a2b3c"
           selector:
-            text:
+            select:
+              custom_value: true
+              options:
+                - red
+                - orange
+                - yellow
+                - green
+                - blue
+                - purple
+                - pink
+                - indigo
+                - teal
+                - cyan
+                - mint
+                - brown
         text_color:
           example: "#ffffff"
           selector:
-            text:
+            select:
+              custom_value: true
+              options:
+                - red
+                - orange
+                - yellow
+                - green
+                - blue
+                - purple
+                - pink
+                - indigo
+                - teal
+                - cyan
+                - mint
+                - brown
         remaining_time:
           example: 120
           selector:
@@ -831,15 +999,57 @@ update_activity_alert:
         accent_color:
           example: "blue"
           selector:
-            text:
+            select:
+              custom_value: true
+              options:
+                - red
+                - orange
+                - yellow
+                - green
+                - blue
+                - purple
+                - pink
+                - indigo
+                - teal
+                - cyan
+                - mint
+                - brown
         background_color:
           example: "#1a2b3c"
           selector:
-            text:
+            select:
+              custom_value: true
+              options:
+                - red
+                - orange
+                - yellow
+                - green
+                - blue
+                - purple
+                - pink
+                - indigo
+                - teal
+                - cyan
+                - mint
+                - brown
         text_color:
           example: "#ffffff"
           selector:
-            text:
+            select:
+              custom_value: true
+              options:
+                - red
+                - orange
+                - yellow
+                - green
+                - blue
+                - purple
+                - pink
+                - indigo
+                - teal
+                - cyan
+                - mint
+                - brown
         remaining_time:
           example: 120
           selector:
@@ -960,15 +1170,57 @@ update_activity_gauge:
         accent_color:
           example: "blue"
           selector:
-            text:
+            select:
+              custom_value: true
+              options:
+                - red
+                - orange
+                - yellow
+                - green
+                - blue
+                - purple
+                - pink
+                - indigo
+                - teal
+                - cyan
+                - mint
+                - brown
         background_color:
           example: "#1a2b3c"
           selector:
-            text:
+            select:
+              custom_value: true
+              options:
+                - red
+                - orange
+                - yellow
+                - green
+                - blue
+                - purple
+                - pink
+                - indigo
+                - teal
+                - cyan
+                - mint
+                - brown
         text_color:
           example: "#ffffff"
           selector:
-            text:
+            select:
+              custom_value: true
+              options:
+                - red
+                - orange
+                - yellow
+                - green
+                - blue
+                - purple
+                - pink
+                - indigo
+                - teal
+                - cyan
+                - mint
+                - brown
         remaining_time:
           example: 120
           selector:
@@ -1108,15 +1360,57 @@ update_activity_timeline:
         accent_color:
           example: "blue"
           selector:
-            text:
+            select:
+              custom_value: true
+              options:
+                - red
+                - orange
+                - yellow
+                - green
+                - blue
+                - purple
+                - pink
+                - indigo
+                - teal
+                - cyan
+                - mint
+                - brown
         background_color:
           example: "#1a2b3c"
           selector:
-            text:
+            select:
+              custom_value: true
+              options:
+                - red
+                - orange
+                - yellow
+                - green
+                - blue
+                - purple
+                - pink
+                - indigo
+                - teal
+                - cyan
+                - mint
+                - brown
         text_color:
           example: "#ffffff"
           selector:
-            text:
+            select:
+              custom_value: true
+              options:
+                - red
+                - orange
+                - yellow
+                - green
+                - blue
+                - purple
+                - pink
+                - indigo
+                - teal
+                - cyan
+                - mint
+                - brown
         remaining_time:
           example: 120
           selector:
@@ -1186,15 +1480,57 @@ update_activity_board:
     accent_color:
       example: "blue"
       selector:
-        text:
+        select:
+          custom_value: true
+          options:
+            - red
+            - orange
+            - yellow
+            - green
+            - blue
+            - purple
+            - pink
+            - indigo
+            - teal
+            - cyan
+            - mint
+            - brown
     background_color:
       example: "#1a2b3c"
       selector:
-        text:
+        select:
+          custom_value: true
+          options:
+            - red
+            - orange
+            - yellow
+            - green
+            - blue
+            - purple
+            - pink
+            - indigo
+            - teal
+            - cyan
+            - mint
+            - brown
     text_color:
       example: "#ffffff"
       selector:
-        text:
+        select:
+          custom_value: true
+          options:
+            - red
+            - orange
+            - yellow
+            - green
+            - blue
+            - purple
+            - pink
+            - indigo
+            - teal
+            - cyan
+            - mint
+            - brown
     tap_action:
       example: '{"url": "homeassistant://navigate/lovelace/0"}'
       selector:
@@ -1269,15 +1605,57 @@ update_activity_log:
     accent_color:
       example: "blue"
       selector:
-        text:
+        select:
+          custom_value: true
+          options:
+            - red
+            - orange
+            - yellow
+            - green
+            - blue
+            - purple
+            - pink
+            - indigo
+            - teal
+            - cyan
+            - mint
+            - brown
     background_color:
       example: "#1a2b3c"
       selector:
-        text:
+        select:
+          custom_value: true
+          options:
+            - red
+            - orange
+            - yellow
+            - green
+            - blue
+            - purple
+            - pink
+            - indigo
+            - teal
+            - cyan
+            - mint
+            - brown
     text_color:
       example: "#ffffff"
       selector:
-        text:
+        select:
+          custom_value: true
+          options:
+            - red
+            - orange
+            - yellow
+            - green
+            - blue
+            - purple
+            - pink
+            - indigo
+            - teal
+            - cyan
+            - mint
+            - brown
     tap_action:
       example: '{"url": "homeassistant://navigate/lovelace/0"}'
       selector:

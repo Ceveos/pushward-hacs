@@ -18,7 +18,6 @@ from homeassistant.helpers.selector import (
     AttributeSelector,
     AttributeSelectorConfig,
     BooleanSelector,
-    ColorRGBSelector,
     EntitySelector,
     EntitySelectorConfig,
     IconSelector,
@@ -139,14 +138,12 @@ from .const import (
     MAX_URL_LEN,
     PRIORITY_MAX,
     PRIORITY_MIN,
-    SCALES,
-    SEVERITIES,
+    PUSHWARD_NAMED_COLORS,
     SNOOZE_SECONDS_MAX,
     SNOOZE_SECONDS_MIN,
     SOUNDS,
     SUBENTRY_TYPE_ENTITY,
     SUBENTRY_TYPE_WIDGET,
-    TEMPLATES,
     TIMELINE_MAX_SERIES,
     TIMELINE_SERIES_LABEL_MAX,
     TOTAL_STEPS_MAX,
@@ -157,15 +154,14 @@ from .const import (
     WIDGET_NAME_MAX,
     WIDGET_POLL_INTERVAL_MAX,
     WIDGET_POLL_INTERVAL_MIN,
-    WIDGET_SEVERITIES,
     WIDGET_TEMPLATE_GAUGE,
     WIDGET_TEMPLATE_PROGRESS,
     WIDGET_TEMPLATE_STAT_LIST,
     WIDGET_TEMPLATE_STATUS,
     WIDGET_TEMPLATE_VALUE,
-    WIDGET_TEMPLATES,
     WIDGET_TRIGGER_EVENT,
     WIDGET_TRIGGER_MODES,
+    WIDGET_TRIGGER_POLL,
     WIDGET_UNIT_MAX,
     normalize_slug,
 )
@@ -224,7 +220,16 @@ def _entity_template_schema(defaults: dict | None = None) -> vol.Schema:
                 default=d.get(CONF_TEMPLATE, "generic"),
             ): SelectSelector(
                 SelectSelectorConfig(
-                    options=TEMPLATES,
+                    options=[
+                        {"value": "generic", "label": "Generic progress"},
+                        {"value": "countdown", "label": "Countdown / timer"},
+                        {"value": "steps", "label": "Steps / workflow"},
+                        {"value": "alert", "label": "Alert"},
+                        {"value": "gauge", "label": "Gauge / numeric range"},
+                        {"value": "timeline", "label": "Timeline / sparkline"},
+                        {"value": "board", "label": "Board / tiles"},
+                        {"value": "log", "label": "Event log"},
+                    ],
                     mode=SelectSelectorMode.DROPDOWN,
                 )
             ),
@@ -355,7 +360,7 @@ def _details_schema(
     attr_selector = AttributeSelector(AttributeSelectorConfig(entity_id=entity_id))
     entity_selector = EntitySelector(EntitySelectorConfig())
 
-    # ColorRGBSelector requires a valid [r,g,b] default — omit if no color saved
+    # Named-color dropdowns also accept custom RGB/RGBA hex values.
     accent_key = _color_vol_key(CONF_ACCENT_COLOR, d)
     bg_color_key = _color_vol_key(CONF_BACKGROUND_COLOR, d)
     text_color_key = _color_vol_key(CONF_TEXT_COLOR, d)
@@ -451,7 +456,7 @@ def _details_schema(
                 label_field="label",
                 description_field="weight",
                 fields={
-                    "label": {"label": "Step label", "selector": TextSelector()},
+                    "label": {"label": "Step label (max 32 characters)", "selector": TextSelector()},
                     "parallel_jobs": {
                         "label": "Parallel rows/jobs (1-10)",
                         "selector": NumberSelector(
@@ -459,12 +464,12 @@ def _details_schema(
                         ),
                     },
                     "weight": {
-                        "label": "Relative duration/width",
+                        "label": "Relative duration/width (unitless)",
                         "selector": NumberSelector(
                             NumberSelectorConfig(min=0.1, max=10000, step=0.1, mode=NumberSelectorMode.BOX)
                         ),
                     },
-                    "color": {"label": "Color (optional)", "selector": TextSelector()},
+                    "color": {"label": "Color (named or RGB/RGBA hex)", "selector": _color_selector()},
                 },
             )
         )
@@ -476,7 +481,11 @@ def _details_schema(
             )
         ] = SelectSelector(
             SelectSelectorConfig(
-                options=SEVERITIES,
+                options=[
+                    {"value": "info", "label": "Information"},
+                    {"value": "warning", "label": "Warning"},
+                    {"value": "critical", "label": "Critical"},
+                ],
                 mode=SelectSelectorMode.DROPDOWN,
             )
         )
@@ -581,7 +590,10 @@ def _details_schema(
             )
         ] = SelectSelector(
             SelectSelectorConfig(
-                options=SCALES,
+                options=[
+                    {"value": "linear", "label": "Linear"},
+                    {"value": "logarithmic", "label": "Logarithmic"},
+                ],
                 mode=SelectSelectorMode.DROPDOWN,
             )
         )
@@ -609,11 +621,11 @@ def _details_schema(
                 description_field="color",
                 fields={
                     "value": {
-                        "label": "Threshold value",
+                        "label": "Threshold value (in series units)",
                         "required": True,
                         "selector": NumberSelector(NumberSelectorConfig(mode=NumberSelectorMode.BOX)),
                     },
-                    "color": {"label": "Color (optional)", "selector": TextSelector()},
+                    "color": {"label": "Color (named or RGB/RGBA hex)", "selector": _color_selector()},
                     "label": {"label": "Label (optional)", "selector": TextSelector()},
                 },
             )
@@ -643,16 +655,23 @@ def _details_schema(
                 label_field=CONF_LABEL,
                 description_field=CONF_ENTITY_ID,
                 fields={
-                    CONF_LABEL: {"label": "Tile label", "required": True, "selector": TextSelector()},
+                    CONF_LABEL: {
+                        "label": "Tile label (max 32 characters)",
+                        "required": True,
+                        "selector": TextSelector(),
+                    },
                     CONF_ENTITY_ID: {
                         "label": "Value entity",
                         "required": True,
                         "selector": EntitySelector(EntitySelectorConfig()),
                     },
                     CONF_VALUE_ATTRIBUTE: {"label": "Attribute (optional)", "selector": TextSelector()},
-                    CONF_UNIT: {"label": "Unit (optional)", "selector": TextSelector()},
+                    CONF_UNIT: {"label": "Unit (optional, max 8 characters)", "selector": TextSelector()},
                     CONF_ICON: {"label": "Icon (optional)", "selector": IconSelector(IconSelectorConfig())},
-                    CONF_ACCENT_COLOR: {"label": "Color (optional)", "selector": TextSelector()},
+                    CONF_ACCENT_COLOR: {
+                        "label": "Color (named or RGB/RGBA hex)",
+                        "selector": _color_selector(),
+                    },
                     "trend": {
                         "label": "Trend (optional)",
                         "selector": SelectSelector(
@@ -723,7 +742,14 @@ def _details_schema(
             CONF_PRIORITY,
             default=d.get(CONF_PRIORITY, DEFAULT_PRIORITY),
         )
-    ] = vol.All(vol.Coerce(int), vol.Range(min=PRIORITY_MIN, max=PRIORITY_MAX))
+    ] = NumberSelector(
+        NumberSelectorConfig(
+            min=PRIORITY_MIN,
+            max=PRIORITY_MAX,
+            step=1,
+            mode=NumberSelectorMode.SLIDER,
+        )
+    )
     fields[
         vol.Optional(
             CONF_SOUND,
@@ -731,7 +757,10 @@ def _details_schema(
         )
     ] = SelectSelector(
         SelectSelectorConfig(
-            options=["", *list(SOUNDS)],
+            options=[
+                {"value": "", "label": "Silent (no sound)"},
+                *[{"value": sound, "label": sound.replace("-", " ").title()} for sound in SOUNDS],
+            ],
             mode=SelectSelectorMode.DROPDOWN,
         )
     )
@@ -740,7 +769,15 @@ def _details_schema(
             CONF_UPDATE_INTERVAL,
             default=d.get(CONF_UPDATE_INTERVAL, DEFAULT_UPDATE_INTERVAL),
         )
-    ] = vol.All(vol.Coerce(int), vol.Range(min=UPDATE_INTERVAL_MIN))
+    ] = NumberSelector(
+        NumberSelectorConfig(
+            min=UPDATE_INTERVAL_MIN,
+            max=86400,
+            step=1,
+            mode=NumberSelectorMode.BOX,
+            unit_of_measurement="seconds",
+        )
+    )
 
     # --- Optional fields ---
     fields[_entity_source_key(CONF_SUBTITLE_ENTITY, d)] = entity_selector
@@ -795,21 +832,21 @@ def _details_schema(
                 unit_of_measurement="seconds",
             )
         )
-    fields[accent_key] = ColorRGBSelector()
+    fields[accent_key] = _color_selector()
     fields[
         vol.Optional(
             CONF_ACCENT_COLOR_ATTRIBUTE,
             description={"suggested_value": d.get(CONF_ACCENT_COLOR_ATTRIBUTE, "")},
         )
     ] = attr_selector
-    fields[bg_color_key] = ColorRGBSelector()
+    fields[bg_color_key] = _color_selector()
     fields[
         vol.Optional(
             CONF_BACKGROUND_COLOR_ATTRIBUTE,
             description={"suggested_value": d.get(CONF_BACKGROUND_COLOR_ATTRIBUTE, "")},
         )
     ] = attr_selector
-    fields[text_color_key] = ColorRGBSelector()
+    fields[text_color_key] = _color_selector()
     fields[
         vol.Optional(
             CONF_TEXT_COLOR_ATTRIBUTE,
@@ -1370,7 +1407,11 @@ def _parse_entity_input(user_input: dict, hass: HomeAssistant | None = None) -> 
     if len(series) + len(series_entities) > TIMELINE_MAX_SERIES:
         raise vol.Invalid("too_many_series", path=[CONF_SERIES_ENTITIES])
     thresholds_raw = user_input.get(CONF_THRESHOLDS, "")
-    thresholds = _parse_thresholds(thresholds_raw) if isinstance(thresholds_raw, str) else thresholds_raw or []
+    thresholds = (
+        _parse_thresholds(thresholds_raw)
+        if isinstance(thresholds_raw, str)
+        else [item for item in thresholds_raw or [] if isinstance(item, dict)][:5]
+    )
     history_period_raw = user_input.get(CONF_HISTORY_PERIOD, DEFAULT_HISTORY_PERIOD)
 
     step_configuration = user_input.get(CONF_STEP_CONFIGURATION, [])
@@ -1417,11 +1458,11 @@ def _parse_entity_input(user_input: dict, hass: HomeAssistant | None = None) -> 
         CONF_ACTIVITY_NAME: user_input.get(CONF_ACTIVITY_NAME, "") or entity_id,
         CONF_ICON: user_input.get(CONF_ICON, ""),
         CONF_ICON_ATTRIBUTE: user_input.get(CONF_ICON_ATTRIBUTE, ""),
-        CONF_PRIORITY: user_input.get(CONF_PRIORITY, DEFAULT_PRIORITY),
+        CONF_PRIORITY: int(user_input.get(CONF_PRIORITY, DEFAULT_PRIORITY)),
         CONF_TEMPLATE: user_input.get(CONF_TEMPLATE, "generic"),
         CONF_START_STATES: start_states or defaults.get("start_states", []),
         CONF_END_STATES: end_states or defaults.get("end_states", []),
-        CONF_UPDATE_INTERVAL: user_input.get(CONF_UPDATE_INTERVAL, DEFAULT_UPDATE_INTERVAL),
+        CONF_UPDATE_INTERVAL: int(user_input.get(CONF_UPDATE_INTERVAL, DEFAULT_UPDATE_INTERVAL)),
         CONF_PROGRESS_ATTRIBUTE: user_input.get(CONF_PROGRESS_ATTRIBUTE, ""),
         CONF_PROGRESS_ENTITY: user_input.get(CONF_PROGRESS_ENTITY, ""),
         CONF_REMAINING_TIME_ATTR: user_input.get(CONF_REMAINING_TIME_ATTR, ""),
@@ -1441,7 +1482,7 @@ def _parse_entity_input(user_input: dict, hass: HomeAssistant | None = None) -> 
         CONF_MIN_VALUE: min_v,
         CONF_MAX_VALUE: max_v,
         CONF_UNIT: user_input.get(CONF_UNIT, ""),
-        CONF_ACCENT_COLOR: _rgb_to_hex(user_input.get(CONF_ACCENT_COLOR)),
+        CONF_ACCENT_COLOR: _color_input_to_str(user_input.get(CONF_ACCENT_COLOR)),
         CONF_ACCENT_COLOR_ATTRIBUTE: user_input.get(CONF_ACCENT_COLOR_ATTRIBUTE, ""),
         CONF_URL: url,
         CONF_URL_FOREGROUND: url_foreground,
@@ -1477,9 +1518,9 @@ def _parse_entity_input(user_input: dict, hass: HomeAssistant | None = None) -> 
         CONF_FIRED_AT_ATTRIBUTE: user_input.get(CONF_FIRED_AT_ATTRIBUTE, ""),
         CONF_FIRED_AT_ENTITY: user_input.get(CONF_FIRED_AT_ENTITY, ""),
         CONF_UNITS: _parse_state_labels(user_input.get(CONF_UNITS, "")),
-        CONF_BACKGROUND_COLOR: _rgb_to_hex(user_input.get(CONF_BACKGROUND_COLOR)),
+        CONF_BACKGROUND_COLOR: _color_input_to_str(user_input.get(CONF_BACKGROUND_COLOR)),
         CONF_BACKGROUND_COLOR_ATTRIBUTE: user_input.get(CONF_BACKGROUND_COLOR_ATTRIBUTE, ""),
-        CONF_TEXT_COLOR: _rgb_to_hex(user_input.get(CONF_TEXT_COLOR)),
+        CONF_TEXT_COLOR: _color_input_to_str(user_input.get(CONF_TEXT_COLOR)),
         CONF_TEXT_COLOR_ATTRIBUTE: user_input.get(CONF_TEXT_COLOR_ATTRIBUTE, ""),
         CONF_TILES: tiles,
         CONF_LOG_LEVEL_ATTRIBUTE: user_input.get(CONF_LOG_LEVEL_ATTRIBUTE, ""),
@@ -1711,7 +1752,13 @@ def _widget_step1_schema(defaults: dict | None = None) -> vol.Schema:
                 default=d.get(CONF_WIDGET_TEMPLATE, WIDGET_TEMPLATE_VALUE),
             ): SelectSelector(
                 SelectSelectorConfig(
-                    options=WIDGET_TEMPLATES,
+                    options=[
+                        {"value": "value", "label": "Single value"},
+                        {"value": "progress", "label": "Progress"},
+                        {"value": "gauge", "label": "Gauge"},
+                        {"value": "status", "label": "Status"},
+                        {"value": "stat_list", "label": "Statistics list"},
+                    ],
                     mode=SelectSelectorMode.DROPDOWN,
                 )
             ),
@@ -1783,7 +1830,13 @@ def _widget_details_schema(
             )
         ] = SelectSelector(
             SelectSelectorConfig(
-                options=WIDGET_SEVERITIES,
+                options=[
+                    {"value": "", "label": "None"},
+                    {"value": "info", "label": "Information"},
+                    {"value": "warning", "label": "Warning"},
+                    {"value": "critical", "label": "Critical"},
+                    {"value": "success", "label": "Success"},
+                ],
                 mode=SelectSelectorMode.DROPDOWN,
             )
         )
@@ -1843,15 +1896,15 @@ def _widget_details_schema(
             description={"suggested_value": d.get(CONF_ICON_ATTRIBUTE, "")},
         )
     ] = attr_selector
-    fields[accent_key] = ColorRGBSelector()
+    fields[accent_key] = _color_selector()
     fields[
         vol.Optional(
             CONF_ACCENT_COLOR_ATTRIBUTE,
             description={"suggested_value": d.get(CONF_ACCENT_COLOR_ATTRIBUTE, "")},
         )
     ] = attr_selector
-    fields[bg_color_key] = ColorRGBSelector()
-    fields[text_color_key] = ColorRGBSelector()
+    fields[bg_color_key] = _color_selector()
+    fields[text_color_key] = _color_selector()
 
     # Widget-wide tap action (universal across all templates)
     fields[
@@ -1875,7 +1928,10 @@ def _widget_details_schema(
         )
     ] = SelectSelector(
         SelectSelectorConfig(
-            options=WIDGET_TRIGGER_MODES,
+            options=[
+                {"value": WIDGET_TRIGGER_EVENT, "label": "On entity changes (recommended)"},
+                {"value": WIDGET_TRIGGER_POLL, "label": "Poll on a schedule"},
+            ],
             mode=SelectSelectorMode.DROPDOWN,
         )
     )
@@ -2030,10 +2086,10 @@ def _parse_widget_input(user_input: dict, step1: dict) -> dict:
         CONF_SUBTITLE_ATTRIBUTE: user_input.get(CONF_SUBTITLE_ATTRIBUTE, "") or "",
         CONF_ICON: user_input.get(CONF_ICON, "") or "",
         CONF_ICON_ATTRIBUTE: user_input.get(CONF_ICON_ATTRIBUTE, "") or "",
-        CONF_ACCENT_COLOR: _rgb_to_hex(user_input.get(CONF_ACCENT_COLOR)),
+        CONF_ACCENT_COLOR: _color_input_to_str(user_input.get(CONF_ACCENT_COLOR)),
         CONF_ACCENT_COLOR_ATTRIBUTE: user_input.get(CONF_ACCENT_COLOR_ATTRIBUTE, "") or "",
-        CONF_BACKGROUND_COLOR: _rgb_to_hex(user_input.get(CONF_BACKGROUND_COLOR)),
-        CONF_TEXT_COLOR: _rgb_to_hex(user_input.get(CONF_TEXT_COLOR)),
+        CONF_BACKGROUND_COLOR: _color_input_to_str(user_input.get(CONF_BACKGROUND_COLOR)),
+        CONF_TEXT_COLOR: _color_input_to_str(user_input.get(CONF_TEXT_COLOR)),
         CONF_TAP_ACTION_URL: tap_action_url,
         CONF_TAP_ACTION_FOREGROUND: tap_action_foreground,
     }
@@ -2122,6 +2178,45 @@ def _rgb_to_hex(rgb: list[int] | None) -> str:
     return f"#{rgb[0]:02x}{rgb[1]:02x}{rgb[2]:02x}"
 
 
+_COLOR_HEX_LABELS = {
+    "red": "#FF3B30",
+    "orange": "#FF9500",
+    "yellow": "#FFCC00",
+    "green": "#34C759",
+    "blue": "#007AFF",
+    "purple": "#AF52DE",
+    "pink": "#FF2D55",
+    "indigo": "#5856D6",
+    "teal": "#5AC8FA",
+    "cyan": "#32ADE6",
+    "mint": "#00C7BE",
+    "brown": "#A2845E",
+}
+
+
+def _color_selector() -> SelectSelector:
+    """Return PushWard's named palette while allowing custom hex colors."""
+    return SelectSelector(
+        SelectSelectorConfig(
+            options=[
+                {"value": color, "label": f"{color.title()} ({_COLOR_HEX_LABELS[color]})"}
+                for color in PUSHWARD_NAMED_COLORS
+            ],
+            custom_value=True,
+            mode=SelectSelectorMode.DROPDOWN,
+        )
+    )
+
+
+def _color_input_to_str(value: object) -> str:
+    """Normalize a named color, custom hex string, or legacy RGB picker value."""
+    if isinstance(value, str):
+        return value.strip()
+    if isinstance(value, list):
+        return _rgb_to_hex(value)
+    return ""
+
+
 def _hex_to_rgb(hex_color: str) -> list[int] | None:
     """Convert a '#rrggbb' hex string back to [R, G, B] for the color picker."""
     if not hex_color or not hex_color.startswith("#") or len(hex_color) != 7:
@@ -2133,9 +2228,9 @@ def _hex_to_rgb(hex_color: str) -> list[int] | None:
 
 
 def _color_vol_key(conf_key: str, current: dict) -> vol.Optional:
-    """Build a vol.Optional key for a ColorRGBSelector, omitting the default if no valid hex is stored."""
-    rgb = _hex_to_rgb(current.get(conf_key, ""))
-    return vol.Optional(conf_key, default=rgb) if rgb is not None else vol.Optional(conf_key)
+    """Build a color key prefilled with a saved named or custom hex color."""
+    value = current.get(conf_key, "")
+    return vol.Optional(conf_key, default=value) if value else vol.Optional(conf_key)
 
 
 def _entity_source_key(conf_key: str, current: dict) -> vol.Optional:
