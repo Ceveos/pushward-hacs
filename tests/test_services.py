@@ -12,14 +12,14 @@ from homeassistant.exceptions import HomeAssistantError, ServiceValidationError
 from homeassistant.helpers import issue_registry as ir
 from pytest_homeassistant_custom_component.common import MockConfigEntry
 
-from custom_components.pushward import async_remove_entry
-from custom_components.pushward.api import (
+from custom_components.pushward_hacs import async_remove_entry
+from custom_components.pushward_hacs.api import (
     PushWardApiError,
     PushWardAuthError,
     PushWardEmailPermissionError,
     PushWardForbiddenError,
 )
-from custom_components.pushward.const import (
+from custom_components.pushward_hacs.const import (
     CONF_INTEGRATION_KEY,
     CONF_SERVER_URL,
     DEFAULT_SERVER_URL,
@@ -29,7 +29,7 @@ from custom_components.pushward.const import (
     TEMPLATES,
     validate_tap_action_url,
 )
-from custom_components.pushward.widget_manager import WidgetManager
+from custom_components.pushward_hacs.widget_manager import WidgetManager
 
 from .conftest import make_usage_payload, make_widget_config
 from .server_contract import assert_valid_activity_content
@@ -70,7 +70,7 @@ async def _setup_entry(hass: HomeAssistant, mock_api: AsyncMock) -> MockConfigEn
     entry.add_to_hass(hass)
 
     with patch(
-        "custom_components.pushward.PushWardApiClient",
+        "custom_components.pushward_hacs.PushWardApiClient",
         return_value=mock_api,
     ):
         await hass.config_entries.async_setup(entry.entry_id)
@@ -217,7 +217,7 @@ async def test_setup_auth_error_triggers_reauth(hass: HomeAssistant) -> None:
     entry = _mock_entry()
     entry.add_to_hass(hass)
 
-    with patch("custom_components.pushward.PushWardApiClient", return_value=api):
+    with patch("custom_components.pushward_hacs.PushWardApiClient", return_value=api):
         await hass.config_entries.async_setup(entry.entry_id)
         await hass.async_block_till_done()
 
@@ -235,7 +235,7 @@ async def test_setup_connection_error_retries(hass: HomeAssistant) -> None:
     entry = _mock_entry()
     entry.add_to_hass(hass)
 
-    with patch("custom_components.pushward.PushWardApiClient", return_value=api):
+    with patch("custom_components.pushward_hacs.PushWardApiClient", return_value=api):
         await hass.config_entries.async_setup(entry.entry_id)
         await hass.async_block_till_done()
 
@@ -1408,7 +1408,7 @@ async def test_async_remove_entry_deletes_server_widgets(hass: HomeAssistant) ->
     )
     entry.add_to_hass(hass)
 
-    with patch("custom_components.pushward.PushWardApiClient", return_value=api):
+    with patch("custom_components.pushward_hacs.PushWardApiClient", return_value=api):
         await async_remove_entry(hass, entry)
 
     assert {c.args[0] for c in api.delete_widget.await_args_list} == {"ha-one", "ha-two"}

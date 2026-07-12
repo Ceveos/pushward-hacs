@@ -7,13 +7,13 @@ from unittest.mock import AsyncMock, MagicMock, patch
 import aiohttp
 import pytest
 
-from custom_components.pushward.api import (
+from custom_components.pushward_hacs.api import (
     PushWardApiError,
     PushWardAuthError,
     PushWardEmailPermissionError,
     PushWardForbiddenError,
 )
-from custom_components.pushward.const import MAX_CONCURRENT_REQUESTS
+from custom_components.pushward_hacs.const import MAX_CONCURRENT_REQUESTS
 
 from .conftest import make_api_client as _make_client
 from .conftest import make_mock_response as _mock_response
@@ -321,7 +321,7 @@ async def test_send_email_omits_none_bodies():
 # --- retry ---
 
 
-@patch("custom_components.pushward.api.asyncio.sleep", new_callable=AsyncMock)
+@patch("custom_components.pushward_hacs.api.asyncio.sleep", new_callable=AsyncMock)
 async def test_retry_on_server_error(mock_sleep):
     resp_500 = _mock_response(500, text="Internal Server Error")
     resp_200 = _mock_response(200)
@@ -334,7 +334,7 @@ async def test_retry_on_server_error(mock_sleep):
     mock_sleep.assert_called_once()
 
 
-@patch("custom_components.pushward.api.asyncio.sleep", new_callable=AsyncMock)
+@patch("custom_components.pushward_hacs.api.asyncio.sleep", new_callable=AsyncMock)
 async def test_retry_on_429_with_retry_after(mock_sleep):
     resp_429 = _mock_response(429, headers={"Retry-After": "2"})
     resp_200 = _mock_response(200)
@@ -348,7 +348,7 @@ async def test_retry_on_429_with_retry_after(mock_sleep):
     mock_sleep.assert_any_call(2.0)
 
 
-@patch("custom_components.pushward.api.asyncio.sleep", new_callable=AsyncMock)
+@patch("custom_components.pushward_hacs.api.asyncio.sleep", new_callable=AsyncMock)
 async def test_no_retry_on_client_error(mock_sleep):
     body = '{"type":"about:blank","title":"Bad Request","status":400,"detail":"Bad Request","code":"validation.failed"}'
     resp_400 = _mock_response(400, text=body)
@@ -364,7 +364,7 @@ async def test_no_retry_on_client_error(mock_sleep):
     mock_sleep.assert_not_called()
 
 
-@patch("custom_components.pushward.api.asyncio.sleep", new_callable=AsyncMock)
+@patch("custom_components.pushward_hacs.api.asyncio.sleep", new_callable=AsyncMock)
 async def test_4xx_error_body_truncated_in_exception(mock_sleep):
     """Large Problem.detail values are truncated to 200 chars + ellipsis in the exception."""
     long_detail = "x" * 500
@@ -416,7 +416,7 @@ async def test_4xx_non_json_body_falls_back_to_raw():
 # --- semaphore concurrency cap ---
 
 
-@patch("custom_components.pushward.api.asyncio.sleep", new_callable=AsyncMock)
+@patch("custom_components.pushward_hacs.api.asyncio.sleep", new_callable=AsyncMock)
 async def test_semaphore_caps_concurrency(mock_sleep):
     """Concurrent API calls are capped at MAX_CONCURRENT_REQUESTS."""
     lock = asyncio.Lock()

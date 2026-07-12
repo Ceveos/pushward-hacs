@@ -1694,7 +1694,7 @@
   "issues": {
     "deprecated_update_activity": {
       "title": "PushWard update_activity செயல் வழக்கொழிந்தது",
-      "description": "`pushward.update_activity` செயல் வழக்கொழிந்தது. அதற்கு பதிலாக உங்கள் தானியக்கங்களை வார்ப்புரு-குறிப்பிட்ட செயலுக்கு மாற்றவும் — எடுத்துக்காட்டாக `pushward.update_activity_countdown` அல்லது `pushward.update_activity_gauge`. பழைய செயல் இப்போதைக்கு இன்னும் வேலை செய்கிறது ஆனால் எதிர்கால வெளியீட்டில் அகற்றப்படும்."
+      "description": "`pushward_hacs.update_activity` செயல் வழக்கொழிந்தது. அதற்கு பதிலாக உங்கள் தானியக்கங்களை வார்ப்புரு-குறிப்பிட்ட செயலுக்கு மாற்றவும் — எடுத்துக்காட்டாக `pushward_hacs.update_activity_countdown` அல்லது `pushward_hacs.update_activity_gauge`. பழைய செயல் இப்போதைக்கு இன்னும் வேலை செய்கிறது ஆனால் எதிர்கால வெளியீட்டில் அகற்றப்படும்."
     },
     "usage_limit_notifications": {
       "title": "PushWard அறிவிப்பு வரம்பு எட்டப்பட்டது",

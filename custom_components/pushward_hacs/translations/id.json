@@ -1694,7 +1694,7 @@
   "issues": {
     "deprecated_update_activity": {
       "title": "Tindakan update_activity PushWard sudah usang",
-      "description": "Tindakan `pushward.update_activity` sudah usang. Alihkan otomasi Anda ke tindakan khusus templat — misalnya `pushward.update_activity_countdown` atau `pushward.update_activity_gauge`. Tindakan lama masih berfungsi untuk saat ini tetapi akan dihapus pada rilis mendatang."
+      "description": "Tindakan `pushward_hacs.update_activity` sudah usang. Alihkan otomasi Anda ke tindakan khusus templat — misalnya `pushward_hacs.update_activity_countdown` atau `pushward_hacs.update_activity_gauge`. Tindakan lama masih berfungsi untuk saat ini tetapi akan dihapus pada rilis mendatang."
     },
     "usage_limit_notifications": {
       "title": "Batas notifikasi PushWard tercapai",

@@ -46,6 +46,7 @@ from .const import (
     CONF_WIDGET_TEMPLATE,
     CONF_WIDGET_TRIGGER_MODE,
     DEFAULT_WIDGET_POLL_INTERVAL,
+    DOMAIN,
     WIDGET_TEMPLATE_STAT_LIST,
     WIDGET_TRIGGER_EVENT,
     WIDGET_TRIGGER_POLL,
@@ -56,11 +57,11 @@ from .widget_mapper import map_widget_content, widget_name_from_config
 _LOGGER = logging.getLogger(__name__)
 
 _WIDGET_STORAGE_VERSION = 1
-_WIDGET_PERMISSION_NOTIFICATION = "pushward_widget_permission"
+_WIDGET_PERMISSION_NOTIFICATION = f"{DOMAIN}_widget_permission"
 
 
 def _widget_storage_key(entry_id: str) -> str:
-    return f"pushward.widgets.{entry_id}"
+    return f"{DOMAIN}.widgets.{entry_id}"
 
 
 def build_widget_store(hass: HomeAssistant, entry_id: str) -> Store:
@@ -68,7 +69,7 @@ def build_widget_store(hass: HomeAssistant, entry_id: str) -> Store:
 
 
 def _forbidden_notification_id(slug: str) -> str:
-    return f"pushward_widget_forbidden_{slug}"
+    return f"{DOMAIN}_widget_forbidden_{slug}"
 
 
 @dataclass

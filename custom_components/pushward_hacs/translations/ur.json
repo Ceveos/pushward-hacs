@@ -1694,7 +1694,7 @@
   "issues": {
     "deprecated_update_activity": {
       "title": "PushWard update_activity ایکشن متروک ہے",
-      "description": "`pushward.update_activity` ایکشن متروک ہے۔ اپنی آٹومیشنز کو اس کے بجائے ٹیمپلیٹ کے مخصوص ایکشن پر منتقل کریں — مثلاً `pushward.update_activity_countdown` یا `pushward.update_activity_gauge`۔ پرانا ایکشن فی الحال کام کرتا رہے گا لیکن مستقبل کی ریلیز میں ہٹا دیا جائے گا۔"
+      "description": "`pushward_hacs.update_activity` ایکشن متروک ہے۔ اپنی آٹومیشنز کو اس کے بجائے ٹیمپلیٹ کے مخصوص ایکشن پر منتقل کریں — مثلاً `pushward_hacs.update_activity_countdown` یا `pushward_hacs.update_activity_gauge`۔ پرانا ایکشن فی الحال کام کرتا رہے گا لیکن مستقبل کی ریلیز میں ہٹا دیا جائے گا۔"
     },
     "usage_limit_notifications": {
       "title": "PushWard اطلاعات کی حد پہنچ گئی",

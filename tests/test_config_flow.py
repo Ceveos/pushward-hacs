@@ -13,8 +13,8 @@ from homeassistant.data_entry_flow import FlowResultType
 from homeassistant.helpers.selector import ObjectSelector
 from pytest_homeassistant_custom_component.common import MockConfigEntry
 
-from custom_components.pushward.api import PushWardAuthError
-from custom_components.pushward.config_flow import (
+from custom_components.pushward_hacs.api import PushWardAuthError
+from custom_components.pushward_hacs.config_flow import (
     _details_schema,
     _entity_staged_schemas,
     _hex_to_rgb,
@@ -38,7 +38,7 @@ from custom_components.pushward.config_flow import (
     _validate_integration_key,
     _widget_staged_schemas,
 )
-from custom_components.pushward.const import (
+from custom_components.pushward_hacs.const import (
     BOARD_MAX_TILES,
     CONF_ACCENT_COLOR_ATTRIBUTE,
     CONF_ACTIVITY_NAME,
@@ -257,7 +257,7 @@ async def _add_entity_subentry(
 def mock_api_client():
     """Mock PushWardApiClient with successful validate_connection."""
     with patch(
-        "custom_components.pushward.config_flow.PushWardApiClient",
+        "custom_components.pushward_hacs.config_flow.PushWardApiClient",
     ) as mock_cls:
         instance = mock_cls.return_value
         instance.validate_connection = AsyncMock(return_value=True)
@@ -268,7 +268,7 @@ def mock_api_client():
 def mock_session():
     """Mock async_get_clientsession for all tests."""
     with patch(
-        "custom_components.pushward.config_flow.async_get_clientsession",
+        "custom_components.pushward_hacs.config_flow.async_get_clientsession",
         return_value=MagicMock(),
     ):
         yield
@@ -278,7 +278,7 @@ def mock_session():
 def mock_setup_entry():
     """Prevent actual setup when config entry is created during tests."""
     with patch(
-        "custom_components.pushward.async_setup_entry",
+        "custom_components.pushward_hacs.async_setup_entry",
         return_value=True,
     ):
         yield
@@ -315,7 +315,7 @@ async def test_user_step_success(
 async def test_user_step_invalid_auth(hass: HomeAssistant) -> None:
     """Test user step with invalid auth."""
     with patch(
-        "custom_components.pushward.config_flow.PushWardApiClient",
+        "custom_components.pushward_hacs.config_flow.PushWardApiClient",
     ) as mock_cls:
         instance = mock_cls.return_value
         instance.validate_connection = AsyncMock(side_effect=PushWardAuthError("bad key"))
@@ -335,7 +335,7 @@ async def test_user_step_invalid_auth(hass: HomeAssistant) -> None:
 async def test_user_step_cannot_connect(hass: HomeAssistant) -> None:
     """Test user step with connection failure."""
     with patch(
-        "custom_components.pushward.config_flow.PushWardApiClient",
+        "custom_components.pushward_hacs.config_flow.PushWardApiClient",
     ) as mock_cls:
         instance = mock_cls.return_value
         instance.validate_connection = AsyncMock(side_effect=OSError("timeout"))
@@ -399,7 +399,7 @@ async def test_reconfigure_invalid_auth(hass: HomeAssistant) -> None:
     entry.add_to_hass(hass)
 
     with patch(
-        "custom_components.pushward.config_flow.PushWardApiClient",
+        "custom_components.pushward_hacs.config_flow.PushWardApiClient",
     ) as mock_cls:
         instance = mock_cls.return_value
         instance.validate_connection = AsyncMock(side_effect=PushWardAuthError("bad key"))
@@ -448,7 +448,7 @@ async def test_reauth_invalid_key(hass: HomeAssistant) -> None:
     entry.add_to_hass(hass)
 
     with patch(
-        "custom_components.pushward.config_flow.PushWardApiClient",
+        "custom_components.pushward_hacs.config_flow.PushWardApiClient",
     ) as mock_cls:
         instance = mock_cls.return_value
         instance.validate_connection = AsyncMock(side_effect=PushWardAuthError("bad key"))
@@ -469,7 +469,7 @@ async def test_reauth_cannot_connect(hass: HomeAssistant) -> None:
     entry.add_to_hass(hass)
 
     with patch(
-        "custom_components.pushward.config_flow.PushWardApiClient",
+        "custom_components.pushward_hacs.config_flow.PushWardApiClient",
     ) as mock_cls:
         instance = mock_cls.return_value
         instance.validate_connection = AsyncMock(side_effect=OSError("timeout"))
@@ -528,7 +528,7 @@ async def test_validate_integration_key_success(hass: HomeAssistant, mock_api_cl
 async def test_validate_integration_key_auth_error(hass: HomeAssistant) -> None:
     """Auth error returns invalid_auth."""
     with patch(
-        "custom_components.pushward.config_flow.PushWardApiClient",
+        "custom_components.pushward_hacs.config_flow.PushWardApiClient",
     ) as mock_cls:
         mock_cls.return_value.validate_connection = AsyncMock(side_effect=PushWardAuthError("bad key"))
         errors = await _validate_integration_key(hass, "bad-key", "test")
@@ -538,7 +538,7 @@ async def test_validate_integration_key_auth_error(hass: HomeAssistant) -> None:
 async def test_validate_integration_key_unexpected_error(hass: HomeAssistant) -> None:
     """Unexpected error returns cannot_connect."""
     with patch(
-        "custom_components.pushward.config_flow.PushWardApiClient",
+        "custom_components.pushward_hacs.config_flow.PushWardApiClient",
     ) as mock_cls:
         mock_cls.return_value.validate_connection = AsyncMock(side_effect=OSError("timeout"))
         errors = await _validate_integration_key(hass, "some-key", "test")

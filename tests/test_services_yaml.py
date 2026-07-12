@@ -18,9 +18,9 @@ from pathlib import Path
 
 import yaml
 
-from custom_components.pushward.const import TEMPLATES
+from custom_components.pushward_hacs.const import TEMPLATES
 
-_COMPONENT = Path(__file__).parent.parent / "custom_components" / "pushward"
+_COMPONENT = Path(__file__).parent.parent / "custom_components" / "pushward_hacs"
 _SERVICES_YAML = _COMPONENT / "services.yaml"
 _TRANSLATIONS = _COMPONENT / "translations"
 

@@ -1694,7 +1694,7 @@
   "issues": {
     "deprecated_update_activity": {
       "title": "Hindi na ginagamit ang PushWard update_activity action",
-      "description": "Hindi na ginagamit ang `pushward.update_activity` action. Ilipat ang iyong mga automation sa template-specific na action sa halip — halimbawa `pushward.update_activity_countdown` o `pushward.update_activity_gauge`. Gumagana pa ang lumang action sa ngayon ngunit aalisin sa hinaharap na release."
+      "description": "Hindi na ginagamit ang `pushward_hacs.update_activity` action. Ilipat ang iyong mga automation sa template-specific na action sa halip — halimbawa `pushward_hacs.update_activity_countdown` o `pushward_hacs.update_activity_gauge`. Gumagana pa ang lumang action sa ngayon ngunit aalisin sa hinaharap na release."
     },
     "usage_limit_notifications": {
       "title": "Naabot na ang limitasyon ng notification sa PushWard",

@@ -19,9 +19,9 @@ from homeassistant.helpers import issue_registry as ir
 from homeassistant.helpers.update_coordinator import UpdateFailed
 from pytest_homeassistant_custom_component.common import MockConfigEntry
 
-import custom_components.pushward as pushward_pkg
-from custom_components.pushward.api import PushWardApiError
-from custom_components.pushward.const import (
+import custom_components.pushward_hacs as pushward_pkg
+from custom_components.pushward_hacs.api import PushWardApiError
+from custom_components.pushward_hacs.const import (
     APP_STORE_URL,
     CONF_INTEGRATION_KEY,
     CONF_SERVER_URL,
@@ -30,8 +30,8 @@ from custom_components.pushward.const import (
     USAGE_LIMIT_RESOURCES,
     usage_limit_issue_id,
 )
-from custom_components.pushward.coordinator import PushWardUsageCoordinator, _format_reset
-from custom_components.pushward.sensor import USAGE_SENSORS
+from custom_components.pushward_hacs.coordinator import PushWardUsageCoordinator, _format_reset
+from custom_components.pushward_hacs.sensor import USAGE_SENSORS
 
 from .conftest import make_premium_usage_payload, make_usage_payload
 
@@ -186,7 +186,7 @@ async def test_unload_clears_outstanding_issue(hass: HomeAssistant) -> None:
     api = AsyncMock()
     api.get_me = AsyncMock(return_value=make_usage_payload(notifications_used=600, notifications_limit=500))
 
-    with patch("custom_components.pushward.PushWardApiClient", return_value=api):
+    with patch("custom_components.pushward_hacs.PushWardApiClient", return_value=api):
         assert await hass.config_entries.async_setup(entry.entry_id)
         await hass.async_block_till_done()
     assert _issue(hass, entry, "notifications_used") is not None

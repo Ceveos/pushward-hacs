@@ -1864,7 +1864,7 @@
   "issues": {
     "deprecated_update_activity": {
       "title": "The PushWard update_activity action is deprecated",
-      "description": "The `pushward.update_activity` action is deprecated. Switch your automations to the template-specific action instead — for example `pushward.update_activity_countdown` or `pushward.update_activity_gauge`. The old action still works for now but will be removed in a future release."
+      "description": "The `pushward_hacs.update_activity` action is deprecated. Switch your automations to the template-specific action instead — for example `pushward_hacs.update_activity_countdown` or `pushward_hacs.update_activity_gauge`. The old action still works for now but will be removed in a future release."
     },
     "usage_limit_notifications": {
       "title": "PushWard notification limit reached",

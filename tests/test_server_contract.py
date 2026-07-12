@@ -12,7 +12,7 @@ import time
 
 import pytest
 
-from custom_components.pushward.const import LOG_LINE_TEXT_MAX
+from custom_components.pushward_hacs.const import LOG_LINE_TEXT_MAX
 
 from .server_contract import (
     PushWardContractError,

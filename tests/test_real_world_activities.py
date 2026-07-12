@@ -26,8 +26,8 @@ import pytest
 from homeassistant.core import HomeAssistant
 from homeassistant.util import dt as dt_util
 
-from custom_components.pushward.activity_manager import ActivityManager
-from custom_components.pushward.const import (
+from custom_components.pushward_hacs.activity_manager import ActivityManager
+from custom_components.pushward_hacs.const import (
     ACTIVITY_STATE_ENDED,
     ACTIVITY_STATE_ONGOING,
     CONF_ACTIVITY_NAME,
@@ -55,7 +55,7 @@ from custom_components.pushward.const import (
     CONF_UNIT,
     CONF_VALUE_ATTRIBUTE,
 )
-from custom_components.pushward.content_mapper import map_content
+from custom_components.pushward_hacs.content_mapper import map_content
 
 from .conftest import (
     activity_updates,

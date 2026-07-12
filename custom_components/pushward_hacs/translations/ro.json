@@ -1694,7 +1694,7 @@
   "issues": {
     "deprecated_update_activity": {
       "title": "Acțiunea PushWard update_activity este deprecated",
-      "description": "Acțiunea `pushward.update_activity` este deprecated. Comutați automatizările la acțiunea specifică șablonului — de exemplu `pushward.update_activity_countdown` sau `pushward.update_activity_gauge`. Vechea acțiune încă funcționează deocamdată, dar va fi eliminată într-o versiune viitoare."
+      "description": "Acțiunea `pushward_hacs.update_activity` este deprecated. Comutați automatizările la acțiunea specifică șablonului — de exemplu `pushward_hacs.update_activity_countdown` sau `pushward_hacs.update_activity_gauge`. Vechea acțiune încă funcționează deocamdată, dar va fi eliminată într-o versiune viitoare."
     },
     "usage_limit_notifications": {
       "title": "Limita de notificări PushWard a fost atinsă",

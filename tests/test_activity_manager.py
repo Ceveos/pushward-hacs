@@ -11,15 +11,15 @@ from unittest.mock import AsyncMock, MagicMock, patch
 from homeassistant.core import HomeAssistant
 from homeassistant.util import dt as dt_util
 
-from custom_components.pushward.activity_manager import (
+from custom_components.pushward_hacs.activity_manager import (
     _ACTIVITY_LIMIT_NOTIFICATION_ID,
     ActivityManager,
     TrackedEntity,
     _companion_entity_ids,
     _forbidden_notification_id,
 )
-from custom_components.pushward.api import PushWardApiError, PushWardAuthError, PushWardForbiddenError
-from custom_components.pushward.const import (
+from custom_components.pushward_hacs.api import PushWardApiError, PushWardAuthError, PushWardForbiddenError
+from custom_components.pushward_hacs.const import (
     CONF_END_STATES,
     CONF_ENDED_TTL,
     CONF_ENTITY_ID,
@@ -107,7 +107,7 @@ async def test_end_activity_two_phase(hass: HomeAssistant) -> None:
 
     # Directly call the two-phase end (avoids async_create_task timing)
     with patch(
-        "custom_components.pushward.activity_manager.asyncio.sleep",
+        "custom_components.pushward_hacs.activity_manager.asyncio.sleep",
         new_callable=AsyncMock,
     ):
         await manager._async_end_activity("binary_sensor.washer")
@@ -198,7 +198,7 @@ async def test_rapid_on_off_cancels_end(hass: HomeAssistant) -> None:
 
     # End activity (schedules two-phase end with sleep)
     with patch(
-        "custom_components.pushward.activity_manager.asyncio.sleep",
+        "custom_components.pushward_hacs.activity_manager.asyncio.sleep",
         new_callable=AsyncMock,
     ) as mock_sleep:
         # Make sleep block so end task is pending
@@ -244,7 +244,7 @@ async def test_stale_end_skips_ended_after_restart(hass: HomeAssistant) -> None:
         tracked.generation += 1
 
     with patch(
-        "custom_components.pushward.activity_manager.asyncio.sleep",
+        "custom_components.pushward_hacs.activity_manager.asyncio.sleep",
         side_effect=bump_generation_during_sleep,
     ):
         await manager._async_end_activity("binary_sensor.washer")
@@ -424,7 +424,7 @@ async def test_activity_limit_409_triggers_persistent_notification(hass: HomeAss
     hass.states.async_set("binary_sensor.washer", "off")
     await manager.async_start()
 
-    with patch("custom_components.pushward.activity_manager.persistent_notification.async_create") as mock_notify:
+    with patch("custom_components.pushward_hacs.activity_manager.persistent_notification.async_create") as mock_notify:
         hass.states.async_set("binary_sensor.washer", "on")
         await hass.async_block_till_done()
 
@@ -445,7 +445,7 @@ async def test_activity_limit_409_does_not_trigger_reauth(hass: HomeAssistant) -
     hass.states.async_set("binary_sensor.washer", "off")
     await manager.async_start()
 
-    with patch("custom_components.pushward.activity_manager.persistent_notification.async_create"):
+    with patch("custom_components.pushward_hacs.activity_manager.persistent_notification.async_create"):
         hass.states.async_set("binary_sensor.washer", "on")
         await hass.async_block_till_done()
 
@@ -476,7 +476,7 @@ async def test_forbidden_403_triggers_persistent_notification_not_reauth(hass: H
         side_effect=PushWardForbiddenError("account owner's subscription is not active", status_code=403)
     )
 
-    with patch("custom_components.pushward.activity_manager.persistent_notification.async_create") as mock_notify:
+    with patch("custom_components.pushward_hacs.activity_manager.persistent_notification.async_create") as mock_notify:
         hass.states.async_set("binary_sensor.washer", "on", {"brightness": 50})
         await hass.async_block_till_done()
 
@@ -501,7 +501,7 @@ async def test_forbidden_403_on_create_also_triggers_notification(hass: HomeAssi
     hass.states.async_set("binary_sensor.washer", "off")
     await manager.async_start()
 
-    with patch("custom_components.pushward.activity_manager.persistent_notification.async_create") as mock_notify:
+    with patch("custom_components.pushward_hacs.activity_manager.persistent_notification.async_create") as mock_notify:
         hass.states.async_set("binary_sensor.washer", "on")
         await hass.async_block_till_done()
 
@@ -529,9 +529,9 @@ async def test_forbidden_403_on_end_also_triggers_notification(hass: HomeAssista
     # Make all update_activity calls raise 403
     api.update_activity = AsyncMock(side_effect=PushWardForbiddenError("subscription not active", status_code=403))
 
-    with patch("custom_components.pushward.activity_manager.persistent_notification.async_create") as mock_notify:
+    with patch("custom_components.pushward_hacs.activity_manager.persistent_notification.async_create") as mock_notify:
         with patch(
-            "custom_components.pushward.activity_manager.asyncio.sleep",
+            "custom_components.pushward_hacs.activity_manager.asyncio.sleep",
             new_callable=AsyncMock,
         ):
             await manager._async_end_activity("binary_sensor.washer")
@@ -563,7 +563,7 @@ async def test_401_still_triggers_reauth(hass: HomeAssistant) -> None:
 
     api.update_activity = AsyncMock(side_effect=PushWardAuthError("bad key", status_code=401))
 
-    with patch("custom_components.pushward.activity_manager.persistent_notification.async_create") as mock_notify:
+    with patch("custom_components.pushward_hacs.activity_manager.persistent_notification.async_create") as mock_notify:
         hass.states.async_set("binary_sensor.washer", "on", {"brightness": 50})
         await hass.async_block_till_done()
 
@@ -653,7 +653,7 @@ async def test_sound_not_passed_on_end(hass: HomeAssistant) -> None:
     api.reset_mock()
 
     with patch(
-        "custom_components.pushward.activity_manager.asyncio.sleep",
+        "custom_components.pushward_hacs.activity_manager.asyncio.sleep",
         new_callable=AsyncMock,
     ):
         await manager._async_end_activity("binary_sensor.washer")

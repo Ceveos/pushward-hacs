@@ -1694,7 +1694,7 @@
   "issues": {
     "deprecated_update_activity": {
       "title": "PushWard update_activity অ্যাকশনটি অবচিত হয়েছে",
-      "description": "`pushward.update_activity` অ্যাকশনটি অবচিত হয়েছে। পরিবর্তে আপনার অটোমেশনগুলোকে টেমপ্লেট-নির্দিষ্ট অ্যাকশনে পরিবর্তন করুন — যেমন `pushward.update_activity_countdown` অথবা `pushward.update_activity_gauge`। পুরোনো অ্যাকশনটি আপাতত কাজ করে তবে একটি ভবিষ্যৎ রিলিজে সরিয়ে ফেলা হবে।"
+      "description": "`pushward_hacs.update_activity` অ্যাকশনটি অবচিত হয়েছে। পরিবর্তে আপনার অটোমেশনগুলোকে টেমপ্লেট-নির্দিষ্ট অ্যাকশনে পরিবর্তন করুন — যেমন `pushward_hacs.update_activity_countdown` অথবা `pushward_hacs.update_activity_gauge`। পুরোনো অ্যাকশনটি আপাতত কাজ করে তবে একটি ভবিষ্যৎ রিলিজে সরিয়ে ফেলা হবে।"
     },
     "usage_limit_notifications": {
       "title": "PushWard নোটিফিকেশন সীমায় পৌঁছেছে",

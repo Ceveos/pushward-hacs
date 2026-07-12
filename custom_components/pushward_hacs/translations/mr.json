@@ -1694,7 +1694,7 @@
   "issues": {
     "deprecated_update_activity": {
       "title": "PushWard update_activity क्रिया कालबाह्य झाली आहे",
-      "description": "`pushward.update_activity` क्रिया कालबाह्य झाली आहे. त्याऐवजी तुमची ऑटोमेशन्स टेम्पलेट-विशिष्ट क्रियेवर स्विच करा — उदाहरणार्थ `pushward.update_activity_countdown` किंवा `pushward.update_activity_gauge`. जुनी क्रिया सध्या कार्यरत आहे पण भविष्यातील रिलीझमध्ये काढून टाकली जाईल."
+      "description": "`pushward_hacs.update_activity` क्रिया कालबाह्य झाली आहे. त्याऐवजी तुमची ऑटोमेशन्स टेम्पलेट-विशिष्ट क्रियेवर स्विच करा — उदाहरणार्थ `pushward_hacs.update_activity_countdown` किंवा `pushward_hacs.update_activity_gauge`. जुनी क्रिया सध्या कार्यरत आहे पण भविष्यातील रिलीझमध्ये काढून टाकली जाईल."
     },
     "usage_limit_notifications": {
       "title": "PushWard सूचना मर्यादा गाठली",

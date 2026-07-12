@@ -1694,7 +1694,7 @@
   "issues": {
     "deprecated_update_activity": {
       "title": "A ação update_activity do PushWard está obsoleta",
-      "description": "A ação `pushward.update_activity` está obsoleta. Em vez disso, mude suas automações para a ação específica do modelo — por exemplo `pushward.update_activity_countdown` ou `pushward.update_activity_gauge`. A ação antiga ainda funciona por enquanto, mas será removida em uma versão futura."
+      "description": "A ação `pushward_hacs.update_activity` está obsoleta. Em vez disso, mude suas automações para a ação específica do modelo — por exemplo `pushward_hacs.update_activity_countdown` ou `pushward_hacs.update_activity_gauge`. A ação antiga ainda funciona por enquanto, mas será removida em uma versão futura."
     },
     "usage_limit_notifications": {
       "title": "Limite de notificações do PushWard atingido",

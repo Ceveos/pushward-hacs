@@ -7,9 +7,9 @@ import pytest
 from homeassistant.core import HomeAssistant
 from homeassistant.loader import DATA_CUSTOM_COMPONENTS
 
-from custom_components.pushward.activity_manager import ActivityManager
-from custom_components.pushward.api import PushWardApiClient
-from custom_components.pushward.const import (
+from custom_components.pushward_hacs.activity_manager import ActivityManager
+from custom_components.pushward_hacs.api import PushWardApiClient
+from custom_components.pushward_hacs.const import (
     CONF_ACCENT_COLOR,
     CONF_ACCENT_COLOR_ATTRIBUTE,
     CONF_ACTIVITY_NAME,
@@ -360,7 +360,7 @@ async def end_activity_via_state(
     Goes through the real ``_async_on_state_change`` → ``_schedule_end`` path with
     ``END_DELAY_SECONDS`` collapsed to 0 so the ENDED push lands without a 5 s wait.
     """
-    with patch("custom_components.pushward.activity_manager.END_DELAY_SECONDS", 0):
+    with patch("custom_components.pushward_hacs.activity_manager.END_DELAY_SECONDS", 0):
         hass.states.async_set(entity_id, end_state, attrs)
         await hass.async_block_till_done()
         end_task = manager._tracked[entity_id].end_task

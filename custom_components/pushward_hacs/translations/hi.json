@@ -1694,7 +1694,7 @@
   "issues": {
     "deprecated_update_activity": {
       "title": "PushWard update_activity क्रिया अब बहिष्कृत है",
-      "description": "`pushward.update_activity` क्रिया बहिष्कृत है। इसके बजाय अपने ऑटोमेशन को टेम्पलेट-विशिष्ट क्रिया पर स्विच करें — उदाहरण के लिए `pushward.update_activity_countdown` या `pushward.update_activity_gauge`। पुरानी क्रिया अभी भी काम करती है लेकिन किसी भविष्य के रिलीज़ में हटा दी जाएगी।"
+      "description": "`pushward_hacs.update_activity` क्रिया बहिष्कृत है। इसके बजाय अपने ऑटोमेशन को टेम्पलेट-विशिष्ट क्रिया पर स्विच करें — उदाहरण के लिए `pushward_hacs.update_activity_countdown` या `pushward_hacs.update_activity_gauge`। पुरानी क्रिया अभी भी काम करती है लेकिन किसी भविष्य के रिलीज़ में हटा दी जाएगी।"
     },
     "usage_limit_notifications": {
       "title": "PushWard सूचना सीमा पूरी हुई",

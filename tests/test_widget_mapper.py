@@ -2,7 +2,7 @@
 
 from unittest.mock import MagicMock
 
-from custom_components.pushward.const import (
+from custom_components.pushward_hacs.const import (
     CONF_ENTITY_ID,
     CONF_ICON,
     CONF_LABEL,
@@ -22,7 +22,7 @@ from custom_components.pushward.const import (
     WIDGET_TEMPLATE_STATUS,
     WIDGET_TEMPLATE_VALUE,
 )
-from custom_components.pushward.widget_mapper import (
+from custom_components.pushward_hacs.widget_mapper import (
     map_widget_content,
     widget_name_from_config,
 )

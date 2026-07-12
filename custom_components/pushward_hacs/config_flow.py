@@ -1390,7 +1390,7 @@ class PushWardConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
             errors = await _validate_integration_key(self.hass, user_input[CONF_INTEGRATION_KEY], "setup")
             if not errors:
                 return self.async_create_entry(
-                    title="PushWard Studio",
+                    title="PushWard HACS",
                     data={
                         CONF_SERVER_URL: DEFAULT_SERVER_URL,
                         CONF_INTEGRATION_KEY: user_input[CONF_INTEGRATION_KEY],

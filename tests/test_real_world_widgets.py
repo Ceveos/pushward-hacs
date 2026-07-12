@@ -12,7 +12,7 @@ from __future__ import annotations
 from homeassistant.const import STATE_UNAVAILABLE
 from homeassistant.core import HomeAssistant
 
-from custom_components.pushward.const import (
+from custom_components.pushward_hacs.const import (
     CONF_ENTITY_ID,
     CONF_LABEL,
     CONF_MAX_VALUE,
@@ -32,8 +32,8 @@ from custom_components.pushward.const import (
     WIDGET_TEMPLATE_VALUE,
     WIDGET_TRIGGER_POLL,
 )
-from custom_components.pushward.widget_manager import WidgetManager
-from custom_components.pushward.widget_mapper import map_widget_content
+from custom_components.pushward_hacs.widget_manager import WidgetManager
+from custom_components.pushward_hacs.widget_mapper import map_widget_content
 
 from .conftest import make_mock_entry, make_widget_api, make_widget_config
 from .server_contract import assert_valid_widget_content

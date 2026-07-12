@@ -1694,7 +1694,7 @@
   "issues": {
     "deprecated_update_activity": {
       "title": "De PushWard-actie update_activity is verouderd",
-      "description": "De actie `pushward.update_activity` is verouderd. Schakel je automatiseringen over naar de sjabloonspecifieke actie — bijvoorbeeld `pushward.update_activity_countdown` of `pushward.update_activity_gauge`. De oude actie werkt voorlopig nog, maar wordt in een toekomstige release verwijderd."
+      "description": "De actie `pushward_hacs.update_activity` is verouderd. Schakel je automatiseringen over naar de sjabloonspecifieke actie — bijvoorbeeld `pushward_hacs.update_activity_countdown` of `pushward_hacs.update_activity_gauge`. De oude actie werkt voorlopig nog, maar wordt in een toekomstige release verwijderd."
     },
     "usage_limit_notifications": {
       "title": "PushWard-meldingslimiet bereikt",

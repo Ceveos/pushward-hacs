@@ -1,0 +1,17 @@
+{
+  "domain": "pushward_hacs",
+  "name": "PushWard HACS",
+  "after_dependencies": [
+    "recorder"
+  ],
+  "codeowners": [
+    "@Ceveos"
+  ],
+  "config_flow": true,
+  "documentation": "https://github.com/Ceveos/pushward-hacs",
+  "integration_type": "service",
+  "iot_class": "cloud_push",
+  "issue_tracker": "https://github.com/Ceveos/pushward-hacs/issues",
+  "requirements": [],
+  "version": "0.1.0"
+}

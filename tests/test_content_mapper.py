@@ -6,7 +6,7 @@ from unittest.mock import patch
 import pytest
 import voluptuous as vol
 
-from custom_components.pushward.const import (
+from custom_components.pushward_hacs.const import (
     CONF_ACCENT_COLOR,
     CONF_ACCENT_COLOR_ATTRIBUTE,
     CONF_ALARM,
@@ -63,7 +63,7 @@ from custom_components.pushward.const import (
     normalize_slug,
     validate_slug,
 )
-from custom_components.pushward.content_mapper import (
+from custom_components.pushward_hacs.content_mapper import (
     _build_log_line,
     _get_timeline_units,
     _get_timeline_values,
@@ -380,7 +380,7 @@ def test_get_domain_defaults_unknown():
 # --- countdown template ---
 
 
-@patch("custom_components.pushward.content_mapper.time")
+@patch("custom_components.pushward_hacs.content_mapper.time")
 def test_map_content_countdown_with_remaining(mock_time):
     mock_time.time.return_value = 1000.0
     state = _make_state("active", {"friendly_name": "Tea Timer", "remaining": 120})
@@ -396,7 +396,7 @@ def test_map_content_countdown_with_remaining(mock_time):
     assert content["remaining_time"] == 120
 
 
-@patch("custom_components.pushward.content_mapper.time")
+@patch("custom_components.pushward_hacs.content_mapper.time")
 def test_map_content_countdown_no_remaining(mock_time):
     mock_time.time.return_value = 1000.0
     state = _make_state("active", {"friendly_name": "Timer"})
@@ -411,7 +411,7 @@ def test_map_content_countdown_no_remaining(mock_time):
     assert content["end_date"] == 1000
 
 
-@patch("custom_components.pushward.content_mapper.time")
+@patch("custom_components.pushward_hacs.content_mapper.time")
 def test_map_completion_content_countdown(mock_time):
     mock_time.time.return_value = 2000.0
     config = {CONF_TEMPLATE: "countdown", CONF_ICON: "timer"}
@@ -660,7 +660,7 @@ def test_map_completion_content_default_message():
     assert content["state"] == "Complete"
 
 
-@patch("custom_components.pushward.content_mapper.time")
+@patch("custom_components.pushward_hacs.content_mapper.time")
 def test_map_content_countdown_completion_message(mock_time):
     """Countdown template includes completion_message when configured."""
     mock_time.time.return_value = 1000.0
@@ -1705,7 +1705,7 @@ def test_map_completion_content_timeline_no_last_content():
 # Countdown: warning_threshold
 
 
-@patch("custom_components.pushward.content_mapper.time")
+@patch("custom_components.pushward_hacs.content_mapper.time")
 def test_countdown_emits_warning_threshold(mock_time):
     mock_time.time.return_value = 1000.0
     state = _make_state("active", {"remaining": 120})
@@ -1722,7 +1722,7 @@ def test_countdown_emits_warning_threshold(mock_time):
     assert content["warning_threshold"] == 30
 
 
-@patch("custom_components.pushward.content_mapper.time")
+@patch("custom_components.pushward_hacs.content_mapper.time")
 def test_countdown_omits_warning_threshold_when_not_configured(mock_time):
     mock_time.time.return_value = 1000.0
     state = _make_state("active", {"remaining": 120})
@@ -1742,7 +1742,7 @@ def test_countdown_omits_warning_threshold_when_not_configured(mock_time):
 # Countdown: alarm
 
 
-@patch("custom_components.pushward.content_mapper.time")
+@patch("custom_components.pushward_hacs.content_mapper.time")
 def test_countdown_emits_alarm_true_when_configured(mock_time):
     mock_time.time.return_value = 1000.0
     state = _make_state("active", {"remaining": 60})
@@ -1759,7 +1759,7 @@ def test_countdown_emits_alarm_true_when_configured(mock_time):
     assert content["alarm"] is True
 
 
-@patch("custom_components.pushward.content_mapper.time")
+@patch("custom_components.pushward_hacs.content_mapper.time")
 def test_countdown_omits_alarm_when_false(mock_time):
     mock_time.time.return_value = 1000.0
     state = _make_state("active", {"remaining": 60})
@@ -1779,7 +1779,7 @@ def test_countdown_omits_alarm_when_false(mock_time):
 # Countdown: start_date
 
 
-@patch("custom_components.pushward.content_mapper.time")
+@patch("custom_components.pushward_hacs.content_mapper.time")
 def test_countdown_emits_start_date_when_remaining_present(mock_time):
     mock_time.time.return_value = 5000.0
     state = _make_state("active", {"remaining": 120})
@@ -1795,7 +1795,7 @@ def test_countdown_emits_start_date_when_remaining_present(mock_time):
     assert content["start_date"] == 5000
 
 
-@patch("custom_components.pushward.content_mapper.time")
+@patch("custom_components.pushward_hacs.content_mapper.time")
 def test_countdown_omits_start_date_when_no_remaining_time_attr(mock_time):
     mock_time.time.return_value = 5000.0
     state = _make_state("active", {})
@@ -2126,7 +2126,7 @@ def test_companion_remaining_time_duration_unit_minutes():
     assert content["remaining_time"] == 25 * 60
 
 
-@patch("custom_components.pushward.content_mapper.time")
+@patch("custom_components.pushward_hacs.content_mapper.time")
 def test_companion_remaining_time_timestamp_anchors_end_date(mock_time):
     """A timestamp finish-time sensor maps end_date to the absolute epoch."""
     mock_time.time.return_value = 1000.0

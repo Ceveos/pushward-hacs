@@ -1694,7 +1694,7 @@
   "issues": {
     "deprecated_update_activity": {
       "title": "Die PushWard-Aktion update_activity ist veraltet",
-      "description": "Die Aktion `pushward.update_activity` ist veraltet. Die Automatisierungen stattdessen auf die vorlagenspezifische Aktion umstellen – zum Beispiel `pushward.update_activity_countdown` oder `pushward.update_activity_gauge`. Die alte Aktion funktioniert vorerst weiterhin, wird aber in einer zukünftigen Version entfernt."
+      "description": "Die Aktion `pushward_hacs.update_activity` ist veraltet. Die Automatisierungen stattdessen auf die vorlagenspezifische Aktion umstellen – zum Beispiel `pushward_hacs.update_activity_countdown` oder `pushward_hacs.update_activity_gauge`. Die alte Aktion funktioniert vorerst weiterhin, wird aber in einer zukünftigen Version entfernt."
     },
     "usage_limit_notifications": {
       "title": "PushWard-Benachrichtigungslimit erreicht",

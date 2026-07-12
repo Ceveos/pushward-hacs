@@ -1694,7 +1694,7 @@
   "issues": {
     "deprecated_update_activity": {
       "title": "Hành động update_activity của PushWard đã lỗi thời",
-      "description": "Hành động `pushward.update_activity` đã lỗi thời. Hãy chuyển các tự động hóa của bạn sang hành động dành riêng cho từng mẫu — ví dụ `pushward.update_activity_countdown` hoặc `pushward.update_activity_gauge`. Hành động cũ vẫn hoạt động hiện tại nhưng sẽ bị gỡ bỏ trong một bản phát hành tương lai."
+      "description": "Hành động `pushward_hacs.update_activity` đã lỗi thời. Hãy chuyển các tự động hóa của bạn sang hành động dành riêng cho từng mẫu — ví dụ `pushward_hacs.update_activity_countdown` hoặc `pushward_hacs.update_activity_gauge`. Hành động cũ vẫn hoạt động hiện tại nhưng sẽ bị gỡ bỏ trong một bản phát hành tương lai."
     },
     "usage_limit_notifications": {
       "title": "Đã đạt giới hạn thông báo của PushWard",

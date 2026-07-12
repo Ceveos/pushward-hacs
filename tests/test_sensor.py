@@ -11,15 +11,15 @@ from homeassistant.helpers import entity_registry as er
 from homeassistant.helpers.update_coordinator import UpdateFailed
 from pytest_homeassistant_custom_component.common import MockConfigEntry
 
-from custom_components.pushward.api import PushWardApiError, PushWardAuthError
-from custom_components.pushward.const import (
+from custom_components.pushward_hacs.api import PushWardApiError, PushWardAuthError
+from custom_components.pushward_hacs.const import (
     CONF_INTEGRATION_KEY,
     CONF_SERVER_URL,
     DEFAULT_SERVER_URL,
     DOMAIN,
 )
-from custom_components.pushward.coordinator import PushWardUsageCoordinator
-from custom_components.pushward.sensor import (
+from custom_components.pushward_hacs.coordinator import PushWardUsageCoordinator
+from custom_components.pushward_hacs.sensor import (
     USAGE_SENSORS,
     PushWardTierSensor,
     PushWardUsageSensor,
@@ -182,7 +182,7 @@ async def test_sensors_created_on_setup(hass: HomeAssistant) -> None:
     api = AsyncMock()
     api.get_me = AsyncMock(return_value=make_usage_payload())
 
-    with patch("custom_components.pushward.PushWardApiClient", return_value=api):
+    with patch("custom_components.pushward_hacs.PushWardApiClient", return_value=api):
         assert await hass.config_entries.async_setup(entry.entry_id)
         await hass.async_block_till_done()
 

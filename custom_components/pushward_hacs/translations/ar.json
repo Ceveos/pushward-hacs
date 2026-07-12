@@ -1694,7 +1694,7 @@
   "issues": {
     "deprecated_update_activity": {
       "title": "إجراء update_activity في PushWard مهمَل",
-      "description": "إجراء `pushward.update_activity` مهمَل. بدّل عمليات الأتمتة لديك إلى الإجراء الخاص بالقالب بدلًا منه — على سبيل المثال `pushward.update_activity_countdown` أو `pushward.update_activity_gauge`. لا يزال الإجراء القديم يعمل حاليًا لكنه سيُزال في إصدار مستقبلي."
+      "description": "إجراء `pushward_hacs.update_activity` مهمَل. بدّل عمليات الأتمتة لديك إلى الإجراء الخاص بالقالب بدلًا منه — على سبيل المثال `pushward_hacs.update_activity_countdown` أو `pushward_hacs.update_activity_gauge`. لا يزال الإجراء القديم يعمل حاليًا لكنه سيُزال في إصدار مستقبلي."
     },
     "usage_limit_notifications": {
       "title": "تم بلوغ حد إشعارات PushWard",

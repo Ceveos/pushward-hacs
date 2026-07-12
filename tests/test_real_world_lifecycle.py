@@ -14,8 +14,8 @@ from unittest.mock import AsyncMock
 
 from homeassistant.core import HomeAssistant
 
-from custom_components.pushward.activity_manager import ActivityManager
-from custom_components.pushward.const import (
+from custom_components.pushward_hacs.activity_manager import ActivityManager
+from custom_components.pushward_hacs.const import (
     ACTIVITY_STATE_ENDED,
     ACTIVITY_STATE_ONGOING,
     CONF_ACTIVITY_NAME,

@@ -2,7 +2,7 @@
 
 import pytest
 
-from custom_components.pushward.api import (
+from custom_components.pushward_hacs.api import (
     PushWardForbiddenError,
     PushWardNotFoundError,
     PushWardWidgetPermissionError,

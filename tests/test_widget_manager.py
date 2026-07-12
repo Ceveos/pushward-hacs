@@ -8,13 +8,13 @@ import pytest
 from homeassistant.const import STATE_UNAVAILABLE
 from homeassistant.core import HomeAssistant
 
-from custom_components.pushward.api import (
+from custom_components.pushward_hacs.api import (
     PushWardApiError,
     PushWardAuthError,
     PushWardNotFoundError,
     PushWardWidgetPermissionError,
 )
-from custom_components.pushward.const import (
+from custom_components.pushward_hacs.const import (
     CONF_ENTITY_ID,
     CONF_SLUG,
     CONF_STAT_ROWS,
@@ -26,7 +26,7 @@ from custom_components.pushward.const import (
     WIDGET_TEMPLATE_VALUE,
     WIDGET_TRIGGER_POLL,
 )
-from custom_components.pushward.widget_manager import (
+from custom_components.pushward_hacs.widget_manager import (
     _WIDGET_PERMISSION_NOTIFICATION,
     WidgetManager,
 )
@@ -291,7 +291,7 @@ async def test_widget_permission_403_surfaces_notification(hass: HomeAssistant) 
     config = make_widget_config()
     hass.states.async_set("sensor.users", "42")
 
-    with patch("custom_components.pushward.widget_manager.persistent_notification.async_create") as create_notif:
+    with patch("custom_components.pushward_hacs.widget_manager.persistent_notification.async_create") as create_notif:
         manager = WidgetManager(hass, api, [config], _mock_entry())
         await manager.async_start()
         assert create_notif.called

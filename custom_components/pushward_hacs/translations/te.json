@@ -1694,7 +1694,7 @@
   "issues": {
     "deprecated_update_activity": {
       "title": "PushWard update_activity చర్య నిరుపయోగం చేయబడింది",
-      "description": "`pushward.update_activity` చర్య నిరుపయోగం చేయబడింది. బదులుగా మీ ఆటోమేషన్‌లను టెంప్లేట్-నిర్దిష్ట చర్యకు మార్చండి — ఉదాహరణకు `pushward.update_activity_countdown` లేదా `pushward.update_activity_gauge`. పాత చర్య ప్రస్తుతానికి ఇంకా పనిచేస్తుంది కానీ భవిష్యత్ విడుదలలో తీసివేయబడుతుంది."
+      "description": "`pushward_hacs.update_activity` చర్య నిరుపయోగం చేయబడింది. బదులుగా మీ ఆటోమేషన్‌లను టెంప్లేట్-నిర్దిష్ట చర్యకు మార్చండి — ఉదాహరణకు `pushward_hacs.update_activity_countdown` లేదా `pushward_hacs.update_activity_gauge`. పాత చర్య ప్రస్తుతానికి ఇంకా పనిచేస్తుంది కానీ భవిష్యత్ విడుదలలో తీసివేయబడుతుంది."
     },
     "usage_limit_notifications": {
       "title": "PushWard నోటిఫికేషన్ పరిమితి చేరుకుంది",

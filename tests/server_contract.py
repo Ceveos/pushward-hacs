@@ -2,7 +2,7 @@
 
 This module encodes the **public** PushWard API validation contract — the same
 constraints advertised by the public OpenAPI spec and already mirrored by the
-caps in ``custom_components/pushward/const.py``. It exists so realistic tests can
+caps in ``custom_components/pushward_hacs/const.py``. It exists so realistic tests can
 assert that whatever the integration's mappers emit would be *accepted* by the
 PushWard server, not merely that it has the shape we expected locally.
 
@@ -27,7 +27,7 @@ import math
 import time
 from urllib.parse import urlparse
 
-from custom_components.pushward.const import (
+from custom_components.pushward_hacs.const import (
     BOARD_MAX_TILES,
     BOARD_TILE_ICON_MAX,
     BOARD_TILE_LABEL_MAX,
@@ -68,7 +68,7 @@ from custom_components.pushward.const import (
     WIDGET_TREND_UP,
     WIDGET_UNIT_MAX,
 )
-from custom_components.pushward.content_mapper import _COLOR_HEX_RE, _COLOR_NAMED
+from custom_components.pushward_hacs.content_mapper import _COLOR_HEX_RE, _COLOR_NAMED
 
 # --- Public caps that const.py does not (yet) name --------------------------------
 # Real server limits the integration honours but has no named constant for; defined

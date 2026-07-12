@@ -49,6 +49,7 @@ from .const import (
     CONF_TILES,
     CONF_UPDATE_INTERVAL,
     CONF_VALUE_ENTITY,
+    DOMAIN,
     END_DELAY_SECONDS,
     LOG_MAX_LINES,
 )
@@ -70,7 +71,7 @@ _HISTORY_SAMPLES_KEY = "samples"
 # but this avoids a visible gap before the first post-restart push).
 _LOG_SAMPLES_KEY = "logs"
 
-_ACTIVITY_LIMIT_NOTIFICATION_ID = "pushward_activity_limit"
+_ACTIVITY_LIMIT_NOTIFICATION_ID = f"{DOMAIN}_activity_limit"
 
 # Config keys that may point a value at a SEPARATE companion entity. Changes to
 # these entities should refresh the activity even though they don't drive
@@ -122,12 +123,12 @@ def _same_log_line(head: dict | None, line: dict) -> bool:
 
 
 def _forbidden_notification_id(slug: str) -> str:
-    return f"pushward_forbidden_{slug}"
+    return f"{DOMAIN}_forbidden_{slug}"
 
 
 def history_storage_key(entry_id: str) -> str:
     """Return the .storage key used for this entry's persisted history buffers."""
-    return f"pushward.history.{entry_id}"
+    return f"{DOMAIN}.history.{entry_id}"
 
 
 def build_history_store(hass: HomeAssistant, entry_id: str) -> Store:

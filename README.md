@@ -1,6 +1,6 @@
-# PushWard Studio
+# PushWard HACS
 
-PushWard Studio is a HACS-compatible Home Assistant custom integration for
+PushWard HACS is a HACS-compatible Home Assistant custom integration for
 driving [PushWard](https://pushward.app) Live Activities and widgets from Home
 Assistant entities. It is focused on an obvious, staged setup experience rather
 than a single wall of fields or comma-delimited configuration strings.
@@ -11,7 +11,7 @@ This project is derived from the MIT-licensed
 
 ## Why an integration instead of a blueprint
 
-Unlike a blueprint, PushWard Studio can:
+Unlike a blueprint, PushWard HACS can:
 
 - Keep track of whether an activity is already running
 - Throttle and deduplicate rapid entity updates
@@ -65,31 +65,30 @@ Compound layouts use repeatable forms:
 
 ## HACS installation
 
-This directory is a standalone HACS repository layout. Publish the contents of
-`home-assistant/pushward-studio/` as the root of its own public GitHub
-repository, then:
+This repository already uses the standalone layout required by HACS. To install
+it as a custom repository:
 
 1. Open **HACS > Integrations**.
 2. Choose **Custom repositories**.
-3. Add the repository URL as category **Integration**.
-4. Search for **PushWard Studio**, install it, and restart Home Assistant.
+3. Add `https://github.com/Ceveos/pushward-hacs` as category **Integration**.
+4. Search for **PushWard HACS**, install it, and restart Home Assistant.
 5. Go to **Settings > Devices & services > Add integration** and search for
-   **PushWard Studio**.
+   **PushWard HACS**.
 6. Paste an integration key from the PushWard iOS app.
 
-The integration uses the `pushward` domain and therefore cannot be installed at
-the same time as the official `pushward-hass` integration. Remove one before
-installing the other.
+The integration uses the separate `pushward_hacs` domain, so it can be installed
+alongside the official `pushward` integration. HACS installs this fork into
+`/config/custom_components/pushward_hacs`.
 
 ## Manual installation
 
-Copy `custom_components/pushward` into your Home Assistant configuration:
+Copy `custom_components/pushward_hacs` into your Home Assistant configuration:
 
 ```text
-/config/custom_components/pushward
+/config/custom_components/pushward_hacs
 ```
 
-Restart Home Assistant and add **PushWard Studio** from **Devices & services**.
+Restart Home Assistant and add **PushWard HACS** from **Devices & services**.
 
 ## Development
 
@@ -102,5 +101,5 @@ ruff check .
 ```
 
 The inherited upstream test suite covers API behavior, mappers, managers,
-services, configuration flows, diagnostics, and quota handling. PushWard Studio
+services, configuration flows, diagnostics, and quota handling. PushWard HACS
 adds staged-flow and structured-selector coverage alongside those tests.

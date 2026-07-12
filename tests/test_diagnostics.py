@@ -13,7 +13,7 @@ from homeassistant.config_entries import ConfigSubentryData
 from homeassistant.core import HomeAssistant
 from pytest_homeassistant_custom_component.common import MockConfigEntry
 
-from custom_components.pushward.const import (
+from custom_components.pushward_hacs.const import (
     CONF_ACTIVITY_NAME,
     CONF_END_STATES,
     CONF_ENTITY_ID,
@@ -30,7 +30,7 @@ from custom_components.pushward.const import (
     SUBENTRY_TYPE_ENTITY,
     SUBENTRY_TYPE_WIDGET,
 )
-from custom_components.pushward.diagnostics import async_get_config_entry_diagnostics
+from custom_components.pushward_hacs.diagnostics import async_get_config_entry_diagnostics
 
 from .conftest import make_entity_config, make_usage_payload, make_widget_config
 
@@ -77,7 +77,7 @@ def _entry_with_subentries() -> MockConfigEntry:
 
 async def _setup(hass: HomeAssistant, entry: MockConfigEntry, api: AsyncMock) -> None:
     entry.add_to_hass(hass)
-    with patch("custom_components.pushward.PushWardApiClient", return_value=api):
+    with patch("custom_components.pushward_hacs.PushWardApiClient", return_value=api):
         await hass.config_entries.async_setup(entry.entry_id)
         await hass.async_block_till_done()
 

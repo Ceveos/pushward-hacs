@@ -1694,7 +1694,7 @@
   "issues": {
     "deprecated_update_activity": {
       "title": "PushWard の update_activity アクションは非推奨です",
-      "description": "`pushward.update_activity` アクションは非推奨です。代わりにテンプレート固有のアクション — 例えば `pushward.update_activity_countdown` や `pushward.update_activity_gauge` — にオートメーションを切り替えてください。古いアクションは当面は動作しますが、将来のリリースで削除されます。"
+      "description": "`pushward_hacs.update_activity` アクションは非推奨です。代わりにテンプレート固有のアクション — 例えば `pushward_hacs.update_activity_countdown` や `pushward_hacs.update_activity_gauge` — にオートメーションを切り替えてください。古いアクションは当面は動作しますが、将来のリリースで削除されます。"
     },
     "usage_limit_notifications": {
       "title": "PushWard の通知上限に達しました",

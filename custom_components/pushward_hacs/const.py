@@ -6,7 +6,7 @@ from urllib.parse import urlparse
 
 import voluptuous as vol
 
-DOMAIN = "pushward"
+DOMAIN = "pushward_hacs"
 SUBENTRY_TYPE_ENTITY = "tracked_entity"
 SUBENTRY_TYPE_WIDGET = "tracked_widget"
 

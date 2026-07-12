@@ -7,8 +7,8 @@ from unittest.mock import AsyncMock, MagicMock
 from homeassistant.core import HomeAssistant
 from homeassistant.helpers import entity_registry as er
 
-from custom_components.pushward.activity_manager import ActivityManager
-from custom_components.pushward.content_mapper import map_content
+from custom_components.pushward_hacs.activity_manager import ActivityManager
+from custom_components.pushward_hacs.content_mapper import map_content
 
 from .conftest import make_entity_config as _entity_config
 

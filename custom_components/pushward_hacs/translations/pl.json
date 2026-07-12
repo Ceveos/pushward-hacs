@@ -1694,7 +1694,7 @@
   "issues": {
     "deprecated_update_activity": {
       "title": "Akcja PushWard update_activity jest przestarzała",
-      "description": "Akcja `pushward.update_activity` jest przestarzała. Przełącz swoje automatyzacje na akcję specyficzną dla szablonu — na przykład `pushward.update_activity_countdown` lub `pushward.update_activity_gauge`. Stara akcja na razie nadal działa, ale zostanie usunięta w przyszłej wersji."
+      "description": "Akcja `pushward_hacs.update_activity` jest przestarzała. Przełącz swoje automatyzacje na akcję specyficzną dla szablonu — na przykład `pushward_hacs.update_activity_countdown` lub `pushward_hacs.update_activity_gauge`. Stara akcja na razie nadal działa, ale zostanie usunięta w przyszłej wersji."
     },
     "usage_limit_notifications": {
       "title": "Osiągnięto limit powiadomień PushWard",

@@ -1694,7 +1694,7 @@
   "issues": {
     "deprecated_update_activity": {
       "title": "Действие PushWard update_activity устарело",
-      "description": "Действие `pushward.update_activity` устарело. Переключите свои автоматизации на действие для конкретного шаблона — например, `pushward.update_activity_countdown` или `pushward.update_activity_gauge`. Старое действие пока работает, но будет удалено в одном из будущих выпусков."
+      "description": "Действие `pushward_hacs.update_activity` устарело. Переключите свои автоматизации на действие для конкретного шаблона — например, `pushward_hacs.update_activity_countdown` или `pushward_hacs.update_activity_gauge`. Старое действие пока работает, но будет удалено в одном из будущих выпусков."
     },
     "usage_limit_notifications": {
       "title": "Достигнут лимит уведомлений PushWard",

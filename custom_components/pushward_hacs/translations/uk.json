@@ -1694,7 +1694,7 @@
   "issues": {
     "deprecated_update_activity": {
       "title": "Дія PushWard update_activity є застарілою",
-      "description": "Дія `pushward.update_activity` є застарілою. Натомість переведіть свої автоматизації на дію для конкретного шаблону — наприклад `pushward.update_activity_countdown` або `pushward.update_activity_gauge`. Стара дія наразі ще працює, але буде вилучена в майбутньому випуску."
+      "description": "Дія `pushward_hacs.update_activity` є застарілою. Натомість переведіть свої автоматизації на дію для конкретного шаблону — наприклад `pushward_hacs.update_activity_countdown` або `pushward_hacs.update_activity_gauge`. Стара дія наразі ще працює, але буде вилучена в майбутньому випуску."
     },
     "usage_limit_notifications": {
       "title": "Досягнуто ліміту сповіщень PushWard",

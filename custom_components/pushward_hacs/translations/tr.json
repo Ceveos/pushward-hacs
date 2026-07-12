@@ -1694,7 +1694,7 @@
   "issues": {
     "deprecated_update_activity": {
       "title": "PushWard update_activity eylemi kullanımdan kaldırıldı",
-      "description": "`pushward.update_activity` eylemi kullanımdan kaldırıldı. Otomasyonlarınızı bunun yerine şablona özgü eyleme geçirin — örneğin `pushward.update_activity_countdown` veya `pushward.update_activity_gauge`. Eski eylem şimdilik hâlâ çalışıyor ancak gelecekteki bir sürümde kaldırılacak."
+      "description": "`pushward_hacs.update_activity` eylemi kullanımdan kaldırıldı. Otomasyonlarınızı bunun yerine şablona özgü eyleme geçirin — örneğin `pushward_hacs.update_activity_countdown` veya `pushward_hacs.update_activity_gauge`. Eski eylem şimdilik hâlâ çalışıyor ancak gelecekteki bir sürümde kaldırılacak."
     },
     "usage_limit_notifications": {
       "title": "PushWard bildirim limitine ulaşıldı",
