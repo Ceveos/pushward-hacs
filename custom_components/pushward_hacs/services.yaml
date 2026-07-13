@@ -593,7 +593,7 @@ update_activity_steps:
       collapsed: true
       fields:
         steps:
-          description: Add one row per step. Collapsed rows summarize the name, parallel jobs, whole-number relative-width parts,
+          description: Add one row per step. Collapsed rows summarize the name, parallel rows, relative width,
             and color.
           selector:
             object:
@@ -605,25 +605,19 @@ update_activity_steps:
                   selector:
                     text: null
                 parallel_jobs:
-                  label: Parallel jobs (1-10)
+                  label: Parallel rows (1-10)
                   required: true
                   selector:
-                    number:
-                      min: 1
-                      max: 10
-                      step: 1
-                      mode: box
-                      unit_of_measurement: jobs
+                    text:
+                      type: number
+                      prefix: 'Rows: '
                 weight:
-                  label: Relative width (whole-number parts)
+                  label: Relative width (whole number)
                   required: true
                   selector:
-                    number:
-                      min: 1
-                      max: 10000
-                      step: 1
-                      mode: box
-                      unit_of_measurement: parts
+                    text:
+                      type: number
+                      prefix: 'Width: '
                 color:
                   label: Color
                   required: true

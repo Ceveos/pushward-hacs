@@ -464,12 +464,12 @@ def _details_schema(
                     item["color"] = colors[index - 1]
                 step_default.append(item)
         # With no label_field Home Assistant joins these compact peer values
-        # with middle dots: "Wash · 2 jobs · 4 parts · Red".
+        # with middle dots: "Wash · Rows: 2 · Width: 4 · Red".
         step_default = [
             {
                 "label": item.get("label") or "",
-                "parallel_jobs": (item.get("configuration") or item).get("parallel_jobs") or 1,
-                "weight": (item.get("configuration") or item).get("weight") or 1,
+                "parallel_jobs": str((item.get("configuration") or item).get("parallel_jobs") or 1),
+                "weight": str((item.get("configuration") or item).get("weight") or 1),
                 "color": _compact_step_color_value((item.get("configuration") or item).get("color") or ""),
             }
             for item in step_default
@@ -485,29 +485,17 @@ def _details_schema(
                         "selector": TextSelector(),
                     },
                     "parallel_jobs": {
-                        "label": "Parallel jobs (1-10)",
+                        "label": "Parallel rows (1-10)",
                         "required": True,
-                        "selector": NumberSelector(
-                            NumberSelectorConfig(
-                                min=1,
-                                max=10,
-                                step=1,
-                                mode=NumberSelectorMode.BOX,
-                                unit_of_measurement="jobs",
-                            )
+                        "selector": TextSelector(
+                            TextSelectorConfig(prefix="Rows: ", type=TextSelectorType.NUMBER)
                         ),
                     },
                     "weight": {
-                        "label": "Relative width (whole-number parts)",
+                        "label": "Relative width (whole number)",
                         "required": True,
-                        "selector": NumberSelector(
-                            NumberSelectorConfig(
-                                min=1,
-                                max=10000,
-                                step=1,
-                                mode=NumberSelectorMode.BOX,
-                                unit_of_measurement="parts",
-                            )
+                        "selector": TextSelector(
+                            TextSelectorConfig(prefix="Width: ", type=TextSelectorType.NUMBER)
                         ),
                     },
                     "color": {
@@ -1496,13 +1484,13 @@ def _parse_entity_input(user_input: dict, hass: HomeAssistant | None = None) -> 
                 raise vol.Invalid(f"Step {index} has an invalid numeric value", path=[CONF_STEP_CONFIGURATION]) from err
             if not parallel_jobs_number.is_integer() or not weight_number.is_integer():
                 raise vol.Invalid(
-                    f"Step {index} parallel jobs and relative width must be whole numbers",
+                    f"Step {index} parallel rows and relative width must be whole numbers",
                     path=[CONF_STEP_CONFIGURATION],
                 )
             parallel_jobs = int(parallel_jobs_number)
             weight = int(weight_number)
             if not 1 <= parallel_jobs <= 10:
-                raise vol.Invalid(f"Step {index} parallel jobs must be from 1 to 10", path=[CONF_STEP_CONFIGURATION])
+                raise vol.Invalid(f"Step {index} parallel rows must be from 1 to 10", path=[CONF_STEP_CONFIGURATION])
             if not 1 <= weight <= 10000:
                 raise vol.Invalid(
                     f"Step {index} relative width must be a whole number from 1 to 10,000",

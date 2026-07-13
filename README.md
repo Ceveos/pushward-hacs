@@ -42,7 +42,7 @@ Compound layouts use repeatable forms:
 - Log columns: add source entity/attribute/label/unit rows.
 - Widget stat lists: add label/entity/attribute/unit rows.
 - Steps: add one row per step with freeform whole-number controls for parallel
-  jobs and relative-width parts, plus a guided or custom color. Collapsed rows
+  rows and relative width, plus a guided or custom color. Collapsed rows
   summarize all four values, so a long
   dishwasher wash stage remains both easy to scan and independent from the
   number of visual job rows.

@@ -293,7 +293,7 @@
         },
         "steps": {
           "name": "Steps",
-          "description": "One row per step. Collapsed rows summarize the name, parallel jobs, whole-number relative-width parts, and color. Parallel jobs create stacked lanes; width parts control each step's proportional width."
+          "description": "One row per step. Collapsed rows summarize the name, parallel rows, relative width, and color. Rows control the stacked indicators; width controls each step's proportional width."
         }
       },
       "sections": {

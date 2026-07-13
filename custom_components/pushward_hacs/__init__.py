@@ -187,10 +187,10 @@ _GENERIC_TEMPLATE_FIELDS = {
 
 
 def _coerce_step_parallel_jobs(value: object) -> int:
-    """Accept a whole-number parallel-job count."""
+    """Accept a whole-number parallel-row count."""
     number = float(value)
     if not number.is_integer():
-        raise vol.Invalid("Parallel jobs must be a whole number")
+        raise vol.Invalid("Parallel rows must be a whole number")
     return int(number)
 
 

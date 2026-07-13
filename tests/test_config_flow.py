@@ -160,8 +160,8 @@ def _mock_details_input(template: str = "generic", **overrides) -> dict:
         data[CONF_STEP_CONFIGURATION] = [
             {
                 "label": "Step 1",
-                "parallel_jobs": 1,
-                "weight": 1,
+                "parallel_jobs": "1",
+                "weight": "1",
                 "color": "Auto",
             }
         ]
@@ -641,8 +641,8 @@ async def test_subentry_add_steps_entity(hass: HomeAssistant) -> None:
             CONF_STEP_CONFIGURATION: [
                 {
                     "label": label,
-                    "parallel_jobs": 1,
-                    "weight": weight,
+                    "parallel_jobs": "1",
+                    "weight": str(weight),
                     "color": "Auto",
                 }
                 for label, weight in [("Pre-wash", 1), ("Wash", 4), ("Rinse", 1), ("Dry", 2), ("Done", 1)]
@@ -1636,7 +1636,7 @@ def test_details_schema_steps_has_structured_step_configuration() -> None:
 
 
 def test_parse_entity_input_structured_steps_separates_rows_and_weights() -> None:
-    """Parallel jobs and whole-number relative-width parts persist independently."""
+    """Parallel rows and whole-number relative width persist independently."""
     result = _parse_entity_input(
         _base_user_input(
             **{
@@ -1665,7 +1665,7 @@ def test_parse_entity_input_structured_steps_separates_rows_and_weights() -> Non
 
 
 def test_parse_entity_input_rejects_fractional_step_width_parts() -> None:
-    """The guided form uses clearer whole-number relative-width parts."""
+    """The guided form uses clearer whole-number relative width."""
     with pytest.raises(vol.Invalid, match="whole number"):
         _parse_entity_input(
             _base_user_input(
@@ -1758,7 +1758,7 @@ def test_compound_layouts_use_repeatable_form_selectors() -> None:
     assert stat_rows_validator.config["multiple"] is True
 
 
-def test_steps_repeatable_rows_have_compact_peer_summary() -> None:
+def test_steps_repeatable_rows_have_compact_labeled_summary() -> None:
     """A collapsed step lets HA join four compact peer values with middle dots."""
     schema = _details_schema("sensor.dishwasher", "steps", defaults={})
     validator = next(
@@ -1771,8 +1771,8 @@ def test_steps_repeatable_rows_have_compact_peer_summary() -> None:
     assert "description_field" not in validator.config
     fields = validator.config["fields"]
     assert set(fields) == {"label", "parallel_jobs", "weight", "color"}
-    assert fields["parallel_jobs"]["selector"].config["unit_of_measurement"] == "jobs"
-    assert fields["weight"]["selector"].config["unit_of_measurement"] == "parts"
+    assert fields["parallel_jobs"]["selector"].config["prefix"] == "Rows: "
+    assert fields["weight"]["selector"].config["prefix"] == "Width: "
 
 
 def test_repeatable_rows_expose_useful_collapsed_subtitles() -> None:
