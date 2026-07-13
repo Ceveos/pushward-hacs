@@ -1,5 +1,22 @@
 # Changelog
 
+## 0.3.0
+
+- Replace raw Steps arrays with named repeatable rows for parallel jobs,
+  relative step length, and color; collapsed rows now show only the step name.
+- Replace state-label and Timeline mini-languages with structured rows and
+  improve summaries for thresholds, tiles, log columns, and widget statistics.
+- Add all three structured foreground/deep-link/silent-webhook action slots to
+  every Live Activity layout and every widget layout.
+- Add guided notification media/actions, Board tiles, Log lines, Timeline
+  series/thresholds, and strict local validation for colors, lengths, and limits.
+- Add `Send via PushWard`, which can deliver any combination of Live Activity,
+  notification, widget, and email channels from one Home Assistant action.
+- Remove the deprecated catch-all activity action and obsolete staged-flow UI.
+- Replace stale partial translations with a consistent English fallback until
+  each complete catalog can be reviewed.
+- Align the development runtime with Home Assistant 2026.6 (Python 3.14.2+).
+
 ## 0.2.0
 
 - Replace the multi-page post-template setup with one form containing

@@ -44,7 +44,7 @@ from .const import (
     WIDGET_TREND_UP,
     WIDGET_UNIT_MAX,
 )
-from .content_mapper import add_tap_action, color_to_str, resolve_color, resolve_icon
+from .content_mapper import add_tap_actions, color_to_str, resolve_color, resolve_icon
 
 _LOGGER = logging.getLogger(__name__)
 
@@ -175,7 +175,7 @@ def map_widget_content(
     if unit:
         content["unit"] = _truncate(unit, WIDGET_UNIT_MAX)
 
-    add_tap_action(content, config)
+    add_tap_actions(content, config)
 
     if template == WIDGET_TEMPLATE_VALUE:
         return _map_value(state, config, content, prev_value)
@@ -265,7 +265,7 @@ def _map_status_static(config: dict) -> dict:
     if icon:
         content["icon"] = str(icon)
     _apply_static_color(content, config, CONF_ACCENT_COLOR, "accent_color")
-    add_tap_action(content, config)
+    add_tap_actions(content, config)
     return content
 
 
@@ -327,7 +327,7 @@ def _map_stat_list(hass: HomeAssistant, config: dict) -> dict | None:
         content["label"] = _truncate(label, WIDGET_LABEL_MAX)
     for conf_key, out_key in _STAT_LIST_COLORS:
         _apply_static_color(content, config, conf_key, out_key)
-    add_tap_action(content, config)
+    add_tap_actions(content, config)
     return content
 
 

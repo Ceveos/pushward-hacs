@@ -13,7 +13,6 @@ These run without a HomeAssistant fixture — they only parse the shipped
 from __future__ import annotations
 
 import json
-import re
 from pathlib import Path
 
 import yaml
@@ -85,36 +84,20 @@ def test_per_template_update_services_exist_without_template_field() -> None:
         assert {"slug", "state"} <= set(leaves), f"{name}: missing slug/state"
 
 
-def test_deprecated_update_activity_still_registered() -> None:
-    """The legacy update_activity stays as a backward-compatible alias."""
-    assert "update_activity" in _services()
+def test_deprecated_update_activity_removed_before_release() -> None:
+    """Only the clear template-specific actions are exposed."""
+    assert "update_activity" not in _services()
 
 
-# Matches the stale dict-keyed wording ("1=Label", "1 = Label") the bug fix removed.
-_DICT_STEP_LABEL_RE = re.compile(r"\b1\s*=")
-
-
-def test_step_labels_documented_as_ordered_list_everywhere() -> None:
-    """step_labels is an ordered list — guard against the old dict-keyed ("1=Label") wording.
-
-    The server is ``StepLabels []string``; the schema validates a list. Stale locales used to
-    describe a dict keyed by step number, which both misled users and failed validation. The
-    English source is asserted positively; every locale is guarded against the dict marker.
-    """
-    svc_yaml = _SERVICES_YAML.read_text()
-    assert "keyed by step number" not in svc_yaml, "services.yaml still documents step_labels as a dict"
-
-    en = json.loads((_TRANSLATIONS / "en.json").read_text())
-    en_desc = en["services"]["update_activity"]["fields"]["step_labels"]["description"].lower()
-    assert "list" in en_desc, f"en.json step_labels no longer describes an ordered list: {en_desc!r}"
-
-    for locale_file in sorted(_TRANSLATIONS.glob("*.json")):
-        data = json.loads(locale_file.read_text())
-        for svc_name, svc in data.get("services", {}).items():
-            desc = svc.get("fields", {}).get("step_labels", {}).get("description", "")
-            assert not _DICT_STEP_LABEL_RE.search(desc), (
-                f"{locale_file.name}:{svc_name} step_labels uses stale dict wording: {desc!r}"
-            )
+def test_steps_action_uses_structured_repeatable_rows() -> None:
+    """Users configure one coherent row per step, not four parallel arrays."""
+    fields = _services()["update_activity_steps"]["fields"]["steps_options"]["fields"]
+    assert set(fields) >= {"steps", "live_progress", "duration", "end_date"}
+    selector = fields["steps"]["selector"]["object"]
+    assert selector["multiple"] is True
+    assert selector["label_field"] == "label"
+    assert "description_field" not in selector
+    assert set(selector["fields"]) == {"label", "parallel_jobs", "weight", "color"}
 
 
 def test_sections_have_matching_translations_in_every_locale() -> None:

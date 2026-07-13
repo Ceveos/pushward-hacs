@@ -233,14 +233,23 @@ _BUTTON_SLOTS: tuple[tuple[str, str, str, str], ...] = (
 )
 
 
-def _add_tap_actions(content: dict, entity_config: dict) -> None:
+def add_tap_actions(content: dict, entity_config: dict) -> None:
     """Add structured tap_action / url_action / secondary_url_action to content.
 
     All three action slots are accepted by every PushWard activity template.
     """
-    add_tap_action(content, entity_config)
+    if action := entity_config.get("tap_action"):
+        content["tap_action"] = dict(action)
+    else:
+        add_tap_action(content, entity_config)
+
+    for slot_key in ("url_action", "secondary_url_action"):
+        if action := entity_config.get(slot_key):
+            content[slot_key] = dict(action)
 
     for slot_key, url_key, foreground_key, title_key in _BUTTON_SLOTS:
+        if slot_key in content:
+            continue
         action = build_tap_action(
             entity_config.get(url_key, ""),
             entity_config.get(foreground_key, DEFAULT_TAP_ACTION_FOREGROUND),
@@ -460,9 +469,9 @@ def _build_board_tiles(entity_config: dict, hass: HomeAssistant | None) -> list[
         trend = tile.get("trend")
         if trend in BOARD_TRENDS:
             out["trend"] = trend
-        tile_action = build_tap_action(tile.get(CONF_URL, ""), True)
+        tile_action = tile.get("url_action") or build_tap_action(tile.get(CONF_URL, ""), True)
         if tile_action:
-            out["url_action"] = tile_action
+            out["url_action"] = dict(tile_action)
         tiles_out.append(out)
         if len(tiles_out) >= BOARD_MAX_TILES:
             break
@@ -518,7 +527,7 @@ def map_content(
     if remaining is not None:
         content["remaining_time"] = remaining
 
-    _add_tap_actions(content, entity_config)
+    add_tap_actions(content, entity_config)
 
     # Template-specific required fields
     template = content["template"]
@@ -657,7 +666,7 @@ def map_completion_content(entity_config: dict, last_content: dict | None = None
         "accent_color": "green",
     }
 
-    _add_tap_actions(content, entity_config)
+    add_tap_actions(content, entity_config)
 
     # Template-specific required fields for server validation
     template = content["template"]

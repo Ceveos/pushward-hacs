@@ -366,6 +366,29 @@ def test_widget_tap_action_omitted_when_empty():
     assert "tap_action" not in content
 
 
+def test_widget_structured_action_slots_are_forwarded():
+    """Widgets support a body tap plus primary and secondary inline buttons."""
+    config = make_widget_config(
+        **{
+            CONF_WIDGET_TEMPLATE: WIDGET_TEMPLATE_VALUE,
+            "tap_action": {"url": "homeassistant://navigate/lovelace/0"},
+            "url_action": {"url": "https://ha.local/open", "title": "Open", "foreground": True},
+            "secondary_url_action": {
+                "url": "https://ha.local/close",
+                "title": "Close",
+                "method": "POST",
+                "body": "{}",
+            },
+        }
+    )
+    state = make_mock_state("42", entity_id="sensor.users")
+    content = map_widget_content(_make_hass({"sensor.users": state}), config)
+
+    assert content["tap_action"]["url"].startswith("homeassistant://")
+    assert content["url_action"]["title"] == "Open"
+    assert content["secondary_url_action"]["method"] == "POST"
+
+
 def test_widget_tap_action_progress_template():
     config = make_widget_config(
         **{

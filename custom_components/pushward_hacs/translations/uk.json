@@ -1,1700 +1,1376 @@
 {
-  "services": {
-    "update_activity": {
-      "name": "Оновити активність (deprecated)",
-      "description": "Оновити стан та вміст PushWard Live Activity.",
-      "fields": {
-        "slug": {
-          "name": "Slug",
-          "description": "Ідентифікатор-slug активності."
-        },
-        "state": {
-          "name": "Стан",
-          "description": "Бажаний стан активності."
-        },
-        "template": {
-          "name": "Шаблон",
-          "description": "Шаблон макета активності."
-        },
-        "progress": {
-          "name": "Прогрес",
-          "description": "Значення прогресу від 0.0 до 1.0."
-        },
-        "state_text": {
-          "name": "Текст стану",
-          "description": "Текст, що відображається як стан активності."
-        },
-        "icon": {
-          "name": "Значок",
-          "description": "Назва SF Symbol або MDI-значка (наприклад, arrow.down.circle.fill, mdi:download)."
-        },
-        "subtitle": {
-          "name": "Підзаголовок",
-          "description": "Текст підзаголовка активності."
-        },
-        "accent_color": {
-          "name": "Акцентний колір",
-          "description": "Назва акцентного кольору активності."
-        },
-        "remaining_time": {
-          "name": "Час, що залишився",
-          "description": "Час, що залишився, у секундах."
-        },
-        "url": {
-          "name": "URL",
-          "description": "Основна URL-адреса, відображувана як кнопка. Підтримується лише в шаблонах steps та alert."
-        },
-        "secondary_url": {
-          "name": "Додатковий URL",
-          "description": "Додаткова URL-адреса як друга кнопка. Підтримується лише в шаблонах steps та alert."
-        },
-        "end_date": {
-          "name": "Дата завершення",
-          "description": "Unix-часова мітка дати завершення countdown."
-        },
-        "total_steps": {
-          "name": "Усього кроків",
-          "description": "Загальна кількість steps."
-        },
-        "current_step": {
-          "name": "Поточний крок",
-          "description": "Номер поточного кроку."
-        },
-        "severity": {
-          "name": "Серйозність",
-          "description": "Рівень серйозності Alert."
-        },
-        "value": {
-          "name": "Значення",
-          "description": "Gauge: числове значення. timeline: об'єкт підписаних значень (наприклад, Temp=22.5)."
-        },
-        "min_value": {
-          "name": "Мінімальне значення",
-          "description": "Мінімальне значення gauge."
-        },
-        "max_value": {
-          "name": "Максимальне значення",
-          "description": "Максимальне значення gauge."
-        },
-        "unit": {
-          "name": "Одиниця",
-          "description": "Одиниця вимірювання поруч із значенням (наприклад, °C, %)."
-        },
-        "completion_message": {
-          "name": "Повідомлення про завершення",
-          "description": "Повідомлення, що відображається під час завершення активності."
-        },
-        "scale": {
-          "name": "Масштаб",
-          "description": "Режим масштабу осі Y (лінійний або логарифмічний). Лише для шаблону timeline."
-        },
-        "decimals": {
-          "name": "Знаки після коми",
-          "description": "Кількість знаків після коми для відображення значень (0–10). Лише для шаблону timeline."
-        },
-        "smoothing": {
-          "name": "Згладжені лінії",
-          "description": "Увімкнути інтерполяцію кривої між точками даних. Лише для шаблону timeline."
-        },
-        "thresholds": {
-          "name": "Пороги",
-          "description": "Горизонтальні опорні лінії на спарклайні. Лише для шаблону timeline."
-        },
-        "sound": {
-          "name": "Звук",
-          "description": "Назва звуку сповіщення для оновлення. Залиште порожнім, щоб використовувати системний звук iOS."
-        },
-        "priority": {
-          "name": "Пріоритет",
-          "description": "Пріоритет активності (0 = найнижчий, 10 = найвищий)."
-        },
-        "background_color": {
-          "name": "Колір фону",
-          "description": "Колір фону Live Activity. #RRGGBB або ім'я кольору. Залиште порожнім для системного значення за замовчуванням."
-        },
-        "text_color": {
-          "name": "Колір тексту",
-          "description": "Колір тексту Live Activity. #RRGGBB або ім'я кольору. Залиште порожнім для системного значення за замовчуванням."
-        },
-        "warning_threshold": {
-          "name": "Попередній поріг",
-          "description": "Коли значення gauge або timeline досягає або перевищує це значення, відображається попереджувальний колір."
-        },
-        "alarm": {
-          "name": "Сигнал",
-          "description": "Активує сигнал AlarmKit при перевищенні попереднього порогу. Працює лише на iOS 26+."
-        },
-        "step_labels": {
-          "name": "Мітки кроків",
-          "description": "Упорядкований список міток кроків. Довжина має дорівнювати total_steps. Лише шаблон steps."
-        },
-        "step_rows": {
-          "name": "Рядки кроків",
-          "description": "Упорядкований список висот рядків (1–10) для кожного кроку. Довжина має дорівнювати total_steps. Лише шаблон steps."
-        },
-        "fired_at": {
-          "name": "Час спрацювання",
-          "description": "Unix-мітка часу спрацювання активності. Використовується для відображення відносного часу."
-        },
-        "units": {
-          "name": "Одиниці",
-          "description": "Мітки одиниць для серій timeline. Формат: attribute=Одиниця. Приклад: temp=°C, humidity=%"
-        },
-        "snooze_seconds": {
-          "name": "Секунди відкладання",
-          "description": "На скільки кнопка «Відкласти» в iOS подовжує відлік (60–3600). Типово 300 (5 хв). Потребує будильника (iOS 26+, лише шаблон відліку)."
-        },
-        "duration": {
-          "name": "Тривалість",
-          "description": "Альтернатива до Дати завершення за принципом «налаштуй і забудь»: секунди (>=1) або рядок тривалості на кшталт «1h30m». Сервер заново прив’язує початок/кінець до поточного моменту. Надсилайте або Тривалість, або Дату завершення — якщо задано обидва, пріоритет має Тривалість."
-        },
-        "start_date": {
-          "name": "Дата початку",
-          "description": "Unix-час, коли почався відлік (прив’язує смугу минулого/залишку). Типово сервер встановлює поточний час."
-        },
-        "history": {
-          "name": "Історія (початкові дані)",
-          "description": "Початкові дані для спарклайну: об’єкт, що зіставляє назву серії зі списком (timestamp, value). Лише початкові дані — після першого оновлення сервер бере це на себе."
-        },
-        "tap_action": {
-          "name": "Дія при дотику",
-          "description": "Ціль дотику для всієї активності у вигляді об’єкта: url (обов’язково), необов’язковий foreground, а для http(s)-адреси — тихий вебхук через method/headers/body."
-        },
-        "url_action": {
-          "name": "Основна кнопка",
-          "description": "Основна натискна кнопка у вигляді об’єкта: url (обов’язково), необов’язкові title, icon, foreground та http(s) method/headers/body для тихого вебхука."
-        },
-        "secondary_url_action": {
-          "name": "Додаткова кнопка",
-          "description": "Додаткова натискна кнопка — той самий формат об’єкта, що й Основна кнопка."
-        }
+  "entity": {
+    "sensor": {
+      "notifications_used": {
+        "name": "Notifications used"
       },
-      "sections": {
-        "countdown_options": {
-          "name": "Параметри countdown",
-          "description": "Лише для шаблону countdown."
-        },
-        "steps_options": {
-          "name": "Параметри steps",
-          "description": "Лише для шаблону steps."
-        },
-        "alert_options": {
-          "name": "Параметри alert",
-          "description": "Лише для шаблону alert."
-        },
-        "gauge_timeline_options": {
-          "name": "Параметри gauge і timeline",
-          "description": "Лише для шаблонів gauge та timeline."
-        },
-        "action_buttons": {
-          "name": "Кнопки дій",
-          "description": "Натискні кнопки-посилання. Лише для шаблонів steps та alert."
-        },
-        "display_options": {
-          "name": "Відображення, колір і звук",
-          "description": "Необов'язкове оформлення та перевизначення для оновлення. Застосовуються до будь-якого шаблону."
+      "live_activity_updates_used": {
+        "name": "Live Activity updates used"
+      },
+      "widget_updates_used": {
+        "name": "Widget updates used"
+      },
+      "emails_used": {
+        "name": "Emails used"
+      },
+      "subscription_tier": {
+        "name": "Subscription tier",
+        "state": {
+          "free": "Free",
+          "premium": "Premium"
         }
       }
-    },
+    }
+  },
+  "services": {
     "update_activity_generic": {
-      "name": "Оновити активність (Generic)",
-      "description": "Оновити стан та вміст PushWard Live Activity.",
+      "name": "Update Activity (Generic)",
+      "description": "Update a PushWard Live Activity state and content.",
       "fields": {
         "slug": {
           "name": "Slug",
-          "description": "Ідентифікатор-slug активності."
+          "description": "Activity slug identifier."
         },
         "state": {
-          "name": "Стан",
-          "description": "Бажаний стан активності."
+          "name": "State",
+          "description": "Desired activity state."
         },
         "state_text": {
-          "name": "Текст стану",
-          "description": "Текст, що відображається як стан активності."
+          "name": "State Text",
+          "description": "Text shown as the activity state."
         },
         "subtitle": {
-          "name": "Підзаголовок",
-          "description": "Текст підзаголовка активності."
+          "name": "Subtitle",
+          "description": "Subtitle text shown on the activity."
         },
         "icon": {
-          "name": "Значок",
-          "description": "Назва SF Symbol або MDI-значка (наприклад, arrow.down.circle.fill, mdi:download)."
+          "name": "Icon",
+          "description": "SF Symbol or MDI icon name (e.g. arrow.down.circle.fill, mdi:download)."
         },
         "progress": {
-          "name": "Прогрес",
-          "description": "Значення прогресу від 0.0 до 1.0."
+          "name": "Progress",
+          "description": "Progress value between 0.0 and 1.0."
         },
         "completion_message": {
-          "name": "Повідомлення про завершення",
-          "description": "Повідомлення, що відображається під час завершення активності."
+          "name": "Completion Message",
+          "description": "Message shown when the activity ends."
         },
         "accent_color": {
-          "name": "Акцентний колір",
-          "description": "Назва акцентного кольору активності."
+          "name": "Accent Color",
+          "description": "Accent color name for the activity."
         },
         "background_color": {
-          "name": "Колір фону",
-          "description": "Колір фону Live Activity. #RRGGBB або ім'я кольору. Залиште порожнім для системного значення за замовчуванням."
+          "name": "Background Color",
+          "description": "Background color for the Live Activity. Hex (#RRGGBB) or named color."
         },
         "text_color": {
-          "name": "Колір тексту",
-          "description": "Колір тексту Live Activity. #RRGGBB або ім'я кольору. Залиште порожнім для системного значення за замовчуванням."
+          "name": "Text Color",
+          "description": "Text color for the Live Activity. Hex (#RRGGBB) or named color."
         },
         "remaining_time": {
-          "name": "Час, що залишився",
-          "description": "Час, що залишився, у секундах."
+          "name": "Remaining Time",
+          "description": "Remaining time in seconds."
         },
         "sound": {
-          "name": "Звук",
-          "description": "Назва звуку сповіщення для оновлення. Залиште порожнім, щоб використовувати системний звук iOS."
+          "name": "Sound",
+          "description": "Notification sound played on the device for this update."
         },
         "priority": {
-          "name": "Пріоритет",
-          "description": "Пріоритет активності (0 = найнижчий, 10 = найвищий)."
-        },
-        "url": {
-          "name": "URL",
-          "description": "Основний URL, що показується як натискна кнопка. http(s) або власна схема, наприклад homeassistant://."
-        },
-        "secondary_url": {
-          "name": "Додатковий URL",
-          "description": "Додатковий URL, що показується як друга натискна кнопка."
+          "name": "Priority Override",
+          "description": "Per-update priority (0-10). Overrides the activity's configured priority for this push only."
         },
         "tap_action": {
-          "name": "Дія при дотику",
-          "description": "Ціль дотику для всієї активності у вигляді об’єкта: url (обов’язково), необов’язковий foreground, а для http(s)-адреси — тихий вебхук через method/headers/body."
+          "name": "Tap Action",
+          "description": "Whole-activity tap target as an object: url (required), optional foreground, and for an http(s) url a silent webhook via method/headers/body."
         },
         "url_action": {
-          "name": "Основна кнопка",
-          "description": "Основна натискна кнопка у вигляді об’єкта: url (обов’язково), необов’язкові title, icon, foreground та http(s) method/headers/body для тихого вебхука."
+          "name": "Primary Button",
+          "description": "Primary tappable button as an object: url (required), optional title, icon, foreground, and http(s) method/headers/body for a silent webhook."
         },
         "secondary_url_action": {
-          "name": "Додаткова кнопка",
-          "description": "Додаткова натискна кнопка — той самий формат об’єкта, що й Основна кнопка."
+          "name": "Secondary Button",
+          "description": "Secondary tappable button — same object shape as the Primary Button."
         }
       },
       "sections": {
         "labels": {
-          "name": "Підписи та значок",
-          "description": "Необов'язкові текстові підписи та значок. Застосовуються до будь-якого шаблону."
+          "name": "Labels & icon",
+          "description": "Optional text labels and icon. Apply to any template."
         },
         "action_buttons": {
-          "name": "Кнопки дій",
-          "description": "Натискні кнопки-посилання. Лише для шаблонів steps та alert."
+          "name": "Action buttons",
+          "description": "Tappable URLs and rich button / tap actions for the activity."
         },
         "display_options": {
-          "name": "Відображення, колір і звук",
-          "description": "Необов'язкове оформлення та перевизначення для оновлення. Застосовуються до будь-якого шаблону."
+          "name": "Display, color & sound",
+          "description": "Optional styling and per-update overrides. Apply to any template."
         }
       }
     },
     "update_activity_countdown": {
-      "name": "Оновити активність (Countdown)",
-      "description": "Оновити стан та вміст PushWard Live Activity.",
+      "name": "Update Activity (Countdown)",
+      "description": "Update a PushWard Live Activity state and content.",
       "fields": {
         "slug": {
           "name": "Slug",
-          "description": "Ідентифікатор-slug активності."
+          "description": "Activity slug identifier."
         },
         "state": {
-          "name": "Стан",
-          "description": "Бажаний стан активності."
+          "name": "State",
+          "description": "Desired activity state."
         },
         "end_date": {
-          "name": "Дата завершення",
-          "description": "Unix-часова мітка дати завершення countdown."
+          "name": "End Date",
+          "description": "Unix timestamp for countdown end date."
         },
         "completion_message": {
-          "name": "Повідомлення про завершення",
-          "description": "Повідомлення, що відображається під час завершення активності."
+          "name": "Completion Message",
+          "description": "Message shown when the activity ends."
         },
         "state_text": {
-          "name": "Текст стану",
-          "description": "Текст, що відображається як стан активності."
+          "name": "State Text",
+          "description": "Text shown as the activity state."
         },
         "subtitle": {
-          "name": "Підзаголовок",
-          "description": "Текст підзаголовка активності."
+          "name": "Subtitle",
+          "description": "Subtitle text shown on the activity."
         },
         "icon": {
-          "name": "Значок",
-          "description": "Назва SF Symbol або MDI-значка (наприклад, arrow.down.circle.fill, mdi:download)."
+          "name": "Icon",
+          "description": "SF Symbol or MDI icon name (e.g. arrow.down.circle.fill, mdi:download)."
         },
         "progress": {
-          "name": "Прогрес",
-          "description": "Значення прогресу від 0.0 до 1.0."
+          "name": "Progress",
+          "description": "Progress value between 0.0 and 1.0."
         },
         "warning_threshold": {
-          "name": "Попередній поріг",
-          "description": "Коли значення gauge або timeline досягає або перевищує це значення, відображається попереджувальний колір."
+          "name": "Warning Threshold",
+          "description": "Seconds before end_date when the countdown enters warning state. Countdown template only."
         },
         "alarm": {
-          "name": "Сигнал",
-          "description": "Активує сигнал AlarmKit при перевищенні попереднього порогу. Працює лише на iOS 26+."
+          "name": "Alarm",
+          "description": "Trigger AlarmKit alarm on countdown expiry (iOS 26+, countdown template only)."
         },
         "snooze_seconds": {
-          "name": "Секунди відкладання",
-          "description": "How long the iOS Snooze button extends the countdown (60–3600). Defaults to 300 (5 min). Only applies with alarm enabled (iOS 26+)."
+          "name": "Snooze Seconds",
+          "description": "How long the iOS Snooze button extends the countdown (60–3600). Defaults to 300 (5 min). Requires alarm (iOS 26+, countdown template only)."
         },
         "accent_color": {
-          "name": "Акцентний колір",
-          "description": "Назва акцентного кольору активності."
+          "name": "Accent Color",
+          "description": "Accent color name for the activity."
         },
         "background_color": {
-          "name": "Колір фону",
-          "description": "Колір фону Live Activity. #RRGGBB або ім'я кольору. Залиште порожнім для системного значення за замовчуванням."
+          "name": "Background Color",
+          "description": "Background color for the Live Activity. Hex (#RRGGBB) or named color."
         },
         "text_color": {
-          "name": "Колір тексту",
-          "description": "Колір тексту Live Activity. #RRGGBB або ім'я кольору. Залиште порожнім для системного значення за замовчуванням."
+          "name": "Text Color",
+          "description": "Text color for the Live Activity. Hex (#RRGGBB) or named color."
         },
         "remaining_time": {
-          "name": "Час, що залишився",
-          "description": "Час, що залишився, у секундах."
+          "name": "Remaining Time",
+          "description": "Remaining time in seconds."
         },
         "sound": {
-          "name": "Звук",
-          "description": "Назва звуку сповіщення для оновлення. Залиште порожнім, щоб використовувати системний звук iOS."
+          "name": "Sound",
+          "description": "Notification sound played on the device for this update."
         },
         "priority": {
-          "name": "Пріоритет",
-          "description": "Пріоритет активності (0 = найнижчий, 10 = найвищий)."
+          "name": "Priority Override",
+          "description": "Per-update priority (0-10). Overrides the activity's configured priority for this push only."
         },
         "duration": {
-          "name": "Тривалість",
-          "description": "Альтернатива до Дати завершення за принципом «налаштуй і забудь»: секунди (>=1) або рядок тривалості на кшталт «1h30m». Сервер заново прив’язує початок/кінець до поточного моменту. Надсилайте або Тривалість, або Дату завершення — якщо задано обидва, пріоритет має Тривалість."
+          "name": "Duration",
+          "description": "Set-and-forget alternative to End Date: seconds (>=1) or a duration string like \"1h30m\". The server re-anchors start/end to now. Send either Duration or End Date — Duration wins if both are set."
         },
         "start_date": {
-          "name": "Дата початку",
-          "description": "Unix-час, коли почався відлік (прив’язує смугу минулого/залишку). Типово сервер встановлює поточний час."
-        },
-        "url": {
-          "name": "URL",
-          "description": "Основний URL, що показується як натискна кнопка. http(s) або власна схема, наприклад homeassistant://."
-        },
-        "secondary_url": {
-          "name": "Додатковий URL",
-          "description": "Додатковий URL, що показується як друга натискна кнопка."
+          "name": "Start Date",
+          "description": "Unix timestamp when the countdown began (anchors the elapsed/remaining bar). The server defaults this to now."
         },
         "tap_action": {
-          "name": "Дія при дотику",
-          "description": "Ціль дотику для всієї активності у вигляді об’єкта: url (обов’язково), необов’язковий foreground, а для http(s)-адреси — тихий вебхук через method/headers/body."
+          "name": "Tap Action",
+          "description": "Whole-activity tap target as an object: url (required), optional foreground, and for an http(s) url a silent webhook via method/headers/body."
         },
         "url_action": {
-          "name": "Основна кнопка",
-          "description": "Основна натискна кнопка у вигляді об’єкта: url (обов’язково), необов’язкові title, icon, foreground та http(s) method/headers/body для тихого вебхука."
+          "name": "Primary Button",
+          "description": "Primary tappable button as an object: url (required), optional title, icon, foreground, and http(s) method/headers/body for a silent webhook."
         },
         "secondary_url_action": {
-          "name": "Додаткова кнопка",
-          "description": "Додаткова натискна кнопка — той самий формат об’єкта, що й Основна кнопка."
+          "name": "Secondary Button",
+          "description": "Secondary tappable button — same object shape as the Primary Button."
         }
       },
       "sections": {
         "labels": {
-          "name": "Підписи та значок",
-          "description": "Необов'язкові текстові підписи та значок. Застосовуються до будь-якого шаблону."
+          "name": "Labels & icon",
+          "description": "Optional text labels and icon. Apply to any template."
         },
         "countdown_options": {
-          "name": "Параметри countdown",
-          "description": "Лише для шаблону countdown."
+          "name": "Countdown options",
+          "description": "Only used by the countdown template."
         },
         "action_buttons": {
-          "name": "Кнопки дій",
-          "description": "Натискні кнопки-посилання. Лише для шаблонів steps та alert."
+          "name": "Action buttons",
+          "description": "Tappable URLs and rich button / tap actions for the activity."
         },
         "display_options": {
-          "name": "Відображення, колір і звук",
-          "description": "Необов'язкове оформлення та перевизначення для оновлення. Застосовуються до будь-якого шаблону."
+          "name": "Display, color & sound",
+          "description": "Optional styling and per-update overrides. Apply to any template."
         }
       }
     },
     "update_activity_steps": {
-      "name": "Оновити активність (Steps)",
-      "description": "Оновити стан та вміст PushWard Live Activity.",
+      "name": "Update Activity (Steps)",
+      "description": "Update a PushWard Live Activity state and content.",
       "fields": {
         "slug": {
           "name": "Slug",
-          "description": "Ідентифікатор-slug активності."
+          "description": "Activity slug identifier."
         },
         "state": {
-          "name": "Стан",
-          "description": "Бажаний стан активності."
-        },
-        "total_steps": {
-          "name": "Усього кроків",
-          "description": "Загальна кількість steps."
+          "name": "State",
+          "description": "Desired activity state."
         },
         "current_step": {
-          "name": "Поточний крок",
-          "description": "Номер поточного кроку."
+          "name": "Current Step",
+          "description": "Current step number."
         },
         "state_text": {
-          "name": "Текст стану",
-          "description": "Текст, що відображається як стан активності."
+          "name": "State Text",
+          "description": "Text shown as the activity state."
         },
         "subtitle": {
-          "name": "Підзаголовок",
-          "description": "Текст підзаголовка активності."
+          "name": "Subtitle",
+          "description": "Subtitle text shown on the activity."
         },
         "icon": {
-          "name": "Значок",
-          "description": "Назва SF Symbol або MDI-значка (наприклад, arrow.down.circle.fill, mdi:download)."
+          "name": "Icon",
+          "description": "SF Symbol or MDI icon name (e.g. arrow.down.circle.fill, mdi:download)."
         },
         "progress": {
-          "name": "Прогрес",
-          "description": "Значення прогресу від 0.0 до 1.0."
-        },
-        "step_labels": {
-          "name": "Мітки кроків",
-          "description": "Упорядкований список міток кроків. Довжина має дорівнювати total_steps. Лише шаблон steps."
-        },
-        "step_rows": {
-          "name": "Рядки кроків",
-          "description": "Упорядкований список висот рядків (1–10) для кожного кроку. Довжина має дорівнювати total_steps. Лише шаблон steps."
-        },
-        "url": {
-          "name": "URL",
-          "description": "Основна URL-адреса, відображувана як кнопка. Підтримується лише в шаблонах steps та alert."
-        },
-        "secondary_url": {
-          "name": "Додатковий URL",
-          "description": "Додаткова URL-адреса як друга кнопка. Підтримується лише в шаблонах steps та alert."
+          "name": "Progress",
+          "description": "Progress value between 0.0 and 1.0."
         },
         "completion_message": {
-          "name": "Повідомлення про завершення",
-          "description": "Повідомлення, що відображається під час завершення активності."
+          "name": "Completion Message",
+          "description": "Message shown when the activity ends."
         },
         "accent_color": {
-          "name": "Акцентний колір",
-          "description": "Назва акцентного кольору активності."
+          "name": "Accent Color",
+          "description": "Accent color name for the activity."
         },
         "background_color": {
-          "name": "Колір фону",
-          "description": "Колір фону Live Activity. #RRGGBB або ім'я кольору. Залиште порожнім для системного значення за замовчуванням."
+          "name": "Background Color",
+          "description": "Background color for the Live Activity. Hex (#RRGGBB) or named color."
         },
         "text_color": {
-          "name": "Колір тексту",
-          "description": "Колір тексту Live Activity. #RRGGBB або ім'я кольору. Залиште порожнім для системного значення за замовчуванням."
+          "name": "Text Color",
+          "description": "Text color for the Live Activity. Hex (#RRGGBB) or named color."
         },
         "remaining_time": {
-          "name": "Час, що залишився",
-          "description": "Час, що залишився, у секундах."
+          "name": "Remaining Time",
+          "description": "Remaining time in seconds."
         },
         "sound": {
-          "name": "Звук",
-          "description": "Назва звуку сповіщення для оновлення. Залиште порожнім, щоб використовувати системний звук iOS."
+          "name": "Sound",
+          "description": "Notification sound played on the device for this update."
         },
         "priority": {
-          "name": "Пріоритет",
-          "description": "Пріоритет активності (0 = найнижчий, 10 = найвищий)."
+          "name": "Priority Override",
+          "description": "Per-update priority (0-10). Overrides the activity's configured priority for this push only."
         },
         "tap_action": {
-          "name": "Дія при дотику",
-          "description": "Ціль дотику для всієї активності у вигляді об’єкта: url (обов’язково), необов’язковий foreground, а для http(s)-адреси — тихий вебхук через method/headers/body."
+          "name": "Tap Action",
+          "description": "Whole-activity tap target as an object: url (required), optional foreground, and for an http(s) url a silent webhook via method/headers/body."
         },
         "url_action": {
-          "name": "Основна кнопка",
-          "description": "Основна натискна кнопка у вигляді об’єкта: url (обов’язково), необов’язкові title, icon, foreground та http(s) method/headers/body для тихого вебхука."
+          "name": "Primary Button",
+          "description": "Primary tappable button as an object: url (required), optional title, icon, foreground, and http(s) method/headers/body for a silent webhook."
         },
         "secondary_url_action": {
-          "name": "Додаткова кнопка",
-          "description": "Додаткова натискна кнопка — той самий формат об’єкта, що й Основна кнопка."
+          "name": "Secondary Button",
+          "description": "Secondary tappable button — same object shape as the Primary Button."
+        },
+        "steps": {
+          "name": "Steps",
+          "description": "One row per step. Parallel jobs creates stacked lanes; relative step length controls proportional width."
         }
       },
       "sections": {
         "labels": {
-          "name": "Підписи та значок",
-          "description": "Необов'язкові текстові підписи та значок. Застосовуються до будь-якого шаблону."
+          "name": "Labels & icon",
+          "description": "Optional text labels and icon. Apply to any template."
         },
         "steps_options": {
-          "name": "Параметри steps",
-          "description": "Лише для шаблону steps."
+          "name": "Steps options",
+          "description": "Only used by the steps template."
         },
         "action_buttons": {
-          "name": "Кнопки дій",
-          "description": "Натискні кнопки-посилання. Лише для шаблонів steps та alert."
+          "name": "Action buttons",
+          "description": "Tappable URLs and rich button / tap actions for the activity."
         },
         "display_options": {
-          "name": "Відображення, колір і звук",
-          "description": "Необов'язкове оформлення та перевизначення для оновлення. Застосовуються до будь-якого шаблону."
+          "name": "Display, color & sound",
+          "description": "Optional styling and per-update overrides. Apply to any template."
         }
       }
     },
     "update_activity_alert": {
-      "name": "Оновити активність (Alert)",
-      "description": "Оновити стан та вміст PushWard Live Activity.",
+      "name": "Update Activity (Alert)",
+      "description": "Update a PushWard Live Activity state and content.",
       "fields": {
         "slug": {
           "name": "Slug",
-          "description": "Ідентифікатор-slug активності."
+          "description": "Activity slug identifier."
         },
         "state": {
-          "name": "Стан",
-          "description": "Бажаний стан активності."
+          "name": "State",
+          "description": "Desired activity state."
         },
         "severity": {
-          "name": "Серйозність",
-          "description": "Рівень серйозності Alert."
+          "name": "Severity",
+          "description": "Alert severity level."
+        },
+        "severity_label": {
+          "name": "Severity Label",
+          "description": "Override the Info/Warning/Critical badge text. Alert template only."
         },
         "state_text": {
-          "name": "Текст стану",
-          "description": "Текст, що відображається як стан активності."
+          "name": "State Text",
+          "description": "Text shown as the activity state."
         },
         "subtitle": {
-          "name": "Підзаголовок",
-          "description": "Текст підзаголовка активності."
+          "name": "Subtitle",
+          "description": "Subtitle text shown on the activity."
         },
         "icon": {
-          "name": "Значок",
-          "description": "Назва SF Symbol або MDI-значка (наприклад, arrow.down.circle.fill, mdi:download)."
+          "name": "Icon",
+          "description": "SF Symbol or MDI icon name (e.g. arrow.down.circle.fill, mdi:download)."
         },
         "progress": {
-          "name": "Прогрес",
-          "description": "Значення прогресу від 0.0 до 1.0."
+          "name": "Progress",
+          "description": "Progress value between 0.0 and 1.0."
         },
         "fired_at": {
-          "name": "Час спрацювання",
-          "description": "Unix-мітка часу спрацювання активності. Використовується для відображення відносного часу."
-        },
-        "url": {
-          "name": "URL",
-          "description": "Основна URL-адреса, відображувана як кнопка. Підтримується лише в шаблонах steps та alert."
-        },
-        "secondary_url": {
-          "name": "Додатковий URL",
-          "description": "Додаткова URL-адреса як друга кнопка. Підтримується лише в шаблонах steps та alert."
+          "name": "Fired At",
+          "description": "Unix timestamp when the alert was triggered. Alert template only."
         },
         "completion_message": {
-          "name": "Повідомлення про завершення",
-          "description": "Повідомлення, що відображається під час завершення активності."
+          "name": "Completion Message",
+          "description": "Message shown when the activity ends."
         },
         "accent_color": {
-          "name": "Акцентний колір",
-          "description": "Назва акцентного кольору активності."
+          "name": "Accent Color",
+          "description": "Accent color name for the activity."
         },
         "background_color": {
-          "name": "Колір фону",
-          "description": "Колір фону Live Activity. #RRGGBB або ім'я кольору. Залиште порожнім для системного значення за замовчуванням."
+          "name": "Background Color",
+          "description": "Background color for the Live Activity. Hex (#RRGGBB) or named color."
         },
         "text_color": {
-          "name": "Колір тексту",
-          "description": "Колір тексту Live Activity. #RRGGBB або ім'я кольору. Залиште порожнім для системного значення за замовчуванням."
+          "name": "Text Color",
+          "description": "Text color for the Live Activity. Hex (#RRGGBB) or named color."
         },
         "remaining_time": {
-          "name": "Час, що залишився",
-          "description": "Час, що залишився, у секундах."
+          "name": "Remaining Time",
+          "description": "Remaining time in seconds."
         },
         "sound": {
-          "name": "Звук",
-          "description": "Назва звуку сповіщення для оновлення. Залиште порожнім, щоб використовувати системний звук iOS."
+          "name": "Sound",
+          "description": "Notification sound played on the device for this update."
         },
         "priority": {
-          "name": "Пріоритет",
-          "description": "Пріоритет активності (0 = найнижчий, 10 = найвищий)."
+          "name": "Priority Override",
+          "description": "Per-update priority (0-10). Overrides the activity's configured priority for this push only."
         },
         "tap_action": {
-          "name": "Дія при дотику",
-          "description": "Ціль дотику для всієї активності у вигляді об’єкта: url (обов’язково), необов’язковий foreground, а для http(s)-адреси — тихий вебхук через method/headers/body."
+          "name": "Tap Action",
+          "description": "Whole-activity tap target as an object: url (required), optional foreground, and for an http(s) url a silent webhook via method/headers/body."
         },
         "url_action": {
-          "name": "Основна кнопка",
-          "description": "Основна натискна кнопка у вигляді об’єкта: url (обов’язково), необов’язкові title, icon, foreground та http(s) method/headers/body для тихого вебхука."
+          "name": "Primary Button",
+          "description": "Primary tappable button as an object: url (required), optional title, icon, foreground, and http(s) method/headers/body for a silent webhook."
         },
         "secondary_url_action": {
-          "name": "Додаткова кнопка",
-          "description": "Додаткова натискна кнопка — той самий формат об’єкта, що й Основна кнопка."
+          "name": "Secondary Button",
+          "description": "Secondary tappable button — same object shape as the Primary Button."
         }
       },
       "sections": {
         "labels": {
-          "name": "Підписи та значок",
-          "description": "Необов'язкові текстові підписи та значок. Застосовуються до будь-якого шаблону."
+          "name": "Labels & icon",
+          "description": "Optional text labels and icon. Apply to any template."
         },
         "alert_options": {
-          "name": "Параметри alert",
-          "description": "Лише для шаблону alert."
+          "name": "Alert options",
+          "description": "Only used by the alert template."
         },
         "action_buttons": {
-          "name": "Кнопки дій",
-          "description": "Натискні кнопки-посилання. Лише для шаблонів steps та alert."
+          "name": "Action buttons",
+          "description": "Tappable URLs and rich button / tap actions for the activity."
         },
         "display_options": {
-          "name": "Відображення, колір і звук",
-          "description": "Необов'язкове оформлення та перевизначення для оновлення. Застосовуються до будь-якого шаблону."
+          "name": "Display, color & sound",
+          "description": "Optional styling and per-update overrides. Apply to any template."
         }
       }
     },
     "update_activity_gauge": {
-      "name": "Оновити активність (Gauge)",
-      "description": "Оновити стан та вміст PushWard Live Activity.",
+      "name": "Update Activity (Gauge)",
+      "description": "Update a PushWard Live Activity state and content.",
       "fields": {
         "slug": {
           "name": "Slug",
-          "description": "Ідентифікатор-slug активності."
+          "description": "Activity slug identifier."
         },
         "state": {
-          "name": "Стан",
-          "description": "Бажаний стан активності."
+          "name": "State",
+          "description": "Desired activity state."
         },
         "value": {
-          "name": "Значення",
-          "description": "Gauge: числове значення. timeline: об'єкт підписаних значень (наприклад, Temp=22.5)."
+          "name": "Value",
+          "description": "Gauge: numeric value. Timeline: labeled values object (e.g. Temp=22.5)."
         },
         "min_value": {
-          "name": "Мінімальне значення",
-          "description": "Мінімальне значення gauge."
+          "name": "Min Value",
+          "description": "Minimum gauge value."
         },
         "max_value": {
-          "name": "Максимальне значення",
-          "description": "Максимальне значення gauge."
+          "name": "Max Value",
+          "description": "Maximum gauge value."
         },
         "unit": {
-          "name": "Одиниця",
-          "description": "Одиниця вимірювання поруч із значенням (наприклад, °C, %)."
+          "name": "Unit",
+          "description": "Display unit for the value (e.g. °C, %)."
         },
         "state_text": {
-          "name": "Текст стану",
-          "description": "Текст, що відображається як стан активності."
+          "name": "State Text",
+          "description": "Text shown as the activity state."
         },
         "subtitle": {
-          "name": "Підзаголовок",
-          "description": "Текст підзаголовка активності."
+          "name": "Subtitle",
+          "description": "Subtitle text shown on the activity."
         },
         "icon": {
-          "name": "Значок",
-          "description": "Назва SF Symbol або MDI-значка (наприклад, arrow.down.circle.fill, mdi:download)."
+          "name": "Icon",
+          "description": "SF Symbol or MDI icon name (e.g. arrow.down.circle.fill, mdi:download)."
         },
         "progress": {
-          "name": "Прогрес",
-          "description": "Значення прогресу від 0.0 до 1.0."
+          "name": "Progress",
+          "description": "Progress value between 0.0 and 1.0."
         },
         "completion_message": {
-          "name": "Повідомлення про завершення",
-          "description": "Повідомлення, що відображається під час завершення активності."
+          "name": "Completion Message",
+          "description": "Message shown when the activity ends."
         },
         "accent_color": {
-          "name": "Акцентний колір",
-          "description": "Назва акцентного кольору активності."
+          "name": "Accent Color",
+          "description": "Accent color name for the activity."
         },
         "background_color": {
-          "name": "Колір фону",
-          "description": "Колір фону Live Activity. #RRGGBB або ім'я кольору. Залиште порожнім для системного значення за замовчуванням."
+          "name": "Background Color",
+          "description": "Background color for the Live Activity. Hex (#RRGGBB) or named color."
         },
         "text_color": {
-          "name": "Колір тексту",
-          "description": "Колір тексту Live Activity. #RRGGBB або ім'я кольору. Залиште порожнім для системного значення за замовчуванням."
+          "name": "Text Color",
+          "description": "Text color for the Live Activity. Hex (#RRGGBB) or named color."
         },
         "remaining_time": {
-          "name": "Час, що залишився",
-          "description": "Час, що залишився, у секундах."
+          "name": "Remaining Time",
+          "description": "Remaining time in seconds."
         },
         "sound": {
-          "name": "Звук",
-          "description": "Назва звуку сповіщення для оновлення. Залиште порожнім, щоб використовувати системний звук iOS."
+          "name": "Sound",
+          "description": "Notification sound played on the device for this update."
         },
         "priority": {
-          "name": "Пріоритет",
-          "description": "Пріоритет активності (0 = найнижчий, 10 = найвищий)."
-        },
-        "url": {
-          "name": "URL",
-          "description": "Основний URL, що показується як натискна кнопка. http(s) або власна схема, наприклад homeassistant://."
-        },
-        "secondary_url": {
-          "name": "Додатковий URL",
-          "description": "Додатковий URL, що показується як друга натискна кнопка."
+          "name": "Priority Override",
+          "description": "Per-update priority (0-10). Overrides the activity's configured priority for this push only."
         },
         "tap_action": {
-          "name": "Дія при дотику",
-          "description": "Ціль дотику для всієї активності у вигляді об’єкта: url (обов’язково), необов’язковий foreground, а для http(s)-адреси — тихий вебхук через method/headers/body."
+          "name": "Tap Action",
+          "description": "Whole-activity tap target as an object: url (required), optional foreground, and for an http(s) url a silent webhook via method/headers/body."
         },
         "url_action": {
-          "name": "Основна кнопка",
-          "description": "Основна натискна кнопка у вигляді об’єкта: url (обов’язково), необов’язкові title, icon, foreground та http(s) method/headers/body для тихого вебхука."
+          "name": "Primary Button",
+          "description": "Primary tappable button as an object: url (required), optional title, icon, foreground, and http(s) method/headers/body for a silent webhook."
         },
         "secondary_url_action": {
-          "name": "Додаткова кнопка",
-          "description": "Додаткова натискна кнопка — той самий формат об’єкта, що й Основна кнопка."
+          "name": "Secondary Button",
+          "description": "Secondary tappable button — same object shape as the Primary Button."
         }
       },
       "sections": {
         "labels": {
-          "name": "Підписи та значок",
-          "description": "Необов'язкові текстові підписи та значок. Застосовуються до будь-якого шаблону."
+          "name": "Labels & icon",
+          "description": "Optional text labels and icon. Apply to any template."
         },
         "action_buttons": {
-          "name": "Кнопки дій",
-          "description": "Натискні кнопки-посилання. Лише для шаблонів steps та alert."
+          "name": "Action buttons",
+          "description": "Tappable URLs and rich button / tap actions for the activity."
         },
         "display_options": {
-          "name": "Відображення, колір і звук",
-          "description": "Необов'язкове оформлення та перевизначення для оновлення. Застосовуються до будь-якого шаблону."
+          "name": "Display, color & sound",
+          "description": "Optional styling and per-update overrides. Apply to any template."
         }
       }
     },
     "update_activity_timeline": {
-      "name": "Оновити активність (Timeline)",
-      "description": "Оновити стан та вміст PushWard Live Activity.",
+      "name": "Update Activity (Timeline)",
+      "description": "Update a PushWard Live Activity state and content.",
       "fields": {
         "slug": {
           "name": "Slug",
-          "description": "Ідентифікатор-slug активності."
+          "description": "Activity slug identifier."
         },
         "state": {
-          "name": "Стан",
-          "description": "Бажаний стан активності."
-        },
-        "value": {
-          "name": "Значення",
-          "description": "Gauge: числове значення. timeline: об'єкт підписаних значень (наприклад, Temp=22.5)."
-        },
-        "unit": {
-          "name": "Одиниця",
-          "description": "Одиниця вимірювання поруч із значенням (наприклад, °C, %)."
+          "name": "State",
+          "description": "Desired activity state."
         },
         "state_text": {
-          "name": "Текст стану",
-          "description": "Текст, що відображається як стан активності."
+          "name": "State Text",
+          "description": "Text shown as the activity state."
         },
         "subtitle": {
-          "name": "Підзаголовок",
-          "description": "Текст підзаголовка активності."
+          "name": "Subtitle",
+          "description": "Subtitle text shown on the activity."
         },
         "icon": {
-          "name": "Значок",
-          "description": "Назва SF Symbol або MDI-значка (наприклад, arrow.down.circle.fill, mdi:download)."
+          "name": "Icon",
+          "description": "SF Symbol or MDI icon name (e.g. arrow.down.circle.fill, mdi:download)."
         },
         "progress": {
-          "name": "Прогрес",
-          "description": "Значення прогресу від 0.0 до 1.0."
+          "name": "Progress",
+          "description": "Progress value between 0.0 and 1.0."
         },
-        "units": {
-          "name": "Одиниці",
-          "description": "Мітки одиниць для серій timeline. Формат: attribute=Одиниця. Приклад: temp=°C, humidity=%"
+        "primary_series": {
+          "name": "Primary Series",
+          "description": "Label of the series shown as the headline value and used for the compact high/low range. Leave empty to keep the auto-picked series. Max 32 characters. Timeline template only."
         },
         "scale": {
-          "name": "Масштаб",
-          "description": "Режим масштабу осі Y (лінійний або логарифмічний). Лише для шаблону timeline."
+          "name": "Scale",
+          "description": "Y-axis scale mode (linear or logarithmic). Timeline template only."
         },
         "decimals": {
-          "name": "Знаки після коми",
-          "description": "Кількість знаків після коми для відображення значень (0–10). Лише для шаблону timeline."
+          "name": "Decimal Places",
+          "description": "Decimal places for value display (0-10). Timeline template only."
         },
         "smoothing": {
-          "name": "Згладжені лінії",
-          "description": "Увімкнути інтерполяцію кривої між точками даних. Лише для шаблону timeline."
+          "name": "Smooth Lines",
+          "description": "Enable curve interpolation between data points. Timeline template only."
         },
         "thresholds": {
-          "name": "Пороги",
-          "description": "Горизонтальні опорні лінії на спарклайні. Лише для шаблону timeline."
+          "name": "Thresholds",
+          "description": "Horizontal reference lines on the sparkline. Timeline template only."
         },
         "completion_message": {
-          "name": "Повідомлення про завершення",
-          "description": "Повідомлення, що відображається під час завершення активності."
+          "name": "Completion Message",
+          "description": "Message shown when the activity ends."
         },
         "accent_color": {
-          "name": "Акцентний колір",
-          "description": "Назва акцентного кольору активності."
+          "name": "Accent Color",
+          "description": "Accent color name for the activity."
         },
         "background_color": {
-          "name": "Колір фону",
-          "description": "Колір фону Live Activity. #RRGGBB або ім'я кольору. Залиште порожнім для системного значення за замовчуванням."
+          "name": "Background Color",
+          "description": "Background color for the Live Activity. Hex (#RRGGBB) or named color."
         },
         "text_color": {
-          "name": "Колір тексту",
-          "description": "Колір тексту Live Activity. #RRGGBB або ім'я кольору. Залиште порожнім для системного значення за замовчуванням."
+          "name": "Text Color",
+          "description": "Text color for the Live Activity. Hex (#RRGGBB) or named color."
         },
         "remaining_time": {
-          "name": "Час, що залишився",
-          "description": "Час, що залишився, у секундах."
+          "name": "Remaining Time",
+          "description": "Remaining time in seconds."
         },
         "sound": {
-          "name": "Звук",
-          "description": "Назва звуку сповіщення для оновлення. Залиште порожнім, щоб використовувати системний звук iOS."
+          "name": "Sound",
+          "description": "Notification sound played on the device for this update."
         },
         "priority": {
-          "name": "Пріоритет",
-          "description": "Пріоритет активності (0 = найнижчий, 10 = найвищий)."
+          "name": "Priority Override",
+          "description": "Per-update priority (0-10). Overrides the activity's configured priority for this push only."
         },
         "history": {
-          "name": "Історія (початкові дані)",
-          "description": "Початкові дані для спарклайну: об’єкт, що зіставляє назву серії зі списком (timestamp, value). Лише початкові дані — після першого оновлення сервер бере це на себе."
-        },
-        "url": {
-          "name": "URL",
-          "description": "Основний URL, що показується як натискна кнопка. http(s) або власна схема, наприклад homeassistant://."
-        },
-        "secondary_url": {
-          "name": "Додатковий URL",
-          "description": "Додатковий URL, що показується як друга натискна кнопка."
+          "name": "History (seed)",
+          "description": "Initial sparkline seed: an object of series name to a list of (timestamp, value). Seed-only — the server takes over after the first update."
         },
         "tap_action": {
-          "name": "Дія при дотику",
-          "description": "Ціль дотику для всієї активності у вигляді об’єкта: url (обов’язково), необов’язковий foreground, а для http(s)-адреси — тихий вебхук через method/headers/body."
+          "name": "Tap Action",
+          "description": "Whole-activity tap target as an object: url (required), optional foreground, and for an http(s) url a silent webhook via method/headers/body."
         },
         "url_action": {
-          "name": "Основна кнопка",
-          "description": "Основна натискна кнопка у вигляді об’єкта: url (обов’язково), необов’язкові title, icon, foreground та http(s) method/headers/body для тихого вебхука."
+          "name": "Primary Button",
+          "description": "Primary tappable button as an object: url (required), optional title, icon, foreground, and http(s) method/headers/body for a silent webhook."
         },
         "secondary_url_action": {
-          "name": "Додаткова кнопка",
-          "description": "Додаткова натискна кнопка — той самий формат об’єкта, що й Основна кнопка."
+          "name": "Secondary Button",
+          "description": "Secondary tappable button — same object shape as the Primary Button."
+        },
+        "series": {
+          "name": "Series",
+          "description": "Add 1-10 named current values, each with an optional display unit."
         }
       },
       "sections": {
         "labels": {
-          "name": "Підписи та значок",
-          "description": "Необов'язкові текстові підписи та значок. Застосовуються до будь-якого шаблону."
+          "name": "Labels & icon",
+          "description": "Optional text labels and icon. Apply to any template."
         },
         "gauge_timeline_options": {
-          "name": "Параметри gauge і timeline",
-          "description": "Лише для шаблонів gauge та timeline."
+          "name": "Gauge & Timeline options",
+          "description": "Only used by the gauge and timeline templates."
         },
         "action_buttons": {
-          "name": "Кнопки дій",
-          "description": "Натискні кнопки-посилання. Лише для шаблонів steps та alert."
+          "name": "Action buttons",
+          "description": "Tappable URLs and rich button / tap actions for the activity."
         },
         "display_options": {
-          "name": "Відображення, колір і звук",
-          "description": "Необов'язкове оформлення та перевизначення для оновлення. Застосовуються до будь-якого шаблону."
+          "name": "Display, color & sound",
+          "description": "Optional styling and per-update overrides. Apply to any template."
+        }
+      }
+    },
+    "update_activity_board": {
+      "name": "Update Activity (Board)",
+      "description": "Update a PushWard board Live Activity (1–4 tiles).",
+      "fields": {
+        "slug": {
+          "name": "Slug",
+          "description": "Activity slug identifier."
+        },
+        "state": {
+          "name": "State",
+          "description": "Desired activity state."
+        },
+        "tiles": {
+          "name": "Tiles",
+          "description": "List of 1–4 tiles. Each: label (required, ≤32), value (required string, ≤16), and optional unit (≤8), icon (SF Symbol or mdi:), color (named or hex), trend (up/down/flat), url_action object."
+        },
+        "state_text": {
+          "name": "State Text",
+          "description": "Text shown as the activity state."
+        },
+        "subtitle": {
+          "name": "Subtitle",
+          "description": "Subtitle text shown on the activity."
+        },
+        "icon": {
+          "name": "Icon",
+          "description": "SF Symbol or MDI icon name (e.g. square.grid.2x2.fill, mdi:view-dashboard)."
+        },
+        "completion_message": {
+          "name": "Completion Message",
+          "description": "Message shown when the activity ends."
+        },
+        "accent_color": {
+          "name": "Accent Color",
+          "description": "Accent color name for the activity."
+        },
+        "background_color": {
+          "name": "Background Color",
+          "description": "Background color for the Live Activity. Hex (#RRGGBB) or named color."
+        },
+        "text_color": {
+          "name": "Text Color",
+          "description": "Text color for the Live Activity. Hex (#RRGGBB) or named color."
+        },
+        "tap_action": {
+          "name": "Tap Action",
+          "description": "Whole-activity tap target as an object: url (required), optional foreground, and for an http(s) url a silent webhook via method/headers/body. (Per-tile taps go in each tile's url_action.)"
+        },
+        "sound": {
+          "name": "Sound",
+          "description": "Notification sound played on the device for this update."
+        },
+        "priority": {
+          "name": "Priority Override",
+          "description": "Per-update priority (0-10). Overrides the activity's configured priority for this push only."
+        }
+      }
+    },
+    "update_activity_log": {
+      "name": "Update Activity (Log)",
+      "description": "Update a PushWard log Live Activity (1–20 newest-first lines).",
+      "fields": {
+        "slug": {
+          "name": "Slug",
+          "description": "Activity slug identifier."
+        },
+        "state": {
+          "name": "State",
+          "description": "Desired activity state."
+        },
+        "lines": {
+          "name": "Lines",
+          "description": "List of 1–20 newest-first log lines. Each: text (required, ≤512), and optional at (unix timestamp) and level (info/warn/error)."
+        },
+        "state_text": {
+          "name": "State Text",
+          "description": "Text shown as the activity state."
+        },
+        "subtitle": {
+          "name": "Subtitle",
+          "description": "Subtitle text shown on the activity."
+        },
+        "icon": {
+          "name": "Icon",
+          "description": "SF Symbol or MDI icon name (e.g. list.bullet.rectangle, mdi:format-list-bulleted)."
+        },
+        "completion_message": {
+          "name": "Completion Message",
+          "description": "Message shown when the activity ends."
+        },
+        "accent_color": {
+          "name": "Accent Color",
+          "description": "Accent color name for the activity."
+        },
+        "background_color": {
+          "name": "Background Color",
+          "description": "Background color for the Live Activity. Hex (#RRGGBB) or named color."
+        },
+        "text_color": {
+          "name": "Text Color",
+          "description": "Text color for the Live Activity. Hex (#RRGGBB) or named color."
+        },
+        "tap_action": {
+          "name": "Tap Action",
+          "description": "Whole-activity tap target as an object: url (required), optional foreground, and for an http(s) url a silent webhook via method/headers/body."
+        },
+        "sound": {
+          "name": "Sound",
+          "description": "Notification sound played on the device for this update."
+        },
+        "priority": {
+          "name": "Priority Override",
+          "description": "Per-update priority (0-10). Overrides the activity's configured priority for this push only."
         }
       }
     },
     "create_activity": {
-      "name": "Створити активність",
-      "description": "Створити нову PushWard Live Activity.",
+      "name": "Create Activity",
+      "description": "Create a new PushWard Live Activity.",
       "fields": {
         "slug": {
           "name": "Slug",
-          "description": "Унікальний ідентифікатор-slug активності."
+          "description": "Unique activity slug identifier."
         },
         "name": {
-          "name": "Назва",
-          "description": "Відображувана назва активності."
+          "name": "Name",
+          "description": "Display name for the activity."
         },
         "priority": {
-          "name": "Пріоритет",
-          "description": "Пріоритет активності (0 = найнижчий, 10 = найвищий)."
+          "name": "Priority",
+          "description": "Activity priority (0 = lowest, 10 = highest)."
         },
         "ended_ttl": {
-          "name": "TTL після завершення",
-          "description": "Секунди зберігання активності після завершення."
+          "name": "Ended TTL",
+          "description": "Seconds to keep the activity after it ends."
         },
         "stale_ttl": {
-          "name": "TTL застарілості",
-          "description": "Секунди до позначення активності як застарілої."
+          "name": "Stale TTL",
+          "description": "Seconds before the activity is considered stale."
         }
       }
     },
     "end_activity": {
-      "name": "Завершити активність",
-      "description": "Завершити PushWard Live Activity.",
+      "name": "End Activity",
+      "description": "End a PushWard Live Activity.",
       "fields": {
         "slug": {
           "name": "Slug",
-          "description": "Ідентифікатор-slug активності для завершення."
+          "description": "Activity slug identifier to end."
         },
         "completion_message": {
-          "name": "Повідомлення про завершення",
-          "description": "Необов'язкове повідомлення під час завершення активності."
+          "name": "Completion Message",
+          "description": "Optional message shown when the activity ends."
         }
       }
     },
     "delete_activity": {
-      "name": "Видалити активність",
-      "description": "Видалити PushWard Live Activity.",
+      "name": "Delete Activity",
+      "description": "Delete a PushWard Live Activity.",
       "fields": {
         "slug": {
           "name": "Slug",
-          "description": "Ідентифікатор-slug активності для видалення."
-        }
-      }
-    },
-    "send_notification": {
-      "name": "Надіслати сповіщення",
-      "description": "Надіслати push-сповіщення через PushWard.",
-      "fields": {
-        "title": {
-          "name": "Заголовок",
-          "description": "Заголовок сповіщення."
-        },
-        "body": {
-          "name": "Текст",
-          "description": "Основний текст сповіщення."
-        },
-        "subtitle": {
-          "name": "Підзаголовок",
-          "description": "Необов'язковий підзаголовок під заголовком."
-        },
-        "level": {
-          "name": "Рівень",
-          "description": "Рівень переривання iOS. Визначає спосіб доставки сповіщення."
-        },
-        "thread_id": {
-          "name": "ID потоку",
-          "description": "Групує сповіщення разом у Центрі сповіщень."
-        },
-        "collapse_id": {
-          "name": "ID згортання",
-          "description": "Ключ дедублікації APNs. Замінює попереднє сповіщення з таким самим ключем."
-        },
-        "source": {
-          "name": "Джерело",
-          "description": "Ідентифікатор джерела для групування у вхідних PushWard."
-        },
-        "source_display_name": {
-          "name": "Відображувана назва джерела",
-          "description": "Зрозуміла назва джерела у вхідних PushWard."
-        },
-        "activity_slug": {
-          "name": "Slug активності",
-          "description": "Прив'язати це сповіщення до наявної Live Activity."
-        },
-        "push": {
-          "name": "Push",
-          "description": "Надіслати як APNs push alert на всі пристрої. Якщо вимкнено, сповіщення зберігається лише у вхідних."
-        },
-        "url": {
-          "name": "URL",
-          "description": "URL, що відкривається при натисканні на сповіщення. Необхідний HTTPS."
-        },
-        "icon_url": {
-          "name": "URL значка",
-          "description": "URL для значка сповіщення. Необхідний HTTPS."
-        },
-        "metadata": {
-          "name": "Метадані",
-          "description": "Додаткові метадані у вигляді пар ключ-значення для відправлення зі сповіщенням."
-        },
-        "media": {
-          "name": "Медіа",
-          "description": "Медіавкладення у вигляді об’єкта з `url` (HTTPS) та `type` (image, video або audio)."
-        },
-        "actions": {
-          "name": "Дії",
-          "description": "Список кнопок дій. Кожна дія — це об’єкт з id, title, необов’язковими url, foreground, destructive, authentication_required та icon. Для http(s)-адреси можна також надіслати тихий вебхук з method (GET/POST/PUT/PATCH/DELETE/HEAD), headers і body."
+          "description": "Activity slug identifier to delete."
         }
       }
     },
     "widget_refresh": {
-      "name": "Оновити віджет",
-      "description": "Примусово оновити відстежуваний віджет PushWard. Обходить кеш порівнянь у пам’яті, тож віджет повторно відмальовується й надсилається на iOS, навіть якщо значення не змінилося.",
+      "name": "Refresh Widget",
+      "description": "Force-refresh a tracked PushWard widget. Bypasses the in-memory diff cache so the widget is re-rendered and pushed to iOS even when the value hasn't changed.",
       "fields": {
         "slug": {
           "name": "Slug",
-          "description": "Ідентифікатор slug віджета. Потрібно вказати або slug, або entity_id."
+          "description": "Widget slug identifier. Either slug or entity_id must be provided."
         },
         "entity_id": {
-          "name": "Сутність",
-          "description": "Сутність HA, прив’язана до віджета. Потрібно вказати або slug, або entity_id."
+          "name": "Entity",
+          "description": "HA entity bound to the widget. Either slug or entity_id must be provided."
+        }
+      }
+    },
+    "send_notification": {
+      "name": "Send Notification",
+      "description": "Send a push notification via PushWard.",
+      "fields": {
+        "title": {
+          "name": "Title",
+          "description": "Notification title."
+        },
+        "body": {
+          "name": "Body",
+          "description": "Notification body text."
+        },
+        "subtitle": {
+          "name": "Subtitle",
+          "description": "Optional subtitle shown below the title."
+        },
+        "level": {
+          "name": "Level",
+          "description": "iOS interruption level. Controls how the notification is delivered."
+        },
+        "volume": {
+          "name": "Volume",
+          "description": "Sound volume for critical alerts (0.0-1.0). Only used when level is critical."
+        },
+        "thread_id": {
+          "name": "Thread ID",
+          "description": "Groups notifications together in Notification Center."
+        },
+        "collapse_id": {
+          "name": "Collapse ID",
+          "description": "APNs deduplication key. Replaces previous notification with the same key."
+        },
+        "source": {
+          "name": "Source",
+          "description": "Source identifier for grouping in the PushWard inbox."
+        },
+        "source_display_name": {
+          "name": "Source Display Name",
+          "description": "Human-readable source name shown in the PushWard inbox."
+        },
+        "activity_slug": {
+          "name": "Activity Slug",
+          "description": "Link this notification to an existing Live Activity."
+        },
+        "push": {
+          "name": "Push",
+          "description": "Send as an APNs push alert to all devices. When false, the notification is stored in the inbox only."
+        },
+        "url": {
+          "name": "URL",
+          "description": "URL to open when the notification is tapped."
+        },
+        "media": {
+          "name": "Media",
+          "description": "Media attachment as an object with `url` (HTTPS) and `type` (image, video, or audio)."
+        },
+        "icon_url": {
+          "name": "Icon URL",
+          "description": "HTTPS URL of a custom per-notification icon."
+        },
+        "metadata": {
+          "name": "Metadata",
+          "description": "Key-value pairs of additional metadata attached to the notification."
+        },
+        "actions": {
+          "name": "Actions",
+          "description": "List of action buttons. Each action is an object with id, title, optional url, foreground, destructive, authentication_required, and icon. For an http(s) url you can also send a silent webhook with method (GET/POST/PUT/PATCH/DELETE/HEAD), headers, and body."
         }
       }
     },
     "send_email": {
-      "name": "Надіслати лист",
-      "description": "Надіслати транзакційний лист через PushWard. Вкажіть текстовий вміст, HTML-вміст або обидва. Інтеграційний ключ повинен мати дозвіл «emails».",
+      "name": "Send Email",
+      "description": "Send a transactional email via PushWard. Provide a text body, an HTML body, or both. The integration key needs the \"emails\" capability.",
       "fields": {
         "to": {
-          "name": "Кому",
-          "description": "Адреса електронної пошти отримувача. Має бути адресою, яку ви вже додали й підтвердили в застосунку PushWard для iOS — непідтверджені адреси відхиляються."
+          "name": "To",
+          "description": "Recipient email address. Must be an address you have already added and confirmed in the PushWard iOS app — unverified addresses are rejected."
         },
         "subject": {
-          "name": "Тема",
-          "description": "Тема листа."
+          "name": "Subject",
+          "description": "Email subject line."
         },
         "body": {
-          "name": "Вміст",
-          "description": "Текстовий вміст листа. Вкажіть його, HTML-вміст або обидва."
+          "name": "Body",
+          "description": "Plain-text email body. Provide this, an HTML body, or both."
         },
         "html_body": {
-          "name": "HTML-вміст",
-          "description": "HTML-вміст листа. Вкажіть його, текстовий вміст або обидва."
+          "name": "HTML Body",
+          "description": "HTML email body. Provide this, a plain-text body, or both."
         }
       }
     },
     "delete_widget": {
-      "name": "Видалити віджет",
-      "description": "Видалити віджет PushWard із сервера. Якщо запис конфігурації відстежуваного віджета досі керує цим slug, віджет буде відтворено під час наступного перезапуску/синхронізації — видаліть запис конфігурації, щоб видалити його остаточно. Вкажіть або slug, або entity_id.",
+      "name": "Delete Widget",
+      "description": "Delete a PushWard widget from the server. If a tracked-widget config entry still drives this slug, the widget is recreated on the next restart/sync — remove the config entry to delete it permanently. Provide either slug or entity_id.",
       "fields": {
         "slug": {
           "name": "Slug",
-          "description": "Ідентифікатор slug віджета. Потрібно вказати або slug, або entity_id."
+          "description": "Widget slug identifier. Either slug or entity_id must be provided."
         },
         "entity_id": {
-          "name": "Сутність",
-          "description": "Сутність HA, прив’язана до віджета. Зіставляється з відповідним віджетом за конфігурацією. Потрібно вказати або slug, або entity_id."
+          "name": "Entity",
+          "description": "HA entity bound to the widget. Resolved to the matching widget by config. Either slug or entity_id must be provided."
         }
       }
+    },
+    "dispatch": {
+      "name": "Send via PushWard",
+      "description": "Send any combination of a Live Activity, notification, widget, and email in one Home Assistant action.",
+      "sections": {
+        "activity_channel": {
+          "name": "Live Activity",
+          "description": "Upsert and update one Live Activity."
+        },
+        "notification_channel": {
+          "name": "Notification",
+          "description": "Optionally send an inbox/APNs notification in the same action."
+        },
+        "widget_channel": {
+          "name": "Widget",
+          "description": "Optionally create or replace a WidgetKit widget."
+        },
+        "email_channel": {
+          "name": "Email",
+          "description": "Optionally send an email to a verified recipient."
+        }
+      }
+    }
+  },
+  "exceptions": {
+    "widget_not_found": {
+      "message": "No PushWard widget matches slug={slug} entity_id={entity_id}."
     }
   },
   "config": {
     "step": {
       "user": {
-        "title": "Підключитися до PushWard",
+        "title": "Connect to PushWard",
+        "description": "Enter your PushWard integration key to get started. Get the PushWard iOS app from the App Store: {app_store_url}",
         "data": {
-          "integration_key": "Ключ інтеграції"
+          "integration_key": "Integration Key"
         },
-        "description": "Введіть свій інтеграційний ключ PushWard, щоб почати. Завантажте застосунок PushWard для iOS з App Store: {app_store_url}",
         "data_description": {
-          "integration_key": "Відкрийте застосунок PushWard для iOS (App Store: {app_store_url}) → Налаштування → Інтеграційні ключі. Ви можете вставити типовий ключ або створити новий з областю «ha-*»."
+          "integration_key": "Open the PushWard iOS app (App Store: {app_store_url}) → Settings → Integration Keys. You can paste the default key, or create a new one with scope 'ha-*'."
         }
       },
       "reconfigure": {
-        "title": "Переналаштувати PushWard",
-        "description": "Оновити ключ інтеграції PushWard.",
+        "title": "Reconfigure PushWard",
+        "description": "Update your PushWard integration key.",
         "data": {
-          "integration_key": "Ключ інтеграції"
+          "integration_key": "Integration Key"
         },
         "data_description": {
-          "integration_key": "Створіть у додатку PushWard iOS у розділі Налаштування → Ключі інтеграції зі сферою 'ha-*'."
+          "integration_key": "Create one in the PushWard iOS app under Settings → Integration Keys with scope 'ha-*'."
         }
       },
       "reauth_confirm": {
-        "title": "Повторна автентифікація",
-        "description": "Ключ інтеграції PushWard недійсний. Вкажіть новий.",
+        "title": "Reauthenticate",
+        "description": "The PushWard integration key is invalid. Please provide a new one.",
         "data": {
-          "integration_key": "Ключ інтеграції"
+          "integration_key": "Integration Key"
         },
         "data_description": {
-          "integration_key": "Створіть у додатку PushWard iOS у розділі Налаштування → Ключі інтеграції зі сферою 'ha-*'."
+          "integration_key": "Create one in the PushWard iOS app under Settings → Integration Keys with scope 'ha-*'."
         }
       }
     },
     "error": {
-      "cannot_connect": "Не вдалося підключитися до сервера PushWard.",
-      "invalid_auth": "Недійсний ключ інтеграції.",
-      "invalid_url": "URL повинен використовувати схему http:// або https://.",
-      "unknown": "Сталася непередбачена помилка."
+      "cannot_connect": "Failed to connect to PushWard server.",
+      "invalid_auth": "Invalid integration key.",
+      "invalid_url": "URL must use http:// or https:// scheme.",
+      "unknown": "An unexpected error occurred."
     },
     "abort": {
-      "already_configured": "PushWard вже налаштовано.",
-      "reconfigure_successful": "Конфігурацію PushWard оновлено.",
-      "reauth_successful": "Повторну автентифікацію виконано успішно."
+      "already_configured": "PushWard is already configured.",
+      "reconfigure_successful": "PushWard configuration updated.",
+      "reauth_successful": "Reauthentication successful."
     }
   },
   "config_subentries": {
     "tracked_entity": {
-      "entry_type": "Відстежувана сутність",
+      "entry_type": "Tracked Entity",
       "initiate_flow": {
-        "user": "Додати відстежувану сутність"
+        "user": "Add tracked entity"
       },
       "step": {
         "user": {
-          "title": "Додати сутність до PushWard",
+          "title": "Add tracked Live Activity",
           "data": {
-            "entity_id": "Сутність",
-            "template": "Шаблон"
+            "entity_id": "Entity to track",
+            "template": "Live Activity layout"
           },
           "data_description": {
-            "template": "Шаблон макета активності. 'generic' підходить для більшості сутностей."
+            "entity_id": "The Home Assistant entity whose state starts, updates, and ends this Live Activity.",
+            "template": "Choose the visual layout. Only settings supported by that layout appear on the next page."
           }
         },
         "details": {
           "title": "Configure {template} activity",
           "data": {
-            "start_states": "Стани запуску",
-            "end_states": "Стани завершення",
-            "progress_attribute": "Атрибут прогресу",
-            "remaining_time_attribute": "Атрибут часу, що залишився",
-            "total_steps": "Усього кроків",
-            "current_step_attribute": "Атрибут поточного кроку",
-            "severity": "Серйозність",
-            "value_attribute": "Атрибут значення",
-            "min_value": "Мінімальне значення",
-            "max_value": "Максимальне значення",
-            "unit": "Одиниця",
-            "series": "Серії",
-            "scale": "Масштаб",
-            "decimals": "Знаки після коми",
-            "smoothing": "Згладжені лінії",
-            "thresholds": "Пороги",
-            "history_period": "Період попередньої історії",
-            "slug": "Slug активності",
-            "activity_name": "Назва активності",
-            "icon": "Значок",
-            "icon_attribute": "Атрибут значка",
-            "priority": "Пріоритет (0–10)",
-            "update_interval": "Мін. інтервал оновлення (секунди)",
-            "subtitle_attribute": "Атрибут підзаголовка",
-            "state_labels": "Мітки станів",
-            "completion_message": "Повідомлення про завершення",
-            "accent_color": "Акцентний колір",
-            "accent_color_attribute": "Атрибут акцентного кольору",
-            "url": "URL",
-            "secondary_url": "Додатковий URL",
-            "ended_ttl": "Автовидалення після завершення (секунди)",
-            "stale_ttl": "Автозавершення після простою (секунди)",
-            "sound": "Звук",
-            "background_color": "Колір фону",
-            "background_color_attribute": "Атрибут кольору фону",
-            "text_color": "Колір тексту",
-            "text_color_attribute": "Атрибут кольору тексту",
-            "warning_threshold": "Попередній поріг",
-            "alarm": "Сигнал",
-            "step_labels": "Мітки кроків",
-            "step_rows": "Рядки кроків",
-            "fired_at_attribute": "Атрибут часу спрацювання",
-            "units": "Одиниці",
-            "progress_entity": "Сутність прогресу",
-            "remaining_time_entity": "Сутність часу, що залишився",
-            "current_step_entity": "Сутність поточного кроку",
-            "value_entity": "Сутність значення",
-            "subtitle_entity": "Сутність підзаголовка",
-            "tap_action_url": "URL дії при дотику",
-            "tap_action_foreground": "Відкривати URL дії при дотику",
-            "url_foreground": "Відкривати URL основної кнопки",
-            "url_title": "Назва основної кнопки",
-            "secondary_url_foreground": "Відкривати URL додаткової кнопки",
-            "secondary_url_title": "Назва додаткової кнопки",
-            "snooze_seconds": "Секунди відкладання (iOS 26+)",
-            "fired_at_entity": "Сутність часу спрацювання",
-            "log_columns": "Стовпці журналу",
+            "start_states": "Start States",
+            "end_states": "End States",
+            "progress_entity": "Progress Entity",
+            "progress_attribute": "Progress Attribute",
+            "remaining_time_entity": "Remaining Time Entity",
+            "remaining_time_attribute": "Remaining Time Attribute",
+            "live_progress": "Live Progress ETA",
+            "current_step_entity": "Current Step Entity",
+            "current_step_attribute": "Current Step Attribute",
+            "severity": "Severity",
+            "severity_label": "Severity Label",
+            "value_entity": "Value Entity",
+            "value_attribute": "Value Attribute",
+            "min_value": "Minimum Value",
+            "max_value": "Maximum Value",
+            "unit": "Unit",
+            "series": "Series",
+            "series_entities": "Series Entities",
+            "primary_series": "Primary Series",
+            "scale": "Scale",
+            "decimals": "Decimal Places",
+            "smoothing": "Smooth Lines",
+            "thresholds": "Thresholds",
+            "history_period": "Back-History Period",
+            "slug": "Activity Slug",
+            "activity_name": "Activity Name",
+            "icon": "Icon",
+            "icon_attribute": "Icon Attribute",
+            "priority": "Priority (0-10)",
+            "update_interval": "Min. Update Interval (seconds)",
+            "subtitle_entity": "Subtitle Entity",
+            "subtitle_attribute": "Subtitle Attribute",
+            "state_labels": "State Labels",
+            "completion_message": "Completion Message",
+            "accent_color": "Accent Color",
+            "accent_color_attribute": "Accent Color Attribute",
+            "tap_action_url": "Tap Action URL",
+            "tap_action_foreground": "Open Tap Action URL",
+            "url": "Primary Button URL",
+            "url_foreground": "Open Primary Button URL",
+            "url_title": "Primary Button Title",
+            "secondary_url": "Secondary Button URL",
+            "secondary_url_foreground": "Open Secondary Button URL",
+            "secondary_url_title": "Secondary Button Title",
+            "ended_ttl": "Auto-Delete After End (seconds)",
+            "stale_ttl": "Auto-End After Idle (seconds)",
+            "sound": "Sound",
+            "background_color": "Background Color",
+            "background_color_attribute": "Background Color Attribute",
+            "text_color": "Text Color",
+            "text_color_attribute": "Text Color Attribute",
+            "warning_threshold": "Warning Threshold (seconds)",
+            "alarm": "Alarm (iOS 26+)",
+            "snooze_seconds": "Snooze Seconds (iOS 26+)",
+            "fired_at_entity": "Fired At Entity",
+            "fired_at_attribute": "Fired At Attribute",
+            "tiles": "Board Tiles",
+            "log_columns": "Log Columns",
+            "log_level_attribute": "Log Level Attribute",
             "step_configuration": "Steps"
           },
           "data_description": {
-            "start_states": "Стани сутності, що запускають Live Activity. Виберіть зі списку або введіть власні значення.",
-            "end_states": "Стани сутності, що завершують Live Activity. Виберіть зі списку або введіть власні значення.",
-            "progress_attribute": "Атрибут сутності зі значенням прогресу від 0 до 100. Приклад: percentage",
-            "remaining_time_attribute": "Атрибут сутності з часом, що залишився, у секундах. Приклад: remaining",
-            "total_steps": "Загальна кількість steps.",
-            "current_step_attribute": "Атрибут сутності з поточним кроком у вигляді цілого числа.",
-            "severity": "Рівень серйозності Alert.",
-            "value_attribute": "Атрибут сутності з поточним числовим значенням gauge. Залиште порожнім, щоб використовувати стан сутності.",
-            "min_value": "Мінімальне значення діапазону gauge.",
-            "max_value": "Максимальне значення діапазону gauge.",
-            "unit": "Одиниця вимірювання поруч із значенням (наприклад, °C, %, кВт). Максимум 32 символи.",
-            "series": "Зіставлення атрибутів сутності з іменованими серіями. Формат: attribute=Мітка, attribute2=Мітка2. Залиште порожнім, щоб використовувати стан сутності як єдину серію.",
-            "scale": "Режим масштабу осі Y для спарклайн-графіка.",
-            "decimals": "Кількість знаків після коми для відображення значень (0–10).",
-            "smoothing": "Увімкнути інтерполяцію кривої між точками даних для плавнішого спарклайну.",
-            "thresholds": "Горизонтальні опорні лінії на спарклайні. Формат: значення:колір:мітка. Приклад: 25:red:Жарко, 18:blue:Холодно. Максимум 5.",
-            "history_period": "Хвилини попередніх даних для ініціалізації спарклайну з рекордера Home Assistant. Встановіть 0, щоб почати без історії.",
-            "slug": "Унікальний ідентифікатор цієї активності. Залиште порожнім для автоматичного генерування з ID сутності. Приклад: ha-living-room-lamp",
-            "activity_name": "Відображувана назва на iPhone Live Activity. За замовчуванням — зрозуміла назва сутності.",
-            "icon": "Замінити значок. Залиште порожнім, щоб використовувати рідний значок сутності (наприклад, mdi:thermometer). Також підтримуються SF Symbols (наприклад, lamp.desk.fill).",
-            "icon_attribute": "Атрибут сутності для динамічного значка. Перевизначає статичний значок і значок сутності, якщо встановлено.",
-            "priority": "Активності з вищим пріоритетом зберігаються довше при досягненні ліміту пристрою (0 = найнижчий, 10 = найвищий).",
-            "update_interval": "Мінімальний інтервал між оновленнями у секундах. Часті зміни стану обмежуються.",
-            "subtitle_attribute": "Атрибут сутності для підзаголовка. Залиште порожнім, щоб використовувати зрозумілу назву сутності.",
-            "state_labels": "Власний текст для відображення станів. Формат: стан=Мітка, стан2=Мітка 2. Приклад: heating=Нагрів, idle=Очікування",
-            "completion_message": "Текст при завершенні активності. Залиште порожнім для 'Complete'. Приклад: Прання завершено",
-            "accent_color": "Акцентний колір для Live Activity. Залиште порожнім для синього за замовчуванням.",
-            "accent_color_attribute": "Атрибут сутності для динамічного акцентного кольору. Перевизначає статичний колір. Підтримує RGB, HS, XY, Kelvin, іменовані кольори та hex.",
-            "url": "Посилання, що відкривається при натисканні на Live Activity. Має починатися з http:// або https://. Лише для шаблонів steps та alert.",
-            "secondary_url": "Додаткове посилання для Live Activity. Лише для шаблонів steps та alert.",
-            "ended_ttl": "Секунди після завершення активності до її автовидалення з сервера. Залиште порожнім, щоб зберігати необмежено. Приклад: 300",
-            "stale_ttl": "Секунди бездіяльності до автоматичного завершення активності сервером. Залиште порожнім, щоб вимкнути. Приклад: 1800",
-            "sound": "Назва звуку сповіщення для цього оновлення. Залиште порожнім для системного звуку iOS.",
-            "background_color": "Колір фону Live Activity. #RRGGBB або ім'я кольору. Залиште порожнім для системного значення за замовчуванням.",
-            "background_color_attribute": "Атрибут сутності для динамічного кольору фону. Перевизначає статичний колір фону.",
-            "text_color": "Колір тексту Live Activity. #RRGGBB або ім'я кольору. Залиште порожнім для системного значення за замовчуванням.",
-            "text_color_attribute": "Атрибут сутності для динамічного кольору тексту. Перевизначає статичний колір тексту.",
-            "warning_threshold": "При досягненні або перевищенні цього значення спрацьовує попереджувальне забарвлення. Шаблони gauge та timeline.",
-            "alarm": "Активує сигнал AlarmKit при перевищенні попереднього порогу. Лише для iOS 26+.",
-            "step_labels": "Власні мітки для кроків шаблону steps. Формат: 1=Мітка, 2=Мітка. Якщо порожньо — використовуються номери кроків.",
-            "step_rows": "Кількість кроків для відображення в одному рядку в шаблоні steps.",
-            "fired_at_attribute": "Атрибут сутності з Unix-міткою часу спрацювання. Використовується для відображення відносного часу.",
-            "units": "Мітки одиниць для серій timeline. Формат: attribute=Одиниця. Приклад: temp=°C, humidity=%",
-            "progress_entity": "Зчитувати прогрес з окремої сутності замість відстежуваної. Залиште порожнім, щоб використовувати відстежувану сутність. Якщо задано поле атрибута, зчитує цей атрибут даної сутності; інакше — її стан.",
-            "remaining_time_entity": "Зчитувати час, що залишився, з окремої сутності (напр., датчика часу пральної машини). Залиште порожнім, щоб використовувати відстежувану сутність. Автоматично розпізнає датчик з часовою міткою (час завершення), датчик тривалості з одиницями, рядок H:MM:SS або звичайні секунди.",
-            "current_step_entity": "Зчитувати поточний крок з окремої сутності. Залиште порожнім, щоб використовувати відстежувану сутність.",
-            "value_entity": "Зчитувати значення шкали з окремої сутності. Залиште порожнім, щоб використовувати відстежувану сутність. Використовує стан сутності-джерела, якщо не задано атрибут.",
-            "subtitle_entity": "Показувати підзаголовок з окремої сутності (напр., датчика програми/режиму). Залиште порожнім, щоб використовувати відстежувану сутність. Використовує стан сутності-джерела, якщо не задано атрибут.",
-            "tap_action_url": "Необов’язковий URL, що відкривається при дотику до тла Live Activity. Підтримує http(s) (відкриває Safari) або власні схеми на кшталт homeassistant://navigate/lovelace/0 (відкриває відповідний застосунок).",
-            "tap_action_foreground": "Увімкнено: дотик відкриває URL. Вимкнено: тихий вебхук (лише http(s)) — надсилає POST у фоні, не залишаючи екран блокування.",
-            "url_foreground": "Увімкнено: дотик відкриває URL. Вимкнено: тихий вебхук (лише http(s)).",
-            "url_title": "Підпис основної кнопки (макс. 64 символи).",
-            "secondary_url_foreground": "Увімкнено: дотик відкриває URL. Вимкнено: тихий вебхук (лише http(s)).",
-            "secondary_url_title": "Підпис додаткової кнопки (макс. 64 символи).",
-            "snooze_seconds": "На скільки кнопка «Відкласти» в iOS подовжує відлік (60–3600). Залиште порожнім для типового значення 300 с (5 хв). Потребує будильника. Лише шаблон відліку.",
-            "fired_at_entity": "Зчитувати час спрацювання сповіщення з окремої сутності. Залиште порожнім, щоб використовувати відстежувану сутність. Приймає unix-час або датчик з ISO-часом. Лише шаблон сповіщення.",
-            "log_columns": "Додаткові значення, що додаються до кожного рядка журналу (макс. 6), розділені комами. Формат: [Label=]source[|unit]. source = атрибут цієї сутності (brightness), стан іншої сутності (binary_sensor.door) або атрибут іншої сутності (sensor.temp:temperature). Приклад: color_temp_kelvin|K, brightness → 'On · 4000K · 153'. Лише шаблон журналу.",
-            "step_configuration": "Add one row per step. Parallel jobs controls the number of stacked rows; relative duration/width makes longer stages wider; color is optional."
+            "start_states": "Entity states that start the Live Activity. Select from the list or type custom values.",
+            "end_states": "Entity states that end the Live Activity. Select from the list or type custom values.",
+            "progress_entity": "Read progress from a separate entity instead of the tracked entity. Leave empty to use the tracked entity. With the attribute field set, reads that attribute of this entity; otherwise its state.",
+            "progress_attribute": "Attribute holding a 0–100 progress value (on the source entity, or the tracked entity if no source is set). Example: percentage",
+            "remaining_time_entity": "Read remaining time from a separate entity (e.g. a washer's time sensor). Leave empty to use the tracked entity. Auto-parses a timestamp (finish-time) sensor, a duration sensor with units, an H:MM:SS string, or plain seconds.",
+            "remaining_time_attribute": "Attribute holding remaining time (on the source entity, or the tracked entity if no source is set). Leave empty to use the source entity's state. Example: remaining",
+            "live_progress": "Animate progress toward the estimated finish time. Generic and Steps layouts require a remaining-time source.",
+            "current_step_entity": "Read the current step from a separate entity. Leave empty to use the tracked entity.",
+            "current_step_attribute": "Attribute holding the zero-based current-step index: 0 is the first step, 1 is the second, and total steps means complete.",
+            "severity": "Alert severity level.",
+            "severity_label": "Override the Info/Warning/Critical badge text shown on the alert. Leave empty to use the severity name. Max 32 characters. Alert template only.",
+            "value_entity": "Read the gauge value from a separate entity. Leave empty to use the tracked entity. Uses the source entity's state unless an attribute is set.",
+            "value_attribute": "Attribute holding the current gauge value as a number (on the source entity, or the tracked entity if no source is set). Leave empty to use the entity's state.",
+            "min_value": "Minimum value for the gauge range.",
+            "max_value": "Maximum value for the gauge range.",
+            "unit": "Display unit shown next to the value (e.g. °C, %, kW). Max 32 characters.",
+            "series": "Map entity attributes to named series. Format: attribute=Label, attribute2=Label2. Leave empty to use the entity's state as a single series.",
+            "series_entities": "Add one row for each entity-backed chart line. Give it a label and optionally select an attribute. Combines with the primary series; up to 10 lines total.",
+            "primary_series": "Label of the series shown as the headline value and used for the compact high/low range. Leave empty to use the tracked entity's own series (or the first configured series).",
+            "scale": "Y-axis scale mode for the sparkline chart.",
+            "decimals": "Number of decimal places shown for values (0–10).",
+            "smoothing": "Enable curve interpolation between data points for a smoother sparkline.",
+            "thresholds": "Add up to 5 horizontal reference lines, each with a value and optional color and label.",
+            "history_period": "Minutes of past data to seed the sparkline when the activity starts. Numeric-state entities (plain sensors, value entities, and state-sourced series entities) backfill from Home Assistant's recorder; attribute-based series fill only from samples collected while the integration runs, because Home Assistant stopped recording most attributes in 2024.8. Set to 0 to start with no history.",
+            "slug": "Unique identifier for this activity. Leave empty to auto-generate from entity ID. Example: ha-living-room-lamp",
+            "activity_name": "Display name shown on the iPhone Live Activity. Defaults to the entity's friendly name.",
+            "icon": "Override icon. Leave empty to use the entity’s native icon (e.g. mdi:thermometer). SF Symbols also supported (e.g. lamp.desk.fill).",
+            "icon_attribute": "Entity attribute for dynamic icon. Overrides static icon and entity icon when set.",
+            "priority": "Higher priority activities are kept longer when the device limit is reached (0 = lowest, 10 = highest).",
+            "update_interval": "Minimum seconds between updates. Rapid state changes are throttled.",
+            "subtitle_entity": "Show the subtitle from a separate entity (e.g. a program/mode sensor). Leave empty to use the tracked entity. Uses the source entity's state unless an attribute is set.",
+            "subtitle_attribute": "Attribute to show as subtitle (on the source entity, or the tracked entity if no source is set). Leave empty to use the source entity's state, or the friendly name when no source is set.",
+            "state_labels": "Add state-to-label mappings. For example, map heating to Heating Up and idle to Standby.",
+            "completion_message": "Text shown when the activity ends. Leave empty for 'Complete'. Example: Wash Done",
+            "accent_color": "Accent color for the Live Activity. Leave empty for default blue.",
+            "accent_color_attribute": "Entity attribute for dynamic accent color. Overrides static color. Supports RGB, HS, XY, Kelvin, named colors, and hex.",
+            "tap_action_url": "Optional URL opened when tapping the Live Activity background. Supports http(s) (opens Safari) or custom schemes like homeassistant://navigate/lovelace/0 (opens that app).",
+            "tap_action_foreground": "On: tap opens the URL. Off: silent webhook (http(s) only) — fires a POST in the background without leaving the Lock Screen.",
+            "url": "Primary button destination for any layout. Supports http(s) URLs and app schemes such as homeassistant://.",
+            "url_foreground": "On: tap opens the URL. Off: silent webhook (http(s) only).",
+            "url_title": "Primary button label (max 64 characters).",
+            "secondary_url": "Secondary button destination for any layout. Supports http(s) URLs and app schemes.",
+            "secondary_url_foreground": "On: tap opens the URL. Off: silent webhook (http(s) only).",
+            "secondary_url_title": "Secondary button label (max 64 characters).",
+            "ended_ttl": "Seconds after the activity ends before the server auto-deletes it. This also controls how soon the ended card leaves the iPhone Lock Screen (iOS caps it at 4 hours regardless). Leave empty to keep indefinitely. Example: 300",
+            "stale_ttl": "Seconds of inactivity before the server auto-ends the activity. Leave empty to disable. Example: 1800",
+            "sound": "Sound played on every update for this entity. Leave empty to use no override.",
+            "background_color": "Background color for the Live Activity. Leave empty for default.",
+            "background_color_attribute": "Entity attribute for dynamic background color. Overrides static color. Supports RGB, HS, XY, Kelvin, named colors, and hex.",
+            "text_color": "Text color for the Live Activity. Leave empty for default.",
+            "text_color_attribute": "Entity attribute for dynamic text color. Overrides static color.",
+            "warning_threshold": "Seconds before the end of a countdown when the server sends a warning push. Leave empty to disable. Countdown template only.",
+            "alarm": "Trigger an AlarmKit alarm when the countdown expires (iOS 26+). Countdown template only.",
+            "snooze_seconds": "How long the iOS Snooze button extends the countdown (60–3600). Leave empty for the 300s (5 min) default. Requires Alarm. Countdown template only.",
+            "fired_at_entity": "Read the alert's fired-at time from a separate entity. Leave empty to use the tracked entity. Accepts a unix timestamp or an ISO timestamp sensor. Alert template only.",
+            "fired_at_attribute": "Attribute holding the unix timestamp when the alert fired (on the source entity, or the tracked entity if no source is set). Alert template only.",
+            "tiles": "Add 1–4 board tiles. Each row selects an entity and label, with optional attribute, unit, and icon. Board template only.",
+            "log_columns": "Add up to 6 extra values to each log line. Each row selects an entity and optional attribute, label, and unit. Log template only.",
+            "log_level_attribute": "Attribute supplying each log line's level (info/warn/error). Leave empty for no level tag. Log template only.",
+            "step_configuration": "Add one named row per step. Parallel jobs creates stacked lanes. Relative step length is a ratio: weights 1, 4, 1 make the middle step four times wider. Color is optional."
           },
           "description": "Everything is on this page. Open only the sections you need.",
           "sections": {
             "lifecycle": {
-              "name": "Lifecycle and delivery",
-              "description": "Choose when the activity runs and how PushWard updates and retains it.",
+              "name": "Lifecycle and update behavior",
+              "description": "Choose when the activity runs, how often it updates, and how long PushWard retains it.",
               "data": {
-                "start_states": "Стани запуску",
-                "end_states": "Стани завершення",
-                "slug": "Slug активності",
-                "activity_name": "Назва активності",
-                "priority": "Пріоритет (0–10)",
-                "sound": "Звук",
-                "update_interval": "Мін. інтервал оновлення (секунди)",
-                "ended_ttl": "Автовидалення після завершення (секунди)",
-                "stale_ttl": "Автозавершення після простою (секунди)"
+                "start_states": "States that start the activity",
+                "end_states": "States that end the activity",
+                "slug": "Activity slug",
+                "activity_name": "Activity display name",
+                "priority": "Priority (0-10)",
+                "sound": "Update sound",
+                "update_interval": "Minimum update interval",
+                "ended_ttl": "Delete after ending",
+                "stale_ttl": "End after no updates"
               },
               "data_description": {
-                "start_states": "Стани сутності, що запускають Live Activity. Виберіть зі списку або введіть власні значення.",
-                "end_states": "Стани сутності, що завершують Live Activity. Виберіть зі списку або введіть власні значення.",
-                "slug": "Унікальний ідентифікатор цієї активності. Залиште порожнім для автоматичного генерування з ID сутності. Приклад: ha-living-room-lamp",
-                "activity_name": "Відображувана назва на iPhone Live Activity. За замовчуванням — зрозуміла назва сутності.",
-                "priority": "Активності з вищим пріоритетом зберігаються довше при досягненні ліміту пристрою (0 = найнижчий, 10 = найвищий).",
-                "sound": "Назва звуку сповіщення для цього оновлення. Залиште порожнім для системного звуку iOS.",
-                "update_interval": "Мінімальний інтервал між оновленнями у секундах. Часті зміни стану обмежуються.",
-                "ended_ttl": "Секунди після завершення активності до її автовидалення з сервера. Залиште порожнім, щоб зберігати необмежено. Приклад: 300",
-                "stale_ttl": "Секунди бездіяльності до автоматичного завершення активності сервером. Залиште порожнім, щоб вимкнути. Приклад: 1800"
+                "start_states": "Entity states that start the Live Activity. Select from the list or type custom values.",
+                "end_states": "Entity states that end the Live Activity. Select from the list or type custom values.",
+                "slug": "Unique identifier for this activity. Leave empty to auto-generate from entity ID. Example: ha-living-room-lamp",
+                "activity_name": "Display name shown on the iPhone Live Activity. Defaults to the entity's friendly name.",
+                "priority": "Integer from 0 to 10. Higher-priority activities are retained first and receive a higher iOS relevance score.",
+                "sound": "Optional sound played for ongoing updates. Choose Silent for no sound; sounds are ignored when ending.",
+                "update_interval": "Minimum seconds between API updates, from 1 to 86,400. Faster entity changes are combined.",
+                "ended_ttl": "Seconds after an activity ends before PushWard deletes it and dismisses the ended card. Valid range: 1-2,592,000 seconds (30 days). Leave blank for the PushWard default.",
+                "stale_ttl": "Seconds without an update before PushWard automatically ends the activity. Valid range: 1-2,592,000 seconds (30 days). Leave blank to disable."
               }
             },
             "content": {
               "name": "Layout content",
               "description": "Values used by the selected Live Activity layout.",
               "data": {
-                "progress_attribute": "Атрибут прогресу",
-                "remaining_time_attribute": "Атрибут часу, що залишився",
-                "total_steps": "Усього кроків",
-                "current_step_attribute": "Атрибут поточного кроку",
-                "severity": "Серйозність",
-                "value_attribute": "Атрибут значення",
-                "min_value": "Мінімальне значення",
-                "max_value": "Максимальне значення",
-                "unit": "Одиниця",
-                "series": "Серії",
-                "scale": "Масштаб",
-                "decimals": "Знаки після коми",
-                "smoothing": "Згладжені лінії",
-                "thresholds": "Пороги",
-                "history_period": "Період попередньої історії",
-                "state_labels": "Мітки станів",
-                "completion_message": "Повідомлення про завершення",
-                "warning_threshold": "Попередній поріг",
-                "alarm": "Сигнал",
-                "step_labels": "Мітки кроків",
-                "step_rows": "Рядки кроків",
-                "fired_at_attribute": "Атрибут часу спрацювання",
-                "units": "Одиниці",
-                "progress_entity": "Сутність прогресу",
-                "remaining_time_entity": "Сутність часу, що залишився",
-                "current_step_entity": "Сутність поточного кроку",
-                "value_entity": "Сутність значення",
-                "snooze_seconds": "Секунди відкладання (iOS 26+)",
-                "fired_at_entity": "Сутність часу спрацювання",
-                "log_columns": "Стовпці журналу",
-                "step_configuration": "Steps"
+                "progress_entity": "Progress source entity",
+                "progress_attribute": "Progress attribute",
+                "remaining_time_entity": "Remaining-time source entity",
+                "remaining_time_attribute": "Remaining-time attribute",
+                "live_progress": "Animate progress between updates",
+                "current_step_entity": "Current-step source entity",
+                "current_step_attribute": "Current-step attribute",
+                "severity": "Alert severity",
+                "severity_label": "Custom severity badge",
+                "value_entity": "Value source entity",
+                "value_attribute": "Value attribute",
+                "min_value": "Minimum value",
+                "max_value": "Maximum value",
+                "unit": "Display unit",
+                "series": "Attribute-backed chart series",
+                "series_entities": "Entity-backed chart series",
+                "primary_series": "Primary chart series",
+                "scale": "Y-axis scale",
+                "decimals": "Decimal places",
+                "smoothing": "Smooth chart lines",
+                "thresholds": "Chart thresholds",
+                "history_period": "Recorder history to load",
+                "state_labels": "State display labels",
+                "completion_message": "Completion message",
+                "warning_threshold": "Countdown warning threshold",
+                "alarm": "Ring an AlarmKit alarm",
+                "snooze_seconds": "Alarm snooze duration",
+                "fired_at_entity": "Fired-at source entity",
+                "fired_at_attribute": "Fired-at attribute",
+                "tiles": "Board tiles",
+                "log_columns": "Additional log values",
+                "log_level_attribute": "Log severity attribute",
+                "step_configuration": "Workflow steps"
               },
               "data_description": {
-                "progress_attribute": "Атрибут сутності зі значенням прогресу від 0 до 100. Приклад: percentage",
-                "remaining_time_attribute": "Атрибут сутності з часом, що залишився, у секундах. Приклад: remaining",
-                "total_steps": "Загальна кількість steps.",
-                "current_step_attribute": "Атрибут сутності з поточним кроком у вигляді цілого числа.",
-                "severity": "Рівень серйозності Alert.",
-                "value_attribute": "Атрибут сутності з поточним числовим значенням gauge. Залиште порожнім, щоб використовувати стан сутності.",
-                "min_value": "Мінімальне значення діапазону gauge.",
-                "max_value": "Максимальне значення діапазону gauge.",
-                "unit": "Одиниця вимірювання поруч із значенням (наприклад, °C, %, кВт). Максимум 32 символи.",
-                "series": "Зіставлення атрибутів сутності з іменованими серіями. Формат: attribute=Мітка, attribute2=Мітка2. Залиште порожнім, щоб використовувати стан сутності як єдину серію.",
-                "scale": "Режим масштабу осі Y для спарклайн-графіка.",
-                "decimals": "Кількість знаків після коми для відображення значень (0–10).",
-                "smoothing": "Увімкнути інтерполяцію кривої між точками даних для плавнішого спарклайну.",
-                "thresholds": "Горизонтальні опорні лінії на спарклайні. Формат: значення:колір:мітка. Приклад: 25:red:Жарко, 18:blue:Холодно. Максимум 5.",
-                "history_period": "Хвилини попередніх даних для ініціалізації спарклайну з рекордера Home Assistant. Встановіть 0, щоб почати без історії.",
-                "state_labels": "Власний текст для відображення станів. Формат: стан=Мітка, стан2=Мітка 2. Приклад: heating=Нагрів, idle=Очікування",
-                "completion_message": "Текст при завершенні активності. Залиште порожнім для 'Complete'. Приклад: Прання завершено",
-                "warning_threshold": "При досягненні або перевищенні цього значення спрацьовує попереджувальне забарвлення. Шаблони gauge та timeline.",
-                "alarm": "Активує сигнал AlarmKit при перевищенні попереднього порогу. Лише для iOS 26+.",
-                "step_labels": "Власні мітки для кроків шаблону steps. Формат: 1=Мітка, 2=Мітка. Якщо порожньо — використовуються номери кроків.",
-                "step_rows": "Кількість кроків для відображення в одному рядку в шаблоні steps.",
-                "fired_at_attribute": "Атрибут сутності з Unix-міткою часу спрацювання. Використовується для відображення відносного часу.",
-                "units": "Мітки одиниць для серій timeline. Формат: attribute=Одиниця. Приклад: temp=°C, humidity=%",
-                "progress_entity": "Зчитувати прогрес з окремої сутності замість відстежуваної. Залиште порожнім, щоб використовувати відстежувану сутність. Якщо задано поле атрибута, зчитує цей атрибут даної сутності; інакше — її стан.",
-                "remaining_time_entity": "Зчитувати час, що залишився, з окремої сутності (напр., датчика часу пральної машини). Залиште порожнім, щоб використовувати відстежувану сутність. Автоматично розпізнає датчик з часовою міткою (час завершення), датчик тривалості з одиницями, рядок H:MM:SS або звичайні секунди.",
-                "current_step_entity": "Зчитувати поточний крок з окремої сутності. Залиште порожнім, щоб використовувати відстежувану сутність.",
-                "value_entity": "Зчитувати значення шкали з окремої сутності. Залиште порожнім, щоб використовувати відстежувану сутність. Використовує стан сутності-джерела, якщо не задано атрибут.",
-                "snooze_seconds": "На скільки кнопка «Відкласти» в iOS подовжує відлік (60–3600). Залиште порожнім для типового значення 300 с (5 хв). Потребує будильника. Лише шаблон відліку.",
-                "fired_at_entity": "Зчитувати час спрацювання сповіщення з окремої сутності. Залиште порожнім, щоб використовувати відстежувану сутність. Приймає unix-час або датчик з ISO-часом. Лише шаблон сповіщення.",
-                "log_columns": "Додаткові значення, що додаються до кожного рядка журналу (макс. 6), розділені комами. Формат: [Label=]source[|unit]. source = атрибут цієї сутності (brightness), стан іншої сутності (binary_sensor.door) або атрибут іншої сутності (sensor.temp:temperature). Приклад: color_temp_kelvin|K, brightness → 'On · 4000K · 153'. Лише шаблон журналу.",
-                "step_configuration": "Add one row per step. Parallel jobs controls the number of stacked rows; relative duration/width makes longer stages wider; color is optional."
+                "progress_entity": "Read progress from a separate entity instead of the tracked entity. Leave empty to use the tracked entity. With the attribute field set, reads that attribute of this entity; otherwise its state.",
+                "progress_attribute": "Numeric progress from 0 to 100. Leave blank to read the selected entity state.",
+                "remaining_time_entity": "Read remaining time from a separate entity (e.g. a washer's time sensor). Leave empty to use the tracked entity. Auto-parses a timestamp (finish-time) sensor, a duration sensor with units, an H:MM:SS string, or plain seconds.",
+                "remaining_time_attribute": "Remaining seconds, a Home Assistant duration, or an absolute date/time. Leave blank to read the selected entity state.",
+                "live_progress": "When enabled, iOS animates toward the estimated finish time. Generic and Steps layouts require a remaining-time source.",
+                "current_step_entity": "Read the current step from a separate entity. Leave empty to use the tracked entity.",
+                "current_step_attribute": "Zero-based step index: 0 is the first step, 1 is the second, and the total step count means complete. Leave blank to read the selected entity state.",
+                "severity": "Alert severity level.",
+                "severity_label": "Override the Info/Warning/Critical badge text shown on the alert. Leave empty to use the severity name. Max 32 characters. Alert template only.",
+                "value_entity": "Read the gauge value from a separate entity. Leave empty to use the tracked entity. Uses the source entity's state unless an attribute is set.",
+                "value_attribute": "Attribute holding the current gauge value as a number (on the source entity, or the tracked entity if no source is set). Leave empty to use the entity's state.",
+                "min_value": "Lower bound of the gauge. Uses the same unit as the source value.",
+                "max_value": "Upper bound of the gauge and must be greater than Minimum value.",
+                "unit": "Text displayed after the value, such as °C, %, kW, or rpm. Maximum 32 characters.",
+                "series": "Add tracked-entity attribute series. Each row has a display label, attribute, and optional unit.",
+                "series_entities": "Add entity-backed chart series. Each row has a label, entity, optional attribute, and optional unit. Up to 10 series total.",
+                "primary_series": "Label of the series shown as the headline value and used for the compact high/low range. Leave empty to use the tracked entity's own series (or the first configured series).",
+                "scale": "Y-axis scale mode for the sparkline chart.",
+                "decimals": "Integer from 0 to 10 controlling displayed precision.",
+                "smoothing": "Enable curve interpolation between data points for a smoother sparkline.",
+                "thresholds": "Add up to 5 horizontal reference lines, each with a value and optional color and label.",
+                "history_period": "Minutes of Home Assistant Recorder history loaded when the timeline starts. Valid range: 0-1,440 minutes; 0 disables backfill.",
+                "state_labels": "Add state-to-label mappings, such as heating → Heating Up and idle → Standby.",
+                "completion_message": "Text shown when the activity ends. Leave empty for 'Complete'. Example: Wash Done",
+                "warning_threshold": "Seconds before a countdown finishes when PushWard sends its warning update. Valid range: 0-86,400 seconds.",
+                "alarm": "Trigger an AlarmKit alarm when the countdown expires (iOS 26+). Countdown template only.",
+                "snooze_seconds": "AlarmKit snooze duration in seconds, from 60 to 3,600. It is ignored unless Alarm is enabled.",
+                "fired_at_entity": "Read the alert's fired-at time from a separate entity. Leave empty to use the tracked entity. Accepts a unix timestamp or an ISO timestamp sensor. Alert template only.",
+                "fired_at_attribute": "Attribute holding the unix timestamp when the alert fired (on the source entity, or the tracked entity if no source is set). Alert template only.",
+                "tiles": "Add 1–4 board tiles. Each row selects an entity and label, with optional attribute, unit, and icon. Board template only.",
+                "log_columns": "Add up to 6 extra values to each log line. Each row selects an entity and optional attribute, label, and unit. Log template only.",
+                "log_level_attribute": "Attribute supplying each log line's level (info/warn/error). Leave empty for no level tag. Log template only.",
+                "step_configuration": "Add one named row per step. Parallel jobs creates stacked lanes. Relative step length is a ratio: weights 1, 4, 1 make the middle step four times wider. Color is optional."
               }
             },
             "appearance": {
               "name": "Appearance and tap actions",
               "description": "Optional labels, icons, colors, buttons, and background tap behavior.",
               "data": {
-                "subtitle_entity": "Сутність підзаголовка",
-                "subtitle_attribute": "Атрибут підзаголовка",
-                "icon": "Значок",
-                "icon_attribute": "Атрибут значка",
-                "accent_color": "Акцентний колір",
-                "accent_color_attribute": "Атрибут акцентного кольору",
-                "background_color": "Колір фону",
-                "background_color_attribute": "Атрибут кольору фону",
-                "text_color": "Колір тексту",
-                "text_color_attribute": "Атрибут кольору тексту",
-                "tap_action_url": "URL дії при дотику",
-                "tap_action_foreground": "Відкривати URL дії при дотику",
-                "url": "URL",
-                "url_foreground": "Відкривати URL основної кнопки",
-                "url_title": "Назва основної кнопки",
-                "secondary_url": "Додатковий URL",
-                "secondary_url_foreground": "Відкривати URL додаткової кнопки",
-                "secondary_url_title": "Назва додаткової кнопки"
+                "subtitle_entity": "Subtitle source entity",
+                "subtitle_attribute": "Subtitle attribute",
+                "icon": "Icon",
+                "icon_attribute": "Dynamic icon attribute",
+                "accent_color": "Accent color",
+                "accent_color_attribute": "Dynamic accent-color attribute",
+                "background_color": "Background color",
+                "background_color_attribute": "Dynamic background-color attribute",
+                "text_color": "Text color",
+                "text_color_attribute": "Dynamic text-color attribute",
+                "tap_action": "Background tap action",
+                "url_action": "Primary button",
+                "secondary_url_action": "Secondary button"
               },
               "data_description": {
-                "subtitle_entity": "Показувати підзаголовок з окремої сутності (напр., датчика програми/режиму). Залиште порожнім, щоб використовувати відстежувану сутність. Використовує стан сутності-джерела, якщо не задано атрибут.",
-                "subtitle_attribute": "Атрибут сутності для підзаголовка. Залиште порожнім, щоб використовувати зрозумілу назву сутності.",
-                "icon": "Замінити значок. Залиште порожнім, щоб використовувати рідний значок сутності (наприклад, mdi:thermometer). Також підтримуються SF Symbols (наприклад, lamp.desk.fill).",
-                "icon_attribute": "Атрибут сутності для динамічного значка. Перевизначає статичний значок і значок сутності, якщо встановлено.",
-                "accent_color": "Акцентний колір для Live Activity. Залиште порожнім для синього за замовчуванням.",
-                "accent_color_attribute": "Атрибут сутності для динамічного акцентного кольору. Перевизначає статичний колір. Підтримує RGB, HS, XY, Kelvin, іменовані кольори та hex.",
-                "background_color": "Колір фону Live Activity. #RRGGBB або ім'я кольору. Залиште порожнім для системного значення за замовчуванням.",
-                "background_color_attribute": "Атрибут сутності для динамічного кольору фону. Перевизначає статичний колір фону.",
-                "text_color": "Колір тексту Live Activity. #RRGGBB або ім'я кольору. Залиште порожнім для системного значення за замовчуванням.",
-                "text_color_attribute": "Атрибут сутності для динамічного кольору тексту. Перевизначає статичний колір тексту.",
-                "tap_action_url": "Необов’язковий URL, що відкривається при дотику до тла Live Activity. Підтримує http(s) (відкриває Safari) або власні схеми на кшталт homeassistant://navigate/lovelace/0 (відкриває відповідний застосунок).",
-                "tap_action_foreground": "Увімкнено: дотик відкриває URL. Вимкнено: тихий вебхук (лише http(s)) — надсилає POST у фоні, не залишаючи екран блокування.",
-                "url": "Посилання, що відкривається при натисканні на Live Activity. Має починатися з http:// або https://. Лише для шаблонів steps та alert.",
-                "url_foreground": "Увімкнено: дотик відкриває URL. Вимкнено: тихий вебхук (лише http(s)).",
-                "url_title": "Підпис основної кнопки (макс. 64 символи).",
-                "secondary_url": "Додаткове посилання для Live Activity. Лише для шаблонів steps та alert.",
-                "secondary_url_foreground": "Увімкнено: дотик відкриває URL. Вимкнено: тихий вебхук (лише http(s)).",
-                "secondary_url_title": "Підпис додаткової кнопки (макс. 64 символи)."
+                "subtitle_entity": "Show the subtitle from a separate entity (e.g. a program/mode sensor). Leave empty to use the tracked entity. Uses the source entity's state unless an attribute is set.",
+                "subtitle_attribute": "Attribute to show as subtitle (on the source entity, or the tracked entity if no source is set). Leave empty to use the source entity's state, or the friendly name when no source is set.",
+                "icon": "Override icon. Leave empty to use the entity’s native icon (e.g. mdi:thermometer). SF Symbols also supported (e.g. lamp.desk.fill).",
+                "icon_attribute": "Entity attribute for dynamic icon. Overrides static icon and entity icon when set.",
+                "accent_color": "Choose a PushWard named color or enter 6/8-digit RGB/RGBA hex, with or without #. Leave blank for blue.",
+                "accent_color_attribute": "Entity attribute for dynamic accent color. Overrides static color. Supports RGB, HS, XY, Kelvin, named colors, and hex.",
+                "background_color": "Choose a PushWard named color or enter 6/8-digit RGB/RGBA hex, with or without #. Leave blank for the iOS default.",
+                "background_color_attribute": "Entity attribute for dynamic background color. Overrides static color. Supports RGB, HS, XY, Kelvin, named colors, and hex.",
+                "text_color": "Choose a PushWard named color or enter 6/8-digit RGB/RGBA hex, with or without #. Leave blank for the iOS default.",
+                "text_color_attribute": "Entity attribute for dynamic text color. Overrides static color.",
+                "tap_action": "Optional whole-card destination. Configure an app link/foreground URL or a silent HTTP webhook.",
+                "url_action": "Optional primary inline button with a title, icon, and visible link or silent webhook.",
+                "secondary_url_action": "Optional second inline button with a title, icon, and visible link or silent webhook."
               }
             }
           }
         },
         "reconfigure": {
-          "title": "Редагувати конфігурацію сутності",
+          "title": "Edit tracked Live Activity",
           "data": {
-            "entity_id": "Сутність",
-            "template": "Шаблон"
+            "entity_id": "Entity",
+            "template": "Template"
           },
           "data_description": {
-            "template": "Шаблон макета активності. 'generic' підходить для більшості сутностей."
+            "template": "Activity layout template. 'generic' works for most entities."
           }
-        },
-        "content": {
-          "title": "3 of 4 · {template} content",
-          "data": {
-            "start_states": "Стани запуску",
-            "end_states": "Стани завершення",
-            "progress_attribute": "Атрибут прогресу",
-            "remaining_time_attribute": "Атрибут часу, що залишився",
-            "total_steps": "Усього кроків",
-            "current_step_attribute": "Атрибут поточного кроку",
-            "severity": "Серйозність",
-            "value_attribute": "Атрибут значення",
-            "min_value": "Мінімальне значення",
-            "max_value": "Максимальне значення",
-            "unit": "Одиниця",
-            "series": "Серії",
-            "scale": "Масштаб",
-            "decimals": "Знаки після коми",
-            "smoothing": "Згладжені лінії",
-            "thresholds": "Пороги",
-            "history_period": "Період попередньої історії",
-            "slug": "Slug активності",
-            "activity_name": "Назва активності",
-            "icon": "Значок",
-            "icon_attribute": "Атрибут значка",
-            "priority": "Пріоритет (0–10)",
-            "update_interval": "Мін. інтервал оновлення (секунди)",
-            "subtitle_attribute": "Атрибут підзаголовка",
-            "state_labels": "Мітки станів",
-            "completion_message": "Повідомлення про завершення",
-            "accent_color": "Акцентний колір",
-            "accent_color_attribute": "Атрибут акцентного кольору",
-            "url": "URL",
-            "secondary_url": "Додатковий URL",
-            "ended_ttl": "Автовидалення після завершення (секунди)",
-            "stale_ttl": "Автозавершення після простою (секунди)",
-            "sound": "Звук",
-            "background_color": "Колір фону",
-            "background_color_attribute": "Атрибут кольору фону",
-            "text_color": "Колір тексту",
-            "text_color_attribute": "Атрибут кольору тексту",
-            "warning_threshold": "Попередній поріг",
-            "alarm": "Сигнал",
-            "step_labels": "Мітки кроків",
-            "step_rows": "Рядки кроків",
-            "fired_at_attribute": "Атрибут часу спрацювання",
-            "units": "Одиниці",
-            "progress_entity": "Сутність прогресу",
-            "remaining_time_entity": "Сутність часу, що залишився",
-            "current_step_entity": "Сутність поточного кроку",
-            "value_entity": "Сутність значення",
-            "subtitle_entity": "Сутність підзаголовка",
-            "tap_action_url": "URL дії при дотику",
-            "tap_action_foreground": "Відкривати URL дії при дотику",
-            "url_foreground": "Відкривати URL основної кнопки",
-            "url_title": "Назва основної кнопки",
-            "secondary_url_foreground": "Відкривати URL додаткової кнопки",
-            "secondary_url_title": "Назва додаткової кнопки",
-            "snooze_seconds": "Секунди відкладання (iOS 26+)",
-            "fired_at_entity": "Сутність часу спрацювання",
-            "log_columns": "Стовпці журналу"
-          },
-          "data_description": {
-            "start_states": "Стани сутності, що запускають Live Activity. Виберіть зі списку або введіть власні значення.",
-            "end_states": "Стани сутності, що завершують Live Activity. Виберіть зі списку або введіть власні значення.",
-            "progress_attribute": "Атрибут сутності зі значенням прогресу від 0 до 100. Приклад: percentage",
-            "remaining_time_attribute": "Атрибут сутності з часом, що залишився, у секундах. Приклад: remaining",
-            "total_steps": "Загальна кількість steps.",
-            "current_step_attribute": "Атрибут сутності з поточним кроком у вигляді цілого числа.",
-            "severity": "Рівень серйозності Alert.",
-            "value_attribute": "Атрибут сутності з поточним числовим значенням gauge. Залиште порожнім, щоб використовувати стан сутності.",
-            "min_value": "Мінімальне значення діапазону gauge.",
-            "max_value": "Максимальне значення діапазону gauge.",
-            "unit": "Одиниця вимірювання поруч із значенням (наприклад, °C, %, кВт). Максимум 32 символи.",
-            "series": "Зіставлення атрибутів сутності з іменованими серіями. Формат: attribute=Мітка, attribute2=Мітка2. Залиште порожнім, щоб використовувати стан сутності як єдину серію.",
-            "scale": "Режим масштабу осі Y для спарклайн-графіка.",
-            "decimals": "Кількість знаків після коми для відображення значень (0–10).",
-            "smoothing": "Увімкнути інтерполяцію кривої між точками даних для плавнішого спарклайну.",
-            "thresholds": "Горизонтальні опорні лінії на спарклайні. Формат: значення:колір:мітка. Приклад: 25:red:Жарко, 18:blue:Холодно. Максимум 5.",
-            "history_period": "Хвилини попередніх даних для ініціалізації спарклайну з рекордера Home Assistant. Встановіть 0, щоб почати без історії.",
-            "slug": "Унікальний ідентифікатор цієї активності. Залиште порожнім для автоматичного генерування з ID сутності. Приклад: ha-living-room-lamp",
-            "activity_name": "Відображувана назва на iPhone Live Activity. За замовчуванням — зрозуміла назва сутності.",
-            "icon": "Замінити значок. Залиште порожнім, щоб використовувати рідний значок сутності (наприклад, mdi:thermometer). Також підтримуються SF Symbols (наприклад, lamp.desk.fill).",
-            "icon_attribute": "Атрибут сутності для динамічного значка. Перевизначає статичний значок і значок сутності, якщо встановлено.",
-            "priority": "Активності з вищим пріоритетом зберігаються довше при досягненні ліміту пристрою (0 = найнижчий, 10 = найвищий).",
-            "update_interval": "Мінімальний інтервал між оновленнями у секундах. Часті зміни стану обмежуються.",
-            "subtitle_attribute": "Атрибут сутності для підзаголовка. Залиште порожнім, щоб використовувати зрозумілу назву сутності.",
-            "state_labels": "Власний текст для відображення станів. Формат: стан=Мітка, стан2=Мітка 2. Приклад: heating=Нагрів, idle=Очікування",
-            "completion_message": "Текст при завершенні активності. Залиште порожнім для 'Complete'. Приклад: Прання завершено",
-            "accent_color": "Акцентний колір для Live Activity. Залиште порожнім для синього за замовчуванням.",
-            "accent_color_attribute": "Атрибут сутності для динамічного акцентного кольору. Перевизначає статичний колір. Підтримує RGB, HS, XY, Kelvin, іменовані кольори та hex.",
-            "url": "Посилання, що відкривається при натисканні на Live Activity. Має починатися з http:// або https://. Лише для шаблонів steps та alert.",
-            "secondary_url": "Додаткове посилання для Live Activity. Лише для шаблонів steps та alert.",
-            "ended_ttl": "Секунди після завершення активності до її автовидалення з сервера. Залиште порожнім, щоб зберігати необмежено. Приклад: 300",
-            "stale_ttl": "Секунди бездіяльності до автоматичного завершення активності сервером. Залиште порожнім, щоб вимкнути. Приклад: 1800",
-            "sound": "Назва звуку сповіщення для цього оновлення. Залиште порожнім для системного звуку iOS.",
-            "background_color": "Колір фону Live Activity. #RRGGBB або ім'я кольору. Залиште порожнім для системного значення за замовчуванням.",
-            "background_color_attribute": "Атрибут сутності для динамічного кольору фону. Перевизначає статичний колір фону.",
-            "text_color": "Колір тексту Live Activity. #RRGGBB або ім'я кольору. Залиште порожнім для системного значення за замовчуванням.",
-            "text_color_attribute": "Атрибут сутності для динамічного кольору тексту. Перевизначає статичний колір тексту.",
-            "warning_threshold": "При досягненні або перевищенні цього значення спрацьовує попереджувальне забарвлення. Шаблони gauge та timeline.",
-            "alarm": "Активує сигнал AlarmKit при перевищенні попереднього порогу. Лише для iOS 26+.",
-            "step_labels": "Власні мітки для кроків шаблону steps. Формат: 1=Мітка, 2=Мітка. Якщо порожньо — використовуються номери кроків.",
-            "step_rows": "Кількість кроків для відображення в одному рядку в шаблоні steps.",
-            "fired_at_attribute": "Атрибут сутності з Unix-міткою часу спрацювання. Використовується для відображення відносного часу.",
-            "units": "Мітки одиниць для серій timeline. Формат: attribute=Одиниця. Приклад: temp=°C, humidity=%",
-            "progress_entity": "Зчитувати прогрес з окремої сутності замість відстежуваної. Залиште порожнім, щоб використовувати відстежувану сутність. Якщо задано поле атрибута, зчитує цей атрибут даної сутності; інакше — її стан.",
-            "remaining_time_entity": "Зчитувати час, що залишився, з окремої сутності (напр., датчика часу пральної машини). Залиште порожнім, щоб використовувати відстежувану сутність. Автоматично розпізнає датчик з часовою міткою (час завершення), датчик тривалості з одиницями, рядок H:MM:SS або звичайні секунди.",
-            "current_step_entity": "Зчитувати поточний крок з окремої сутності. Залиште порожнім, щоб використовувати відстежувану сутність.",
-            "value_entity": "Зчитувати значення шкали з окремої сутності. Залиште порожнім, щоб використовувати відстежувану сутність. Використовує стан сутності-джерела, якщо не задано атрибут.",
-            "subtitle_entity": "Показувати підзаголовок з окремої сутності (напр., датчика програми/режиму). Залиште порожнім, щоб використовувати відстежувану сутність. Використовує стан сутності-джерела, якщо не задано атрибут.",
-            "tap_action_url": "Необов’язковий URL, що відкривається при дотику до тла Live Activity. Підтримує http(s) (відкриває Safari) або власні схеми на кшталт homeassistant://navigate/lovelace/0 (відкриває відповідний застосунок).",
-            "tap_action_foreground": "Увімкнено: дотик відкриває URL. Вимкнено: тихий вебхук (лише http(s)) — надсилає POST у фоні, не залишаючи екран блокування.",
-            "url_foreground": "Увімкнено: дотик відкриває URL. Вимкнено: тихий вебхук (лише http(s)).",
-            "url_title": "Підпис основної кнопки (макс. 64 символи).",
-            "secondary_url_foreground": "Увімкнено: дотик відкриває URL. Вимкнено: тихий вебхук (лише http(s)).",
-            "secondary_url_title": "Підпис додаткової кнопки (макс. 64 символи).",
-            "snooze_seconds": "На скільки кнопка «Відкласти» в iOS подовжує відлік (60–3600). Залиште порожнім для типового значення 300 с (5 хв). Потребує будильника. Лише шаблон відліку.",
-            "fired_at_entity": "Зчитувати час спрацювання сповіщення з окремої сутності. Залиште порожнім, щоб використовувати відстежувану сутність. Приймає unix-час або датчик з ISO-часом. Лише шаблон сповіщення.",
-            "log_columns": "Додаткові значення, що додаються до кожного рядка журналу (макс. 6), розділені комами. Формат: [Label=]source[|unit]. source = атрибут цієї сутності (brightness), стан іншої сутності (binary_sensor.door) або атрибут іншої сутності (sensor.temp:temperature). Приклад: color_temp_kelvin|K, brightness → 'On · 4000K · 153'. Лише шаблон журналу."
-          },
-          "description": "Configure only the values used by the selected Live Activity layout."
-        },
-        "appearance": {
-          "title": "4 of 4 · Appearance and actions",
-          "data": {
-            "start_states": "Стани запуску",
-            "end_states": "Стани завершення",
-            "progress_attribute": "Атрибут прогресу",
-            "remaining_time_attribute": "Атрибут часу, що залишився",
-            "total_steps": "Усього кроків",
-            "current_step_attribute": "Атрибут поточного кроку",
-            "severity": "Серйозність",
-            "value_attribute": "Атрибут значення",
-            "min_value": "Мінімальне значення",
-            "max_value": "Максимальне значення",
-            "unit": "Одиниця",
-            "series": "Серії",
-            "scale": "Масштаб",
-            "decimals": "Знаки після коми",
-            "smoothing": "Згладжені лінії",
-            "thresholds": "Пороги",
-            "history_period": "Період попередньої історії",
-            "slug": "Slug активності",
-            "activity_name": "Назва активності",
-            "icon": "Значок",
-            "icon_attribute": "Атрибут значка",
-            "priority": "Пріоритет (0–10)",
-            "update_interval": "Мін. інтервал оновлення (секунди)",
-            "subtitle_attribute": "Атрибут підзаголовка",
-            "state_labels": "Мітки станів",
-            "completion_message": "Повідомлення про завершення",
-            "accent_color": "Акцентний колір",
-            "accent_color_attribute": "Атрибут акцентного кольору",
-            "url": "URL",
-            "secondary_url": "Додатковий URL",
-            "ended_ttl": "Автовидалення після завершення (секунди)",
-            "stale_ttl": "Автозавершення після простою (секунди)",
-            "sound": "Звук",
-            "background_color": "Колір фону",
-            "background_color_attribute": "Атрибут кольору фону",
-            "text_color": "Колір тексту",
-            "text_color_attribute": "Атрибут кольору тексту",
-            "warning_threshold": "Попередній поріг",
-            "alarm": "Сигнал",
-            "step_labels": "Мітки кроків",
-            "step_rows": "Рядки кроків",
-            "fired_at_attribute": "Атрибут часу спрацювання",
-            "units": "Одиниці",
-            "progress_entity": "Сутність прогресу",
-            "remaining_time_entity": "Сутність часу, що залишився",
-            "current_step_entity": "Сутність поточного кроку",
-            "value_entity": "Сутність значення",
-            "subtitle_entity": "Сутність підзаголовка",
-            "tap_action_url": "URL дії при дотику",
-            "tap_action_foreground": "Відкривати URL дії при дотику",
-            "url_foreground": "Відкривати URL основної кнопки",
-            "url_title": "Назва основної кнопки",
-            "secondary_url_foreground": "Відкривати URL додаткової кнопки",
-            "secondary_url_title": "Назва додаткової кнопки",
-            "snooze_seconds": "Секунди відкладання (iOS 26+)",
-            "fired_at_entity": "Сутність часу спрацювання",
-            "log_columns": "Стовпці журналу"
-          },
-          "data_description": {
-            "start_states": "Стани сутності, що запускають Live Activity. Виберіть зі списку або введіть власні значення.",
-            "end_states": "Стани сутності, що завершують Live Activity. Виберіть зі списку або введіть власні значення.",
-            "progress_attribute": "Атрибут сутності зі значенням прогресу від 0 до 100. Приклад: percentage",
-            "remaining_time_attribute": "Атрибут сутності з часом, що залишився, у секундах. Приклад: remaining",
-            "total_steps": "Загальна кількість steps.",
-            "current_step_attribute": "Атрибут сутності з поточним кроком у вигляді цілого числа.",
-            "severity": "Рівень серйозності Alert.",
-            "value_attribute": "Атрибут сутності з поточним числовим значенням gauge. Залиште порожнім, щоб використовувати стан сутності.",
-            "min_value": "Мінімальне значення діапазону gauge.",
-            "max_value": "Максимальне значення діапазону gauge.",
-            "unit": "Одиниця вимірювання поруч із значенням (наприклад, °C, %, кВт). Максимум 32 символи.",
-            "series": "Зіставлення атрибутів сутності з іменованими серіями. Формат: attribute=Мітка, attribute2=Мітка2. Залиште порожнім, щоб використовувати стан сутності як єдину серію.",
-            "scale": "Режим масштабу осі Y для спарклайн-графіка.",
-            "decimals": "Кількість знаків після коми для відображення значень (0–10).",
-            "smoothing": "Увімкнути інтерполяцію кривої між точками даних для плавнішого спарклайну.",
-            "thresholds": "Горизонтальні опорні лінії на спарклайні. Формат: значення:колір:мітка. Приклад: 25:red:Жарко, 18:blue:Холодно. Максимум 5.",
-            "history_period": "Хвилини попередніх даних для ініціалізації спарклайну з рекордера Home Assistant. Встановіть 0, щоб почати без історії.",
-            "slug": "Унікальний ідентифікатор цієї активності. Залиште порожнім для автоматичного генерування з ID сутності. Приклад: ha-living-room-lamp",
-            "activity_name": "Відображувана назва на iPhone Live Activity. За замовчуванням — зрозуміла назва сутності.",
-            "icon": "Замінити значок. Залиште порожнім, щоб використовувати рідний значок сутності (наприклад, mdi:thermometer). Також підтримуються SF Symbols (наприклад, lamp.desk.fill).",
-            "icon_attribute": "Атрибут сутності для динамічного значка. Перевизначає статичний значок і значок сутності, якщо встановлено.",
-            "priority": "Активності з вищим пріоритетом зберігаються довше при досягненні ліміту пристрою (0 = найнижчий, 10 = найвищий).",
-            "update_interval": "Мінімальний інтервал між оновленнями у секундах. Часті зміни стану обмежуються.",
-            "subtitle_attribute": "Атрибут сутності для підзаголовка. Залиште порожнім, щоб використовувати зрозумілу назву сутності.",
-            "state_labels": "Власний текст для відображення станів. Формат: стан=Мітка, стан2=Мітка 2. Приклад: heating=Нагрів, idle=Очікування",
-            "completion_message": "Текст при завершенні активності. Залиште порожнім для 'Complete'. Приклад: Прання завершено",
-            "accent_color": "Акцентний колір для Live Activity. Залиште порожнім для синього за замовчуванням.",
-            "accent_color_attribute": "Атрибут сутності для динамічного акцентного кольору. Перевизначає статичний колір. Підтримує RGB, HS, XY, Kelvin, іменовані кольори та hex.",
-            "url": "Посилання, що відкривається при натисканні на Live Activity. Має починатися з http:// або https://. Лише для шаблонів steps та alert.",
-            "secondary_url": "Додаткове посилання для Live Activity. Лише для шаблонів steps та alert.",
-            "ended_ttl": "Секунди після завершення активності до її автовидалення з сервера. Залиште порожнім, щоб зберігати необмежено. Приклад: 300",
-            "stale_ttl": "Секунди бездіяльності до автоматичного завершення активності сервером. Залиште порожнім, щоб вимкнути. Приклад: 1800",
-            "sound": "Назва звуку сповіщення для цього оновлення. Залиште порожнім для системного звуку iOS.",
-            "background_color": "Колір фону Live Activity. #RRGGBB або ім'я кольору. Залиште порожнім для системного значення за замовчуванням.",
-            "background_color_attribute": "Атрибут сутності для динамічного кольору фону. Перевизначає статичний колір фону.",
-            "text_color": "Колір тексту Live Activity. #RRGGBB або ім'я кольору. Залиште порожнім для системного значення за замовчуванням.",
-            "text_color_attribute": "Атрибут сутності для динамічного кольору тексту. Перевизначає статичний колір тексту.",
-            "warning_threshold": "При досягненні або перевищенні цього значення спрацьовує попереджувальне забарвлення. Шаблони gauge та timeline.",
-            "alarm": "Активує сигнал AlarmKit при перевищенні попереднього порогу. Лише для iOS 26+.",
-            "step_labels": "Власні мітки для кроків шаблону steps. Формат: 1=Мітка, 2=Мітка. Якщо порожньо — використовуються номери кроків.",
-            "step_rows": "Кількість кроків для відображення в одному рядку в шаблоні steps.",
-            "fired_at_attribute": "Атрибут сутності з Unix-міткою часу спрацювання. Використовується для відображення відносного часу.",
-            "units": "Мітки одиниць для серій timeline. Формат: attribute=Одиниця. Приклад: temp=°C, humidity=%",
-            "progress_entity": "Зчитувати прогрес з окремої сутності замість відстежуваної. Залиште порожнім, щоб використовувати відстежувану сутність. Якщо задано поле атрибута, зчитує цей атрибут даної сутності; інакше — її стан.",
-            "remaining_time_entity": "Зчитувати час, що залишився, з окремої сутності (напр., датчика часу пральної машини). Залиште порожнім, щоб використовувати відстежувану сутність. Автоматично розпізнає датчик з часовою міткою (час завершення), датчик тривалості з одиницями, рядок H:MM:SS або звичайні секунди.",
-            "current_step_entity": "Зчитувати поточний крок з окремої сутності. Залиште порожнім, щоб використовувати відстежувану сутність.",
-            "value_entity": "Зчитувати значення шкали з окремої сутності. Залиште порожнім, щоб використовувати відстежувану сутність. Використовує стан сутності-джерела, якщо не задано атрибут.",
-            "subtitle_entity": "Показувати підзаголовок з окремої сутності (напр., датчика програми/режиму). Залиште порожнім, щоб використовувати відстежувану сутність. Використовує стан сутності-джерела, якщо не задано атрибут.",
-            "tap_action_url": "Необов’язковий URL, що відкривається при дотику до тла Live Activity. Підтримує http(s) (відкриває Safari) або власні схеми на кшталт homeassistant://navigate/lovelace/0 (відкриває відповідний застосунок).",
-            "tap_action_foreground": "Увімкнено: дотик відкриває URL. Вимкнено: тихий вебхук (лише http(s)) — надсилає POST у фоні, не залишаючи екран блокування.",
-            "url_foreground": "Увімкнено: дотик відкриває URL. Вимкнено: тихий вебхук (лише http(s)).",
-            "url_title": "Підпис основної кнопки (макс. 64 символи).",
-            "secondary_url_foreground": "Увімкнено: дотик відкриває URL. Вимкнено: тихий вебхук (лише http(s)).",
-            "secondary_url_title": "Підпис додаткової кнопки (макс. 64 символи).",
-            "snooze_seconds": "На скільки кнопка «Відкласти» в iOS подовжує відлік (60–3600). Залиште порожнім для типового значення 300 с (5 хв). Потребує будильника. Лише шаблон відліку.",
-            "fired_at_entity": "Зчитувати час спрацювання сповіщення з окремої сутності. Залиште порожнім, щоб використовувати відстежувану сутність. Приймає unix-час або датчик з ISO-часом. Лише шаблон сповіщення.",
-            "log_columns": "Додаткові значення, що додаються до кожного рядка журналу (макс. 6), розділені комами. Формат: [Label=]source[|unit]. source = атрибут цієї сутності (brightness), стан іншої сутності (binary_sensor.door) або атрибут іншої сутності (sensor.temp:temperature). Приклад: color_temp_kelvin|K, brightness → 'On · 4000K · 153'. Лише шаблон журналу."
-          },
-          "description": "Finish with labels, colors, icons, and tap behavior."
         }
       },
       "error": {
-        "invalid_url": "URL повинен використовувати схему http:// або https://.",
-        "invalid_gauge_range": "Мінімальне значення повинно бути менше максимального.",
-        "silent_requires_http": "Тихий вебхук (foreground вимкнено) потребує URL http:// або https://."
+        "invalid_url": "URL must include a valid scheme. Use http(s):// or a custom app scheme like homeassistant://.",
+        "silent_requires_http": "Silent webhook (foreground off) requires an http:// or https:// URL.",
+        "invalid_gauge_range": "Minimum value must be less than maximum value.",
+        "tiles_required": "At least one tile is required for the board template.",
+        "too_many_series": "A timeline supports at most 10 series in total (series attributes plus series entities)."
       },
       "abort": {
-        "already_configured": "Ця сутність вже відстежується.",
-        "reconfigure_successful": "Конфігурацію сутності оновлено."
+        "already_configured": "This entity is already tracked.",
+        "reconfigure_successful": "Entity configuration updated."
       }
     },
     "tracked_widget": {
-      "entry_type": "Відстежуваний віджет",
+      "entry_type": "Tracked Widget",
       "initiate_flow": {
-        "user": "Додати відстежуваний віджет"
+        "user": "Add tracked widget"
       },
       "step": {
         "user": {
-          "title": "Додати віджет до PushWard",
+          "title": "Add tracked PushWard widget",
           "data": {
-            "entity_id": "Сутність",
-            "widget_template": "Шаблон",
-            "slug": "Slug віджета"
+            "entity_id": "Entity to display",
+            "widget_template": "Widget layout",
+            "slug": "Widget slug"
           },
           "data_description": {
-            "widget_template": "Макет віджета. Використовуйте `value` для одного числа, `progress` для смуги 0–1, `gauge` для значення в діапазоні, `status` для значка важливості або `stat_list` для до 6 рядків.",
-            "slug": "Унікальний ідентифікатор цього віджета. Залиште порожнім для автоматичного створення з ID сутності."
+            "widget_template": "Widget layout. Use `value` for a single number, `progress` for a 0–1 bar, `gauge` for a value-in-range, `status` for a severity badge, or `stat_list` for up to 6 rows.",
+            "slug": "Unique identifier for this widget. Leave empty to auto-generate from entity ID.",
+            "entity_id": "The Home Assistant entity that supplies this widget’s value and update events."
           }
         },
         "reconfigure": {
-          "title": "Редагувати віджет",
+          "title": "Edit tracked PushWard widget",
           "data": {
-            "entity_id": "Сутність",
-            "widget_template": "Шаблон",
-            "slug": "Slug віджета"
+            "entity_id": "Entity",
+            "widget_template": "Template",
+            "slug": "Widget Slug"
           },
           "data_description": {
-            "widget_template": "Макет віджета.",
-            "slug": "Унікальний ідентифікатор цього віджета."
+            "widget_template": "Widget layout.",
+            "slug": "Unique identifier for this widget."
           }
         },
         "details": {
           "title": "Configure {template} widget",
           "data": {
-            "widget_name": "Назва віджета",
-            "value_attribute": "Атрибут значення",
-            "unit": "Одиниця",
-            "min_value": "Мінімальне значення",
-            "max_value": "Максимальне значення",
-            "severity": "Важливість",
-            "stat_rows": "Рядки статистики",
-            "label": "Мітка",
-            "label_attribute": "Атрибут мітки",
-            "subtitle_attribute": "Атрибут підзаголовка",
-            "icon": "Значок",
-            "icon_attribute": "Атрибут значка",
-            "accent_color": "Акцентний колір",
-            "accent_color_attribute": "Атрибут акцентного кольору",
-            "background_color": "Колір тла",
-            "text_color": "Колір тексту",
-            "widget_trigger_mode": "Режим спрацювання",
-            "widget_poll_interval": "Інтервал опитування (секунди)",
-            "tap_action_url": "URL дії при дотику",
-            "tap_action_foreground": "Відкривати URL дії при дотику"
+            "widget_name": "Widget Name",
+            "value_attribute": "Value Attribute",
+            "unit": "Unit",
+            "min_value": "Minimum Value",
+            "max_value": "Maximum Value",
+            "severity": "Severity",
+            "stat_rows": "Stat Rows",
+            "label": "Label",
+            "label_attribute": "Label Attribute",
+            "subtitle_attribute": "Subtitle Attribute",
+            "icon": "Icon",
+            "icon_attribute": "Icon Attribute",
+            "accent_color": "Accent Color",
+            "accent_color_attribute": "Accent Color Attribute",
+            "background_color": "Background Color",
+            "text_color": "Text Color",
+            "widget_trigger_mode": "Trigger Mode",
+            "widget_poll_interval": "Poll Interval (seconds)",
+            "tap_action_url": "Tap Action URL",
+            "tap_action_foreground": "Open Tap Action URL"
           },
           "data_description": {
-            "widget_name": "Відображувана назва в засобі вибору віджетів iOS. Типово — зрозуміла назва сутності.",
-            "value_attribute": "Атрибут сутності, що містить значення. Залиште порожнім, щоб використовувати основний стан сутності.",
-            "unit": "Одиниця, що показується поряд зі значенням. Макс. 32 символи.",
-            "min_value": "Мінімальне значення діапазону шкали.",
-            "max_value": "Максимальне значення діапазону шкали.",
-            "severity": "Важливість статусу (info, warning, critical, success).",
-            "stat_rows": "До 6 рядків. Формат: `Label=entity_id[:attribute[:unit]]`, через кому. Приклад: `Users=sensor.user_count, Active=sensor.active_devices:count`.",
-            "label": "Статична мітка, що показується на віджеті. Залиште порожнім, щоб взяти із сутності.",
-            "label_attribute": "Атрибут сутності, що використовується як мітка. Перевизначає статичну мітку.",
-            "subtitle_attribute": "Атрибут сутності, що показується як підзаголовок віджета.",
-            "icon": "Статичний значок. Підтримуються SF Symbols та назви MDI.",
-            "icon_attribute": "Атрибут сутності для динамічного значка. Перевизначає статичний значок.",
-            "accent_color": "Акцентний колір віджета. Залиште порожнім для типового.",
-            "accent_color_attribute": "Атрибут сутності для динамічного акцентного кольору.",
-            "background_color": "Необов’язковий колір тла.",
-            "text_color": "Необов’язковий колір тексту.",
-            "widget_trigger_mode": "Як запускаються оновлення. `event` реагує на зміни стану; `poll` переобчислює через фіксований інтервал.",
-            "widget_poll_interval": "Інтервал між опитуваннями (10–3600 секунд). Використовується лише коли режим спрацювання — `poll`.",
-            "tap_action_url": "Необов’язковий URL, що відкривається при дотику до віджета. Підтримує http(s) (відкриває Safari) або власні схеми на кшталт homeassistant://navigate/lovelace/0.",
-            "tap_action_foreground": "Увімкнено: дотик відкриває URL. Вимкнено: тихий вебхук (лише http(s)) — надсилає POST у фоні."
+            "widget_name": "Display name shown in the iOS widget picker. Defaults to the entity's friendly name.",
+            "value_attribute": "Entity attribute holding the value. Leave empty to use the entity's primary state.",
+            "unit": "Display unit shown next to the value. Max 32 characters.",
+            "min_value": "Minimum value for the gauge range.",
+            "max_value": "Maximum value for the gauge range.",
+            "severity": "Status severity (info, warning, critical, success).",
+            "stat_rows": "Add up to 6 rows, each with a label, entity, and optional attribute and unit. Smaller widgets may show fewer rows depending on Row Density in the PushWard app.",
+            "label": "Static label shown on the widget. Leave empty to derive from the entity.",
+            "label_attribute": "Entity attribute used as the label. Overrides the static label.",
+            "subtitle_attribute": "Entity attribute shown as the widget subtitle.",
+            "icon": "Static icon. SF Symbols and MDI names supported.",
+            "icon_attribute": "Entity attribute for a dynamic icon. Overrides the static icon.",
+            "accent_color": "Accent color for the widget. Leave empty for the default.",
+            "accent_color_attribute": "Entity attribute for a dynamic accent color.",
+            "background_color": "Optional background color.",
+            "text_color": "Optional text color.",
+            "widget_trigger_mode": "How updates are triggered. `event` reacts to state changes; `poll` re-evaluates on a fixed interval.",
+            "widget_poll_interval": "Interval between polls (10–3600 seconds). Only used when trigger mode is `poll`.",
+            "tap_action_url": "Optional URL opened when tapping the widget. Supports http(s) (opens Safari) or custom schemes like homeassistant://navigate/lovelace/0.",
+            "tap_action_foreground": "On: tap opens the URL. Off: silent webhook (http(s) only) — fires a POST in the background."
           },
           "description": "Everything is on this page. Open only the sections you need.",
           "sections": {
@@ -1702,225 +1378,99 @@
               "name": "Widget content",
               "description": "Values rendered by the selected widget layout.",
               "data": {
-                "value_attribute": "Атрибут значення",
-                "unit": "Одиниця",
-                "min_value": "Мінімальне значення",
-                "max_value": "Максимальне значення",
-                "severity": "Важливість",
-                "stat_rows": "Рядки статистики"
+                "value_attribute": "Value Attribute",
+                "unit": "Unit",
+                "min_value": "Minimum Value",
+                "max_value": "Maximum Value",
+                "severity": "Severity",
+                "stat_rows": "Stat Rows"
               },
               "data_description": {
-                "value_attribute": "Атрибут сутності, що містить значення. Залиште порожнім, щоб використовувати основний стан сутності.",
-                "unit": "Одиниця, що показується поряд зі значенням. Макс. 32 символи.",
-                "min_value": "Мінімальне значення діапазону шкали.",
-                "max_value": "Максимальне значення діапазону шкали.",
-                "severity": "Важливість статусу (info, warning, critical, success).",
-                "stat_rows": "До 6 рядків. Формат: `Label=entity_id[:attribute[:unit]]`, через кому. Приклад: `Users=sensor.user_count, Active=sensor.active_devices:count`."
+                "value_attribute": "Entity attribute holding the value. Leave empty to use the entity's primary state.",
+                "unit": "Display unit shown next to the value. Max 32 characters.",
+                "min_value": "Minimum value for the gauge range.",
+                "max_value": "Maximum value for the gauge range.",
+                "severity": "Status severity (info, warning, critical, success).",
+                "stat_rows": "Add up to 6 rows, each with a label, entity, and optional attribute and unit. Smaller widgets may show fewer rows depending on Row Density in the PushWard app."
               }
             },
             "appearance": {
               "name": "Appearance and tap action",
               "description": "Optional labels, icon, colors, and tap behavior.",
               "data": {
-                "widget_name": "Назва віджета",
-                "label": "Мітка",
-                "label_attribute": "Атрибут мітки",
-                "subtitle_attribute": "Атрибут підзаголовка",
-                "icon": "Значок",
-                "icon_attribute": "Атрибут значка",
-                "accent_color": "Акцентний колір",
-                "accent_color_attribute": "Атрибут акцентного кольору",
-                "background_color": "Колір тла",
-                "text_color": "Колір тексту",
-                "tap_action_url": "URL дії при дотику",
-                "tap_action_foreground": "Відкривати URL дії при дотику"
+                "widget_name": "Widget Name",
+                "label": "Label",
+                "label_attribute": "Label Attribute",
+                "subtitle_attribute": "Subtitle Attribute",
+                "icon": "Icon",
+                "icon_attribute": "Icon Attribute",
+                "accent_color": "Accent Color",
+                "accent_color_attribute": "Accent Color Attribute",
+                "background_color": "Background Color",
+                "text_color": "Text Color",
+                "tap_action": "Background tap action",
+                "url_action": "Primary button",
+                "secondary_url_action": "Secondary button"
               },
               "data_description": {
-                "widget_name": "Відображувана назва в засобі вибору віджетів iOS. Типово — зрозуміла назва сутності.",
-                "label": "Статична мітка, що показується на віджеті. Залиште порожнім, щоб взяти із сутності.",
-                "label_attribute": "Атрибут сутності, що використовується як мітка. Перевизначає статичну мітку.",
-                "subtitle_attribute": "Атрибут сутності, що показується як підзаголовок віджета.",
-                "icon": "Статичний значок. Підтримуються SF Symbols та назви MDI.",
-                "icon_attribute": "Атрибут сутності для динамічного значка. Перевизначає статичний значок.",
-                "accent_color": "Акцентний колір віджета. Залиште порожнім для типового.",
-                "accent_color_attribute": "Атрибут сутності для динамічного акцентного кольору.",
-                "background_color": "Необов’язковий колір тла.",
-                "text_color": "Необов’язковий колір тексту.",
-                "tap_action_url": "Необов’язковий URL, що відкривається при дотику до віджета. Підтримує http(s) (відкриває Safari) або власні схеми на кшталт homeassistant://navigate/lovelace/0.",
-                "tap_action_foreground": "Увімкнено: дотик відкриває URL. Вимкнено: тихий вебхук (лише http(s)) — надсилає POST у фоні."
+                "widget_name": "Display name shown in the iOS widget picker. Defaults to the entity's friendly name.",
+                "label": "Static label shown on the widget. Leave empty to derive from the entity.",
+                "label_attribute": "Entity attribute used as the label. Overrides the static label.",
+                "subtitle_attribute": "Entity attribute shown as the widget subtitle.",
+                "icon": "Static icon. SF Symbols and MDI names supported.",
+                "icon_attribute": "Entity attribute for a dynamic icon. Overrides the static icon.",
+                "accent_color": "Choose a PushWard named color or enter 6/8-digit RGB/RGBA hex, with or without #.",
+                "accent_color_attribute": "Entity attribute for a dynamic accent color.",
+                "background_color": "Choose a PushWard named color or enter 6/8-digit RGB/RGBA hex, with or without #.",
+                "text_color": "Choose a PushWard named color or enter 6/8-digit RGB/RGBA hex, with or without #.",
+                "tap_action": "Optional whole-card destination. Configure an app link/foreground URL or a silent HTTP webhook.",
+                "url_action": "Optional primary inline button with a title, icon, and visible link or silent webhook.",
+                "secondary_url_action": "Optional second inline button with a title, icon, and visible link or silent webhook."
               }
             },
             "refresh": {
               "name": "Refresh behavior",
               "description": "Choose event-driven updates or periodic polling.",
               "data": {
-                "widget_trigger_mode": "Режим спрацювання",
-                "widget_poll_interval": "Інтервал опитування (секунди)"
+                "widget_trigger_mode": "Trigger Mode",
+                "widget_poll_interval": "Polling interval"
               },
               "data_description": {
-                "widget_trigger_mode": "Як запускаються оновлення. `event` реагує на зміни стану; `poll` переобчислює через фіксований інтервал.",
-                "widget_poll_interval": "Інтервал між опитуваннями (10–3600 секунд). Використовується лише коли режим спрацювання — `poll`."
+                "widget_trigger_mode": "How updates are triggered. `event` reacts to state changes; `poll` re-evaluates on a fixed interval.",
+                "widget_poll_interval": "Seconds between polls. Valid range: 10-3,600 seconds; used only with Poll on a schedule."
               }
             }
           }
-        },
-        "appearance": {
-          "title": "3 of 4 · Appearance and tap action",
-          "data": {
-            "widget_name": "Назва віджета",
-            "value_attribute": "Атрибут значення",
-            "unit": "Одиниця",
-            "min_value": "Мінімальне значення",
-            "max_value": "Максимальне значення",
-            "severity": "Важливість",
-            "stat_rows": "Рядки статистики",
-            "label": "Мітка",
-            "label_attribute": "Атрибут мітки",
-            "subtitle_attribute": "Атрибут підзаголовка",
-            "icon": "Значок",
-            "icon_attribute": "Атрибут значка",
-            "accent_color": "Акцентний колір",
-            "accent_color_attribute": "Атрибут акцентного кольору",
-            "background_color": "Колір тла",
-            "text_color": "Колір тексту",
-            "widget_trigger_mode": "Режим спрацювання",
-            "widget_poll_interval": "Інтервал опитування (секунди)",
-            "tap_action_url": "URL дії при дотику",
-            "tap_action_foreground": "Відкривати URL дії при дотику"
-          },
-          "data_description": {
-            "widget_name": "Відображувана назва в засобі вибору віджетів iOS. Типово — зрозуміла назва сутності.",
-            "value_attribute": "Атрибут сутності, що містить значення. Залиште порожнім, щоб використовувати основний стан сутності.",
-            "unit": "Одиниця, що показується поряд зі значенням. Макс. 32 символи.",
-            "min_value": "Мінімальне значення діапазону шкали.",
-            "max_value": "Максимальне значення діапазону шкали.",
-            "severity": "Важливість статусу (info, warning, critical, success).",
-            "stat_rows": "До 6 рядків. Формат: `Label=entity_id[:attribute[:unit]]`, через кому. Приклад: `Users=sensor.user_count, Active=sensor.active_devices:count`.",
-            "label": "Статична мітка, що показується на віджеті. Залиште порожнім, щоб взяти із сутності.",
-            "label_attribute": "Атрибут сутності, що використовується як мітка. Перевизначає статичну мітку.",
-            "subtitle_attribute": "Атрибут сутності, що показується як підзаголовок віджета.",
-            "icon": "Статичний значок. Підтримуються SF Symbols та назви MDI.",
-            "icon_attribute": "Атрибут сутності для динамічного значка. Перевизначає статичний значок.",
-            "accent_color": "Акцентний колір віджета. Залиште порожнім для типового.",
-            "accent_color_attribute": "Атрибут сутності для динамічного акцентного кольору.",
-            "background_color": "Необов’язковий колір тла.",
-            "text_color": "Необов’язковий колір тексту.",
-            "widget_trigger_mode": "Як запускаються оновлення. `event` реагує на зміни стану; `poll` переобчислює через фіксований інтервал.",
-            "widget_poll_interval": "Інтервал між опитуваннями (10–3600 секунд). Використовується лише коли режим спрацювання — `poll`.",
-            "tap_action_url": "Необов’язковий URL, що відкривається при дотику до віджета. Підтримує http(s) (відкриває Safari) або власні схеми на кшталт homeassistant://navigate/lovelace/0.",
-            "tap_action_foreground": "Увімкнено: дотик відкриває URL. Вимкнено: тихий вебхук (лише http(s)) — надсилає POST у фоні."
-          },
-          "description": "Set the widget labels, icon, colors, and tap behavior."
-        },
-        "refresh": {
-          "title": "4 of 4 · Refresh behavior",
-          "data": {
-            "widget_name": "Назва віджета",
-            "value_attribute": "Атрибут значення",
-            "unit": "Одиниця",
-            "min_value": "Мінімальне значення",
-            "max_value": "Максимальне значення",
-            "severity": "Важливість",
-            "stat_rows": "Рядки статистики",
-            "label": "Мітка",
-            "label_attribute": "Атрибут мітки",
-            "subtitle_attribute": "Атрибут підзаголовка",
-            "icon": "Значок",
-            "icon_attribute": "Атрибут значка",
-            "accent_color": "Акцентний колір",
-            "accent_color_attribute": "Атрибут акцентного кольору",
-            "background_color": "Колір тла",
-            "text_color": "Колір тексту",
-            "widget_trigger_mode": "Режим спрацювання",
-            "widget_poll_interval": "Інтервал опитування (секунди)",
-            "tap_action_url": "URL дії при дотику",
-            "tap_action_foreground": "Відкривати URL дії при дотику"
-          },
-          "data_description": {
-            "widget_name": "Відображувана назва в засобі вибору віджетів iOS. Типово — зрозуміла назва сутності.",
-            "value_attribute": "Атрибут сутності, що містить значення. Залиште порожнім, щоб використовувати основний стан сутності.",
-            "unit": "Одиниця, що показується поряд зі значенням. Макс. 32 символи.",
-            "min_value": "Мінімальне значення діапазону шкали.",
-            "max_value": "Максимальне значення діапазону шкали.",
-            "severity": "Важливість статусу (info, warning, critical, success).",
-            "stat_rows": "До 6 рядків. Формат: `Label=entity_id[:attribute[:unit]]`, через кому. Приклад: `Users=sensor.user_count, Active=sensor.active_devices:count`.",
-            "label": "Статична мітка, що показується на віджеті. Залиште порожнім, щоб взяти із сутності.",
-            "label_attribute": "Атрибут сутності, що використовується як мітка. Перевизначає статичну мітку.",
-            "subtitle_attribute": "Атрибут сутності, що показується як підзаголовок віджета.",
-            "icon": "Статичний значок. Підтримуються SF Symbols та назви MDI.",
-            "icon_attribute": "Атрибут сутності для динамічного значка. Перевизначає статичний значок.",
-            "accent_color": "Акцентний колір віджета. Залиште порожнім для типового.",
-            "accent_color_attribute": "Атрибут сутності для динамічного акцентного кольору.",
-            "background_color": "Необов’язковий колір тла.",
-            "text_color": "Необов’язковий колір тексту.",
-            "widget_trigger_mode": "Як запускаються оновлення. `event` реагує на зміни стану; `poll` переобчислює через фіксований інтервал.",
-            "widget_poll_interval": "Інтервал між опитуваннями (10–3600 секунд). Використовується лише коли режим спрацювання — `poll`.",
-            "tap_action_url": "Необов’язковий URL, що відкривається при дотику до віджета. Підтримує http(s) (відкриває Safari) або власні схеми на кшталт homeassistant://navigate/lovelace/0.",
-            "tap_action_foreground": "Увімкнено: дотик відкриває URL. Вимкнено: тихий вебхук (лише http(s)) — надсилає POST у фоні."
-          },
-          "description": "Choose whether Home Assistant pushes changes or the PushWard app polls for them."
         }
       },
       "error": {
-        "invalid_url": "URL повинен містити дійсну схему. Використовуйте http(s):// або власну схему застосунку на кшталт homeassistant://.",
-        "silent_requires_http": "Тихий вебхук (foreground вимкнено) потребує URL http:// або https://.",
-        "invalid_gauge_range": "Мінімальне значення має бути меншим за максимальне.",
-        "stat_rows_required": "Для шаблону stat_list потрібен принаймні один рядок статистики."
+        "invalid_url": "URL must include a valid scheme. Use http(s):// or a custom app scheme like homeassistant://.",
+        "silent_requires_http": "Silent webhook (foreground off) requires an http:// or https:// URL.",
+        "invalid_gauge_range": "Minimum value must be less than maximum value.",
+        "stat_rows_required": "At least one stat row is required for the stat_list template."
       },
       "abort": {
-        "already_configured": "Віджет з таким slug вже існує.",
-        "reconfigure_successful": "Конфігурацію віджета оновлено."
+        "already_configured": "A widget with this slug already exists.",
+        "reconfigure_successful": "Widget configuration updated."
       }
-    }
-  },
-  "entity": {
-    "sensor": {
-      "notifications_used": {
-        "name": "Використано сповіщень"
-      },
-      "live_activity_updates_used": {
-        "name": "Використано оновлень Live Activity"
-      },
-      "widget_updates_used": {
-        "name": "Використано оновлень віджетів"
-      },
-      "emails_used": {
-        "name": "Використано листів"
-      },
-      "subscription_tier": {
-        "name": "Рівень підписки",
-        "state": {
-          "free": "Безкоштовний",
-          "premium": "Преміум"
-        }
-      }
-    }
-  },
-  "exceptions": {
-    "widget_not_found": {
-      "message": "Жоден віджет PushWard не відповідає slug={slug} entity_id={entity_id}."
     }
   },
   "issues": {
-    "deprecated_update_activity": {
-      "title": "Дія PushWard update_activity є застарілою",
-      "description": "Дія `pushward_hacs.update_activity` є застарілою. Натомість переведіть свої автоматизації на дію для конкретного шаблону — наприклад `pushward_hacs.update_activity_countdown` або `pushward_hacs.update_activity_gauge`. Стара дія наразі ще працює, але буде вилучена в майбутньому випуску."
-    },
     "usage_limit_notifications": {
-      "title": "Досягнуто ліміту сповіщень PushWard",
-      "description": "Ваш обліковий запис PushWard використав {used} зі {limit} сповіщень за поточний період, тож нові сповіщення відхилятимуться, доки не скинеться квота ({resets_at}). Підвищте рівень підписки в застосунку PushWard для iOS, щоб збільшити ліміт."
+      "title": "PushWard notification limit reached",
+      "description": "Your PushWard account has used {used} of its {limit} notifications for the current period, so new notifications will be rejected until the quota resets ({resets_at}). Upgrade your subscription in the PushWard iOS app to raise the limit."
     },
     "usage_limit_live_activity": {
-      "title": "Досягнуто ліміту оновлень Live Activity PushWard",
-      "description": "Ваш обліковий запис PushWard використав {used} зі {limit} оновлень Live Activity за поточний період, тож нові оновлення відхилятимуться, доки не скинеться квота ({resets_at}). Підвищте рівень підписки в застосунку PushWard для iOS, щоб збільшити ліміт."
+      "title": "PushWard Live Activity update limit reached",
+      "description": "Your PushWard account has used {used} of its {limit} Live Activity updates for the current period, so new updates will be rejected until the quota resets ({resets_at}). Upgrade your subscription in the PushWard iOS app to raise the limit."
     },
     "usage_limit_widgets": {
-      "title": "Досягнуто ліміту оновлень віджетів PushWard",
-      "description": "Ваш обліковий запис PushWard використав {used} зі {limit} оновлень віджетів за поточний період, тож нові оновлення відхилятимуться, доки не скинеться квота ({resets_at}). Підвищте рівень підписки в застосунку PushWard для iOS, щоб збільшити ліміт."
+      "title": "PushWard widget update limit reached",
+      "description": "Your PushWard account has used {used} of its {limit} widget updates for the current period, so new updates will be rejected until the quota resets ({resets_at}). Upgrade your subscription in the PushWard iOS app to raise the limit."
     },
     "usage_limit_emails": {
-      "title": "Досягнуто ліміту листів PushWard",
-      "description": "Ваш обліковий запис PushWard використав {used} зі {limit} листів за поточний період, тож нові листи відхилятимуться, доки не скинеться квота ({resets_at}). Підвищте рівень підписки в застосунку PushWard для iOS, щоб збільшити ліміт."
+      "title": "PushWard email limit reached",
+      "description": "Your PushWard account has used {used} of its {limit} emails for the current period, so new emails will be rejected until the quota resets ({resets_at}). Upgrade your subscription in the PushWard iOS app to raise the limit."
     }
   }
 }

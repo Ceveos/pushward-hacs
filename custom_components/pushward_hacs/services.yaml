@@ -1,403 +1,32 @@
-update_activity:
-  name: Update Activity (deprecated)
-  description: "Deprecated — use the template-specific Update actions (e.g. Update Activity (Countdown)). Kept for backward compatibility; will be removed in a future release."
-  fields:
-    slug:
-      name: Slug
-      description: Activity slug identifier.
-      required: true
-      example: "ha-washer"
-      selector:
-        text:
-    state:
-      name: State
-      description: Activity state.
-      required: true
-      selector:
-        select:
-          options:
-            - "ongoing"
-            - "ended"
-    template:
-      name: Template
-      description: "Activity layout template. Optional — omit to keep the activity's current template. For steps also set total_steps and current_step; for alert, severity; for gauge, min_value and max_value; for countdown, end_date."
-      example: "generic"
-      selector:
-        select:
-          options:
-            - "generic"
-            - "countdown"
-            - "steps"
-            - "alert"
-            - "gauge"
-            - "timeline"
-    progress:
-      name: Progress
-      description: Progress value between 0.0 and 1.0.
-      example: 0.5
-      selector:
-        number:
-          min: 0.0
-          max: 1.0
-          step: 0.01
-          mode: slider
-    state_text:
-      name: State Text
-      description: Text shown as the activity state.
-      example: "Downloading"
-      selector:
-        text:
-    icon:
-      name: Icon
-      description: SF Symbol or MDI icon name (e.g. arrow.down.circle.fill, mdi:download).
-      example: "arrow.down.circle.fill"
-      selector:
-        text:
-    subtitle:
-      name: Subtitle
-      description: Subtitle text shown on the activity.
-      example: "episode-01.mkv"
-      selector:
-        text:
-    completion_message:
-      name: Completion Message
-      description: Message shown when the activity ends.
-      example: "Download complete!"
-      selector:
-        text:
-    countdown_options:
-      collapsed: true
-      fields:
-        end_date:
-          name: End Date
-          description: Unix timestamp for countdown end date.
-          example: 1700000000
-          selector:
-            number:
-              min: 0
-              mode: box
-        duration:
-          name: Duration
-          description: 'Set-and-forget alternative to End Date: seconds (≥1) or a duration string like "1h30m". The server re-anchors start/end to now. Send either Duration or End Date — Duration wins if both are set. Countdown template only.'
-          example: "30m"
-          selector:
-            text:
-        start_date:
-          name: Start Date
-          description: Unix timestamp when the countdown began (anchors the elapsed/remaining bar). The server defaults this to now. Countdown template only.
-          example: 1700000000
-          selector:
-            number:
-              min: 0
-              mode: box
-        warning_threshold:
-          name: Warning Threshold
-          description: Seconds remaining at which the countdown enters warning state. Countdown template only.
-          example: 30
-          selector:
-            number:
-              min: 0
-              mode: box
-              unit_of_measurement: seconds
-        alarm:
-          name: Alarm
-          description: Trigger a device alarm when the countdown expires. Countdown template only (iOS 26+).
-          selector:
-            boolean:
-        snooze_seconds:
-          name: Snooze Seconds
-          description: How long the iOS Snooze button extends the countdown (60–3600). Defaults to 300 (5 min). Only applies with alarm enabled (iOS 26+).
-          example: 600
-          selector:
-            number:
-              min: 60
-              max: 3600
-              mode: box
-              unit_of_measurement: seconds
-    steps_options:
-      collapsed: true
-      fields:
-        total_steps:
-          name: Total Steps
-          description: Total number of steps. Steps template only.
-          example: 5
-          selector:
-            number:
-              min: 1
-              mode: box
-        current_step:
-          name: Current Step
-          description: Current step number. Steps template only.
-          example: 2
-          selector:
-            number:
-              min: 0
-              mode: box
-        step_labels:
-          name: Step Labels
-          description: 'Labels for each step, in order, as a list — one per step (e.g. ["Build","Test","Deploy"]). Length must equal total_steps. Steps template only.'
-          selector:
-            object:
-        step_rows:
-          name: Step Rows
-          description: Row heights for each step as a list of integers (1–10). Steps template only.
-          selector:
-            object:
-    alert_options:
-      collapsed: true
-      fields:
-        severity:
-          name: Severity
-          description: Alert severity level. Alert template only.
-          example: "warning"
-          selector:
-            select:
-              options:
-                - "critical"
-                - "warning"
-                - "info"
-        severity_label:
-          name: Severity Label
-          description: Override the Info/Warning/Critical badge text. Alert template only.
-          example: "Page 1"
-          selector:
-            text:
-        fired_at:
-          name: Fired At
-          description: Unix timestamp when the alert was triggered. Alert template only.
-          example: 1700000000
-          selector:
-            number:
-              min: 0
-              mode: box
-    gauge_timeline_options:
-      collapsed: true
-      fields:
-        value:
-          name: Value
-          description: "Gauge: numeric value. Timeline: labeled values object (e.g. Temp=22.5)."
-          example: 22.5
-          selector:
-            object:
-        min_value:
-          name: Min Value
-          description: Minimum gauge value. Gauge template only.
-          example: 0
-          selector:
-            number:
-              step: 0.1
-              mode: box
-        max_value:
-          name: Max Value
-          description: Maximum gauge value. Gauge template only.
-          example: 100
-          selector:
-            number:
-              step: 0.1
-              mode: box
-        unit:
-          name: Unit
-          description: Display unit for the value (e.g. °C, %). Gauge and timeline templates.
-          example: "°C"
-          selector:
-            text:
-        scale:
-          name: Scale
-          description: Y-axis scale mode (linear or logarithmic). Timeline template only.
-          example: "linear"
-          selector:
-            select:
-              options:
-                - "linear"
-                - "logarithmic"
-        decimals:
-          name: Decimal Places
-          description: Decimal places for value display (0-10). Timeline template only.
-          example: 1
-          selector:
-            number:
-              min: 0
-              max: 10
-              mode: box
-        smoothing:
-          name: Smooth Lines
-          description: Enable curve interpolation between data points. Timeline template only.
-          selector:
-            boolean:
-        thresholds:
-          name: Thresholds
-          description: Horizontal reference lines on the sparkline. Timeline template only.
-          selector:
-            object:
-        units:
-          name: Units
-          description: Per-series unit labels as a YAML object (e.g. {"temp":"°C","humidity":"%"}). Timeline template only.
-          selector:
-            object:
-        history:
-          name: History (seed)
-          description: 'Initial sparkline seed as an object of series name → list of (timestamp, value). Seed-only — the server takes over as source of truth after the first update. Timeline template only.'
-          selector:
-            object:
-    action_buttons:
-      collapsed: true
-      fields:
-        url:
-          name: URL
-          description: Primary URL displayed as a tappable button.
-          example: "https://example.com"
-          selector:
-            text:
-        secondary_url:
-          name: Secondary URL
-          description: Secondary URL displayed as a second tappable button.
-          example: "https://example.com/details"
-          selector:
-            text:
-        tap_action:
-          name: Tap Action
-          description: 'Whole-activity tap target as an object: url (required; http(s) or a custom scheme like homeassistant://), optional foreground, and for http(s) a silent webhook via method/headers/body.'
-          example: '{"url": "homeassistant://navigate/lovelace/0"}'
-          selector:
-            object:
-        url_action:
-          name: Primary Button
-          description: 'Primary tappable button as an object: url (required), optional title, icon, foreground, and http(s) method/headers/body for a silent webhook.'
-          example: '{"url": "https://example.com", "title": "Open", "method": "POST"}'
-          selector:
-            object:
-        secondary_url_action:
-          name: Secondary Button
-          description: Secondary tappable button — same object shape as Primary Button.
-          example: '{"url": "https://example.com/details", "title": "Details"}'
-          selector:
-            object:
-    display_options:
-      collapsed: true
-      fields:
-        accent_color:
-          name: Accent Color
-          description: "Accent color: choose a named PushWard color or enter 6/8-digit RGB/RGBA hex."
-          example: "blue"
-          selector:
-            select:
-              custom_value: true
-              options:
-                - red
-                - orange
-                - yellow
-                - green
-                - blue
-                - purple
-                - pink
-                - indigo
-                - teal
-                - cyan
-                - mint
-                - brown
-        background_color:
-          name: Background Color
-          description: Background color as a hex value (e.g. #1a2b3c) or named color (e.g. blue).
-          example: "#1a2b3c"
-          selector:
-            select:
-              custom_value: true
-              options:
-                - red
-                - orange
-                - yellow
-                - green
-                - blue
-                - purple
-                - pink
-                - indigo
-                - teal
-                - cyan
-                - mint
-                - brown
-        text_color:
-          name: Text Color
-          description: Text color as a hex value (e.g. #ffffff) or named color (e.g. blue).
-          example: "#ffffff"
-          selector:
-            select:
-              custom_value: true
-              options:
-                - red
-                - orange
-                - yellow
-                - green
-                - blue
-                - purple
-                - pink
-                - indigo
-                - teal
-                - cyan
-                - mint
-                - brown
-        remaining_time:
-          name: Remaining Time
-          description: Remaining time in seconds.
-          example: 120
-          selector:
-            number:
-              min: 0
-              mode: box
-        sound:
-          name: Sound
-          description: Override the notification sound for this update.
-          example: "chime"
-          selector:
-            select:
-              options:
-                - "default"
-                - "chime"
-                - "alert"
-                - "success"
-                - "warning"
-                - "bell"
-                - "ding"
-                - "buzz"
-                - "notification"
-        priority:
-          name: Priority Override
-          description: Override activity priority for this update (0 = lowest, 10 = highest).
-          example: 5
-          selector:
-            number:
-              min: 0
-              max: 10
-              mode: slider
-
 update_activity_generic:
   fields:
     slug:
       required: true
-      example: "ha-washer"
+      example: ha-washer
       selector:
-        text:
+        text: null
     state:
       required: true
       selector:
         select:
           options:
-            - "ongoing"
-            - "ended"
+          - ongoing
+          - ended
     state_text:
-      example: "Downloading"
+      example: Downloading
       selector:
-        text:
+        text: null
     labels:
       collapsed: true
       fields:
         subtitle:
-          example: "episode-01.mkv"
+          example: episode-01.mkv
           selector:
-            text:
+            text: null
         icon:
-          example: "arrow.down.circle.fill"
+          example: arrow.down.circle.fill
           selector:
-            text:
+            text: null
         progress:
           example: 0.5
           selector:
@@ -409,100 +38,201 @@ update_activity_generic:
     action_buttons:
       collapsed: true
       fields:
-        url:
-          example: "https://example.com"
-          selector:
-            text:
-        secondary_url:
-          example: "https://example.com/details"
-          selector:
-            text:
         tap_action:
           example: '{"url": "homeassistant://navigate/lovelace/0"}'
           selector:
             object:
+              fields:
+                url:
+                  label: URL or app deep link
+                  required: true
+                  selector:
+                    text: {}
+                foreground:
+                  label: Open visibly instead of running silently
+                  selector:
+                    boolean: {}
+                method:
+                  label: Silent webhook method
+                  selector:
+                    select:
+                      options:
+                      - GET
+                      - POST
+                      - PUT
+                      - PATCH
+                      - DELETE
+                      - HEAD
+                headers:
+                  label: Silent webhook headers (advanced object)
+                  selector:
+                    object: {}
+                body:
+                  label: Silent webhook body
+                  selector:
+                    text:
+                      multiline: true
+          description: Optional background tap destination. Configure a visible link/app deep link or a silent HTTP webhook.
         url_action:
           example: '{"url": "https://example.com", "title": "Open", "method": "POST"}'
           selector:
             object:
+              fields:
+                title:
+                  label: Button title
+                  selector:
+                    text: {}
+                icon:
+                  label: SF Symbol
+                  selector:
+                    text: {}
+                url:
+                  label: URL or app deep link
+                  required: true
+                  selector:
+                    text: {}
+                foreground:
+                  label: Open visibly instead of running silently
+                  selector:
+                    boolean: {}
+                method:
+                  label: Silent webhook method
+                  selector:
+                    select:
+                      options:
+                      - GET
+                      - POST
+                      - PUT
+                      - PATCH
+                      - DELETE
+                      - HEAD
+                headers:
+                  label: Silent webhook headers (advanced object)
+                  selector:
+                    object: {}
+                body:
+                  label: Silent webhook body
+                  selector:
+                    text:
+                      multiline: true
+          description: Optional button with a visible destination or silent HTTP webhook.
         secondary_url_action:
           example: '{"url": "https://example.com/details", "title": "Details"}'
           selector:
             object:
+              fields:
+                title:
+                  label: Button title
+                  selector:
+                    text: {}
+                icon:
+                  label: SF Symbol
+                  selector:
+                    text: {}
+                url:
+                  label: URL or app deep link
+                  required: true
+                  selector:
+                    text: {}
+                foreground:
+                  label: Open visibly instead of running silently
+                  selector:
+                    boolean: {}
+                method:
+                  label: Silent webhook method
+                  selector:
+                    select:
+                      options:
+                      - GET
+                      - POST
+                      - PUT
+                      - PATCH
+                      - DELETE
+                      - HEAD
+                headers:
+                  label: Silent webhook headers (advanced object)
+                  selector:
+                    object: {}
+                body:
+                  label: Silent webhook body
+                  selector:
+                    text:
+                      multiline: true
+          description: Optional button with a visible destination or silent HTTP webhook.
     display_options:
       collapsed: true
       fields:
         live_progress:
           description: Animate progress toward the estimated completion between pushes. Requires an end date or duration.
           selector:
-            boolean:
+            boolean: null
         duration:
           description: Estimated remaining duration in seconds or a value such as 10m or 1h30m.
           selector:
-            text:
+            text: null
         end_date:
           description: Estimated completion as a Unix timestamp. Overrides duration.
           selector:
             number:
               mode: box
         completion_message:
-          example: "Download complete!"
+          example: Download complete!
           selector:
-            text:
+            text: null
         accent_color:
-          example: "blue"
+          example: blue
           selector:
             select:
               custom_value: true
               options:
-                - red
-                - orange
-                - yellow
-                - green
-                - blue
-                - purple
-                - pink
-                - indigo
-                - teal
-                - cyan
-                - mint
-                - brown
+              - red
+              - orange
+              - yellow
+              - green
+              - blue
+              - purple
+              - pink
+              - indigo
+              - teal
+              - cyan
+              - mint
+              - brown
         background_color:
-          example: "#1a2b3c"
+          example: '#1a2b3c'
           selector:
             select:
               custom_value: true
               options:
-                - red
-                - orange
-                - yellow
-                - green
-                - blue
-                - purple
-                - pink
-                - indigo
-                - teal
-                - cyan
-                - mint
-                - brown
+              - red
+              - orange
+              - yellow
+              - green
+              - blue
+              - purple
+              - pink
+              - indigo
+              - teal
+              - cyan
+              - mint
+              - brown
         text_color:
-          example: "#ffffff"
+          example: '#ffffff'
           selector:
             select:
               custom_value: true
               options:
-                - red
-                - orange
-                - yellow
-                - green
-                - blue
-                - purple
-                - pink
-                - indigo
-                - teal
-                - cyan
-                - mint
-                - brown
+              - red
+              - orange
+              - yellow
+              - green
+              - blue
+              - purple
+              - pink
+              - indigo
+              - teal
+              - cyan
+              - mint
+              - brown
         remaining_time:
           example: 120
           selector:
@@ -510,19 +240,19 @@ update_activity_generic:
               min: 0
               mode: box
         sound:
-          example: "chime"
+          example: chime
           selector:
             select:
               options:
-                - "default"
-                - "chime"
-                - "alert"
-                - "success"
-                - "warning"
-                - "bell"
-                - "ding"
-                - "buzz"
-                - "notification"
+              - default
+              - chime
+              - alert
+              - success
+              - warning
+              - bell
+              - ding
+              - buzz
+              - notification
         priority:
           example: 5
           selector:
@@ -530,21 +260,20 @@ update_activity_generic:
               min: 0
               max: 10
               mode: slider
-
 update_activity_countdown:
   fields:
     slug:
       required: true
-      example: "ha-washer"
+      example: ha-washer
       selector:
-        text:
+        text: null
     state:
       required: true
       selector:
         select:
           options:
-            - "ongoing"
-            - "ended"
+          - ongoing
+          - ended
     end_date:
       example: 1700000000
       selector:
@@ -552,28 +281,28 @@ update_activity_countdown:
           min: 0
           mode: box
     duration:
-      example: "30m"
+      example: 30m
       selector:
-        text:
+        text: null
     completion_message:
-      example: "Download complete!"
+      example: Download complete!
       selector:
-        text:
+        text: null
     labels:
       collapsed: true
       fields:
         state_text:
-          example: "Downloading"
+          example: Downloading
           selector:
-            text:
+            text: null
         subtitle:
-          example: "episode-01.mkv"
+          example: episode-01.mkv
           selector:
-            text:
+            text: null
         icon:
-          example: "arrow.down.circle.fill"
+          example: arrow.down.circle.fill
           selector:
-            text:
+            text: null
         progress:
           example: 0.5
           selector:
@@ -600,7 +329,7 @@ update_activity_countdown:
               unit_of_measurement: seconds
         alarm:
           selector:
-            boolean:
+            boolean: null
         snooze_seconds:
           example: 600
           selector:
@@ -612,83 +341,184 @@ update_activity_countdown:
     action_buttons:
       collapsed: true
       fields:
-        url:
-          example: "https://example.com"
-          selector:
-            text:
-        secondary_url:
-          example: "https://example.com/details"
-          selector:
-            text:
         tap_action:
           example: '{"url": "homeassistant://navigate/lovelace/0"}'
           selector:
             object:
+              fields:
+                url:
+                  label: URL or app deep link
+                  required: true
+                  selector:
+                    text: {}
+                foreground:
+                  label: Open visibly instead of running silently
+                  selector:
+                    boolean: {}
+                method:
+                  label: Silent webhook method
+                  selector:
+                    select:
+                      options:
+                      - GET
+                      - POST
+                      - PUT
+                      - PATCH
+                      - DELETE
+                      - HEAD
+                headers:
+                  label: Silent webhook headers (advanced object)
+                  selector:
+                    object: {}
+                body:
+                  label: Silent webhook body
+                  selector:
+                    text:
+                      multiline: true
+          description: Optional background tap destination. Configure a visible link/app deep link or a silent HTTP webhook.
         url_action:
           example: '{"url": "https://example.com", "title": "Open", "method": "POST"}'
           selector:
             object:
+              fields:
+                title:
+                  label: Button title
+                  selector:
+                    text: {}
+                icon:
+                  label: SF Symbol
+                  selector:
+                    text: {}
+                url:
+                  label: URL or app deep link
+                  required: true
+                  selector:
+                    text: {}
+                foreground:
+                  label: Open visibly instead of running silently
+                  selector:
+                    boolean: {}
+                method:
+                  label: Silent webhook method
+                  selector:
+                    select:
+                      options:
+                      - GET
+                      - POST
+                      - PUT
+                      - PATCH
+                      - DELETE
+                      - HEAD
+                headers:
+                  label: Silent webhook headers (advanced object)
+                  selector:
+                    object: {}
+                body:
+                  label: Silent webhook body
+                  selector:
+                    text:
+                      multiline: true
+          description: Optional button with a visible destination or silent HTTP webhook.
         secondary_url_action:
           example: '{"url": "https://example.com/details", "title": "Details"}'
           selector:
             object:
+              fields:
+                title:
+                  label: Button title
+                  selector:
+                    text: {}
+                icon:
+                  label: SF Symbol
+                  selector:
+                    text: {}
+                url:
+                  label: URL or app deep link
+                  required: true
+                  selector:
+                    text: {}
+                foreground:
+                  label: Open visibly instead of running silently
+                  selector:
+                    boolean: {}
+                method:
+                  label: Silent webhook method
+                  selector:
+                    select:
+                      options:
+                      - GET
+                      - POST
+                      - PUT
+                      - PATCH
+                      - DELETE
+                      - HEAD
+                headers:
+                  label: Silent webhook headers (advanced object)
+                  selector:
+                    object: {}
+                body:
+                  label: Silent webhook body
+                  selector:
+                    text:
+                      multiline: true
+          description: Optional button with a visible destination or silent HTTP webhook.
     display_options:
       collapsed: true
       fields:
         accent_color:
-          example: "blue"
+          example: blue
           selector:
             select:
               custom_value: true
               options:
-                - red
-                - orange
-                - yellow
-                - green
-                - blue
-                - purple
-                - pink
-                - indigo
-                - teal
-                - cyan
-                - mint
-                - brown
+              - red
+              - orange
+              - yellow
+              - green
+              - blue
+              - purple
+              - pink
+              - indigo
+              - teal
+              - cyan
+              - mint
+              - brown
         background_color:
-          example: "#1a2b3c"
+          example: '#1a2b3c'
           selector:
             select:
               custom_value: true
               options:
-                - red
-                - orange
-                - yellow
-                - green
-                - blue
-                - purple
-                - pink
-                - indigo
-                - teal
-                - cyan
-                - mint
-                - brown
+              - red
+              - orange
+              - yellow
+              - green
+              - blue
+              - purple
+              - pink
+              - indigo
+              - teal
+              - cyan
+              - mint
+              - brown
         text_color:
-          example: "#ffffff"
+          example: '#ffffff'
           selector:
             select:
               custom_value: true
               options:
-                - red
-                - orange
-                - yellow
-                - green
-                - blue
-                - purple
-                - pink
-                - indigo
-                - teal
-                - cyan
-                - mint
-                - brown
+              - red
+              - orange
+              - yellow
+              - green
+              - blue
+              - purple
+              - pink
+              - indigo
+              - teal
+              - cyan
+              - mint
+              - brown
         remaining_time:
           example: 120
           selector:
@@ -696,19 +526,19 @@ update_activity_countdown:
               min: 0
               mode: box
         sound:
-          example: "chime"
+          example: chime
           selector:
             select:
               options:
-                - "default"
-                - "chime"
-                - "alert"
-                - "success"
-                - "warning"
-                - "bell"
-                - "ding"
-                - "buzz"
-                - "notification"
+              - default
+              - chime
+              - alert
+              - success
+              - warning
+              - bell
+              - ding
+              - buzz
+              - notification
         priority:
           example: 5
           selector:
@@ -716,27 +546,20 @@ update_activity_countdown:
               min: 0
               max: 10
               mode: slider
-
 update_activity_steps:
   fields:
     slug:
       required: true
-      example: "ha-washer"
+      example: ha-washer
       selector:
-        text:
+        text: null
     state:
       required: true
       selector:
         select:
           options:
-            - "ongoing"
-            - "ended"
-    total_steps:
-      example: 5
-      selector:
-        number:
-          min: 1
-          mode: box
+          - ongoing
+          - ended
     current_step:
       example: 2
       selector:
@@ -747,17 +570,17 @@ update_activity_steps:
       collapsed: true
       fields:
         state_text:
-          example: "Downloading"
+          example: Downloading
           selector:
-            text:
+            text: null
         subtitle:
-          example: "episode-01.mkv"
+          example: episode-01.mkv
           selector:
-            text:
+            text: null
         icon:
-          example: "arrow.down.circle.fill"
+          example: arrow.down.circle.fill
           selector:
-            text:
+            text: null
         progress:
           example: 0.5
           selector:
@@ -769,28 +592,60 @@ update_activity_steps:
     steps_options:
       collapsed: true
       fields:
-        step_labels:
+        steps:
+          description: Add one row per step. The step name is shown when collapsed; expand it to set parallel jobs, relative
+            length, and color.
           selector:
             object:
-        step_rows:
-          selector:
-            object:
-        step_weights:
-          description: Relative duration/width for every step. Length must equal total steps.
-          selector:
-            object:
-        step_colors:
-          description: Optional named or hex color for every step. Length must equal total steps.
-          selector:
-            object:
+              multiple: true
+              label_field: label
+              fields:
+                label:
+                  label: Step name
+                  required: true
+                  selector:
+                    text: null
+                parallel_jobs:
+                  label: Parallel jobs (1-10; default 1)
+                  selector:
+                    number:
+                      min: 1
+                      max: 10
+                      mode: box
+                weight:
+                  label: Relative step length (ratio; default 1)
+                  selector:
+                    number:
+                      min: 0.1
+                      max: 10000
+                      step: 0.1
+                      mode: box
+                color:
+                  label: Color
+                  selector:
+                    select:
+                      custom_value: true
+                      options:
+                      - red
+                      - orange
+                      - yellow
+                      - green
+                      - blue
+                      - purple
+                      - pink
+                      - indigo
+                      - teal
+                      - cyan
+                      - mint
+                      - brown
         live_progress:
           description: Animate progress within the current step. Requires an end date or duration.
           selector:
-            boolean:
+            boolean: null
         duration:
           description: Expected duration of the current step, such as 90m.
           selector:
-            text:
+            text: null
         end_date:
           description: Expected finish time of the current step as a Unix timestamp.
           selector:
@@ -799,87 +654,188 @@ update_activity_steps:
     action_buttons:
       collapsed: true
       fields:
-        url:
-          example: "https://example.com"
-          selector:
-            text:
-        secondary_url:
-          example: "https://example.com/details"
-          selector:
-            text:
         tap_action:
           example: '{"url": "homeassistant://navigate/lovelace/0"}'
           selector:
             object:
+              fields:
+                url:
+                  label: URL or app deep link
+                  required: true
+                  selector:
+                    text: {}
+                foreground:
+                  label: Open visibly instead of running silently
+                  selector:
+                    boolean: {}
+                method:
+                  label: Silent webhook method
+                  selector:
+                    select:
+                      options:
+                      - GET
+                      - POST
+                      - PUT
+                      - PATCH
+                      - DELETE
+                      - HEAD
+                headers:
+                  label: Silent webhook headers (advanced object)
+                  selector:
+                    object: {}
+                body:
+                  label: Silent webhook body
+                  selector:
+                    text:
+                      multiline: true
+          description: Optional background tap destination. Configure a visible link/app deep link or a silent HTTP webhook.
         url_action:
           example: '{"url": "https://example.com", "title": "Open", "method": "POST"}'
           selector:
             object:
+              fields:
+                title:
+                  label: Button title
+                  selector:
+                    text: {}
+                icon:
+                  label: SF Symbol
+                  selector:
+                    text: {}
+                url:
+                  label: URL or app deep link
+                  required: true
+                  selector:
+                    text: {}
+                foreground:
+                  label: Open visibly instead of running silently
+                  selector:
+                    boolean: {}
+                method:
+                  label: Silent webhook method
+                  selector:
+                    select:
+                      options:
+                      - GET
+                      - POST
+                      - PUT
+                      - PATCH
+                      - DELETE
+                      - HEAD
+                headers:
+                  label: Silent webhook headers (advanced object)
+                  selector:
+                    object: {}
+                body:
+                  label: Silent webhook body
+                  selector:
+                    text:
+                      multiline: true
+          description: Optional button with a visible destination or silent HTTP webhook.
         secondary_url_action:
           example: '{"url": "https://example.com/details", "title": "Details"}'
           selector:
             object:
+              fields:
+                title:
+                  label: Button title
+                  selector:
+                    text: {}
+                icon:
+                  label: SF Symbol
+                  selector:
+                    text: {}
+                url:
+                  label: URL or app deep link
+                  required: true
+                  selector:
+                    text: {}
+                foreground:
+                  label: Open visibly instead of running silently
+                  selector:
+                    boolean: {}
+                method:
+                  label: Silent webhook method
+                  selector:
+                    select:
+                      options:
+                      - GET
+                      - POST
+                      - PUT
+                      - PATCH
+                      - DELETE
+                      - HEAD
+                headers:
+                  label: Silent webhook headers (advanced object)
+                  selector:
+                    object: {}
+                body:
+                  label: Silent webhook body
+                  selector:
+                    text:
+                      multiline: true
+          description: Optional button with a visible destination or silent HTTP webhook.
     display_options:
       collapsed: true
       fields:
         completion_message:
-          example: "Download complete!"
+          example: Download complete!
           selector:
-            text:
+            text: null
         accent_color:
-          example: "blue"
+          example: blue
           selector:
             select:
               custom_value: true
               options:
-                - red
-                - orange
-                - yellow
-                - green
-                - blue
-                - purple
-                - pink
-                - indigo
-                - teal
-                - cyan
-                - mint
-                - brown
+              - red
+              - orange
+              - yellow
+              - green
+              - blue
+              - purple
+              - pink
+              - indigo
+              - teal
+              - cyan
+              - mint
+              - brown
         background_color:
-          example: "#1a2b3c"
+          example: '#1a2b3c'
           selector:
             select:
               custom_value: true
               options:
-                - red
-                - orange
-                - yellow
-                - green
-                - blue
-                - purple
-                - pink
-                - indigo
-                - teal
-                - cyan
-                - mint
-                - brown
+              - red
+              - orange
+              - yellow
+              - green
+              - blue
+              - purple
+              - pink
+              - indigo
+              - teal
+              - cyan
+              - mint
+              - brown
         text_color:
-          example: "#ffffff"
+          example: '#ffffff'
           selector:
             select:
               custom_value: true
               options:
-                - red
-                - orange
-                - yellow
-                - green
-                - blue
-                - purple
-                - pink
-                - indigo
-                - teal
-                - cyan
-                - mint
-                - brown
+              - red
+              - orange
+              - yellow
+              - green
+              - blue
+              - purple
+              - pink
+              - indigo
+              - teal
+              - cyan
+              - mint
+              - brown
         remaining_time:
           example: 120
           selector:
@@ -887,19 +843,19 @@ update_activity_steps:
               min: 0
               mode: box
         sound:
-          example: "chime"
+          example: chime
           selector:
             select:
               options:
-                - "default"
-                - "chime"
-                - "alert"
-                - "success"
-                - "warning"
-                - "bell"
-                - "ding"
-                - "buzz"
-                - "notification"
+              - default
+              - chime
+              - alert
+              - success
+              - warning
+              - bell
+              - ding
+              - buzz
+              - notification
         priority:
           example: 5
           selector:
@@ -907,48 +863,47 @@ update_activity_steps:
               min: 0
               max: 10
               mode: slider
-
 update_activity_alert:
   fields:
     slug:
       required: true
-      example: "ha-washer"
+      example: ha-washer
       selector:
-        text:
+        text: null
     state:
       required: true
       selector:
         select:
           options:
-            - "ongoing"
-            - "ended"
+          - ongoing
+          - ended
     severity:
-      example: "warning"
+      example: warning
       selector:
         select:
           options:
-            - "critical"
-            - "warning"
-            - "info"
+          - critical
+          - warning
+          - info
     severity_label:
-      example: "Page 1"
+      example: Page 1
       selector:
-        text:
+        text: null
     labels:
       collapsed: true
       fields:
         state_text:
-          example: "Downloading"
+          example: Downloading
           selector:
-            text:
+            text: null
         subtitle:
-          example: "episode-01.mkv"
+          example: episode-01.mkv
           selector:
-            text:
+            text: null
         icon:
-          example: "arrow.down.circle.fill"
+          example: arrow.down.circle.fill
           selector:
-            text:
+            text: null
         progress:
           example: 0.5
           selector:
@@ -969,87 +924,188 @@ update_activity_alert:
     action_buttons:
       collapsed: true
       fields:
-        url:
-          example: "https://example.com"
-          selector:
-            text:
-        secondary_url:
-          example: "https://example.com/details"
-          selector:
-            text:
         tap_action:
           example: '{"url": "homeassistant://navigate/lovelace/0"}'
           selector:
             object:
+              fields:
+                url:
+                  label: URL or app deep link
+                  required: true
+                  selector:
+                    text: {}
+                foreground:
+                  label: Open visibly instead of running silently
+                  selector:
+                    boolean: {}
+                method:
+                  label: Silent webhook method
+                  selector:
+                    select:
+                      options:
+                      - GET
+                      - POST
+                      - PUT
+                      - PATCH
+                      - DELETE
+                      - HEAD
+                headers:
+                  label: Silent webhook headers (advanced object)
+                  selector:
+                    object: {}
+                body:
+                  label: Silent webhook body
+                  selector:
+                    text:
+                      multiline: true
+          description: Optional background tap destination. Configure a visible link/app deep link or a silent HTTP webhook.
         url_action:
           example: '{"url": "https://example.com", "title": "Open", "method": "POST"}'
           selector:
             object:
+              fields:
+                title:
+                  label: Button title
+                  selector:
+                    text: {}
+                icon:
+                  label: SF Symbol
+                  selector:
+                    text: {}
+                url:
+                  label: URL or app deep link
+                  required: true
+                  selector:
+                    text: {}
+                foreground:
+                  label: Open visibly instead of running silently
+                  selector:
+                    boolean: {}
+                method:
+                  label: Silent webhook method
+                  selector:
+                    select:
+                      options:
+                      - GET
+                      - POST
+                      - PUT
+                      - PATCH
+                      - DELETE
+                      - HEAD
+                headers:
+                  label: Silent webhook headers (advanced object)
+                  selector:
+                    object: {}
+                body:
+                  label: Silent webhook body
+                  selector:
+                    text:
+                      multiline: true
+          description: Optional button with a visible destination or silent HTTP webhook.
         secondary_url_action:
           example: '{"url": "https://example.com/details", "title": "Details"}'
           selector:
             object:
+              fields:
+                title:
+                  label: Button title
+                  selector:
+                    text: {}
+                icon:
+                  label: SF Symbol
+                  selector:
+                    text: {}
+                url:
+                  label: URL or app deep link
+                  required: true
+                  selector:
+                    text: {}
+                foreground:
+                  label: Open visibly instead of running silently
+                  selector:
+                    boolean: {}
+                method:
+                  label: Silent webhook method
+                  selector:
+                    select:
+                      options:
+                      - GET
+                      - POST
+                      - PUT
+                      - PATCH
+                      - DELETE
+                      - HEAD
+                headers:
+                  label: Silent webhook headers (advanced object)
+                  selector:
+                    object: {}
+                body:
+                  label: Silent webhook body
+                  selector:
+                    text:
+                      multiline: true
+          description: Optional button with a visible destination or silent HTTP webhook.
     display_options:
       collapsed: true
       fields:
         completion_message:
-          example: "Download complete!"
+          example: Download complete!
           selector:
-            text:
+            text: null
         accent_color:
-          example: "blue"
+          example: blue
           selector:
             select:
               custom_value: true
               options:
-                - red
-                - orange
-                - yellow
-                - green
-                - blue
-                - purple
-                - pink
-                - indigo
-                - teal
-                - cyan
-                - mint
-                - brown
+              - red
+              - orange
+              - yellow
+              - green
+              - blue
+              - purple
+              - pink
+              - indigo
+              - teal
+              - cyan
+              - mint
+              - brown
         background_color:
-          example: "#1a2b3c"
+          example: '#1a2b3c'
           selector:
             select:
               custom_value: true
               options:
-                - red
-                - orange
-                - yellow
-                - green
-                - blue
-                - purple
-                - pink
-                - indigo
-                - teal
-                - cyan
-                - mint
-                - brown
+              - red
+              - orange
+              - yellow
+              - green
+              - blue
+              - purple
+              - pink
+              - indigo
+              - teal
+              - cyan
+              - mint
+              - brown
         text_color:
-          example: "#ffffff"
+          example: '#ffffff'
           selector:
             select:
               custom_value: true
               options:
-                - red
-                - orange
-                - yellow
-                - green
-                - blue
-                - purple
-                - pink
-                - indigo
-                - teal
-                - cyan
-                - mint
-                - brown
+              - red
+              - orange
+              - yellow
+              - green
+              - blue
+              - purple
+              - pink
+              - indigo
+              - teal
+              - cyan
+              - mint
+              - brown
         remaining_time:
           example: 120
           selector:
@@ -1057,19 +1113,19 @@ update_activity_alert:
               min: 0
               mode: box
         sound:
-          example: "chime"
+          example: chime
           selector:
             select:
               options:
-                - "default"
-                - "chime"
-                - "alert"
-                - "success"
-                - "warning"
-                - "bell"
-                - "ding"
-                - "buzz"
-                - "notification"
+              - default
+              - chime
+              - alert
+              - success
+              - warning
+              - bell
+              - ding
+              - buzz
+              - notification
         priority:
           example: 5
           selector:
@@ -1077,21 +1133,20 @@ update_activity_alert:
               min: 0
               max: 10
               mode: slider
-
 update_activity_gauge:
   fields:
     slug:
       required: true
-      example: "ha-washer"
+      example: ha-washer
       selector:
-        text:
+        text: null
     state:
       required: true
       selector:
         select:
           options:
-            - "ongoing"
-            - "ended"
+          - ongoing
+          - ended
     value:
       example: 22.5
       selector:
@@ -1111,24 +1166,24 @@ update_activity_gauge:
           step: 0.1
           mode: box
     unit:
-      example: "°C"
+      example: °C
       selector:
-        text:
+        text: null
     labels:
       collapsed: true
       fields:
         state_text:
-          example: "Downloading"
+          example: Downloading
           selector:
-            text:
+            text: null
         subtitle:
-          example: "episode-01.mkv"
+          example: episode-01.mkv
           selector:
-            text:
+            text: null
         icon:
-          example: "arrow.down.circle.fill"
+          example: arrow.down.circle.fill
           selector:
-            text:
+            text: null
         progress:
           example: 0.5
           selector:
@@ -1140,87 +1195,188 @@ update_activity_gauge:
     action_buttons:
       collapsed: true
       fields:
-        url:
-          example: "https://example.com"
-          selector:
-            text:
-        secondary_url:
-          example: "https://example.com/details"
-          selector:
-            text:
         tap_action:
           example: '{"url": "homeassistant://navigate/lovelace/0"}'
           selector:
             object:
+              fields:
+                url:
+                  label: URL or app deep link
+                  required: true
+                  selector:
+                    text: {}
+                foreground:
+                  label: Open visibly instead of running silently
+                  selector:
+                    boolean: {}
+                method:
+                  label: Silent webhook method
+                  selector:
+                    select:
+                      options:
+                      - GET
+                      - POST
+                      - PUT
+                      - PATCH
+                      - DELETE
+                      - HEAD
+                headers:
+                  label: Silent webhook headers (advanced object)
+                  selector:
+                    object: {}
+                body:
+                  label: Silent webhook body
+                  selector:
+                    text:
+                      multiline: true
+          description: Optional background tap destination. Configure a visible link/app deep link or a silent HTTP webhook.
         url_action:
           example: '{"url": "https://example.com", "title": "Open", "method": "POST"}'
           selector:
             object:
+              fields:
+                title:
+                  label: Button title
+                  selector:
+                    text: {}
+                icon:
+                  label: SF Symbol
+                  selector:
+                    text: {}
+                url:
+                  label: URL or app deep link
+                  required: true
+                  selector:
+                    text: {}
+                foreground:
+                  label: Open visibly instead of running silently
+                  selector:
+                    boolean: {}
+                method:
+                  label: Silent webhook method
+                  selector:
+                    select:
+                      options:
+                      - GET
+                      - POST
+                      - PUT
+                      - PATCH
+                      - DELETE
+                      - HEAD
+                headers:
+                  label: Silent webhook headers (advanced object)
+                  selector:
+                    object: {}
+                body:
+                  label: Silent webhook body
+                  selector:
+                    text:
+                      multiline: true
+          description: Optional button with a visible destination or silent HTTP webhook.
         secondary_url_action:
           example: '{"url": "https://example.com/details", "title": "Details"}'
           selector:
             object:
+              fields:
+                title:
+                  label: Button title
+                  selector:
+                    text: {}
+                icon:
+                  label: SF Symbol
+                  selector:
+                    text: {}
+                url:
+                  label: URL or app deep link
+                  required: true
+                  selector:
+                    text: {}
+                foreground:
+                  label: Open visibly instead of running silently
+                  selector:
+                    boolean: {}
+                method:
+                  label: Silent webhook method
+                  selector:
+                    select:
+                      options:
+                      - GET
+                      - POST
+                      - PUT
+                      - PATCH
+                      - DELETE
+                      - HEAD
+                headers:
+                  label: Silent webhook headers (advanced object)
+                  selector:
+                    object: {}
+                body:
+                  label: Silent webhook body
+                  selector:
+                    text:
+                      multiline: true
+          description: Optional button with a visible destination or silent HTTP webhook.
     display_options:
       collapsed: true
       fields:
         completion_message:
-          example: "Download complete!"
+          example: Download complete!
           selector:
-            text:
+            text: null
         accent_color:
-          example: "blue"
+          example: blue
           selector:
             select:
               custom_value: true
               options:
-                - red
-                - orange
-                - yellow
-                - green
-                - blue
-                - purple
-                - pink
-                - indigo
-                - teal
-                - cyan
-                - mint
-                - brown
+              - red
+              - orange
+              - yellow
+              - green
+              - blue
+              - purple
+              - pink
+              - indigo
+              - teal
+              - cyan
+              - mint
+              - brown
         background_color:
-          example: "#1a2b3c"
+          example: '#1a2b3c'
           selector:
             select:
               custom_value: true
               options:
-                - red
-                - orange
-                - yellow
-                - green
-                - blue
-                - purple
-                - pink
-                - indigo
-                - teal
-                - cyan
-                - mint
-                - brown
+              - red
+              - orange
+              - yellow
+              - green
+              - blue
+              - purple
+              - pink
+              - indigo
+              - teal
+              - cyan
+              - mint
+              - brown
         text_color:
-          example: "#ffffff"
+          example: '#ffffff'
           selector:
             select:
               custom_value: true
               options:
-                - red
-                - orange
-                - yellow
-                - green
-                - blue
-                - purple
-                - pink
-                - indigo
-                - teal
-                - cyan
-                - mint
-                - brown
+              - red
+              - orange
+              - yellow
+              - green
+              - blue
+              - purple
+              - pink
+              - indigo
+              - teal
+              - cyan
+              - mint
+              - brown
         remaining_time:
           example: 120
           selector:
@@ -1228,19 +1384,19 @@ update_activity_gauge:
               min: 0
               mode: box
         sound:
-          example: "chime"
+          example: chime
           selector:
             select:
               options:
-                - "default"
-                - "chime"
-                - "alert"
-                - "success"
-                - "warning"
-                - "bell"
-                - "ding"
-                - "buzz"
-                - "notification"
+              - default
+              - chime
+              - alert
+              - success
+              - warning
+              - bell
+              - ding
+              - buzz
+              - notification
         priority:
           example: 5
           selector:
@@ -1248,44 +1404,35 @@ update_activity_gauge:
               min: 0
               max: 10
               mode: slider
-
 update_activity_timeline:
   fields:
     slug:
       required: true
-      example: "ha-washer"
+      example: ha-washer
       selector:
-        text:
+        text: null
     state:
       required: true
       selector:
         select:
           options:
-            - "ongoing"
-            - "ended"
-    value:
-      example: 22.5
-      selector:
-        object:
-    unit:
-      example: "°C"
-      selector:
-        text:
+          - ongoing
+          - ended
     labels:
       collapsed: true
       fields:
         state_text:
-          example: "Downloading"
+          example: Downloading
           selector:
-            text:
+            text: null
         subtitle:
-          example: "episode-01.mkv"
+          example: episode-01.mkv
           selector:
-            text:
+            text: null
         icon:
-          example: "arrow.down.circle.fill"
+          example: arrow.down.circle.fill
           selector:
-            text:
+            text: null
         progress:
           example: 0.5
           selector:
@@ -1297,20 +1444,40 @@ update_activity_timeline:
     gauge_timeline_options:
       collapsed: true
       fields:
-        units:
+        series:
+          description: Add 1-10 named values. The series label is shown when collapsed; each series can have its own unit.
           selector:
             object:
+              multiple: true
+              label_field: label
+              description_field: unit
+              fields:
+                label:
+                  label: Series label
+                  required: true
+                  selector:
+                    text: {}
+                value:
+                  label: Current value
+                  required: true
+                  selector:
+                    number:
+                      mode: box
+                unit:
+                  label: Display unit (optional)
+                  selector:
+                    text: {}
         primary_series:
-          example: "CPU"
+          example: CPU
           selector:
-            text:
+            text: null
         scale:
-          example: "linear"
+          example: linear
           selector:
             select:
               options:
-                - "linear"
-                - "logarithmic"
+              - linear
+              - logarithmic
         decimals:
           example: 1
           selector:
@@ -1320,97 +1487,233 @@ update_activity_timeline:
               mode: box
         smoothing:
           selector:
-            boolean:
+            boolean: null
         thresholds:
           selector:
             object:
+              multiple: true
+              label_field: value
+              description_field: label
+              fields:
+                value:
+                  label: Threshold value (series units)
+                  required: true
+                  selector:
+                    number:
+                      mode: box
+                label:
+                  label: Label (optional)
+                  selector:
+                    text: {}
+                color:
+                  label: Color
+                  selector:
+                    select:
+                      custom_value: true
+                      options: &id001
+                      - red
+                      - orange
+                      - yellow
+                      - green
+                      - blue
+                      - purple
+                      - pink
+                      - indigo
+                      - teal
+                      - cyan
+                      - mint
+                      - brown
+          description: Add up to 5 horizontal reference lines.
         history:
           selector:
-            object:
+            object: null
+          description: Advanced initial history seed. Map each series name to timestamp/value samples; normally tracked activities
+            create this automatically.
     action_buttons:
       collapsed: true
       fields:
-        url:
-          example: "https://example.com"
-          selector:
-            text:
-        secondary_url:
-          example: "https://example.com/details"
-          selector:
-            text:
         tap_action:
           example: '{"url": "homeassistant://navigate/lovelace/0"}'
           selector:
             object:
+              fields:
+                url:
+                  label: URL or app deep link
+                  required: true
+                  selector:
+                    text: {}
+                foreground:
+                  label: Open visibly instead of running silently
+                  selector:
+                    boolean: {}
+                method:
+                  label: Silent webhook method
+                  selector:
+                    select:
+                      options:
+                      - GET
+                      - POST
+                      - PUT
+                      - PATCH
+                      - DELETE
+                      - HEAD
+                headers:
+                  label: Silent webhook headers (advanced object)
+                  selector:
+                    object: {}
+                body:
+                  label: Silent webhook body
+                  selector:
+                    text:
+                      multiline: true
+          description: Optional background tap destination. Configure a visible link/app deep link or a silent HTTP webhook.
         url_action:
           example: '{"url": "https://example.com", "title": "Open", "method": "POST"}'
           selector:
             object:
+              fields:
+                title:
+                  label: Button title
+                  selector:
+                    text: {}
+                icon:
+                  label: SF Symbol
+                  selector:
+                    text: {}
+                url:
+                  label: URL or app deep link
+                  required: true
+                  selector:
+                    text: {}
+                foreground:
+                  label: Open visibly instead of running silently
+                  selector:
+                    boolean: {}
+                method:
+                  label: Silent webhook method
+                  selector:
+                    select:
+                      options:
+                      - GET
+                      - POST
+                      - PUT
+                      - PATCH
+                      - DELETE
+                      - HEAD
+                headers:
+                  label: Silent webhook headers (advanced object)
+                  selector:
+                    object: {}
+                body:
+                  label: Silent webhook body
+                  selector:
+                    text:
+                      multiline: true
+          description: Optional button with a visible destination or silent HTTP webhook.
         secondary_url_action:
           example: '{"url": "https://example.com/details", "title": "Details"}'
           selector:
             object:
+              fields:
+                title:
+                  label: Button title
+                  selector:
+                    text: {}
+                icon:
+                  label: SF Symbol
+                  selector:
+                    text: {}
+                url:
+                  label: URL or app deep link
+                  required: true
+                  selector:
+                    text: {}
+                foreground:
+                  label: Open visibly instead of running silently
+                  selector:
+                    boolean: {}
+                method:
+                  label: Silent webhook method
+                  selector:
+                    select:
+                      options:
+                      - GET
+                      - POST
+                      - PUT
+                      - PATCH
+                      - DELETE
+                      - HEAD
+                headers:
+                  label: Silent webhook headers (advanced object)
+                  selector:
+                    object: {}
+                body:
+                  label: Silent webhook body
+                  selector:
+                    text:
+                      multiline: true
+          description: Optional button with a visible destination or silent HTTP webhook.
     display_options:
       collapsed: true
       fields:
         completion_message:
-          example: "Download complete!"
+          example: Download complete!
           selector:
-            text:
+            text: null
         accent_color:
-          example: "blue"
+          example: blue
           selector:
             select:
               custom_value: true
               options:
-                - red
-                - orange
-                - yellow
-                - green
-                - blue
-                - purple
-                - pink
-                - indigo
-                - teal
-                - cyan
-                - mint
-                - brown
+              - red
+              - orange
+              - yellow
+              - green
+              - blue
+              - purple
+              - pink
+              - indigo
+              - teal
+              - cyan
+              - mint
+              - brown
         background_color:
-          example: "#1a2b3c"
+          example: '#1a2b3c'
           selector:
             select:
               custom_value: true
               options:
-                - red
-                - orange
-                - yellow
-                - green
-                - blue
-                - purple
-                - pink
-                - indigo
-                - teal
-                - cyan
-                - mint
-                - brown
+              - red
+              - orange
+              - yellow
+              - green
+              - blue
+              - purple
+              - pink
+              - indigo
+              - teal
+              - cyan
+              - mint
+              - brown
         text_color:
-          example: "#ffffff"
+          example: '#ffffff'
           selector:
             select:
               custom_value: true
               options:
-                - red
-                - orange
-                - yellow
-                - green
-                - blue
-                - purple
-                - pink
-                - indigo
-                - teal
-                - cyan
-                - mint
-                - brown
+              - red
+              - orange
+              - yellow
+              - green
+              - blue
+              - purple
+              - pink
+              - indigo
+              - teal
+              - cyan
+              - mint
+              - brown
         remaining_time:
           example: 120
           selector:
@@ -1418,19 +1721,19 @@ update_activity_timeline:
               min: 0
               mode: box
         sound:
-          example: "chime"
+          example: chime
           selector:
             select:
               options:
-                - "default"
-                - "chime"
-                - "alert"
-                - "success"
-                - "warning"
-                - "bell"
-                - "ding"
-                - "buzz"
-                - "notification"
+              - default
+              - chime
+              - alert
+              - success
+              - warning
+              - bell
+              - ding
+              - buzz
+              - notification
         priority:
           example: 5
           selector:
@@ -1438,127 +1741,310 @@ update_activity_timeline:
               min: 0
               max: 10
               mode: slider
-
-# board/log use a deliberately FLAT field layout (no collapsible `sections`) so the
-# only new translation strings live in en.json — avoiding the all-locale `sections`
-# requirement. Each service shows exactly the fields its template renders.
 update_activity_board:
   fields:
     slug:
       required: true
-      example: "ha-status-board"
+      example: ha-status-board
       selector:
-        text:
+        text: null
     state:
       required: true
       selector:
         select:
           options:
-            - "ongoing"
-            - "ended"
+          - ongoing
+          - ended
     tiles:
       required: true
       example: '[{"label": "CPU", "value": "72", "unit": "%", "trend": "up"}, {"label": "Door", "value": "Open", "icon": "door.left.hand.open"}]'
       selector:
         object:
+          multiple: true
+          label_field: label
+          fields:
+            label:
+              label: Tile label (1-32 characters)
+              required: true
+              selector:
+                text: {}
+            value:
+              label: Displayed value (1-16 characters)
+              required: true
+              selector:
+                text: {}
+            unit:
+              label: Unit (up to 8 characters)
+              selector:
+                text: {}
+            icon:
+              label: SF Symbol or MDI icon
+              selector:
+                text: {}
+            color:
+              label: Value color
+              selector:
+                select:
+                  custom_value: true
+                  options: *id001
+            trend:
+              label: Trend arrow
+              selector:
+                select:
+                  options:
+                  - label: None
+                    value: ''
+                  - up
+                  - down
+                  - flat
+            url_action:
+              label: Tile tap action (advanced object)
+              selector:
+                object:
+                  fields:
+                    title:
+                      label: Button title
+                      selector:
+                        text: {}
+                    icon:
+                      label: SF Symbol
+                      selector:
+                        text: {}
+                    url:
+                      label: URL or app deep link
+                      required: true
+                      selector:
+                        text: {}
+                    foreground:
+                      label: Open visibly instead of running silently
+                      selector:
+                        boolean: {}
+                    method:
+                      label: Silent webhook method
+                      selector:
+                        select:
+                          options:
+                          - GET
+                          - POST
+                          - PUT
+                          - PATCH
+                          - DELETE
+                          - HEAD
+                    headers:
+                      label: Silent webhook headers (advanced object)
+                      selector:
+                        object: {}
+                    body:
+                      label: Silent webhook body
+                      selector:
+                        text:
+                          multiline: true
+      description: Add 1-4 tiles. The label is shown when collapsed; expand a tile for value, styling, and tap behavior.
     state_text:
-      example: "Home Status"
+      example: Home Status
       selector:
-        text:
+        text: null
     subtitle:
-      example: "Updated just now"
+      example: Updated just now
       selector:
-        text:
+        text: null
     icon:
-      example: "square.grid.2x2.fill"
+      example: square.grid.2x2.fill
       selector:
-        text:
+        text: null
     completion_message:
-      example: "All clear"
+      example: All clear
       selector:
-        text:
+        text: null
     accent_color:
-      example: "blue"
+      example: blue
       selector:
         select:
           custom_value: true
           options:
-            - red
-            - orange
-            - yellow
-            - green
-            - blue
-            - purple
-            - pink
-            - indigo
-            - teal
-            - cyan
-            - mint
-            - brown
+          - red
+          - orange
+          - yellow
+          - green
+          - blue
+          - purple
+          - pink
+          - indigo
+          - teal
+          - cyan
+          - mint
+          - brown
     background_color:
-      example: "#1a2b3c"
+      example: '#1a2b3c'
       selector:
         select:
           custom_value: true
           options:
-            - red
-            - orange
-            - yellow
-            - green
-            - blue
-            - purple
-            - pink
-            - indigo
-            - teal
-            - cyan
-            - mint
-            - brown
+          - red
+          - orange
+          - yellow
+          - green
+          - blue
+          - purple
+          - pink
+          - indigo
+          - teal
+          - cyan
+          - mint
+          - brown
     text_color:
-      example: "#ffffff"
+      example: '#ffffff'
       selector:
         select:
           custom_value: true
           options:
-            - red
-            - orange
-            - yellow
-            - green
-            - blue
-            - purple
-            - pink
-            - indigo
-            - teal
-            - cyan
-            - mint
-            - brown
+          - red
+          - orange
+          - yellow
+          - green
+          - blue
+          - purple
+          - pink
+          - indigo
+          - teal
+          - cyan
+          - mint
+          - brown
     tap_action:
       example: '{"url": "homeassistant://navigate/lovelace/0"}'
       selector:
         object:
+          fields:
+            url:
+              label: URL or app deep link
+              required: true
+              selector:
+                text: {}
+            foreground:
+              label: Open visibly instead of running silently
+              selector:
+                boolean: {}
+            method:
+              label: Silent webhook method
+              selector:
+                select:
+                  options:
+                  - GET
+                  - POST
+                  - PUT
+                  - PATCH
+                  - DELETE
+                  - HEAD
+            headers:
+              label: Silent webhook headers (advanced object)
+              selector:
+                object: {}
+            body:
+              label: Silent webhook body
+              selector:
+                text:
+                  multiline: true
+      description: Optional background tap destination. Configure a visible link/app deep link or a silent HTTP webhook.
     url_action:
-      description: Primary button action, including foreground links or silent HTTP webhooks.
+      description: Optional button with a visible destination or silent HTTP webhook.
       example: '{"url": "https://example.com/ack", "title": "Acknowledge", "method": "POST"}'
       selector:
         object:
+          fields:
+            title:
+              label: Button title
+              selector:
+                text: {}
+            icon:
+              label: SF Symbol
+              selector:
+                text: {}
+            url:
+              label: URL or app deep link
+              required: true
+              selector:
+                text: {}
+            foreground:
+              label: Open visibly instead of running silently
+              selector:
+                boolean: {}
+            method:
+              label: Silent webhook method
+              selector:
+                select:
+                  options:
+                  - GET
+                  - POST
+                  - PUT
+                  - PATCH
+                  - DELETE
+                  - HEAD
+            headers:
+              label: Silent webhook headers (advanced object)
+              selector:
+                object: {}
+            body:
+              label: Silent webhook body
+              selector:
+                text:
+                  multiline: true
     secondary_url_action:
-      description: Secondary button action.
+      description: Optional button with a visible destination or silent HTTP webhook.
       example: '{"url": "https://example.com/details", "title": "Details", "foreground": true}'
       selector:
         object:
+          fields:
+            title:
+              label: Button title
+              selector:
+                text: {}
+            icon:
+              label: SF Symbol
+              selector:
+                text: {}
+            url:
+              label: URL or app deep link
+              required: true
+              selector:
+                text: {}
+            foreground:
+              label: Open visibly instead of running silently
+              selector:
+                boolean: {}
+            method:
+              label: Silent webhook method
+              selector:
+                select:
+                  options:
+                  - GET
+                  - POST
+                  - PUT
+                  - PATCH
+                  - DELETE
+                  - HEAD
+            headers:
+              label: Silent webhook headers (advanced object)
+              selector:
+                object: {}
+            body:
+              label: Silent webhook body
+              selector:
+                text:
+                  multiline: true
     sound:
-      example: "chime"
+      example: chime
       selector:
         select:
           options:
-            - "default"
-            - "chime"
-            - "alert"
-            - "success"
-            - "warning"
-            - "bell"
-            - "ding"
-            - "buzz"
-            - "notification"
+          - default
+          - chime
+          - alert
+          - success
+          - warning
+          - bell
+          - ding
+          - buzz
+          - notification
     priority:
       example: 5
       selector:
@@ -1566,124 +2052,254 @@ update_activity_board:
           min: 0
           max: 10
           mode: slider
-
 update_activity_log:
   fields:
     slug:
       required: true
-      example: "ha-event-log"
+      example: ha-event-log
       selector:
-        text:
+        text: null
     state:
       required: true
       selector:
         select:
           options:
-            - "ongoing"
-            - "ended"
+          - ongoing
+          - ended
     lines:
       required: true
       example: '[{"text": "Front door opened", "level": "info"}, {"text": "Garage left open", "level": "warn"}]'
       selector:
         object:
+          multiple: true
+          label_field: text
+          description_field: level
+          fields:
+            text:
+              label: Log text
+              required: true
+              selector:
+                text: {}
+            at:
+              label: Unix timestamp (optional; seconds)
+              selector:
+                number:
+                  min: 1
+                  mode: box
+            level:
+              label: Level
+              selector:
+                select:
+                  options:
+                  - info
+                  - warn
+                  - error
+      description: Add 1-20 lines, newest first. Each row can include a timestamp and severity level.
     state_text:
-      example: "Event Log"
+      example: Event Log
       selector:
-        text:
+        text: null
     subtitle:
-      example: "5 events today"
+      example: 5 events today
       selector:
-        text:
+        text: null
     icon:
-      example: "list.bullet.rectangle"
+      example: list.bullet.rectangle
       selector:
-        text:
+        text: null
     completion_message:
-      example: "Log closed"
+      example: Log closed
       selector:
-        text:
+        text: null
     accent_color:
-      example: "blue"
+      example: blue
       selector:
         select:
           custom_value: true
           options:
-            - red
-            - orange
-            - yellow
-            - green
-            - blue
-            - purple
-            - pink
-            - indigo
-            - teal
-            - cyan
-            - mint
-            - brown
+          - red
+          - orange
+          - yellow
+          - green
+          - blue
+          - purple
+          - pink
+          - indigo
+          - teal
+          - cyan
+          - mint
+          - brown
     background_color:
-      example: "#1a2b3c"
+      example: '#1a2b3c'
       selector:
         select:
           custom_value: true
           options:
-            - red
-            - orange
-            - yellow
-            - green
-            - blue
-            - purple
-            - pink
-            - indigo
-            - teal
-            - cyan
-            - mint
-            - brown
+          - red
+          - orange
+          - yellow
+          - green
+          - blue
+          - purple
+          - pink
+          - indigo
+          - teal
+          - cyan
+          - mint
+          - brown
     text_color:
-      example: "#ffffff"
+      example: '#ffffff'
       selector:
         select:
           custom_value: true
           options:
-            - red
-            - orange
-            - yellow
-            - green
-            - blue
-            - purple
-            - pink
-            - indigo
-            - teal
-            - cyan
-            - mint
-            - brown
+          - red
+          - orange
+          - yellow
+          - green
+          - blue
+          - purple
+          - pink
+          - indigo
+          - teal
+          - cyan
+          - mint
+          - brown
     tap_action:
       example: '{"url": "homeassistant://navigate/lovelace/0"}'
       selector:
         object:
+          fields:
+            url:
+              label: URL or app deep link
+              required: true
+              selector:
+                text: {}
+            foreground:
+              label: Open visibly instead of running silently
+              selector:
+                boolean: {}
+            method:
+              label: Silent webhook method
+              selector:
+                select:
+                  options:
+                  - GET
+                  - POST
+                  - PUT
+                  - PATCH
+                  - DELETE
+                  - HEAD
+            headers:
+              label: Silent webhook headers (advanced object)
+              selector:
+                object: {}
+            body:
+              label: Silent webhook body
+              selector:
+                text:
+                  multiline: true
+      description: Optional background tap destination. Configure a visible link/app deep link or a silent HTTP webhook.
     url_action:
-      description: Primary button action, including foreground links or silent HTTP webhooks.
+      description: Optional button with a visible destination or silent HTTP webhook.
       example: '{"url": "https://example.com/ack", "title": "Acknowledge", "method": "POST"}'
       selector:
         object:
+          fields:
+            title:
+              label: Button title
+              selector:
+                text: {}
+            icon:
+              label: SF Symbol
+              selector:
+                text: {}
+            url:
+              label: URL or app deep link
+              required: true
+              selector:
+                text: {}
+            foreground:
+              label: Open visibly instead of running silently
+              selector:
+                boolean: {}
+            method:
+              label: Silent webhook method
+              selector:
+                select:
+                  options:
+                  - GET
+                  - POST
+                  - PUT
+                  - PATCH
+                  - DELETE
+                  - HEAD
+            headers:
+              label: Silent webhook headers (advanced object)
+              selector:
+                object: {}
+            body:
+              label: Silent webhook body
+              selector:
+                text:
+                  multiline: true
     secondary_url_action:
-      description: Secondary button action.
+      description: Optional button with a visible destination or silent HTTP webhook.
       example: '{"url": "https://example.com/details", "title": "Details", "foreground": true}'
       selector:
         object:
+          fields:
+            title:
+              label: Button title
+              selector:
+                text: {}
+            icon:
+              label: SF Symbol
+              selector:
+                text: {}
+            url:
+              label: URL or app deep link
+              required: true
+              selector:
+                text: {}
+            foreground:
+              label: Open visibly instead of running silently
+              selector:
+                boolean: {}
+            method:
+              label: Silent webhook method
+              selector:
+                select:
+                  options:
+                  - GET
+                  - POST
+                  - PUT
+                  - PATCH
+                  - DELETE
+                  - HEAD
+            headers:
+              label: Silent webhook headers (advanced object)
+              selector:
+                object: {}
+            body:
+              label: Silent webhook body
+              selector:
+                text:
+                  multiline: true
     sound:
-      example: "chime"
+      example: chime
       selector:
         select:
           options:
-            - "default"
-            - "chime"
-            - "alert"
-            - "success"
-            - "warning"
-            - "bell"
-            - "ding"
-            - "buzz"
-            - "notification"
+          - default
+          - chime
+          - alert
+          - success
+          - warning
+          - bell
+          - ding
+          - buzz
+          - notification
     priority:
       example: 5
       selector:
@@ -1691,7 +2307,6 @@ update_activity_log:
           min: 0
           max: 10
           mode: slider
-
 create_activity:
   name: Create Activity
   description: Create a new PushWard Live Activity.
@@ -1700,16 +2315,16 @@ create_activity:
       name: Slug
       description: Unique activity slug identifier.
       required: true
-      example: "ha-washer"
+      example: ha-washer
       selector:
-        text:
+        text: null
     name:
       name: Name
       description: Display name for the activity.
       required: true
-      example: "Washing Machine"
+      example: Washing Machine
       selector:
-        text:
+        text: null
     priority:
       name: Priority
       description: Activity priority (0 = lowest, 10 = highest).
@@ -1738,7 +2353,6 @@ create_activity:
           min: 1
           max: 2592000
           mode: box
-
 end_activity:
   name: End Activity
   description: End a PushWard Live Activity.
@@ -1747,16 +2361,15 @@ end_activity:
       name: Slug
       description: Activity slug identifier to end.
       required: true
-      example: "ha-washer"
+      example: ha-washer
       selector:
-        text:
+        text: null
     completion_message:
       name: Completion Message
       description: Optional message shown when the activity ends.
-      example: "Washing complete!"
+      example: Washing complete!
       selector:
-        text:
-
+        text: null
 delete_activity:
   name: Delete Activity
   description: Delete a PushWard Live Activity.
@@ -1765,10 +2378,9 @@ delete_activity:
       name: Slug
       description: Activity slug identifier to delete.
       required: true
-      example: "ha-washer"
+      example: ha-washer
       selector:
-        text:
-
+        text: null
 send_notification:
   name: Send Notification
   description: Send a push notification via PushWard.
@@ -1777,34 +2389,34 @@ send_notification:
       name: Title
       description: Notification title.
       required: true
-      example: "Door Opened"
+      example: Door Opened
       selector:
-        text:
+        text: null
     body:
       name: Body
       description: Notification body text.
       required: true
-      example: "The front door was opened."
+      example: The front door was opened.
       selector:
         text:
           multiline: true
     subtitle:
       name: Subtitle
       description: Optional subtitle shown below the title.
-      example: "Living Room"
+      example: Living Room
       selector:
-        text:
+        text: null
     level:
       name: Level
       description: iOS interruption level. Controls how the notification is delivered.
-      example: "active"
+      example: active
       selector:
         select:
           options:
-            - "passive"
-            - "active"
-            - "time-sensitive"
-            - "critical"
+          - passive
+          - active
+          - time-sensitive
+          - critical
     volume:
       name: Volume
       description: Sound volume for critical alerts (0.0-1.0). Only used when level is critical.
@@ -1817,78 +2429,150 @@ send_notification:
     thread_id:
       name: Thread ID
       description: Groups notifications together in Notification Center.
-      example: "home-security"
+      example: home-security
       selector:
-        text:
+        text: null
     collapse_id:
       name: Collapse ID
       description: APNs deduplication key. Replaces previous notification with the same key. Max 64 characters.
-      example: "door-alert"
+      example: door-alert
       selector:
-        text:
+        text: null
     source:
       name: Source
       description: Source identifier for grouping in the PushWard inbox.
-      example: "home-assistant"
+      example: home-assistant
       selector:
-        text:
+        text: null
     source_display_name:
       name: Source Display Name
       description: Human-readable source name shown in the PushWard inbox.
-      example: "Home Assistant"
+      example: Home Assistant
       selector:
-        text:
+        text: null
     activity_slug:
       name: Activity Slug
       description: Link this notification to an existing Live Activity.
-      example: "ha-washer"
+      example: ha-washer
       selector:
-        text:
+        text: null
     url:
       name: URL
       description: Primary deep-link URL opened when the notification is tapped.
-      example: "https://example.com"
+      example: https://example.com
       selector:
-        text:
+        text: null
     media:
       name: Media
-      description: Media attachment as an object with `url` (HTTPS) and `type` (image, video, or audio).
+      description: Optional image, video, or audio attachment hosted at an HTTPS URL.
       example: '{"url": "https://example.com/image.png", "type": "image"}'
       selector:
         object:
+          fields:
+            url:
+              label: HTTPS media URL
+              required: true
+              selector:
+                text:
+                  type: url
+            type:
+              label: Media type
+              required: true
+              selector:
+                select:
+                  options:
+                  - image
+                  - video
+                  - audio
     icon_url:
       name: Icon URL
       description: URL of a custom icon to display with the notification.
-      example: "https://example.com/icon.png"
+      example: https://example.com/icon.png
       selector:
-        text:
+        text: null
     metadata:
       name: Metadata
-      description: Arbitrary key-value pairs attached to the notification for custom app handling.
+      description: Advanced optional key-value data for custom app handling. Use YAML/object syntax.
       selector:
-        object:
+        object: null
     actions:
       name: Actions
-      description: 'List of action buttons. Each action is an object with `id`, `title`, optional `url`, `foreground`, `destructive`, `authentication_required`, and `icon`. For an http(s) `url` you can also send a silent webhook with `method` (GET/POST/PUT/PATCH/DELETE/HEAD), `headers`, and `body`.'
-      example: '[{"id": "open", "title": "Open", "url": "https://example.com", "foreground": true}, {"id": "ack", "title": "Acknowledge", "url": "https://example.com/ack", "method": "POST", "body": "ok"}]'
+      description: Add up to 10 notification buttons. Expand a row to configure its destination and behavior.
+      example: '[{"id": "open", "title": "Open", "url": "https://example.com", "foreground": true}, {"id": "ack", "title":
+        "Acknowledge", "url": "https://example.com/ack", "method": "POST", "body": "ok"}]'
       selector:
         object:
+          multiple: true
+          label_field: title
+          description_field: id
+          fields:
+            id:
+              label: Action ID
+              required: true
+              selector:
+                text: null
+            title:
+              label: Button title
+              required: true
+              selector:
+                text: null
+            url:
+              label: URL or app deep link
+              selector:
+                text: null
+            foreground:
+              label: Open the URL visibly
+              selector:
+                boolean: null
+            method:
+              label: Silent webhook method
+              selector:
+                select:
+                  options:
+                  - GET
+                  - POST
+                  - PUT
+                  - PATCH
+                  - DELETE
+                  - HEAD
+            headers:
+              label: Silent webhook headers (advanced object)
+              selector:
+                object: null
+            body:
+              label: Silent webhook body
+              selector:
+                text:
+                  multiline: true
+            icon:
+              label: SF Symbol
+              selector:
+                text: null
+            destructive:
+              label: Destructive styling
+              selector:
+                boolean: null
+            authentication_required:
+              label: Require device authentication
+              selector:
+                boolean: null
     push:
       name: Push
       description: Send as an APNs push alert to all devices. When false, the notification is stored in the inbox only.
       default: true
       selector:
-        boolean:
-
+        boolean: null
 send_email:
   name: Send Email
-  description: Send a transactional email via PushWard. Provide a text body, an HTML body, or both. The integration key needs the "emails" capability.
+  description: Send a transactional email via PushWard. Provide a text body, an HTML body, or both. The integration key needs
+    the "emails" capability.
   fields:
     to:
       name: To
-      description: Recipient email address. Must be an address you have already added and confirmed in the PushWard iOS app — unverified addresses are rejected.
+      description: Recipient email address. Must be an address you have already added and confirmed in the PushWard iOS app
+        — unverified addresses are rejected.
       required: true
-      example: "alerts@example.com"
+      example: alerts@example.com
       selector:
         text:
           type: email
@@ -1896,54 +2580,234 @@ send_email:
       name: Subject
       description: Email subject line.
       required: true
-      example: "Home Security Alert"
+      example: Home Security Alert
       selector:
-        text:
+        text: null
     body:
       name: Body
       description: Plain-text email body. Provide this, an HTML body, or both.
-      example: "The front door was opened at 10:30 PM."
+      example: The front door was opened at 10:30 PM.
       selector:
         text:
           multiline: true
     html_body:
       name: HTML Body
       description: HTML email body. Provide this, a plain-text body, or both.
-      example: "<p>The front door was opened at <b>10:30 PM</b>.</p>"
+      example: <p>The front door was opened at <b>10:30 PM</b>.</p>
       selector:
         text:
           multiline: true
-
 widget_refresh:
   name: Refresh Widget
-  description: Force-refresh a tracked PushWard widget. Bypasses the in-memory diff cache so the widget is re-rendered and pushed to iOS even when the value hasn't changed.
+  description: Force-refresh a tracked PushWard widget. Bypasses the in-memory diff cache so the widget is re-rendered and
+    pushed to iOS even when the value hasn't changed.
   fields:
     slug:
       name: Slug
       description: Widget slug identifier. Either `slug` or `entity_id` must be provided.
-      example: "ha-sensor-registered-users"
+      example: ha-sensor-registered-users
       selector:
-        text:
+        text: null
     entity_id:
       name: Entity
-      description: HA entity bound to the widget. Resolved to the matching widget by config. Either `slug` or `entity_id` must be provided.
-      example: "sensor.registered_users"
+      description: HA entity bound to the widget. Resolved to the matching widget by config. Either `slug` or `entity_id`
+        must be provided.
+      example: sensor.registered_users
       selector:
-        entity:
-
+        entity: null
 delete_widget:
   name: Delete Widget
-  description: Delete a PushWard widget from the server. If a tracked-widget config entry still drives this slug, the widget is recreated on the next restart/sync — remove the config entry to delete it permanently. Provide either slug or entity_id.
+  description: Delete a PushWard widget from the server. If a tracked-widget config entry still drives this slug, the widget
+    is recreated on the next restart/sync — remove the config entry to delete it permanently. Provide either slug or entity_id.
   fields:
     slug:
       name: Slug
       description: Widget slug identifier. Either `slug` or `entity_id` must be provided.
-      example: "ha-sensor-registered-users"
+      example: ha-sensor-registered-users
       selector:
-        text:
+        text: null
     entity_id:
       name: Entity
-      description: HA entity bound to the widget. Resolved to the matching widget by config. Either `slug` or `entity_id` must be provided.
-      example: "sensor.registered_users"
+      description: HA entity bound to the widget. Resolved to the matching widget by config. Either `slug` or `entity_id`
+        must be provided.
+      example: sensor.registered_users
       selector:
-        entity:
+        entity: null
+dispatch:
+  name: Send via PushWard
+  description: Send any combination of a Live Activity, notification, widget, and email in one Home Assistant action.
+  fields:
+    activity_channel:
+      collapsed: true
+      fields:
+        activity_enabled:
+          name: Send Live Activity
+          description: Enable this section to upsert and update a Live Activity.
+          default: false
+          selector:
+            boolean: {}
+        activity_slug:
+          name: Activity slug
+          description: Unique URL-safe identifier. Required when Live Activity is enabled.
+          selector:
+            text: {}
+        activity_state:
+          name: Activity state
+          description: Ongoing starts/updates the activity; ended completes it.
+          selector:
+            select:
+              options:
+              - ongoing
+              - ended
+        activity_template:
+          name: Activity layout
+          description: Layout expected by the content object below.
+          selector:
+            select:
+              options:
+              - generic
+              - countdown
+              - steps
+              - alert
+              - gauge
+              - timeline
+              - board
+              - log
+        activity_content:
+          name: Activity content
+          description: Template-specific content without the template field. Use a focused Update Activity action for a fully
+            guided editor.
+          selector:
+            object: {}
+        activity_sound:
+          name: Update sound
+          description: Optional sound for ongoing updates; ignored when ending.
+          selector:
+            select:
+              options:
+              - default
+              - chime
+              - alert
+              - success
+              - warning
+              - bell
+              - ding
+              - buzz
+              - notification
+        activity_priority:
+          name: Priority
+          description: Optional per-update priority from 0 (lowest) to 10 (highest).
+          selector:
+            number:
+              min: 0
+              max: 10
+              mode: slider
+    notification_channel:
+      collapsed: true
+      fields:
+        notification_enabled:
+          name: Send notification
+          description: Enable this section to send a PushWard inbox/APNs notification.
+          default: false
+          selector:
+            boolean: {}
+        notification_title:
+          name: Notification title
+          selector:
+            text: {}
+        notification_body:
+          name: Notification body
+          selector:
+            text:
+              multiline: true
+        notification_subtitle:
+          name: Notification subtitle
+          selector:
+            text: {}
+        notification_level:
+          name: Interruption level
+          description: Passive is quiet; time-sensitive and critical require the corresponding iOS permissions.
+          selector:
+            select:
+              options:
+              - passive
+              - active
+              - time-sensitive
+              - critical
+        notification_push:
+          name: Send APNs alert
+          description: Disable to store the notification only in the PushWard inbox.
+          default: true
+          selector:
+            boolean: {}
+    widget_channel:
+      collapsed: true
+      fields:
+        widget_enabled:
+          name: Upsert widget
+          description: Enable this section to create or replace a PushWard widget.
+          default: false
+          selector:
+            boolean: {}
+        widget_slug:
+          name: Widget slug
+          selector:
+            text: {}
+        widget_name:
+          name: Widget display name
+          selector:
+            text: {}
+        widget_template:
+          name: Widget layout
+          selector:
+            select:
+              options:
+              - value
+              - progress
+              - gauge
+              - status
+              - stat_list
+        widget_content:
+          name: Widget content
+          description: Layout-specific widget content without the template field.
+          selector:
+            object: {}
+        widget_push_throttle:
+          name: Push throttle
+          description: Minimum seconds between server widget pushes, from 1 to 3,600.
+          selector:
+            number:
+              min: 1
+              max: 3600
+              unit_of_measurement: seconds
+              mode: box
+    email_channel:
+      collapsed: true
+      fields:
+        email_enabled:
+          name: Send email
+          description: Enable this section to send to a recipient verified in the PushWard app.
+          default: false
+          selector:
+            boolean: {}
+        email_to:
+          name: Recipient
+          selector:
+            text:
+              type: email
+        email_subject:
+          name: Subject
+          selector:
+            text: {}
+        email_body:
+          name: Plain-text body
+          description: Provide this, the HTML body, or both.
+          selector:
+            text:
+              multiline: true
+        email_html_body:
+          name: HTML body
+          description: Provide this, the plain-text body, or both.
+          selector:
+            text:
+              multiline: true

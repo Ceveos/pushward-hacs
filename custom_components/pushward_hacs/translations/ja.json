@@ -1,1700 +1,1376 @@
 {
-  "services": {
-    "update_activity": {
-      "name": "アクティビティを更新 (deprecated)",
-      "description": "PushWard Live Activityの状態とコンテンツを更新します。",
-      "fields": {
-        "slug": {
-          "name": "スラッグ",
-          "description": "アクティビティのスラッグ識別子。"
-        },
-        "state": {
-          "name": "状態",
-          "description": "アクティビティの目標状態。"
-        },
-        "template": {
-          "name": "テンプレート",
-          "description": "アクティビティのレイアウトテンプレート。"
-        },
-        "progress": {
-          "name": "進捗",
-          "description": "0.0〜1.0の進捗値。"
-        },
-        "state_text": {
-          "name": "状態テキスト",
-          "description": "アクティビティの状態として表示されるテキスト。"
-        },
-        "icon": {
-          "name": "アイコン",
-          "description": "SF Symbol またはMDIアイコン名（例: arrow.down.circle.fill, mdi:download）。"
-        },
-        "subtitle": {
-          "name": "サブタイトル",
-          "description": "アクティビティに表示されるサブタイトルテキスト。"
-        },
-        "accent_color": {
-          "name": "アクセントカラー",
-          "description": "アクティビティのアクセントカラー名。"
-        },
-        "remaining_time": {
-          "name": "残り時間",
-          "description": "残り時間（秒）。"
-        },
-        "url": {
-          "name": "URL",
-          "description": "タップ可能なボタンとして表示されるプライマリURL。steps および alert テンプレートのみ対応。"
-        },
-        "secondary_url": {
-          "name": "セカンダリURL",
-          "description": "2番目のタップ可能なボタンとして表示されるセカンダリURL。steps および alert テンプレートのみ対応。"
-        },
-        "end_date": {
-          "name": "終了日時",
-          "description": "countdown の終了日時のUnixタイムスタンプ。"
-        },
-        "total_steps": {
-          "name": "総 steps 数",
-          "description": "steps の総数。"
-        },
-        "current_step": {
-          "name": "現在のステップ",
-          "description": "現在のステップ番号。"
-        },
-        "severity": {
-          "name": "重大度",
-          "description": "alert の重大度レベル。"
-        },
-        "value": {
-          "name": "値",
-          "description": "gauge: 数値。timeline: ラベル付きの値オブジェクト（例: Temp=22.5）。"
-        },
-        "min_value": {
-          "name": "最小値",
-          "description": "gauge の最小値。"
-        },
-        "max_value": {
-          "name": "最大値",
-          "description": "gauge の最大値。"
-        },
-        "unit": {
-          "name": "単位",
-          "description": "値の表示単位（例: °C, %）。"
-        },
-        "completion_message": {
-          "name": "完了メッセージ",
-          "description": "アクティビティ終了時に表示されるメッセージ。"
-        },
-        "scale": {
-          "name": "スケール",
-          "description": "Y軸のスケールモード（線形または対数）。timeline テンプレートのみ。"
-        },
-        "decimals": {
-          "name": "小数点以下の桁数",
-          "description": "値表示の小数点以下の桁数（0〜10）。timeline テンプレートのみ。"
-        },
-        "smoothing": {
-          "name": "スムーズな折れ線",
-          "description": "データポイント間のカーブ補間を有効にします。timeline テンプレートのみ。"
-        },
-        "thresholds": {
-          "name": "しきい値",
-          "description": "スパークラインの水平参照線。timeline テンプレートのみ。"
-        },
-        "sound": {
-          "name": "サウンド",
-          "description": "この更新でデバイスで再生される通知サウンド。"
-        },
-        "priority": {
-          "name": "優先度の上書き",
-          "description": "更新ごとの優先度（0〜10）。このプッシュにのみ、アクティビティに設定された優先度を上書きします。"
-        },
-        "background_color": {
-          "name": "背景色",
-          "description": "Live Activity の背景色。16進数（#RRGGBB）または色名。"
-        },
-        "text_color": {
-          "name": "テキスト色",
-          "description": "Live Activity のテキスト色。16進数（#RRGGBB）または色名。"
-        },
-        "warning_threshold": {
-          "name": "警告しきい値",
-          "description": "countdown が警告状態に入る end_date までの秒数。countdown テンプレートのみ。"
-        },
-        "alarm": {
-          "name": "アラーム",
-          "description": "countdown の期限切れ時に AlarmKit アラームを起動する（iOS 26+、countdown テンプレートのみ）。"
-        },
-        "step_labels": {
-          "name": "ステップラベル",
-          "description": "ステップラベルの順序付きリスト。長さは total_steps と等しくなければなりません。steps テンプレートのみ。"
-        },
-        "step_rows": {
-          "name": "ステップ行高",
-          "description": "各ステップの行高（1〜10）の順序付きリスト。長さは total_steps と等しくなければなりません。steps テンプレートのみ。"
-        },
-        "fired_at": {
-          "name": "発火時刻",
-          "description": "alert が発火したときの Unix タイムスタンプ。alert テンプレートのみ。"
-        },
-        "units": {
-          "name": "単位マップ",
-          "description": "系列ごとの単位ラベル。キーは value dict のキーと一致する必要があります。timeline テンプレートのみ。"
-        },
-        "snooze_seconds": {
-          "name": "スヌーズ秒数",
-          "description": "iOS のスヌーズボタンが countdown を延長する時間（60〜3600）。デフォルトは 300（5分）。アラームが必要（iOS 26+、countdown テンプレートのみ）。"
-        },
-        "duration": {
-          "name": "継続時間",
-          "description": "終了日時の代わりに使える「設定したら任せる」方式: 秒数（1以上）または「1h30m」のような継続時間文字列。サーバーは開始/終了を現在時刻に再設定します。継続時間か終了日時のどちらかを指定してください。両方を設定した場合は継続時間が優先されます。"
-        },
-        "start_date": {
-          "name": "開始日時",
-          "description": "countdown が始まった時刻の Unix タイムスタンプ（経過/残りバーの基準）。サーバーのデフォルトは現在時刻です。"
-        },
-        "history": {
-          "name": "履歴（シード）",
-          "description": "スパークラインの初期シード: シリーズ名を (timestamp, value) のリストにマッピングするオブジェクト。シードのみ — 最初の更新以降はサーバーが引き継ぎます。"
-        },
-        "tap_action": {
-          "name": "タップアクション",
-          "description": "アクティビティ全体のタップ先をオブジェクトで指定: url（必須）、任意の foreground、http(s) URL の場合は method/headers/body によるサイレント Webhook。"
-        },
-        "url_action": {
-          "name": "プライマリボタン",
-          "description": "タップ可能なプライマリボタンをオブジェクトで指定: url（必須）、任意の title、icon、foreground、サイレント Webhook 用の http(s) method/headers/body。"
-        },
-        "secondary_url_action": {
-          "name": "セカンダリボタン",
-          "description": "タップ可能なセカンダリボタン — プライマリボタンと同じオブジェクト形式。"
-        }
+  "entity": {
+    "sensor": {
+      "notifications_used": {
+        "name": "Notifications used"
       },
-      "sections": {
-        "countdown_options": {
-          "name": "countdown オプション",
-          "description": "countdown テンプレートのみ。"
-        },
-        "steps_options": {
-          "name": "steps オプション",
-          "description": "steps テンプレートのみ。"
-        },
-        "alert_options": {
-          "name": "alert オプション",
-          "description": "alert テンプレートのみ。"
-        },
-        "gauge_timeline_options": {
-          "name": "gauge・timeline オプション",
-          "description": "gauge および timeline テンプレートのみ。"
-        },
-        "action_buttons": {
-          "name": "アクションボタン",
-          "description": "タップ可能なURLボタン。steps および alert テンプレートのみ。"
-        },
-        "display_options": {
-          "name": "表示・色・サウンド",
-          "description": "任意のスタイルと更新ごとの上書き。すべてのテンプレートに適用されます。"
+      "live_activity_updates_used": {
+        "name": "Live Activity updates used"
+      },
+      "widget_updates_used": {
+        "name": "Widget updates used"
+      },
+      "emails_used": {
+        "name": "Emails used"
+      },
+      "subscription_tier": {
+        "name": "Subscription tier",
+        "state": {
+          "free": "Free",
+          "premium": "Premium"
         }
       }
-    },
+    }
+  },
+  "services": {
     "update_activity_generic": {
-      "name": "アクティビティを更新 (Generic)",
-      "description": "PushWard Live Activityの状態とコンテンツを更新します。",
+      "name": "Update Activity (Generic)",
+      "description": "Update a PushWard Live Activity state and content.",
       "fields": {
         "slug": {
-          "name": "スラッグ",
-          "description": "アクティビティのスラッグ識別子。"
+          "name": "Slug",
+          "description": "Activity slug identifier."
         },
         "state": {
-          "name": "状態",
-          "description": "アクティビティの目標状態。"
+          "name": "State",
+          "description": "Desired activity state."
         },
         "state_text": {
-          "name": "状態テキスト",
-          "description": "アクティビティの状態として表示されるテキスト。"
+          "name": "State Text",
+          "description": "Text shown as the activity state."
         },
         "subtitle": {
-          "name": "サブタイトル",
-          "description": "アクティビティに表示されるサブタイトルテキスト。"
+          "name": "Subtitle",
+          "description": "Subtitle text shown on the activity."
         },
         "icon": {
-          "name": "アイコン",
-          "description": "SF Symbol またはMDIアイコン名（例: arrow.down.circle.fill, mdi:download）。"
+          "name": "Icon",
+          "description": "SF Symbol or MDI icon name (e.g. arrow.down.circle.fill, mdi:download)."
         },
         "progress": {
-          "name": "進捗",
-          "description": "0.0〜1.0の進捗値。"
+          "name": "Progress",
+          "description": "Progress value between 0.0 and 1.0."
         },
         "completion_message": {
-          "name": "完了メッセージ",
-          "description": "アクティビティ終了時に表示されるメッセージ。"
+          "name": "Completion Message",
+          "description": "Message shown when the activity ends."
         },
         "accent_color": {
-          "name": "アクセントカラー",
-          "description": "アクティビティのアクセントカラー名。"
+          "name": "Accent Color",
+          "description": "Accent color name for the activity."
         },
         "background_color": {
-          "name": "背景色",
-          "description": "Live Activity の背景色。16進数（#RRGGBB）または色名。"
+          "name": "Background Color",
+          "description": "Background color for the Live Activity. Hex (#RRGGBB) or named color."
         },
         "text_color": {
-          "name": "テキスト色",
-          "description": "Live Activity のテキスト色。16進数（#RRGGBB）または色名。"
+          "name": "Text Color",
+          "description": "Text color for the Live Activity. Hex (#RRGGBB) or named color."
         },
         "remaining_time": {
-          "name": "残り時間",
-          "description": "残り時間（秒）。"
+          "name": "Remaining Time",
+          "description": "Remaining time in seconds."
         },
         "sound": {
-          "name": "サウンド",
-          "description": "この更新でデバイスで再生される通知サウンド。"
+          "name": "Sound",
+          "description": "Notification sound played on the device for this update."
         },
         "priority": {
-          "name": "優先度の上書き",
-          "description": "更新ごとの優先度（0〜10）。このプッシュにのみ、アクティビティに設定された優先度を上書きします。"
-        },
-        "url": {
-          "name": "URL",
-          "description": "タップ可能なボタンとして表示されるプライマリ URL。http(s) または homeassistant:// のようなカスタムスキーム。"
-        },
-        "secondary_url": {
-          "name": "セカンダリURL",
-          "description": "2番目のタップ可能なボタンとして表示されるセカンダリ URL。"
+          "name": "Priority Override",
+          "description": "Per-update priority (0-10). Overrides the activity's configured priority for this push only."
         },
         "tap_action": {
-          "name": "タップアクション",
-          "description": "アクティビティ全体のタップ先をオブジェクトで指定: url（必須）、任意の foreground、http(s) URL の場合は method/headers/body によるサイレント Webhook。"
+          "name": "Tap Action",
+          "description": "Whole-activity tap target as an object: url (required), optional foreground, and for an http(s) url a silent webhook via method/headers/body."
         },
         "url_action": {
-          "name": "プライマリボタン",
-          "description": "タップ可能なプライマリボタンをオブジェクトで指定: url（必須）、任意の title、icon、foreground、サイレント Webhook 用の http(s) method/headers/body。"
+          "name": "Primary Button",
+          "description": "Primary tappable button as an object: url (required), optional title, icon, foreground, and http(s) method/headers/body for a silent webhook."
         },
         "secondary_url_action": {
-          "name": "セカンダリボタン",
-          "description": "タップ可能なセカンダリボタン — プライマリボタンと同じオブジェクト形式。"
+          "name": "Secondary Button",
+          "description": "Secondary tappable button — same object shape as the Primary Button."
         }
       },
       "sections": {
         "labels": {
-          "name": "ラベルとアイコン",
-          "description": "任意のテキストラベルとアイコン。すべてのテンプレートに適用されます。"
+          "name": "Labels & icon",
+          "description": "Optional text labels and icon. Apply to any template."
         },
         "action_buttons": {
-          "name": "アクションボタン",
-          "description": "タップ可能なURLボタン。steps および alert テンプレートのみ。"
+          "name": "Action buttons",
+          "description": "Tappable URLs and rich button / tap actions for the activity."
         },
         "display_options": {
-          "name": "表示・色・サウンド",
-          "description": "任意のスタイルと更新ごとの上書き。すべてのテンプレートに適用されます。"
+          "name": "Display, color & sound",
+          "description": "Optional styling and per-update overrides. Apply to any template."
         }
       }
     },
     "update_activity_countdown": {
-      "name": "アクティビティを更新 (Countdown)",
-      "description": "PushWard Live Activityの状態とコンテンツを更新します。",
+      "name": "Update Activity (Countdown)",
+      "description": "Update a PushWard Live Activity state and content.",
       "fields": {
         "slug": {
-          "name": "スラッグ",
-          "description": "アクティビティのスラッグ識別子。"
+          "name": "Slug",
+          "description": "Activity slug identifier."
         },
         "state": {
-          "name": "状態",
-          "description": "アクティビティの目標状態。"
+          "name": "State",
+          "description": "Desired activity state."
         },
         "end_date": {
-          "name": "終了日時",
-          "description": "countdown の終了日時のUnixタイムスタンプ。"
+          "name": "End Date",
+          "description": "Unix timestamp for countdown end date."
         },
         "completion_message": {
-          "name": "完了メッセージ",
-          "description": "アクティビティ終了時に表示されるメッセージ。"
+          "name": "Completion Message",
+          "description": "Message shown when the activity ends."
         },
         "state_text": {
-          "name": "状態テキスト",
-          "description": "アクティビティの状態として表示されるテキスト。"
+          "name": "State Text",
+          "description": "Text shown as the activity state."
         },
         "subtitle": {
-          "name": "サブタイトル",
-          "description": "アクティビティに表示されるサブタイトルテキスト。"
+          "name": "Subtitle",
+          "description": "Subtitle text shown on the activity."
         },
         "icon": {
-          "name": "アイコン",
-          "description": "SF Symbol またはMDIアイコン名（例: arrow.down.circle.fill, mdi:download）。"
+          "name": "Icon",
+          "description": "SF Symbol or MDI icon name (e.g. arrow.down.circle.fill, mdi:download)."
         },
         "progress": {
-          "name": "進捗",
-          "description": "0.0〜1.0の進捗値。"
+          "name": "Progress",
+          "description": "Progress value between 0.0 and 1.0."
         },
         "warning_threshold": {
-          "name": "警告しきい値",
-          "description": "countdown が警告状態に入る end_date までの秒数。countdown テンプレートのみ。"
+          "name": "Warning Threshold",
+          "description": "Seconds before end_date when the countdown enters warning state. Countdown template only."
         },
         "alarm": {
-          "name": "アラーム",
-          "description": "countdown の期限切れ時に AlarmKit アラームを起動する（iOS 26+、countdown テンプレートのみ）。"
+          "name": "Alarm",
+          "description": "Trigger AlarmKit alarm on countdown expiry (iOS 26+, countdown template only)."
         },
         "snooze_seconds": {
-          "name": "スヌーズ秒数",
-          "description": "How long the iOS Snooze button extends the countdown (60–3600). Defaults to 300 (5 min). Only applies with alarm enabled (iOS 26+)."
+          "name": "Snooze Seconds",
+          "description": "How long the iOS Snooze button extends the countdown (60–3600). Defaults to 300 (5 min). Requires alarm (iOS 26+, countdown template only)."
         },
         "accent_color": {
-          "name": "アクセントカラー",
-          "description": "アクティビティのアクセントカラー名。"
+          "name": "Accent Color",
+          "description": "Accent color name for the activity."
         },
         "background_color": {
-          "name": "背景色",
-          "description": "Live Activity の背景色。16進数（#RRGGBB）または色名。"
+          "name": "Background Color",
+          "description": "Background color for the Live Activity. Hex (#RRGGBB) or named color."
         },
         "text_color": {
-          "name": "テキスト色",
-          "description": "Live Activity のテキスト色。16進数（#RRGGBB）または色名。"
+          "name": "Text Color",
+          "description": "Text color for the Live Activity. Hex (#RRGGBB) or named color."
         },
         "remaining_time": {
-          "name": "残り時間",
-          "description": "残り時間（秒）。"
+          "name": "Remaining Time",
+          "description": "Remaining time in seconds."
         },
         "sound": {
-          "name": "サウンド",
-          "description": "この更新でデバイスで再生される通知サウンド。"
+          "name": "Sound",
+          "description": "Notification sound played on the device for this update."
         },
         "priority": {
-          "name": "優先度の上書き",
-          "description": "更新ごとの優先度（0〜10）。このプッシュにのみ、アクティビティに設定された優先度を上書きします。"
+          "name": "Priority Override",
+          "description": "Per-update priority (0-10). Overrides the activity's configured priority for this push only."
         },
         "duration": {
-          "name": "継続時間",
-          "description": "終了日時の代わりに使える「設定したら任せる」方式: 秒数（1以上）または「1h30m」のような継続時間文字列。サーバーは開始/終了を現在時刻に再設定します。継続時間か終了日時のどちらかを指定してください。両方を設定した場合は継続時間が優先されます。"
+          "name": "Duration",
+          "description": "Set-and-forget alternative to End Date: seconds (>=1) or a duration string like \"1h30m\". The server re-anchors start/end to now. Send either Duration or End Date — Duration wins if both are set."
         },
         "start_date": {
-          "name": "開始日時",
-          "description": "countdown が始まった時刻の Unix タイムスタンプ（経過/残りバーの基準）。サーバーのデフォルトは現在時刻です。"
-        },
-        "url": {
-          "name": "URL",
-          "description": "タップ可能なボタンとして表示されるプライマリ URL。http(s) または homeassistant:// のようなカスタムスキーム。"
-        },
-        "secondary_url": {
-          "name": "セカンダリURL",
-          "description": "2番目のタップ可能なボタンとして表示されるセカンダリ URL。"
+          "name": "Start Date",
+          "description": "Unix timestamp when the countdown began (anchors the elapsed/remaining bar). The server defaults this to now."
         },
         "tap_action": {
-          "name": "タップアクション",
-          "description": "アクティビティ全体のタップ先をオブジェクトで指定: url（必須）、任意の foreground、http(s) URL の場合は method/headers/body によるサイレント Webhook。"
+          "name": "Tap Action",
+          "description": "Whole-activity tap target as an object: url (required), optional foreground, and for an http(s) url a silent webhook via method/headers/body."
         },
         "url_action": {
-          "name": "プライマリボタン",
-          "description": "タップ可能なプライマリボタンをオブジェクトで指定: url（必須）、任意の title、icon、foreground、サイレント Webhook 用の http(s) method/headers/body。"
+          "name": "Primary Button",
+          "description": "Primary tappable button as an object: url (required), optional title, icon, foreground, and http(s) method/headers/body for a silent webhook."
         },
         "secondary_url_action": {
-          "name": "セカンダリボタン",
-          "description": "タップ可能なセカンダリボタン — プライマリボタンと同じオブジェクト形式。"
+          "name": "Secondary Button",
+          "description": "Secondary tappable button — same object shape as the Primary Button."
         }
       },
       "sections": {
         "labels": {
-          "name": "ラベルとアイコン",
-          "description": "任意のテキストラベルとアイコン。すべてのテンプレートに適用されます。"
+          "name": "Labels & icon",
+          "description": "Optional text labels and icon. Apply to any template."
         },
         "countdown_options": {
-          "name": "countdown オプション",
-          "description": "countdown テンプレートのみ。"
+          "name": "Countdown options",
+          "description": "Only used by the countdown template."
         },
         "action_buttons": {
-          "name": "アクションボタン",
-          "description": "タップ可能なURLボタン。steps および alert テンプレートのみ。"
+          "name": "Action buttons",
+          "description": "Tappable URLs and rich button / tap actions for the activity."
         },
         "display_options": {
-          "name": "表示・色・サウンド",
-          "description": "任意のスタイルと更新ごとの上書き。すべてのテンプレートに適用されます。"
+          "name": "Display, color & sound",
+          "description": "Optional styling and per-update overrides. Apply to any template."
         }
       }
     },
     "update_activity_steps": {
-      "name": "アクティビティを更新 (Steps)",
-      "description": "PushWard Live Activityの状態とコンテンツを更新します。",
+      "name": "Update Activity (Steps)",
+      "description": "Update a PushWard Live Activity state and content.",
       "fields": {
         "slug": {
-          "name": "スラッグ",
-          "description": "アクティビティのスラッグ識別子。"
+          "name": "Slug",
+          "description": "Activity slug identifier."
         },
         "state": {
-          "name": "状態",
-          "description": "アクティビティの目標状態。"
-        },
-        "total_steps": {
-          "name": "総 steps 数",
-          "description": "steps の総数。"
+          "name": "State",
+          "description": "Desired activity state."
         },
         "current_step": {
-          "name": "現在のステップ",
-          "description": "現在のステップ番号。"
+          "name": "Current Step",
+          "description": "Current step number."
         },
         "state_text": {
-          "name": "状態テキスト",
-          "description": "アクティビティの状態として表示されるテキスト。"
+          "name": "State Text",
+          "description": "Text shown as the activity state."
         },
         "subtitle": {
-          "name": "サブタイトル",
-          "description": "アクティビティに表示されるサブタイトルテキスト。"
+          "name": "Subtitle",
+          "description": "Subtitle text shown on the activity."
         },
         "icon": {
-          "name": "アイコン",
-          "description": "SF Symbol またはMDIアイコン名（例: arrow.down.circle.fill, mdi:download）。"
+          "name": "Icon",
+          "description": "SF Symbol or MDI icon name (e.g. arrow.down.circle.fill, mdi:download)."
         },
         "progress": {
-          "name": "進捗",
-          "description": "0.0〜1.0の進捗値。"
-        },
-        "step_labels": {
-          "name": "ステップラベル",
-          "description": "ステップラベルの順序付きリスト。長さは total_steps と等しくなければなりません。steps テンプレートのみ。"
-        },
-        "step_rows": {
-          "name": "ステップ行高",
-          "description": "各ステップの行高（1〜10）の順序付きリスト。長さは total_steps と等しくなければなりません。steps テンプレートのみ。"
-        },
-        "url": {
-          "name": "URL",
-          "description": "タップ可能なボタンとして表示されるプライマリURL。steps および alert テンプレートのみ対応。"
-        },
-        "secondary_url": {
-          "name": "セカンダリURL",
-          "description": "2番目のタップ可能なボタンとして表示されるセカンダリURL。steps および alert テンプレートのみ対応。"
+          "name": "Progress",
+          "description": "Progress value between 0.0 and 1.0."
         },
         "completion_message": {
-          "name": "完了メッセージ",
-          "description": "アクティビティ終了時に表示されるメッセージ。"
+          "name": "Completion Message",
+          "description": "Message shown when the activity ends."
         },
         "accent_color": {
-          "name": "アクセントカラー",
-          "description": "アクティビティのアクセントカラー名。"
+          "name": "Accent Color",
+          "description": "Accent color name for the activity."
         },
         "background_color": {
-          "name": "背景色",
-          "description": "Live Activity の背景色。16進数（#RRGGBB）または色名。"
+          "name": "Background Color",
+          "description": "Background color for the Live Activity. Hex (#RRGGBB) or named color."
         },
         "text_color": {
-          "name": "テキスト色",
-          "description": "Live Activity のテキスト色。16進数（#RRGGBB）または色名。"
+          "name": "Text Color",
+          "description": "Text color for the Live Activity. Hex (#RRGGBB) or named color."
         },
         "remaining_time": {
-          "name": "残り時間",
-          "description": "残り時間（秒）。"
+          "name": "Remaining Time",
+          "description": "Remaining time in seconds."
         },
         "sound": {
-          "name": "サウンド",
-          "description": "この更新でデバイスで再生される通知サウンド。"
+          "name": "Sound",
+          "description": "Notification sound played on the device for this update."
         },
         "priority": {
-          "name": "優先度の上書き",
-          "description": "更新ごとの優先度（0〜10）。このプッシュにのみ、アクティビティに設定された優先度を上書きします。"
+          "name": "Priority Override",
+          "description": "Per-update priority (0-10). Overrides the activity's configured priority for this push only."
         },
         "tap_action": {
-          "name": "タップアクション",
-          "description": "アクティビティ全体のタップ先をオブジェクトで指定: url（必須）、任意の foreground、http(s) URL の場合は method/headers/body によるサイレント Webhook。"
+          "name": "Tap Action",
+          "description": "Whole-activity tap target as an object: url (required), optional foreground, and for an http(s) url a silent webhook via method/headers/body."
         },
         "url_action": {
-          "name": "プライマリボタン",
-          "description": "タップ可能なプライマリボタンをオブジェクトで指定: url（必須）、任意の title、icon、foreground、サイレント Webhook 用の http(s) method/headers/body。"
+          "name": "Primary Button",
+          "description": "Primary tappable button as an object: url (required), optional title, icon, foreground, and http(s) method/headers/body for a silent webhook."
         },
         "secondary_url_action": {
-          "name": "セカンダリボタン",
-          "description": "タップ可能なセカンダリボタン — プライマリボタンと同じオブジェクト形式。"
+          "name": "Secondary Button",
+          "description": "Secondary tappable button — same object shape as the Primary Button."
+        },
+        "steps": {
+          "name": "Steps",
+          "description": "One row per step. Parallel jobs creates stacked lanes; relative step length controls proportional width."
         }
       },
       "sections": {
         "labels": {
-          "name": "ラベルとアイコン",
-          "description": "任意のテキストラベルとアイコン。すべてのテンプレートに適用されます。"
+          "name": "Labels & icon",
+          "description": "Optional text labels and icon. Apply to any template."
         },
         "steps_options": {
-          "name": "steps オプション",
-          "description": "steps テンプレートのみ。"
+          "name": "Steps options",
+          "description": "Only used by the steps template."
         },
         "action_buttons": {
-          "name": "アクションボタン",
-          "description": "タップ可能なURLボタン。steps および alert テンプレートのみ。"
+          "name": "Action buttons",
+          "description": "Tappable URLs and rich button / tap actions for the activity."
         },
         "display_options": {
-          "name": "表示・色・サウンド",
-          "description": "任意のスタイルと更新ごとの上書き。すべてのテンプレートに適用されます。"
+          "name": "Display, color & sound",
+          "description": "Optional styling and per-update overrides. Apply to any template."
         }
       }
     },
     "update_activity_alert": {
-      "name": "アクティビティを更新 (Alert)",
-      "description": "PushWard Live Activityの状態とコンテンツを更新します。",
+      "name": "Update Activity (Alert)",
+      "description": "Update a PushWard Live Activity state and content.",
       "fields": {
         "slug": {
-          "name": "スラッグ",
-          "description": "アクティビティのスラッグ識別子。"
+          "name": "Slug",
+          "description": "Activity slug identifier."
         },
         "state": {
-          "name": "状態",
-          "description": "アクティビティの目標状態。"
+          "name": "State",
+          "description": "Desired activity state."
         },
         "severity": {
-          "name": "重大度",
-          "description": "alert の重大度レベル。"
+          "name": "Severity",
+          "description": "Alert severity level."
+        },
+        "severity_label": {
+          "name": "Severity Label",
+          "description": "Override the Info/Warning/Critical badge text. Alert template only."
         },
         "state_text": {
-          "name": "状態テキスト",
-          "description": "アクティビティの状態として表示されるテキスト。"
+          "name": "State Text",
+          "description": "Text shown as the activity state."
         },
         "subtitle": {
-          "name": "サブタイトル",
-          "description": "アクティビティに表示されるサブタイトルテキスト。"
+          "name": "Subtitle",
+          "description": "Subtitle text shown on the activity."
         },
         "icon": {
-          "name": "アイコン",
-          "description": "SF Symbol またはMDIアイコン名（例: arrow.down.circle.fill, mdi:download）。"
+          "name": "Icon",
+          "description": "SF Symbol or MDI icon name (e.g. arrow.down.circle.fill, mdi:download)."
         },
         "progress": {
-          "name": "進捗",
-          "description": "0.0〜1.0の進捗値。"
+          "name": "Progress",
+          "description": "Progress value between 0.0 and 1.0."
         },
         "fired_at": {
-          "name": "発火時刻",
-          "description": "alert が発火したときの Unix タイムスタンプ。alert テンプレートのみ。"
-        },
-        "url": {
-          "name": "URL",
-          "description": "タップ可能なボタンとして表示されるプライマリURL。steps および alert テンプレートのみ対応。"
-        },
-        "secondary_url": {
-          "name": "セカンダリURL",
-          "description": "2番目のタップ可能なボタンとして表示されるセカンダリURL。steps および alert テンプレートのみ対応。"
+          "name": "Fired At",
+          "description": "Unix timestamp when the alert was triggered. Alert template only."
         },
         "completion_message": {
-          "name": "完了メッセージ",
-          "description": "アクティビティ終了時に表示されるメッセージ。"
+          "name": "Completion Message",
+          "description": "Message shown when the activity ends."
         },
         "accent_color": {
-          "name": "アクセントカラー",
-          "description": "アクティビティのアクセントカラー名。"
+          "name": "Accent Color",
+          "description": "Accent color name for the activity."
         },
         "background_color": {
-          "name": "背景色",
-          "description": "Live Activity の背景色。16進数（#RRGGBB）または色名。"
+          "name": "Background Color",
+          "description": "Background color for the Live Activity. Hex (#RRGGBB) or named color."
         },
         "text_color": {
-          "name": "テキスト色",
-          "description": "Live Activity のテキスト色。16進数（#RRGGBB）または色名。"
+          "name": "Text Color",
+          "description": "Text color for the Live Activity. Hex (#RRGGBB) or named color."
         },
         "remaining_time": {
-          "name": "残り時間",
-          "description": "残り時間（秒）。"
+          "name": "Remaining Time",
+          "description": "Remaining time in seconds."
         },
         "sound": {
-          "name": "サウンド",
-          "description": "この更新でデバイスで再生される通知サウンド。"
+          "name": "Sound",
+          "description": "Notification sound played on the device for this update."
         },
         "priority": {
-          "name": "優先度の上書き",
-          "description": "更新ごとの優先度（0〜10）。このプッシュにのみ、アクティビティに設定された優先度を上書きします。"
+          "name": "Priority Override",
+          "description": "Per-update priority (0-10). Overrides the activity's configured priority for this push only."
         },
         "tap_action": {
-          "name": "タップアクション",
-          "description": "アクティビティ全体のタップ先をオブジェクトで指定: url（必須）、任意の foreground、http(s) URL の場合は method/headers/body によるサイレント Webhook。"
+          "name": "Tap Action",
+          "description": "Whole-activity tap target as an object: url (required), optional foreground, and for an http(s) url a silent webhook via method/headers/body."
         },
         "url_action": {
-          "name": "プライマリボタン",
-          "description": "タップ可能なプライマリボタンをオブジェクトで指定: url（必須）、任意の title、icon、foreground、サイレント Webhook 用の http(s) method/headers/body。"
+          "name": "Primary Button",
+          "description": "Primary tappable button as an object: url (required), optional title, icon, foreground, and http(s) method/headers/body for a silent webhook."
         },
         "secondary_url_action": {
-          "name": "セカンダリボタン",
-          "description": "タップ可能なセカンダリボタン — プライマリボタンと同じオブジェクト形式。"
+          "name": "Secondary Button",
+          "description": "Secondary tappable button — same object shape as the Primary Button."
         }
       },
       "sections": {
         "labels": {
-          "name": "ラベルとアイコン",
-          "description": "任意のテキストラベルとアイコン。すべてのテンプレートに適用されます。"
+          "name": "Labels & icon",
+          "description": "Optional text labels and icon. Apply to any template."
         },
         "alert_options": {
-          "name": "alert オプション",
-          "description": "alert テンプレートのみ。"
+          "name": "Alert options",
+          "description": "Only used by the alert template."
         },
         "action_buttons": {
-          "name": "アクションボタン",
-          "description": "タップ可能なURLボタン。steps および alert テンプレートのみ。"
+          "name": "Action buttons",
+          "description": "Tappable URLs and rich button / tap actions for the activity."
         },
         "display_options": {
-          "name": "表示・色・サウンド",
-          "description": "任意のスタイルと更新ごとの上書き。すべてのテンプレートに適用されます。"
+          "name": "Display, color & sound",
+          "description": "Optional styling and per-update overrides. Apply to any template."
         }
       }
     },
     "update_activity_gauge": {
-      "name": "アクティビティを更新 (Gauge)",
-      "description": "PushWard Live Activityの状態とコンテンツを更新します。",
+      "name": "Update Activity (Gauge)",
+      "description": "Update a PushWard Live Activity state and content.",
       "fields": {
         "slug": {
-          "name": "スラッグ",
-          "description": "アクティビティのスラッグ識別子。"
+          "name": "Slug",
+          "description": "Activity slug identifier."
         },
         "state": {
-          "name": "状態",
-          "description": "アクティビティの目標状態。"
+          "name": "State",
+          "description": "Desired activity state."
         },
         "value": {
-          "name": "値",
-          "description": "gauge: 数値。timeline: ラベル付きの値オブジェクト（例: Temp=22.5）。"
+          "name": "Value",
+          "description": "Gauge: numeric value. Timeline: labeled values object (e.g. Temp=22.5)."
         },
         "min_value": {
-          "name": "最小値",
-          "description": "gauge の最小値。"
+          "name": "Min Value",
+          "description": "Minimum gauge value."
         },
         "max_value": {
-          "name": "最大値",
-          "description": "gauge の最大値。"
+          "name": "Max Value",
+          "description": "Maximum gauge value."
         },
         "unit": {
-          "name": "単位",
-          "description": "値の表示単位（例: °C, %）。"
+          "name": "Unit",
+          "description": "Display unit for the value (e.g. °C, %)."
         },
         "state_text": {
-          "name": "状態テキスト",
-          "description": "アクティビティの状態として表示されるテキスト。"
+          "name": "State Text",
+          "description": "Text shown as the activity state."
         },
         "subtitle": {
-          "name": "サブタイトル",
-          "description": "アクティビティに表示されるサブタイトルテキスト。"
+          "name": "Subtitle",
+          "description": "Subtitle text shown on the activity."
         },
         "icon": {
-          "name": "アイコン",
-          "description": "SF Symbol またはMDIアイコン名（例: arrow.down.circle.fill, mdi:download）。"
+          "name": "Icon",
+          "description": "SF Symbol or MDI icon name (e.g. arrow.down.circle.fill, mdi:download)."
         },
         "progress": {
-          "name": "進捗",
-          "description": "0.0〜1.0の進捗値。"
+          "name": "Progress",
+          "description": "Progress value between 0.0 and 1.0."
         },
         "completion_message": {
-          "name": "完了メッセージ",
-          "description": "アクティビティ終了時に表示されるメッセージ。"
+          "name": "Completion Message",
+          "description": "Message shown when the activity ends."
         },
         "accent_color": {
-          "name": "アクセントカラー",
-          "description": "アクティビティのアクセントカラー名。"
+          "name": "Accent Color",
+          "description": "Accent color name for the activity."
         },
         "background_color": {
-          "name": "背景色",
-          "description": "Live Activity の背景色。16進数（#RRGGBB）または色名。"
+          "name": "Background Color",
+          "description": "Background color for the Live Activity. Hex (#RRGGBB) or named color."
         },
         "text_color": {
-          "name": "テキスト色",
-          "description": "Live Activity のテキスト色。16進数（#RRGGBB）または色名。"
+          "name": "Text Color",
+          "description": "Text color for the Live Activity. Hex (#RRGGBB) or named color."
         },
         "remaining_time": {
-          "name": "残り時間",
-          "description": "残り時間（秒）。"
+          "name": "Remaining Time",
+          "description": "Remaining time in seconds."
         },
         "sound": {
-          "name": "サウンド",
-          "description": "この更新でデバイスで再生される通知サウンド。"
+          "name": "Sound",
+          "description": "Notification sound played on the device for this update."
         },
         "priority": {
-          "name": "優先度の上書き",
-          "description": "更新ごとの優先度（0〜10）。このプッシュにのみ、アクティビティに設定された優先度を上書きします。"
-        },
-        "url": {
-          "name": "URL",
-          "description": "タップ可能なボタンとして表示されるプライマリ URL。http(s) または homeassistant:// のようなカスタムスキーム。"
-        },
-        "secondary_url": {
-          "name": "セカンダリURL",
-          "description": "2番目のタップ可能なボタンとして表示されるセカンダリ URL。"
+          "name": "Priority Override",
+          "description": "Per-update priority (0-10). Overrides the activity's configured priority for this push only."
         },
         "tap_action": {
-          "name": "タップアクション",
-          "description": "アクティビティ全体のタップ先をオブジェクトで指定: url（必須）、任意の foreground、http(s) URL の場合は method/headers/body によるサイレント Webhook。"
+          "name": "Tap Action",
+          "description": "Whole-activity tap target as an object: url (required), optional foreground, and for an http(s) url a silent webhook via method/headers/body."
         },
         "url_action": {
-          "name": "プライマリボタン",
-          "description": "タップ可能なプライマリボタンをオブジェクトで指定: url（必須）、任意の title、icon、foreground、サイレント Webhook 用の http(s) method/headers/body。"
+          "name": "Primary Button",
+          "description": "Primary tappable button as an object: url (required), optional title, icon, foreground, and http(s) method/headers/body for a silent webhook."
         },
         "secondary_url_action": {
-          "name": "セカンダリボタン",
-          "description": "タップ可能なセカンダリボタン — プライマリボタンと同じオブジェクト形式。"
+          "name": "Secondary Button",
+          "description": "Secondary tappable button — same object shape as the Primary Button."
         }
       },
       "sections": {
         "labels": {
-          "name": "ラベルとアイコン",
-          "description": "任意のテキストラベルとアイコン。すべてのテンプレートに適用されます。"
+          "name": "Labels & icon",
+          "description": "Optional text labels and icon. Apply to any template."
         },
         "action_buttons": {
-          "name": "アクションボタン",
-          "description": "タップ可能なURLボタン。steps および alert テンプレートのみ。"
+          "name": "Action buttons",
+          "description": "Tappable URLs and rich button / tap actions for the activity."
         },
         "display_options": {
-          "name": "表示・色・サウンド",
-          "description": "任意のスタイルと更新ごとの上書き。すべてのテンプレートに適用されます。"
+          "name": "Display, color & sound",
+          "description": "Optional styling and per-update overrides. Apply to any template."
         }
       }
     },
     "update_activity_timeline": {
-      "name": "アクティビティを更新 (Timeline)",
-      "description": "PushWard Live Activityの状態とコンテンツを更新します。",
+      "name": "Update Activity (Timeline)",
+      "description": "Update a PushWard Live Activity state and content.",
       "fields": {
         "slug": {
-          "name": "スラッグ",
-          "description": "アクティビティのスラッグ識別子。"
+          "name": "Slug",
+          "description": "Activity slug identifier."
         },
         "state": {
-          "name": "状態",
-          "description": "アクティビティの目標状態。"
-        },
-        "value": {
-          "name": "値",
-          "description": "gauge: 数値。timeline: ラベル付きの値オブジェクト（例: Temp=22.5）。"
-        },
-        "unit": {
-          "name": "単位",
-          "description": "値の表示単位（例: °C, %）。"
+          "name": "State",
+          "description": "Desired activity state."
         },
         "state_text": {
-          "name": "状態テキスト",
-          "description": "アクティビティの状態として表示されるテキスト。"
+          "name": "State Text",
+          "description": "Text shown as the activity state."
         },
         "subtitle": {
-          "name": "サブタイトル",
-          "description": "アクティビティに表示されるサブタイトルテキスト。"
+          "name": "Subtitle",
+          "description": "Subtitle text shown on the activity."
         },
         "icon": {
-          "name": "アイコン",
-          "description": "SF Symbol またはMDIアイコン名（例: arrow.down.circle.fill, mdi:download）。"
+          "name": "Icon",
+          "description": "SF Symbol or MDI icon name (e.g. arrow.down.circle.fill, mdi:download)."
         },
         "progress": {
-          "name": "進捗",
-          "description": "0.0〜1.0の進捗値。"
+          "name": "Progress",
+          "description": "Progress value between 0.0 and 1.0."
         },
-        "units": {
-          "name": "単位マップ",
-          "description": "系列ごとの単位ラベル。キーは value dict のキーと一致する必要があります。timeline テンプレートのみ。"
+        "primary_series": {
+          "name": "Primary Series",
+          "description": "Label of the series shown as the headline value and used for the compact high/low range. Leave empty to keep the auto-picked series. Max 32 characters. Timeline template only."
         },
         "scale": {
-          "name": "スケール",
-          "description": "Y軸のスケールモード（線形または対数）。timeline テンプレートのみ。"
+          "name": "Scale",
+          "description": "Y-axis scale mode (linear or logarithmic). Timeline template only."
         },
         "decimals": {
-          "name": "小数点以下の桁数",
-          "description": "値表示の小数点以下の桁数（0〜10）。timeline テンプレートのみ。"
+          "name": "Decimal Places",
+          "description": "Decimal places for value display (0-10). Timeline template only."
         },
         "smoothing": {
-          "name": "スムーズな折れ線",
-          "description": "データポイント間のカーブ補間を有効にします。timeline テンプレートのみ。"
+          "name": "Smooth Lines",
+          "description": "Enable curve interpolation between data points. Timeline template only."
         },
         "thresholds": {
-          "name": "しきい値",
-          "description": "スパークラインの水平参照線。timeline テンプレートのみ。"
+          "name": "Thresholds",
+          "description": "Horizontal reference lines on the sparkline. Timeline template only."
         },
         "completion_message": {
-          "name": "完了メッセージ",
-          "description": "アクティビティ終了時に表示されるメッセージ。"
+          "name": "Completion Message",
+          "description": "Message shown when the activity ends."
         },
         "accent_color": {
-          "name": "アクセントカラー",
-          "description": "アクティビティのアクセントカラー名。"
+          "name": "Accent Color",
+          "description": "Accent color name for the activity."
         },
         "background_color": {
-          "name": "背景色",
-          "description": "Live Activity の背景色。16進数（#RRGGBB）または色名。"
+          "name": "Background Color",
+          "description": "Background color for the Live Activity. Hex (#RRGGBB) or named color."
         },
         "text_color": {
-          "name": "テキスト色",
-          "description": "Live Activity のテキスト色。16進数（#RRGGBB）または色名。"
+          "name": "Text Color",
+          "description": "Text color for the Live Activity. Hex (#RRGGBB) or named color."
         },
         "remaining_time": {
-          "name": "残り時間",
-          "description": "残り時間（秒）。"
+          "name": "Remaining Time",
+          "description": "Remaining time in seconds."
         },
         "sound": {
-          "name": "サウンド",
-          "description": "この更新でデバイスで再生される通知サウンド。"
+          "name": "Sound",
+          "description": "Notification sound played on the device for this update."
         },
         "priority": {
-          "name": "優先度の上書き",
-          "description": "更新ごとの優先度（0〜10）。このプッシュにのみ、アクティビティに設定された優先度を上書きします。"
+          "name": "Priority Override",
+          "description": "Per-update priority (0-10). Overrides the activity's configured priority for this push only."
         },
         "history": {
-          "name": "履歴（シード）",
-          "description": "スパークラインの初期シード: シリーズ名を (timestamp, value) のリストにマッピングするオブジェクト。シードのみ — 最初の更新以降はサーバーが引き継ぎます。"
-        },
-        "url": {
-          "name": "URL",
-          "description": "タップ可能なボタンとして表示されるプライマリ URL。http(s) または homeassistant:// のようなカスタムスキーム。"
-        },
-        "secondary_url": {
-          "name": "セカンダリURL",
-          "description": "2番目のタップ可能なボタンとして表示されるセカンダリ URL。"
+          "name": "History (seed)",
+          "description": "Initial sparkline seed: an object of series name to a list of (timestamp, value). Seed-only — the server takes over after the first update."
         },
         "tap_action": {
-          "name": "タップアクション",
-          "description": "アクティビティ全体のタップ先をオブジェクトで指定: url（必須）、任意の foreground、http(s) URL の場合は method/headers/body によるサイレント Webhook。"
+          "name": "Tap Action",
+          "description": "Whole-activity tap target as an object: url (required), optional foreground, and for an http(s) url a silent webhook via method/headers/body."
         },
         "url_action": {
-          "name": "プライマリボタン",
-          "description": "タップ可能なプライマリボタンをオブジェクトで指定: url（必須）、任意の title、icon、foreground、サイレント Webhook 用の http(s) method/headers/body。"
+          "name": "Primary Button",
+          "description": "Primary tappable button as an object: url (required), optional title, icon, foreground, and http(s) method/headers/body for a silent webhook."
         },
         "secondary_url_action": {
-          "name": "セカンダリボタン",
-          "description": "タップ可能なセカンダリボタン — プライマリボタンと同じオブジェクト形式。"
+          "name": "Secondary Button",
+          "description": "Secondary tappable button — same object shape as the Primary Button."
+        },
+        "series": {
+          "name": "Series",
+          "description": "Add 1-10 named current values, each with an optional display unit."
         }
       },
       "sections": {
         "labels": {
-          "name": "ラベルとアイコン",
-          "description": "任意のテキストラベルとアイコン。すべてのテンプレートに適用されます。"
+          "name": "Labels & icon",
+          "description": "Optional text labels and icon. Apply to any template."
         },
         "gauge_timeline_options": {
-          "name": "gauge・timeline オプション",
-          "description": "gauge および timeline テンプレートのみ。"
+          "name": "Gauge & Timeline options",
+          "description": "Only used by the gauge and timeline templates."
         },
         "action_buttons": {
-          "name": "アクションボタン",
-          "description": "タップ可能なURLボタン。steps および alert テンプレートのみ。"
+          "name": "Action buttons",
+          "description": "Tappable URLs and rich button / tap actions for the activity."
         },
         "display_options": {
-          "name": "表示・色・サウンド",
-          "description": "任意のスタイルと更新ごとの上書き。すべてのテンプレートに適用されます。"
+          "name": "Display, color & sound",
+          "description": "Optional styling and per-update overrides. Apply to any template."
+        }
+      }
+    },
+    "update_activity_board": {
+      "name": "Update Activity (Board)",
+      "description": "Update a PushWard board Live Activity (1–4 tiles).",
+      "fields": {
+        "slug": {
+          "name": "Slug",
+          "description": "Activity slug identifier."
+        },
+        "state": {
+          "name": "State",
+          "description": "Desired activity state."
+        },
+        "tiles": {
+          "name": "Tiles",
+          "description": "List of 1–4 tiles. Each: label (required, ≤32), value (required string, ≤16), and optional unit (≤8), icon (SF Symbol or mdi:), color (named or hex), trend (up/down/flat), url_action object."
+        },
+        "state_text": {
+          "name": "State Text",
+          "description": "Text shown as the activity state."
+        },
+        "subtitle": {
+          "name": "Subtitle",
+          "description": "Subtitle text shown on the activity."
+        },
+        "icon": {
+          "name": "Icon",
+          "description": "SF Symbol or MDI icon name (e.g. square.grid.2x2.fill, mdi:view-dashboard)."
+        },
+        "completion_message": {
+          "name": "Completion Message",
+          "description": "Message shown when the activity ends."
+        },
+        "accent_color": {
+          "name": "Accent Color",
+          "description": "Accent color name for the activity."
+        },
+        "background_color": {
+          "name": "Background Color",
+          "description": "Background color for the Live Activity. Hex (#RRGGBB) or named color."
+        },
+        "text_color": {
+          "name": "Text Color",
+          "description": "Text color for the Live Activity. Hex (#RRGGBB) or named color."
+        },
+        "tap_action": {
+          "name": "Tap Action",
+          "description": "Whole-activity tap target as an object: url (required), optional foreground, and for an http(s) url a silent webhook via method/headers/body. (Per-tile taps go in each tile's url_action.)"
+        },
+        "sound": {
+          "name": "Sound",
+          "description": "Notification sound played on the device for this update."
+        },
+        "priority": {
+          "name": "Priority Override",
+          "description": "Per-update priority (0-10). Overrides the activity's configured priority for this push only."
+        }
+      }
+    },
+    "update_activity_log": {
+      "name": "Update Activity (Log)",
+      "description": "Update a PushWard log Live Activity (1–20 newest-first lines).",
+      "fields": {
+        "slug": {
+          "name": "Slug",
+          "description": "Activity slug identifier."
+        },
+        "state": {
+          "name": "State",
+          "description": "Desired activity state."
+        },
+        "lines": {
+          "name": "Lines",
+          "description": "List of 1–20 newest-first log lines. Each: text (required, ≤512), and optional at (unix timestamp) and level (info/warn/error)."
+        },
+        "state_text": {
+          "name": "State Text",
+          "description": "Text shown as the activity state."
+        },
+        "subtitle": {
+          "name": "Subtitle",
+          "description": "Subtitle text shown on the activity."
+        },
+        "icon": {
+          "name": "Icon",
+          "description": "SF Symbol or MDI icon name (e.g. list.bullet.rectangle, mdi:format-list-bulleted)."
+        },
+        "completion_message": {
+          "name": "Completion Message",
+          "description": "Message shown when the activity ends."
+        },
+        "accent_color": {
+          "name": "Accent Color",
+          "description": "Accent color name for the activity."
+        },
+        "background_color": {
+          "name": "Background Color",
+          "description": "Background color for the Live Activity. Hex (#RRGGBB) or named color."
+        },
+        "text_color": {
+          "name": "Text Color",
+          "description": "Text color for the Live Activity. Hex (#RRGGBB) or named color."
+        },
+        "tap_action": {
+          "name": "Tap Action",
+          "description": "Whole-activity tap target as an object: url (required), optional foreground, and for an http(s) url a silent webhook via method/headers/body."
+        },
+        "sound": {
+          "name": "Sound",
+          "description": "Notification sound played on the device for this update."
+        },
+        "priority": {
+          "name": "Priority Override",
+          "description": "Per-update priority (0-10). Overrides the activity's configured priority for this push only."
         }
       }
     },
     "create_activity": {
-      "name": "アクティビティを作成",
-      "description": "新しいPushWard Live Activityを作成します。",
+      "name": "Create Activity",
+      "description": "Create a new PushWard Live Activity.",
       "fields": {
         "slug": {
-          "name": "スラッグ",
-          "description": "一意のアクティビティスラッグ識別子。"
+          "name": "Slug",
+          "description": "Unique activity slug identifier."
         },
         "name": {
-          "name": "名前",
-          "description": "アクティビティの表示名。"
+          "name": "Name",
+          "description": "Display name for the activity."
         },
         "priority": {
-          "name": "優先度",
-          "description": "アクティビティの優先度（0 = 最低, 10 = 最高）。"
+          "name": "Priority",
+          "description": "Activity priority (0 = lowest, 10 = highest)."
         },
         "ended_ttl": {
-          "name": "終了後TTL",
-          "description": "アクティビティ終了後に保持する秒数。"
+          "name": "Ended TTL",
+          "description": "Seconds to keep the activity after it ends."
         },
         "stale_ttl": {
-          "name": "古いTTL",
-          "description": "アクティビティが古いと見なされるまでの秒数。"
+          "name": "Stale TTL",
+          "description": "Seconds before the activity is considered stale."
         }
       }
     },
     "end_activity": {
-      "name": "アクティビティを終了",
-      "description": "PushWard Live Activityを終了します。",
+      "name": "End Activity",
+      "description": "End a PushWard Live Activity.",
       "fields": {
         "slug": {
-          "name": "スラッグ",
-          "description": "終了するアクティビティのスラッグ識別子。"
+          "name": "Slug",
+          "description": "Activity slug identifier to end."
         },
         "completion_message": {
-          "name": "完了メッセージ",
-          "description": "アクティビティ終了時に表示されるオプションのメッセージ。"
+          "name": "Completion Message",
+          "description": "Optional message shown when the activity ends."
         }
       }
     },
     "delete_activity": {
-      "name": "アクティビティを削除",
-      "description": "PushWard Live Activityを削除します。",
+      "name": "Delete Activity",
+      "description": "Delete a PushWard Live Activity.",
       "fields": {
         "slug": {
-          "name": "スラッグ",
-          "description": "削除するアクティビティのスラッグ識別子。"
-        }
-      }
-    },
-    "send_notification": {
-      "name": "通知を送信",
-      "description": "PushWard経由でプッシュ通知を送信します。",
-      "fields": {
-        "title": {
-          "name": "タイトル",
-          "description": "通知のタイトル。"
-        },
-        "body": {
-          "name": "本文",
-          "description": "通知の本文テキスト。"
-        },
-        "subtitle": {
-          "name": "サブタイトル",
-          "description": "タイトルの下に表示されるオプションのサブタイトル。"
-        },
-        "level": {
-          "name": "レベル",
-          "description": "iOSの割り込みレベル。通知の配信方法を制御します。"
-        },
-        "thread_id": {
-          "name": "スレッドID",
-          "description": "通知センターで通知をまとめてグループ化します。"
-        },
-        "collapse_id": {
-          "name": "折りたたみID",
-          "description": "APNsの重複排除キー。同じキーを持つ以前の通知を置き換えます。"
-        },
-        "source": {
-          "name": "ソース",
-          "description": "PushWardインボックスでのグループ化に使用するソース識別子。"
-        },
-        "source_display_name": {
-          "name": "ソース表示名",
-          "description": "PushWardインボックスに表示される人間が読めるソース名。"
-        },
-        "activity_slug": {
-          "name": "アクティビティスラッグ",
-          "description": "この通知を既存のLive Activityにリンクします。"
-        },
-        "push": {
-          "name": "プッシュ",
-          "description": "APNs push alert としてすべてのデバイスに送信します。false の場合、通知はインボックスにのみ保存されます。"
-        },
-        "url": {
-          "name": "URL",
-          "description": "通知をタップしたときに開く URL。"
-        },
-        "icon_url": {
-          "name": "アイコン URL",
-          "description": "通知ごとのカスタムアイコンの HTTPS URL。"
-        },
-        "metadata": {
-          "name": "メタデータ",
-          "description": "通知に添付される追加メタデータのキーと値のペア。"
-        },
-        "media": {
-          "name": "メディア",
-          "description": "`url`（HTTPS）と `type`（image、video、または audio）を持つオブジェクトとしてのメディア添付。"
-        },
-        "actions": {
-          "name": "アクション",
-          "description": "アクションボタンのリスト。各アクションは id、title、任意の url、foreground、destructive、authentication_required、icon を持つオブジェクトです。http(s) URL の場合は method（GET/POST/PUT/PATCH/DELETE/HEAD）、headers、body を指定してサイレント Webhook を送信することもできます。"
+          "name": "Slug",
+          "description": "Activity slug identifier to delete."
         }
       }
     },
     "widget_refresh": {
-      "name": "ウィジェットを更新",
-      "description": "追跡中の PushWard ウィジェットを強制的に更新します。メモリ内の差分キャッシュをバイパスし、値が変わっていなくてもウィジェットを再描画して iOS にプッシュします。",
+      "name": "Refresh Widget",
+      "description": "Force-refresh a tracked PushWard widget. Bypasses the in-memory diff cache so the widget is re-rendered and pushed to iOS even when the value hasn't changed.",
       "fields": {
         "slug": {
-          "name": "スラッグ",
-          "description": "ウィジェットのスラッグ識別子。slug または entity_id のいずれかを指定する必要があります。"
+          "name": "Slug",
+          "description": "Widget slug identifier. Either slug or entity_id must be provided."
         },
         "entity_id": {
-          "name": "エンティティ",
-          "description": "ウィジェットに紐付けられた HA エンティティ。slug または entity_id のいずれかを指定する必要があります。"
+          "name": "Entity",
+          "description": "HA entity bound to the widget. Either slug or entity_id must be provided."
+        }
+      }
+    },
+    "send_notification": {
+      "name": "Send Notification",
+      "description": "Send a push notification via PushWard.",
+      "fields": {
+        "title": {
+          "name": "Title",
+          "description": "Notification title."
+        },
+        "body": {
+          "name": "Body",
+          "description": "Notification body text."
+        },
+        "subtitle": {
+          "name": "Subtitle",
+          "description": "Optional subtitle shown below the title."
+        },
+        "level": {
+          "name": "Level",
+          "description": "iOS interruption level. Controls how the notification is delivered."
+        },
+        "volume": {
+          "name": "Volume",
+          "description": "Sound volume for critical alerts (0.0-1.0). Only used when level is critical."
+        },
+        "thread_id": {
+          "name": "Thread ID",
+          "description": "Groups notifications together in Notification Center."
+        },
+        "collapse_id": {
+          "name": "Collapse ID",
+          "description": "APNs deduplication key. Replaces previous notification with the same key."
+        },
+        "source": {
+          "name": "Source",
+          "description": "Source identifier for grouping in the PushWard inbox."
+        },
+        "source_display_name": {
+          "name": "Source Display Name",
+          "description": "Human-readable source name shown in the PushWard inbox."
+        },
+        "activity_slug": {
+          "name": "Activity Slug",
+          "description": "Link this notification to an existing Live Activity."
+        },
+        "push": {
+          "name": "Push",
+          "description": "Send as an APNs push alert to all devices. When false, the notification is stored in the inbox only."
+        },
+        "url": {
+          "name": "URL",
+          "description": "URL to open when the notification is tapped."
+        },
+        "media": {
+          "name": "Media",
+          "description": "Media attachment as an object with `url` (HTTPS) and `type` (image, video, or audio)."
+        },
+        "icon_url": {
+          "name": "Icon URL",
+          "description": "HTTPS URL of a custom per-notification icon."
+        },
+        "metadata": {
+          "name": "Metadata",
+          "description": "Key-value pairs of additional metadata attached to the notification."
+        },
+        "actions": {
+          "name": "Actions",
+          "description": "List of action buttons. Each action is an object with id, title, optional url, foreground, destructive, authentication_required, and icon. For an http(s) url you can also send a silent webhook with method (GET/POST/PUT/PATCH/DELETE/HEAD), headers, and body."
         }
       }
     },
     "send_email": {
-      "name": "メールを送信",
-      "description": "PushWard 経由でトランザクションメールを送信します。テキスト本文、HTML 本文、またはその両方を指定してください。統合キーには「emails」の権限が必要です。",
+      "name": "Send Email",
+      "description": "Send a transactional email via PushWard. Provide a text body, an HTML body, or both. The integration key needs the \"emails\" capability.",
       "fields": {
         "to": {
-          "name": "宛先",
-          "description": "受信者のメールアドレス。PushWard iOS アプリですでに追加・確認済みのアドレスである必要があります — 未確認のアドレスは拒否されます。"
+          "name": "To",
+          "description": "Recipient email address. Must be an address you have already added and confirmed in the PushWard iOS app — unverified addresses are rejected."
         },
         "subject": {
-          "name": "件名",
-          "description": "メールの件名。"
+          "name": "Subject",
+          "description": "Email subject line."
         },
         "body": {
-          "name": "本文",
-          "description": "プレーンテキストのメール本文。これ、HTML 本文、またはその両方を指定してください。"
+          "name": "Body",
+          "description": "Plain-text email body. Provide this, an HTML body, or both."
         },
         "html_body": {
-          "name": "HTML本文",
-          "description": "HTML のメール本文。これ、プレーンテキスト本文、またはその両方を指定してください。"
+          "name": "HTML Body",
+          "description": "HTML email body. Provide this, a plain-text body, or both."
         }
       }
     },
     "delete_widget": {
-      "name": "ウィジェットを削除",
-      "description": "サーバーから PushWard ウィジェットを削除します。追跡ウィジェットの設定エントリがまだこのスラッグを管理している場合、次回の再起動/同期時にウィジェットが再作成されます — 完全に削除するには設定エントリを削除してください。slug または entity_id のいずれかを指定してください。",
+      "name": "Delete Widget",
+      "description": "Delete a PushWard widget from the server. If a tracked-widget config entry still drives this slug, the widget is recreated on the next restart/sync — remove the config entry to delete it permanently. Provide either slug or entity_id.",
       "fields": {
         "slug": {
-          "name": "スラッグ",
-          "description": "ウィジェットのスラッグ識別子。slug または entity_id のいずれかを指定する必要があります。"
+          "name": "Slug",
+          "description": "Widget slug identifier. Either slug or entity_id must be provided."
         },
         "entity_id": {
-          "name": "エンティティ",
-          "description": "ウィジェットに紐付けられた HA エンティティ。設定に基づいて該当するウィジェットに解決されます。slug または entity_id のいずれかを指定する必要があります。"
+          "name": "Entity",
+          "description": "HA entity bound to the widget. Resolved to the matching widget by config. Either slug or entity_id must be provided."
         }
       }
+    },
+    "dispatch": {
+      "name": "Send via PushWard",
+      "description": "Send any combination of a Live Activity, notification, widget, and email in one Home Assistant action.",
+      "sections": {
+        "activity_channel": {
+          "name": "Live Activity",
+          "description": "Upsert and update one Live Activity."
+        },
+        "notification_channel": {
+          "name": "Notification",
+          "description": "Optionally send an inbox/APNs notification in the same action."
+        },
+        "widget_channel": {
+          "name": "Widget",
+          "description": "Optionally create or replace a WidgetKit widget."
+        },
+        "email_channel": {
+          "name": "Email",
+          "description": "Optionally send an email to a verified recipient."
+        }
+      }
+    }
+  },
+  "exceptions": {
+    "widget_not_found": {
+      "message": "No PushWard widget matches slug={slug} entity_id={entity_id}."
     }
   },
   "config": {
     "step": {
       "user": {
-        "title": "PushWardに接続",
+        "title": "Connect to PushWard",
+        "description": "Enter your PushWard integration key to get started. Get the PushWard iOS app from the App Store: {app_store_url}",
         "data": {
-          "integration_key": "統合キー"
+          "integration_key": "Integration Key"
         },
-        "description": "始めるには PushWard 統合キーを入力してください。PushWard iOS アプリは App Store から入手できます: {app_store_url}",
         "data_description": {
-          "integration_key": "PushWard iOS アプリ（App Store: {app_store_url}）を開き、設定 → 統合キーへ進みます。デフォルトのキーを貼り付けるか、スコープ 'ha-*' で新しいキーを作成できます。"
+          "integration_key": "Open the PushWard iOS app (App Store: {app_store_url}) → Settings → Integration Keys. You can paste the default key, or create a new one with scope 'ha-*'."
         }
       },
       "reconfigure": {
-        "title": "PushWardを再設定",
-        "description": "PushWardの統合キーを更新します。",
+        "title": "Reconfigure PushWard",
+        "description": "Update your PushWard integration key.",
         "data": {
-          "integration_key": "統合キー"
+          "integration_key": "Integration Key"
         },
         "data_description": {
-          "integration_key": "PushWard iOSアプリの設定 → 統合キーで、スコープ 'ha-*' のキーを作成してください。"
+          "integration_key": "Create one in the PushWard iOS app under Settings → Integration Keys with scope 'ha-*'."
         }
       },
       "reauth_confirm": {
-        "title": "再認証",
-        "description": "PushWardの統合キーが無効です。新しいキーを入力してください。",
+        "title": "Reauthenticate",
+        "description": "The PushWard integration key is invalid. Please provide a new one.",
         "data": {
-          "integration_key": "統合キー"
+          "integration_key": "Integration Key"
         },
         "data_description": {
-          "integration_key": "PushWard iOSアプリの設定 → 統合キーで、スコープ 'ha-*' のキーを作成してください。"
+          "integration_key": "Create one in the PushWard iOS app under Settings → Integration Keys with scope 'ha-*'."
         }
       }
     },
     "error": {
-      "cannot_connect": "PushWardサーバーへの接続に失敗しました。",
-      "invalid_auth": "統合キーが無効です。",
-      "invalid_url": "URLは http:// または https:// で始まる必要があります。",
-      "unknown": "予期しないエラーが発生しました。"
+      "cannot_connect": "Failed to connect to PushWard server.",
+      "invalid_auth": "Invalid integration key.",
+      "invalid_url": "URL must use http:// or https:// scheme.",
+      "unknown": "An unexpected error occurred."
     },
     "abort": {
-      "already_configured": "PushWardはすでに設定されています。",
-      "reconfigure_successful": "PushWardの設定を更新しました。",
-      "reauth_successful": "再認証が完了しました。"
+      "already_configured": "PushWard is already configured.",
+      "reconfigure_successful": "PushWard configuration updated.",
+      "reauth_successful": "Reauthentication successful."
     }
   },
   "config_subentries": {
     "tracked_entity": {
-      "entry_type": "追跡エンティティ",
+      "entry_type": "Tracked Entity",
       "initiate_flow": {
-        "user": "追跡エンティティを追加"
+        "user": "Add tracked entity"
       },
       "step": {
         "user": {
-          "title": "エンティティをPushWardに追加",
+          "title": "Add tracked Live Activity",
           "data": {
-            "entity_id": "エンティティ",
-            "template": "テンプレート"
+            "entity_id": "Entity to track",
+            "template": "Live Activity layout"
           },
           "data_description": {
-            "template": "アクティビティのレイアウトテンプレート。'generic' はほとんどのエンティティに対応しています。"
+            "entity_id": "The Home Assistant entity whose state starts, updates, and ends this Live Activity.",
+            "template": "Choose the visual layout. Only settings supported by that layout appear on the next page."
           }
         },
         "details": {
           "title": "Configure {template} activity",
           "data": {
-            "start_states": "開始状態",
-            "end_states": "終了状態",
-            "progress_attribute": "進捗属性",
-            "remaining_time_attribute": "残り時間属性",
-            "total_steps": "総 steps 数",
-            "current_step_attribute": "現在のステップ属性",
-            "severity": "重大度",
-            "value_attribute": "値属性",
-            "min_value": "最小値",
-            "max_value": "最大値",
-            "unit": "単位",
-            "series": "シリーズ",
-            "scale": "スケール",
-            "decimals": "小数点以下の桁数",
-            "smoothing": "スムーズな折れ線",
-            "thresholds": "しきい値",
-            "history_period": "過去データ期間",
-            "slug": "アクティビティスラッグ",
-            "activity_name": "アクティビティ名",
-            "icon": "アイコン",
-            "icon_attribute": "アイコン属性",
-            "priority": "優先度 (0〜10)",
-            "update_interval": "最小更新間隔（秒）",
-            "subtitle_attribute": "サブタイトル属性",
-            "state_labels": "状態ラベル",
-            "completion_message": "完了メッセージ",
-            "accent_color": "アクセントカラー",
-            "accent_color_attribute": "アクセントカラー属性",
-            "url": "URL",
-            "secondary_url": "セカンダリURL",
-            "ended_ttl": "終了後に自動削除（秒）",
-            "stale_ttl": "アイドル後に自動終了（秒）",
-            "sound": "サウンド",
-            "background_color": "背景色",
-            "background_color_attribute": "背景色属性",
-            "text_color": "テキスト色",
-            "text_color_attribute": "テキスト色属性",
-            "warning_threshold": "警告しきい値（秒）",
-            "alarm": "アラーム（iOS 26+）",
-            "step_labels": "ステップラベル",
-            "step_rows": "ステップ行高",
-            "fired_at_attribute": "発火時刻属性",
-            "units": "系列ごとの単位",
-            "progress_entity": "進捗エンティティ",
-            "remaining_time_entity": "残り時間エンティティ",
-            "current_step_entity": "現在のステップエンティティ",
-            "value_entity": "値エンティティ",
-            "subtitle_entity": "サブタイトルエンティティ",
-            "tap_action_url": "タップアクションURL",
-            "tap_action_foreground": "タップアクションURLを開く",
-            "url_foreground": "プライマリボタンURLを開く",
-            "url_title": "プライマリボタンのタイトル",
-            "secondary_url_foreground": "セカンダリボタンURLを開く",
-            "secondary_url_title": "セカンダリボタンのタイトル",
-            "snooze_seconds": "スヌーズ秒数（iOS 26+）",
-            "fired_at_entity": "発火時刻エンティティ",
-            "log_columns": "ログ列",
+            "start_states": "Start States",
+            "end_states": "End States",
+            "progress_entity": "Progress Entity",
+            "progress_attribute": "Progress Attribute",
+            "remaining_time_entity": "Remaining Time Entity",
+            "remaining_time_attribute": "Remaining Time Attribute",
+            "live_progress": "Live Progress ETA",
+            "current_step_entity": "Current Step Entity",
+            "current_step_attribute": "Current Step Attribute",
+            "severity": "Severity",
+            "severity_label": "Severity Label",
+            "value_entity": "Value Entity",
+            "value_attribute": "Value Attribute",
+            "min_value": "Minimum Value",
+            "max_value": "Maximum Value",
+            "unit": "Unit",
+            "series": "Series",
+            "series_entities": "Series Entities",
+            "primary_series": "Primary Series",
+            "scale": "Scale",
+            "decimals": "Decimal Places",
+            "smoothing": "Smooth Lines",
+            "thresholds": "Thresholds",
+            "history_period": "Back-History Period",
+            "slug": "Activity Slug",
+            "activity_name": "Activity Name",
+            "icon": "Icon",
+            "icon_attribute": "Icon Attribute",
+            "priority": "Priority (0-10)",
+            "update_interval": "Min. Update Interval (seconds)",
+            "subtitle_entity": "Subtitle Entity",
+            "subtitle_attribute": "Subtitle Attribute",
+            "state_labels": "State Labels",
+            "completion_message": "Completion Message",
+            "accent_color": "Accent Color",
+            "accent_color_attribute": "Accent Color Attribute",
+            "tap_action_url": "Tap Action URL",
+            "tap_action_foreground": "Open Tap Action URL",
+            "url": "Primary Button URL",
+            "url_foreground": "Open Primary Button URL",
+            "url_title": "Primary Button Title",
+            "secondary_url": "Secondary Button URL",
+            "secondary_url_foreground": "Open Secondary Button URL",
+            "secondary_url_title": "Secondary Button Title",
+            "ended_ttl": "Auto-Delete After End (seconds)",
+            "stale_ttl": "Auto-End After Idle (seconds)",
+            "sound": "Sound",
+            "background_color": "Background Color",
+            "background_color_attribute": "Background Color Attribute",
+            "text_color": "Text Color",
+            "text_color_attribute": "Text Color Attribute",
+            "warning_threshold": "Warning Threshold (seconds)",
+            "alarm": "Alarm (iOS 26+)",
+            "snooze_seconds": "Snooze Seconds (iOS 26+)",
+            "fired_at_entity": "Fired At Entity",
+            "fired_at_attribute": "Fired At Attribute",
+            "tiles": "Board Tiles",
+            "log_columns": "Log Columns",
+            "log_level_attribute": "Log Level Attribute",
             "step_configuration": "Steps"
           },
           "data_description": {
-            "start_states": "Live Activityを開始するエンティティの状態。リストから選択するか、カスタム値を入力してください。",
-            "end_states": "Live Activityを終了するエンティティの状態。リストから選択するか、カスタム値を入力してください。",
-            "progress_attribute": "0〜100の進捗値を持つエンティティ属性。例: percentage",
-            "remaining_time_attribute": "残り時間（秒）を持つエンティティ属性。例: remaining",
-            "total_steps": "steps の総数。",
-            "current_step_attribute": "現在のステップを整数で保持するエンティティ属性。",
-            "severity": "alert の重大度レベル。",
-            "value_attribute": "現在の gauge 値を数値で保持するエンティティ属性。空白のままにするとエンティティの状態を使用します。",
-            "min_value": "gauge 範囲の最小値。",
-            "max_value": "gauge 範囲の最大値。",
-            "unit": "値の隣に表示される単位（例: °C, %, kW）。最大32文字。",
-            "series": "エンティティ属性を名前付きシリーズにマッピングします。形式: attribute=Label, attribute2=Label2。空白のままにするとエンティティの状態を単一シリーズとして使用します。",
-            "scale": "スパークラインチャートのY軸スケールモード。",
-            "decimals": "値の小数点以下の桁数（0〜10）。",
-            "smoothing": "データポイント間のカーブ補間を有効にして、スパークラインを滑らかにします。",
-            "thresholds": "スパークラインの水平参照線。形式: value:color:label。例: 25:red:Hot, 18:blue:Cold。最大5つ。",
-            "history_period": "Home Assistantのレコーダーからスパークラインにシードする過去データの分数。0に設定すると履歴なしで開始します。",
-            "slug": "このアクティビティの一意の識別子。空白のままにするとエンティティIDから自動生成されます。例: ha-living-room-lamp",
-            "activity_name": "iPhone Live Activityに表示される名前。デフォルトはエンティティのフレンドリー名です。",
-            "icon": "アイコンの上書き。空白のままにするとエンティティのネイティブアイコンを使用します（例: mdi:thermometer）。SF Symbolsもサポートされています（例: lamp.desk.fill）。",
-            "icon_attribute": "動的アイコン用のエンティティ属性。設定すると静的アイコンおよびエンティティアイコンより優先されます。",
-            "priority": "デバイスの上限に達した場合、優先度の高いアクティビティが長く保持されます（0 = 最低, 10 = 最高）。",
-            "update_interval": "更新間の最小秒数。急速な状態変化はスロットリングされます。",
-            "subtitle_attribute": "サブタイトルとして表示するエンティティ属性。空白のままにするとエンティティのフレンドリー名を使用します。",
-            "state_labels": "状態のカスタム表示テキスト。形式: state=Label, state2=Label 2。例: heating=加熱中, idle=待機中",
-            "completion_message": "アクティビティ終了時に表示されるテキスト。空白のままにすると「完了」と表示されます。例: 洗濯完了",
-            "accent_color": "Live Activityのアクセントカラー。空白のままにするとデフォルトの青色を使用します。",
-            "accent_color_attribute": "動的アクセントカラー用のエンティティ属性。静的カラーより優先されます。RGB、HS、XY、ケルビン、カラー名、16進数に対応しています。",
-            "url": "Live Activityをタップしたときに開くリンク。http:// または https:// で始まる必要があります。steps および alert テンプレートのみ。",
-            "secondary_url": "Live Activityのセカンダリリンク。steps および alert テンプレートのみ。",
-            "ended_ttl": "アクティビティ終了後、サーバーから自動削除されるまでの秒数。空白のままにすると無期限に保持されます。例: 300",
-            "stale_ttl": "サーバーがアクティビティを自動終了するまでの非アクティブ秒数。空白のままにすると無効にします。例: 1800",
-            "sound": "このエンティティの毎回の更新で再生されるサウンド。空白のままにすると上書きなし。",
-            "background_color": "Live Activity の背景色。空白のままにするとデフォルト色を使用します。",
-            "background_color_attribute": "動的背景色のエンティティ属性。静的色より優先されます。RGB、HS、XY、ケルビン、色名、16進数に対応しています。",
-            "text_color": "Live Activity のテキスト色。空白のままにするとデフォルト色を使用します。",
-            "text_color_attribute": "動的テキスト色のエンティティ属性。静的色より優先されます。",
-            "warning_threshold": "countdown 終了前にサーバーが警告プッシュを送信する秒数。空白のままにすると無効にします。countdown テンプレートのみ。",
-            "alarm": "countdown の期限切れ時に AlarmKit アラームを起動する（iOS 26+）。countdown テンプレートのみ。",
-            "step_labels": "各ステップのラベル。形式: 1=最初のステップ, 2=2番目のステップ。ステップ 1..total_steps をカバーする必要があります。steps テンプレートのみ。",
-            "step_rows": "各ステップの行高（1–10）、カンマ区切り。total_steps 個のエントリが必要です。steps テンプレートのみ。",
-            "fired_at_attribute": "alert が発火したときの Unix タイムスタンプを持つエンティティ属性。alert テンプレートのみ。",
-            "units": "系列ごとの単位ラベル。形式: 系列ラベル=単位, 温度=°C, 湿度=%。timeline テンプレートのみ。",
-            "progress_entity": "追跡エンティティの代わりに別のエンティティから進捗を読み取ります。空白のままにすると追跡エンティティを使用します。属性フィールドを設定するとこのエンティティのその属性を、設定しない場合は状態を読み取ります。",
-            "remaining_time_entity": "別のエンティティ（例: 洗濯機の時間センサー）から残り時間を読み取ります。空白のままにすると追跡エンティティを使用します。タイムスタンプ（終了時刻）センサー、単位付きの継続時間センサー、H:MM:SS 文字列、または単純な秒数を自動的に解析します。",
-            "current_step_entity": "別のエンティティから現在のステップを読み取ります。空白のままにすると追跡エンティティを使用します。",
-            "value_entity": "別のエンティティから gauge の値を読み取ります。空白のままにすると追跡エンティティを使用します。属性を設定しない限りソースエンティティの状態を使用します。",
-            "subtitle_entity": "別のエンティティ（例: プログラム/モードセンサー）からサブタイトルを表示します。空白のままにすると追跡エンティティを使用します。属性を設定しない限りソースエンティティの状態を使用します。",
-            "tap_action_url": "Live Activity の背景をタップしたときに開く任意の URL。http(s)（Safari を開く）または homeassistant://navigate/lovelace/0 のようなカスタムスキーム（そのアプリを開く）に対応しています。",
-            "tap_action_foreground": "オン: タップで URL を開きます。オフ: サイレント Webhook（http(s) のみ）— ロック画面を離れずにバックグラウンドで POST を送信します。",
-            "url_foreground": "オン: タップで URL を開きます。オフ: サイレント Webhook（http(s) のみ）。",
-            "url_title": "プライマリボタンのラベル（最大 64 文字）。",
-            "secondary_url_foreground": "オン: タップで URL を開きます。オフ: サイレント Webhook（http(s) のみ）。",
-            "secondary_url_title": "セカンダリボタンのラベル（最大 64 文字）。",
-            "snooze_seconds": "iOS のスヌーズボタンが countdown を延長する時間（60〜3600）。空白のままにすると 300 秒（5分）のデフォルトになります。アラームが必要。countdown テンプレートのみ。",
-            "fired_at_entity": "別のエンティティから alert の発火時刻を読み取ります。空白のままにすると追跡エンティティを使用します。Unix タイムスタンプまたは ISO タイムスタンプセンサーを受け付けます。alert テンプレートのみ。",
-            "log_columns": "各ログ行に追加される値（最大6個）、カンマ区切り。形式: [Label=]source[|unit]。source = このエンティティの属性 (brightness)、別のエンティティの状態 (binary_sensor.door)、または別のエンティティの属性 (sensor.temp:temperature)。例: color_temp_kelvin|K, brightness → 'On · 4000K · 153'。ログテンプレートのみ。",
-            "step_configuration": "Add one row per step. Parallel jobs controls the number of stacked rows; relative duration/width makes longer stages wider; color is optional."
+            "start_states": "Entity states that start the Live Activity. Select from the list or type custom values.",
+            "end_states": "Entity states that end the Live Activity. Select from the list or type custom values.",
+            "progress_entity": "Read progress from a separate entity instead of the tracked entity. Leave empty to use the tracked entity. With the attribute field set, reads that attribute of this entity; otherwise its state.",
+            "progress_attribute": "Attribute holding a 0–100 progress value (on the source entity, or the tracked entity if no source is set). Example: percentage",
+            "remaining_time_entity": "Read remaining time from a separate entity (e.g. a washer's time sensor). Leave empty to use the tracked entity. Auto-parses a timestamp (finish-time) sensor, a duration sensor with units, an H:MM:SS string, or plain seconds.",
+            "remaining_time_attribute": "Attribute holding remaining time (on the source entity, or the tracked entity if no source is set). Leave empty to use the source entity's state. Example: remaining",
+            "live_progress": "Animate progress toward the estimated finish time. Generic and Steps layouts require a remaining-time source.",
+            "current_step_entity": "Read the current step from a separate entity. Leave empty to use the tracked entity.",
+            "current_step_attribute": "Attribute holding the zero-based current-step index: 0 is the first step, 1 is the second, and total steps means complete.",
+            "severity": "Alert severity level.",
+            "severity_label": "Override the Info/Warning/Critical badge text shown on the alert. Leave empty to use the severity name. Max 32 characters. Alert template only.",
+            "value_entity": "Read the gauge value from a separate entity. Leave empty to use the tracked entity. Uses the source entity's state unless an attribute is set.",
+            "value_attribute": "Attribute holding the current gauge value as a number (on the source entity, or the tracked entity if no source is set). Leave empty to use the entity's state.",
+            "min_value": "Minimum value for the gauge range.",
+            "max_value": "Maximum value for the gauge range.",
+            "unit": "Display unit shown next to the value (e.g. °C, %, kW). Max 32 characters.",
+            "series": "Map entity attributes to named series. Format: attribute=Label, attribute2=Label2. Leave empty to use the entity's state as a single series.",
+            "series_entities": "Add one row for each entity-backed chart line. Give it a label and optionally select an attribute. Combines with the primary series; up to 10 lines total.",
+            "primary_series": "Label of the series shown as the headline value and used for the compact high/low range. Leave empty to use the tracked entity's own series (or the first configured series).",
+            "scale": "Y-axis scale mode for the sparkline chart.",
+            "decimals": "Number of decimal places shown for values (0–10).",
+            "smoothing": "Enable curve interpolation between data points for a smoother sparkline.",
+            "thresholds": "Add up to 5 horizontal reference lines, each with a value and optional color and label.",
+            "history_period": "Minutes of past data to seed the sparkline when the activity starts. Numeric-state entities (plain sensors, value entities, and state-sourced series entities) backfill from Home Assistant's recorder; attribute-based series fill only from samples collected while the integration runs, because Home Assistant stopped recording most attributes in 2024.8. Set to 0 to start with no history.",
+            "slug": "Unique identifier for this activity. Leave empty to auto-generate from entity ID. Example: ha-living-room-lamp",
+            "activity_name": "Display name shown on the iPhone Live Activity. Defaults to the entity's friendly name.",
+            "icon": "Override icon. Leave empty to use the entity’s native icon (e.g. mdi:thermometer). SF Symbols also supported (e.g. lamp.desk.fill).",
+            "icon_attribute": "Entity attribute for dynamic icon. Overrides static icon and entity icon when set.",
+            "priority": "Higher priority activities are kept longer when the device limit is reached (0 = lowest, 10 = highest).",
+            "update_interval": "Minimum seconds between updates. Rapid state changes are throttled.",
+            "subtitle_entity": "Show the subtitle from a separate entity (e.g. a program/mode sensor). Leave empty to use the tracked entity. Uses the source entity's state unless an attribute is set.",
+            "subtitle_attribute": "Attribute to show as subtitle (on the source entity, or the tracked entity if no source is set). Leave empty to use the source entity's state, or the friendly name when no source is set.",
+            "state_labels": "Add state-to-label mappings. For example, map heating to Heating Up and idle to Standby.",
+            "completion_message": "Text shown when the activity ends. Leave empty for 'Complete'. Example: Wash Done",
+            "accent_color": "Accent color for the Live Activity. Leave empty for default blue.",
+            "accent_color_attribute": "Entity attribute for dynamic accent color. Overrides static color. Supports RGB, HS, XY, Kelvin, named colors, and hex.",
+            "tap_action_url": "Optional URL opened when tapping the Live Activity background. Supports http(s) (opens Safari) or custom schemes like homeassistant://navigate/lovelace/0 (opens that app).",
+            "tap_action_foreground": "On: tap opens the URL. Off: silent webhook (http(s) only) — fires a POST in the background without leaving the Lock Screen.",
+            "url": "Primary button destination for any layout. Supports http(s) URLs and app schemes such as homeassistant://.",
+            "url_foreground": "On: tap opens the URL. Off: silent webhook (http(s) only).",
+            "url_title": "Primary button label (max 64 characters).",
+            "secondary_url": "Secondary button destination for any layout. Supports http(s) URLs and app schemes.",
+            "secondary_url_foreground": "On: tap opens the URL. Off: silent webhook (http(s) only).",
+            "secondary_url_title": "Secondary button label (max 64 characters).",
+            "ended_ttl": "Seconds after the activity ends before the server auto-deletes it. This also controls how soon the ended card leaves the iPhone Lock Screen (iOS caps it at 4 hours regardless). Leave empty to keep indefinitely. Example: 300",
+            "stale_ttl": "Seconds of inactivity before the server auto-ends the activity. Leave empty to disable. Example: 1800",
+            "sound": "Sound played on every update for this entity. Leave empty to use no override.",
+            "background_color": "Background color for the Live Activity. Leave empty for default.",
+            "background_color_attribute": "Entity attribute for dynamic background color. Overrides static color. Supports RGB, HS, XY, Kelvin, named colors, and hex.",
+            "text_color": "Text color for the Live Activity. Leave empty for default.",
+            "text_color_attribute": "Entity attribute for dynamic text color. Overrides static color.",
+            "warning_threshold": "Seconds before the end of a countdown when the server sends a warning push. Leave empty to disable. Countdown template only.",
+            "alarm": "Trigger an AlarmKit alarm when the countdown expires (iOS 26+). Countdown template only.",
+            "snooze_seconds": "How long the iOS Snooze button extends the countdown (60–3600). Leave empty for the 300s (5 min) default. Requires Alarm. Countdown template only.",
+            "fired_at_entity": "Read the alert's fired-at time from a separate entity. Leave empty to use the tracked entity. Accepts a unix timestamp or an ISO timestamp sensor. Alert template only.",
+            "fired_at_attribute": "Attribute holding the unix timestamp when the alert fired (on the source entity, or the tracked entity if no source is set). Alert template only.",
+            "tiles": "Add 1–4 board tiles. Each row selects an entity and label, with optional attribute, unit, and icon. Board template only.",
+            "log_columns": "Add up to 6 extra values to each log line. Each row selects an entity and optional attribute, label, and unit. Log template only.",
+            "log_level_attribute": "Attribute supplying each log line's level (info/warn/error). Leave empty for no level tag. Log template only.",
+            "step_configuration": "Add one named row per step. Parallel jobs creates stacked lanes. Relative step length is a ratio: weights 1, 4, 1 make the middle step four times wider. Color is optional."
           },
           "description": "Everything is on this page. Open only the sections you need.",
           "sections": {
             "lifecycle": {
-              "name": "Lifecycle and delivery",
-              "description": "Choose when the activity runs and how PushWard updates and retains it.",
+              "name": "Lifecycle and update behavior",
+              "description": "Choose when the activity runs, how often it updates, and how long PushWard retains it.",
               "data": {
-                "start_states": "開始状態",
-                "end_states": "終了状態",
-                "slug": "アクティビティスラッグ",
-                "activity_name": "アクティビティ名",
-                "priority": "優先度 (0〜10)",
-                "sound": "サウンド",
-                "update_interval": "最小更新間隔（秒）",
-                "ended_ttl": "終了後に自動削除（秒）",
-                "stale_ttl": "アイドル後に自動終了（秒）"
+                "start_states": "States that start the activity",
+                "end_states": "States that end the activity",
+                "slug": "Activity slug",
+                "activity_name": "Activity display name",
+                "priority": "Priority (0-10)",
+                "sound": "Update sound",
+                "update_interval": "Minimum update interval",
+                "ended_ttl": "Delete after ending",
+                "stale_ttl": "End after no updates"
               },
               "data_description": {
-                "start_states": "Live Activityを開始するエンティティの状態。リストから選択するか、カスタム値を入力してください。",
-                "end_states": "Live Activityを終了するエンティティの状態。リストから選択するか、カスタム値を入力してください。",
-                "slug": "このアクティビティの一意の識別子。空白のままにするとエンティティIDから自動生成されます。例: ha-living-room-lamp",
-                "activity_name": "iPhone Live Activityに表示される名前。デフォルトはエンティティのフレンドリー名です。",
-                "priority": "デバイスの上限に達した場合、優先度の高いアクティビティが長く保持されます（0 = 最低, 10 = 最高）。",
-                "sound": "このエンティティの毎回の更新で再生されるサウンド。空白のままにすると上書きなし。",
-                "update_interval": "更新間の最小秒数。急速な状態変化はスロットリングされます。",
-                "ended_ttl": "アクティビティ終了後、サーバーから自動削除されるまでの秒数。空白のままにすると無期限に保持されます。例: 300",
-                "stale_ttl": "サーバーがアクティビティを自動終了するまでの非アクティブ秒数。空白のままにすると無効にします。例: 1800"
+                "start_states": "Entity states that start the Live Activity. Select from the list or type custom values.",
+                "end_states": "Entity states that end the Live Activity. Select from the list or type custom values.",
+                "slug": "Unique identifier for this activity. Leave empty to auto-generate from entity ID. Example: ha-living-room-lamp",
+                "activity_name": "Display name shown on the iPhone Live Activity. Defaults to the entity's friendly name.",
+                "priority": "Integer from 0 to 10. Higher-priority activities are retained first and receive a higher iOS relevance score.",
+                "sound": "Optional sound played for ongoing updates. Choose Silent for no sound; sounds are ignored when ending.",
+                "update_interval": "Minimum seconds between API updates, from 1 to 86,400. Faster entity changes are combined.",
+                "ended_ttl": "Seconds after an activity ends before PushWard deletes it and dismisses the ended card. Valid range: 1-2,592,000 seconds (30 days). Leave blank for the PushWard default.",
+                "stale_ttl": "Seconds without an update before PushWard automatically ends the activity. Valid range: 1-2,592,000 seconds (30 days). Leave blank to disable."
               }
             },
             "content": {
               "name": "Layout content",
               "description": "Values used by the selected Live Activity layout.",
               "data": {
-                "progress_attribute": "進捗属性",
-                "remaining_time_attribute": "残り時間属性",
-                "total_steps": "総 steps 数",
-                "current_step_attribute": "現在のステップ属性",
-                "severity": "重大度",
-                "value_attribute": "値属性",
-                "min_value": "最小値",
-                "max_value": "最大値",
-                "unit": "単位",
-                "series": "シリーズ",
-                "scale": "スケール",
-                "decimals": "小数点以下の桁数",
-                "smoothing": "スムーズな折れ線",
-                "thresholds": "しきい値",
-                "history_period": "過去データ期間",
-                "state_labels": "状態ラベル",
-                "completion_message": "完了メッセージ",
-                "warning_threshold": "警告しきい値（秒）",
-                "alarm": "アラーム（iOS 26+）",
-                "step_labels": "ステップラベル",
-                "step_rows": "ステップ行高",
-                "fired_at_attribute": "発火時刻属性",
-                "units": "系列ごとの単位",
-                "progress_entity": "進捗エンティティ",
-                "remaining_time_entity": "残り時間エンティティ",
-                "current_step_entity": "現在のステップエンティティ",
-                "value_entity": "値エンティティ",
-                "snooze_seconds": "スヌーズ秒数（iOS 26+）",
-                "fired_at_entity": "発火時刻エンティティ",
-                "log_columns": "ログ列",
-                "step_configuration": "Steps"
+                "progress_entity": "Progress source entity",
+                "progress_attribute": "Progress attribute",
+                "remaining_time_entity": "Remaining-time source entity",
+                "remaining_time_attribute": "Remaining-time attribute",
+                "live_progress": "Animate progress between updates",
+                "current_step_entity": "Current-step source entity",
+                "current_step_attribute": "Current-step attribute",
+                "severity": "Alert severity",
+                "severity_label": "Custom severity badge",
+                "value_entity": "Value source entity",
+                "value_attribute": "Value attribute",
+                "min_value": "Minimum value",
+                "max_value": "Maximum value",
+                "unit": "Display unit",
+                "series": "Attribute-backed chart series",
+                "series_entities": "Entity-backed chart series",
+                "primary_series": "Primary chart series",
+                "scale": "Y-axis scale",
+                "decimals": "Decimal places",
+                "smoothing": "Smooth chart lines",
+                "thresholds": "Chart thresholds",
+                "history_period": "Recorder history to load",
+                "state_labels": "State display labels",
+                "completion_message": "Completion message",
+                "warning_threshold": "Countdown warning threshold",
+                "alarm": "Ring an AlarmKit alarm",
+                "snooze_seconds": "Alarm snooze duration",
+                "fired_at_entity": "Fired-at source entity",
+                "fired_at_attribute": "Fired-at attribute",
+                "tiles": "Board tiles",
+                "log_columns": "Additional log values",
+                "log_level_attribute": "Log severity attribute",
+                "step_configuration": "Workflow steps"
               },
               "data_description": {
-                "progress_attribute": "0〜100の進捗値を持つエンティティ属性。例: percentage",
-                "remaining_time_attribute": "残り時間（秒）を持つエンティティ属性。例: remaining",
-                "total_steps": "steps の総数。",
-                "current_step_attribute": "現在のステップを整数で保持するエンティティ属性。",
-                "severity": "alert の重大度レベル。",
-                "value_attribute": "現在の gauge 値を数値で保持するエンティティ属性。空白のままにするとエンティティの状態を使用します。",
-                "min_value": "gauge 範囲の最小値。",
-                "max_value": "gauge 範囲の最大値。",
-                "unit": "値の隣に表示される単位（例: °C, %, kW）。最大32文字。",
-                "series": "エンティティ属性を名前付きシリーズにマッピングします。形式: attribute=Label, attribute2=Label2。空白のままにするとエンティティの状態を単一シリーズとして使用します。",
-                "scale": "スパークラインチャートのY軸スケールモード。",
-                "decimals": "値の小数点以下の桁数（0〜10）。",
-                "smoothing": "データポイント間のカーブ補間を有効にして、スパークラインを滑らかにします。",
-                "thresholds": "スパークラインの水平参照線。形式: value:color:label。例: 25:red:Hot, 18:blue:Cold。最大5つ。",
-                "history_period": "Home Assistantのレコーダーからスパークラインにシードする過去データの分数。0に設定すると履歴なしで開始します。",
-                "state_labels": "状態のカスタム表示テキスト。形式: state=Label, state2=Label 2。例: heating=加熱中, idle=待機中",
-                "completion_message": "アクティビティ終了時に表示されるテキスト。空白のままにすると「完了」と表示されます。例: 洗濯完了",
-                "warning_threshold": "countdown 終了前にサーバーが警告プッシュを送信する秒数。空白のままにすると無効にします。countdown テンプレートのみ。",
-                "alarm": "countdown の期限切れ時に AlarmKit アラームを起動する（iOS 26+）。countdown テンプレートのみ。",
-                "step_labels": "各ステップのラベル。形式: 1=最初のステップ, 2=2番目のステップ。ステップ 1..total_steps をカバーする必要があります。steps テンプレートのみ。",
-                "step_rows": "各ステップの行高（1–10）、カンマ区切り。total_steps 個のエントリが必要です。steps テンプレートのみ。",
-                "fired_at_attribute": "alert が発火したときの Unix タイムスタンプを持つエンティティ属性。alert テンプレートのみ。",
-                "units": "系列ごとの単位ラベル。形式: 系列ラベル=単位, 温度=°C, 湿度=%。timeline テンプレートのみ。",
-                "progress_entity": "追跡エンティティの代わりに別のエンティティから進捗を読み取ります。空白のままにすると追跡エンティティを使用します。属性フィールドを設定するとこのエンティティのその属性を、設定しない場合は状態を読み取ります。",
-                "remaining_time_entity": "別のエンティティ（例: 洗濯機の時間センサー）から残り時間を読み取ります。空白のままにすると追跡エンティティを使用します。タイムスタンプ（終了時刻）センサー、単位付きの継続時間センサー、H:MM:SS 文字列、または単純な秒数を自動的に解析します。",
-                "current_step_entity": "別のエンティティから現在のステップを読み取ります。空白のままにすると追跡エンティティを使用します。",
-                "value_entity": "別のエンティティから gauge の値を読み取ります。空白のままにすると追跡エンティティを使用します。属性を設定しない限りソースエンティティの状態を使用します。",
-                "snooze_seconds": "iOS のスヌーズボタンが countdown を延長する時間（60〜3600）。空白のままにすると 300 秒（5分）のデフォルトになります。アラームが必要。countdown テンプレートのみ。",
-                "fired_at_entity": "別のエンティティから alert の発火時刻を読み取ります。空白のままにすると追跡エンティティを使用します。Unix タイムスタンプまたは ISO タイムスタンプセンサーを受け付けます。alert テンプレートのみ。",
-                "log_columns": "各ログ行に追加される値（最大6個）、カンマ区切り。形式: [Label=]source[|unit]。source = このエンティティの属性 (brightness)、別のエンティティの状態 (binary_sensor.door)、または別のエンティティの属性 (sensor.temp:temperature)。例: color_temp_kelvin|K, brightness → 'On · 4000K · 153'。ログテンプレートのみ。",
-                "step_configuration": "Add one row per step. Parallel jobs controls the number of stacked rows; relative duration/width makes longer stages wider; color is optional."
+                "progress_entity": "Read progress from a separate entity instead of the tracked entity. Leave empty to use the tracked entity. With the attribute field set, reads that attribute of this entity; otherwise its state.",
+                "progress_attribute": "Numeric progress from 0 to 100. Leave blank to read the selected entity state.",
+                "remaining_time_entity": "Read remaining time from a separate entity (e.g. a washer's time sensor). Leave empty to use the tracked entity. Auto-parses a timestamp (finish-time) sensor, a duration sensor with units, an H:MM:SS string, or plain seconds.",
+                "remaining_time_attribute": "Remaining seconds, a Home Assistant duration, or an absolute date/time. Leave blank to read the selected entity state.",
+                "live_progress": "When enabled, iOS animates toward the estimated finish time. Generic and Steps layouts require a remaining-time source.",
+                "current_step_entity": "Read the current step from a separate entity. Leave empty to use the tracked entity.",
+                "current_step_attribute": "Zero-based step index: 0 is the first step, 1 is the second, and the total step count means complete. Leave blank to read the selected entity state.",
+                "severity": "Alert severity level.",
+                "severity_label": "Override the Info/Warning/Critical badge text shown on the alert. Leave empty to use the severity name. Max 32 characters. Alert template only.",
+                "value_entity": "Read the gauge value from a separate entity. Leave empty to use the tracked entity. Uses the source entity's state unless an attribute is set.",
+                "value_attribute": "Attribute holding the current gauge value as a number (on the source entity, or the tracked entity if no source is set). Leave empty to use the entity's state.",
+                "min_value": "Lower bound of the gauge. Uses the same unit as the source value.",
+                "max_value": "Upper bound of the gauge and must be greater than Minimum value.",
+                "unit": "Text displayed after the value, such as °C, %, kW, or rpm. Maximum 32 characters.",
+                "series": "Add tracked-entity attribute series. Each row has a display label, attribute, and optional unit.",
+                "series_entities": "Add entity-backed chart series. Each row has a label, entity, optional attribute, and optional unit. Up to 10 series total.",
+                "primary_series": "Label of the series shown as the headline value and used for the compact high/low range. Leave empty to use the tracked entity's own series (or the first configured series).",
+                "scale": "Y-axis scale mode for the sparkline chart.",
+                "decimals": "Integer from 0 to 10 controlling displayed precision.",
+                "smoothing": "Enable curve interpolation between data points for a smoother sparkline.",
+                "thresholds": "Add up to 5 horizontal reference lines, each with a value and optional color and label.",
+                "history_period": "Minutes of Home Assistant Recorder history loaded when the timeline starts. Valid range: 0-1,440 minutes; 0 disables backfill.",
+                "state_labels": "Add state-to-label mappings, such as heating → Heating Up and idle → Standby.",
+                "completion_message": "Text shown when the activity ends. Leave empty for 'Complete'. Example: Wash Done",
+                "warning_threshold": "Seconds before a countdown finishes when PushWard sends its warning update. Valid range: 0-86,400 seconds.",
+                "alarm": "Trigger an AlarmKit alarm when the countdown expires (iOS 26+). Countdown template only.",
+                "snooze_seconds": "AlarmKit snooze duration in seconds, from 60 to 3,600. It is ignored unless Alarm is enabled.",
+                "fired_at_entity": "Read the alert's fired-at time from a separate entity. Leave empty to use the tracked entity. Accepts a unix timestamp or an ISO timestamp sensor. Alert template only.",
+                "fired_at_attribute": "Attribute holding the unix timestamp when the alert fired (on the source entity, or the tracked entity if no source is set). Alert template only.",
+                "tiles": "Add 1–4 board tiles. Each row selects an entity and label, with optional attribute, unit, and icon. Board template only.",
+                "log_columns": "Add up to 6 extra values to each log line. Each row selects an entity and optional attribute, label, and unit. Log template only.",
+                "log_level_attribute": "Attribute supplying each log line's level (info/warn/error). Leave empty for no level tag. Log template only.",
+                "step_configuration": "Add one named row per step. Parallel jobs creates stacked lanes. Relative step length is a ratio: weights 1, 4, 1 make the middle step four times wider. Color is optional."
               }
             },
             "appearance": {
               "name": "Appearance and tap actions",
               "description": "Optional labels, icons, colors, buttons, and background tap behavior.",
               "data": {
-                "subtitle_entity": "サブタイトルエンティティ",
-                "subtitle_attribute": "サブタイトル属性",
-                "icon": "アイコン",
-                "icon_attribute": "アイコン属性",
-                "accent_color": "アクセントカラー",
-                "accent_color_attribute": "アクセントカラー属性",
-                "background_color": "背景色",
-                "background_color_attribute": "背景色属性",
-                "text_color": "テキスト色",
-                "text_color_attribute": "テキスト色属性",
-                "tap_action_url": "タップアクションURL",
-                "tap_action_foreground": "タップアクションURLを開く",
-                "url": "URL",
-                "url_foreground": "プライマリボタンURLを開く",
-                "url_title": "プライマリボタンのタイトル",
-                "secondary_url": "セカンダリURL",
-                "secondary_url_foreground": "セカンダリボタンURLを開く",
-                "secondary_url_title": "セカンダリボタンのタイトル"
+                "subtitle_entity": "Subtitle source entity",
+                "subtitle_attribute": "Subtitle attribute",
+                "icon": "Icon",
+                "icon_attribute": "Dynamic icon attribute",
+                "accent_color": "Accent color",
+                "accent_color_attribute": "Dynamic accent-color attribute",
+                "background_color": "Background color",
+                "background_color_attribute": "Dynamic background-color attribute",
+                "text_color": "Text color",
+                "text_color_attribute": "Dynamic text-color attribute",
+                "tap_action": "Background tap action",
+                "url_action": "Primary button",
+                "secondary_url_action": "Secondary button"
               },
               "data_description": {
-                "subtitle_entity": "別のエンティティ（例: プログラム/モードセンサー）からサブタイトルを表示します。空白のままにすると追跡エンティティを使用します。属性を設定しない限りソースエンティティの状態を使用します。",
-                "subtitle_attribute": "サブタイトルとして表示するエンティティ属性。空白のままにするとエンティティのフレンドリー名を使用します。",
-                "icon": "アイコンの上書き。空白のままにするとエンティティのネイティブアイコンを使用します（例: mdi:thermometer）。SF Symbolsもサポートされています（例: lamp.desk.fill）。",
-                "icon_attribute": "動的アイコン用のエンティティ属性。設定すると静的アイコンおよびエンティティアイコンより優先されます。",
-                "accent_color": "Live Activityのアクセントカラー。空白のままにするとデフォルトの青色を使用します。",
-                "accent_color_attribute": "動的アクセントカラー用のエンティティ属性。静的カラーより優先されます。RGB、HS、XY、ケルビン、カラー名、16進数に対応しています。",
-                "background_color": "Live Activity の背景色。空白のままにするとデフォルト色を使用します。",
-                "background_color_attribute": "動的背景色のエンティティ属性。静的色より優先されます。RGB、HS、XY、ケルビン、色名、16進数に対応しています。",
-                "text_color": "Live Activity のテキスト色。空白のままにするとデフォルト色を使用します。",
-                "text_color_attribute": "動的テキスト色のエンティティ属性。静的色より優先されます。",
-                "tap_action_url": "Live Activity の背景をタップしたときに開く任意の URL。http(s)（Safari を開く）または homeassistant://navigate/lovelace/0 のようなカスタムスキーム（そのアプリを開く）に対応しています。",
-                "tap_action_foreground": "オン: タップで URL を開きます。オフ: サイレント Webhook（http(s) のみ）— ロック画面を離れずにバックグラウンドで POST を送信します。",
-                "url": "Live Activityをタップしたときに開くリンク。http:// または https:// で始まる必要があります。steps および alert テンプレートのみ。",
-                "url_foreground": "オン: タップで URL を開きます。オフ: サイレント Webhook（http(s) のみ）。",
-                "url_title": "プライマリボタンのラベル（最大 64 文字）。",
-                "secondary_url": "Live Activityのセカンダリリンク。steps および alert テンプレートのみ。",
-                "secondary_url_foreground": "オン: タップで URL を開きます。オフ: サイレント Webhook（http(s) のみ）。",
-                "secondary_url_title": "セカンダリボタンのラベル（最大 64 文字）。"
+                "subtitle_entity": "Show the subtitle from a separate entity (e.g. a program/mode sensor). Leave empty to use the tracked entity. Uses the source entity's state unless an attribute is set.",
+                "subtitle_attribute": "Attribute to show as subtitle (on the source entity, or the tracked entity if no source is set). Leave empty to use the source entity's state, or the friendly name when no source is set.",
+                "icon": "Override icon. Leave empty to use the entity’s native icon (e.g. mdi:thermometer). SF Symbols also supported (e.g. lamp.desk.fill).",
+                "icon_attribute": "Entity attribute for dynamic icon. Overrides static icon and entity icon when set.",
+                "accent_color": "Choose a PushWard named color or enter 6/8-digit RGB/RGBA hex, with or without #. Leave blank for blue.",
+                "accent_color_attribute": "Entity attribute for dynamic accent color. Overrides static color. Supports RGB, HS, XY, Kelvin, named colors, and hex.",
+                "background_color": "Choose a PushWard named color or enter 6/8-digit RGB/RGBA hex, with or without #. Leave blank for the iOS default.",
+                "background_color_attribute": "Entity attribute for dynamic background color. Overrides static color. Supports RGB, HS, XY, Kelvin, named colors, and hex.",
+                "text_color": "Choose a PushWard named color or enter 6/8-digit RGB/RGBA hex, with or without #. Leave blank for the iOS default.",
+                "text_color_attribute": "Entity attribute for dynamic text color. Overrides static color.",
+                "tap_action": "Optional whole-card destination. Configure an app link/foreground URL or a silent HTTP webhook.",
+                "url_action": "Optional primary inline button with a title, icon, and visible link or silent webhook.",
+                "secondary_url_action": "Optional second inline button with a title, icon, and visible link or silent webhook."
               }
             }
           }
         },
         "reconfigure": {
-          "title": "エンティティ設定を編集",
+          "title": "Edit tracked Live Activity",
           "data": {
-            "entity_id": "エンティティ",
-            "template": "テンプレート"
+            "entity_id": "Entity",
+            "template": "Template"
           },
           "data_description": {
-            "template": "アクティビティのレイアウトテンプレート。'generic' はほとんどのエンティティに対応しています。"
+            "template": "Activity layout template. 'generic' works for most entities."
           }
-        },
-        "content": {
-          "title": "3 of 4 · {template} content",
-          "data": {
-            "start_states": "開始状態",
-            "end_states": "終了状態",
-            "progress_attribute": "進捗属性",
-            "remaining_time_attribute": "残り時間属性",
-            "total_steps": "総 steps 数",
-            "current_step_attribute": "現在のステップ属性",
-            "severity": "重大度",
-            "value_attribute": "値属性",
-            "min_value": "最小値",
-            "max_value": "最大値",
-            "unit": "単位",
-            "series": "シリーズ",
-            "scale": "スケール",
-            "decimals": "小数点以下の桁数",
-            "smoothing": "スムーズな折れ線",
-            "thresholds": "しきい値",
-            "history_period": "過去データ期間",
-            "slug": "アクティビティスラッグ",
-            "activity_name": "アクティビティ名",
-            "icon": "アイコン",
-            "icon_attribute": "アイコン属性",
-            "priority": "優先度 (0〜10)",
-            "update_interval": "最小更新間隔（秒）",
-            "subtitle_attribute": "サブタイトル属性",
-            "state_labels": "状態ラベル",
-            "completion_message": "完了メッセージ",
-            "accent_color": "アクセントカラー",
-            "accent_color_attribute": "アクセントカラー属性",
-            "url": "URL",
-            "secondary_url": "セカンダリURL",
-            "ended_ttl": "終了後に自動削除（秒）",
-            "stale_ttl": "アイドル後に自動終了（秒）",
-            "sound": "サウンド",
-            "background_color": "背景色",
-            "background_color_attribute": "背景色属性",
-            "text_color": "テキスト色",
-            "text_color_attribute": "テキスト色属性",
-            "warning_threshold": "警告しきい値（秒）",
-            "alarm": "アラーム（iOS 26+）",
-            "step_labels": "ステップラベル",
-            "step_rows": "ステップ行高",
-            "fired_at_attribute": "発火時刻属性",
-            "units": "系列ごとの単位",
-            "progress_entity": "進捗エンティティ",
-            "remaining_time_entity": "残り時間エンティティ",
-            "current_step_entity": "現在のステップエンティティ",
-            "value_entity": "値エンティティ",
-            "subtitle_entity": "サブタイトルエンティティ",
-            "tap_action_url": "タップアクションURL",
-            "tap_action_foreground": "タップアクションURLを開く",
-            "url_foreground": "プライマリボタンURLを開く",
-            "url_title": "プライマリボタンのタイトル",
-            "secondary_url_foreground": "セカンダリボタンURLを開く",
-            "secondary_url_title": "セカンダリボタンのタイトル",
-            "snooze_seconds": "スヌーズ秒数（iOS 26+）",
-            "fired_at_entity": "発火時刻エンティティ",
-            "log_columns": "ログ列"
-          },
-          "data_description": {
-            "start_states": "Live Activityを開始するエンティティの状態。リストから選択するか、カスタム値を入力してください。",
-            "end_states": "Live Activityを終了するエンティティの状態。リストから選択するか、カスタム値を入力してください。",
-            "progress_attribute": "0〜100の進捗値を持つエンティティ属性。例: percentage",
-            "remaining_time_attribute": "残り時間（秒）を持つエンティティ属性。例: remaining",
-            "total_steps": "steps の総数。",
-            "current_step_attribute": "現在のステップを整数で保持するエンティティ属性。",
-            "severity": "alert の重大度レベル。",
-            "value_attribute": "現在の gauge 値を数値で保持するエンティティ属性。空白のままにするとエンティティの状態を使用します。",
-            "min_value": "gauge 範囲の最小値。",
-            "max_value": "gauge 範囲の最大値。",
-            "unit": "値の隣に表示される単位（例: °C, %, kW）。最大32文字。",
-            "series": "エンティティ属性を名前付きシリーズにマッピングします。形式: attribute=Label, attribute2=Label2。空白のままにするとエンティティの状態を単一シリーズとして使用します。",
-            "scale": "スパークラインチャートのY軸スケールモード。",
-            "decimals": "値の小数点以下の桁数（0〜10）。",
-            "smoothing": "データポイント間のカーブ補間を有効にして、スパークラインを滑らかにします。",
-            "thresholds": "スパークラインの水平参照線。形式: value:color:label。例: 25:red:Hot, 18:blue:Cold。最大5つ。",
-            "history_period": "Home Assistantのレコーダーからスパークラインにシードする過去データの分数。0に設定すると履歴なしで開始します。",
-            "slug": "このアクティビティの一意の識別子。空白のままにするとエンティティIDから自動生成されます。例: ha-living-room-lamp",
-            "activity_name": "iPhone Live Activityに表示される名前。デフォルトはエンティティのフレンドリー名です。",
-            "icon": "アイコンの上書き。空白のままにするとエンティティのネイティブアイコンを使用します（例: mdi:thermometer）。SF Symbolsもサポートされています（例: lamp.desk.fill）。",
-            "icon_attribute": "動的アイコン用のエンティティ属性。設定すると静的アイコンおよびエンティティアイコンより優先されます。",
-            "priority": "デバイスの上限に達した場合、優先度の高いアクティビティが長く保持されます（0 = 最低, 10 = 最高）。",
-            "update_interval": "更新間の最小秒数。急速な状態変化はスロットリングされます。",
-            "subtitle_attribute": "サブタイトルとして表示するエンティティ属性。空白のままにするとエンティティのフレンドリー名を使用します。",
-            "state_labels": "状態のカスタム表示テキスト。形式: state=Label, state2=Label 2。例: heating=加熱中, idle=待機中",
-            "completion_message": "アクティビティ終了時に表示されるテキスト。空白のままにすると「完了」と表示されます。例: 洗濯完了",
-            "accent_color": "Live Activityのアクセントカラー。空白のままにするとデフォルトの青色を使用します。",
-            "accent_color_attribute": "動的アクセントカラー用のエンティティ属性。静的カラーより優先されます。RGB、HS、XY、ケルビン、カラー名、16進数に対応しています。",
-            "url": "Live Activityをタップしたときに開くリンク。http:// または https:// で始まる必要があります。steps および alert テンプレートのみ。",
-            "secondary_url": "Live Activityのセカンダリリンク。steps および alert テンプレートのみ。",
-            "ended_ttl": "アクティビティ終了後、サーバーから自動削除されるまでの秒数。空白のままにすると無期限に保持されます。例: 300",
-            "stale_ttl": "サーバーがアクティビティを自動終了するまでの非アクティブ秒数。空白のままにすると無効にします。例: 1800",
-            "sound": "このエンティティの毎回の更新で再生されるサウンド。空白のままにすると上書きなし。",
-            "background_color": "Live Activity の背景色。空白のままにするとデフォルト色を使用します。",
-            "background_color_attribute": "動的背景色のエンティティ属性。静的色より優先されます。RGB、HS、XY、ケルビン、色名、16進数に対応しています。",
-            "text_color": "Live Activity のテキスト色。空白のままにするとデフォルト色を使用します。",
-            "text_color_attribute": "動的テキスト色のエンティティ属性。静的色より優先されます。",
-            "warning_threshold": "countdown 終了前にサーバーが警告プッシュを送信する秒数。空白のままにすると無効にします。countdown テンプレートのみ。",
-            "alarm": "countdown の期限切れ時に AlarmKit アラームを起動する（iOS 26+）。countdown テンプレートのみ。",
-            "step_labels": "各ステップのラベル。形式: 1=最初のステップ, 2=2番目のステップ。ステップ 1..total_steps をカバーする必要があります。steps テンプレートのみ。",
-            "step_rows": "各ステップの行高（1–10）、カンマ区切り。total_steps 個のエントリが必要です。steps テンプレートのみ。",
-            "fired_at_attribute": "alert が発火したときの Unix タイムスタンプを持つエンティティ属性。alert テンプレートのみ。",
-            "units": "系列ごとの単位ラベル。形式: 系列ラベル=単位, 温度=°C, 湿度=%。timeline テンプレートのみ。",
-            "progress_entity": "追跡エンティティの代わりに別のエンティティから進捗を読み取ります。空白のままにすると追跡エンティティを使用します。属性フィールドを設定するとこのエンティティのその属性を、設定しない場合は状態を読み取ります。",
-            "remaining_time_entity": "別のエンティティ（例: 洗濯機の時間センサー）から残り時間を読み取ります。空白のままにすると追跡エンティティを使用します。タイムスタンプ（終了時刻）センサー、単位付きの継続時間センサー、H:MM:SS 文字列、または単純な秒数を自動的に解析します。",
-            "current_step_entity": "別のエンティティから現在のステップを読み取ります。空白のままにすると追跡エンティティを使用します。",
-            "value_entity": "別のエンティティから gauge の値を読み取ります。空白のままにすると追跡エンティティを使用します。属性を設定しない限りソースエンティティの状態を使用します。",
-            "subtitle_entity": "別のエンティティ（例: プログラム/モードセンサー）からサブタイトルを表示します。空白のままにすると追跡エンティティを使用します。属性を設定しない限りソースエンティティの状態を使用します。",
-            "tap_action_url": "Live Activity の背景をタップしたときに開く任意の URL。http(s)（Safari を開く）または homeassistant://navigate/lovelace/0 のようなカスタムスキーム（そのアプリを開く）に対応しています。",
-            "tap_action_foreground": "オン: タップで URL を開きます。オフ: サイレント Webhook（http(s) のみ）— ロック画面を離れずにバックグラウンドで POST を送信します。",
-            "url_foreground": "オン: タップで URL を開きます。オフ: サイレント Webhook（http(s) のみ）。",
-            "url_title": "プライマリボタンのラベル（最大 64 文字）。",
-            "secondary_url_foreground": "オン: タップで URL を開きます。オフ: サイレント Webhook（http(s) のみ）。",
-            "secondary_url_title": "セカンダリボタンのラベル（最大 64 文字）。",
-            "snooze_seconds": "iOS のスヌーズボタンが countdown を延長する時間（60〜3600）。空白のままにすると 300 秒（5分）のデフォルトになります。アラームが必要。countdown テンプレートのみ。",
-            "fired_at_entity": "別のエンティティから alert の発火時刻を読み取ります。空白のままにすると追跡エンティティを使用します。Unix タイムスタンプまたは ISO タイムスタンプセンサーを受け付けます。alert テンプレートのみ。",
-            "log_columns": "各ログ行に追加される値（最大6個）、カンマ区切り。形式: [Label=]source[|unit]。source = このエンティティの属性 (brightness)、別のエンティティの状態 (binary_sensor.door)、または別のエンティティの属性 (sensor.temp:temperature)。例: color_temp_kelvin|K, brightness → 'On · 4000K · 153'。ログテンプレートのみ。"
-          },
-          "description": "Configure only the values used by the selected Live Activity layout."
-        },
-        "appearance": {
-          "title": "4 of 4 · Appearance and actions",
-          "data": {
-            "start_states": "開始状態",
-            "end_states": "終了状態",
-            "progress_attribute": "進捗属性",
-            "remaining_time_attribute": "残り時間属性",
-            "total_steps": "総 steps 数",
-            "current_step_attribute": "現在のステップ属性",
-            "severity": "重大度",
-            "value_attribute": "値属性",
-            "min_value": "最小値",
-            "max_value": "最大値",
-            "unit": "単位",
-            "series": "シリーズ",
-            "scale": "スケール",
-            "decimals": "小数点以下の桁数",
-            "smoothing": "スムーズな折れ線",
-            "thresholds": "しきい値",
-            "history_period": "過去データ期間",
-            "slug": "アクティビティスラッグ",
-            "activity_name": "アクティビティ名",
-            "icon": "アイコン",
-            "icon_attribute": "アイコン属性",
-            "priority": "優先度 (0〜10)",
-            "update_interval": "最小更新間隔（秒）",
-            "subtitle_attribute": "サブタイトル属性",
-            "state_labels": "状態ラベル",
-            "completion_message": "完了メッセージ",
-            "accent_color": "アクセントカラー",
-            "accent_color_attribute": "アクセントカラー属性",
-            "url": "URL",
-            "secondary_url": "セカンダリURL",
-            "ended_ttl": "終了後に自動削除（秒）",
-            "stale_ttl": "アイドル後に自動終了（秒）",
-            "sound": "サウンド",
-            "background_color": "背景色",
-            "background_color_attribute": "背景色属性",
-            "text_color": "テキスト色",
-            "text_color_attribute": "テキスト色属性",
-            "warning_threshold": "警告しきい値（秒）",
-            "alarm": "アラーム（iOS 26+）",
-            "step_labels": "ステップラベル",
-            "step_rows": "ステップ行高",
-            "fired_at_attribute": "発火時刻属性",
-            "units": "系列ごとの単位",
-            "progress_entity": "進捗エンティティ",
-            "remaining_time_entity": "残り時間エンティティ",
-            "current_step_entity": "現在のステップエンティティ",
-            "value_entity": "値エンティティ",
-            "subtitle_entity": "サブタイトルエンティティ",
-            "tap_action_url": "タップアクションURL",
-            "tap_action_foreground": "タップアクションURLを開く",
-            "url_foreground": "プライマリボタンURLを開く",
-            "url_title": "プライマリボタンのタイトル",
-            "secondary_url_foreground": "セカンダリボタンURLを開く",
-            "secondary_url_title": "セカンダリボタンのタイトル",
-            "snooze_seconds": "スヌーズ秒数（iOS 26+）",
-            "fired_at_entity": "発火時刻エンティティ",
-            "log_columns": "ログ列"
-          },
-          "data_description": {
-            "start_states": "Live Activityを開始するエンティティの状態。リストから選択するか、カスタム値を入力してください。",
-            "end_states": "Live Activityを終了するエンティティの状態。リストから選択するか、カスタム値を入力してください。",
-            "progress_attribute": "0〜100の進捗値を持つエンティティ属性。例: percentage",
-            "remaining_time_attribute": "残り時間（秒）を持つエンティティ属性。例: remaining",
-            "total_steps": "steps の総数。",
-            "current_step_attribute": "現在のステップを整数で保持するエンティティ属性。",
-            "severity": "alert の重大度レベル。",
-            "value_attribute": "現在の gauge 値を数値で保持するエンティティ属性。空白のままにするとエンティティの状態を使用します。",
-            "min_value": "gauge 範囲の最小値。",
-            "max_value": "gauge 範囲の最大値。",
-            "unit": "値の隣に表示される単位（例: °C, %, kW）。最大32文字。",
-            "series": "エンティティ属性を名前付きシリーズにマッピングします。形式: attribute=Label, attribute2=Label2。空白のままにするとエンティティの状態を単一シリーズとして使用します。",
-            "scale": "スパークラインチャートのY軸スケールモード。",
-            "decimals": "値の小数点以下の桁数（0〜10）。",
-            "smoothing": "データポイント間のカーブ補間を有効にして、スパークラインを滑らかにします。",
-            "thresholds": "スパークラインの水平参照線。形式: value:color:label。例: 25:red:Hot, 18:blue:Cold。最大5つ。",
-            "history_period": "Home Assistantのレコーダーからスパークラインにシードする過去データの分数。0に設定すると履歴なしで開始します。",
-            "slug": "このアクティビティの一意の識別子。空白のままにするとエンティティIDから自動生成されます。例: ha-living-room-lamp",
-            "activity_name": "iPhone Live Activityに表示される名前。デフォルトはエンティティのフレンドリー名です。",
-            "icon": "アイコンの上書き。空白のままにするとエンティティのネイティブアイコンを使用します（例: mdi:thermometer）。SF Symbolsもサポートされています（例: lamp.desk.fill）。",
-            "icon_attribute": "動的アイコン用のエンティティ属性。設定すると静的アイコンおよびエンティティアイコンより優先されます。",
-            "priority": "デバイスの上限に達した場合、優先度の高いアクティビティが長く保持されます（0 = 最低, 10 = 最高）。",
-            "update_interval": "更新間の最小秒数。急速な状態変化はスロットリングされます。",
-            "subtitle_attribute": "サブタイトルとして表示するエンティティ属性。空白のままにするとエンティティのフレンドリー名を使用します。",
-            "state_labels": "状態のカスタム表示テキスト。形式: state=Label, state2=Label 2。例: heating=加熱中, idle=待機中",
-            "completion_message": "アクティビティ終了時に表示されるテキスト。空白のままにすると「完了」と表示されます。例: 洗濯完了",
-            "accent_color": "Live Activityのアクセントカラー。空白のままにするとデフォルトの青色を使用します。",
-            "accent_color_attribute": "動的アクセントカラー用のエンティティ属性。静的カラーより優先されます。RGB、HS、XY、ケルビン、カラー名、16進数に対応しています。",
-            "url": "Live Activityをタップしたときに開くリンク。http:// または https:// で始まる必要があります。steps および alert テンプレートのみ。",
-            "secondary_url": "Live Activityのセカンダリリンク。steps および alert テンプレートのみ。",
-            "ended_ttl": "アクティビティ終了後、サーバーから自動削除されるまでの秒数。空白のままにすると無期限に保持されます。例: 300",
-            "stale_ttl": "サーバーがアクティビティを自動終了するまでの非アクティブ秒数。空白のままにすると無効にします。例: 1800",
-            "sound": "このエンティティの毎回の更新で再生されるサウンド。空白のままにすると上書きなし。",
-            "background_color": "Live Activity の背景色。空白のままにするとデフォルト色を使用します。",
-            "background_color_attribute": "動的背景色のエンティティ属性。静的色より優先されます。RGB、HS、XY、ケルビン、色名、16進数に対応しています。",
-            "text_color": "Live Activity のテキスト色。空白のままにするとデフォルト色を使用します。",
-            "text_color_attribute": "動的テキスト色のエンティティ属性。静的色より優先されます。",
-            "warning_threshold": "countdown 終了前にサーバーが警告プッシュを送信する秒数。空白のままにすると無効にします。countdown テンプレートのみ。",
-            "alarm": "countdown の期限切れ時に AlarmKit アラームを起動する（iOS 26+）。countdown テンプレートのみ。",
-            "step_labels": "各ステップのラベル。形式: 1=最初のステップ, 2=2番目のステップ。ステップ 1..total_steps をカバーする必要があります。steps テンプレートのみ。",
-            "step_rows": "各ステップの行高（1–10）、カンマ区切り。total_steps 個のエントリが必要です。steps テンプレートのみ。",
-            "fired_at_attribute": "alert が発火したときの Unix タイムスタンプを持つエンティティ属性。alert テンプレートのみ。",
-            "units": "系列ごとの単位ラベル。形式: 系列ラベル=単位, 温度=°C, 湿度=%。timeline テンプレートのみ。",
-            "progress_entity": "追跡エンティティの代わりに別のエンティティから進捗を読み取ります。空白のままにすると追跡エンティティを使用します。属性フィールドを設定するとこのエンティティのその属性を、設定しない場合は状態を読み取ります。",
-            "remaining_time_entity": "別のエンティティ（例: 洗濯機の時間センサー）から残り時間を読み取ります。空白のままにすると追跡エンティティを使用します。タイムスタンプ（終了時刻）センサー、単位付きの継続時間センサー、H:MM:SS 文字列、または単純な秒数を自動的に解析します。",
-            "current_step_entity": "別のエンティティから現在のステップを読み取ります。空白のままにすると追跡エンティティを使用します。",
-            "value_entity": "別のエンティティから gauge の値を読み取ります。空白のままにすると追跡エンティティを使用します。属性を設定しない限りソースエンティティの状態を使用します。",
-            "subtitle_entity": "別のエンティティ（例: プログラム/モードセンサー）からサブタイトルを表示します。空白のままにすると追跡エンティティを使用します。属性を設定しない限りソースエンティティの状態を使用します。",
-            "tap_action_url": "Live Activity の背景をタップしたときに開く任意の URL。http(s)（Safari を開く）または homeassistant://navigate/lovelace/0 のようなカスタムスキーム（そのアプリを開く）に対応しています。",
-            "tap_action_foreground": "オン: タップで URL を開きます。オフ: サイレント Webhook（http(s) のみ）— ロック画面を離れずにバックグラウンドで POST を送信します。",
-            "url_foreground": "オン: タップで URL を開きます。オフ: サイレント Webhook（http(s) のみ）。",
-            "url_title": "プライマリボタンのラベル（最大 64 文字）。",
-            "secondary_url_foreground": "オン: タップで URL を開きます。オフ: サイレント Webhook（http(s) のみ）。",
-            "secondary_url_title": "セカンダリボタンのラベル（最大 64 文字）。",
-            "snooze_seconds": "iOS のスヌーズボタンが countdown を延長する時間（60〜3600）。空白のままにすると 300 秒（5分）のデフォルトになります。アラームが必要。countdown テンプレートのみ。",
-            "fired_at_entity": "別のエンティティから alert の発火時刻を読み取ります。空白のままにすると追跡エンティティを使用します。Unix タイムスタンプまたは ISO タイムスタンプセンサーを受け付けます。alert テンプレートのみ。",
-            "log_columns": "各ログ行に追加される値（最大6個）、カンマ区切り。形式: [Label=]source[|unit]。source = このエンティティの属性 (brightness)、別のエンティティの状態 (binary_sensor.door)、または別のエンティティの属性 (sensor.temp:temperature)。例: color_temp_kelvin|K, brightness → 'On · 4000K · 153'。ログテンプレートのみ。"
-          },
-          "description": "Finish with labels, colors, icons, and tap behavior."
         }
       },
       "error": {
-        "invalid_url": "URLは http:// または https:// で始まる必要があります。",
-        "invalid_gauge_range": "最小値は最大値より小さくなければなりません。",
-        "silent_requires_http": "サイレント Webhook（フォアグラウンドオフ）には http:// または https:// の URL が必要です。"
+        "invalid_url": "URL must include a valid scheme. Use http(s):// or a custom app scheme like homeassistant://.",
+        "silent_requires_http": "Silent webhook (foreground off) requires an http:// or https:// URL.",
+        "invalid_gauge_range": "Minimum value must be less than maximum value.",
+        "tiles_required": "At least one tile is required for the board template.",
+        "too_many_series": "A timeline supports at most 10 series in total (series attributes plus series entities)."
       },
       "abort": {
-        "already_configured": "このエンティティはすでに追跡されています。",
-        "reconfigure_successful": "エンティティの設定を更新しました。"
+        "already_configured": "This entity is already tracked.",
+        "reconfigure_successful": "Entity configuration updated."
       }
     },
     "tracked_widget": {
-      "entry_type": "追跡ウィジェット",
+      "entry_type": "Tracked Widget",
       "initiate_flow": {
-        "user": "追跡ウィジェットを追加"
+        "user": "Add tracked widget"
       },
       "step": {
         "user": {
-          "title": "PushWard にウィジェットを追加",
+          "title": "Add tracked PushWard widget",
           "data": {
-            "entity_id": "エンティティ",
-            "widget_template": "テンプレート",
-            "slug": "ウィジェットスラッグ"
+            "entity_id": "Entity to display",
+            "widget_template": "Widget layout",
+            "slug": "Widget slug"
           },
           "data_description": {
-            "widget_template": "ウィジェットのレイアウト。単一の数値には `value`、0〜1 のバーには `progress`、範囲内の値には `gauge`、重大度バッジには `status`、最大 6 行には `stat_list` を使用します。",
-            "slug": "このウィジェットの一意の識別子。空白のままにするとエンティティ ID から自動生成されます。"
+            "widget_template": "Widget layout. Use `value` for a single number, `progress` for a 0–1 bar, `gauge` for a value-in-range, `status` for a severity badge, or `stat_list` for up to 6 rows.",
+            "slug": "Unique identifier for this widget. Leave empty to auto-generate from entity ID.",
+            "entity_id": "The Home Assistant entity that supplies this widget’s value and update events."
           }
         },
         "reconfigure": {
-          "title": "ウィジェットを編集",
+          "title": "Edit tracked PushWard widget",
           "data": {
-            "entity_id": "エンティティ",
-            "widget_template": "テンプレート",
-            "slug": "ウィジェットスラッグ"
+            "entity_id": "Entity",
+            "widget_template": "Template",
+            "slug": "Widget Slug"
           },
           "data_description": {
-            "widget_template": "ウィジェットのレイアウト。",
-            "slug": "このウィジェットの一意の識別子。"
+            "widget_template": "Widget layout.",
+            "slug": "Unique identifier for this widget."
           }
         },
         "details": {
           "title": "Configure {template} widget",
           "data": {
-            "widget_name": "ウィジェット名",
-            "value_attribute": "値属性",
-            "unit": "単位",
-            "min_value": "最小値",
-            "max_value": "最大値",
-            "severity": "重大度",
-            "stat_rows": "統計行",
-            "label": "ラベル",
-            "label_attribute": "ラベル属性",
-            "subtitle_attribute": "サブタイトル属性",
-            "icon": "アイコン",
-            "icon_attribute": "アイコン属性",
-            "accent_color": "アクセントカラー",
-            "accent_color_attribute": "アクセントカラー属性",
-            "background_color": "背景色",
-            "text_color": "テキスト色",
-            "widget_trigger_mode": "トリガーモード",
-            "widget_poll_interval": "ポーリング間隔（秒）",
-            "tap_action_url": "タップアクションURL",
-            "tap_action_foreground": "タップアクションURLを開く"
+            "widget_name": "Widget Name",
+            "value_attribute": "Value Attribute",
+            "unit": "Unit",
+            "min_value": "Minimum Value",
+            "max_value": "Maximum Value",
+            "severity": "Severity",
+            "stat_rows": "Stat Rows",
+            "label": "Label",
+            "label_attribute": "Label Attribute",
+            "subtitle_attribute": "Subtitle Attribute",
+            "icon": "Icon",
+            "icon_attribute": "Icon Attribute",
+            "accent_color": "Accent Color",
+            "accent_color_attribute": "Accent Color Attribute",
+            "background_color": "Background Color",
+            "text_color": "Text Color",
+            "widget_trigger_mode": "Trigger Mode",
+            "widget_poll_interval": "Poll Interval (seconds)",
+            "tap_action_url": "Tap Action URL",
+            "tap_action_foreground": "Open Tap Action URL"
           },
           "data_description": {
-            "widget_name": "iOS のウィジェット選択画面に表示される表示名。デフォルトはエンティティのフレンドリー名です。",
-            "value_attribute": "値を保持するエンティティ属性。空白のままにするとエンティティの主状態を使用します。",
-            "unit": "値の横に表示される単位。最大 32 文字。",
-            "min_value": "gauge 範囲の最小値。",
-            "max_value": "gauge 範囲の最大値。",
-            "severity": "ステータスの重大度（info、warning、critical、success）。",
-            "stat_rows": "最大 6 行。形式: `Label=entity_id[:attribute[:unit]]`、カンマ区切り。例: `Users=sensor.user_count, Active=sensor.active_devices:count`。",
-            "label": "ウィジェットに表示される静的ラベル。空白のままにするとエンティティから取得します。",
-            "label_attribute": "ラベルとして使用するエンティティ属性。静的ラベルより優先されます。",
-            "subtitle_attribute": "ウィジェットのサブタイトルとして表示するエンティティ属性。",
-            "icon": "静的アイコン。SF Symbols と MDI 名に対応しています。",
-            "icon_attribute": "動的アイコン用のエンティティ属性。静的アイコンより優先されます。",
-            "accent_color": "ウィジェットのアクセントカラー。空白のままにするとデフォルトになります。",
-            "accent_color_attribute": "動的アクセントカラー用のエンティティ属性。",
-            "background_color": "任意の背景色。",
-            "text_color": "任意のテキスト色。",
-            "widget_trigger_mode": "更新がトリガーされる方法。`event` は状態変化に反応し、`poll` は一定間隔で再評価します。",
-            "widget_poll_interval": "ポーリングの間隔（10〜3600 秒）。トリガーモードが `poll` の場合にのみ使用されます。",
-            "tap_action_url": "ウィジェットをタップしたときに開く任意の URL。http(s)（Safari を開く）または homeassistant://navigate/lovelace/0 のようなカスタムスキームに対応しています。",
-            "tap_action_foreground": "オン: タップで URL を開きます。オフ: サイレント Webhook（http(s) のみ）— バックグラウンドで POST を送信します。"
+            "widget_name": "Display name shown in the iOS widget picker. Defaults to the entity's friendly name.",
+            "value_attribute": "Entity attribute holding the value. Leave empty to use the entity's primary state.",
+            "unit": "Display unit shown next to the value. Max 32 characters.",
+            "min_value": "Minimum value for the gauge range.",
+            "max_value": "Maximum value for the gauge range.",
+            "severity": "Status severity (info, warning, critical, success).",
+            "stat_rows": "Add up to 6 rows, each with a label, entity, and optional attribute and unit. Smaller widgets may show fewer rows depending on Row Density in the PushWard app.",
+            "label": "Static label shown on the widget. Leave empty to derive from the entity.",
+            "label_attribute": "Entity attribute used as the label. Overrides the static label.",
+            "subtitle_attribute": "Entity attribute shown as the widget subtitle.",
+            "icon": "Static icon. SF Symbols and MDI names supported.",
+            "icon_attribute": "Entity attribute for a dynamic icon. Overrides the static icon.",
+            "accent_color": "Accent color for the widget. Leave empty for the default.",
+            "accent_color_attribute": "Entity attribute for a dynamic accent color.",
+            "background_color": "Optional background color.",
+            "text_color": "Optional text color.",
+            "widget_trigger_mode": "How updates are triggered. `event` reacts to state changes; `poll` re-evaluates on a fixed interval.",
+            "widget_poll_interval": "Interval between polls (10–3600 seconds). Only used when trigger mode is `poll`.",
+            "tap_action_url": "Optional URL opened when tapping the widget. Supports http(s) (opens Safari) or custom schemes like homeassistant://navigate/lovelace/0.",
+            "tap_action_foreground": "On: tap opens the URL. Off: silent webhook (http(s) only) — fires a POST in the background."
           },
           "description": "Everything is on this page. Open only the sections you need.",
           "sections": {
@@ -1702,225 +1378,99 @@
               "name": "Widget content",
               "description": "Values rendered by the selected widget layout.",
               "data": {
-                "value_attribute": "値属性",
-                "unit": "単位",
-                "min_value": "最小値",
-                "max_value": "最大値",
-                "severity": "重大度",
-                "stat_rows": "統計行"
+                "value_attribute": "Value Attribute",
+                "unit": "Unit",
+                "min_value": "Minimum Value",
+                "max_value": "Maximum Value",
+                "severity": "Severity",
+                "stat_rows": "Stat Rows"
               },
               "data_description": {
-                "value_attribute": "値を保持するエンティティ属性。空白のままにするとエンティティの主状態を使用します。",
-                "unit": "値の横に表示される単位。最大 32 文字。",
-                "min_value": "gauge 範囲の最小値。",
-                "max_value": "gauge 範囲の最大値。",
-                "severity": "ステータスの重大度（info、warning、critical、success）。",
-                "stat_rows": "最大 6 行。形式: `Label=entity_id[:attribute[:unit]]`、カンマ区切り。例: `Users=sensor.user_count, Active=sensor.active_devices:count`。"
+                "value_attribute": "Entity attribute holding the value. Leave empty to use the entity's primary state.",
+                "unit": "Display unit shown next to the value. Max 32 characters.",
+                "min_value": "Minimum value for the gauge range.",
+                "max_value": "Maximum value for the gauge range.",
+                "severity": "Status severity (info, warning, critical, success).",
+                "stat_rows": "Add up to 6 rows, each with a label, entity, and optional attribute and unit. Smaller widgets may show fewer rows depending on Row Density in the PushWard app."
               }
             },
             "appearance": {
               "name": "Appearance and tap action",
               "description": "Optional labels, icon, colors, and tap behavior.",
               "data": {
-                "widget_name": "ウィジェット名",
-                "label": "ラベル",
-                "label_attribute": "ラベル属性",
-                "subtitle_attribute": "サブタイトル属性",
-                "icon": "アイコン",
-                "icon_attribute": "アイコン属性",
-                "accent_color": "アクセントカラー",
-                "accent_color_attribute": "アクセントカラー属性",
-                "background_color": "背景色",
-                "text_color": "テキスト色",
-                "tap_action_url": "タップアクションURL",
-                "tap_action_foreground": "タップアクションURLを開く"
+                "widget_name": "Widget Name",
+                "label": "Label",
+                "label_attribute": "Label Attribute",
+                "subtitle_attribute": "Subtitle Attribute",
+                "icon": "Icon",
+                "icon_attribute": "Icon Attribute",
+                "accent_color": "Accent Color",
+                "accent_color_attribute": "Accent Color Attribute",
+                "background_color": "Background Color",
+                "text_color": "Text Color",
+                "tap_action": "Background tap action",
+                "url_action": "Primary button",
+                "secondary_url_action": "Secondary button"
               },
               "data_description": {
-                "widget_name": "iOS のウィジェット選択画面に表示される表示名。デフォルトはエンティティのフレンドリー名です。",
-                "label": "ウィジェットに表示される静的ラベル。空白のままにするとエンティティから取得します。",
-                "label_attribute": "ラベルとして使用するエンティティ属性。静的ラベルより優先されます。",
-                "subtitle_attribute": "ウィジェットのサブタイトルとして表示するエンティティ属性。",
-                "icon": "静的アイコン。SF Symbols と MDI 名に対応しています。",
-                "icon_attribute": "動的アイコン用のエンティティ属性。静的アイコンより優先されます。",
-                "accent_color": "ウィジェットのアクセントカラー。空白のままにするとデフォルトになります。",
-                "accent_color_attribute": "動的アクセントカラー用のエンティティ属性。",
-                "background_color": "任意の背景色。",
-                "text_color": "任意のテキスト色。",
-                "tap_action_url": "ウィジェットをタップしたときに開く任意の URL。http(s)（Safari を開く）または homeassistant://navigate/lovelace/0 のようなカスタムスキームに対応しています。",
-                "tap_action_foreground": "オン: タップで URL を開きます。オフ: サイレント Webhook（http(s) のみ）— バックグラウンドで POST を送信します。"
+                "widget_name": "Display name shown in the iOS widget picker. Defaults to the entity's friendly name.",
+                "label": "Static label shown on the widget. Leave empty to derive from the entity.",
+                "label_attribute": "Entity attribute used as the label. Overrides the static label.",
+                "subtitle_attribute": "Entity attribute shown as the widget subtitle.",
+                "icon": "Static icon. SF Symbols and MDI names supported.",
+                "icon_attribute": "Entity attribute for a dynamic icon. Overrides the static icon.",
+                "accent_color": "Choose a PushWard named color or enter 6/8-digit RGB/RGBA hex, with or without #.",
+                "accent_color_attribute": "Entity attribute for a dynamic accent color.",
+                "background_color": "Choose a PushWard named color or enter 6/8-digit RGB/RGBA hex, with or without #.",
+                "text_color": "Choose a PushWard named color or enter 6/8-digit RGB/RGBA hex, with or without #.",
+                "tap_action": "Optional whole-card destination. Configure an app link/foreground URL or a silent HTTP webhook.",
+                "url_action": "Optional primary inline button with a title, icon, and visible link or silent webhook.",
+                "secondary_url_action": "Optional second inline button with a title, icon, and visible link or silent webhook."
               }
             },
             "refresh": {
               "name": "Refresh behavior",
               "description": "Choose event-driven updates or periodic polling.",
               "data": {
-                "widget_trigger_mode": "トリガーモード",
-                "widget_poll_interval": "ポーリング間隔（秒）"
+                "widget_trigger_mode": "Trigger Mode",
+                "widget_poll_interval": "Polling interval"
               },
               "data_description": {
-                "widget_trigger_mode": "更新がトリガーされる方法。`event` は状態変化に反応し、`poll` は一定間隔で再評価します。",
-                "widget_poll_interval": "ポーリングの間隔（10〜3600 秒）。トリガーモードが `poll` の場合にのみ使用されます。"
+                "widget_trigger_mode": "How updates are triggered. `event` reacts to state changes; `poll` re-evaluates on a fixed interval.",
+                "widget_poll_interval": "Seconds between polls. Valid range: 10-3,600 seconds; used only with Poll on a schedule."
               }
             }
           }
-        },
-        "appearance": {
-          "title": "3 of 4 · Appearance and tap action",
-          "data": {
-            "widget_name": "ウィジェット名",
-            "value_attribute": "値属性",
-            "unit": "単位",
-            "min_value": "最小値",
-            "max_value": "最大値",
-            "severity": "重大度",
-            "stat_rows": "統計行",
-            "label": "ラベル",
-            "label_attribute": "ラベル属性",
-            "subtitle_attribute": "サブタイトル属性",
-            "icon": "アイコン",
-            "icon_attribute": "アイコン属性",
-            "accent_color": "アクセントカラー",
-            "accent_color_attribute": "アクセントカラー属性",
-            "background_color": "背景色",
-            "text_color": "テキスト色",
-            "widget_trigger_mode": "トリガーモード",
-            "widget_poll_interval": "ポーリング間隔（秒）",
-            "tap_action_url": "タップアクションURL",
-            "tap_action_foreground": "タップアクションURLを開く"
-          },
-          "data_description": {
-            "widget_name": "iOS のウィジェット選択画面に表示される表示名。デフォルトはエンティティのフレンドリー名です。",
-            "value_attribute": "値を保持するエンティティ属性。空白のままにするとエンティティの主状態を使用します。",
-            "unit": "値の横に表示される単位。最大 32 文字。",
-            "min_value": "gauge 範囲の最小値。",
-            "max_value": "gauge 範囲の最大値。",
-            "severity": "ステータスの重大度（info、warning、critical、success）。",
-            "stat_rows": "最大 6 行。形式: `Label=entity_id[:attribute[:unit]]`、カンマ区切り。例: `Users=sensor.user_count, Active=sensor.active_devices:count`。",
-            "label": "ウィジェットに表示される静的ラベル。空白のままにするとエンティティから取得します。",
-            "label_attribute": "ラベルとして使用するエンティティ属性。静的ラベルより優先されます。",
-            "subtitle_attribute": "ウィジェットのサブタイトルとして表示するエンティティ属性。",
-            "icon": "静的アイコン。SF Symbols と MDI 名に対応しています。",
-            "icon_attribute": "動的アイコン用のエンティティ属性。静的アイコンより優先されます。",
-            "accent_color": "ウィジェットのアクセントカラー。空白のままにするとデフォルトになります。",
-            "accent_color_attribute": "動的アクセントカラー用のエンティティ属性。",
-            "background_color": "任意の背景色。",
-            "text_color": "任意のテキスト色。",
-            "widget_trigger_mode": "更新がトリガーされる方法。`event` は状態変化に反応し、`poll` は一定間隔で再評価します。",
-            "widget_poll_interval": "ポーリングの間隔（10〜3600 秒）。トリガーモードが `poll` の場合にのみ使用されます。",
-            "tap_action_url": "ウィジェットをタップしたときに開く任意の URL。http(s)（Safari を開く）または homeassistant://navigate/lovelace/0 のようなカスタムスキームに対応しています。",
-            "tap_action_foreground": "オン: タップで URL を開きます。オフ: サイレント Webhook（http(s) のみ）— バックグラウンドで POST を送信します。"
-          },
-          "description": "Set the widget labels, icon, colors, and tap behavior."
-        },
-        "refresh": {
-          "title": "4 of 4 · Refresh behavior",
-          "data": {
-            "widget_name": "ウィジェット名",
-            "value_attribute": "値属性",
-            "unit": "単位",
-            "min_value": "最小値",
-            "max_value": "最大値",
-            "severity": "重大度",
-            "stat_rows": "統計行",
-            "label": "ラベル",
-            "label_attribute": "ラベル属性",
-            "subtitle_attribute": "サブタイトル属性",
-            "icon": "アイコン",
-            "icon_attribute": "アイコン属性",
-            "accent_color": "アクセントカラー",
-            "accent_color_attribute": "アクセントカラー属性",
-            "background_color": "背景色",
-            "text_color": "テキスト色",
-            "widget_trigger_mode": "トリガーモード",
-            "widget_poll_interval": "ポーリング間隔（秒）",
-            "tap_action_url": "タップアクションURL",
-            "tap_action_foreground": "タップアクションURLを開く"
-          },
-          "data_description": {
-            "widget_name": "iOS のウィジェット選択画面に表示される表示名。デフォルトはエンティティのフレンドリー名です。",
-            "value_attribute": "値を保持するエンティティ属性。空白のままにするとエンティティの主状態を使用します。",
-            "unit": "値の横に表示される単位。最大 32 文字。",
-            "min_value": "gauge 範囲の最小値。",
-            "max_value": "gauge 範囲の最大値。",
-            "severity": "ステータスの重大度（info、warning、critical、success）。",
-            "stat_rows": "最大 6 行。形式: `Label=entity_id[:attribute[:unit]]`、カンマ区切り。例: `Users=sensor.user_count, Active=sensor.active_devices:count`。",
-            "label": "ウィジェットに表示される静的ラベル。空白のままにするとエンティティから取得します。",
-            "label_attribute": "ラベルとして使用するエンティティ属性。静的ラベルより優先されます。",
-            "subtitle_attribute": "ウィジェットのサブタイトルとして表示するエンティティ属性。",
-            "icon": "静的アイコン。SF Symbols と MDI 名に対応しています。",
-            "icon_attribute": "動的アイコン用のエンティティ属性。静的アイコンより優先されます。",
-            "accent_color": "ウィジェットのアクセントカラー。空白のままにするとデフォルトになります。",
-            "accent_color_attribute": "動的アクセントカラー用のエンティティ属性。",
-            "background_color": "任意の背景色。",
-            "text_color": "任意のテキスト色。",
-            "widget_trigger_mode": "更新がトリガーされる方法。`event` は状態変化に反応し、`poll` は一定間隔で再評価します。",
-            "widget_poll_interval": "ポーリングの間隔（10〜3600 秒）。トリガーモードが `poll` の場合にのみ使用されます。",
-            "tap_action_url": "ウィジェットをタップしたときに開く任意の URL。http(s)（Safari を開く）または homeassistant://navigate/lovelace/0 のようなカスタムスキームに対応しています。",
-            "tap_action_foreground": "オン: タップで URL を開きます。オフ: サイレント Webhook（http(s) のみ）— バックグラウンドで POST を送信します。"
-          },
-          "description": "Choose whether Home Assistant pushes changes or the PushWard app polls for them."
         }
       },
       "error": {
-        "invalid_url": "URL には有効なスキームを含める必要があります。http(s):// または homeassistant:// のようなカスタムアプリスキームを使用してください。",
-        "silent_requires_http": "サイレント Webhook（フォアグラウンドオフ）には http:// または https:// の URL が必要です。",
-        "invalid_gauge_range": "最小値は最大値より小さくなければなりません。",
-        "stat_rows_required": "stat_list テンプレートには少なくとも 1 つの統計行が必要です。"
+        "invalid_url": "URL must include a valid scheme. Use http(s):// or a custom app scheme like homeassistant://.",
+        "silent_requires_http": "Silent webhook (foreground off) requires an http:// or https:// URL.",
+        "invalid_gauge_range": "Minimum value must be less than maximum value.",
+        "stat_rows_required": "At least one stat row is required for the stat_list template."
       },
       "abort": {
-        "already_configured": "このスラッグのウィジェットはすでに存在します。",
-        "reconfigure_successful": "ウィジェットの設定を更新しました。"
+        "already_configured": "A widget with this slug already exists.",
+        "reconfigure_successful": "Widget configuration updated."
       }
-    }
-  },
-  "entity": {
-    "sensor": {
-      "notifications_used": {
-        "name": "使用済み通知数"
-      },
-      "live_activity_updates_used": {
-        "name": "使用済み Live Activity 更新数"
-      },
-      "widget_updates_used": {
-        "name": "使用済みウィジェット更新数"
-      },
-      "emails_used": {
-        "name": "使用済みメール数"
-      },
-      "subscription_tier": {
-        "name": "サブスクリプション層",
-        "state": {
-          "free": "無料",
-          "premium": "プレミアム"
-        }
-      }
-    }
-  },
-  "exceptions": {
-    "widget_not_found": {
-      "message": "slug={slug} entity_id={entity_id} に一致する PushWard ウィジェットがありません。"
     }
   },
   "issues": {
-    "deprecated_update_activity": {
-      "title": "PushWard の update_activity アクションは非推奨です",
-      "description": "`pushward_hacs.update_activity` アクションは非推奨です。代わりにテンプレート固有のアクション — 例えば `pushward_hacs.update_activity_countdown` や `pushward_hacs.update_activity_gauge` — にオートメーションを切り替えてください。古いアクションは当面は動作しますが、将来のリリースで削除されます。"
-    },
     "usage_limit_notifications": {
-      "title": "PushWard の通知上限に達しました",
-      "description": "PushWard アカウントは現在の期間の {limit} 件中 {used} 件の通知を使用したため、クォータがリセットされる（{resets_at}）まで新しい通知は拒否されます。上限を引き上げるには、PushWard iOS アプリでサブスクリプションをアップグレードしてください。"
+      "title": "PushWard notification limit reached",
+      "description": "Your PushWard account has used {used} of its {limit} notifications for the current period, so new notifications will be rejected until the quota resets ({resets_at}). Upgrade your subscription in the PushWard iOS app to raise the limit."
     },
     "usage_limit_live_activity": {
-      "title": "PushWard の Live Activity 更新上限に達しました",
-      "description": "PushWard アカウントは現在の期間の {limit} 件中 {used} 件の Live Activity 更新を使用したため、クォータがリセットされる（{resets_at}）まで新しい更新は拒否されます。上限を引き上げるには、PushWard iOS アプリでサブスクリプションをアップグレードしてください。"
+      "title": "PushWard Live Activity update limit reached",
+      "description": "Your PushWard account has used {used} of its {limit} Live Activity updates for the current period, so new updates will be rejected until the quota resets ({resets_at}). Upgrade your subscription in the PushWard iOS app to raise the limit."
     },
     "usage_limit_widgets": {
-      "title": "PushWard のウィジェット更新上限に達しました",
-      "description": "PushWard アカウントは現在の期間の {limit} 件中 {used} 件のウィジェット更新を使用したため、クォータがリセットされる（{resets_at}）まで新しい更新は拒否されます。上限を引き上げるには、PushWard iOS アプリでサブスクリプションをアップグレードしてください。"
+      "title": "PushWard widget update limit reached",
+      "description": "Your PushWard account has used {used} of its {limit} widget updates for the current period, so new updates will be rejected until the quota resets ({resets_at}). Upgrade your subscription in the PushWard iOS app to raise the limit."
     },
     "usage_limit_emails": {
-      "title": "PushWard のメール上限に達しました",
-      "description": "PushWard アカウントは現在の期間の {limit} 件中 {used} 件のメールを使用したため、クォータがリセットされる（{resets_at}）まで新しいメールは拒否されます。上限を引き上げるには、PushWard iOS アプリでサブスクリプションをアップグレードしてください。"
+      "title": "PushWard email limit reached",
+      "description": "Your PushWard account has used {used} of its {limit} emails for the current period, so new emails will be rejected until the quota resets ({resets_at}). Upgrade your subscription in the PushWard iOS app to raise the limit."
     }
   }
 }

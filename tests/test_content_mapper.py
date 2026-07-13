@@ -722,6 +722,24 @@ def test_map_content_urls_omitted_when_empty():
     assert "secondary_url" not in content
 
 
+def test_structured_activity_actions_are_forwarded_on_board():
+    """Every layout, including Board, receives all three structured action slots."""
+    state = _make_state("on", {"friendly_name": "Home"})
+    config = {
+        CONF_TEMPLATE: "board",
+        CONF_ICON: "square.grid.2x2",
+        "tap_action": {"url": "homeassistant://navigate/lovelace/home"},
+        "url_action": {"url": "https://ha.local/ack", "title": "Acknowledge", "method": "POST"},
+        "secondary_url_action": {"url": "https://ha.local/details", "title": "Details", "foreground": True},
+    }
+
+    content = map_content(state, config)
+
+    assert content["tap_action"]["url"].startswith("homeassistant://")
+    assert content["url_action"]["title"] == "Acknowledge"
+    assert content["secondary_url_action"]["title"] == "Details"
+
+
 def test_map_completion_content_preserves_urls():
     """URLs persist through completion content as structured actions."""
     config = {

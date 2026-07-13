@@ -169,13 +169,13 @@ def _mock_details_input(template: str = "generic", **overrides) -> dict:
         data[CONF_MAX_VALUE] = 100.0
         data[CONF_UNIT] = ""
     if template == "timeline":
-        data[CONF_SERIES] = ""
+        data[CONF_SERIES] = []
         data[CONF_VALUE_ATTRIBUTE] = ""
         data[CONF_UNIT] = ""
         data[CONF_SCALE] = "linear"
         data[CONF_DECIMALS] = 1
         data[CONF_SMOOTHING] = False
-        data[CONF_THRESHOLDS] = ""
+        data[CONF_THRESHOLDS] = []
         data[CONF_HISTORY_PERIOD] = 0
 
     # Identity fields
@@ -188,13 +188,13 @@ def _mock_details_input(template: str = "generic", **overrides) -> dict:
 
     # Common optional fields
     data[CONF_SUBTITLE_ATTRIBUTE] = ""
-    data[CONF_STATE_LABELS] = ""
+    data[CONF_STATE_LABELS] = []
     if template == "countdown":
         data[CONF_COMPLETION_MESSAGE] = ""
     data[CONF_ACCENT_COLOR_ATTRIBUTE] = ""
-    if template in ("steps", "alert"):
-        data[CONF_URL] = ""
-        data[CONF_SECONDARY_URL] = ""
+    data["tap_action"] = {}
+    data["url_action"] = {}
+    data["secondary_url_action"] = {}
 
     data.update(overrides)
     return data
@@ -340,7 +340,7 @@ async def test_user_step_success(
     )
 
     assert result["type"] is FlowResultType.CREATE_ENTRY
-    assert result["title"] == "PushWard"
+    assert result["title"] == "PushWard HACS"
     assert result["data"] == {
         CONF_SERVER_URL: DEFAULT_SERVER_URL,
         CONF_INTEGRATION_KEY: MOCK_INTEGRATION_KEY,
@@ -819,13 +819,17 @@ async def test_subentry_gauge_rejects_min_gte_max(hass: HomeAssistant) -> None:
     assert result["step_id"] == "details"
 
     # Submit with min >= max
+    details = _section_user_input(
+        result["data_schema"],
+        _mock_details_input("gauge", **{CONF_MIN_VALUE: 100.0, CONF_MAX_VALUE: 50.0}),
+    )
     result = await hass.config_entries.subentries.async_configure(
         result["flow_id"],
-        user_input=_mock_details_input("gauge", **{CONF_MIN_VALUE: 100.0, CONF_MAX_VALUE: 50.0}),
+        user_input=details,
     )
     assert result["type"] is FlowResultType.FORM
     assert result["step_id"] == "details"
-    assert CONF_MIN_VALUE in result["errors"]
+    assert result["errors"] == {"base": "invalid_gauge_range"}
 
 
 async def test_subentry_gauge_shows_gauge_fields(hass: HomeAssistant) -> None:
@@ -889,9 +893,13 @@ async def test_subentry_reconfigure(hass: HomeAssistant) -> None:
     assert result["step_id"] == "details"
 
     # Step 2: all details including name and priority changes
+    details = _section_user_input(
+        result["data_schema"],
+        _mock_details_input("generic", **{CONF_ACTIVITY_NAME: "My Washer", CONF_PRIORITY: 5}),
+    )
     result = await hass.config_entries.subentries.async_configure(
         result["flow_id"],
-        user_input=_mock_details_input("generic", **{CONF_ACTIVITY_NAME: "My Washer", CONF_PRIORITY: 5}),
+        user_input=details,
     )
     assert result["type"] is FlowResultType.ABORT
     assert result["reason"] == "reconfigure_successful"
@@ -1122,12 +1130,19 @@ def test_parse_csv(csv_str: str, expected: list[str]) -> None:
 
 
 async def test_subentry_add_entity_with_state_labels(hass: HomeAssistant) -> None:
-    """State labels are parsed from CSV and stored as dict."""
+    """State-label rows are stored as a lookup map."""
     entry = _mock_entry()
     entry.add_to_hass(hass)
 
     result = await _add_entity_subentry(
-        hass, entry, details_overrides={CONF_STATE_LABELS: "heating=Warming Up, idle=Standby"}
+        hass,
+        entry,
+        details_overrides={
+            CONF_STATE_LABELS: [
+                {"state": "heating", "label": "Warming Up"},
+                {"state": "idle", "label": "Standby"},
+            ]
+        },
     )
     assert result["type"] is FlowResultType.CREATE_ENTRY
     subentries = list(entry.subentries.values())
@@ -1190,7 +1205,7 @@ async def test_subentry_completion_message_only_for_countdown(hass: HomeAssistan
 
 
 async def test_subentry_add_entity_with_urls(hass: HomeAssistant) -> None:
-    """URLs are validated and stored."""
+    """Structured button actions are validated and stored."""
     entry = _mock_entry()
     entry.add_to_hass(hass)
 
@@ -1199,14 +1214,14 @@ async def test_subentry_add_entity_with_urls(hass: HomeAssistant) -> None:
         entry,
         template="alert",
         details_overrides={
-            CONF_URL: "https://ha.local/lovelace/laundry",
-            CONF_SECONDARY_URL: "https://ha.local/lovelace/overview",
+            "url_action": {"url": "https://ha.local/lovelace/laundry", "title": "Laundry"},
+            "secondary_url_action": {"url": "https://ha.local/lovelace/overview", "title": "Overview"},
         },
     )
     assert result["type"] is FlowResultType.CREATE_ENTRY
     subentries = list(entry.subentries.values())
-    assert subentries[0].data[CONF_URL] == "https://ha.local/lovelace/laundry"
-    assert subentries[0].data[CONF_SECONDARY_URL] == "https://ha.local/lovelace/overview"
+    assert subentries[0].data["url_action"]["url"] == "https://ha.local/lovelace/laundry"
+    assert subentries[0].data["secondary_url_action"]["title"] == "Overview"
 
 
 async def test_subentry_add_entity_with_icon_attribute(hass: HomeAssistant) -> None:
@@ -1264,6 +1279,7 @@ async def test_subentry_reconfigure_clearing_attribute_selectors(hass: HomeAssis
     del details[CONF_PROGRESS_ATTRIBUTE]
     del details[CONF_ACCENT_COLOR_ATTRIBUTE]
 
+    details = _section_user_input(result["data_schema"], details)
     result = await hass.config_entries.subentries.async_configure(
         result["flow_id"],
         user_input=details,
@@ -1304,6 +1320,7 @@ async def test_subentry_reconfigure_clearing_remaining_time_attr(hass: HomeAssis
     details = _mock_details_input("countdown")
     del details[CONF_REMAINING_TIME_ATTR]
 
+    details = _section_user_input(result["data_schema"], details)
     result = await hass.config_entries.subentries.async_configure(
         result["flow_id"],
         user_input=details,
@@ -1341,6 +1358,7 @@ async def test_subentry_reconfigure_clearing_steps_attrs(hass: HomeAssistant) ->
     del details[CONF_PROGRESS_ATTRIBUTE]
     del details[CONF_CURRENT_STEP_ATTR]
 
+    details = _section_user_input(result["data_schema"], details)
     result = await hass.config_entries.subentries.async_configure(
         result["flow_id"],
         user_input=details,
@@ -1370,12 +1388,16 @@ async def test_subentry_rejects_dangerous_url_scheme(hass: HomeAssistant) -> Non
     assert result["step_id"] == "details"
 
     # Step 2 with a security-blocked scheme
+    details = _section_user_input(
+        result["data_schema"],
+        _mock_details_input("alert", **{"url_action": {"url": "javascript:alert(1)"}}),
+    )
     result = await hass.config_entries.subentries.async_configure(
         result["flow_id"],
-        user_input=_mock_details_input("alert", **{CONF_URL: "javascript:alert(1)"}),
+        user_input=details,
     )
     assert result["type"] is FlowResultType.FORM
-    assert result["errors"] == {"base": "invalid_url"}
+    assert "not allowed" in result["errors"]["base"]
 
 
 async def test_subentry_rejects_dangerous_secondary_url(hass: HomeAssistant) -> None:
@@ -1395,12 +1417,16 @@ async def test_subentry_rejects_dangerous_secondary_url(hass: HomeAssistant) -> 
     assert result["step_id"] == "details"
 
     # Step 2 with a security-blocked scheme
+    details = _section_user_input(
+        result["data_schema"],
+        _mock_details_input("alert", **{"secondary_url_action": {"url": "data:text/html,bad"}}),
+    )
     result = await hass.config_entries.subentries.async_configure(
         result["flow_id"],
-        user_input=_mock_details_input("alert", **{CONF_SECONDARY_URL: "data:text/html,bad"}),
+        user_input=details,
     )
     assert result["type"] is FlowResultType.FORM
-    assert result["errors"] == {"base": "invalid_url"}
+    assert "not allowed" in result["errors"]["base"]
 
 
 # --- _parse_thresholds / _serialize_thresholds ---
@@ -1481,20 +1507,26 @@ async def test_subentry_timeline_template(hass: HomeAssistant) -> None:
     assert result["step_id"] == "details"
 
     # Step 2 with timeline fields
-    result = await hass.config_entries.subentries.async_configure(
-        result["flow_id"],
-        user_input=_mock_details_input(
+    details = _section_user_input(
+        result["data_schema"],
+        _mock_details_input(
             "timeline",
             **{
-                CONF_SERIES: "current_temperature=Current, target_temperature=Target",
-                CONF_UNIT: "\u00b0C",
+                CONF_SERIES: [
+                    {CONF_LABEL: "Current", "attribute": "current_temperature", CONF_UNIT: "°C"},
+                    {CONF_LABEL: "Target", "attribute": "target_temperature", CONF_UNIT: "°C"},
+                ],
                 CONF_SCALE: "logarithmic",
                 CONF_DECIMALS: 2,
                 CONF_SMOOTHING: True,
-                CONF_THRESHOLDS: "25:red:Hot",
+                CONF_THRESHOLDS: [{"value": 25, "color": "red", "label": "Hot"}],
                 CONF_HISTORY_PERIOD: 6,
             },
         ),
+    )
+    result = await hass.config_entries.subentries.async_configure(
+        result["flow_id"],
+        user_input=details,
     )
     assert result["type"] is FlowResultType.CREATE_ENTRY
 
@@ -1506,7 +1538,7 @@ async def test_subentry_timeline_template(hass: HomeAssistant) -> None:
         "current_temperature": "Current",
         "target_temperature": "Target",
     }
-    assert subentry_data[CONF_UNIT] == "\u00b0C"
+    assert subentry_data[CONF_UNITS] == {"Current": "°C", "Target": "°C"}
     assert subentry_data[CONF_SCALE] == "logarithmic"
     assert subentry_data[CONF_DECIMALS] == 2
     assert subentry_data[CONF_SMOOTHING] is True
@@ -1531,12 +1563,21 @@ async def test_subentry_timeline_series_entities(hass: HomeAssistant) -> None:
     )
     assert result["step_id"] == "details"
 
+    details = _section_user_input(
+        result["data_schema"],
+        _mock_details_input(
+            "timeline",
+            **{
+                CONF_SERIES_ENTITIES: [
+                    {CONF_ENTITY_ID: "sensor.bedroom_pm25", CONF_LABEL: ""},
+                    {CONF_ENTITY_ID: "sensor.office_pm25", CONF_LABEL: "Office"},
+                ]
+            },
+        ),
+    )
     result = await hass.config_entries.subentries.async_configure(
         result["flow_id"],
-        user_input=_mock_details_input(
-            "timeline",
-            **{CONF_SERIES_ENTITIES: "sensor.bedroom_pm25, Office=sensor.office_pm25"},
-        ),
+        user_input=details,
     )
     assert result["type"] is FlowResultType.CREATE_ENTRY
 
@@ -1610,11 +1651,11 @@ def test_details_schema_alert_has_fired_at_attribute() -> None:
     assert CONF_FIRED_AT_ATTRIBUTE in keys
 
 
-def test_details_schema_timeline_has_units() -> None:
-    """Timeline template includes units field."""
+def test_details_schema_timeline_has_structured_series() -> None:
+    """Timeline template includes structured tracked-attribute series rows."""
     schema = _details_schema("sensor.temp", "timeline", defaults={})
     keys = _schema_keys(schema)
-    assert CONF_UNITS in keys
+    assert CONF_SERIES in keys
 
 
 def test_details_schema_board_has_tiles() -> None:
@@ -1675,6 +1716,19 @@ def test_compound_layouts_use_repeatable_form_selectors() -> None:
     assert board_tiles_validator.config["multiple"] is True
     assert isinstance(stat_rows_validator, ObjectSelector)
     assert stat_rows_validator.config["multiple"] is True
+
+
+def test_steps_repeatable_rows_have_clear_collapsed_summary() -> None:
+    """A collapsed step shows its name, never an unexplained numeric subtitle."""
+    schema = _details_schema("sensor.dishwasher", "steps", defaults={})
+    validator = next(
+        value
+        for key, value in schema.schema.items()
+        if str(key.schema if isinstance(key, vol.Marker) else key) == CONF_STEP_CONFIGURATION
+    )
+    assert isinstance(validator, ObjectSelector)
+    assert validator.config["label_field"] == "label"
+    assert "description_field" not in validator.config
 
 
 # --- _parse_int_list tests ---
@@ -1944,6 +1998,45 @@ def test_parse_widget_input_unknown_trigger_falls_back_to_event() -> None:
 # --- Tap action parsing & validation ---
 
 
+def test_parse_entity_input_structured_action_slots() -> None:
+    """Structured activity actions retain link, webhook, title, and icon fields."""
+    result = _parse_entity_input(
+        _base_user_input(
+            **{
+                "tap_action": {"url": "homeassistant://navigate/lovelace/0"},
+                "url_action": {
+                    "url": "https://ha.local/api/services/script/turn_on",
+                    "title": "Run",
+                    "icon": "play.fill",
+                    "method": "POST",
+                    "body": "{}",
+                },
+                "secondary_url_action": {"url": "https://ha.local/details", "foreground": True},
+            }
+        )
+    )
+    assert result["tap_action"]["url"].startswith("homeassistant://")
+    assert result["url_action"]["method"] == "POST"
+    assert result["url_action"]["icon"] == "play.fill"
+
+
+def test_parse_widget_input_structured_action_slots() -> None:
+    """Widgets persist body, primary-button, and secondary-button actions."""
+    result = _parse_widget_input(
+        _widget_details(
+            **{
+                "tap_action": {"url": "homeassistant://navigate/lovelace/0"},
+                "url_action": {"url": "https://ha.local/open", "title": "Open", "foreground": True},
+                "secondary_url_action": {"url": "https://ha.local/close", "title": "Close", "method": "POST"},
+            }
+        ),
+        _widget_step1(),
+    )
+    assert result["tap_action"]["url"].startswith("homeassistant://")
+    assert result["url_action"]["title"] == "Open"
+    assert result["secondary_url_action"]["method"] == "POST"
+
+
 def test_parse_entity_input_tap_action_url_persisted() -> None:
     """tap_action_url + foreground roundtrip through the entity parser."""
     result = _parse_entity_input(
@@ -1959,11 +2052,10 @@ def test_parse_entity_input_tap_action_url_persisted() -> None:
 
 
 def test_parse_entity_input_url_title_and_foreground_persisted() -> None:
-    """url_title and url_foreground roundtrip through the entity parser (steps/alert)."""
+    """Legacy URL values still roundtrip through the entity parser."""
     result = _parse_entity_input(
         _base_user_input(
             **{
-                CONF_TEMPLATE: "steps",
                 CONF_URL: "https://ha.local/lovelace/laundry",
                 CONF_URL_TITLE: "Open",
                 CONF_URL_FOREGROUND: False,
@@ -1991,16 +2083,14 @@ def test_parse_entity_input_silent_requires_http() -> None:
                 }
             )
         )
-    assert exc.value.path == [CONF_TAP_ACTION_URL]
-    # Voluptuous stringifies the error code into args[0]
-    assert "silent_requires_http" in str(exc.value)
+    assert "requires an http(s) URL" in str(exc.value)
 
 
 def test_parse_entity_input_blocks_dangerous_scheme() -> None:
     """javascript: in any URL field is rejected as invalid_url."""
     with pytest.raises(vol.Invalid) as exc:
         _parse_entity_input(_base_user_input(**{CONF_TAP_ACTION_URL: "javascript:alert(1)"}))
-    assert exc.value.path == [CONF_TAP_ACTION_URL]
+    assert "URL scheme" in str(exc.value)
 
 
 def test_parse_widget_input_tap_action_url_persisted() -> None:
@@ -2028,8 +2118,7 @@ def test_parse_widget_input_silent_requires_http() -> None:
     )
     with pytest.raises(vol.Invalid) as exc:
         _parse_widget_input(details, step1)
-    assert exc.value.path == [CONF_TAP_ACTION_URL]
-    assert "silent_requires_http" in str(exc.value)
+    assert "requires an http(s) URL" in str(exc.value)
 
 
 def test_parse_widget_input_empty_tap_action_defaults() -> None:

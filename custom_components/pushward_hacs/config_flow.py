@@ -39,6 +39,8 @@ from .api import PushWardApiClient, PushWardApiError, PushWardAuthError
 from .const import (
     APP_STORE_URL,
     BOARD_MAX_TILES,
+    BOARD_TILE_LABEL_MAX,
+    BOARD_TILE_UNIT_MAX,
     CONF_ACCENT_COLOR,
     CONF_ACCENT_COLOR_ATTRIBUTE,
     CONF_ACTIVITY_NAME,
@@ -116,7 +118,6 @@ from .const import (
     CONF_WIDGET_POLL_INTERVAL,
     CONF_WIDGET_TEMPLATE,
     CONF_WIDGET_TRIGGER_MODE,
-    DANGEROUS_URL_SCHEMES,
     DEFAULT_DECIMALS,
     DEFAULT_HISTORY_PERIOD,
     DEFAULT_MAX_VALUE,
@@ -125,7 +126,6 @@ from .const import (
     DEFAULT_SCALE,
     DEFAULT_SERVER_URL,
     DEFAULT_SEVERITY,
-    DEFAULT_TAP_ACTION_FOREGROUND,
     DEFAULT_TOTAL_STEPS,
     DEFAULT_UPDATE_INTERVAL,
     DEFAULT_WIDGET_POLL_INTERVAL,
@@ -133,9 +133,10 @@ from .const import (
     LOG_MAX_COLUMNS,
     MAX_LONG_TEXT_LEN,
     MAX_SLUG_LEN,
+    MAX_TAP_ACTION_BODY_LEN,
+    MAX_TAP_ACTION_ICON_LEN,
     MAX_TAP_ACTION_TITLE_LEN,
     MAX_TEXT_LEN,
-    MAX_URL_LEN,
     PRIORITY_MAX,
     PRIORITY_MIN,
     PUSHWARD_NAMED_COLORS,
@@ -144,6 +145,7 @@ from .const import (
     SOUNDS,
     SUBENTRY_TYPE_ENTITY,
     SUBENTRY_TYPE_WIDGET,
+    TAP_ACTION_METHODS,
     TIMELINE_MAX_SERIES,
     TIMELINE_SERIES_LABEL_MAX,
     TOTAL_STEPS_MAX,
@@ -164,6 +166,9 @@ from .const import (
     WIDGET_TRIGGER_POLL,
     WIDGET_UNIT_MAX,
     normalize_slug,
+    validate_action_headers,
+    validate_color,
+    validate_tap_action_url,
 )
 from .content_mapper import get_domain_defaults, sanitize_slug
 
@@ -357,7 +362,11 @@ def _details_schema(
     start_default = d.get(CONF_START_STATES) if d.get(CONF_START_STATES) else domain_defs.get("start_states", [])
     end_default = d.get(CONF_END_STATES) if d.get(CONF_END_STATES) else domain_defs.get("end_states", [])
 
-    attr_selector = AttributeSelector(AttributeSelectorConfig(entity_id=entity_id))
+    tracked_attr_selector = AttributeSelector(AttributeSelectorConfig(entity_id=entity_id))
+    # HA cannot dynamically rebind an AttributeSelector to a companion entity
+    # selected elsewhere on this form. A text box never suggests attributes from
+    # the wrong entity and preserves the existing stored string format.
+    source_attr_selector = TextSelector()
     entity_selector = EntitySelector(EntitySelectorConfig())
 
     # Named-color dropdowns also accept custom RGB/RGBA hex values.
@@ -407,7 +416,7 @@ def _details_schema(
                 CONF_PROGRESS_ATTRIBUTE,
                 description={"suggested_value": d.get(CONF_PROGRESS_ATTRIBUTE, "")},
             )
-        ] = attr_selector
+        ] = source_attr_selector
     if template in ("generic", "countdown", "steps"):
         fields[_entity_source_key(CONF_REMAINING_TIME_ENTITY, d)] = entity_selector
         fields[
@@ -415,7 +424,7 @@ def _details_schema(
                 CONF_REMAINING_TIME_ATTR,
                 description={"suggested_value": d.get(CONF_REMAINING_TIME_ATTR, "")},
             )
-        ] = attr_selector
+        ] = source_attr_selector
     if template in ("generic", "steps"):
         # Only meaningful with a remaining-time source above: interpolate the bar
         # to full and count down an ETA. Server accepts live_progress on generic only.
@@ -432,7 +441,7 @@ def _details_schema(
                 CONF_CURRENT_STEP_ATTR,
                 description={"suggested_value": d.get(CONF_CURRENT_STEP_ATTR, "")},
             )
-        ] = attr_selector
+        ] = source_attr_selector
         step_default = d.get(CONF_STEP_CONFIGURATION)
         if not isinstance(step_default, list):
             total = int(d.get(CONF_TOTAL_STEPS, DEFAULT_TOTAL_STEPS))
@@ -442,11 +451,15 @@ def _details_schema(
             colors = d.get(CONF_STEP_COLORS) or []
             step_default = []
             for index in range(1, total + 1):
-                item = {"label": labels.get(str(index), "") if isinstance(labels, dict) else ""}
-                if index <= len(rows):
-                    item["parallel_jobs"] = rows[index - 1]
-                if index <= len(weights):
-                    item["weight"] = weights[index - 1]
+                item = {
+                    "label": (
+                        (labels.get(str(index)) or f"Step {index}")
+                        if isinstance(labels, dict)
+                        else f"Step {index}"
+                    ),
+                    "parallel_jobs": rows[index - 1] if index <= len(rows) else 1,
+                    "weight": weights[index - 1] if index <= len(weights) else 1,
+                }
                 if index <= len(colors):
                     item["color"] = colors[index - 1]
                 step_default.append(item)
@@ -454,17 +467,20 @@ def _details_schema(
             ObjectSelectorConfig(
                 multiple=True,
                 label_field="label",
-                description_field="weight",
                 fields={
-                    "label": {"label": "Step label (max 32 characters)", "selector": TextSelector()},
+                    "label": {
+                        "label": "Step name (1-32 characters)",
+                        "required": True,
+                        "selector": TextSelector(),
+                    },
                     "parallel_jobs": {
-                        "label": "Parallel rows/jobs (1-10)",
+                        "label": "Parallel jobs (1-10; default 1)",
                         "selector": NumberSelector(
                             NumberSelectorConfig(min=1, max=10, mode=NumberSelectorMode.BOX)
                         ),
                     },
                     "weight": {
-                        "label": "Relative duration/width (unitless)",
+                        "label": "Relative step length (ratio; default 1)",
                         "selector": NumberSelector(
                             NumberSelectorConfig(min=0.1, max=10000, step=0.1, mode=NumberSelectorMode.BOX)
                         ),
@@ -501,7 +517,7 @@ def _details_schema(
                 CONF_FIRED_AT_ATTRIBUTE,
                 description={"suggested_value": d.get(CONF_FIRED_AT_ATTRIBUTE, "")},
             )
-        ] = attr_selector
+        ] = source_attr_selector
     if template == "gauge":
         fields[_entity_source_key(CONF_VALUE_ENTITY, d)] = entity_selector
         fields[
@@ -509,7 +525,7 @@ def _details_schema(
                 CONF_VALUE_ATTRIBUTE,
                 description={"suggested_value": d.get(CONF_VALUE_ATTRIBUTE, "")},
             )
-        ] = attr_selector
+        ] = source_attr_selector
         fields[
             vol.Required(
                 CONF_MIN_VALUE,
@@ -529,14 +545,33 @@ def _details_schema(
             )
         ] = vol.All(str, vol.Length(max=32))
     if template == "timeline":
+        series_default = d.get(CONF_SERIES, [])
+        units_default = d.get(CONF_UNITS, {}) or {}
+        if isinstance(series_default, dict):
+            series_default = [
+                {"attribute": attribute, "label": label, "unit": units_default.get(label, "")}
+                for attribute, label in series_default.items()
+            ]
         fields[
             vol.Optional(
                 CONF_SERIES,
-                default=d.get(CONF_SERIES, ""),
+                default=series_default,
             )
-        ] = vol.All(str, vol.Length(max=MAX_LONG_TEXT_LEN))
-        # Bind separate entities as named series (mirrors the board-tile string).
-        # Format: '[Label=]entity_id[:attribute]' comma-separated.
+        ] = ObjectSelector(
+            ObjectSelectorConfig(
+                multiple=True,
+                label_field=CONF_LABEL,
+                fields={
+                    CONF_LABEL: {"label": "Series label", "required": True, "selector": TextSelector()},
+                    "attribute": {
+                        "label": "Tracked-entity attribute",
+                        "required": True,
+                        "selector": tracked_attr_selector,
+                    },
+                    CONF_UNIT: {"label": "Display unit (optional)", "selector": TextSelector()},
+                },
+            )
+        )
         fields[
             vol.Optional(
                 CONF_SERIES_ENTITIES,
@@ -546,7 +581,6 @@ def _details_schema(
             ObjectSelectorConfig(
                 multiple=True,
                 label_field=CONF_LABEL,
-                description_field=CONF_ENTITY_ID,
                 fields={
                     CONF_LABEL: {"label": "Series label", "selector": TextSelector()},
                     CONF_ENTITY_ID: {
@@ -555,15 +589,10 @@ def _details_schema(
                         "selector": EntitySelector(EntitySelectorConfig()),
                     },
                     "attribute": {"label": "Attribute (optional)", "selector": TextSelector()},
+                    CONF_UNIT: {"label": "Display unit (optional)", "selector": TextSelector()},
                 },
             )
         )
-        fields[
-            vol.Optional(
-                CONF_UNITS,
-                default=d.get(CONF_UNITS, ""),
-            )
-        ] = vol.All(str, vol.Length(max=MAX_LONG_TEXT_LEN))
         fields[
             vol.Optional(
                 CONF_PRIMARY_SERIES,
@@ -576,7 +605,7 @@ def _details_schema(
                 CONF_VALUE_ATTRIBUTE,
                 description={"suggested_value": d.get(CONF_VALUE_ATTRIBUTE, "")},
             )
-        ] = attr_selector
+        ] = source_attr_selector
         fields[
             vol.Optional(
                 CONF_UNIT,
@@ -617,8 +646,8 @@ def _details_schema(
         ] = ObjectSelector(
             ObjectSelectorConfig(
                 multiple=True,
-                label_field="label",
-                description_field="color",
+                label_field="value",
+                description_field="label",
                 fields={
                     "value": {
                         "label": "Threshold value (in series units)",
@@ -653,7 +682,6 @@ def _details_schema(
             ObjectSelectorConfig(
                 multiple=True,
                 label_field=CONF_LABEL,
-                description_field=CONF_ENTITY_ID,
                 fields={
                     CONF_LABEL: {
                         "label": "Tile label (max 32 characters)",
@@ -678,7 +706,7 @@ def _details_schema(
                             SelectSelectorConfig(options=["", "up", "down", "flat"])
                         ),
                     },
-                    CONF_URL: {"label": "Tap URL (optional)", "selector": TextSelector()},
+                    "url_action": {"label": "Tile tap action (optional)", "selector": _action_selector(button=True)},
                 },
             )
         )
@@ -696,9 +724,8 @@ def _details_schema(
             ObjectSelectorConfig(
                 multiple=True,
                 label_field=CONF_LABEL,
-                description_field=CONF_ENTITY_ID,
                 fields={
-                    CONF_LABEL: {"label": "Column label (optional)", "selector": TextSelector()},
+                    CONF_LABEL: {"label": "Column label", "required": True, "selector": TextSelector()},
                     CONF_ENTITY_ID: {"label": "Source entity (optional)", "selector": entity_selector},
                     "attribute": {
                         "label": "Attribute (uses tracked entity when source is blank)",
@@ -715,7 +742,7 @@ def _details_schema(
                 CONF_LOG_LEVEL_ATTRIBUTE,
                 description={"suggested_value": d.get(CONF_LOG_LEVEL_ATTRIBUTE, "")},
             )
-        ] = attr_selector
+        ] = tracked_attr_selector
 
     # --- Identity fields ---
     fields[vol.Optional(CONF_SLUG, default=d.get(CONF_SLUG, ""))] = vol.All(str, vol.Length(max=MAX_SLUG_LEN))
@@ -736,7 +763,7 @@ def _details_schema(
             CONF_ICON_ATTRIBUTE,
             description={"suggested_value": d.get(CONF_ICON_ATTRIBUTE, "")},
         )
-    ] = attr_selector
+    ] = tracked_attr_selector
     fields[
         vol.Optional(
             CONF_PRIORITY,
@@ -786,13 +813,23 @@ def _details_schema(
             CONF_SUBTITLE_ATTRIBUTE,
             description={"suggested_value": d.get(CONF_SUBTITLE_ATTRIBUTE, "")},
         )
-    ] = attr_selector
-    fields[
-        vol.Optional(
-            CONF_STATE_LABELS,
-            default=d.get(CONF_STATE_LABELS, ""),
+    ] = source_attr_selector
+    state_labels_default = d.get(CONF_STATE_LABELS, [])
+    if isinstance(state_labels_default, dict):
+        state_labels_default = [
+            {"state": state, "label": label} for state, label in state_labels_default.items()
+        ]
+    fields[vol.Optional(CONF_STATE_LABELS, default=state_labels_default)] = ObjectSelector(
+        ObjectSelectorConfig(
+            multiple=True,
+            label_field="state",
+            description_field="label",
+            fields={
+                "state": {"label": "Entity state", "required": True, "selector": TextSelector()},
+                "label": {"label": "Text shown on iPhone", "required": True, "selector": TextSelector()},
+            },
         )
-    ] = vol.All(str, vol.Length(max=MAX_LONG_TEXT_LEN))
+    )
     if template == "countdown":
         fields[
             vol.Optional(
@@ -838,70 +875,26 @@ def _details_schema(
             CONF_ACCENT_COLOR_ATTRIBUTE,
             description={"suggested_value": d.get(CONF_ACCENT_COLOR_ATTRIBUTE, "")},
         )
-    ] = attr_selector
+    ] = tracked_attr_selector
     fields[bg_color_key] = _color_selector()
     fields[
         vol.Optional(
             CONF_BACKGROUND_COLOR_ATTRIBUTE,
             description={"suggested_value": d.get(CONF_BACKGROUND_COLOR_ATTRIBUTE, "")},
         )
-    ] = attr_selector
+    ] = tracked_attr_selector
     fields[text_color_key] = _color_selector()
     fields[
         vol.Optional(
             CONF_TEXT_COLOR_ATTRIBUTE,
             description={"suggested_value": d.get(CONF_TEXT_COLOR_ATTRIBUTE, "")},
         )
-    ] = attr_selector
+    ] = tracked_attr_selector
+    fields[vol.Optional("tap_action", default=d.get("tap_action", {}))] = _action_selector(button=False)
+    fields[vol.Optional("url_action", default=d.get("url_action", {}))] = _action_selector(button=True)
     fields[
-        vol.Optional(
-            CONF_TAP_ACTION_URL,
-            default=d.get(CONF_TAP_ACTION_URL, ""),
-        )
-    ] = vol.All(str, vol.Length(max=MAX_URL_LEN))
-    fields[
-        vol.Optional(
-            CONF_TAP_ACTION_FOREGROUND,
-            default=d.get(CONF_TAP_ACTION_FOREGROUND, DEFAULT_TAP_ACTION_FOREGROUND),
-        )
-    ] = BooleanSelector()
-    if template not in ("board", "log"):
-        fields[
-            vol.Optional(
-                CONF_URL,
-                default=d.get(CONF_URL, ""),
-            )
-        ] = vol.All(str, vol.Length(max=MAX_URL_LEN))
-        fields[
-            vol.Optional(
-                CONF_URL_FOREGROUND,
-                default=d.get(CONF_URL_FOREGROUND, DEFAULT_TAP_ACTION_FOREGROUND),
-            )
-        ] = BooleanSelector()
-        fields[
-            vol.Optional(
-                CONF_URL_TITLE,
-                default=d.get(CONF_URL_TITLE, ""),
-            )
-        ] = vol.All(str, vol.Length(max=MAX_TAP_ACTION_TITLE_LEN))
-        fields[
-            vol.Optional(
-                CONF_SECONDARY_URL,
-                default=d.get(CONF_SECONDARY_URL, ""),
-            )
-        ] = vol.All(str, vol.Length(max=MAX_URL_LEN))
-        fields[
-            vol.Optional(
-                CONF_SECONDARY_URL_FOREGROUND,
-                default=d.get(CONF_SECONDARY_URL_FOREGROUND, DEFAULT_TAP_ACTION_FOREGROUND),
-            )
-        ] = BooleanSelector()
-        fields[
-            vol.Optional(
-                CONF_SECONDARY_URL_TITLE,
-                default=d.get(CONF_SECONDARY_URL_TITLE, ""),
-            )
-        ] = vol.All(str, vol.Length(max=MAX_TAP_ACTION_TITLE_LEN))
+        vol.Optional("secondary_url_action", default=d.get("secondary_url_action", {}))
+    ] = _action_selector(button=True)
     fields[ended_ttl_key] = NumberSelector(
         NumberSelectorConfig(
             min=_TTL_MIN,
@@ -945,14 +938,9 @@ _ENTITY_APPEARANCE_FIELDS = {
     CONF_BACKGROUND_COLOR_ATTRIBUTE,
     CONF_TEXT_COLOR,
     CONF_TEXT_COLOR_ATTRIBUTE,
-    CONF_TAP_ACTION_URL,
-    CONF_TAP_ACTION_FOREGROUND,
-    CONF_URL,
-    CONF_URL_FOREGROUND,
-    CONF_URL_TITLE,
-    CONF_SECONDARY_URL,
-    CONF_SECONDARY_URL_FOREGROUND,
-    CONF_SECONDARY_URL_TITLE,
+    "tap_action",
+    "url_action",
+    "secondary_url_action",
 }
 
 
@@ -1035,50 +1023,46 @@ def _entity_sectioned_schema(
     )
 
 
-def _tap_action_url_error(url: str, foreground: bool) -> str | None:
-    """Return the error code for an invalid tap-action URL, or None when valid.
-
-    Empty URL is valid (optional field). Foreground=True accepts http(s) or any
-    custom scheme not on the security blocklist. Foreground=False (silent webhook)
-    requires http(s) — custom schemes are no-ops on iOS without an HTTP shape
-    (see pushward-server fa4a98f).
-    """
-    if not url:
-        return None
-    parsed = urlparse(url)
-    if not parsed.scheme:
-        return "invalid_url"
-    scheme = parsed.scheme.lower()
-    if scheme in ("http", "https"):
-        return None if parsed.netloc else "invalid_url"
-    if scheme in DANGEROUS_URL_SCHEMES:
-        return "invalid_url"
-    if not foreground:
-        return "silent_requires_http"
-    return None
-
-
-def _raise_url_errors(checks: list[tuple[str, str, bool]]) -> None:
-    """Validate a batch of (field, url, foreground) tuples. Raises `vol.Invalid`
-    with one error code and all matching field paths so the form lights up every
-    bad field at once. Different codes are reported one batch at a time, most
-    specific first.
-    """
-    grouped: dict[str, list[str]] = {}
-    for field, url, foreground in checks:
-        code = _tap_action_url_error(url, foreground)
-        if code is None:
-            continue
-        grouped.setdefault(code, []).append(field)
-    if not grouped:
-        return
-    # silent_requires_http is more specific than invalid_url; surface it first.
-    for preferred in ("silent_requires_http", "invalid_url"):
-        if preferred in grouped:
-            raise vol.Invalid(preferred, path=grouped[preferred])
-    # Fall back to whatever code came in (future-proofing for new codes).
-    code, fields = next(iter(grouped.items()))
-    raise vol.Invalid(code, path=fields)
+def _normalize_action(raw: object, *, button: bool) -> dict:
+    """Validate one structured action from a config-flow object selector."""
+    if not isinstance(raw, dict) or not raw:
+        return {}
+    url = validate_tap_action_url(str(raw.get("url") or "").strip())
+    action: dict = {"url": url}
+    if "foreground" in raw:
+        action["foreground"] = bool(raw["foreground"])
+    if method := raw.get("method"):
+        method = str(method).upper()
+        if method not in TAP_ACTION_METHODS:
+            raise vol.Invalid("Unsupported silent webhook method")
+        action["method"] = method
+    if headers := raw.get("headers"):
+        if not isinstance(headers, dict):
+            raise vol.Invalid("Silent webhook headers must be an object")
+        action["headers"] = validate_action_headers({str(key): str(value) for key, value in headers.items()})
+    if body := raw.get("body"):
+        if len(str(body)) > MAX_TAP_ACTION_BODY_LEN:
+            raise vol.Invalid(f"Silent webhook body must be at most {MAX_TAP_ACTION_BODY_LEN} characters")
+        action["body"] = str(body)
+    if any(action.get(key) for key in ("method", "headers", "body")) and urlparse(url).scheme.lower() not in (
+        "http",
+        "https",
+    ):
+        raise vol.Invalid("Silent webhook method, headers, and body require an http(s) URL")
+    if action.get("foreground") is False and not any(action.get(key) for key in ("method", "headers", "body")):
+        if urlparse(url).scheme.lower() not in ("http", "https"):
+            raise vol.Invalid("Silent webhook behavior requires an http(s) URL")
+        action["method"] = "GET"
+    if button:
+        if title := raw.get("title"):
+            if len(str(title)) > MAX_TAP_ACTION_TITLE_LEN:
+                raise vol.Invalid(f"Button title must be at most {MAX_TAP_ACTION_TITLE_LEN} characters")
+            action["title"] = str(title)
+        if icon := raw.get("icon"):
+            if len(str(icon)) > MAX_TAP_ACTION_ICON_LEN:
+                raise vol.Invalid(f"Button icon must be at most {MAX_TAP_ACTION_ICON_LEN} characters")
+            action["icon"] = str(icon)
+    return action
 
 
 def _coerce_gauge_range(user_input: dict, *, is_gauge: bool) -> tuple[float, float]:
@@ -1343,6 +1327,8 @@ def _resolve_series_entity_labels(series_entities: list[dict], hass: HomeAssista
         out: dict = {CONF_LABEL: label, CONF_ENTITY_ID: entity_id}
         if attr:
             out["attribute"] = attr
+        if unit := series.get(CONF_UNIT):
+            out[CONF_UNIT] = str(unit)
         resolved.append(out)
     return resolved
 
@@ -1378,45 +1364,75 @@ def _parse_entity_input(user_input: dict, hass: HomeAssistant | None = None) -> 
     ended_ttl = user_input.get(CONF_ENDED_TTL)
     stale_ttl = user_input.get(CONF_STALE_TTL)
 
-    # Validate URLs (allow http/https + custom schemes; silent mode requires http(s))
-    tap_action_url = user_input.get(CONF_TAP_ACTION_URL, "").strip()
-    tap_action_foreground = bool(user_input.get(CONF_TAP_ACTION_FOREGROUND, DEFAULT_TAP_ACTION_FOREGROUND))
-    url = user_input.get(CONF_URL, "").strip()
-    url_foreground = bool(user_input.get(CONF_URL_FOREGROUND, DEFAULT_TAP_ACTION_FOREGROUND))
-    url_title = user_input.get(CONF_URL_TITLE, "").strip()
-    secondary_url = user_input.get(CONF_SECONDARY_URL, "").strip()
-    secondary_url_foreground = bool(user_input.get(CONF_SECONDARY_URL_FOREGROUND, DEFAULT_TAP_ACTION_FOREGROUND))
-    secondary_url_title = user_input.get(CONF_SECONDARY_URL_TITLE, "").strip()
-
-    _raise_url_errors(
-        [
-            (CONF_TAP_ACTION_URL, tap_action_url, tap_action_foreground),
-            (CONF_URL, url, url_foreground),
-            (CONF_SECONDARY_URL, secondary_url, secondary_url_foreground),
-        ]
-    )
+    tap_action = _normalize_action(user_input.get("tap_action"), button=False)
+    url_action = _normalize_action(user_input.get("url_action"), button=True)
+    secondary_url_action = _normalize_action(user_input.get("secondary_url_action"), button=True)
+    # These keys are no longer shown, but accepting them costs nothing and keeps
+    # direct parser callers/tests straightforward during the pre-release transition.
+    legacy_tap_url = str(user_input.get(CONF_TAP_ACTION_URL) or "").strip()
+    legacy_tap_foreground = bool(user_input.get(CONF_TAP_ACTION_FOREGROUND, True))
+    legacy_url = str(user_input.get(CONF_URL) or "").strip()
+    legacy_url_foreground = bool(user_input.get(CONF_URL_FOREGROUND, True))
+    legacy_url_title = str(user_input.get(CONF_URL_TITLE) or "").strip()
+    legacy_secondary_url = str(user_input.get(CONF_SECONDARY_URL) or "").strip()
+    legacy_secondary_foreground = bool(user_input.get(CONF_SECONDARY_URL_FOREGROUND, True))
+    legacy_secondary_title = str(user_input.get(CONF_SECONDARY_URL_TITLE) or "").strip()
+    if legacy_tap_url:
+        _normalize_action({"url": legacy_tap_url, "foreground": legacy_tap_foreground}, button=False)
+    if legacy_url:
+        _normalize_action({"url": legacy_url, "foreground": legacy_url_foreground}, button=True)
+    if legacy_secondary_url:
+        _normalize_action({"url": legacy_secondary_url, "foreground": legacy_secondary_foreground}, button=True)
 
     min_v, max_v = _coerce_gauge_range(user_input, is_gauge=user_input.get(CONF_TEMPLATE) == "gauge")
 
     # Parse timeline fields
-    series_raw = user_input.get(CONF_SERIES, "")
-    series = _parse_state_labels(series_raw) if isinstance(series_raw, str) else series_raw or {}
+    series_raw = user_input.get(CONF_SERIES, [])
+    if isinstance(series_raw, list):
+        series_rows = [row for row in series_raw if isinstance(row, dict)]
+        series = {
+            str(row.get("attribute") or "").strip(): str(row.get(CONF_LABEL) or "").strip()
+            for row in series_rows
+            if row.get("attribute") and row.get(CONF_LABEL)
+        }
+    else:
+        series_rows = []
+        series = _parse_state_labels(series_raw) if isinstance(series_raw, str) else series_raw or {}
     series_entities = _resolve_series_entity_labels(
         _parse_series_entities(user_input.get(CONF_SERIES_ENTITIES, "")), hass
     )
     if len(series) + len(series_entities) > TIMELINE_MAX_SERIES:
         raise vol.Invalid("too_many_series", path=[CONF_SERIES_ENTITIES])
+    for row in [*series_rows, *series_entities]:
+        label = str(row.get(CONF_LABEL) or "")
+        if label and len(label) > TIMELINE_SERIES_LABEL_MAX:
+            raise vol.Invalid(
+                f"Timeline series labels must be at most {TIMELINE_SERIES_LABEL_MAX} characters",
+                path=[CONF_SERIES],
+            )
+    units = {
+        str(row.get(CONF_LABEL)).strip(): str(row.get(CONF_UNIT)).strip()
+        for row in [*series_rows, *series_entities]
+        if row.get(CONF_LABEL) and row.get(CONF_UNIT)
+    }
     thresholds_raw = user_input.get(CONF_THRESHOLDS, "")
+    if isinstance(thresholds_raw, list) and len(thresholds_raw) > 5:
+        raise vol.Invalid("A Timeline supports at most 5 thresholds", path=[CONF_THRESHOLDS])
     thresholds = (
         _parse_thresholds(thresholds_raw)
         if isinstance(thresholds_raw, str)
         else [item for item in thresholds_raw or [] if isinstance(item, dict)][:5]
     )
+    for threshold in thresholds:
+        if isinstance(threshold, dict) and threshold.get("color"):
+            threshold["color"] = _validate_color_input(threshold["color"])
     history_period_raw = user_input.get(CONF_HISTORY_PERIOD, DEFAULT_HISTORY_PERIOD)
 
     step_configuration = user_input.get(CONF_STEP_CONFIGURATION, [])
     if not isinstance(step_configuration, list):
         step_configuration = []
+    if len(step_configuration) > TOTAL_STEPS_MAX:
+        raise vol.Invalid(f"A Steps activity supports at most {TOTAL_STEPS_MAX} steps", path=[CONF_STEP_CONFIGURATION])
     step_configuration = [item for item in step_configuration if isinstance(item, dict)][:TOTAL_STEPS_MAX]
     if user_input.get(CONF_TEMPLATE) == "steps" and not step_configuration:
         legacy_total = int(user_input.get(CONF_TOTAL_STEPS, DEFAULT_TOTAL_STEPS))
@@ -1428,6 +1444,29 @@ def _parse_entity_input(user_input: dict, hass: HomeAssistant | None = None) -> 
             if index <= len(legacy_rows):
                 item["parallel_jobs"] = legacy_rows[index - 1]
             step_configuration.append(item)
+    if user_input.get(CONF_TEMPLATE) == "steps":
+        for index, item in enumerate(step_configuration, 1):
+            label = str(item.get("label") or "").strip()
+            if not label or len(label) > 32:
+                raise vol.Invalid(
+                    f"Step {index} needs a name between 1 and 32 characters",
+                    path=[CONF_STEP_CONFIGURATION],
+                )
+            item["label"] = label
+            try:
+                parallel_jobs = int(item.get("parallel_jobs") or 1)
+                weight = float(item.get("weight") or 1)
+            except (TypeError, ValueError) as err:
+                raise vol.Invalid(f"Step {index} has an invalid numeric value", path=[CONF_STEP_CONFIGURATION]) from err
+            if not 1 <= parallel_jobs <= 10:
+                raise vol.Invalid(f"Step {index} parallel jobs must be from 1 to 10", path=[CONF_STEP_CONFIGURATION])
+            if not 0.1 <= weight <= 10000:
+                raise vol.Invalid(
+                    f"Step {index} relative length must be from 0.1 to 10,000",
+                    path=[CONF_STEP_CONFIGURATION],
+                )
+            color = _validate_color_input(item.get("color"), allow_empty=True)
+            item.update(parallel_jobs=parallel_jobs, weight=weight, color=color)
     step_labels = {
         str(index): str(item.get("label") or "")
         for index, item in enumerate(step_configuration, 1)
@@ -1448,9 +1487,29 @@ def _parse_entity_input(user_input: dict, hass: HomeAssistant | None = None) -> 
     step_colors = [str(item.get("color") or "") for item in step_configuration]
 
     # Board tiles: a board needs at least one tile to render.
-    tiles = _parse_board_tiles(user_input.get(CONF_TILES, ""))
+    raw_tiles = user_input.get(CONF_TILES, "")
+    if isinstance(raw_tiles, list) and len(raw_tiles) > BOARD_MAX_TILES:
+        raise vol.Invalid(f"A Board supports at most {BOARD_MAX_TILES} tiles", path=[CONF_TILES])
+    tiles = _parse_board_tiles(raw_tiles)
     if user_input.get(CONF_TEMPLATE) == "board" and not tiles:
         raise vol.Invalid("tiles_required", path=[CONF_TILES])
+    for index, tile in enumerate(tiles, 1):
+        if len(str(tile.get(CONF_LABEL, ""))) > BOARD_TILE_LABEL_MAX:
+            raise vol.Invalid(
+                f"Tile {index} label must be at most {BOARD_TILE_LABEL_MAX} characters", path=[CONF_TILES]
+            )
+        if len(str(tile.get(CONF_UNIT, ""))) > BOARD_TILE_UNIT_MAX:
+            raise vol.Invalid(
+                f"Tile {index} unit must be at most {BOARD_TILE_UNIT_MAX} characters", path=[CONF_TILES]
+            )
+        if CONF_ACCENT_COLOR in tile:
+            tile[CONF_ACCENT_COLOR] = _validate_color_input(tile[CONF_ACCENT_COLOR], allow_empty=True)
+        if tile.get("url_action"):
+            tile["url_action"] = _normalize_action(tile["url_action"], button=True)
+
+    raw_log_columns = user_input.get(CONF_LOG_COLUMNS, "")
+    if isinstance(raw_log_columns, list) and len(raw_log_columns) > LOG_MAX_COLUMNS:
+        raise vol.Invalid(f"A Log supports at most {LOG_MAX_COLUMNS} extra columns", path=[CONF_LOG_COLUMNS])
 
     return {
         CONF_ENTITY_ID: entity_id,
@@ -1470,7 +1529,15 @@ def _parse_entity_input(user_input: dict, hass: HomeAssistant | None = None) -> 
         CONF_LIVE_PROGRESS: bool(user_input.get(CONF_LIVE_PROGRESS, False)),
         CONF_SUBTITLE_ATTRIBUTE: user_input.get(CONF_SUBTITLE_ATTRIBUTE, ""),
         CONF_SUBTITLE_ENTITY: user_input.get(CONF_SUBTITLE_ENTITY, ""),
-        CONF_STATE_LABELS: _parse_state_labels(user_input.get(CONF_STATE_LABELS, "")),
+        CONF_STATE_LABELS: (
+            _parse_state_labels(user_input.get(CONF_STATE_LABELS, ""))
+            if isinstance(user_input.get(CONF_STATE_LABELS), str)
+            else {
+                str(row.get("state")).strip(): str(row.get("label")).strip()
+                for row in user_input.get(CONF_STATE_LABELS, [])
+                if isinstance(row, dict) and row.get("state") and row.get("label")
+            }
+        ),
         CONF_COMPLETION_MESSAGE: user_input.get(CONF_COMPLETION_MESSAGE, ""),
         CONF_TOTAL_STEPS: len(step_configuration) or user_input.get(CONF_TOTAL_STEPS, DEFAULT_TOTAL_STEPS),
         CONF_CURRENT_STEP_ATTR: user_input.get(CONF_CURRENT_STEP_ATTR, ""),
@@ -1482,16 +1549,19 @@ def _parse_entity_input(user_input: dict, hass: HomeAssistant | None = None) -> 
         CONF_MIN_VALUE: min_v,
         CONF_MAX_VALUE: max_v,
         CONF_UNIT: user_input.get(CONF_UNIT, ""),
-        CONF_ACCENT_COLOR: _color_input_to_str(user_input.get(CONF_ACCENT_COLOR)),
+        CONF_ACCENT_COLOR: _validate_color_input(user_input.get(CONF_ACCENT_COLOR), allow_empty=True),
         CONF_ACCENT_COLOR_ATTRIBUTE: user_input.get(CONF_ACCENT_COLOR_ATTRIBUTE, ""),
-        CONF_URL: url,
-        CONF_URL_FOREGROUND: url_foreground,
-        CONF_URL_TITLE: url_title,
-        CONF_SECONDARY_URL: secondary_url,
-        CONF_SECONDARY_URL_FOREGROUND: secondary_url_foreground,
-        CONF_SECONDARY_URL_TITLE: secondary_url_title,
-        CONF_TAP_ACTION_URL: tap_action_url,
-        CONF_TAP_ACTION_FOREGROUND: tap_action_foreground,
+        "tap_action": tap_action,
+        "url_action": url_action,
+        "secondary_url_action": secondary_url_action,
+        CONF_TAP_ACTION_URL: legacy_tap_url,
+        CONF_TAP_ACTION_FOREGROUND: legacy_tap_foreground,
+        CONF_URL: legacy_url,
+        CONF_URL_FOREGROUND: legacy_url_foreground,
+        CONF_URL_TITLE: legacy_url_title,
+        CONF_SECONDARY_URL: legacy_secondary_url,
+        CONF_SECONDARY_URL_FOREGROUND: legacy_secondary_foreground,
+        CONF_SECONDARY_URL_TITLE: legacy_secondary_title,
         CONF_ENDED_TTL: int(ended_ttl) if ended_ttl is not None else None,
         CONF_STALE_TTL: int(stale_ttl) if stale_ttl is not None else None,
         CONF_SERIES: series,
@@ -1517,14 +1587,14 @@ def _parse_entity_input(user_input: dict, hass: HomeAssistant | None = None) -> 
         CONF_STEP_COLORS: step_colors,
         CONF_FIRED_AT_ATTRIBUTE: user_input.get(CONF_FIRED_AT_ATTRIBUTE, ""),
         CONF_FIRED_AT_ENTITY: user_input.get(CONF_FIRED_AT_ENTITY, ""),
-        CONF_UNITS: _parse_state_labels(user_input.get(CONF_UNITS, "")),
-        CONF_BACKGROUND_COLOR: _color_input_to_str(user_input.get(CONF_BACKGROUND_COLOR)),
+        CONF_UNITS: units or _parse_state_labels(user_input.get(CONF_UNITS, "")),
+        CONF_BACKGROUND_COLOR: _validate_color_input(user_input.get(CONF_BACKGROUND_COLOR), allow_empty=True),
         CONF_BACKGROUND_COLOR_ATTRIBUTE: user_input.get(CONF_BACKGROUND_COLOR_ATTRIBUTE, ""),
-        CONF_TEXT_COLOR: _color_input_to_str(user_input.get(CONF_TEXT_COLOR)),
+        CONF_TEXT_COLOR: _validate_color_input(user_input.get(CONF_TEXT_COLOR), allow_empty=True),
         CONF_TEXT_COLOR_ATTRIBUTE: user_input.get(CONF_TEXT_COLOR_ATTRIBUTE, ""),
         CONF_TILES: tiles,
         CONF_LOG_LEVEL_ATTRIBUTE: user_input.get(CONF_LOG_LEVEL_ATTRIBUTE, ""),
-        CONF_LOG_COLUMNS: _parse_log_columns(user_input.get(CONF_LOG_COLUMNS, "")),
+        CONF_LOG_COLUMNS: _parse_log_columns(raw_log_columns),
     }
 
 
@@ -1670,17 +1740,7 @@ class PushWardEntitySubentryFlow(config_entries.ConfigSubentryFlow):
             self._step1_input = user_input
             self._is_reconfigure = True
             # Prepare defaults for step 2 from existing config
-            current = dict(subentry.data)
-            labels = current.get(CONF_STATE_LABELS)
-            if isinstance(labels, dict):
-                current[CONF_STATE_LABELS] = _serialize_key_value_pairs(labels)
-            series = current.get(CONF_SERIES)
-            if isinstance(series, dict):
-                current[CONF_SERIES] = _serialize_key_value_pairs(series)
-            units = current.get(CONF_UNITS)
-            if isinstance(units, dict):
-                current[CONF_UNITS] = _serialize_key_value_pairs(units)
-            self._details_defaults = current
+            self._details_defaults = dict(subentry.data)
             return await self.async_step_details()
 
         current = dict(subentry.data)
@@ -1723,17 +1783,6 @@ class PushWardEntitySubentryFlow(config_entries.ConfigSubentryFlow):
             data_schema=_entity_sectioned_schema(entity_id, template, defaults, self.hass),
             description_placeholders={"entity": entity_id, "template": template},
         )
-
-    async def async_step_content(self, user_input: dict[str, Any] | None = None) -> config_entries.SubentryFlowResult:
-        """Redirect an in-progress legacy staged flow to the unified form."""
-        return await self.async_step_details(user_input)
-
-    async def async_step_appearance(
-        self, user_input: dict[str, Any] | None = None
-    ) -> config_entries.SubentryFlowResult:
-        """Redirect an in-progress legacy staged flow to the unified form."""
-        return await self.async_step_details(user_input)
-
 
 # --- Widget subentry flow ---
 
@@ -1851,7 +1900,6 @@ def _widget_details_schema(
             ObjectSelectorConfig(
                 multiple=True,
                 label_field=CONF_LABEL,
-                description_field=CONF_ENTITY_ID,
                 fields={
                     CONF_LABEL: {"label": "Row label", "required": True, "selector": TextSelector()},
                     CONF_ENTITY_ID: {
@@ -1906,19 +1954,11 @@ def _widget_details_schema(
     fields[bg_color_key] = _color_selector()
     fields[text_color_key] = _color_selector()
 
-    # Widget-wide tap action (universal across all templates)
+    fields[vol.Optional("tap_action", default=d.get("tap_action", {}))] = _action_selector(button=False)
+    fields[vol.Optional("url_action", default=d.get("url_action", {}))] = _action_selector(button=True)
     fields[
-        vol.Optional(
-            CONF_TAP_ACTION_URL,
-            default=d.get(CONF_TAP_ACTION_URL, ""),
-        )
-    ] = vol.All(str, vol.Length(max=MAX_URL_LEN))
-    fields[
-        vol.Optional(
-            CONF_TAP_ACTION_FOREGROUND,
-            default=d.get(CONF_TAP_ACTION_FOREGROUND, DEFAULT_TAP_ACTION_FOREGROUND),
-        )
-    ] = BooleanSelector()
+        vol.Optional("secondary_url_action", default=d.get("secondary_url_action", {}))
+    ] = _action_selector(button=True)
 
     # Trigger mode + interval
     fields[
@@ -1963,8 +2003,9 @@ _WIDGET_APPEARANCE_FIELDS = {
     CONF_ACCENT_COLOR_ATTRIBUTE,
     CONF_BACKGROUND_COLOR,
     CONF_TEXT_COLOR,
-    CONF_TAP_ACTION_URL,
-    CONF_TAP_ACTION_FOREGROUND,
+    "tap_action",
+    "url_action",
+    "secondary_url_action",
 }
 _WIDGET_REFRESH_FIELDS = {CONF_WIDGET_TRIGGER_MODE, CONF_WIDGET_POLL_INTERVAL}
 
@@ -2053,9 +2094,25 @@ def _parse_widget_input(user_input: dict, step1: dict) -> dict:
 
     min_v, max_v = _coerce_gauge_range(user_input, is_gauge=template == WIDGET_TEMPLATE_GAUGE)
 
-    stat_rows = _parse_widget_stat_rows(user_input.get(CONF_STAT_ROWS, ""))
+    raw_stat_rows = user_input.get(CONF_STAT_ROWS, [])
+    if isinstance(raw_stat_rows, list) and len(raw_stat_rows) > WIDGET_MAX_STAT_ROWS:
+        raise vol.Invalid(f"A statistics widget supports at most {WIDGET_MAX_STAT_ROWS} rows", path=[CONF_STAT_ROWS])
+    stat_rows = _parse_widget_stat_rows(raw_stat_rows)
     if template == WIDGET_TEMPLATE_STAT_LIST and not stat_rows:
         raise vol.Invalid("stat_rows_required", path=[CONF_STAT_ROWS])
+    for index, row in enumerate(stat_rows, 1):
+        label = str(row.get(CONF_LABEL) or "").strip()
+        unit = str(row.get(CONF_UNIT) or "")
+        if not label or len(label) > WIDGET_LABEL_MAX:
+            raise vol.Invalid(
+                f"Statistic row {index} needs a label from 1 to {WIDGET_LABEL_MAX} characters",
+                path=[CONF_STAT_ROWS],
+            )
+        if len(unit) > WIDGET_UNIT_MAX:
+            raise vol.Invalid(
+                f"Statistic row {index} unit must be at most {WIDGET_UNIT_MAX} characters",
+                path=[CONF_STAT_ROWS],
+            )
 
     poll_interval = int(user_input.get(CONF_WIDGET_POLL_INTERVAL, DEFAULT_WIDGET_POLL_INTERVAL))
     poll_interval = max(WIDGET_POLL_INTERVAL_MIN, min(WIDGET_POLL_INTERVAL_MAX, poll_interval))
@@ -2064,9 +2121,13 @@ def _parse_widget_input(user_input: dict, step1: dict) -> dict:
     if trigger not in WIDGET_TRIGGER_MODES:
         trigger = WIDGET_TRIGGER_EVENT
 
-    tap_action_url = (user_input.get(CONF_TAP_ACTION_URL) or "").strip()
-    tap_action_foreground = bool(user_input.get(CONF_TAP_ACTION_FOREGROUND, DEFAULT_TAP_ACTION_FOREGROUND))
-    _raise_url_errors([(CONF_TAP_ACTION_URL, tap_action_url, tap_action_foreground)])
+    tap_action = _normalize_action(user_input.get("tap_action"), button=False)
+    url_action = _normalize_action(user_input.get("url_action"), button=True)
+    secondary_url_action = _normalize_action(user_input.get("secondary_url_action"), button=True)
+    legacy_tap_url = str(user_input.get(CONF_TAP_ACTION_URL) or "").strip()
+    legacy_tap_foreground = bool(user_input.get(CONF_TAP_ACTION_FOREGROUND, True))
+    if legacy_tap_url:
+        _normalize_action({"url": legacy_tap_url, "foreground": legacy_tap_foreground}, button=False)
 
     return {
         CONF_ENTITY_ID: entity_id,
@@ -2086,12 +2147,15 @@ def _parse_widget_input(user_input: dict, step1: dict) -> dict:
         CONF_SUBTITLE_ATTRIBUTE: user_input.get(CONF_SUBTITLE_ATTRIBUTE, "") or "",
         CONF_ICON: user_input.get(CONF_ICON, "") or "",
         CONF_ICON_ATTRIBUTE: user_input.get(CONF_ICON_ATTRIBUTE, "") or "",
-        CONF_ACCENT_COLOR: _color_input_to_str(user_input.get(CONF_ACCENT_COLOR)),
+        CONF_ACCENT_COLOR: _validate_color_input(user_input.get(CONF_ACCENT_COLOR), allow_empty=True),
         CONF_ACCENT_COLOR_ATTRIBUTE: user_input.get(CONF_ACCENT_COLOR_ATTRIBUTE, "") or "",
-        CONF_BACKGROUND_COLOR: _color_input_to_str(user_input.get(CONF_BACKGROUND_COLOR)),
-        CONF_TEXT_COLOR: _color_input_to_str(user_input.get(CONF_TEXT_COLOR)),
-        CONF_TAP_ACTION_URL: tap_action_url,
-        CONF_TAP_ACTION_FOREGROUND: tap_action_foreground,
+        CONF_BACKGROUND_COLOR: _validate_color_input(user_input.get(CONF_BACKGROUND_COLOR), allow_empty=True),
+        CONF_TEXT_COLOR: _validate_color_input(user_input.get(CONF_TEXT_COLOR), allow_empty=True),
+        "tap_action": tap_action,
+        "url_action": url_action,
+        "secondary_url_action": secondary_url_action,
+        CONF_TAP_ACTION_URL: legacy_tap_url,
+        CONF_TAP_ACTION_FOREGROUND: legacy_tap_foreground,
     }
 
 
@@ -2160,17 +2224,6 @@ class PushWardWidgetSubentryFlow(config_entries.ConfigSubentryFlow):
             description_placeholders={"entity": entity_id, "template": template},
         )
 
-    async def async_step_appearance(
-        self, user_input: dict[str, Any] | None = None
-    ) -> config_entries.SubentryFlowResult:
-        """Redirect an in-progress legacy staged flow to the unified form."""
-        return await self.async_step_details(user_input)
-
-    async def async_step_refresh(self, user_input: dict[str, Any] | None = None) -> config_entries.SubentryFlowResult:
-        """Redirect an in-progress legacy staged flow to the unified form."""
-        return await self.async_step_details(user_input)
-
-
 def _rgb_to_hex(rgb: list[int] | None) -> str:
     """Convert an [R, G, B] list to a '#rrggbb' hex string."""
     if not rgb or not isinstance(rgb, list) or len(rgb) != 3:
@@ -2199,13 +2252,44 @@ def _color_selector() -> SelectSelector:
     return SelectSelector(
         SelectSelectorConfig(
             options=[
-                {"value": color, "label": f"{color.title()} ({_COLOR_HEX_LABELS[color]})"}
-                for color in PUSHWARD_NAMED_COLORS
+                {"value": "", "label": "Automatic / PushWard default"},
+                *[
+                    {"value": color, "label": f"{color.title()} ({_COLOR_HEX_LABELS[color]})"}
+                    for color in PUSHWARD_NAMED_COLORS
+                ],
             ],
             custom_value=True,
             mode=SelectSelectorMode.DROPDOWN,
         )
     )
+
+
+def _action_selector(*, button: bool) -> ObjectSelector:
+    """Return a structured foreground-link / silent-webhook editor."""
+    fields: dict[str, dict] = {}
+    if button:
+        fields.update(
+            {
+                "title": {"label": "Button title (max 64 characters)", "selector": TextSelector()},
+                "icon": {"label": "SF Symbol (optional)", "selector": TextSelector()},
+            }
+        )
+    fields.update(
+        {
+            "url": {"label": "URL or app deep link", "selector": TextSelector()},
+            "foreground": {"label": "Open visibly instead of running silently", "selector": BooleanSelector()},
+            "method": {
+                "label": "Silent webhook method",
+                "selector": SelectSelector(SelectSelectorConfig(options=list(TAP_ACTION_METHODS))),
+            },
+            "headers": {"label": "Silent webhook headers (advanced object)", "selector": ObjectSelector()},
+            "body": {
+                "label": "Silent webhook body",
+                "selector": TextSelector(TextSelectorConfig(multiline=True)),
+            },
+        }
+    )
+    return ObjectSelector(ObjectSelectorConfig(fields=fields))
 
 
 def _color_input_to_str(value: object) -> str:
@@ -2215,6 +2299,14 @@ def _color_input_to_str(value: object) -> str:
     if isinstance(value, list):
         return _rgb_to_hex(value)
     return ""
+
+
+def _validate_color_input(value: object, *, allow_empty: bool = False) -> str:
+    """Return a normalized PushWard color or raise a clear form error."""
+    color = _color_input_to_str(value)
+    if not color and allow_empty:
+        return ""
+    return validate_color(color)
 
 
 def _hex_to_rgb(hex_color: str) -> list[int] | None:

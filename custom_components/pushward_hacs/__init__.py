@@ -59,6 +59,7 @@ from .const import (
     USAGE_LIMIT_RESOURCES,
     usage_limit_issue_id,
     validate_action_headers,
+    validate_color,
     validate_duration,
     validate_slug,
     validate_tap_action_url,
@@ -72,7 +73,6 @@ _LOGGER = logging.getLogger(__name__)
 PLATFORMS = [Platform.SENSOR]
 
 
-SERVICE_UPDATE_ACTIVITY = "update_activity"
 # Per-template update services (one per const.TEMPLATES) — the template is implied by the
 # service name, so the UI shows only that template's fields (HA can't hide fields by value).
 SERVICE_UPDATE_TEMPLATE_PREFIX = "update_activity_"
@@ -83,6 +83,7 @@ SERVICE_SEND_NOTIFICATION = "send_notification"
 SERVICE_SEND_EMAIL = "send_email"
 SERVICE_WIDGET_REFRESH = "widget_refresh"
 SERVICE_DELETE_WIDGET = "delete_widget"
+SERVICE_DISPATCH = "dispatch"
 
 # Keys that turn an action into a silent HTTP webhook — gated by _validate_http_action_fields.
 _HTTP_ACTION_KEYS = ("method", "headers", "body")
@@ -139,8 +140,6 @@ _URL_ACTION_SCHEMA = vol.All(
 # tapActionProperties). Legacy url/secondary_url strings sit alongside the richer
 # *_action objects; the server allows custom-scheme URLs here, hence validate_tap_action_url.
 _UNIVERSAL_ACTION_FIELDS = {
-    vol.Optional("url"): validate_tap_action_url,
-    vol.Optional("secondary_url"): validate_tap_action_url,
     vol.Optional("tap_action"): _TAP_ACTION_SCHEMA,
     vol.Optional("url_action"): _URL_ACTION_SCHEMA,
     vol.Optional("secondary_url_action"): _URL_ACTION_SCHEMA,
@@ -149,7 +148,7 @@ _UNIVERSAL_ACTION_FIELDS = {
 # Composable field-groups for the update services. The shared groups (top-level +
 # universal labels/appearance/actions) merge with one template-specific group per service, so
 # each per-template schema accepts that template's fields plus the universal ones; the
-# deprecated update_activity schema is rebuilt below as the union of all of them.
+# each template-specific action is assembled from the same validated field groups.
 _UPDATE_TOPLEVEL_FIELDS = {
     vol.Required("slug"): validate_slug,
     vol.Required("state"): vol.In(ACTIVITY_STATES),
@@ -162,9 +161,9 @@ _UNIVERSAL_LABEL_FIELDS = {
 }
 _UNIVERSAL_APPEARANCE_FIELDS = {
     vol.Optional("completion_message"): str,
-    vol.Optional("accent_color"): str,
-    vol.Optional("background_color"): str,
-    vol.Optional("text_color"): str,
+    vol.Optional("accent_color"): validate_color,
+    vol.Optional("background_color"): validate_color,
+    vol.Optional("text_color"): validate_color,
     vol.Optional("remaining_time"): vol.Coerce(int),
     vol.Optional("sound"): vol.In(SOUNDS),
     vol.Optional("priority"): vol.All(vol.Coerce(int), vol.Range(min=0, max=10)),
@@ -185,13 +184,17 @@ _GENERIC_TEMPLATE_FIELDS = {
     vol.Optional("duration"): validate_duration,
     vol.Optional("live_progress"): cv.boolean,
 }
+_STEP_SCHEMA = vol.Schema(
+    {
+        vol.Required("label"): vol.All(str, vol.Length(min=1, max=32)),
+        vol.Optional("parallel_jobs", default=1): vol.All(vol.Coerce(int), vol.Range(min=1, max=10)),
+        vol.Optional("weight", default=1): vol.All(vol.Coerce(float), vol.Range(min=0.1, max=10000)),
+        vol.Optional("color"): validate_color,
+    }
+)
 _STEPS_TEMPLATE_FIELDS = {
-    vol.Optional("total_steps"): vol.Coerce(int),
     vol.Optional("current_step"): vol.Coerce(int),
-    vol.Optional("step_labels"): list,
-    vol.Optional("step_rows"): list,
-    vol.Optional("step_weights"): list,
-    vol.Optional("step_colors"): list,
+    vol.Optional("steps"): vol.All([_STEP_SCHEMA], vol.Length(min=1, max=20)),
     vol.Optional("end_date"): vol.Coerce(int),
     vol.Optional("duration"): validate_duration,
     vol.Optional("live_progress"): cv.boolean,
@@ -209,10 +212,15 @@ _GAUGE_TEMPLATE_FIELDS = {
     vol.Optional("max_value"): vol.Coerce(float),
     vol.Optional("unit"): str,
 }
+_TIMELINE_SERIES_SCHEMA = vol.Schema(
+    {
+        vol.Required("label"): vol.All(str, vol.Length(min=1, max=32)),
+        vol.Required("value"): vol.Coerce(float),
+        vol.Optional("unit"): vol.All(str, vol.Length(max=32)),
+    }
+)
 _TIMELINE_TEMPLATE_FIELDS = {
-    vol.Optional("value"): vol.Any(vol.Coerce(float), dict),
-    vol.Optional("unit"): str,
-    vol.Optional("units"): dict,
+    vol.Optional("series"): vol.All([_TIMELINE_SERIES_SCHEMA], vol.Length(min=1, max=10)),
     # Override the headline series (else the mapper auto-picks it). Server caps it at 32.
     vol.Optional("primary_series"): vol.All(str, vol.Length(max=32)),
     vol.Optional("scale"): vol.In(SCALES),
@@ -232,7 +240,7 @@ _BOARD_TILE_SCHEMA = vol.All(
             vol.Required("value"): vol.All(vol.Coerce(str), vol.Length(min=1, max=BOARD_TILE_VALUE_MAX)),
             vol.Optional("unit"): vol.All(vol.Coerce(str), vol.Length(max=BOARD_TILE_UNIT_MAX)),
             vol.Optional("icon"): vol.All(str, vol.Length(max=BOARD_TILE_ICON_MAX)),
-            vol.Optional("color"): str,  # named/hex; server ValidateColor is authoritative
+            vol.Optional("color"): validate_color,
             vol.Optional("trend"): vol.In(BOARD_TRENDS),
             vol.Optional("url_action"): _URL_ACTION_SCHEMA,
         }
@@ -255,9 +263,9 @@ _LOG_TEMPLATE_FIELDS = {
     vol.Optional("lines"): vol.All([_LOG_LINE_SCHEMA], vol.Length(min=1, max=LOG_MAX_LINES)),
 }
 
-# Lean field groups for board/log: only the fields those templates actually render.
-# Board/log have no progress bar, no remaining_time, and no whole-activity button slots
-# (board uses per-tile url_action; log has no buttons) — so those are deliberately absent.
+# Lean field groups for board/log: no progress bar or remaining_time. All three
+# universal activity tap targets remain available, and Board additionally supports
+# a per-tile url_action.
 _BOARD_LOG_LABEL_FIELDS = {
     vol.Optional("state_text"): str,
     vol.Optional("subtitle"): str,
@@ -265,9 +273,9 @@ _BOARD_LOG_LABEL_FIELDS = {
 }
 _BOARD_LOG_APPEARANCE_FIELDS = {
     vol.Optional("completion_message"): str,
-    vol.Optional("accent_color"): str,
-    vol.Optional("background_color"): str,
-    vol.Optional("text_color"): str,
+    vol.Optional("accent_color"): validate_color,
+    vol.Optional("background_color"): validate_color,
+    vol.Optional("text_color"): validate_color,
     vol.Optional("sound"): vol.In(SOUNDS),
     vol.Optional("priority"): vol.All(vol.Coerce(int), vol.Range(min=0, max=10)),
 }
@@ -307,24 +315,10 @@ _UPDATE_TEMPLATE_SCHEMAS = {
     "alert": _update_template_schema(_ALERT_TEMPLATE_FIELDS),
     "gauge": _update_template_schema(_GAUGE_TEMPLATE_FIELDS),
     "timeline": _update_template_schema(_TIMELINE_TEMPLATE_FIELDS),
-    # board/log use the lean schema (no progress / remaining_time / button slots).
+    # board/log use the lean schema (no progress or remaining_time).
     "board": _board_log_schema(_BOARD_TEMPLATE_FIELDS),
     "log": _board_log_schema(_LOG_TEMPLATE_FIELDS),
 }
-
-# The deprecated update_activity accepts every template's fields (plus an explicit
-# `template` selector) — i.e. the union of all per-template schemas.
-SCHEMA_UPDATE_ACTIVITY = _update_template_schema(
-    {vol.Optional("template"): str},
-    _GENERIC_TEMPLATE_FIELDS,
-    _COUNTDOWN_TEMPLATE_FIELDS,
-    _STEPS_TEMPLATE_FIELDS,
-    _ALERT_TEMPLATE_FIELDS,
-    _GAUGE_TEMPLATE_FIELDS,
-    _TIMELINE_TEMPLATE_FIELDS,
-    _BOARD_TEMPLATE_FIELDS,
-    _LOG_TEMPLATE_FIELDS,
-)
 
 SCHEMA_CREATE_ACTIVITY = vol.Schema(
     {
@@ -445,6 +439,63 @@ SCHEMA_WIDGET_REFRESH = SCHEMA_WIDGET_TARGET
 SCHEMA_DELETE_WIDGET = SCHEMA_WIDGET_TARGET
 
 
+def _validate_dispatch(data: dict) -> dict:
+    """Require complete fields for every enabled dispatch channel."""
+    requirements = {
+        "activity_enabled": ("activity_slug", "activity_state", "activity_template", "activity_content"),
+        "notification_enabled": ("notification_title", "notification_body"),
+        "widget_enabled": ("widget_slug", "widget_name", "widget_template", "widget_content"),
+        "email_enabled": ("email_to", "email_subject"),
+    }
+    enabled = [toggle for toggle in requirements if data.get(toggle)]
+    if not enabled:
+        raise vol.Invalid("enable at least one PushWard channel")
+    for toggle in enabled:
+        missing = [
+            field
+            for field in requirements[toggle]
+            if field not in data or data[field] is None or (isinstance(data[field], str) and not data[field].strip())
+        ]
+        if missing:
+            raise vol.Invalid(f"{toggle.removesuffix('_enabled')} is missing: {', '.join(missing)}")
+    if data.get("email_enabled") and not (data.get("email_body") or data.get("email_html_body")):
+        raise vol.Invalid("email needs a plain-text body, an HTML body, or both")
+    return data
+
+
+SCHEMA_DISPATCH = vol.All(
+    vol.Schema(
+        {
+            vol.Optional("activity_enabled", default=False): cv.boolean,
+            vol.Optional("activity_slug"): validate_slug,
+            vol.Optional("activity_state"): vol.In(ACTIVITY_STATES),
+            vol.Optional("activity_template"): vol.In(TEMPLATES),
+            vol.Optional("activity_content"): dict,
+            vol.Optional("activity_sound"): vol.In(SOUNDS),
+            vol.Optional("activity_priority"): vol.All(vol.Coerce(int), vol.Range(min=0, max=10)),
+            vol.Optional("notification_enabled", default=False): cv.boolean,
+            vol.Optional("notification_title"): str,
+            vol.Optional("notification_body"): str,
+            vol.Optional("notification_subtitle"): str,
+            vol.Optional("notification_level"): vol.In(NOTIFICATION_LEVELS),
+            vol.Optional("notification_push", default=True): cv.boolean,
+            vol.Optional("widget_enabled", default=False): cv.boolean,
+            vol.Optional("widget_slug"): validate_slug,
+            vol.Optional("widget_name"): str,
+            vol.Optional("widget_template"): str,
+            vol.Optional("widget_content"): dict,
+            vol.Optional("widget_push_throttle"): vol.All(vol.Coerce(int), vol.Range(min=1, max=3600)),
+            vol.Optional("email_enabled", default=False): cv.boolean,
+            vol.Optional("email_to"): vol.All(str, vol.Email(), vol.Length(max=254)),
+            vol.Optional("email_subject"): vol.All(str, _no_line_breaks, vol.Length(min=1, max=256)),
+            vol.Optional("email_body"): str,
+            vol.Optional("email_html_body"): str,
+        }
+    ),
+    _validate_dispatch,
+)
+
+
 def _get_api(hass: HomeAssistant) -> PushWardApiClient:
     """Get the API client from the first available config entry."""
     entries = hass.data.get(DOMAIN)
@@ -476,7 +527,7 @@ async def _send_activity_update(hass: HomeAssistant, call: ServiceCall, *, templ
 
     sound/priority are top-level PATCH kwargs; every remaining field is content. state_text
     is the user-facing name for the content "state" string. The per-template actions inject
-    their template (their schema omits it); the deprecated alias lets the caller pass it.
+    their template because the focused action schema intentionally omits it.
     """
     api = _get_api(hass)
     content = dict(call.data)
@@ -486,29 +537,22 @@ async def _send_activity_update(hass: HomeAssistant, call: ServiceCall, *, templ
     priority = content.pop("priority", None)
     if "state_text" in content:
         content["state"] = content.pop("state_text")
+    if steps := content.pop("steps", None):
+        content["total_steps"] = len(steps)
+        content["step_labels"] = [step["label"] for step in steps]
+        content["step_rows"] = [step["parallel_jobs"] for step in steps]
+        content["step_weights"] = [step["weight"] for step in steps]
+        if any(step.get("color") for step in steps):
+            content["step_colors"] = [step.get("color") or "" for step in steps]
+    if series := content.pop("series", None):
+        content["value"] = {item["label"]: item["value"] for item in series}
+        units = {item["label"]: item["unit"] for item in series if item.get("unit")}
+        if units:
+            content["units"] = units
     if template is not None:
         content["template"] = template
     with _surface_api_errors():
         await api.update_activity(slug, state, content, sound=sound, priority=priority, upsert=True)
-
-
-async def _async_handle_update_activity(hass: HomeAssistant, call: ServiceCall) -> None:
-    """Handle the deprecated update_activity service call.
-
-    Superseded by the per-template ``update_activity_<template>`` services. Kept as a
-    backward-compatible alias; raises an idempotent Repair issue (cleared on restart once
-    automations migrate) instead of logging a warning on every call.
-    """
-    ir.async_create_issue(
-        hass,
-        DOMAIN,
-        "deprecated_update_activity",
-        is_fixable=False,
-        is_persistent=False,
-        severity=ir.IssueSeverity.WARNING,
-        translation_key="deprecated_update_activity",
-    )
-    await _send_activity_update(hass, call)
 
 
 async def _async_handle_update_template(hass: HomeAssistant, call: ServiceCall, *, template: str) -> None:
@@ -656,14 +700,51 @@ async def _async_handle_delete_widget(hass: HomeAssistant, call: ServiceCall) ->
         await api.delete_widget(slug)
 
 
+async def _async_handle_dispatch(hass: HomeAssistant, call: ServiceCall) -> None:
+    """Send any enabled PushWard channels from one Home Assistant action."""
+    api = _get_api(hass)
+    data = call.data
+    with _surface_api_errors():
+        if data["activity_enabled"]:
+            content = {**data["activity_content"], "template": data["activity_template"]}
+            await api.update_activity(
+                data["activity_slug"],
+                data["activity_state"],
+                content,
+                sound=data.get("activity_sound"),
+                priority=data.get("activity_priority"),
+                upsert=True,
+            )
+        if data["notification_enabled"]:
+            await api.create_notification(
+                data["notification_title"],
+                data["notification_body"],
+                subtitle=data.get("notification_subtitle"),
+                level=data.get("notification_level"),
+                activity_slug=data.get("activity_slug") if data.get("activity_enabled") else None,
+                push=data["notification_push"],
+            )
+        if data["widget_enabled"]:
+            await api.create_widget(
+                data["widget_slug"],
+                data["widget_name"],
+                data["widget_template"],
+                data["widget_content"],
+                push_throttle=data.get("widget_push_throttle"),
+            )
+        if data["email_enabled"]:
+            await api.send_email(
+                data["email_to"],
+                data["email_subject"],
+                text_body=data.get("email_body") or None,
+                html_body=data.get("email_html_body") or None,
+            )
+
+
 def _register_services(hass: HomeAssistant) -> None:
     """Register PushWard services (only once)."""
-    if hass.services.has_service(DOMAIN, SERVICE_UPDATE_ACTIVITY):
+    if hass.services.has_service(DOMAIN, SERVICE_CREATE_ACTIVITY):
         return
-
-    hass.services.async_register(
-        DOMAIN, SERVICE_UPDATE_ACTIVITY, partial(_async_handle_update_activity, hass), SCHEMA_UPDATE_ACTIVITY
-    )
     for template in TEMPLATES:
         hass.services.async_register(
             DOMAIN,
@@ -690,6 +771,7 @@ def _register_services(hass: HomeAssistant) -> None:
     hass.services.async_register(
         DOMAIN, SERVICE_DELETE_WIDGET, partial(_async_handle_delete_widget, hass), SCHEMA_DELETE_WIDGET
     )
+    hass.services.async_register(DOMAIN, SERVICE_DISPATCH, partial(_async_handle_dispatch, hass), SCHEMA_DISPATCH)
 
 
 async def async_setup(hass: HomeAssistant, config: ConfigType) -> bool:
@@ -766,7 +848,7 @@ async def async_unload_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
     if not await hass.config_entries.async_unload_platforms(entry, PLATFORMS):
         return False
 
-    data = hass.data[DOMAIN].pop(entry.entry_id, None)
+    data = hass.data.get(DOMAIN, {}).pop(entry.entry_id, None)
     if data:
         widget_manager: WidgetManager | None = data.get("widget_manager")
         stops = [data["manager"].async_stop()]

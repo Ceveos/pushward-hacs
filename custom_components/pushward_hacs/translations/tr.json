@@ -1,1700 +1,1376 @@
 {
-  "services": {
-    "update_activity": {
-      "name": "Aktiviteyi Güncelle (deprecated)",
-      "description": "Bir PushWard Live Activity durumunu ve içeriğini güncelle.",
-      "fields": {
-        "slug": {
-          "name": "Slug",
-          "description": "Aktivite slug tanımlayıcısı."
-        },
-        "state": {
-          "name": "Durum",
-          "description": "İstenen aktivite durumu."
-        },
-        "template": {
-          "name": "Şablon",
-          "description": "Aktivite düzen şablonu."
-        },
-        "progress": {
-          "name": "İlerleme",
-          "description": "0,0 ile 1,0 arasında ilerleme değeri."
-        },
-        "state_text": {
-          "name": "Durum Metni",
-          "description": "Aktivite durumu olarak gösterilen metin."
-        },
-        "icon": {
-          "name": "Simge",
-          "description": "SF Symbol veya MDI simge adı (örn. arrow.down.circle.fill, mdi:download)."
-        },
-        "subtitle": {
-          "name": "Alt Başlık",
-          "description": "Aktivitede gösterilen alt başlık metni."
-        },
-        "accent_color": {
-          "name": "Vurgu Rengi",
-          "description": "Aktivite için vurgu rengi adı."
-        },
-        "remaining_time": {
-          "name": "Kalan Süre",
-          "description": "Saniye cinsinden kalan süre."
-        },
-        "url": {
-          "name": "URL",
-          "description": "Dokunulabilir düğme olarak gösterilen birincil URL. Yalnızca steps ve alert şablonlarında desteklenir."
-        },
-        "secondary_url": {
-          "name": "İkincil URL",
-          "description": "İkinci dokunulabilir düğme olarak gösterilen ikincil URL. Yalnızca steps ve alert şablonlarında desteklenir."
-        },
-        "end_date": {
-          "name": "Bitiş Tarihi",
-          "description": "countdown bitiş tarihi için Unix zaman damgası."
-        },
-        "total_steps": {
-          "name": "Toplam steps",
-          "description": "Toplam steps adedi."
-        },
-        "current_step": {
-          "name": "Geçerli Adım",
-          "description": "Geçerli adım numarası."
-        },
-        "severity": {
-          "name": "Önem Derecesi",
-          "description": "alert önem düzeyi."
-        },
-        "value": {
-          "name": "Değer",
-          "description": "gauge: sayısal değer. timeline: etiketli değerler nesnesi (örn. Temp=22.5)."
-        },
-        "min_value": {
-          "name": "Minimum Değer",
-          "description": "Minimum gauge değeri."
-        },
-        "max_value": {
-          "name": "Maksimum Değer",
-          "description": "Maksimum gauge değeri."
-        },
-        "unit": {
-          "name": "Birim",
-          "description": "Değer için görüntü birimi (örn. °C, %)."
-        },
-        "completion_message": {
-          "name": "Tamamlanma Mesajı",
-          "description": "Aktivite sona erdiğinde gösterilen mesaj."
-        },
-        "scale": {
-          "name": "Ölçek",
-          "description": "Y ekseni ölçek modu (doğrusal veya logaritmik). Yalnızca timeline şablonu."
-        },
-        "decimals": {
-          "name": "Ondalık Basamak",
-          "description": "Değer görüntüsü için ondalık basamak sayısı (0-10). Yalnızca timeline şablonu."
-        },
-        "smoothing": {
-          "name": "Düzgün Çizgiler",
-          "description": "Veri noktaları arasında eğri aradeğerlemeyi etkinleştir. Yalnızca timeline şablonu."
-        },
-        "thresholds": {
-          "name": "Eşikler",
-          "description": "Kıvılcım çizelgesi üzerindeki yatay referans çizgileri. Yalnızca timeline şablonu."
-        },
-        "sound": {
-          "name": "Ses",
-          "description": "Güncelleme için bildirim sesi adı. iOS sistem sesini kullanmak için boş bırakın."
-        },
-        "priority": {
-          "name": "Öncelik",
-          "description": "Aktivite önceliği (0 = en düşük, 10 = en yüksek)."
-        },
-        "background_color": {
-          "name": "Arka Plan Rengi",
-          "description": "Live Activity arka plan rengi. #RRGGBB veya adlandırılmış renk. Boş bırakılırsa sistem varsayılanı kullanılır."
-        },
-        "text_color": {
-          "name": "Metin Rengi",
-          "description": "Live Activity metin rengi. #RRGGBB veya adlandırılmış renk. Boş bırakılırsa sistem varsayılanı kullanılır."
-        },
-        "warning_threshold": {
-          "name": "Uyarı Eşiği",
-          "description": "Gauge veya timeline değerinin bu değere ulaşması veya aşması durumunda uyarı rengi gösterilir."
-        },
-        "alarm": {
-          "name": "Alarm",
-          "description": "Uyarı eşiği aşıldığında AlarmKit alarmını tetikler. Yalnızca iOS 26+ üzerinde çalışır."
-        },
-        "step_labels": {
-          "name": "Adım Etiketleri",
-          "description": "Adım etiketlerinin sıralı listesi. Uzunluk total_steps ile eşit olmalıdır. Yalnızca steps şablonu."
-        },
-        "step_rows": {
-          "name": "Adım Satırları",
-          "description": "Her adım için satır yüksekliklerinin (1-10) sıralı listesi. Uzunluk total_steps ile eşit olmalıdır. Yalnızca steps şablonu."
-        },
-        "fired_at": {
-          "name": "Tetiklenme Zamanı",
-          "description": "Aktivitenin tetiklendiği Unix zaman damgası. Gösterilecek göreceli zaman için kullanılır."
-        },
-        "units": {
-          "name": "Birimler",
-          "description": "Timeline serileri için birim etiketleri. Biçim: attribute=Birim. Örnek: temp=°C, humidity=%"
-        },
-        "snooze_seconds": {
-          "name": "Erteleme Saniyeleri",
-          "description": "iOS Ertele düğmesinin geri sayımı ne kadar uzattığı (60–3600). Varsayılan 300 (5 dk). Alarm gerektirir (yalnızca iOS 26+, geri sayım şablonu)."
-        },
-        "duration": {
-          "name": "Süre",
-          "description": "Bitiş Tarihi'ne kur-ve-unut alternatifi: saniye (>=1) veya \"1h30m\" gibi bir süre dizesi. Sunucu başlangıç/bitişi şimdiye yeniden sabitler. Süre veya Bitiş Tarihi'nden birini gönderin — ikisi de ayarlanırsa Süre öncelik kazanır."
-        },
-        "start_date": {
-          "name": "Başlangıç Tarihi",
-          "description": "Geri sayımın başladığı Unix zaman damgası (geçen/kalan çubuğunu sabitler). Sunucu bunu varsayılan olarak şimdiye ayarlar."
-        },
-        "history": {
-          "name": "Geçmiş (başlangıç)",
-          "description": "İlk sparkline başlangıç verisi: seri adından (timestamp, value) listesine eşleyen bir nesne. Yalnızca başlangıç — ilk güncellemeden sonra sunucu devralır."
-        },
-        "tap_action": {
-          "name": "Dokunma Eylemi",
-          "description": "Nesne olarak tüm etkinliğin dokunma hedefi: url (gerekli), isteğe bağlı foreground ve http(s) url için method/headers/body üzerinden sessiz bir webhook."
-        },
-        "url_action": {
-          "name": "Birincil Düğme",
-          "description": "Nesne olarak birincil dokunulabilir düğme: url (gerekli), isteğe bağlı title, icon, foreground ve sessiz bir webhook için http(s) method/headers/body."
-        },
-        "secondary_url_action": {
-          "name": "İkincil Düğme",
-          "description": "İkincil dokunulabilir düğme — Birincil Düğme ile aynı nesne yapısı."
-        }
+  "entity": {
+    "sensor": {
+      "notifications_used": {
+        "name": "Notifications used"
       },
-      "sections": {
-        "countdown_options": {
-          "name": "countdown seçenekleri",
-          "description": "Yalnızca countdown şablonu."
-        },
-        "steps_options": {
-          "name": "steps seçenekleri",
-          "description": "Yalnızca steps şablonu."
-        },
-        "alert_options": {
-          "name": "alert seçenekleri",
-          "description": "Yalnızca alert şablonu."
-        },
-        "gauge_timeline_options": {
-          "name": "gauge ve timeline seçenekleri",
-          "description": "Yalnızca gauge ve timeline şablonları."
-        },
-        "action_buttons": {
-          "name": "Eylem düğmeleri",
-          "description": "Dokunulabilir URL düğmeleri. Yalnızca steps ve alert şablonları."
-        },
-        "display_options": {
-          "name": "Görünüm, renk ve ses",
-          "description": "İsteğe bağlı biçimlendirme ve güncelleme başına geçersiz kılmalar. Her şablona uygulanır."
+      "live_activity_updates_used": {
+        "name": "Live Activity updates used"
+      },
+      "widget_updates_used": {
+        "name": "Widget updates used"
+      },
+      "emails_used": {
+        "name": "Emails used"
+      },
+      "subscription_tier": {
+        "name": "Subscription tier",
+        "state": {
+          "free": "Free",
+          "premium": "Premium"
         }
       }
-    },
+    }
+  },
+  "services": {
     "update_activity_generic": {
-      "name": "Aktiviteyi Güncelle (Generic)",
-      "description": "Bir PushWard Live Activity durumunu ve içeriğini güncelle.",
+      "name": "Update Activity (Generic)",
+      "description": "Update a PushWard Live Activity state and content.",
       "fields": {
         "slug": {
           "name": "Slug",
-          "description": "Aktivite slug tanımlayıcısı."
+          "description": "Activity slug identifier."
         },
         "state": {
-          "name": "Durum",
-          "description": "İstenen aktivite durumu."
+          "name": "State",
+          "description": "Desired activity state."
         },
         "state_text": {
-          "name": "Durum Metni",
-          "description": "Aktivite durumu olarak gösterilen metin."
+          "name": "State Text",
+          "description": "Text shown as the activity state."
         },
         "subtitle": {
-          "name": "Alt Başlık",
-          "description": "Aktivitede gösterilen alt başlık metni."
+          "name": "Subtitle",
+          "description": "Subtitle text shown on the activity."
         },
         "icon": {
-          "name": "Simge",
-          "description": "SF Symbol veya MDI simge adı (örn. arrow.down.circle.fill, mdi:download)."
+          "name": "Icon",
+          "description": "SF Symbol or MDI icon name (e.g. arrow.down.circle.fill, mdi:download)."
         },
         "progress": {
-          "name": "İlerleme",
-          "description": "0,0 ile 1,0 arasında ilerleme değeri."
+          "name": "Progress",
+          "description": "Progress value between 0.0 and 1.0."
         },
         "completion_message": {
-          "name": "Tamamlanma Mesajı",
-          "description": "Aktivite sona erdiğinde gösterilen mesaj."
+          "name": "Completion Message",
+          "description": "Message shown when the activity ends."
         },
         "accent_color": {
-          "name": "Vurgu Rengi",
-          "description": "Aktivite için vurgu rengi adı."
+          "name": "Accent Color",
+          "description": "Accent color name for the activity."
         },
         "background_color": {
-          "name": "Arka Plan Rengi",
-          "description": "Live Activity arka plan rengi. #RRGGBB veya adlandırılmış renk. Boş bırakılırsa sistem varsayılanı kullanılır."
+          "name": "Background Color",
+          "description": "Background color for the Live Activity. Hex (#RRGGBB) or named color."
         },
         "text_color": {
-          "name": "Metin Rengi",
-          "description": "Live Activity metin rengi. #RRGGBB veya adlandırılmış renk. Boş bırakılırsa sistem varsayılanı kullanılır."
+          "name": "Text Color",
+          "description": "Text color for the Live Activity. Hex (#RRGGBB) or named color."
         },
         "remaining_time": {
-          "name": "Kalan Süre",
-          "description": "Saniye cinsinden kalan süre."
+          "name": "Remaining Time",
+          "description": "Remaining time in seconds."
         },
         "sound": {
-          "name": "Ses",
-          "description": "Güncelleme için bildirim sesi adı. iOS sistem sesini kullanmak için boş bırakın."
+          "name": "Sound",
+          "description": "Notification sound played on the device for this update."
         },
         "priority": {
-          "name": "Öncelik",
-          "description": "Aktivite önceliği (0 = en düşük, 10 = en yüksek)."
-        },
-        "url": {
-          "name": "URL",
-          "description": "Dokunulabilir düğme olarak gösterilen birincil URL. http(s) veya homeassistant:// gibi özel bir şema."
-        },
-        "secondary_url": {
-          "name": "İkincil URL",
-          "description": "İkinci dokunulabilir düğme olarak gösterilen ikincil URL."
+          "name": "Priority Override",
+          "description": "Per-update priority (0-10). Overrides the activity's configured priority for this push only."
         },
         "tap_action": {
-          "name": "Dokunma Eylemi",
-          "description": "Nesne olarak tüm etkinliğin dokunma hedefi: url (gerekli), isteğe bağlı foreground ve http(s) url için method/headers/body üzerinden sessiz bir webhook."
+          "name": "Tap Action",
+          "description": "Whole-activity tap target as an object: url (required), optional foreground, and for an http(s) url a silent webhook via method/headers/body."
         },
         "url_action": {
-          "name": "Birincil Düğme",
-          "description": "Nesne olarak birincil dokunulabilir düğme: url (gerekli), isteğe bağlı title, icon, foreground ve sessiz bir webhook için http(s) method/headers/body."
+          "name": "Primary Button",
+          "description": "Primary tappable button as an object: url (required), optional title, icon, foreground, and http(s) method/headers/body for a silent webhook."
         },
         "secondary_url_action": {
-          "name": "İkincil Düğme",
-          "description": "İkincil dokunulabilir düğme — Birincil Düğme ile aynı nesne yapısı."
+          "name": "Secondary Button",
+          "description": "Secondary tappable button — same object shape as the Primary Button."
         }
       },
       "sections": {
         "labels": {
-          "name": "Etiketler ve simge",
-          "description": "İsteğe bağlı metin etiketleri ve simge. Tüm şablonlar için geçerlidir."
+          "name": "Labels & icon",
+          "description": "Optional text labels and icon. Apply to any template."
         },
         "action_buttons": {
-          "name": "Eylem düğmeleri",
-          "description": "Dokunulabilir URL düğmeleri. Yalnızca steps ve alert şablonları."
+          "name": "Action buttons",
+          "description": "Tappable URLs and rich button / tap actions for the activity."
         },
         "display_options": {
-          "name": "Görünüm, renk ve ses",
-          "description": "İsteğe bağlı biçimlendirme ve güncelleme başına geçersiz kılmalar. Her şablona uygulanır."
+          "name": "Display, color & sound",
+          "description": "Optional styling and per-update overrides. Apply to any template."
         }
       }
     },
     "update_activity_countdown": {
-      "name": "Aktiviteyi Güncelle (Countdown)",
-      "description": "Bir PushWard Live Activity durumunu ve içeriğini güncelle.",
+      "name": "Update Activity (Countdown)",
+      "description": "Update a PushWard Live Activity state and content.",
       "fields": {
         "slug": {
           "name": "Slug",
-          "description": "Aktivite slug tanımlayıcısı."
+          "description": "Activity slug identifier."
         },
         "state": {
-          "name": "Durum",
-          "description": "İstenen aktivite durumu."
+          "name": "State",
+          "description": "Desired activity state."
         },
         "end_date": {
-          "name": "Bitiş Tarihi",
-          "description": "countdown bitiş tarihi için Unix zaman damgası."
+          "name": "End Date",
+          "description": "Unix timestamp for countdown end date."
         },
         "completion_message": {
-          "name": "Tamamlanma Mesajı",
-          "description": "Aktivite sona erdiğinde gösterilen mesaj."
+          "name": "Completion Message",
+          "description": "Message shown when the activity ends."
         },
         "state_text": {
-          "name": "Durum Metni",
-          "description": "Aktivite durumu olarak gösterilen metin."
+          "name": "State Text",
+          "description": "Text shown as the activity state."
         },
         "subtitle": {
-          "name": "Alt Başlık",
-          "description": "Aktivitede gösterilen alt başlık metni."
+          "name": "Subtitle",
+          "description": "Subtitle text shown on the activity."
         },
         "icon": {
-          "name": "Simge",
-          "description": "SF Symbol veya MDI simge adı (örn. arrow.down.circle.fill, mdi:download)."
+          "name": "Icon",
+          "description": "SF Symbol or MDI icon name (e.g. arrow.down.circle.fill, mdi:download)."
         },
         "progress": {
-          "name": "İlerleme",
-          "description": "0,0 ile 1,0 arasında ilerleme değeri."
+          "name": "Progress",
+          "description": "Progress value between 0.0 and 1.0."
         },
         "warning_threshold": {
-          "name": "Uyarı Eşiği",
-          "description": "Gauge veya timeline değerinin bu değere ulaşması veya aşması durumunda uyarı rengi gösterilir."
+          "name": "Warning Threshold",
+          "description": "Seconds before end_date when the countdown enters warning state. Countdown template only."
         },
         "alarm": {
           "name": "Alarm",
-          "description": "Uyarı eşiği aşıldığında AlarmKit alarmını tetikler. Yalnızca iOS 26+ üzerinde çalışır."
+          "description": "Trigger AlarmKit alarm on countdown expiry (iOS 26+, countdown template only)."
         },
         "snooze_seconds": {
-          "name": "Erteleme Saniyeleri",
-          "description": "How long the iOS Snooze button extends the countdown (60–3600). Defaults to 300 (5 min). Only applies with alarm enabled (iOS 26+)."
+          "name": "Snooze Seconds",
+          "description": "How long the iOS Snooze button extends the countdown (60–3600). Defaults to 300 (5 min). Requires alarm (iOS 26+, countdown template only)."
         },
         "accent_color": {
-          "name": "Vurgu Rengi",
-          "description": "Aktivite için vurgu rengi adı."
+          "name": "Accent Color",
+          "description": "Accent color name for the activity."
         },
         "background_color": {
-          "name": "Arka Plan Rengi",
-          "description": "Live Activity arka plan rengi. #RRGGBB veya adlandırılmış renk. Boş bırakılırsa sistem varsayılanı kullanılır."
+          "name": "Background Color",
+          "description": "Background color for the Live Activity. Hex (#RRGGBB) or named color."
         },
         "text_color": {
-          "name": "Metin Rengi",
-          "description": "Live Activity metin rengi. #RRGGBB veya adlandırılmış renk. Boş bırakılırsa sistem varsayılanı kullanılır."
+          "name": "Text Color",
+          "description": "Text color for the Live Activity. Hex (#RRGGBB) or named color."
         },
         "remaining_time": {
-          "name": "Kalan Süre",
-          "description": "Saniye cinsinden kalan süre."
+          "name": "Remaining Time",
+          "description": "Remaining time in seconds."
         },
         "sound": {
-          "name": "Ses",
-          "description": "Güncelleme için bildirim sesi adı. iOS sistem sesini kullanmak için boş bırakın."
+          "name": "Sound",
+          "description": "Notification sound played on the device for this update."
         },
         "priority": {
-          "name": "Öncelik",
-          "description": "Aktivite önceliği (0 = en düşük, 10 = en yüksek)."
+          "name": "Priority Override",
+          "description": "Per-update priority (0-10). Overrides the activity's configured priority for this push only."
         },
         "duration": {
-          "name": "Süre",
-          "description": "Bitiş Tarihi'ne kur-ve-unut alternatifi: saniye (>=1) veya \"1h30m\" gibi bir süre dizesi. Sunucu başlangıç/bitişi şimdiye yeniden sabitler. Süre veya Bitiş Tarihi'nden birini gönderin — ikisi de ayarlanırsa Süre öncelik kazanır."
+          "name": "Duration",
+          "description": "Set-and-forget alternative to End Date: seconds (>=1) or a duration string like \"1h30m\". The server re-anchors start/end to now. Send either Duration or End Date — Duration wins if both are set."
         },
         "start_date": {
-          "name": "Başlangıç Tarihi",
-          "description": "Geri sayımın başladığı Unix zaman damgası (geçen/kalan çubuğunu sabitler). Sunucu bunu varsayılan olarak şimdiye ayarlar."
-        },
-        "url": {
-          "name": "URL",
-          "description": "Dokunulabilir düğme olarak gösterilen birincil URL. http(s) veya homeassistant:// gibi özel bir şema."
-        },
-        "secondary_url": {
-          "name": "İkincil URL",
-          "description": "İkinci dokunulabilir düğme olarak gösterilen ikincil URL."
+          "name": "Start Date",
+          "description": "Unix timestamp when the countdown began (anchors the elapsed/remaining bar). The server defaults this to now."
         },
         "tap_action": {
-          "name": "Dokunma Eylemi",
-          "description": "Nesne olarak tüm etkinliğin dokunma hedefi: url (gerekli), isteğe bağlı foreground ve http(s) url için method/headers/body üzerinden sessiz bir webhook."
+          "name": "Tap Action",
+          "description": "Whole-activity tap target as an object: url (required), optional foreground, and for an http(s) url a silent webhook via method/headers/body."
         },
         "url_action": {
-          "name": "Birincil Düğme",
-          "description": "Nesne olarak birincil dokunulabilir düğme: url (gerekli), isteğe bağlı title, icon, foreground ve sessiz bir webhook için http(s) method/headers/body."
+          "name": "Primary Button",
+          "description": "Primary tappable button as an object: url (required), optional title, icon, foreground, and http(s) method/headers/body for a silent webhook."
         },
         "secondary_url_action": {
-          "name": "İkincil Düğme",
-          "description": "İkincil dokunulabilir düğme — Birincil Düğme ile aynı nesne yapısı."
+          "name": "Secondary Button",
+          "description": "Secondary tappable button — same object shape as the Primary Button."
         }
       },
       "sections": {
         "labels": {
-          "name": "Etiketler ve simge",
-          "description": "İsteğe bağlı metin etiketleri ve simge. Tüm şablonlar için geçerlidir."
+          "name": "Labels & icon",
+          "description": "Optional text labels and icon. Apply to any template."
         },
         "countdown_options": {
-          "name": "countdown seçenekleri",
-          "description": "Yalnızca countdown şablonu."
+          "name": "Countdown options",
+          "description": "Only used by the countdown template."
         },
         "action_buttons": {
-          "name": "Eylem düğmeleri",
-          "description": "Dokunulabilir URL düğmeleri. Yalnızca steps ve alert şablonları."
+          "name": "Action buttons",
+          "description": "Tappable URLs and rich button / tap actions for the activity."
         },
         "display_options": {
-          "name": "Görünüm, renk ve ses",
-          "description": "İsteğe bağlı biçimlendirme ve güncelleme başına geçersiz kılmalar. Her şablona uygulanır."
+          "name": "Display, color & sound",
+          "description": "Optional styling and per-update overrides. Apply to any template."
         }
       }
     },
     "update_activity_steps": {
-      "name": "Aktiviteyi Güncelle (Steps)",
-      "description": "Bir PushWard Live Activity durumunu ve içeriğini güncelle.",
+      "name": "Update Activity (Steps)",
+      "description": "Update a PushWard Live Activity state and content.",
       "fields": {
         "slug": {
           "name": "Slug",
-          "description": "Aktivite slug tanımlayıcısı."
+          "description": "Activity slug identifier."
         },
         "state": {
-          "name": "Durum",
-          "description": "İstenen aktivite durumu."
-        },
-        "total_steps": {
-          "name": "Toplam steps",
-          "description": "Toplam steps adedi."
+          "name": "State",
+          "description": "Desired activity state."
         },
         "current_step": {
-          "name": "Geçerli Adım",
-          "description": "Geçerli adım numarası."
+          "name": "Current Step",
+          "description": "Current step number."
         },
         "state_text": {
-          "name": "Durum Metni",
-          "description": "Aktivite durumu olarak gösterilen metin."
+          "name": "State Text",
+          "description": "Text shown as the activity state."
         },
         "subtitle": {
-          "name": "Alt Başlık",
-          "description": "Aktivitede gösterilen alt başlık metni."
+          "name": "Subtitle",
+          "description": "Subtitle text shown on the activity."
         },
         "icon": {
-          "name": "Simge",
-          "description": "SF Symbol veya MDI simge adı (örn. arrow.down.circle.fill, mdi:download)."
+          "name": "Icon",
+          "description": "SF Symbol or MDI icon name (e.g. arrow.down.circle.fill, mdi:download)."
         },
         "progress": {
-          "name": "İlerleme",
-          "description": "0,0 ile 1,0 arasında ilerleme değeri."
-        },
-        "step_labels": {
-          "name": "Adım Etiketleri",
-          "description": "Adım etiketlerinin sıralı listesi. Uzunluk total_steps ile eşit olmalıdır. Yalnızca steps şablonu."
-        },
-        "step_rows": {
-          "name": "Adım Satırları",
-          "description": "Her adım için satır yüksekliklerinin (1-10) sıralı listesi. Uzunluk total_steps ile eşit olmalıdır. Yalnızca steps şablonu."
-        },
-        "url": {
-          "name": "URL",
-          "description": "Dokunulabilir düğme olarak gösterilen birincil URL. Yalnızca steps ve alert şablonlarında desteklenir."
-        },
-        "secondary_url": {
-          "name": "İkincil URL",
-          "description": "İkinci dokunulabilir düğme olarak gösterilen ikincil URL. Yalnızca steps ve alert şablonlarında desteklenir."
+          "name": "Progress",
+          "description": "Progress value between 0.0 and 1.0."
         },
         "completion_message": {
-          "name": "Tamamlanma Mesajı",
-          "description": "Aktivite sona erdiğinde gösterilen mesaj."
+          "name": "Completion Message",
+          "description": "Message shown when the activity ends."
         },
         "accent_color": {
-          "name": "Vurgu Rengi",
-          "description": "Aktivite için vurgu rengi adı."
+          "name": "Accent Color",
+          "description": "Accent color name for the activity."
         },
         "background_color": {
-          "name": "Arka Plan Rengi",
-          "description": "Live Activity arka plan rengi. #RRGGBB veya adlandırılmış renk. Boş bırakılırsa sistem varsayılanı kullanılır."
+          "name": "Background Color",
+          "description": "Background color for the Live Activity. Hex (#RRGGBB) or named color."
         },
         "text_color": {
-          "name": "Metin Rengi",
-          "description": "Live Activity metin rengi. #RRGGBB veya adlandırılmış renk. Boş bırakılırsa sistem varsayılanı kullanılır."
+          "name": "Text Color",
+          "description": "Text color for the Live Activity. Hex (#RRGGBB) or named color."
         },
         "remaining_time": {
-          "name": "Kalan Süre",
-          "description": "Saniye cinsinden kalan süre."
+          "name": "Remaining Time",
+          "description": "Remaining time in seconds."
         },
         "sound": {
-          "name": "Ses",
-          "description": "Güncelleme için bildirim sesi adı. iOS sistem sesini kullanmak için boş bırakın."
+          "name": "Sound",
+          "description": "Notification sound played on the device for this update."
         },
         "priority": {
-          "name": "Öncelik",
-          "description": "Aktivite önceliği (0 = en düşük, 10 = en yüksek)."
+          "name": "Priority Override",
+          "description": "Per-update priority (0-10). Overrides the activity's configured priority for this push only."
         },
         "tap_action": {
-          "name": "Dokunma Eylemi",
-          "description": "Nesne olarak tüm etkinliğin dokunma hedefi: url (gerekli), isteğe bağlı foreground ve http(s) url için method/headers/body üzerinden sessiz bir webhook."
+          "name": "Tap Action",
+          "description": "Whole-activity tap target as an object: url (required), optional foreground, and for an http(s) url a silent webhook via method/headers/body."
         },
         "url_action": {
-          "name": "Birincil Düğme",
-          "description": "Nesne olarak birincil dokunulabilir düğme: url (gerekli), isteğe bağlı title, icon, foreground ve sessiz bir webhook için http(s) method/headers/body."
+          "name": "Primary Button",
+          "description": "Primary tappable button as an object: url (required), optional title, icon, foreground, and http(s) method/headers/body for a silent webhook."
         },
         "secondary_url_action": {
-          "name": "İkincil Düğme",
-          "description": "İkincil dokunulabilir düğme — Birincil Düğme ile aynı nesne yapısı."
+          "name": "Secondary Button",
+          "description": "Secondary tappable button — same object shape as the Primary Button."
+        },
+        "steps": {
+          "name": "Steps",
+          "description": "One row per step. Parallel jobs creates stacked lanes; relative step length controls proportional width."
         }
       },
       "sections": {
         "labels": {
-          "name": "Etiketler ve simge",
-          "description": "İsteğe bağlı metin etiketleri ve simge. Tüm şablonlar için geçerlidir."
+          "name": "Labels & icon",
+          "description": "Optional text labels and icon. Apply to any template."
         },
         "steps_options": {
-          "name": "steps seçenekleri",
-          "description": "Yalnızca steps şablonu."
+          "name": "Steps options",
+          "description": "Only used by the steps template."
         },
         "action_buttons": {
-          "name": "Eylem düğmeleri",
-          "description": "Dokunulabilir URL düğmeleri. Yalnızca steps ve alert şablonları."
+          "name": "Action buttons",
+          "description": "Tappable URLs and rich button / tap actions for the activity."
         },
         "display_options": {
-          "name": "Görünüm, renk ve ses",
-          "description": "İsteğe bağlı biçimlendirme ve güncelleme başına geçersiz kılmalar. Her şablona uygulanır."
+          "name": "Display, color & sound",
+          "description": "Optional styling and per-update overrides. Apply to any template."
         }
       }
     },
     "update_activity_alert": {
-      "name": "Aktiviteyi Güncelle (Alert)",
-      "description": "Bir PushWard Live Activity durumunu ve içeriğini güncelle.",
+      "name": "Update Activity (Alert)",
+      "description": "Update a PushWard Live Activity state and content.",
       "fields": {
         "slug": {
           "name": "Slug",
-          "description": "Aktivite slug tanımlayıcısı."
+          "description": "Activity slug identifier."
         },
         "state": {
-          "name": "Durum",
-          "description": "İstenen aktivite durumu."
+          "name": "State",
+          "description": "Desired activity state."
         },
         "severity": {
-          "name": "Önem Derecesi",
-          "description": "alert önem düzeyi."
+          "name": "Severity",
+          "description": "Alert severity level."
+        },
+        "severity_label": {
+          "name": "Severity Label",
+          "description": "Override the Info/Warning/Critical badge text. Alert template only."
         },
         "state_text": {
-          "name": "Durum Metni",
-          "description": "Aktivite durumu olarak gösterilen metin."
+          "name": "State Text",
+          "description": "Text shown as the activity state."
         },
         "subtitle": {
-          "name": "Alt Başlık",
-          "description": "Aktivitede gösterilen alt başlık metni."
+          "name": "Subtitle",
+          "description": "Subtitle text shown on the activity."
         },
         "icon": {
-          "name": "Simge",
-          "description": "SF Symbol veya MDI simge adı (örn. arrow.down.circle.fill, mdi:download)."
+          "name": "Icon",
+          "description": "SF Symbol or MDI icon name (e.g. arrow.down.circle.fill, mdi:download)."
         },
         "progress": {
-          "name": "İlerleme",
-          "description": "0,0 ile 1,0 arasında ilerleme değeri."
+          "name": "Progress",
+          "description": "Progress value between 0.0 and 1.0."
         },
         "fired_at": {
-          "name": "Tetiklenme Zamanı",
-          "description": "Aktivitenin tetiklendiği Unix zaman damgası. Gösterilecek göreceli zaman için kullanılır."
-        },
-        "url": {
-          "name": "URL",
-          "description": "Dokunulabilir düğme olarak gösterilen birincil URL. Yalnızca steps ve alert şablonlarında desteklenir."
-        },
-        "secondary_url": {
-          "name": "İkincil URL",
-          "description": "İkinci dokunulabilir düğme olarak gösterilen ikincil URL. Yalnızca steps ve alert şablonlarında desteklenir."
+          "name": "Fired At",
+          "description": "Unix timestamp when the alert was triggered. Alert template only."
         },
         "completion_message": {
-          "name": "Tamamlanma Mesajı",
-          "description": "Aktivite sona erdiğinde gösterilen mesaj."
+          "name": "Completion Message",
+          "description": "Message shown when the activity ends."
         },
         "accent_color": {
-          "name": "Vurgu Rengi",
-          "description": "Aktivite için vurgu rengi adı."
+          "name": "Accent Color",
+          "description": "Accent color name for the activity."
         },
         "background_color": {
-          "name": "Arka Plan Rengi",
-          "description": "Live Activity arka plan rengi. #RRGGBB veya adlandırılmış renk. Boş bırakılırsa sistem varsayılanı kullanılır."
+          "name": "Background Color",
+          "description": "Background color for the Live Activity. Hex (#RRGGBB) or named color."
         },
         "text_color": {
-          "name": "Metin Rengi",
-          "description": "Live Activity metin rengi. #RRGGBB veya adlandırılmış renk. Boş bırakılırsa sistem varsayılanı kullanılır."
+          "name": "Text Color",
+          "description": "Text color for the Live Activity. Hex (#RRGGBB) or named color."
         },
         "remaining_time": {
-          "name": "Kalan Süre",
-          "description": "Saniye cinsinden kalan süre."
+          "name": "Remaining Time",
+          "description": "Remaining time in seconds."
         },
         "sound": {
-          "name": "Ses",
-          "description": "Güncelleme için bildirim sesi adı. iOS sistem sesini kullanmak için boş bırakın."
+          "name": "Sound",
+          "description": "Notification sound played on the device for this update."
         },
         "priority": {
-          "name": "Öncelik",
-          "description": "Aktivite önceliği (0 = en düşük, 10 = en yüksek)."
+          "name": "Priority Override",
+          "description": "Per-update priority (0-10). Overrides the activity's configured priority for this push only."
         },
         "tap_action": {
-          "name": "Dokunma Eylemi",
-          "description": "Nesne olarak tüm etkinliğin dokunma hedefi: url (gerekli), isteğe bağlı foreground ve http(s) url için method/headers/body üzerinden sessiz bir webhook."
+          "name": "Tap Action",
+          "description": "Whole-activity tap target as an object: url (required), optional foreground, and for an http(s) url a silent webhook via method/headers/body."
         },
         "url_action": {
-          "name": "Birincil Düğme",
-          "description": "Nesne olarak birincil dokunulabilir düğme: url (gerekli), isteğe bağlı title, icon, foreground ve sessiz bir webhook için http(s) method/headers/body."
+          "name": "Primary Button",
+          "description": "Primary tappable button as an object: url (required), optional title, icon, foreground, and http(s) method/headers/body for a silent webhook."
         },
         "secondary_url_action": {
-          "name": "İkincil Düğme",
-          "description": "İkincil dokunulabilir düğme — Birincil Düğme ile aynı nesne yapısı."
+          "name": "Secondary Button",
+          "description": "Secondary tappable button — same object shape as the Primary Button."
         }
       },
       "sections": {
         "labels": {
-          "name": "Etiketler ve simge",
-          "description": "İsteğe bağlı metin etiketleri ve simge. Tüm şablonlar için geçerlidir."
+          "name": "Labels & icon",
+          "description": "Optional text labels and icon. Apply to any template."
         },
         "alert_options": {
-          "name": "alert seçenekleri",
-          "description": "Yalnızca alert şablonu."
+          "name": "Alert options",
+          "description": "Only used by the alert template."
         },
         "action_buttons": {
-          "name": "Eylem düğmeleri",
-          "description": "Dokunulabilir URL düğmeleri. Yalnızca steps ve alert şablonları."
+          "name": "Action buttons",
+          "description": "Tappable URLs and rich button / tap actions for the activity."
         },
         "display_options": {
-          "name": "Görünüm, renk ve ses",
-          "description": "İsteğe bağlı biçimlendirme ve güncelleme başına geçersiz kılmalar. Her şablona uygulanır."
+          "name": "Display, color & sound",
+          "description": "Optional styling and per-update overrides. Apply to any template."
         }
       }
     },
     "update_activity_gauge": {
-      "name": "Aktiviteyi Güncelle (Gauge)",
-      "description": "Bir PushWard Live Activity durumunu ve içeriğini güncelle.",
+      "name": "Update Activity (Gauge)",
+      "description": "Update a PushWard Live Activity state and content.",
       "fields": {
         "slug": {
           "name": "Slug",
-          "description": "Aktivite slug tanımlayıcısı."
+          "description": "Activity slug identifier."
         },
         "state": {
-          "name": "Durum",
-          "description": "İstenen aktivite durumu."
+          "name": "State",
+          "description": "Desired activity state."
         },
         "value": {
-          "name": "Değer",
-          "description": "gauge: sayısal değer. timeline: etiketli değerler nesnesi (örn. Temp=22.5)."
+          "name": "Value",
+          "description": "Gauge: numeric value. Timeline: labeled values object (e.g. Temp=22.5)."
         },
         "min_value": {
-          "name": "Minimum Değer",
-          "description": "Minimum gauge değeri."
+          "name": "Min Value",
+          "description": "Minimum gauge value."
         },
         "max_value": {
-          "name": "Maksimum Değer",
-          "description": "Maksimum gauge değeri."
+          "name": "Max Value",
+          "description": "Maximum gauge value."
         },
         "unit": {
-          "name": "Birim",
-          "description": "Değer için görüntü birimi (örn. °C, %)."
+          "name": "Unit",
+          "description": "Display unit for the value (e.g. °C, %)."
         },
         "state_text": {
-          "name": "Durum Metni",
-          "description": "Aktivite durumu olarak gösterilen metin."
+          "name": "State Text",
+          "description": "Text shown as the activity state."
         },
         "subtitle": {
-          "name": "Alt Başlık",
-          "description": "Aktivitede gösterilen alt başlık metni."
+          "name": "Subtitle",
+          "description": "Subtitle text shown on the activity."
         },
         "icon": {
-          "name": "Simge",
-          "description": "SF Symbol veya MDI simge adı (örn. arrow.down.circle.fill, mdi:download)."
+          "name": "Icon",
+          "description": "SF Symbol or MDI icon name (e.g. arrow.down.circle.fill, mdi:download)."
         },
         "progress": {
-          "name": "İlerleme",
-          "description": "0,0 ile 1,0 arasında ilerleme değeri."
+          "name": "Progress",
+          "description": "Progress value between 0.0 and 1.0."
         },
         "completion_message": {
-          "name": "Tamamlanma Mesajı",
-          "description": "Aktivite sona erdiğinde gösterilen mesaj."
+          "name": "Completion Message",
+          "description": "Message shown when the activity ends."
         },
         "accent_color": {
-          "name": "Vurgu Rengi",
-          "description": "Aktivite için vurgu rengi adı."
+          "name": "Accent Color",
+          "description": "Accent color name for the activity."
         },
         "background_color": {
-          "name": "Arka Plan Rengi",
-          "description": "Live Activity arka plan rengi. #RRGGBB veya adlandırılmış renk. Boş bırakılırsa sistem varsayılanı kullanılır."
+          "name": "Background Color",
+          "description": "Background color for the Live Activity. Hex (#RRGGBB) or named color."
         },
         "text_color": {
-          "name": "Metin Rengi",
-          "description": "Live Activity metin rengi. #RRGGBB veya adlandırılmış renk. Boş bırakılırsa sistem varsayılanı kullanılır."
+          "name": "Text Color",
+          "description": "Text color for the Live Activity. Hex (#RRGGBB) or named color."
         },
         "remaining_time": {
-          "name": "Kalan Süre",
-          "description": "Saniye cinsinden kalan süre."
+          "name": "Remaining Time",
+          "description": "Remaining time in seconds."
         },
         "sound": {
-          "name": "Ses",
-          "description": "Güncelleme için bildirim sesi adı. iOS sistem sesini kullanmak için boş bırakın."
+          "name": "Sound",
+          "description": "Notification sound played on the device for this update."
         },
         "priority": {
-          "name": "Öncelik",
-          "description": "Aktivite önceliği (0 = en düşük, 10 = en yüksek)."
-        },
-        "url": {
-          "name": "URL",
-          "description": "Dokunulabilir düğme olarak gösterilen birincil URL. http(s) veya homeassistant:// gibi özel bir şema."
-        },
-        "secondary_url": {
-          "name": "İkincil URL",
-          "description": "İkinci dokunulabilir düğme olarak gösterilen ikincil URL."
+          "name": "Priority Override",
+          "description": "Per-update priority (0-10). Overrides the activity's configured priority for this push only."
         },
         "tap_action": {
-          "name": "Dokunma Eylemi",
-          "description": "Nesne olarak tüm etkinliğin dokunma hedefi: url (gerekli), isteğe bağlı foreground ve http(s) url için method/headers/body üzerinden sessiz bir webhook."
+          "name": "Tap Action",
+          "description": "Whole-activity tap target as an object: url (required), optional foreground, and for an http(s) url a silent webhook via method/headers/body."
         },
         "url_action": {
-          "name": "Birincil Düğme",
-          "description": "Nesne olarak birincil dokunulabilir düğme: url (gerekli), isteğe bağlı title, icon, foreground ve sessiz bir webhook için http(s) method/headers/body."
+          "name": "Primary Button",
+          "description": "Primary tappable button as an object: url (required), optional title, icon, foreground, and http(s) method/headers/body for a silent webhook."
         },
         "secondary_url_action": {
-          "name": "İkincil Düğme",
-          "description": "İkincil dokunulabilir düğme — Birincil Düğme ile aynı nesne yapısı."
+          "name": "Secondary Button",
+          "description": "Secondary tappable button — same object shape as the Primary Button."
         }
       },
       "sections": {
         "labels": {
-          "name": "Etiketler ve simge",
-          "description": "İsteğe bağlı metin etiketleri ve simge. Tüm şablonlar için geçerlidir."
+          "name": "Labels & icon",
+          "description": "Optional text labels and icon. Apply to any template."
         },
         "action_buttons": {
-          "name": "Eylem düğmeleri",
-          "description": "Dokunulabilir URL düğmeleri. Yalnızca steps ve alert şablonları."
+          "name": "Action buttons",
+          "description": "Tappable URLs and rich button / tap actions for the activity."
         },
         "display_options": {
-          "name": "Görünüm, renk ve ses",
-          "description": "İsteğe bağlı biçimlendirme ve güncelleme başına geçersiz kılmalar. Her şablona uygulanır."
+          "name": "Display, color & sound",
+          "description": "Optional styling and per-update overrides. Apply to any template."
         }
       }
     },
     "update_activity_timeline": {
-      "name": "Aktiviteyi Güncelle (Timeline)",
-      "description": "Bir PushWard Live Activity durumunu ve içeriğini güncelle.",
+      "name": "Update Activity (Timeline)",
+      "description": "Update a PushWard Live Activity state and content.",
       "fields": {
         "slug": {
           "name": "Slug",
-          "description": "Aktivite slug tanımlayıcısı."
+          "description": "Activity slug identifier."
         },
         "state": {
-          "name": "Durum",
-          "description": "İstenen aktivite durumu."
-        },
-        "value": {
-          "name": "Değer",
-          "description": "gauge: sayısal değer. timeline: etiketli değerler nesnesi (örn. Temp=22.5)."
-        },
-        "unit": {
-          "name": "Birim",
-          "description": "Değer için görüntü birimi (örn. °C, %)."
+          "name": "State",
+          "description": "Desired activity state."
         },
         "state_text": {
-          "name": "Durum Metni",
-          "description": "Aktivite durumu olarak gösterilen metin."
+          "name": "State Text",
+          "description": "Text shown as the activity state."
         },
         "subtitle": {
-          "name": "Alt Başlık",
-          "description": "Aktivitede gösterilen alt başlık metni."
+          "name": "Subtitle",
+          "description": "Subtitle text shown on the activity."
         },
         "icon": {
-          "name": "Simge",
-          "description": "SF Symbol veya MDI simge adı (örn. arrow.down.circle.fill, mdi:download)."
+          "name": "Icon",
+          "description": "SF Symbol or MDI icon name (e.g. arrow.down.circle.fill, mdi:download)."
         },
         "progress": {
-          "name": "İlerleme",
-          "description": "0,0 ile 1,0 arasında ilerleme değeri."
+          "name": "Progress",
+          "description": "Progress value between 0.0 and 1.0."
         },
-        "units": {
-          "name": "Birimler",
-          "description": "Timeline serileri için birim etiketleri. Biçim: attribute=Birim. Örnek: temp=°C, humidity=%"
+        "primary_series": {
+          "name": "Primary Series",
+          "description": "Label of the series shown as the headline value and used for the compact high/low range. Leave empty to keep the auto-picked series. Max 32 characters. Timeline template only."
         },
         "scale": {
-          "name": "Ölçek",
-          "description": "Y ekseni ölçek modu (doğrusal veya logaritmik). Yalnızca timeline şablonu."
+          "name": "Scale",
+          "description": "Y-axis scale mode (linear or logarithmic). Timeline template only."
         },
         "decimals": {
-          "name": "Ondalık Basamak",
-          "description": "Değer görüntüsü için ondalık basamak sayısı (0-10). Yalnızca timeline şablonu."
+          "name": "Decimal Places",
+          "description": "Decimal places for value display (0-10). Timeline template only."
         },
         "smoothing": {
-          "name": "Düzgün Çizgiler",
-          "description": "Veri noktaları arasında eğri aradeğerlemeyi etkinleştir. Yalnızca timeline şablonu."
+          "name": "Smooth Lines",
+          "description": "Enable curve interpolation between data points. Timeline template only."
         },
         "thresholds": {
-          "name": "Eşikler",
-          "description": "Kıvılcım çizelgesi üzerindeki yatay referans çizgileri. Yalnızca timeline şablonu."
+          "name": "Thresholds",
+          "description": "Horizontal reference lines on the sparkline. Timeline template only."
         },
         "completion_message": {
-          "name": "Tamamlanma Mesajı",
-          "description": "Aktivite sona erdiğinde gösterilen mesaj."
+          "name": "Completion Message",
+          "description": "Message shown when the activity ends."
         },
         "accent_color": {
-          "name": "Vurgu Rengi",
-          "description": "Aktivite için vurgu rengi adı."
+          "name": "Accent Color",
+          "description": "Accent color name for the activity."
         },
         "background_color": {
-          "name": "Arka Plan Rengi",
-          "description": "Live Activity arka plan rengi. #RRGGBB veya adlandırılmış renk. Boş bırakılırsa sistem varsayılanı kullanılır."
+          "name": "Background Color",
+          "description": "Background color for the Live Activity. Hex (#RRGGBB) or named color."
         },
         "text_color": {
-          "name": "Metin Rengi",
-          "description": "Live Activity metin rengi. #RRGGBB veya adlandırılmış renk. Boş bırakılırsa sistem varsayılanı kullanılır."
+          "name": "Text Color",
+          "description": "Text color for the Live Activity. Hex (#RRGGBB) or named color."
         },
         "remaining_time": {
-          "name": "Kalan Süre",
-          "description": "Saniye cinsinden kalan süre."
+          "name": "Remaining Time",
+          "description": "Remaining time in seconds."
         },
         "sound": {
-          "name": "Ses",
-          "description": "Güncelleme için bildirim sesi adı. iOS sistem sesini kullanmak için boş bırakın."
+          "name": "Sound",
+          "description": "Notification sound played on the device for this update."
         },
         "priority": {
-          "name": "Öncelik",
-          "description": "Aktivite önceliği (0 = en düşük, 10 = en yüksek)."
+          "name": "Priority Override",
+          "description": "Per-update priority (0-10). Overrides the activity's configured priority for this push only."
         },
         "history": {
-          "name": "Geçmiş (başlangıç)",
-          "description": "İlk sparkline başlangıç verisi: seri adından (timestamp, value) listesine eşleyen bir nesne. Yalnızca başlangıç — ilk güncellemeden sonra sunucu devralır."
-        },
-        "url": {
-          "name": "URL",
-          "description": "Dokunulabilir düğme olarak gösterilen birincil URL. http(s) veya homeassistant:// gibi özel bir şema."
-        },
-        "secondary_url": {
-          "name": "İkincil URL",
-          "description": "İkinci dokunulabilir düğme olarak gösterilen ikincil URL."
+          "name": "History (seed)",
+          "description": "Initial sparkline seed: an object of series name to a list of (timestamp, value). Seed-only — the server takes over after the first update."
         },
         "tap_action": {
-          "name": "Dokunma Eylemi",
-          "description": "Nesne olarak tüm etkinliğin dokunma hedefi: url (gerekli), isteğe bağlı foreground ve http(s) url için method/headers/body üzerinden sessiz bir webhook."
+          "name": "Tap Action",
+          "description": "Whole-activity tap target as an object: url (required), optional foreground, and for an http(s) url a silent webhook via method/headers/body."
         },
         "url_action": {
-          "name": "Birincil Düğme",
-          "description": "Nesne olarak birincil dokunulabilir düğme: url (gerekli), isteğe bağlı title, icon, foreground ve sessiz bir webhook için http(s) method/headers/body."
+          "name": "Primary Button",
+          "description": "Primary tappable button as an object: url (required), optional title, icon, foreground, and http(s) method/headers/body for a silent webhook."
         },
         "secondary_url_action": {
-          "name": "İkincil Düğme",
-          "description": "İkincil dokunulabilir düğme — Birincil Düğme ile aynı nesne yapısı."
+          "name": "Secondary Button",
+          "description": "Secondary tappable button — same object shape as the Primary Button."
+        },
+        "series": {
+          "name": "Series",
+          "description": "Add 1-10 named current values, each with an optional display unit."
         }
       },
       "sections": {
         "labels": {
-          "name": "Etiketler ve simge",
-          "description": "İsteğe bağlı metin etiketleri ve simge. Tüm şablonlar için geçerlidir."
+          "name": "Labels & icon",
+          "description": "Optional text labels and icon. Apply to any template."
         },
         "gauge_timeline_options": {
-          "name": "gauge ve timeline seçenekleri",
-          "description": "Yalnızca gauge ve timeline şablonları."
+          "name": "Gauge & Timeline options",
+          "description": "Only used by the gauge and timeline templates."
         },
         "action_buttons": {
-          "name": "Eylem düğmeleri",
-          "description": "Dokunulabilir URL düğmeleri. Yalnızca steps ve alert şablonları."
+          "name": "Action buttons",
+          "description": "Tappable URLs and rich button / tap actions for the activity."
         },
         "display_options": {
-          "name": "Görünüm, renk ve ses",
-          "description": "İsteğe bağlı biçimlendirme ve güncelleme başına geçersiz kılmalar. Her şablona uygulanır."
+          "name": "Display, color & sound",
+          "description": "Optional styling and per-update overrides. Apply to any template."
+        }
+      }
+    },
+    "update_activity_board": {
+      "name": "Update Activity (Board)",
+      "description": "Update a PushWard board Live Activity (1–4 tiles).",
+      "fields": {
+        "slug": {
+          "name": "Slug",
+          "description": "Activity slug identifier."
+        },
+        "state": {
+          "name": "State",
+          "description": "Desired activity state."
+        },
+        "tiles": {
+          "name": "Tiles",
+          "description": "List of 1–4 tiles. Each: label (required, ≤32), value (required string, ≤16), and optional unit (≤8), icon (SF Symbol or mdi:), color (named or hex), trend (up/down/flat), url_action object."
+        },
+        "state_text": {
+          "name": "State Text",
+          "description": "Text shown as the activity state."
+        },
+        "subtitle": {
+          "name": "Subtitle",
+          "description": "Subtitle text shown on the activity."
+        },
+        "icon": {
+          "name": "Icon",
+          "description": "SF Symbol or MDI icon name (e.g. square.grid.2x2.fill, mdi:view-dashboard)."
+        },
+        "completion_message": {
+          "name": "Completion Message",
+          "description": "Message shown when the activity ends."
+        },
+        "accent_color": {
+          "name": "Accent Color",
+          "description": "Accent color name for the activity."
+        },
+        "background_color": {
+          "name": "Background Color",
+          "description": "Background color for the Live Activity. Hex (#RRGGBB) or named color."
+        },
+        "text_color": {
+          "name": "Text Color",
+          "description": "Text color for the Live Activity. Hex (#RRGGBB) or named color."
+        },
+        "tap_action": {
+          "name": "Tap Action",
+          "description": "Whole-activity tap target as an object: url (required), optional foreground, and for an http(s) url a silent webhook via method/headers/body. (Per-tile taps go in each tile's url_action.)"
+        },
+        "sound": {
+          "name": "Sound",
+          "description": "Notification sound played on the device for this update."
+        },
+        "priority": {
+          "name": "Priority Override",
+          "description": "Per-update priority (0-10). Overrides the activity's configured priority for this push only."
+        }
+      }
+    },
+    "update_activity_log": {
+      "name": "Update Activity (Log)",
+      "description": "Update a PushWard log Live Activity (1–20 newest-first lines).",
+      "fields": {
+        "slug": {
+          "name": "Slug",
+          "description": "Activity slug identifier."
+        },
+        "state": {
+          "name": "State",
+          "description": "Desired activity state."
+        },
+        "lines": {
+          "name": "Lines",
+          "description": "List of 1–20 newest-first log lines. Each: text (required, ≤512), and optional at (unix timestamp) and level (info/warn/error)."
+        },
+        "state_text": {
+          "name": "State Text",
+          "description": "Text shown as the activity state."
+        },
+        "subtitle": {
+          "name": "Subtitle",
+          "description": "Subtitle text shown on the activity."
+        },
+        "icon": {
+          "name": "Icon",
+          "description": "SF Symbol or MDI icon name (e.g. list.bullet.rectangle, mdi:format-list-bulleted)."
+        },
+        "completion_message": {
+          "name": "Completion Message",
+          "description": "Message shown when the activity ends."
+        },
+        "accent_color": {
+          "name": "Accent Color",
+          "description": "Accent color name for the activity."
+        },
+        "background_color": {
+          "name": "Background Color",
+          "description": "Background color for the Live Activity. Hex (#RRGGBB) or named color."
+        },
+        "text_color": {
+          "name": "Text Color",
+          "description": "Text color for the Live Activity. Hex (#RRGGBB) or named color."
+        },
+        "tap_action": {
+          "name": "Tap Action",
+          "description": "Whole-activity tap target as an object: url (required), optional foreground, and for an http(s) url a silent webhook via method/headers/body."
+        },
+        "sound": {
+          "name": "Sound",
+          "description": "Notification sound played on the device for this update."
+        },
+        "priority": {
+          "name": "Priority Override",
+          "description": "Per-update priority (0-10). Overrides the activity's configured priority for this push only."
         }
       }
     },
     "create_activity": {
-      "name": "Aktivite Oluştur",
-      "description": "Yeni bir PushWard Live Activity oluştur.",
+      "name": "Create Activity",
+      "description": "Create a new PushWard Live Activity.",
       "fields": {
         "slug": {
           "name": "Slug",
-          "description": "Benzersiz aktivite slug tanımlayıcısı."
+          "description": "Unique activity slug identifier."
         },
         "name": {
-          "name": "Ad",
-          "description": "Aktivite için görüntü adı."
+          "name": "Name",
+          "description": "Display name for the activity."
         },
         "priority": {
-          "name": "Öncelik",
-          "description": "Aktivite önceliği (0 = en düşük, 10 = en yüksek)."
+          "name": "Priority",
+          "description": "Activity priority (0 = lowest, 10 = highest)."
         },
         "ended_ttl": {
-          "name": "Bitiş TTL",
-          "description": "Aktivite sona erdikten sonra tutulacağı saniye sayısı."
+          "name": "Ended TTL",
+          "description": "Seconds to keep the activity after it ends."
         },
         "stale_ttl": {
-          "name": "Bayatlama TTL",
-          "description": "Aktivitenin bayatlamış sayılmasından önceki saniye sayısı."
+          "name": "Stale TTL",
+          "description": "Seconds before the activity is considered stale."
         }
       }
     },
     "end_activity": {
-      "name": "Aktiviteyi Sonlandır",
-      "description": "Bir PushWard Live Activity'yi sonlandır.",
+      "name": "End Activity",
+      "description": "End a PushWard Live Activity.",
       "fields": {
         "slug": {
           "name": "Slug",
-          "description": "Sonlandırılacak aktivite slug tanımlayıcısı."
+          "description": "Activity slug identifier to end."
         },
         "completion_message": {
-          "name": "Tamamlanma Mesajı",
-          "description": "Aktivite sona erdiğinde gösterilen isteğe bağlı mesaj."
+          "name": "Completion Message",
+          "description": "Optional message shown when the activity ends."
         }
       }
     },
     "delete_activity": {
-      "name": "Aktiviteyi Sil",
-      "description": "Bir PushWard Live Activity'yi sil.",
+      "name": "Delete Activity",
+      "description": "Delete a PushWard Live Activity.",
       "fields": {
         "slug": {
           "name": "Slug",
-          "description": "Silinecek aktivite slug tanımlayıcısı."
-        }
-      }
-    },
-    "send_notification": {
-      "name": "Bildirim Gönder",
-      "description": "PushWard aracılığıyla anlık bildirim gönder.",
-      "fields": {
-        "title": {
-          "name": "Başlık",
-          "description": "Bildirim başlığı."
-        },
-        "body": {
-          "name": "Gövde",
-          "description": "Bildirim gövde metni."
-        },
-        "subtitle": {
-          "name": "Alt Başlık",
-          "description": "Başlığın altında gösterilen isteğe bağlı alt başlık."
-        },
-        "level": {
-          "name": "Düzey",
-          "description": "iOS kesme düzeyi. Bildirimin nasıl iletileceğini kontrol eder."
-        },
-        "thread_id": {
-          "name": "Konu Kimliği",
-          "description": "Bildirimleri Bildirim Merkezi'nde gruplandırır."
-        },
-        "collapse_id": {
-          "name": "Daraltma Kimliği",
-          "description": "APNs tekilleştirme anahtarı. Aynı anahtara sahip önceki bildirimin yerini alır."
-        },
-        "source": {
-          "name": "Kaynak",
-          "description": "PushWard gelen kutusunda gruplandırma için kaynak tanımlayıcısı."
-        },
-        "source_display_name": {
-          "name": "Kaynak Görüntü Adı",
-          "description": "PushWard gelen kutusunda gösterilen okunabilir kaynak adı."
-        },
-        "activity_slug": {
-          "name": "Aktivite Slug",
-          "description": "Bu bildirimi mevcut bir Live Activity ile ilişkilendir."
-        },
-        "push": {
-          "name": "Gönder",
-          "description": "Tüm cihazlara APNs push alert olarak gönder. False olduğunda bildirim yalnızca gelen kutusunda saklanır."
-        },
-        "url": {
-          "name": "URL",
-          "description": "Bildirime dokunulduğunda açılacak URL. HTTPS gereklidir."
-        },
-        "icon_url": {
-          "name": "Simge URL'si",
-          "description": "Bildirim simgesi için URL. HTTPS gereklidir."
-        },
-        "metadata": {
-          "name": "Meta Veri",
-          "description": "Bildirimle gönderilecek ek anahtar-değer çifti meta verisi."
-        },
-        "media": {
-          "name": "Medya",
-          "description": "`url` (HTTPS) ve `type` (image, video veya audio) içeren bir nesne olarak medya eki."
-        },
-        "actions": {
-          "name": "Eylemler",
-          "description": "Eylem düğmelerinin listesi. Her eylem; id, title, isteğe bağlı url, foreground, destructive, authentication_required ve icon içeren bir nesnedir. Bir http(s) url için method (GET/POST/PUT/PATCH/DELETE/HEAD), headers ve body ile sessiz bir webhook da gönderebilirsiniz."
+          "description": "Activity slug identifier to delete."
         }
       }
     },
     "widget_refresh": {
-      "name": "Widget'ı Yenile",
-      "description": "İzlenen bir PushWard widget'ını zorla yeniler. Bellekteki fark önbelleğini atlar, böylece değer değişmemiş olsa bile widget yeniden oluşturulur ve iOS'a gönderilir.",
+      "name": "Refresh Widget",
+      "description": "Force-refresh a tracked PushWard widget. Bypasses the in-memory diff cache so the widget is re-rendered and pushed to iOS even when the value hasn't changed.",
       "fields": {
         "slug": {
           "name": "Slug",
-          "description": "Widget slug tanımlayıcısı. slug veya entity_id'den biri sağlanmalıdır."
+          "description": "Widget slug identifier. Either slug or entity_id must be provided."
         },
         "entity_id": {
-          "name": "Varlık",
-          "description": "Widget'a bağlı HA varlığı. slug veya entity_id'den biri sağlanmalıdır."
+          "name": "Entity",
+          "description": "HA entity bound to the widget. Either slug or entity_id must be provided."
+        }
+      }
+    },
+    "send_notification": {
+      "name": "Send Notification",
+      "description": "Send a push notification via PushWard.",
+      "fields": {
+        "title": {
+          "name": "Title",
+          "description": "Notification title."
+        },
+        "body": {
+          "name": "Body",
+          "description": "Notification body text."
+        },
+        "subtitle": {
+          "name": "Subtitle",
+          "description": "Optional subtitle shown below the title."
+        },
+        "level": {
+          "name": "Level",
+          "description": "iOS interruption level. Controls how the notification is delivered."
+        },
+        "volume": {
+          "name": "Volume",
+          "description": "Sound volume for critical alerts (0.0-1.0). Only used when level is critical."
+        },
+        "thread_id": {
+          "name": "Thread ID",
+          "description": "Groups notifications together in Notification Center."
+        },
+        "collapse_id": {
+          "name": "Collapse ID",
+          "description": "APNs deduplication key. Replaces previous notification with the same key."
+        },
+        "source": {
+          "name": "Source",
+          "description": "Source identifier for grouping in the PushWard inbox."
+        },
+        "source_display_name": {
+          "name": "Source Display Name",
+          "description": "Human-readable source name shown in the PushWard inbox."
+        },
+        "activity_slug": {
+          "name": "Activity Slug",
+          "description": "Link this notification to an existing Live Activity."
+        },
+        "push": {
+          "name": "Push",
+          "description": "Send as an APNs push alert to all devices. When false, the notification is stored in the inbox only."
+        },
+        "url": {
+          "name": "URL",
+          "description": "URL to open when the notification is tapped."
+        },
+        "media": {
+          "name": "Media",
+          "description": "Media attachment as an object with `url` (HTTPS) and `type` (image, video, or audio)."
+        },
+        "icon_url": {
+          "name": "Icon URL",
+          "description": "HTTPS URL of a custom per-notification icon."
+        },
+        "metadata": {
+          "name": "Metadata",
+          "description": "Key-value pairs of additional metadata attached to the notification."
+        },
+        "actions": {
+          "name": "Actions",
+          "description": "List of action buttons. Each action is an object with id, title, optional url, foreground, destructive, authentication_required, and icon. For an http(s) url you can also send a silent webhook with method (GET/POST/PUT/PATCH/DELETE/HEAD), headers, and body."
         }
       }
     },
     "send_email": {
-      "name": "E-posta Gönder",
-      "description": "PushWard üzerinden işlemsel bir e-posta gönderin. Bir metin gövdesi, bir HTML gövdesi veya her ikisini sağlayın. Entegrasyon anahtarının \"emails\" yetkisine sahip olması gerekir.",
+      "name": "Send Email",
+      "description": "Send a transactional email via PushWard. Provide a text body, an HTML body, or both. The integration key needs the \"emails\" capability.",
       "fields": {
         "to": {
-          "name": "Alıcı",
-          "description": "Alıcı e-posta adresi. PushWard iOS uygulamasında daha önce eklediğiniz ve onayladığınız bir adres olmalıdır — doğrulanmamış adresler reddedilir."
+          "name": "To",
+          "description": "Recipient email address. Must be an address you have already added and confirmed in the PushWard iOS app — unverified addresses are rejected."
         },
         "subject": {
-          "name": "Konu",
-          "description": "E-posta konu satırı."
+          "name": "Subject",
+          "description": "Email subject line."
         },
         "body": {
-          "name": "Gövde",
-          "description": "Düz metin e-posta gövdesi. Bunu, bir HTML gövdesini veya her ikisini sağlayın."
+          "name": "Body",
+          "description": "Plain-text email body. Provide this, an HTML body, or both."
         },
         "html_body": {
-          "name": "HTML Gövde",
-          "description": "HTML e-posta gövdesi. Bunu, bir düz metin gövdesini veya her ikisini sağlayın."
+          "name": "HTML Body",
+          "description": "HTML email body. Provide this, a plain-text body, or both."
         }
       }
     },
     "delete_widget": {
-      "name": "Widget'ı Sil",
-      "description": "Bir PushWard widget'ını sunucudan siler. İzlenen widget yapılandırma girdisi bu slug'ı hâlâ yönetiyorsa, widget bir sonraki yeniden başlatma/eşitlemede yeniden oluşturulur — kalıcı olarak silmek için yapılandırma girdisini kaldırın. slug veya entity_id'den birini sağlayın.",
+      "name": "Delete Widget",
+      "description": "Delete a PushWard widget from the server. If a tracked-widget config entry still drives this slug, the widget is recreated on the next restart/sync — remove the config entry to delete it permanently. Provide either slug or entity_id.",
       "fields": {
         "slug": {
           "name": "Slug",
-          "description": "Widget slug tanımlayıcısı. slug veya entity_id'den biri sağlanmalıdır."
+          "description": "Widget slug identifier. Either slug or entity_id must be provided."
         },
         "entity_id": {
-          "name": "Varlık",
-          "description": "Widget'a bağlı HA varlığı. Yapılandırmaya göre eşleşen widget'a çözümlenir. slug veya entity_id'den biri sağlanmalıdır."
+          "name": "Entity",
+          "description": "HA entity bound to the widget. Resolved to the matching widget by config. Either slug or entity_id must be provided."
         }
       }
+    },
+    "dispatch": {
+      "name": "Send via PushWard",
+      "description": "Send any combination of a Live Activity, notification, widget, and email in one Home Assistant action.",
+      "sections": {
+        "activity_channel": {
+          "name": "Live Activity",
+          "description": "Upsert and update one Live Activity."
+        },
+        "notification_channel": {
+          "name": "Notification",
+          "description": "Optionally send an inbox/APNs notification in the same action."
+        },
+        "widget_channel": {
+          "name": "Widget",
+          "description": "Optionally create or replace a WidgetKit widget."
+        },
+        "email_channel": {
+          "name": "Email",
+          "description": "Optionally send an email to a verified recipient."
+        }
+      }
+    }
+  },
+  "exceptions": {
+    "widget_not_found": {
+      "message": "No PushWard widget matches slug={slug} entity_id={entity_id}."
     }
   },
   "config": {
     "step": {
       "user": {
-        "title": "PushWard'a Bağlan",
+        "title": "Connect to PushWard",
+        "description": "Enter your PushWard integration key to get started. Get the PushWard iOS app from the App Store: {app_store_url}",
         "data": {
-          "integration_key": "Entegrasyon Anahtarı"
+          "integration_key": "Integration Key"
         },
-        "description": "Başlamak için PushWard entegrasyon anahtarınızı girin. PushWard iOS uygulamasını App Store'dan edinin: {app_store_url}",
         "data_description": {
-          "integration_key": "PushWard iOS uygulamasını açın (App Store: {app_store_url}) → Ayarlar → Entegrasyon Anahtarları. Varsayılan anahtarı yapıştırabilir veya 'ha-*' kapsamıyla yeni bir tane oluşturabilirsiniz."
+          "integration_key": "Open the PushWard iOS app (App Store: {app_store_url}) → Settings → Integration Keys. You can paste the default key, or create a new one with scope 'ha-*'."
         }
       },
       "reconfigure": {
-        "title": "PushWard'ı Yeniden Yapılandır",
-        "description": "PushWard entegrasyon anahtarınızı güncelleyin.",
+        "title": "Reconfigure PushWard",
+        "description": "Update your PushWard integration key.",
         "data": {
-          "integration_key": "Entegrasyon Anahtarı"
+          "integration_key": "Integration Key"
         },
         "data_description": {
-          "integration_key": "PushWard iOS uygulamasında Ayarlar → Entegrasyon Anahtarları bölümünden 'ha-*' kapsamıyla oluşturun."
+          "integration_key": "Create one in the PushWard iOS app under Settings → Integration Keys with scope 'ha-*'."
         }
       },
       "reauth_confirm": {
-        "title": "Yeniden Kimlik Doğrulama",
-        "description": "PushWard entegrasyon anahtarı geçersiz. Lütfen yeni bir tane girin.",
+        "title": "Reauthenticate",
+        "description": "The PushWard integration key is invalid. Please provide a new one.",
         "data": {
-          "integration_key": "Entegrasyon Anahtarı"
+          "integration_key": "Integration Key"
         },
         "data_description": {
-          "integration_key": "PushWard iOS uygulamasında Ayarlar → Entegrasyon Anahtarları bölümünden 'ha-*' kapsamıyla oluşturun."
+          "integration_key": "Create one in the PushWard iOS app under Settings → Integration Keys with scope 'ha-*'."
         }
       }
     },
     "error": {
-      "cannot_connect": "PushWard sunucusuna bağlanılamadı.",
-      "invalid_auth": "Geçersiz entegrasyon anahtarı.",
-      "invalid_url": "URL, http:// veya https:// şeması kullanmalıdır.",
-      "unknown": "Beklenmeyen bir hata oluştu."
+      "cannot_connect": "Failed to connect to PushWard server.",
+      "invalid_auth": "Invalid integration key.",
+      "invalid_url": "URL must use http:// or https:// scheme.",
+      "unknown": "An unexpected error occurred."
     },
     "abort": {
-      "already_configured": "PushWard zaten yapılandırılmış.",
-      "reconfigure_successful": "PushWard yapılandırması güncellendi.",
-      "reauth_successful": "Yeniden kimlik doğrulama başarılı."
+      "already_configured": "PushWard is already configured.",
+      "reconfigure_successful": "PushWard configuration updated.",
+      "reauth_successful": "Reauthentication successful."
     }
   },
   "config_subentries": {
     "tracked_entity": {
-      "entry_type": "İzlenen Varlık",
+      "entry_type": "Tracked Entity",
       "initiate_flow": {
-        "user": "İzlenen varlık ekle"
+        "user": "Add tracked entity"
       },
       "step": {
         "user": {
-          "title": "PushWard'a Varlık Ekle",
+          "title": "Add tracked Live Activity",
           "data": {
-            "entity_id": "Varlık",
-            "template": "Şablon"
+            "entity_id": "Entity to track",
+            "template": "Live Activity layout"
           },
           "data_description": {
-            "template": "Aktivite düzen şablonu. 'generic' çoğu varlık için uygundur."
+            "entity_id": "The Home Assistant entity whose state starts, updates, and ends this Live Activity.",
+            "template": "Choose the visual layout. Only settings supported by that layout appear on the next page."
           }
         },
         "details": {
           "title": "Configure {template} activity",
           "data": {
-            "start_states": "Başlangıç Durumları",
-            "end_states": "Bitiş Durumları",
-            "progress_attribute": "İlerleme Niteliği",
-            "remaining_time_attribute": "Kalan Süre Niteliği",
-            "total_steps": "Toplam steps",
-            "current_step_attribute": "Geçerli Adım Niteliği",
-            "severity": "Önem Derecesi",
-            "value_attribute": "Değer Niteliği",
-            "min_value": "Minimum Değer",
-            "max_value": "Maksimum Değer",
-            "unit": "Birim",
-            "series": "Seri",
-            "scale": "Ölçek",
-            "decimals": "Ondalık Basamak",
-            "smoothing": "Düzgün Çizgiler",
-            "thresholds": "Eşikler",
-            "history_period": "Geçmiş Dönemi",
-            "slug": "Aktivite Slug",
-            "activity_name": "Aktivite Adı",
-            "icon": "Simge",
-            "icon_attribute": "Simge Niteliği",
-            "priority": "Öncelik (0-10)",
-            "update_interval": "Min. Güncelleme Aralığı (saniye)",
-            "subtitle_attribute": "Alt Başlık Niteliği",
-            "state_labels": "Durum Etiketleri",
-            "completion_message": "Tamamlanma Mesajı",
-            "accent_color": "Vurgu Rengi",
-            "accent_color_attribute": "Vurgu Rengi Niteliği",
-            "url": "URL",
-            "secondary_url": "İkincil URL",
-            "ended_ttl": "Bitişten Sonra Otomatik Sil (saniye)",
-            "stale_ttl": "Hareketsizlikte Otomatik Sonlandır (saniye)",
-            "sound": "Ses",
-            "background_color": "Arka Plan Rengi",
-            "background_color_attribute": "Arka Plan Rengi Niteliği",
-            "text_color": "Metin Rengi",
-            "text_color_attribute": "Metin Rengi Niteliği",
-            "warning_threshold": "Uyarı Eşiği",
-            "alarm": "Alarm",
-            "step_labels": "Adım Etiketleri",
-            "step_rows": "Adım Satırları",
-            "fired_at_attribute": "Tetiklenme Zamanı Niteliği",
-            "units": "Birimler",
-            "progress_entity": "İlerleme Varlığı",
-            "remaining_time_entity": "Kalan Süre Varlığı",
-            "current_step_entity": "Geçerli Adım Varlığı",
-            "value_entity": "Değer Varlığı",
-            "subtitle_entity": "Alt Başlık Varlığı",
-            "tap_action_url": "Dokunma Eylemi URL'si",
-            "tap_action_foreground": "Dokunma Eylemi URL'sini Aç",
-            "url_foreground": "Birincil Düğme URL'sini Aç",
-            "url_title": "Birincil Düğme Başlığı",
-            "secondary_url_foreground": "İkincil Düğme URL'sini Aç",
-            "secondary_url_title": "İkincil Düğme Başlığı",
-            "snooze_seconds": "Erteleme Saniyeleri (iOS 26+)",
-            "fired_at_entity": "Tetiklenme Zamanı Varlığı",
-            "log_columns": "Günlük Sütunları",
+            "start_states": "Start States",
+            "end_states": "End States",
+            "progress_entity": "Progress Entity",
+            "progress_attribute": "Progress Attribute",
+            "remaining_time_entity": "Remaining Time Entity",
+            "remaining_time_attribute": "Remaining Time Attribute",
+            "live_progress": "Live Progress ETA",
+            "current_step_entity": "Current Step Entity",
+            "current_step_attribute": "Current Step Attribute",
+            "severity": "Severity",
+            "severity_label": "Severity Label",
+            "value_entity": "Value Entity",
+            "value_attribute": "Value Attribute",
+            "min_value": "Minimum Value",
+            "max_value": "Maximum Value",
+            "unit": "Unit",
+            "series": "Series",
+            "series_entities": "Series Entities",
+            "primary_series": "Primary Series",
+            "scale": "Scale",
+            "decimals": "Decimal Places",
+            "smoothing": "Smooth Lines",
+            "thresholds": "Thresholds",
+            "history_period": "Back-History Period",
+            "slug": "Activity Slug",
+            "activity_name": "Activity Name",
+            "icon": "Icon",
+            "icon_attribute": "Icon Attribute",
+            "priority": "Priority (0-10)",
+            "update_interval": "Min. Update Interval (seconds)",
+            "subtitle_entity": "Subtitle Entity",
+            "subtitle_attribute": "Subtitle Attribute",
+            "state_labels": "State Labels",
+            "completion_message": "Completion Message",
+            "accent_color": "Accent Color",
+            "accent_color_attribute": "Accent Color Attribute",
+            "tap_action_url": "Tap Action URL",
+            "tap_action_foreground": "Open Tap Action URL",
+            "url": "Primary Button URL",
+            "url_foreground": "Open Primary Button URL",
+            "url_title": "Primary Button Title",
+            "secondary_url": "Secondary Button URL",
+            "secondary_url_foreground": "Open Secondary Button URL",
+            "secondary_url_title": "Secondary Button Title",
+            "ended_ttl": "Auto-Delete After End (seconds)",
+            "stale_ttl": "Auto-End After Idle (seconds)",
+            "sound": "Sound",
+            "background_color": "Background Color",
+            "background_color_attribute": "Background Color Attribute",
+            "text_color": "Text Color",
+            "text_color_attribute": "Text Color Attribute",
+            "warning_threshold": "Warning Threshold (seconds)",
+            "alarm": "Alarm (iOS 26+)",
+            "snooze_seconds": "Snooze Seconds (iOS 26+)",
+            "fired_at_entity": "Fired At Entity",
+            "fired_at_attribute": "Fired At Attribute",
+            "tiles": "Board Tiles",
+            "log_columns": "Log Columns",
+            "log_level_attribute": "Log Level Attribute",
             "step_configuration": "Steps"
           },
           "data_description": {
-            "start_states": "Live Activity'yi başlatan varlık durumları. Listeden seçin veya özel değer girin.",
-            "end_states": "Live Activity'yi sonlandıran varlık durumları. Listeden seçin veya özel değer girin.",
-            "progress_attribute": "0–100 arasında ilerleme değeri tutan varlık niteliği. Örnek: percentage",
-            "remaining_time_attribute": "Saniye cinsinden kalan süreyi tutan varlık niteliği. Örnek: remaining",
-            "total_steps": "Toplam steps adedi.",
-            "current_step_attribute": "Geçerli adımı tamsayı olarak tutan varlık niteliği.",
-            "severity": "alert önem düzeyi.",
-            "value_attribute": "Geçerli gauge değerini sayı olarak tutan varlık niteliği. Varlığın durumunu kullanmak için boş bırakın.",
-            "min_value": "gauge aralığı için minimum değer.",
-            "max_value": "gauge aralığı için maksimum değer.",
-            "unit": "Değerin yanında gösterilen birim (örn. °C, %, kW). En fazla 32 karakter.",
-            "series": "Varlık niteliklerini adlandırılmış serilere eşleyin. Biçim: attribute=Etiket, attribute2=Etiket2. Tek seri olarak varlığın durumunu kullanmak için boş bırakın.",
-            "scale": "Kıvılcım çizelgesi için Y ekseni ölçek modu.",
-            "decimals": "Değerler için gösterilen ondalık basamak sayısı (0–10).",
-            "smoothing": "Daha düzgün bir kıvılcım çizelgesi için veri noktaları arasında eğri aradeğerlemeyi etkinleştir.",
-            "thresholds": "Kıvılcım çizelgesi üzerindeki yatay referans çizgileri. Biçim: değer:renk:etiket. Örnek: 25:red:Sıcak, 18:blue:Soğuk. En fazla 5.",
-            "history_period": "Home Assistant'ın kaydedicisinden kıvılcım çizelgesini başlatmak için geriye dönük veri dakikası. Geçmiş olmadan başlamak için 0 girin.",
-            "slug": "Bu aktivite için benzersiz tanımlayıcı. Varlık kimliğinden otomatik oluşturmak için boş bırakın. Örnek: ha-living-room-lamp",
-            "activity_name": "iPhone Live Activity üzerinde gösterilen görüntü adı. Varsayılan olarak varlığın kolay adını kullanır.",
-            "icon": "Simgeyi geçersiz kıl. Varlığın yerel simgesini kullanmak için boş bırakın (örn. mdi:thermometer). SF Symbols da desteklenir (örn. lamp.desk.fill).",
-            "icon_attribute": "Dinamik simge için varlık niteliği. Ayarlandığında statik simgeyi ve varlık simgesini geçersiz kılar.",
-            "priority": "Cihaz sınırına ulaşıldığında daha yüksek öncelikli aktiviteler daha uzun süre tutulur (0 = en düşük, 10 = en yüksek).",
-            "update_interval": "Güncellemeler arasındaki minimum saniye. Hızlı durum değişiklikleri kısıtlanır.",
-            "subtitle_attribute": "Alt başlık olarak gösterilecek varlık niteliği. Varlığın kolay adını kullanmak için boş bırakın.",
-            "state_labels": "Durumlar için özel görüntü metni. Biçim: durum=Etiket, durum2=Etiket 2. Örnek: heating=Isınıyor, idle=Beklemede",
-            "completion_message": "Aktivite sona erdiğinde gösterilen metin. 'Tamamlandı' için boş bırakın. Örnek: Yıkama Bitti",
-            "accent_color": "Live Activity için vurgu rengi. Varsayılan mavi için boş bırakın.",
-            "accent_color_attribute": "Dinamik vurgu rengi için varlık niteliği. Statik rengi geçersiz kılar. RGB, HS, XY, Kelvin, adlandırılmış renkler ve onaltılık desteklenir.",
-            "url": "Live Activity'ye dokunulduğunda açılan bağlantı. http:// veya https:// ile başlamalıdır. Yalnızca steps ve alert şablonları.",
-            "secondary_url": "Live Activity için ikincil bağlantı. Yalnızca steps ve alert şablonları.",
-            "ended_ttl": "Aktivite sona erdikten kaç saniye sonra sunucudan otomatik silineceği. Süresiz tutmak için boş bırakın. Örnek: 300",
-            "stale_ttl": "Sunucunun aktiviteyi otomatik sonlandırmasından önceki hareketsizlik süresi (saniye). Devre dışı bırakmak için boş bırakın. Örnek: 1800",
-            "sound": "Bu güncelleme için bildirim sesi adı. iOS sistem sesini kullanmak için boş bırakın.",
-            "background_color": "Live Activity arka plan rengi. #RRGGBB veya adlandırılmış renk. Sistem varsayılanı için boş bırakın.",
-            "background_color_attribute": "Dinamik arka plan rengi için varlık niteliği. Statik arka plan rengini geçersiz kılar.",
-            "text_color": "Live Activity metin rengi. #RRGGBB veya adlandırılmış renk. Sistem varsayılanı için boş bırakın.",
-            "text_color_attribute": "Dinamik metin rengi için varlık niteliği. Statik metin rengini geçersiz kılar.",
-            "warning_threshold": "Bu değere ulaşıldığında veya aşıldığında uyarı renklendirmesi tetiklenir. Gauge ve timeline şablonları.",
-            "alarm": "Uyarı eşiği aşıldığında AlarmKit alarmını tetikler. Yalnızca iOS 26+.",
-            "step_labels": "Steps şablonu adımları için özel etiketler. Biçim: 1=Etiket, 2=Etiket. Boş bırakılırsa adım numaraları kullanılır.",
-            "step_rows": "Steps şablonunda bir satırda gösterilecek adım sayısı.",
-            "fired_at_attribute": "Tetiklenme Unix zaman damgasını tutan varlık niteliği. Göreceli zaman görüntüsü için kullanılır.",
-            "units": "Timeline serileri için birim etiketleri. Biçim: attribute=Birim. Örnek: temp=°C, humidity=%",
-            "progress_entity": "İlerlemeyi izlenen varlık yerine ayrı bir varlıktan okur. İzlenen varlığı kullanmak için boş bırakın. Öznitelik alanı ayarlandığında bu varlığın o özniteliğini okur; aksi takdirde durumunu.",
-            "remaining_time_entity": "Kalan süreyi ayrı bir varlıktan okur (ör. bir çamaşır makinesinin süre sensörü). İzlenen varlığı kullanmak için boş bırakın. Bir zaman damgası (bitiş zamanı) sensörünü, birimli bir süre sensörünü, bir H:MM:SS dizesini veya düz saniyeyi otomatik olarak ayrıştırır.",
-            "current_step_entity": "Geçerli adımı ayrı bir varlıktan okur. İzlenen varlığı kullanmak için boş bırakın.",
-            "value_entity": "Gösterge değerini ayrı bir varlıktan okur. İzlenen varlığı kullanmak için boş bırakın. Bir öznitelik ayarlanmadıkça kaynak varlığın durumunu kullanır.",
-            "subtitle_entity": "Alt başlığı ayrı bir varlıktan gösterir (ör. bir program/mod sensörü). İzlenen varlığı kullanmak için boş bırakın. Bir öznitelik ayarlanmadıkça kaynak varlığın durumunu kullanır.",
-            "tap_action_url": "Live Activity arka planına dokunulduğunda açılan isteğe bağlı URL. http(s) (Safari'yi açar) veya homeassistant://navigate/lovelace/0 gibi özel şemaları (o uygulamayı açar) destekler.",
-            "tap_action_foreground": "Açık: dokunma URL'yi açar. Kapalı: sessiz webhook (yalnızca http(s)) — Kilit Ekranı'ndan ayrılmadan arka planda bir POST tetikler.",
-            "url_foreground": "Açık: dokunma URL'yi açar. Kapalı: sessiz webhook (yalnızca http(s)).",
-            "url_title": "Birincil düğme etiketi (en fazla 64 karakter).",
-            "secondary_url_foreground": "Açık: dokunma URL'yi açar. Kapalı: sessiz webhook (yalnızca http(s)).",
-            "secondary_url_title": "İkincil düğme etiketi (en fazla 64 karakter).",
-            "snooze_seconds": "iOS Ertele düğmesinin geri sayımı ne kadar uzattığı (60–3600). 300s (5 dk) varsayılanı için boş bırakın. Alarm gerektirir. Yalnızca geri sayım şablonu.",
-            "fired_at_entity": "Uyarının tetiklenme zamanını ayrı bir varlıktan okur. İzlenen varlığı kullanmak için boş bırakın. Bir unix zaman damgası veya bir ISO zaman damgası sensörü kabul eder. Yalnızca uyarı şablonu.",
-            "log_columns": "Her günlük satırına eklenen ek değerler (en fazla 6), virgülle ayrılır. Biçim: [Label=]source[|unit]. source = bu varlığın bir niteliği (brightness), başka bir varlığın durumu (binary_sensor.door) veya başka bir varlığın niteliği (sensor.temp:temperature). Örnek: color_temp_kelvin|K, brightness → 'On · 4000K · 153'. Yalnızca günlük şablonu.",
-            "step_configuration": "Add one row per step. Parallel jobs controls the number of stacked rows; relative duration/width makes longer stages wider; color is optional."
+            "start_states": "Entity states that start the Live Activity. Select from the list or type custom values.",
+            "end_states": "Entity states that end the Live Activity. Select from the list or type custom values.",
+            "progress_entity": "Read progress from a separate entity instead of the tracked entity. Leave empty to use the tracked entity. With the attribute field set, reads that attribute of this entity; otherwise its state.",
+            "progress_attribute": "Attribute holding a 0–100 progress value (on the source entity, or the tracked entity if no source is set). Example: percentage",
+            "remaining_time_entity": "Read remaining time from a separate entity (e.g. a washer's time sensor). Leave empty to use the tracked entity. Auto-parses a timestamp (finish-time) sensor, a duration sensor with units, an H:MM:SS string, or plain seconds.",
+            "remaining_time_attribute": "Attribute holding remaining time (on the source entity, or the tracked entity if no source is set). Leave empty to use the source entity's state. Example: remaining",
+            "live_progress": "Animate progress toward the estimated finish time. Generic and Steps layouts require a remaining-time source.",
+            "current_step_entity": "Read the current step from a separate entity. Leave empty to use the tracked entity.",
+            "current_step_attribute": "Attribute holding the zero-based current-step index: 0 is the first step, 1 is the second, and total steps means complete.",
+            "severity": "Alert severity level.",
+            "severity_label": "Override the Info/Warning/Critical badge text shown on the alert. Leave empty to use the severity name. Max 32 characters. Alert template only.",
+            "value_entity": "Read the gauge value from a separate entity. Leave empty to use the tracked entity. Uses the source entity's state unless an attribute is set.",
+            "value_attribute": "Attribute holding the current gauge value as a number (on the source entity, or the tracked entity if no source is set). Leave empty to use the entity's state.",
+            "min_value": "Minimum value for the gauge range.",
+            "max_value": "Maximum value for the gauge range.",
+            "unit": "Display unit shown next to the value (e.g. °C, %, kW). Max 32 characters.",
+            "series": "Map entity attributes to named series. Format: attribute=Label, attribute2=Label2. Leave empty to use the entity's state as a single series.",
+            "series_entities": "Add one row for each entity-backed chart line. Give it a label and optionally select an attribute. Combines with the primary series; up to 10 lines total.",
+            "primary_series": "Label of the series shown as the headline value and used for the compact high/low range. Leave empty to use the tracked entity's own series (or the first configured series).",
+            "scale": "Y-axis scale mode for the sparkline chart.",
+            "decimals": "Number of decimal places shown for values (0–10).",
+            "smoothing": "Enable curve interpolation between data points for a smoother sparkline.",
+            "thresholds": "Add up to 5 horizontal reference lines, each with a value and optional color and label.",
+            "history_period": "Minutes of past data to seed the sparkline when the activity starts. Numeric-state entities (plain sensors, value entities, and state-sourced series entities) backfill from Home Assistant's recorder; attribute-based series fill only from samples collected while the integration runs, because Home Assistant stopped recording most attributes in 2024.8. Set to 0 to start with no history.",
+            "slug": "Unique identifier for this activity. Leave empty to auto-generate from entity ID. Example: ha-living-room-lamp",
+            "activity_name": "Display name shown on the iPhone Live Activity. Defaults to the entity's friendly name.",
+            "icon": "Override icon. Leave empty to use the entity’s native icon (e.g. mdi:thermometer). SF Symbols also supported (e.g. lamp.desk.fill).",
+            "icon_attribute": "Entity attribute for dynamic icon. Overrides static icon and entity icon when set.",
+            "priority": "Higher priority activities are kept longer when the device limit is reached (0 = lowest, 10 = highest).",
+            "update_interval": "Minimum seconds between updates. Rapid state changes are throttled.",
+            "subtitle_entity": "Show the subtitle from a separate entity (e.g. a program/mode sensor). Leave empty to use the tracked entity. Uses the source entity's state unless an attribute is set.",
+            "subtitle_attribute": "Attribute to show as subtitle (on the source entity, or the tracked entity if no source is set). Leave empty to use the source entity's state, or the friendly name when no source is set.",
+            "state_labels": "Add state-to-label mappings. For example, map heating to Heating Up and idle to Standby.",
+            "completion_message": "Text shown when the activity ends. Leave empty for 'Complete'. Example: Wash Done",
+            "accent_color": "Accent color for the Live Activity. Leave empty for default blue.",
+            "accent_color_attribute": "Entity attribute for dynamic accent color. Overrides static color. Supports RGB, HS, XY, Kelvin, named colors, and hex.",
+            "tap_action_url": "Optional URL opened when tapping the Live Activity background. Supports http(s) (opens Safari) or custom schemes like homeassistant://navigate/lovelace/0 (opens that app).",
+            "tap_action_foreground": "On: tap opens the URL. Off: silent webhook (http(s) only) — fires a POST in the background without leaving the Lock Screen.",
+            "url": "Primary button destination for any layout. Supports http(s) URLs and app schemes such as homeassistant://.",
+            "url_foreground": "On: tap opens the URL. Off: silent webhook (http(s) only).",
+            "url_title": "Primary button label (max 64 characters).",
+            "secondary_url": "Secondary button destination for any layout. Supports http(s) URLs and app schemes.",
+            "secondary_url_foreground": "On: tap opens the URL. Off: silent webhook (http(s) only).",
+            "secondary_url_title": "Secondary button label (max 64 characters).",
+            "ended_ttl": "Seconds after the activity ends before the server auto-deletes it. This also controls how soon the ended card leaves the iPhone Lock Screen (iOS caps it at 4 hours regardless). Leave empty to keep indefinitely. Example: 300",
+            "stale_ttl": "Seconds of inactivity before the server auto-ends the activity. Leave empty to disable. Example: 1800",
+            "sound": "Sound played on every update for this entity. Leave empty to use no override.",
+            "background_color": "Background color for the Live Activity. Leave empty for default.",
+            "background_color_attribute": "Entity attribute for dynamic background color. Overrides static color. Supports RGB, HS, XY, Kelvin, named colors, and hex.",
+            "text_color": "Text color for the Live Activity. Leave empty for default.",
+            "text_color_attribute": "Entity attribute for dynamic text color. Overrides static color.",
+            "warning_threshold": "Seconds before the end of a countdown when the server sends a warning push. Leave empty to disable. Countdown template only.",
+            "alarm": "Trigger an AlarmKit alarm when the countdown expires (iOS 26+). Countdown template only.",
+            "snooze_seconds": "How long the iOS Snooze button extends the countdown (60–3600). Leave empty for the 300s (5 min) default. Requires Alarm. Countdown template only.",
+            "fired_at_entity": "Read the alert's fired-at time from a separate entity. Leave empty to use the tracked entity. Accepts a unix timestamp or an ISO timestamp sensor. Alert template only.",
+            "fired_at_attribute": "Attribute holding the unix timestamp when the alert fired (on the source entity, or the tracked entity if no source is set). Alert template only.",
+            "tiles": "Add 1–4 board tiles. Each row selects an entity and label, with optional attribute, unit, and icon. Board template only.",
+            "log_columns": "Add up to 6 extra values to each log line. Each row selects an entity and optional attribute, label, and unit. Log template only.",
+            "log_level_attribute": "Attribute supplying each log line's level (info/warn/error). Leave empty for no level tag. Log template only.",
+            "step_configuration": "Add one named row per step. Parallel jobs creates stacked lanes. Relative step length is a ratio: weights 1, 4, 1 make the middle step four times wider. Color is optional."
           },
           "description": "Everything is on this page. Open only the sections you need.",
           "sections": {
             "lifecycle": {
-              "name": "Lifecycle and delivery",
-              "description": "Choose when the activity runs and how PushWard updates and retains it.",
+              "name": "Lifecycle and update behavior",
+              "description": "Choose when the activity runs, how often it updates, and how long PushWard retains it.",
               "data": {
-                "start_states": "Başlangıç Durumları",
-                "end_states": "Bitiş Durumları",
-                "slug": "Aktivite Slug",
-                "activity_name": "Aktivite Adı",
-                "priority": "Öncelik (0-10)",
-                "sound": "Ses",
-                "update_interval": "Min. Güncelleme Aralığı (saniye)",
-                "ended_ttl": "Bitişten Sonra Otomatik Sil (saniye)",
-                "stale_ttl": "Hareketsizlikte Otomatik Sonlandır (saniye)"
+                "start_states": "States that start the activity",
+                "end_states": "States that end the activity",
+                "slug": "Activity slug",
+                "activity_name": "Activity display name",
+                "priority": "Priority (0-10)",
+                "sound": "Update sound",
+                "update_interval": "Minimum update interval",
+                "ended_ttl": "Delete after ending",
+                "stale_ttl": "End after no updates"
               },
               "data_description": {
-                "start_states": "Live Activity'yi başlatan varlık durumları. Listeden seçin veya özel değer girin.",
-                "end_states": "Live Activity'yi sonlandıran varlık durumları. Listeden seçin veya özel değer girin.",
-                "slug": "Bu aktivite için benzersiz tanımlayıcı. Varlık kimliğinden otomatik oluşturmak için boş bırakın. Örnek: ha-living-room-lamp",
-                "activity_name": "iPhone Live Activity üzerinde gösterilen görüntü adı. Varsayılan olarak varlığın kolay adını kullanır.",
-                "priority": "Cihaz sınırına ulaşıldığında daha yüksek öncelikli aktiviteler daha uzun süre tutulur (0 = en düşük, 10 = en yüksek).",
-                "sound": "Bu güncelleme için bildirim sesi adı. iOS sistem sesini kullanmak için boş bırakın.",
-                "update_interval": "Güncellemeler arasındaki minimum saniye. Hızlı durum değişiklikleri kısıtlanır.",
-                "ended_ttl": "Aktivite sona erdikten kaç saniye sonra sunucudan otomatik silineceği. Süresiz tutmak için boş bırakın. Örnek: 300",
-                "stale_ttl": "Sunucunun aktiviteyi otomatik sonlandırmasından önceki hareketsizlik süresi (saniye). Devre dışı bırakmak için boş bırakın. Örnek: 1800"
+                "start_states": "Entity states that start the Live Activity. Select from the list or type custom values.",
+                "end_states": "Entity states that end the Live Activity. Select from the list or type custom values.",
+                "slug": "Unique identifier for this activity. Leave empty to auto-generate from entity ID. Example: ha-living-room-lamp",
+                "activity_name": "Display name shown on the iPhone Live Activity. Defaults to the entity's friendly name.",
+                "priority": "Integer from 0 to 10. Higher-priority activities are retained first and receive a higher iOS relevance score.",
+                "sound": "Optional sound played for ongoing updates. Choose Silent for no sound; sounds are ignored when ending.",
+                "update_interval": "Minimum seconds between API updates, from 1 to 86,400. Faster entity changes are combined.",
+                "ended_ttl": "Seconds after an activity ends before PushWard deletes it and dismisses the ended card. Valid range: 1-2,592,000 seconds (30 days). Leave blank for the PushWard default.",
+                "stale_ttl": "Seconds without an update before PushWard automatically ends the activity. Valid range: 1-2,592,000 seconds (30 days). Leave blank to disable."
               }
             },
             "content": {
               "name": "Layout content",
               "description": "Values used by the selected Live Activity layout.",
               "data": {
-                "progress_attribute": "İlerleme Niteliği",
-                "remaining_time_attribute": "Kalan Süre Niteliği",
-                "total_steps": "Toplam steps",
-                "current_step_attribute": "Geçerli Adım Niteliği",
-                "severity": "Önem Derecesi",
-                "value_attribute": "Değer Niteliği",
-                "min_value": "Minimum Değer",
-                "max_value": "Maksimum Değer",
-                "unit": "Birim",
-                "series": "Seri",
-                "scale": "Ölçek",
-                "decimals": "Ondalık Basamak",
-                "smoothing": "Düzgün Çizgiler",
-                "thresholds": "Eşikler",
-                "history_period": "Geçmiş Dönemi",
-                "state_labels": "Durum Etiketleri",
-                "completion_message": "Tamamlanma Mesajı",
-                "warning_threshold": "Uyarı Eşiği",
-                "alarm": "Alarm",
-                "step_labels": "Adım Etiketleri",
-                "step_rows": "Adım Satırları",
-                "fired_at_attribute": "Tetiklenme Zamanı Niteliği",
-                "units": "Birimler",
-                "progress_entity": "İlerleme Varlığı",
-                "remaining_time_entity": "Kalan Süre Varlığı",
-                "current_step_entity": "Geçerli Adım Varlığı",
-                "value_entity": "Değer Varlığı",
-                "snooze_seconds": "Erteleme Saniyeleri (iOS 26+)",
-                "fired_at_entity": "Tetiklenme Zamanı Varlığı",
-                "log_columns": "Günlük Sütunları",
-                "step_configuration": "Steps"
+                "progress_entity": "Progress source entity",
+                "progress_attribute": "Progress attribute",
+                "remaining_time_entity": "Remaining-time source entity",
+                "remaining_time_attribute": "Remaining-time attribute",
+                "live_progress": "Animate progress between updates",
+                "current_step_entity": "Current-step source entity",
+                "current_step_attribute": "Current-step attribute",
+                "severity": "Alert severity",
+                "severity_label": "Custom severity badge",
+                "value_entity": "Value source entity",
+                "value_attribute": "Value attribute",
+                "min_value": "Minimum value",
+                "max_value": "Maximum value",
+                "unit": "Display unit",
+                "series": "Attribute-backed chart series",
+                "series_entities": "Entity-backed chart series",
+                "primary_series": "Primary chart series",
+                "scale": "Y-axis scale",
+                "decimals": "Decimal places",
+                "smoothing": "Smooth chart lines",
+                "thresholds": "Chart thresholds",
+                "history_period": "Recorder history to load",
+                "state_labels": "State display labels",
+                "completion_message": "Completion message",
+                "warning_threshold": "Countdown warning threshold",
+                "alarm": "Ring an AlarmKit alarm",
+                "snooze_seconds": "Alarm snooze duration",
+                "fired_at_entity": "Fired-at source entity",
+                "fired_at_attribute": "Fired-at attribute",
+                "tiles": "Board tiles",
+                "log_columns": "Additional log values",
+                "log_level_attribute": "Log severity attribute",
+                "step_configuration": "Workflow steps"
               },
               "data_description": {
-                "progress_attribute": "0–100 arasında ilerleme değeri tutan varlık niteliği. Örnek: percentage",
-                "remaining_time_attribute": "Saniye cinsinden kalan süreyi tutan varlık niteliği. Örnek: remaining",
-                "total_steps": "Toplam steps adedi.",
-                "current_step_attribute": "Geçerli adımı tamsayı olarak tutan varlık niteliği.",
-                "severity": "alert önem düzeyi.",
-                "value_attribute": "Geçerli gauge değerini sayı olarak tutan varlık niteliği. Varlığın durumunu kullanmak için boş bırakın.",
-                "min_value": "gauge aralığı için minimum değer.",
-                "max_value": "gauge aralığı için maksimum değer.",
-                "unit": "Değerin yanında gösterilen birim (örn. °C, %, kW). En fazla 32 karakter.",
-                "series": "Varlık niteliklerini adlandırılmış serilere eşleyin. Biçim: attribute=Etiket, attribute2=Etiket2. Tek seri olarak varlığın durumunu kullanmak için boş bırakın.",
-                "scale": "Kıvılcım çizelgesi için Y ekseni ölçek modu.",
-                "decimals": "Değerler için gösterilen ondalık basamak sayısı (0–10).",
-                "smoothing": "Daha düzgün bir kıvılcım çizelgesi için veri noktaları arasında eğri aradeğerlemeyi etkinleştir.",
-                "thresholds": "Kıvılcım çizelgesi üzerindeki yatay referans çizgileri. Biçim: değer:renk:etiket. Örnek: 25:red:Sıcak, 18:blue:Soğuk. En fazla 5.",
-                "history_period": "Home Assistant'ın kaydedicisinden kıvılcım çizelgesini başlatmak için geriye dönük veri dakikası. Geçmiş olmadan başlamak için 0 girin.",
-                "state_labels": "Durumlar için özel görüntü metni. Biçim: durum=Etiket, durum2=Etiket 2. Örnek: heating=Isınıyor, idle=Beklemede",
-                "completion_message": "Aktivite sona erdiğinde gösterilen metin. 'Tamamlandı' için boş bırakın. Örnek: Yıkama Bitti",
-                "warning_threshold": "Bu değere ulaşıldığında veya aşıldığında uyarı renklendirmesi tetiklenir. Gauge ve timeline şablonları.",
-                "alarm": "Uyarı eşiği aşıldığında AlarmKit alarmını tetikler. Yalnızca iOS 26+.",
-                "step_labels": "Steps şablonu adımları için özel etiketler. Biçim: 1=Etiket, 2=Etiket. Boş bırakılırsa adım numaraları kullanılır.",
-                "step_rows": "Steps şablonunda bir satırda gösterilecek adım sayısı.",
-                "fired_at_attribute": "Tetiklenme Unix zaman damgasını tutan varlık niteliği. Göreceli zaman görüntüsü için kullanılır.",
-                "units": "Timeline serileri için birim etiketleri. Biçim: attribute=Birim. Örnek: temp=°C, humidity=%",
-                "progress_entity": "İlerlemeyi izlenen varlık yerine ayrı bir varlıktan okur. İzlenen varlığı kullanmak için boş bırakın. Öznitelik alanı ayarlandığında bu varlığın o özniteliğini okur; aksi takdirde durumunu.",
-                "remaining_time_entity": "Kalan süreyi ayrı bir varlıktan okur (ör. bir çamaşır makinesinin süre sensörü). İzlenen varlığı kullanmak için boş bırakın. Bir zaman damgası (bitiş zamanı) sensörünü, birimli bir süre sensörünü, bir H:MM:SS dizesini veya düz saniyeyi otomatik olarak ayrıştırır.",
-                "current_step_entity": "Geçerli adımı ayrı bir varlıktan okur. İzlenen varlığı kullanmak için boş bırakın.",
-                "value_entity": "Gösterge değerini ayrı bir varlıktan okur. İzlenen varlığı kullanmak için boş bırakın. Bir öznitelik ayarlanmadıkça kaynak varlığın durumunu kullanır.",
-                "snooze_seconds": "iOS Ertele düğmesinin geri sayımı ne kadar uzattığı (60–3600). 300s (5 dk) varsayılanı için boş bırakın. Alarm gerektirir. Yalnızca geri sayım şablonu.",
-                "fired_at_entity": "Uyarının tetiklenme zamanını ayrı bir varlıktan okur. İzlenen varlığı kullanmak için boş bırakın. Bir unix zaman damgası veya bir ISO zaman damgası sensörü kabul eder. Yalnızca uyarı şablonu.",
-                "log_columns": "Her günlük satırına eklenen ek değerler (en fazla 6), virgülle ayrılır. Biçim: [Label=]source[|unit]. source = bu varlığın bir niteliği (brightness), başka bir varlığın durumu (binary_sensor.door) veya başka bir varlığın niteliği (sensor.temp:temperature). Örnek: color_temp_kelvin|K, brightness → 'On · 4000K · 153'. Yalnızca günlük şablonu.",
-                "step_configuration": "Add one row per step. Parallel jobs controls the number of stacked rows; relative duration/width makes longer stages wider; color is optional."
+                "progress_entity": "Read progress from a separate entity instead of the tracked entity. Leave empty to use the tracked entity. With the attribute field set, reads that attribute of this entity; otherwise its state.",
+                "progress_attribute": "Numeric progress from 0 to 100. Leave blank to read the selected entity state.",
+                "remaining_time_entity": "Read remaining time from a separate entity (e.g. a washer's time sensor). Leave empty to use the tracked entity. Auto-parses a timestamp (finish-time) sensor, a duration sensor with units, an H:MM:SS string, or plain seconds.",
+                "remaining_time_attribute": "Remaining seconds, a Home Assistant duration, or an absolute date/time. Leave blank to read the selected entity state.",
+                "live_progress": "When enabled, iOS animates toward the estimated finish time. Generic and Steps layouts require a remaining-time source.",
+                "current_step_entity": "Read the current step from a separate entity. Leave empty to use the tracked entity.",
+                "current_step_attribute": "Zero-based step index: 0 is the first step, 1 is the second, and the total step count means complete. Leave blank to read the selected entity state.",
+                "severity": "Alert severity level.",
+                "severity_label": "Override the Info/Warning/Critical badge text shown on the alert. Leave empty to use the severity name. Max 32 characters. Alert template only.",
+                "value_entity": "Read the gauge value from a separate entity. Leave empty to use the tracked entity. Uses the source entity's state unless an attribute is set.",
+                "value_attribute": "Attribute holding the current gauge value as a number (on the source entity, or the tracked entity if no source is set). Leave empty to use the entity's state.",
+                "min_value": "Lower bound of the gauge. Uses the same unit as the source value.",
+                "max_value": "Upper bound of the gauge and must be greater than Minimum value.",
+                "unit": "Text displayed after the value, such as °C, %, kW, or rpm. Maximum 32 characters.",
+                "series": "Add tracked-entity attribute series. Each row has a display label, attribute, and optional unit.",
+                "series_entities": "Add entity-backed chart series. Each row has a label, entity, optional attribute, and optional unit. Up to 10 series total.",
+                "primary_series": "Label of the series shown as the headline value and used for the compact high/low range. Leave empty to use the tracked entity's own series (or the first configured series).",
+                "scale": "Y-axis scale mode for the sparkline chart.",
+                "decimals": "Integer from 0 to 10 controlling displayed precision.",
+                "smoothing": "Enable curve interpolation between data points for a smoother sparkline.",
+                "thresholds": "Add up to 5 horizontal reference lines, each with a value and optional color and label.",
+                "history_period": "Minutes of Home Assistant Recorder history loaded when the timeline starts. Valid range: 0-1,440 minutes; 0 disables backfill.",
+                "state_labels": "Add state-to-label mappings, such as heating → Heating Up and idle → Standby.",
+                "completion_message": "Text shown when the activity ends. Leave empty for 'Complete'. Example: Wash Done",
+                "warning_threshold": "Seconds before a countdown finishes when PushWard sends its warning update. Valid range: 0-86,400 seconds.",
+                "alarm": "Trigger an AlarmKit alarm when the countdown expires (iOS 26+). Countdown template only.",
+                "snooze_seconds": "AlarmKit snooze duration in seconds, from 60 to 3,600. It is ignored unless Alarm is enabled.",
+                "fired_at_entity": "Read the alert's fired-at time from a separate entity. Leave empty to use the tracked entity. Accepts a unix timestamp or an ISO timestamp sensor. Alert template only.",
+                "fired_at_attribute": "Attribute holding the unix timestamp when the alert fired (on the source entity, or the tracked entity if no source is set). Alert template only.",
+                "tiles": "Add 1–4 board tiles. Each row selects an entity and label, with optional attribute, unit, and icon. Board template only.",
+                "log_columns": "Add up to 6 extra values to each log line. Each row selects an entity and optional attribute, label, and unit. Log template only.",
+                "log_level_attribute": "Attribute supplying each log line's level (info/warn/error). Leave empty for no level tag. Log template only.",
+                "step_configuration": "Add one named row per step. Parallel jobs creates stacked lanes. Relative step length is a ratio: weights 1, 4, 1 make the middle step four times wider. Color is optional."
               }
             },
             "appearance": {
               "name": "Appearance and tap actions",
               "description": "Optional labels, icons, colors, buttons, and background tap behavior.",
               "data": {
-                "subtitle_entity": "Alt Başlık Varlığı",
-                "subtitle_attribute": "Alt Başlık Niteliği",
-                "icon": "Simge",
-                "icon_attribute": "Simge Niteliği",
-                "accent_color": "Vurgu Rengi",
-                "accent_color_attribute": "Vurgu Rengi Niteliği",
-                "background_color": "Arka Plan Rengi",
-                "background_color_attribute": "Arka Plan Rengi Niteliği",
-                "text_color": "Metin Rengi",
-                "text_color_attribute": "Metin Rengi Niteliği",
-                "tap_action_url": "Dokunma Eylemi URL'si",
-                "tap_action_foreground": "Dokunma Eylemi URL'sini Aç",
-                "url": "URL",
-                "url_foreground": "Birincil Düğme URL'sini Aç",
-                "url_title": "Birincil Düğme Başlığı",
-                "secondary_url": "İkincil URL",
-                "secondary_url_foreground": "İkincil Düğme URL'sini Aç",
-                "secondary_url_title": "İkincil Düğme Başlığı"
+                "subtitle_entity": "Subtitle source entity",
+                "subtitle_attribute": "Subtitle attribute",
+                "icon": "Icon",
+                "icon_attribute": "Dynamic icon attribute",
+                "accent_color": "Accent color",
+                "accent_color_attribute": "Dynamic accent-color attribute",
+                "background_color": "Background color",
+                "background_color_attribute": "Dynamic background-color attribute",
+                "text_color": "Text color",
+                "text_color_attribute": "Dynamic text-color attribute",
+                "tap_action": "Background tap action",
+                "url_action": "Primary button",
+                "secondary_url_action": "Secondary button"
               },
               "data_description": {
-                "subtitle_entity": "Alt başlığı ayrı bir varlıktan gösterir (ör. bir program/mod sensörü). İzlenen varlığı kullanmak için boş bırakın. Bir öznitelik ayarlanmadıkça kaynak varlığın durumunu kullanır.",
-                "subtitle_attribute": "Alt başlık olarak gösterilecek varlık niteliği. Varlığın kolay adını kullanmak için boş bırakın.",
-                "icon": "Simgeyi geçersiz kıl. Varlığın yerel simgesini kullanmak için boş bırakın (örn. mdi:thermometer). SF Symbols da desteklenir (örn. lamp.desk.fill).",
-                "icon_attribute": "Dinamik simge için varlık niteliği. Ayarlandığında statik simgeyi ve varlık simgesini geçersiz kılar.",
-                "accent_color": "Live Activity için vurgu rengi. Varsayılan mavi için boş bırakın.",
-                "accent_color_attribute": "Dinamik vurgu rengi için varlık niteliği. Statik rengi geçersiz kılar. RGB, HS, XY, Kelvin, adlandırılmış renkler ve onaltılık desteklenir.",
-                "background_color": "Live Activity arka plan rengi. #RRGGBB veya adlandırılmış renk. Sistem varsayılanı için boş bırakın.",
-                "background_color_attribute": "Dinamik arka plan rengi için varlık niteliği. Statik arka plan rengini geçersiz kılar.",
-                "text_color": "Live Activity metin rengi. #RRGGBB veya adlandırılmış renk. Sistem varsayılanı için boş bırakın.",
-                "text_color_attribute": "Dinamik metin rengi için varlık niteliği. Statik metin rengini geçersiz kılar.",
-                "tap_action_url": "Live Activity arka planına dokunulduğunda açılan isteğe bağlı URL. http(s) (Safari'yi açar) veya homeassistant://navigate/lovelace/0 gibi özel şemaları (o uygulamayı açar) destekler.",
-                "tap_action_foreground": "Açık: dokunma URL'yi açar. Kapalı: sessiz webhook (yalnızca http(s)) — Kilit Ekranı'ndan ayrılmadan arka planda bir POST tetikler.",
-                "url": "Live Activity'ye dokunulduğunda açılan bağlantı. http:// veya https:// ile başlamalıdır. Yalnızca steps ve alert şablonları.",
-                "url_foreground": "Açık: dokunma URL'yi açar. Kapalı: sessiz webhook (yalnızca http(s)).",
-                "url_title": "Birincil düğme etiketi (en fazla 64 karakter).",
-                "secondary_url": "Live Activity için ikincil bağlantı. Yalnızca steps ve alert şablonları.",
-                "secondary_url_foreground": "Açık: dokunma URL'yi açar. Kapalı: sessiz webhook (yalnızca http(s)).",
-                "secondary_url_title": "İkincil düğme etiketi (en fazla 64 karakter)."
+                "subtitle_entity": "Show the subtitle from a separate entity (e.g. a program/mode sensor). Leave empty to use the tracked entity. Uses the source entity's state unless an attribute is set.",
+                "subtitle_attribute": "Attribute to show as subtitle (on the source entity, or the tracked entity if no source is set). Leave empty to use the source entity's state, or the friendly name when no source is set.",
+                "icon": "Override icon. Leave empty to use the entity’s native icon (e.g. mdi:thermometer). SF Symbols also supported (e.g. lamp.desk.fill).",
+                "icon_attribute": "Entity attribute for dynamic icon. Overrides static icon and entity icon when set.",
+                "accent_color": "Choose a PushWard named color or enter 6/8-digit RGB/RGBA hex, with or without #. Leave blank for blue.",
+                "accent_color_attribute": "Entity attribute for dynamic accent color. Overrides static color. Supports RGB, HS, XY, Kelvin, named colors, and hex.",
+                "background_color": "Choose a PushWard named color or enter 6/8-digit RGB/RGBA hex, with or without #. Leave blank for the iOS default.",
+                "background_color_attribute": "Entity attribute for dynamic background color. Overrides static color. Supports RGB, HS, XY, Kelvin, named colors, and hex.",
+                "text_color": "Choose a PushWard named color or enter 6/8-digit RGB/RGBA hex, with or without #. Leave blank for the iOS default.",
+                "text_color_attribute": "Entity attribute for dynamic text color. Overrides static color.",
+                "tap_action": "Optional whole-card destination. Configure an app link/foreground URL or a silent HTTP webhook.",
+                "url_action": "Optional primary inline button with a title, icon, and visible link or silent webhook.",
+                "secondary_url_action": "Optional second inline button with a title, icon, and visible link or silent webhook."
               }
             }
           }
         },
         "reconfigure": {
-          "title": "Varlık Yapılandırmasını Düzenle",
+          "title": "Edit tracked Live Activity",
           "data": {
-            "entity_id": "Varlık",
-            "template": "Şablon"
+            "entity_id": "Entity",
+            "template": "Template"
           },
           "data_description": {
-            "template": "Aktivite düzen şablonu. 'generic' çoğu varlık için uygundur."
+            "template": "Activity layout template. 'generic' works for most entities."
           }
-        },
-        "content": {
-          "title": "3 of 4 · {template} content",
-          "data": {
-            "start_states": "Başlangıç Durumları",
-            "end_states": "Bitiş Durumları",
-            "progress_attribute": "İlerleme Niteliği",
-            "remaining_time_attribute": "Kalan Süre Niteliği",
-            "total_steps": "Toplam steps",
-            "current_step_attribute": "Geçerli Adım Niteliği",
-            "severity": "Önem Derecesi",
-            "value_attribute": "Değer Niteliği",
-            "min_value": "Minimum Değer",
-            "max_value": "Maksimum Değer",
-            "unit": "Birim",
-            "series": "Seri",
-            "scale": "Ölçek",
-            "decimals": "Ondalık Basamak",
-            "smoothing": "Düzgün Çizgiler",
-            "thresholds": "Eşikler",
-            "history_period": "Geçmiş Dönemi",
-            "slug": "Aktivite Slug",
-            "activity_name": "Aktivite Adı",
-            "icon": "Simge",
-            "icon_attribute": "Simge Niteliği",
-            "priority": "Öncelik (0-10)",
-            "update_interval": "Min. Güncelleme Aralığı (saniye)",
-            "subtitle_attribute": "Alt Başlık Niteliği",
-            "state_labels": "Durum Etiketleri",
-            "completion_message": "Tamamlanma Mesajı",
-            "accent_color": "Vurgu Rengi",
-            "accent_color_attribute": "Vurgu Rengi Niteliği",
-            "url": "URL",
-            "secondary_url": "İkincil URL",
-            "ended_ttl": "Bitişten Sonra Otomatik Sil (saniye)",
-            "stale_ttl": "Hareketsizlikte Otomatik Sonlandır (saniye)",
-            "sound": "Ses",
-            "background_color": "Arka Plan Rengi",
-            "background_color_attribute": "Arka Plan Rengi Niteliği",
-            "text_color": "Metin Rengi",
-            "text_color_attribute": "Metin Rengi Niteliği",
-            "warning_threshold": "Uyarı Eşiği",
-            "alarm": "Alarm",
-            "step_labels": "Adım Etiketleri",
-            "step_rows": "Adım Satırları",
-            "fired_at_attribute": "Tetiklenme Zamanı Niteliği",
-            "units": "Birimler",
-            "progress_entity": "İlerleme Varlığı",
-            "remaining_time_entity": "Kalan Süre Varlığı",
-            "current_step_entity": "Geçerli Adım Varlığı",
-            "value_entity": "Değer Varlığı",
-            "subtitle_entity": "Alt Başlık Varlığı",
-            "tap_action_url": "Dokunma Eylemi URL'si",
-            "tap_action_foreground": "Dokunma Eylemi URL'sini Aç",
-            "url_foreground": "Birincil Düğme URL'sini Aç",
-            "url_title": "Birincil Düğme Başlığı",
-            "secondary_url_foreground": "İkincil Düğme URL'sini Aç",
-            "secondary_url_title": "İkincil Düğme Başlığı",
-            "snooze_seconds": "Erteleme Saniyeleri (iOS 26+)",
-            "fired_at_entity": "Tetiklenme Zamanı Varlığı",
-            "log_columns": "Günlük Sütunları"
-          },
-          "data_description": {
-            "start_states": "Live Activity'yi başlatan varlık durumları. Listeden seçin veya özel değer girin.",
-            "end_states": "Live Activity'yi sonlandıran varlık durumları. Listeden seçin veya özel değer girin.",
-            "progress_attribute": "0–100 arasında ilerleme değeri tutan varlık niteliği. Örnek: percentage",
-            "remaining_time_attribute": "Saniye cinsinden kalan süreyi tutan varlık niteliği. Örnek: remaining",
-            "total_steps": "Toplam steps adedi.",
-            "current_step_attribute": "Geçerli adımı tamsayı olarak tutan varlık niteliği.",
-            "severity": "alert önem düzeyi.",
-            "value_attribute": "Geçerli gauge değerini sayı olarak tutan varlık niteliği. Varlığın durumunu kullanmak için boş bırakın.",
-            "min_value": "gauge aralığı için minimum değer.",
-            "max_value": "gauge aralığı için maksimum değer.",
-            "unit": "Değerin yanında gösterilen birim (örn. °C, %, kW). En fazla 32 karakter.",
-            "series": "Varlık niteliklerini adlandırılmış serilere eşleyin. Biçim: attribute=Etiket, attribute2=Etiket2. Tek seri olarak varlığın durumunu kullanmak için boş bırakın.",
-            "scale": "Kıvılcım çizelgesi için Y ekseni ölçek modu.",
-            "decimals": "Değerler için gösterilen ondalık basamak sayısı (0–10).",
-            "smoothing": "Daha düzgün bir kıvılcım çizelgesi için veri noktaları arasında eğri aradeğerlemeyi etkinleştir.",
-            "thresholds": "Kıvılcım çizelgesi üzerindeki yatay referans çizgileri. Biçim: değer:renk:etiket. Örnek: 25:red:Sıcak, 18:blue:Soğuk. En fazla 5.",
-            "history_period": "Home Assistant'ın kaydedicisinden kıvılcım çizelgesini başlatmak için geriye dönük veri dakikası. Geçmiş olmadan başlamak için 0 girin.",
-            "slug": "Bu aktivite için benzersiz tanımlayıcı. Varlık kimliğinden otomatik oluşturmak için boş bırakın. Örnek: ha-living-room-lamp",
-            "activity_name": "iPhone Live Activity üzerinde gösterilen görüntü adı. Varsayılan olarak varlığın kolay adını kullanır.",
-            "icon": "Simgeyi geçersiz kıl. Varlığın yerel simgesini kullanmak için boş bırakın (örn. mdi:thermometer). SF Symbols da desteklenir (örn. lamp.desk.fill).",
-            "icon_attribute": "Dinamik simge için varlık niteliği. Ayarlandığında statik simgeyi ve varlık simgesini geçersiz kılar.",
-            "priority": "Cihaz sınırına ulaşıldığında daha yüksek öncelikli aktiviteler daha uzun süre tutulur (0 = en düşük, 10 = en yüksek).",
-            "update_interval": "Güncellemeler arasındaki minimum saniye. Hızlı durum değişiklikleri kısıtlanır.",
-            "subtitle_attribute": "Alt başlık olarak gösterilecek varlık niteliği. Varlığın kolay adını kullanmak için boş bırakın.",
-            "state_labels": "Durumlar için özel görüntü metni. Biçim: durum=Etiket, durum2=Etiket 2. Örnek: heating=Isınıyor, idle=Beklemede",
-            "completion_message": "Aktivite sona erdiğinde gösterilen metin. 'Tamamlandı' için boş bırakın. Örnek: Yıkama Bitti",
-            "accent_color": "Live Activity için vurgu rengi. Varsayılan mavi için boş bırakın.",
-            "accent_color_attribute": "Dinamik vurgu rengi için varlık niteliği. Statik rengi geçersiz kılar. RGB, HS, XY, Kelvin, adlandırılmış renkler ve onaltılık desteklenir.",
-            "url": "Live Activity'ye dokunulduğunda açılan bağlantı. http:// veya https:// ile başlamalıdır. Yalnızca steps ve alert şablonları.",
-            "secondary_url": "Live Activity için ikincil bağlantı. Yalnızca steps ve alert şablonları.",
-            "ended_ttl": "Aktivite sona erdikten kaç saniye sonra sunucudan otomatik silineceği. Süresiz tutmak için boş bırakın. Örnek: 300",
-            "stale_ttl": "Sunucunun aktiviteyi otomatik sonlandırmasından önceki hareketsizlik süresi (saniye). Devre dışı bırakmak için boş bırakın. Örnek: 1800",
-            "sound": "Bu güncelleme için bildirim sesi adı. iOS sistem sesini kullanmak için boş bırakın.",
-            "background_color": "Live Activity arka plan rengi. #RRGGBB veya adlandırılmış renk. Sistem varsayılanı için boş bırakın.",
-            "background_color_attribute": "Dinamik arka plan rengi için varlık niteliği. Statik arka plan rengini geçersiz kılar.",
-            "text_color": "Live Activity metin rengi. #RRGGBB veya adlandırılmış renk. Sistem varsayılanı için boş bırakın.",
-            "text_color_attribute": "Dinamik metin rengi için varlık niteliği. Statik metin rengini geçersiz kılar.",
-            "warning_threshold": "Bu değere ulaşıldığında veya aşıldığında uyarı renklendirmesi tetiklenir. Gauge ve timeline şablonları.",
-            "alarm": "Uyarı eşiği aşıldığında AlarmKit alarmını tetikler. Yalnızca iOS 26+.",
-            "step_labels": "Steps şablonu adımları için özel etiketler. Biçim: 1=Etiket, 2=Etiket. Boş bırakılırsa adım numaraları kullanılır.",
-            "step_rows": "Steps şablonunda bir satırda gösterilecek adım sayısı.",
-            "fired_at_attribute": "Tetiklenme Unix zaman damgasını tutan varlık niteliği. Göreceli zaman görüntüsü için kullanılır.",
-            "units": "Timeline serileri için birim etiketleri. Biçim: attribute=Birim. Örnek: temp=°C, humidity=%",
-            "progress_entity": "İlerlemeyi izlenen varlık yerine ayrı bir varlıktan okur. İzlenen varlığı kullanmak için boş bırakın. Öznitelik alanı ayarlandığında bu varlığın o özniteliğini okur; aksi takdirde durumunu.",
-            "remaining_time_entity": "Kalan süreyi ayrı bir varlıktan okur (ör. bir çamaşır makinesinin süre sensörü). İzlenen varlığı kullanmak için boş bırakın. Bir zaman damgası (bitiş zamanı) sensörünü, birimli bir süre sensörünü, bir H:MM:SS dizesini veya düz saniyeyi otomatik olarak ayrıştırır.",
-            "current_step_entity": "Geçerli adımı ayrı bir varlıktan okur. İzlenen varlığı kullanmak için boş bırakın.",
-            "value_entity": "Gösterge değerini ayrı bir varlıktan okur. İzlenen varlığı kullanmak için boş bırakın. Bir öznitelik ayarlanmadıkça kaynak varlığın durumunu kullanır.",
-            "subtitle_entity": "Alt başlığı ayrı bir varlıktan gösterir (ör. bir program/mod sensörü). İzlenen varlığı kullanmak için boş bırakın. Bir öznitelik ayarlanmadıkça kaynak varlığın durumunu kullanır.",
-            "tap_action_url": "Live Activity arka planına dokunulduğunda açılan isteğe bağlı URL. http(s) (Safari'yi açar) veya homeassistant://navigate/lovelace/0 gibi özel şemaları (o uygulamayı açar) destekler.",
-            "tap_action_foreground": "Açık: dokunma URL'yi açar. Kapalı: sessiz webhook (yalnızca http(s)) — Kilit Ekranı'ndan ayrılmadan arka planda bir POST tetikler.",
-            "url_foreground": "Açık: dokunma URL'yi açar. Kapalı: sessiz webhook (yalnızca http(s)).",
-            "url_title": "Birincil düğme etiketi (en fazla 64 karakter).",
-            "secondary_url_foreground": "Açık: dokunma URL'yi açar. Kapalı: sessiz webhook (yalnızca http(s)).",
-            "secondary_url_title": "İkincil düğme etiketi (en fazla 64 karakter).",
-            "snooze_seconds": "iOS Ertele düğmesinin geri sayımı ne kadar uzattığı (60–3600). 300s (5 dk) varsayılanı için boş bırakın. Alarm gerektirir. Yalnızca geri sayım şablonu.",
-            "fired_at_entity": "Uyarının tetiklenme zamanını ayrı bir varlıktan okur. İzlenen varlığı kullanmak için boş bırakın. Bir unix zaman damgası veya bir ISO zaman damgası sensörü kabul eder. Yalnızca uyarı şablonu.",
-            "log_columns": "Her günlük satırına eklenen ek değerler (en fazla 6), virgülle ayrılır. Biçim: [Label=]source[|unit]. source = bu varlığın bir niteliği (brightness), başka bir varlığın durumu (binary_sensor.door) veya başka bir varlığın niteliği (sensor.temp:temperature). Örnek: color_temp_kelvin|K, brightness → 'On · 4000K · 153'. Yalnızca günlük şablonu."
-          },
-          "description": "Configure only the values used by the selected Live Activity layout."
-        },
-        "appearance": {
-          "title": "4 of 4 · Appearance and actions",
-          "data": {
-            "start_states": "Başlangıç Durumları",
-            "end_states": "Bitiş Durumları",
-            "progress_attribute": "İlerleme Niteliği",
-            "remaining_time_attribute": "Kalan Süre Niteliği",
-            "total_steps": "Toplam steps",
-            "current_step_attribute": "Geçerli Adım Niteliği",
-            "severity": "Önem Derecesi",
-            "value_attribute": "Değer Niteliği",
-            "min_value": "Minimum Değer",
-            "max_value": "Maksimum Değer",
-            "unit": "Birim",
-            "series": "Seri",
-            "scale": "Ölçek",
-            "decimals": "Ondalık Basamak",
-            "smoothing": "Düzgün Çizgiler",
-            "thresholds": "Eşikler",
-            "history_period": "Geçmiş Dönemi",
-            "slug": "Aktivite Slug",
-            "activity_name": "Aktivite Adı",
-            "icon": "Simge",
-            "icon_attribute": "Simge Niteliği",
-            "priority": "Öncelik (0-10)",
-            "update_interval": "Min. Güncelleme Aralığı (saniye)",
-            "subtitle_attribute": "Alt Başlık Niteliği",
-            "state_labels": "Durum Etiketleri",
-            "completion_message": "Tamamlanma Mesajı",
-            "accent_color": "Vurgu Rengi",
-            "accent_color_attribute": "Vurgu Rengi Niteliği",
-            "url": "URL",
-            "secondary_url": "İkincil URL",
-            "ended_ttl": "Bitişten Sonra Otomatik Sil (saniye)",
-            "stale_ttl": "Hareketsizlikte Otomatik Sonlandır (saniye)",
-            "sound": "Ses",
-            "background_color": "Arka Plan Rengi",
-            "background_color_attribute": "Arka Plan Rengi Niteliği",
-            "text_color": "Metin Rengi",
-            "text_color_attribute": "Metin Rengi Niteliği",
-            "warning_threshold": "Uyarı Eşiği",
-            "alarm": "Alarm",
-            "step_labels": "Adım Etiketleri",
-            "step_rows": "Adım Satırları",
-            "fired_at_attribute": "Tetiklenme Zamanı Niteliği",
-            "units": "Birimler",
-            "progress_entity": "İlerleme Varlığı",
-            "remaining_time_entity": "Kalan Süre Varlığı",
-            "current_step_entity": "Geçerli Adım Varlığı",
-            "value_entity": "Değer Varlığı",
-            "subtitle_entity": "Alt Başlık Varlığı",
-            "tap_action_url": "Dokunma Eylemi URL'si",
-            "tap_action_foreground": "Dokunma Eylemi URL'sini Aç",
-            "url_foreground": "Birincil Düğme URL'sini Aç",
-            "url_title": "Birincil Düğme Başlığı",
-            "secondary_url_foreground": "İkincil Düğme URL'sini Aç",
-            "secondary_url_title": "İkincil Düğme Başlığı",
-            "snooze_seconds": "Erteleme Saniyeleri (iOS 26+)",
-            "fired_at_entity": "Tetiklenme Zamanı Varlığı",
-            "log_columns": "Günlük Sütunları"
-          },
-          "data_description": {
-            "start_states": "Live Activity'yi başlatan varlık durumları. Listeden seçin veya özel değer girin.",
-            "end_states": "Live Activity'yi sonlandıran varlık durumları. Listeden seçin veya özel değer girin.",
-            "progress_attribute": "0–100 arasında ilerleme değeri tutan varlık niteliği. Örnek: percentage",
-            "remaining_time_attribute": "Saniye cinsinden kalan süreyi tutan varlık niteliği. Örnek: remaining",
-            "total_steps": "Toplam steps adedi.",
-            "current_step_attribute": "Geçerli adımı tamsayı olarak tutan varlık niteliği.",
-            "severity": "alert önem düzeyi.",
-            "value_attribute": "Geçerli gauge değerini sayı olarak tutan varlık niteliği. Varlığın durumunu kullanmak için boş bırakın.",
-            "min_value": "gauge aralığı için minimum değer.",
-            "max_value": "gauge aralığı için maksimum değer.",
-            "unit": "Değerin yanında gösterilen birim (örn. °C, %, kW). En fazla 32 karakter.",
-            "series": "Varlık niteliklerini adlandırılmış serilere eşleyin. Biçim: attribute=Etiket, attribute2=Etiket2. Tek seri olarak varlığın durumunu kullanmak için boş bırakın.",
-            "scale": "Kıvılcım çizelgesi için Y ekseni ölçek modu.",
-            "decimals": "Değerler için gösterilen ondalık basamak sayısı (0–10).",
-            "smoothing": "Daha düzgün bir kıvılcım çizelgesi için veri noktaları arasında eğri aradeğerlemeyi etkinleştir.",
-            "thresholds": "Kıvılcım çizelgesi üzerindeki yatay referans çizgileri. Biçim: değer:renk:etiket. Örnek: 25:red:Sıcak, 18:blue:Soğuk. En fazla 5.",
-            "history_period": "Home Assistant'ın kaydedicisinden kıvılcım çizelgesini başlatmak için geriye dönük veri dakikası. Geçmiş olmadan başlamak için 0 girin.",
-            "slug": "Bu aktivite için benzersiz tanımlayıcı. Varlık kimliğinden otomatik oluşturmak için boş bırakın. Örnek: ha-living-room-lamp",
-            "activity_name": "iPhone Live Activity üzerinde gösterilen görüntü adı. Varsayılan olarak varlığın kolay adını kullanır.",
-            "icon": "Simgeyi geçersiz kıl. Varlığın yerel simgesini kullanmak için boş bırakın (örn. mdi:thermometer). SF Symbols da desteklenir (örn. lamp.desk.fill).",
-            "icon_attribute": "Dinamik simge için varlık niteliği. Ayarlandığında statik simgeyi ve varlık simgesini geçersiz kılar.",
-            "priority": "Cihaz sınırına ulaşıldığında daha yüksek öncelikli aktiviteler daha uzun süre tutulur (0 = en düşük, 10 = en yüksek).",
-            "update_interval": "Güncellemeler arasındaki minimum saniye. Hızlı durum değişiklikleri kısıtlanır.",
-            "subtitle_attribute": "Alt başlık olarak gösterilecek varlık niteliği. Varlığın kolay adını kullanmak için boş bırakın.",
-            "state_labels": "Durumlar için özel görüntü metni. Biçim: durum=Etiket, durum2=Etiket 2. Örnek: heating=Isınıyor, idle=Beklemede",
-            "completion_message": "Aktivite sona erdiğinde gösterilen metin. 'Tamamlandı' için boş bırakın. Örnek: Yıkama Bitti",
-            "accent_color": "Live Activity için vurgu rengi. Varsayılan mavi için boş bırakın.",
-            "accent_color_attribute": "Dinamik vurgu rengi için varlık niteliği. Statik rengi geçersiz kılar. RGB, HS, XY, Kelvin, adlandırılmış renkler ve onaltılık desteklenir.",
-            "url": "Live Activity'ye dokunulduğunda açılan bağlantı. http:// veya https:// ile başlamalıdır. Yalnızca steps ve alert şablonları.",
-            "secondary_url": "Live Activity için ikincil bağlantı. Yalnızca steps ve alert şablonları.",
-            "ended_ttl": "Aktivite sona erdikten kaç saniye sonra sunucudan otomatik silineceği. Süresiz tutmak için boş bırakın. Örnek: 300",
-            "stale_ttl": "Sunucunun aktiviteyi otomatik sonlandırmasından önceki hareketsizlik süresi (saniye). Devre dışı bırakmak için boş bırakın. Örnek: 1800",
-            "sound": "Bu güncelleme için bildirim sesi adı. iOS sistem sesini kullanmak için boş bırakın.",
-            "background_color": "Live Activity arka plan rengi. #RRGGBB veya adlandırılmış renk. Sistem varsayılanı için boş bırakın.",
-            "background_color_attribute": "Dinamik arka plan rengi için varlık niteliği. Statik arka plan rengini geçersiz kılar.",
-            "text_color": "Live Activity metin rengi. #RRGGBB veya adlandırılmış renk. Sistem varsayılanı için boş bırakın.",
-            "text_color_attribute": "Dinamik metin rengi için varlık niteliği. Statik metin rengini geçersiz kılar.",
-            "warning_threshold": "Bu değere ulaşıldığında veya aşıldığında uyarı renklendirmesi tetiklenir. Gauge ve timeline şablonları.",
-            "alarm": "Uyarı eşiği aşıldığında AlarmKit alarmını tetikler. Yalnızca iOS 26+.",
-            "step_labels": "Steps şablonu adımları için özel etiketler. Biçim: 1=Etiket, 2=Etiket. Boş bırakılırsa adım numaraları kullanılır.",
-            "step_rows": "Steps şablonunda bir satırda gösterilecek adım sayısı.",
-            "fired_at_attribute": "Tetiklenme Unix zaman damgasını tutan varlık niteliği. Göreceli zaman görüntüsü için kullanılır.",
-            "units": "Timeline serileri için birim etiketleri. Biçim: attribute=Birim. Örnek: temp=°C, humidity=%",
-            "progress_entity": "İlerlemeyi izlenen varlık yerine ayrı bir varlıktan okur. İzlenen varlığı kullanmak için boş bırakın. Öznitelik alanı ayarlandığında bu varlığın o özniteliğini okur; aksi takdirde durumunu.",
-            "remaining_time_entity": "Kalan süreyi ayrı bir varlıktan okur (ör. bir çamaşır makinesinin süre sensörü). İzlenen varlığı kullanmak için boş bırakın. Bir zaman damgası (bitiş zamanı) sensörünü, birimli bir süre sensörünü, bir H:MM:SS dizesini veya düz saniyeyi otomatik olarak ayrıştırır.",
-            "current_step_entity": "Geçerli adımı ayrı bir varlıktan okur. İzlenen varlığı kullanmak için boş bırakın.",
-            "value_entity": "Gösterge değerini ayrı bir varlıktan okur. İzlenen varlığı kullanmak için boş bırakın. Bir öznitelik ayarlanmadıkça kaynak varlığın durumunu kullanır.",
-            "subtitle_entity": "Alt başlığı ayrı bir varlıktan gösterir (ör. bir program/mod sensörü). İzlenen varlığı kullanmak için boş bırakın. Bir öznitelik ayarlanmadıkça kaynak varlığın durumunu kullanır.",
-            "tap_action_url": "Live Activity arka planına dokunulduğunda açılan isteğe bağlı URL. http(s) (Safari'yi açar) veya homeassistant://navigate/lovelace/0 gibi özel şemaları (o uygulamayı açar) destekler.",
-            "tap_action_foreground": "Açık: dokunma URL'yi açar. Kapalı: sessiz webhook (yalnızca http(s)) — Kilit Ekranı'ndan ayrılmadan arka planda bir POST tetikler.",
-            "url_foreground": "Açık: dokunma URL'yi açar. Kapalı: sessiz webhook (yalnızca http(s)).",
-            "url_title": "Birincil düğme etiketi (en fazla 64 karakter).",
-            "secondary_url_foreground": "Açık: dokunma URL'yi açar. Kapalı: sessiz webhook (yalnızca http(s)).",
-            "secondary_url_title": "İkincil düğme etiketi (en fazla 64 karakter).",
-            "snooze_seconds": "iOS Ertele düğmesinin geri sayımı ne kadar uzattığı (60–3600). 300s (5 dk) varsayılanı için boş bırakın. Alarm gerektirir. Yalnızca geri sayım şablonu.",
-            "fired_at_entity": "Uyarının tetiklenme zamanını ayrı bir varlıktan okur. İzlenen varlığı kullanmak için boş bırakın. Bir unix zaman damgası veya bir ISO zaman damgası sensörü kabul eder. Yalnızca uyarı şablonu.",
-            "log_columns": "Her günlük satırına eklenen ek değerler (en fazla 6), virgülle ayrılır. Biçim: [Label=]source[|unit]. source = bu varlığın bir niteliği (brightness), başka bir varlığın durumu (binary_sensor.door) veya başka bir varlığın niteliği (sensor.temp:temperature). Örnek: color_temp_kelvin|K, brightness → 'On · 4000K · 153'. Yalnızca günlük şablonu."
-          },
-          "description": "Finish with labels, colors, icons, and tap behavior."
         }
       },
       "error": {
-        "invalid_url": "URL, http:// veya https:// şeması kullanmalıdır.",
-        "invalid_gauge_range": "Minimum değer, maksimum değerden küçük olmalıdır.",
-        "silent_requires_http": "Sessiz webhook (foreground kapalı) bir http:// veya https:// URL'si gerektirir."
+        "invalid_url": "URL must include a valid scheme. Use http(s):// or a custom app scheme like homeassistant://.",
+        "silent_requires_http": "Silent webhook (foreground off) requires an http:// or https:// URL.",
+        "invalid_gauge_range": "Minimum value must be less than maximum value.",
+        "tiles_required": "At least one tile is required for the board template.",
+        "too_many_series": "A timeline supports at most 10 series in total (series attributes plus series entities)."
       },
       "abort": {
-        "already_configured": "Bu varlık zaten izleniyor.",
-        "reconfigure_successful": "Varlık yapılandırması güncellendi."
+        "already_configured": "This entity is already tracked.",
+        "reconfigure_successful": "Entity configuration updated."
       }
     },
     "tracked_widget": {
-      "entry_type": "İzlenen Widget",
+      "entry_type": "Tracked Widget",
       "initiate_flow": {
-        "user": "İzlenen widget ekle"
+        "user": "Add tracked widget"
       },
       "step": {
         "user": {
-          "title": "PushWard'a Widget Ekle",
+          "title": "Add tracked PushWard widget",
           "data": {
-            "entity_id": "Varlık",
-            "widget_template": "Şablon",
-            "slug": "Widget Slug'ı"
+            "entity_id": "Entity to display",
+            "widget_template": "Widget layout",
+            "slug": "Widget slug"
           },
           "data_description": {
-            "widget_template": "Widget düzeni. Tek bir sayı için `value`, 0–1 çubuğu için `progress`, aralıktaki bir değer için `gauge`, önem rozeti için `status` veya en fazla 6 satır için `stat_list` kullanın.",
-            "slug": "Bu widget için benzersiz tanımlayıcı. Varlık kimliğinden otomatik oluşturmak için boş bırakın."
+            "widget_template": "Widget layout. Use `value` for a single number, `progress` for a 0–1 bar, `gauge` for a value-in-range, `status` for a severity badge, or `stat_list` for up to 6 rows.",
+            "slug": "Unique identifier for this widget. Leave empty to auto-generate from entity ID.",
+            "entity_id": "The Home Assistant entity that supplies this widget’s value and update events."
           }
         },
         "reconfigure": {
-          "title": "Widget'ı Düzenle",
+          "title": "Edit tracked PushWard widget",
           "data": {
-            "entity_id": "Varlık",
-            "widget_template": "Şablon",
-            "slug": "Widget Slug'ı"
+            "entity_id": "Entity",
+            "widget_template": "Template",
+            "slug": "Widget Slug"
           },
           "data_description": {
-            "widget_template": "Widget düzeni.",
-            "slug": "Bu widget için benzersiz tanımlayıcı."
+            "widget_template": "Widget layout.",
+            "slug": "Unique identifier for this widget."
           }
         },
         "details": {
           "title": "Configure {template} widget",
           "data": {
-            "widget_name": "Widget Adı",
-            "value_attribute": "Değer Özniteliği",
-            "unit": "Birim",
-            "min_value": "Minimum Değer",
-            "max_value": "Maksimum Değer",
-            "severity": "Önem Derecesi",
-            "stat_rows": "İstatistik Satırları",
-            "label": "Etiket",
-            "label_attribute": "Etiket Özniteliği",
-            "subtitle_attribute": "Alt Başlık Özniteliği",
-            "icon": "Simge",
-            "icon_attribute": "Simge Özniteliği",
-            "accent_color": "Vurgu Rengi",
-            "accent_color_attribute": "Vurgu Rengi Özniteliği",
-            "background_color": "Arka Plan Rengi",
-            "text_color": "Metin Rengi",
-            "widget_trigger_mode": "Tetikleme Modu",
-            "widget_poll_interval": "Yoklama Aralığı (saniye)",
-            "tap_action_url": "Dokunma Eylemi URL'si",
-            "tap_action_foreground": "Dokunma Eylemi URL'sini Aç"
+            "widget_name": "Widget Name",
+            "value_attribute": "Value Attribute",
+            "unit": "Unit",
+            "min_value": "Minimum Value",
+            "max_value": "Maximum Value",
+            "severity": "Severity",
+            "stat_rows": "Stat Rows",
+            "label": "Label",
+            "label_attribute": "Label Attribute",
+            "subtitle_attribute": "Subtitle Attribute",
+            "icon": "Icon",
+            "icon_attribute": "Icon Attribute",
+            "accent_color": "Accent Color",
+            "accent_color_attribute": "Accent Color Attribute",
+            "background_color": "Background Color",
+            "text_color": "Text Color",
+            "widget_trigger_mode": "Trigger Mode",
+            "widget_poll_interval": "Poll Interval (seconds)",
+            "tap_action_url": "Tap Action URL",
+            "tap_action_foreground": "Open Tap Action URL"
           },
           "data_description": {
-            "widget_name": "iOS widget seçicide gösterilen görünen ad. Varsayılan olarak varlığın kolay adıdır.",
-            "value_attribute": "Değeri tutan varlık özniteliği. Varlığın birincil durumunu kullanmak için boş bırakın.",
-            "unit": "Değerin yanında gösterilen görünen birim. En fazla 32 karakter.",
-            "min_value": "Gösterge aralığı için minimum değer.",
-            "max_value": "Gösterge aralığı için maksimum değer.",
-            "severity": "Durum önem derecesi (info, warning, critical, success).",
-            "stat_rows": "En fazla 6 satır. Biçim: `Label=entity_id[:attribute[:unit]]`, virgülle ayrılmış. Örnek: `Users=sensor.user_count, Active=sensor.active_devices:count`.",
-            "label": "Widget'ta gösterilen statik etiket. Varlıktan türetmek için boş bırakın.",
-            "label_attribute": "Etiket olarak kullanılan varlık özniteliği. Statik etiketi geçersiz kılar.",
-            "subtitle_attribute": "Widget alt başlığı olarak gösterilen varlık özniteliği.",
-            "icon": "Statik simge. SF Symbols ve MDI adları desteklenir.",
-            "icon_attribute": "Dinamik bir simge için varlık özniteliği. Statik simgeyi geçersiz kılar.",
-            "accent_color": "Widget için vurgu rengi. Varsayılan için boş bırakın.",
-            "accent_color_attribute": "Dinamik bir vurgu rengi için varlık özniteliği.",
-            "background_color": "İsteğe bağlı arka plan rengi.",
-            "text_color": "İsteğe bağlı metin rengi.",
-            "widget_trigger_mode": "Güncellemelerin nasıl tetiklendiği. `event` durum değişikliklerine tepki verir; `poll` sabit bir aralıkta yeniden değerlendirir.",
-            "widget_poll_interval": "Yoklamalar arasındaki aralık (10–3600 saniye). Yalnızca tetikleme modu `poll` olduğunda kullanılır.",
-            "tap_action_url": "Widget'a dokunulduğunda açılan isteğe bağlı URL. http(s) (Safari'yi açar) veya homeassistant://navigate/lovelace/0 gibi özel şemaları destekler.",
-            "tap_action_foreground": "Açık: dokunma URL'yi açar. Kapalı: sessiz webhook (yalnızca http(s)) — arka planda bir POST tetikler."
+            "widget_name": "Display name shown in the iOS widget picker. Defaults to the entity's friendly name.",
+            "value_attribute": "Entity attribute holding the value. Leave empty to use the entity's primary state.",
+            "unit": "Display unit shown next to the value. Max 32 characters.",
+            "min_value": "Minimum value for the gauge range.",
+            "max_value": "Maximum value for the gauge range.",
+            "severity": "Status severity (info, warning, critical, success).",
+            "stat_rows": "Add up to 6 rows, each with a label, entity, and optional attribute and unit. Smaller widgets may show fewer rows depending on Row Density in the PushWard app.",
+            "label": "Static label shown on the widget. Leave empty to derive from the entity.",
+            "label_attribute": "Entity attribute used as the label. Overrides the static label.",
+            "subtitle_attribute": "Entity attribute shown as the widget subtitle.",
+            "icon": "Static icon. SF Symbols and MDI names supported.",
+            "icon_attribute": "Entity attribute for a dynamic icon. Overrides the static icon.",
+            "accent_color": "Accent color for the widget. Leave empty for the default.",
+            "accent_color_attribute": "Entity attribute for a dynamic accent color.",
+            "background_color": "Optional background color.",
+            "text_color": "Optional text color.",
+            "widget_trigger_mode": "How updates are triggered. `event` reacts to state changes; `poll` re-evaluates on a fixed interval.",
+            "widget_poll_interval": "Interval between polls (10–3600 seconds). Only used when trigger mode is `poll`.",
+            "tap_action_url": "Optional URL opened when tapping the widget. Supports http(s) (opens Safari) or custom schemes like homeassistant://navigate/lovelace/0.",
+            "tap_action_foreground": "On: tap opens the URL. Off: silent webhook (http(s) only) — fires a POST in the background."
           },
           "description": "Everything is on this page. Open only the sections you need.",
           "sections": {
@@ -1702,225 +1378,99 @@
               "name": "Widget content",
               "description": "Values rendered by the selected widget layout.",
               "data": {
-                "value_attribute": "Değer Özniteliği",
-                "unit": "Birim",
-                "min_value": "Minimum Değer",
-                "max_value": "Maksimum Değer",
-                "severity": "Önem Derecesi",
-                "stat_rows": "İstatistik Satırları"
+                "value_attribute": "Value Attribute",
+                "unit": "Unit",
+                "min_value": "Minimum Value",
+                "max_value": "Maximum Value",
+                "severity": "Severity",
+                "stat_rows": "Stat Rows"
               },
               "data_description": {
-                "value_attribute": "Değeri tutan varlık özniteliği. Varlığın birincil durumunu kullanmak için boş bırakın.",
-                "unit": "Değerin yanında gösterilen görünen birim. En fazla 32 karakter.",
-                "min_value": "Gösterge aralığı için minimum değer.",
-                "max_value": "Gösterge aralığı için maksimum değer.",
-                "severity": "Durum önem derecesi (info, warning, critical, success).",
-                "stat_rows": "En fazla 6 satır. Biçim: `Label=entity_id[:attribute[:unit]]`, virgülle ayrılmış. Örnek: `Users=sensor.user_count, Active=sensor.active_devices:count`."
+                "value_attribute": "Entity attribute holding the value. Leave empty to use the entity's primary state.",
+                "unit": "Display unit shown next to the value. Max 32 characters.",
+                "min_value": "Minimum value for the gauge range.",
+                "max_value": "Maximum value for the gauge range.",
+                "severity": "Status severity (info, warning, critical, success).",
+                "stat_rows": "Add up to 6 rows, each with a label, entity, and optional attribute and unit. Smaller widgets may show fewer rows depending on Row Density in the PushWard app."
               }
             },
             "appearance": {
               "name": "Appearance and tap action",
               "description": "Optional labels, icon, colors, and tap behavior.",
               "data": {
-                "widget_name": "Widget Adı",
-                "label": "Etiket",
-                "label_attribute": "Etiket Özniteliği",
-                "subtitle_attribute": "Alt Başlık Özniteliği",
-                "icon": "Simge",
-                "icon_attribute": "Simge Özniteliği",
-                "accent_color": "Vurgu Rengi",
-                "accent_color_attribute": "Vurgu Rengi Özniteliği",
-                "background_color": "Arka Plan Rengi",
-                "text_color": "Metin Rengi",
-                "tap_action_url": "Dokunma Eylemi URL'si",
-                "tap_action_foreground": "Dokunma Eylemi URL'sini Aç"
+                "widget_name": "Widget Name",
+                "label": "Label",
+                "label_attribute": "Label Attribute",
+                "subtitle_attribute": "Subtitle Attribute",
+                "icon": "Icon",
+                "icon_attribute": "Icon Attribute",
+                "accent_color": "Accent Color",
+                "accent_color_attribute": "Accent Color Attribute",
+                "background_color": "Background Color",
+                "text_color": "Text Color",
+                "tap_action": "Background tap action",
+                "url_action": "Primary button",
+                "secondary_url_action": "Secondary button"
               },
               "data_description": {
-                "widget_name": "iOS widget seçicide gösterilen görünen ad. Varsayılan olarak varlığın kolay adıdır.",
-                "label": "Widget'ta gösterilen statik etiket. Varlıktan türetmek için boş bırakın.",
-                "label_attribute": "Etiket olarak kullanılan varlık özniteliği. Statik etiketi geçersiz kılar.",
-                "subtitle_attribute": "Widget alt başlığı olarak gösterilen varlık özniteliği.",
-                "icon": "Statik simge. SF Symbols ve MDI adları desteklenir.",
-                "icon_attribute": "Dinamik bir simge için varlık özniteliği. Statik simgeyi geçersiz kılar.",
-                "accent_color": "Widget için vurgu rengi. Varsayılan için boş bırakın.",
-                "accent_color_attribute": "Dinamik bir vurgu rengi için varlık özniteliği.",
-                "background_color": "İsteğe bağlı arka plan rengi.",
-                "text_color": "İsteğe bağlı metin rengi.",
-                "tap_action_url": "Widget'a dokunulduğunda açılan isteğe bağlı URL. http(s) (Safari'yi açar) veya homeassistant://navigate/lovelace/0 gibi özel şemaları destekler.",
-                "tap_action_foreground": "Açık: dokunma URL'yi açar. Kapalı: sessiz webhook (yalnızca http(s)) — arka planda bir POST tetikler."
+                "widget_name": "Display name shown in the iOS widget picker. Defaults to the entity's friendly name.",
+                "label": "Static label shown on the widget. Leave empty to derive from the entity.",
+                "label_attribute": "Entity attribute used as the label. Overrides the static label.",
+                "subtitle_attribute": "Entity attribute shown as the widget subtitle.",
+                "icon": "Static icon. SF Symbols and MDI names supported.",
+                "icon_attribute": "Entity attribute for a dynamic icon. Overrides the static icon.",
+                "accent_color": "Choose a PushWard named color or enter 6/8-digit RGB/RGBA hex, with or without #.",
+                "accent_color_attribute": "Entity attribute for a dynamic accent color.",
+                "background_color": "Choose a PushWard named color or enter 6/8-digit RGB/RGBA hex, with or without #.",
+                "text_color": "Choose a PushWard named color or enter 6/8-digit RGB/RGBA hex, with or without #.",
+                "tap_action": "Optional whole-card destination. Configure an app link/foreground URL or a silent HTTP webhook.",
+                "url_action": "Optional primary inline button with a title, icon, and visible link or silent webhook.",
+                "secondary_url_action": "Optional second inline button with a title, icon, and visible link or silent webhook."
               }
             },
             "refresh": {
               "name": "Refresh behavior",
               "description": "Choose event-driven updates or periodic polling.",
               "data": {
-                "widget_trigger_mode": "Tetikleme Modu",
-                "widget_poll_interval": "Yoklama Aralığı (saniye)"
+                "widget_trigger_mode": "Trigger Mode",
+                "widget_poll_interval": "Polling interval"
               },
               "data_description": {
-                "widget_trigger_mode": "Güncellemelerin nasıl tetiklendiği. `event` durum değişikliklerine tepki verir; `poll` sabit bir aralıkta yeniden değerlendirir.",
-                "widget_poll_interval": "Yoklamalar arasındaki aralık (10–3600 saniye). Yalnızca tetikleme modu `poll` olduğunda kullanılır."
+                "widget_trigger_mode": "How updates are triggered. `event` reacts to state changes; `poll` re-evaluates on a fixed interval.",
+                "widget_poll_interval": "Seconds between polls. Valid range: 10-3,600 seconds; used only with Poll on a schedule."
               }
             }
           }
-        },
-        "appearance": {
-          "title": "3 of 4 · Appearance and tap action",
-          "data": {
-            "widget_name": "Widget Adı",
-            "value_attribute": "Değer Özniteliği",
-            "unit": "Birim",
-            "min_value": "Minimum Değer",
-            "max_value": "Maksimum Değer",
-            "severity": "Önem Derecesi",
-            "stat_rows": "İstatistik Satırları",
-            "label": "Etiket",
-            "label_attribute": "Etiket Özniteliği",
-            "subtitle_attribute": "Alt Başlık Özniteliği",
-            "icon": "Simge",
-            "icon_attribute": "Simge Özniteliği",
-            "accent_color": "Vurgu Rengi",
-            "accent_color_attribute": "Vurgu Rengi Özniteliği",
-            "background_color": "Arka Plan Rengi",
-            "text_color": "Metin Rengi",
-            "widget_trigger_mode": "Tetikleme Modu",
-            "widget_poll_interval": "Yoklama Aralığı (saniye)",
-            "tap_action_url": "Dokunma Eylemi URL'si",
-            "tap_action_foreground": "Dokunma Eylemi URL'sini Aç"
-          },
-          "data_description": {
-            "widget_name": "iOS widget seçicide gösterilen görünen ad. Varsayılan olarak varlığın kolay adıdır.",
-            "value_attribute": "Değeri tutan varlık özniteliği. Varlığın birincil durumunu kullanmak için boş bırakın.",
-            "unit": "Değerin yanında gösterilen görünen birim. En fazla 32 karakter.",
-            "min_value": "Gösterge aralığı için minimum değer.",
-            "max_value": "Gösterge aralığı için maksimum değer.",
-            "severity": "Durum önem derecesi (info, warning, critical, success).",
-            "stat_rows": "En fazla 6 satır. Biçim: `Label=entity_id[:attribute[:unit]]`, virgülle ayrılmış. Örnek: `Users=sensor.user_count, Active=sensor.active_devices:count`.",
-            "label": "Widget'ta gösterilen statik etiket. Varlıktan türetmek için boş bırakın.",
-            "label_attribute": "Etiket olarak kullanılan varlık özniteliği. Statik etiketi geçersiz kılar.",
-            "subtitle_attribute": "Widget alt başlığı olarak gösterilen varlık özniteliği.",
-            "icon": "Statik simge. SF Symbols ve MDI adları desteklenir.",
-            "icon_attribute": "Dinamik bir simge için varlık özniteliği. Statik simgeyi geçersiz kılar.",
-            "accent_color": "Widget için vurgu rengi. Varsayılan için boş bırakın.",
-            "accent_color_attribute": "Dinamik bir vurgu rengi için varlık özniteliği.",
-            "background_color": "İsteğe bağlı arka plan rengi.",
-            "text_color": "İsteğe bağlı metin rengi.",
-            "widget_trigger_mode": "Güncellemelerin nasıl tetiklendiği. `event` durum değişikliklerine tepki verir; `poll` sabit bir aralıkta yeniden değerlendirir.",
-            "widget_poll_interval": "Yoklamalar arasındaki aralık (10–3600 saniye). Yalnızca tetikleme modu `poll` olduğunda kullanılır.",
-            "tap_action_url": "Widget'a dokunulduğunda açılan isteğe bağlı URL. http(s) (Safari'yi açar) veya homeassistant://navigate/lovelace/0 gibi özel şemaları destekler.",
-            "tap_action_foreground": "Açık: dokunma URL'yi açar. Kapalı: sessiz webhook (yalnızca http(s)) — arka planda bir POST tetikler."
-          },
-          "description": "Set the widget labels, icon, colors, and tap behavior."
-        },
-        "refresh": {
-          "title": "4 of 4 · Refresh behavior",
-          "data": {
-            "widget_name": "Widget Adı",
-            "value_attribute": "Değer Özniteliği",
-            "unit": "Birim",
-            "min_value": "Minimum Değer",
-            "max_value": "Maksimum Değer",
-            "severity": "Önem Derecesi",
-            "stat_rows": "İstatistik Satırları",
-            "label": "Etiket",
-            "label_attribute": "Etiket Özniteliği",
-            "subtitle_attribute": "Alt Başlık Özniteliği",
-            "icon": "Simge",
-            "icon_attribute": "Simge Özniteliği",
-            "accent_color": "Vurgu Rengi",
-            "accent_color_attribute": "Vurgu Rengi Özniteliği",
-            "background_color": "Arka Plan Rengi",
-            "text_color": "Metin Rengi",
-            "widget_trigger_mode": "Tetikleme Modu",
-            "widget_poll_interval": "Yoklama Aralığı (saniye)",
-            "tap_action_url": "Dokunma Eylemi URL'si",
-            "tap_action_foreground": "Dokunma Eylemi URL'sini Aç"
-          },
-          "data_description": {
-            "widget_name": "iOS widget seçicide gösterilen görünen ad. Varsayılan olarak varlığın kolay adıdır.",
-            "value_attribute": "Değeri tutan varlık özniteliği. Varlığın birincil durumunu kullanmak için boş bırakın.",
-            "unit": "Değerin yanında gösterilen görünen birim. En fazla 32 karakter.",
-            "min_value": "Gösterge aralığı için minimum değer.",
-            "max_value": "Gösterge aralığı için maksimum değer.",
-            "severity": "Durum önem derecesi (info, warning, critical, success).",
-            "stat_rows": "En fazla 6 satır. Biçim: `Label=entity_id[:attribute[:unit]]`, virgülle ayrılmış. Örnek: `Users=sensor.user_count, Active=sensor.active_devices:count`.",
-            "label": "Widget'ta gösterilen statik etiket. Varlıktan türetmek için boş bırakın.",
-            "label_attribute": "Etiket olarak kullanılan varlık özniteliği. Statik etiketi geçersiz kılar.",
-            "subtitle_attribute": "Widget alt başlığı olarak gösterilen varlık özniteliği.",
-            "icon": "Statik simge. SF Symbols ve MDI adları desteklenir.",
-            "icon_attribute": "Dinamik bir simge için varlık özniteliği. Statik simgeyi geçersiz kılar.",
-            "accent_color": "Widget için vurgu rengi. Varsayılan için boş bırakın.",
-            "accent_color_attribute": "Dinamik bir vurgu rengi için varlık özniteliği.",
-            "background_color": "İsteğe bağlı arka plan rengi.",
-            "text_color": "İsteğe bağlı metin rengi.",
-            "widget_trigger_mode": "Güncellemelerin nasıl tetiklendiği. `event` durum değişikliklerine tepki verir; `poll` sabit bir aralıkta yeniden değerlendirir.",
-            "widget_poll_interval": "Yoklamalar arasındaki aralık (10–3600 saniye). Yalnızca tetikleme modu `poll` olduğunda kullanılır.",
-            "tap_action_url": "Widget'a dokunulduğunda açılan isteğe bağlı URL. http(s) (Safari'yi açar) veya homeassistant://navigate/lovelace/0 gibi özel şemaları destekler.",
-            "tap_action_foreground": "Açık: dokunma URL'yi açar. Kapalı: sessiz webhook (yalnızca http(s)) — arka planda bir POST tetikler."
-          },
-          "description": "Choose whether Home Assistant pushes changes or the PushWard app polls for them."
         }
       },
       "error": {
-        "invalid_url": "URL geçerli bir şema içermelidir. http(s):// veya homeassistant:// gibi özel bir uygulama şeması kullanın.",
-        "silent_requires_http": "Sessiz webhook (foreground kapalı) bir http:// veya https:// URL'si gerektirir.",
-        "invalid_gauge_range": "Minimum değer maksimum değerden küçük olmalıdır.",
-        "stat_rows_required": "stat_list şablonu için en az bir istatistik satırı gereklidir."
+        "invalid_url": "URL must include a valid scheme. Use http(s):// or a custom app scheme like homeassistant://.",
+        "silent_requires_http": "Silent webhook (foreground off) requires an http:// or https:// URL.",
+        "invalid_gauge_range": "Minimum value must be less than maximum value.",
+        "stat_rows_required": "At least one stat row is required for the stat_list template."
       },
       "abort": {
-        "already_configured": "Bu slug'a sahip bir widget zaten var.",
-        "reconfigure_successful": "Widget yapılandırması güncellendi."
+        "already_configured": "A widget with this slug already exists.",
+        "reconfigure_successful": "Widget configuration updated."
       }
-    }
-  },
-  "entity": {
-    "sensor": {
-      "notifications_used": {
-        "name": "Kullanılan bildirimler"
-      },
-      "live_activity_updates_used": {
-        "name": "Kullanılan Live Activity güncellemeleri"
-      },
-      "widget_updates_used": {
-        "name": "Kullanılan widget güncellemeleri"
-      },
-      "emails_used": {
-        "name": "Kullanılan e-postalar"
-      },
-      "subscription_tier": {
-        "name": "Abonelik katmanı",
-        "state": {
-          "free": "Ücretsiz",
-          "premium": "Premium"
-        }
-      }
-    }
-  },
-  "exceptions": {
-    "widget_not_found": {
-      "message": "slug={slug} entity_id={entity_id} ile eşleşen PushWard widget'ı yok."
     }
   },
   "issues": {
-    "deprecated_update_activity": {
-      "title": "PushWard update_activity eylemi kullanımdan kaldırıldı",
-      "description": "`pushward_hacs.update_activity` eylemi kullanımdan kaldırıldı. Otomasyonlarınızı bunun yerine şablona özgü eyleme geçirin — örneğin `pushward_hacs.update_activity_countdown` veya `pushward_hacs.update_activity_gauge`. Eski eylem şimdilik hâlâ çalışıyor ancak gelecekteki bir sürümde kaldırılacak."
-    },
     "usage_limit_notifications": {
-      "title": "PushWard bildirim limitine ulaşıldı",
-      "description": "PushWard hesabınız mevcut dönem için {limit} bildiriminin {used} tanesini kullandı, bu nedenle kota sıfırlanana kadar ({resets_at}) yeni bildirimler reddedilecek. Limiti yükseltmek için PushWard iOS uygulamasında aboneliğinizi yükseltin."
+      "title": "PushWard notification limit reached",
+      "description": "Your PushWard account has used {used} of its {limit} notifications for the current period, so new notifications will be rejected until the quota resets ({resets_at}). Upgrade your subscription in the PushWard iOS app to raise the limit."
     },
     "usage_limit_live_activity": {
-      "title": "PushWard Live Activity güncelleme limitine ulaşıldı",
-      "description": "PushWard hesabınız mevcut dönem için {limit} Live Activity güncellemesinin {used} tanesini kullandı, bu nedenle kota sıfırlanana kadar ({resets_at}) yeni güncellemeler reddedilecek. Limiti yükseltmek için PushWard iOS uygulamasında aboneliğinizi yükseltin."
+      "title": "PushWard Live Activity update limit reached",
+      "description": "Your PushWard account has used {used} of its {limit} Live Activity updates for the current period, so new updates will be rejected until the quota resets ({resets_at}). Upgrade your subscription in the PushWard iOS app to raise the limit."
     },
     "usage_limit_widgets": {
-      "title": "PushWard widget güncelleme limitine ulaşıldı",
-      "description": "PushWard hesabınız mevcut dönem için {limit} widget güncellemesinin {used} tanesini kullandı, bu nedenle kota sıfırlanana kadar ({resets_at}) yeni güncellemeler reddedilecek. Limiti yükseltmek için PushWard iOS uygulamasında aboneliğinizi yükseltin."
+      "title": "PushWard widget update limit reached",
+      "description": "Your PushWard account has used {used} of its {limit} widget updates for the current period, so new updates will be rejected until the quota resets ({resets_at}). Upgrade your subscription in the PushWard iOS app to raise the limit."
     },
     "usage_limit_emails": {
-      "title": "PushWard e-posta limitine ulaşıldı",
-      "description": "PushWard hesabınız mevcut dönem için {limit} e-postasının {used} tanesini kullandı, bu nedenle kota sıfırlanana kadar ({resets_at}) yeni e-postalar reddedilecek. Limiti yükseltmek için PushWard iOS uygulamasında aboneliğinizi yükseltin."
+      "title": "PushWard email limit reached",
+      "description": "Your PushWard account has used {used} of its {limit} emails for the current period, so new emails will be rejected until the quota resets ({resets_at}). Upgrade your subscription in the PushWard iOS app to raise the limit."
     }
   }
 }

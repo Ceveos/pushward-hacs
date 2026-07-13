@@ -1,1700 +1,1376 @@
 {
-  "services": {
-    "update_activity": {
-      "name": "Aggiorna attività (deprecated)",
-      "description": "Aggiornare lo stato e il contenuto di una PushWard Live Activity.",
-      "fields": {
-        "slug": {
-          "name": "Slug",
-          "description": "Identificatore slug dell'attività."
-        },
-        "state": {
-          "name": "Stato",
-          "description": "Stato desiderato dell'attività."
-        },
-        "template": {
-          "name": "Modello",
-          "description": "Modello di layout dell'attività."
-        },
-        "progress": {
-          "name": "Avanzamento",
-          "description": "Valore di avanzamento compreso tra 0.0 e 1.0."
-        },
-        "state_text": {
-          "name": "Testo stato",
-          "description": "Testo visualizzato come stato dell'attività."
-        },
-        "icon": {
-          "name": "Icona",
-          "description": "Nome icona SF Symbol o MDI (es. arrow.down.circle.fill, mdi:download)."
-        },
-        "subtitle": {
-          "name": "Sottotitolo",
-          "description": "Testo del sottotitolo visualizzato nell'attività."
-        },
-        "accent_color": {
-          "name": "Colore accento",
-          "description": "Nome del colore accento per l'attività."
-        },
-        "remaining_time": {
-          "name": "Tempo rimanente",
-          "description": "Tempo rimanente in secondi."
-        },
-        "url": {
-          "name": "URL",
-          "description": "URL principale visualizzato come pulsante selezionabile. Supportato solo nei modelli steps e alert."
-        },
-        "secondary_url": {
-          "name": "URL secondario",
-          "description": "URL secondario visualizzato come secondo pulsante selezionabile. Supportato solo nei modelli steps e alert."
-        },
-        "end_date": {
-          "name": "Data di fine",
-          "description": "Timestamp Unix per la data di fine countdown."
-        },
-        "total_steps": {
-          "name": "Passaggi totali",
-          "description": "Numero totale di steps."
-        },
-        "current_step": {
-          "name": "Passo corrente",
-          "description": "Numero del passo corrente."
-        },
-        "severity": {
-          "name": "Gravità",
-          "description": "Livello di gravità alert."
-        },
-        "value": {
-          "name": "Valore",
-          "description": "Gauge: valore numerico. Timeline: oggetto con valori etichettati (es. Temp=22.5)."
-        },
-        "min_value": {
-          "name": "Valore minimo",
-          "description": "Valore minimo del gauge."
-        },
-        "max_value": {
-          "name": "Valore massimo",
-          "description": "Valore massimo del gauge."
-        },
-        "unit": {
-          "name": "Unità",
-          "description": "Unità di visualizzazione per il valore (es. °C, %)."
-        },
-        "completion_message": {
-          "name": "Messaggio di completamento",
-          "description": "Messaggio visualizzato al termine dell'attività."
-        },
-        "scale": {
-          "name": "Scala",
-          "description": "Modalità scala sull'asse Y (lineare o logaritmica). Solo per il modello timeline."
-        },
-        "decimals": {
-          "name": "Cifre decimali",
-          "description": "Cifre decimali per la visualizzazione del valore (0-10). Solo per il modello timeline."
-        },
-        "smoothing": {
-          "name": "Linee smussate",
-          "description": "Abilitare l'interpolazione della curva tra i punti dati. Solo per il modello timeline."
-        },
-        "thresholds": {
-          "name": "Soglie",
-          "description": "Linee di riferimento orizzontali sul grafico sparkline. Solo per il modello timeline."
-        },
-        "sound": {
-          "name": "Suono",
-          "description": "Suono di notifica riprodotto sul dispositivo per questo aggiornamento."
-        },
-        "priority": {
-          "name": "Priorità temporanea",
-          "description": "Priorità per singolo aggiornamento (0-10). Sostituisce la priorità configurata dell'attività solo per questo push."
-        },
-        "background_color": {
-          "name": "Colore sfondo",
-          "description": "Colore di sfondo della Live Activity. Esadecimale (#RRGGBB) o nome del colore."
-        },
-        "text_color": {
-          "name": "Colore testo",
-          "description": "Colore del testo della Live Activity. Esadecimale (#RRGGBB) o nome del colore."
-        },
-        "warning_threshold": {
-          "name": "Soglia di avviso",
-          "description": "Secondi prima di end_date in cui il countdown entra in stato di avviso. Solo per il modello countdown."
-        },
-        "alarm": {
-          "name": "Sveglia",
-          "description": "Attivare la sveglia AlarmKit alla scadenza del countdown (iOS 26+, solo per il modello countdown)."
-        },
-        "step_labels": {
-          "name": "Etichette passi",
-          "description": "Elenco ordinato delle etichette dei passi. La lunghezza deve essere uguale a total_steps. Solo per il modello steps."
-        },
-        "step_rows": {
-          "name": "Altezze righe passi",
-          "description": "Elenco ordinato delle altezze di riga (1-10) per passo. La lunghezza deve essere uguale a total_steps. Solo per il modello steps."
-        },
-        "fired_at": {
-          "name": "Attivato alle",
-          "description": "Timestamp Unix di quando è stato attivato l'alert. Solo per il modello alert."
-        },
-        "units": {
-          "name": "Mappa unità",
-          "description": "Etichette delle unità per serie. Le chiavi devono corrispondere alle chiavi del value dict. Solo per il modello timeline."
-        },
-        "snooze_seconds": {
-          "name": "Secondi di posticipo",
-          "description": "Di quanto il pulsante Posticipa di iOS estende il conto alla rovescia (60–3600). Valore predefinito 300 (5 min). Richiede una sveglia (iOS 26+, solo modello conto alla rovescia)."
-        },
-        "duration": {
-          "name": "Durata",
-          "description": "Alternativa imposta-e-dimentica a Data di fine: secondi (>=1) o una stringa di durata come \"1h30m\". Il server riancora inizio/fine al momento attuale. Invia Durata oppure Data di fine — se entrambe sono impostate prevale Durata."
-        },
-        "start_date": {
-          "name": "Data di inizio",
-          "description": "Timestamp Unix di inizio del conto alla rovescia (ancora la barra di tempo trascorso/rimanente). Per impostazione predefinita il server usa il momento attuale."
-        },
-        "history": {
-          "name": "Cronologia (seed)",
-          "description": "Seed iniziale dello sparkline: un oggetto che mappa il nome di una serie a un elenco di (timestamp, value). Solo seed — dopo il primo aggiornamento il server prende il controllo."
-        },
-        "tap_action": {
-          "name": "Azione al tocco",
-          "description": "Bersaglio del tocco sull'intera attività come oggetto: url (obbligatorio), foreground facoltativo e, per un url http(s), un webhook silenzioso tramite method/headers/body."
-        },
-        "url_action": {
-          "name": "Pulsante primario",
-          "description": "Pulsante primario toccabile come oggetto: url (obbligatorio), title, icon e foreground facoltativi, e method/headers/body http(s) per un webhook silenzioso."
-        },
-        "secondary_url_action": {
-          "name": "Pulsante secondario",
-          "description": "Pulsante secondario toccabile — stessa forma di oggetto del pulsante primario."
-        }
+  "entity": {
+    "sensor": {
+      "notifications_used": {
+        "name": "Notifications used"
       },
-      "sections": {
-        "countdown_options": {
-          "name": "Opzioni countdown",
-          "description": "Solo per il modello countdown."
-        },
-        "steps_options": {
-          "name": "Opzioni steps",
-          "description": "Solo per il modello steps."
-        },
-        "alert_options": {
-          "name": "Opzioni alert",
-          "description": "Solo per il modello alert."
-        },
-        "gauge_timeline_options": {
-          "name": "Opzioni gauge e timeline",
-          "description": "Solo per i modelli gauge e timeline."
-        },
-        "action_buttons": {
-          "name": "Pulsanti azione",
-          "description": "Pulsanti URL selezionabili. Solo per i modelli steps e alert."
-        },
-        "display_options": {
-          "name": "Visualizzazione, colore e suono",
-          "description": "Stile opzionale e sostituzioni per aggiornamento. Si applicano a qualsiasi modello."
+      "live_activity_updates_used": {
+        "name": "Live Activity updates used"
+      },
+      "widget_updates_used": {
+        "name": "Widget updates used"
+      },
+      "emails_used": {
+        "name": "Emails used"
+      },
+      "subscription_tier": {
+        "name": "Subscription tier",
+        "state": {
+          "free": "Free",
+          "premium": "Premium"
         }
       }
-    },
+    }
+  },
+  "services": {
     "update_activity_generic": {
-      "name": "Aggiorna attività (Generic)",
-      "description": "Aggiornare lo stato e il contenuto di una PushWard Live Activity.",
+      "name": "Update Activity (Generic)",
+      "description": "Update a PushWard Live Activity state and content.",
       "fields": {
         "slug": {
           "name": "Slug",
-          "description": "Identificatore slug dell'attività."
+          "description": "Activity slug identifier."
         },
         "state": {
-          "name": "Stato",
-          "description": "Stato desiderato dell'attività."
+          "name": "State",
+          "description": "Desired activity state."
         },
         "state_text": {
-          "name": "Testo stato",
-          "description": "Testo visualizzato come stato dell'attività."
+          "name": "State Text",
+          "description": "Text shown as the activity state."
         },
         "subtitle": {
-          "name": "Sottotitolo",
-          "description": "Testo del sottotitolo visualizzato nell'attività."
+          "name": "Subtitle",
+          "description": "Subtitle text shown on the activity."
         },
         "icon": {
-          "name": "Icona",
-          "description": "Nome icona SF Symbol o MDI (es. arrow.down.circle.fill, mdi:download)."
+          "name": "Icon",
+          "description": "SF Symbol or MDI icon name (e.g. arrow.down.circle.fill, mdi:download)."
         },
         "progress": {
-          "name": "Avanzamento",
-          "description": "Valore di avanzamento compreso tra 0.0 e 1.0."
+          "name": "Progress",
+          "description": "Progress value between 0.0 and 1.0."
         },
         "completion_message": {
-          "name": "Messaggio di completamento",
-          "description": "Messaggio visualizzato al termine dell'attività."
+          "name": "Completion Message",
+          "description": "Message shown when the activity ends."
         },
         "accent_color": {
-          "name": "Colore accento",
-          "description": "Nome del colore accento per l'attività."
+          "name": "Accent Color",
+          "description": "Accent color name for the activity."
         },
         "background_color": {
-          "name": "Colore sfondo",
-          "description": "Colore di sfondo della Live Activity. Esadecimale (#RRGGBB) o nome del colore."
+          "name": "Background Color",
+          "description": "Background color for the Live Activity. Hex (#RRGGBB) or named color."
         },
         "text_color": {
-          "name": "Colore testo",
-          "description": "Colore del testo della Live Activity. Esadecimale (#RRGGBB) o nome del colore."
+          "name": "Text Color",
+          "description": "Text color for the Live Activity. Hex (#RRGGBB) or named color."
         },
         "remaining_time": {
-          "name": "Tempo rimanente",
-          "description": "Tempo rimanente in secondi."
+          "name": "Remaining Time",
+          "description": "Remaining time in seconds."
         },
         "sound": {
-          "name": "Suono",
-          "description": "Suono di notifica riprodotto sul dispositivo per questo aggiornamento."
+          "name": "Sound",
+          "description": "Notification sound played on the device for this update."
         },
         "priority": {
-          "name": "Priorità temporanea",
-          "description": "Priorità per singolo aggiornamento (0-10). Sostituisce la priorità configurata dell'attività solo per questo push."
-        },
-        "url": {
-          "name": "URL",
-          "description": "URL primario mostrato come pulsante toccabile. http(s) o uno schema personalizzato come homeassistant://."
-        },
-        "secondary_url": {
-          "name": "URL secondario",
-          "description": "URL secondario mostrato come secondo pulsante toccabile."
+          "name": "Priority Override",
+          "description": "Per-update priority (0-10). Overrides the activity's configured priority for this push only."
         },
         "tap_action": {
-          "name": "Azione al tocco",
-          "description": "Bersaglio del tocco sull'intera attività come oggetto: url (obbligatorio), foreground facoltativo e, per un url http(s), un webhook silenzioso tramite method/headers/body."
+          "name": "Tap Action",
+          "description": "Whole-activity tap target as an object: url (required), optional foreground, and for an http(s) url a silent webhook via method/headers/body."
         },
         "url_action": {
-          "name": "Pulsante primario",
-          "description": "Pulsante primario toccabile come oggetto: url (obbligatorio), title, icon e foreground facoltativi, e method/headers/body http(s) per un webhook silenzioso."
+          "name": "Primary Button",
+          "description": "Primary tappable button as an object: url (required), optional title, icon, foreground, and http(s) method/headers/body for a silent webhook."
         },
         "secondary_url_action": {
-          "name": "Pulsante secondario",
-          "description": "Pulsante secondario toccabile — stessa forma di oggetto del pulsante primario."
+          "name": "Secondary Button",
+          "description": "Secondary tappable button — same object shape as the Primary Button."
         }
       },
       "sections": {
         "labels": {
-          "name": "Etichette e icona",
-          "description": "Etichette di testo e icona facoltative. Validi per qualsiasi modello."
+          "name": "Labels & icon",
+          "description": "Optional text labels and icon. Apply to any template."
         },
         "action_buttons": {
-          "name": "Pulsanti azione",
-          "description": "Pulsanti URL selezionabili. Solo per i modelli steps e alert."
+          "name": "Action buttons",
+          "description": "Tappable URLs and rich button / tap actions for the activity."
         },
         "display_options": {
-          "name": "Visualizzazione, colore e suono",
-          "description": "Stile opzionale e sostituzioni per aggiornamento. Si applicano a qualsiasi modello."
+          "name": "Display, color & sound",
+          "description": "Optional styling and per-update overrides. Apply to any template."
         }
       }
     },
     "update_activity_countdown": {
-      "name": "Aggiorna attività (Countdown)",
-      "description": "Aggiornare lo stato e il contenuto di una PushWard Live Activity.",
+      "name": "Update Activity (Countdown)",
+      "description": "Update a PushWard Live Activity state and content.",
       "fields": {
         "slug": {
           "name": "Slug",
-          "description": "Identificatore slug dell'attività."
+          "description": "Activity slug identifier."
         },
         "state": {
-          "name": "Stato",
-          "description": "Stato desiderato dell'attività."
+          "name": "State",
+          "description": "Desired activity state."
         },
         "end_date": {
-          "name": "Data di fine",
-          "description": "Timestamp Unix per la data di fine countdown."
+          "name": "End Date",
+          "description": "Unix timestamp for countdown end date."
         },
         "completion_message": {
-          "name": "Messaggio di completamento",
-          "description": "Messaggio visualizzato al termine dell'attività."
+          "name": "Completion Message",
+          "description": "Message shown when the activity ends."
         },
         "state_text": {
-          "name": "Testo stato",
-          "description": "Testo visualizzato come stato dell'attività."
+          "name": "State Text",
+          "description": "Text shown as the activity state."
         },
         "subtitle": {
-          "name": "Sottotitolo",
-          "description": "Testo del sottotitolo visualizzato nell'attività."
+          "name": "Subtitle",
+          "description": "Subtitle text shown on the activity."
         },
         "icon": {
-          "name": "Icona",
-          "description": "Nome icona SF Symbol o MDI (es. arrow.down.circle.fill, mdi:download)."
+          "name": "Icon",
+          "description": "SF Symbol or MDI icon name (e.g. arrow.down.circle.fill, mdi:download)."
         },
         "progress": {
-          "name": "Avanzamento",
-          "description": "Valore di avanzamento compreso tra 0.0 e 1.0."
+          "name": "Progress",
+          "description": "Progress value between 0.0 and 1.0."
         },
         "warning_threshold": {
-          "name": "Soglia di avviso",
-          "description": "Secondi prima di end_date in cui il countdown entra in stato di avviso. Solo per il modello countdown."
+          "name": "Warning Threshold",
+          "description": "Seconds before end_date when the countdown enters warning state. Countdown template only."
         },
         "alarm": {
-          "name": "Sveglia",
-          "description": "Attivare la sveglia AlarmKit alla scadenza del countdown (iOS 26+, solo per il modello countdown)."
+          "name": "Alarm",
+          "description": "Trigger AlarmKit alarm on countdown expiry (iOS 26+, countdown template only)."
         },
         "snooze_seconds": {
-          "name": "Secondi di posticipo",
-          "description": "How long the iOS Snooze button extends the countdown (60–3600). Defaults to 300 (5 min). Only applies with alarm enabled (iOS 26+)."
+          "name": "Snooze Seconds",
+          "description": "How long the iOS Snooze button extends the countdown (60–3600). Defaults to 300 (5 min). Requires alarm (iOS 26+, countdown template only)."
         },
         "accent_color": {
-          "name": "Colore accento",
-          "description": "Nome del colore accento per l'attività."
+          "name": "Accent Color",
+          "description": "Accent color name for the activity."
         },
         "background_color": {
-          "name": "Colore sfondo",
-          "description": "Colore di sfondo della Live Activity. Esadecimale (#RRGGBB) o nome del colore."
+          "name": "Background Color",
+          "description": "Background color for the Live Activity. Hex (#RRGGBB) or named color."
         },
         "text_color": {
-          "name": "Colore testo",
-          "description": "Colore del testo della Live Activity. Esadecimale (#RRGGBB) o nome del colore."
+          "name": "Text Color",
+          "description": "Text color for the Live Activity. Hex (#RRGGBB) or named color."
         },
         "remaining_time": {
-          "name": "Tempo rimanente",
-          "description": "Tempo rimanente in secondi."
+          "name": "Remaining Time",
+          "description": "Remaining time in seconds."
         },
         "sound": {
-          "name": "Suono",
-          "description": "Suono di notifica riprodotto sul dispositivo per questo aggiornamento."
+          "name": "Sound",
+          "description": "Notification sound played on the device for this update."
         },
         "priority": {
-          "name": "Priorità temporanea",
-          "description": "Priorità per singolo aggiornamento (0-10). Sostituisce la priorità configurata dell'attività solo per questo push."
+          "name": "Priority Override",
+          "description": "Per-update priority (0-10). Overrides the activity's configured priority for this push only."
         },
         "duration": {
-          "name": "Durata",
-          "description": "Alternativa imposta-e-dimentica a Data di fine: secondi (>=1) o una stringa di durata come \"1h30m\". Il server riancora inizio/fine al momento attuale. Invia Durata oppure Data di fine — se entrambe sono impostate prevale Durata."
+          "name": "Duration",
+          "description": "Set-and-forget alternative to End Date: seconds (>=1) or a duration string like \"1h30m\". The server re-anchors start/end to now. Send either Duration or End Date — Duration wins if both are set."
         },
         "start_date": {
-          "name": "Data di inizio",
-          "description": "Timestamp Unix di inizio del conto alla rovescia (ancora la barra di tempo trascorso/rimanente). Per impostazione predefinita il server usa il momento attuale."
-        },
-        "url": {
-          "name": "URL",
-          "description": "URL primario mostrato come pulsante toccabile. http(s) o uno schema personalizzato come homeassistant://."
-        },
-        "secondary_url": {
-          "name": "URL secondario",
-          "description": "URL secondario mostrato come secondo pulsante toccabile."
+          "name": "Start Date",
+          "description": "Unix timestamp when the countdown began (anchors the elapsed/remaining bar). The server defaults this to now."
         },
         "tap_action": {
-          "name": "Azione al tocco",
-          "description": "Bersaglio del tocco sull'intera attività come oggetto: url (obbligatorio), foreground facoltativo e, per un url http(s), un webhook silenzioso tramite method/headers/body."
+          "name": "Tap Action",
+          "description": "Whole-activity tap target as an object: url (required), optional foreground, and for an http(s) url a silent webhook via method/headers/body."
         },
         "url_action": {
-          "name": "Pulsante primario",
-          "description": "Pulsante primario toccabile come oggetto: url (obbligatorio), title, icon e foreground facoltativi, e method/headers/body http(s) per un webhook silenzioso."
+          "name": "Primary Button",
+          "description": "Primary tappable button as an object: url (required), optional title, icon, foreground, and http(s) method/headers/body for a silent webhook."
         },
         "secondary_url_action": {
-          "name": "Pulsante secondario",
-          "description": "Pulsante secondario toccabile — stessa forma di oggetto del pulsante primario."
+          "name": "Secondary Button",
+          "description": "Secondary tappable button — same object shape as the Primary Button."
         }
       },
       "sections": {
         "labels": {
-          "name": "Etichette e icona",
-          "description": "Etichette di testo e icona facoltative. Validi per qualsiasi modello."
+          "name": "Labels & icon",
+          "description": "Optional text labels and icon. Apply to any template."
         },
         "countdown_options": {
-          "name": "Opzioni countdown",
-          "description": "Solo per il modello countdown."
+          "name": "Countdown options",
+          "description": "Only used by the countdown template."
         },
         "action_buttons": {
-          "name": "Pulsanti azione",
-          "description": "Pulsanti URL selezionabili. Solo per i modelli steps e alert."
+          "name": "Action buttons",
+          "description": "Tappable URLs and rich button / tap actions for the activity."
         },
         "display_options": {
-          "name": "Visualizzazione, colore e suono",
-          "description": "Stile opzionale e sostituzioni per aggiornamento. Si applicano a qualsiasi modello."
+          "name": "Display, color & sound",
+          "description": "Optional styling and per-update overrides. Apply to any template."
         }
       }
     },
     "update_activity_steps": {
-      "name": "Aggiorna attività (Steps)",
-      "description": "Aggiornare lo stato e il contenuto di una PushWard Live Activity.",
+      "name": "Update Activity (Steps)",
+      "description": "Update a PushWard Live Activity state and content.",
       "fields": {
         "slug": {
           "name": "Slug",
-          "description": "Identificatore slug dell'attività."
+          "description": "Activity slug identifier."
         },
         "state": {
-          "name": "Stato",
-          "description": "Stato desiderato dell'attività."
-        },
-        "total_steps": {
-          "name": "Passaggi totali",
-          "description": "Numero totale di steps."
+          "name": "State",
+          "description": "Desired activity state."
         },
         "current_step": {
-          "name": "Passo corrente",
-          "description": "Numero del passo corrente."
+          "name": "Current Step",
+          "description": "Current step number."
         },
         "state_text": {
-          "name": "Testo stato",
-          "description": "Testo visualizzato come stato dell'attività."
+          "name": "State Text",
+          "description": "Text shown as the activity state."
         },
         "subtitle": {
-          "name": "Sottotitolo",
-          "description": "Testo del sottotitolo visualizzato nell'attività."
+          "name": "Subtitle",
+          "description": "Subtitle text shown on the activity."
         },
         "icon": {
-          "name": "Icona",
-          "description": "Nome icona SF Symbol o MDI (es. arrow.down.circle.fill, mdi:download)."
+          "name": "Icon",
+          "description": "SF Symbol or MDI icon name (e.g. arrow.down.circle.fill, mdi:download)."
         },
         "progress": {
-          "name": "Avanzamento",
-          "description": "Valore di avanzamento compreso tra 0.0 e 1.0."
-        },
-        "step_labels": {
-          "name": "Etichette passi",
-          "description": "Elenco ordinato delle etichette dei passi. La lunghezza deve essere uguale a total_steps. Solo per il modello steps."
-        },
-        "step_rows": {
-          "name": "Altezze righe passi",
-          "description": "Elenco ordinato delle altezze di riga (1-10) per passo. La lunghezza deve essere uguale a total_steps. Solo per il modello steps."
-        },
-        "url": {
-          "name": "URL",
-          "description": "URL principale visualizzato come pulsante selezionabile. Supportato solo nei modelli steps e alert."
-        },
-        "secondary_url": {
-          "name": "URL secondario",
-          "description": "URL secondario visualizzato come secondo pulsante selezionabile. Supportato solo nei modelli steps e alert."
+          "name": "Progress",
+          "description": "Progress value between 0.0 and 1.0."
         },
         "completion_message": {
-          "name": "Messaggio di completamento",
-          "description": "Messaggio visualizzato al termine dell'attività."
+          "name": "Completion Message",
+          "description": "Message shown when the activity ends."
         },
         "accent_color": {
-          "name": "Colore accento",
-          "description": "Nome del colore accento per l'attività."
+          "name": "Accent Color",
+          "description": "Accent color name for the activity."
         },
         "background_color": {
-          "name": "Colore sfondo",
-          "description": "Colore di sfondo della Live Activity. Esadecimale (#RRGGBB) o nome del colore."
+          "name": "Background Color",
+          "description": "Background color for the Live Activity. Hex (#RRGGBB) or named color."
         },
         "text_color": {
-          "name": "Colore testo",
-          "description": "Colore del testo della Live Activity. Esadecimale (#RRGGBB) o nome del colore."
+          "name": "Text Color",
+          "description": "Text color for the Live Activity. Hex (#RRGGBB) or named color."
         },
         "remaining_time": {
-          "name": "Tempo rimanente",
-          "description": "Tempo rimanente in secondi."
+          "name": "Remaining Time",
+          "description": "Remaining time in seconds."
         },
         "sound": {
-          "name": "Suono",
-          "description": "Suono di notifica riprodotto sul dispositivo per questo aggiornamento."
+          "name": "Sound",
+          "description": "Notification sound played on the device for this update."
         },
         "priority": {
-          "name": "Priorità temporanea",
-          "description": "Priorità per singolo aggiornamento (0-10). Sostituisce la priorità configurata dell'attività solo per questo push."
+          "name": "Priority Override",
+          "description": "Per-update priority (0-10). Overrides the activity's configured priority for this push only."
         },
         "tap_action": {
-          "name": "Azione al tocco",
-          "description": "Bersaglio del tocco sull'intera attività come oggetto: url (obbligatorio), foreground facoltativo e, per un url http(s), un webhook silenzioso tramite method/headers/body."
+          "name": "Tap Action",
+          "description": "Whole-activity tap target as an object: url (required), optional foreground, and for an http(s) url a silent webhook via method/headers/body."
         },
         "url_action": {
-          "name": "Pulsante primario",
-          "description": "Pulsante primario toccabile come oggetto: url (obbligatorio), title, icon e foreground facoltativi, e method/headers/body http(s) per un webhook silenzioso."
+          "name": "Primary Button",
+          "description": "Primary tappable button as an object: url (required), optional title, icon, foreground, and http(s) method/headers/body for a silent webhook."
         },
         "secondary_url_action": {
-          "name": "Pulsante secondario",
-          "description": "Pulsante secondario toccabile — stessa forma di oggetto del pulsante primario."
+          "name": "Secondary Button",
+          "description": "Secondary tappable button — same object shape as the Primary Button."
+        },
+        "steps": {
+          "name": "Steps",
+          "description": "One row per step. Parallel jobs creates stacked lanes; relative step length controls proportional width."
         }
       },
       "sections": {
         "labels": {
-          "name": "Etichette e icona",
-          "description": "Etichette di testo e icona facoltative. Validi per qualsiasi modello."
+          "name": "Labels & icon",
+          "description": "Optional text labels and icon. Apply to any template."
         },
         "steps_options": {
-          "name": "Opzioni steps",
-          "description": "Solo per il modello steps."
+          "name": "Steps options",
+          "description": "Only used by the steps template."
         },
         "action_buttons": {
-          "name": "Pulsanti azione",
-          "description": "Pulsanti URL selezionabili. Solo per i modelli steps e alert."
+          "name": "Action buttons",
+          "description": "Tappable URLs and rich button / tap actions for the activity."
         },
         "display_options": {
-          "name": "Visualizzazione, colore e suono",
-          "description": "Stile opzionale e sostituzioni per aggiornamento. Si applicano a qualsiasi modello."
+          "name": "Display, color & sound",
+          "description": "Optional styling and per-update overrides. Apply to any template."
         }
       }
     },
     "update_activity_alert": {
-      "name": "Aggiorna attività (Alert)",
-      "description": "Aggiornare lo stato e il contenuto di una PushWard Live Activity.",
+      "name": "Update Activity (Alert)",
+      "description": "Update a PushWard Live Activity state and content.",
       "fields": {
         "slug": {
           "name": "Slug",
-          "description": "Identificatore slug dell'attività."
+          "description": "Activity slug identifier."
         },
         "state": {
-          "name": "Stato",
-          "description": "Stato desiderato dell'attività."
+          "name": "State",
+          "description": "Desired activity state."
         },
         "severity": {
-          "name": "Gravità",
-          "description": "Livello di gravità alert."
+          "name": "Severity",
+          "description": "Alert severity level."
+        },
+        "severity_label": {
+          "name": "Severity Label",
+          "description": "Override the Info/Warning/Critical badge text. Alert template only."
         },
         "state_text": {
-          "name": "Testo stato",
-          "description": "Testo visualizzato come stato dell'attività."
+          "name": "State Text",
+          "description": "Text shown as the activity state."
         },
         "subtitle": {
-          "name": "Sottotitolo",
-          "description": "Testo del sottotitolo visualizzato nell'attività."
+          "name": "Subtitle",
+          "description": "Subtitle text shown on the activity."
         },
         "icon": {
-          "name": "Icona",
-          "description": "Nome icona SF Symbol o MDI (es. arrow.down.circle.fill, mdi:download)."
+          "name": "Icon",
+          "description": "SF Symbol or MDI icon name (e.g. arrow.down.circle.fill, mdi:download)."
         },
         "progress": {
-          "name": "Avanzamento",
-          "description": "Valore di avanzamento compreso tra 0.0 e 1.0."
+          "name": "Progress",
+          "description": "Progress value between 0.0 and 1.0."
         },
         "fired_at": {
-          "name": "Attivato alle",
-          "description": "Timestamp Unix di quando è stato attivato l'alert. Solo per il modello alert."
-        },
-        "url": {
-          "name": "URL",
-          "description": "URL principale visualizzato come pulsante selezionabile. Supportato solo nei modelli steps e alert."
-        },
-        "secondary_url": {
-          "name": "URL secondario",
-          "description": "URL secondario visualizzato come secondo pulsante selezionabile. Supportato solo nei modelli steps e alert."
+          "name": "Fired At",
+          "description": "Unix timestamp when the alert was triggered. Alert template only."
         },
         "completion_message": {
-          "name": "Messaggio di completamento",
-          "description": "Messaggio visualizzato al termine dell'attività."
+          "name": "Completion Message",
+          "description": "Message shown when the activity ends."
         },
         "accent_color": {
-          "name": "Colore accento",
-          "description": "Nome del colore accento per l'attività."
+          "name": "Accent Color",
+          "description": "Accent color name for the activity."
         },
         "background_color": {
-          "name": "Colore sfondo",
-          "description": "Colore di sfondo della Live Activity. Esadecimale (#RRGGBB) o nome del colore."
+          "name": "Background Color",
+          "description": "Background color for the Live Activity. Hex (#RRGGBB) or named color."
         },
         "text_color": {
-          "name": "Colore testo",
-          "description": "Colore del testo della Live Activity. Esadecimale (#RRGGBB) o nome del colore."
+          "name": "Text Color",
+          "description": "Text color for the Live Activity. Hex (#RRGGBB) or named color."
         },
         "remaining_time": {
-          "name": "Tempo rimanente",
-          "description": "Tempo rimanente in secondi."
+          "name": "Remaining Time",
+          "description": "Remaining time in seconds."
         },
         "sound": {
-          "name": "Suono",
-          "description": "Suono di notifica riprodotto sul dispositivo per questo aggiornamento."
+          "name": "Sound",
+          "description": "Notification sound played on the device for this update."
         },
         "priority": {
-          "name": "Priorità temporanea",
-          "description": "Priorità per singolo aggiornamento (0-10). Sostituisce la priorità configurata dell'attività solo per questo push."
+          "name": "Priority Override",
+          "description": "Per-update priority (0-10). Overrides the activity's configured priority for this push only."
         },
         "tap_action": {
-          "name": "Azione al tocco",
-          "description": "Bersaglio del tocco sull'intera attività come oggetto: url (obbligatorio), foreground facoltativo e, per un url http(s), un webhook silenzioso tramite method/headers/body."
+          "name": "Tap Action",
+          "description": "Whole-activity tap target as an object: url (required), optional foreground, and for an http(s) url a silent webhook via method/headers/body."
         },
         "url_action": {
-          "name": "Pulsante primario",
-          "description": "Pulsante primario toccabile come oggetto: url (obbligatorio), title, icon e foreground facoltativi, e method/headers/body http(s) per un webhook silenzioso."
+          "name": "Primary Button",
+          "description": "Primary tappable button as an object: url (required), optional title, icon, foreground, and http(s) method/headers/body for a silent webhook."
         },
         "secondary_url_action": {
-          "name": "Pulsante secondario",
-          "description": "Pulsante secondario toccabile — stessa forma di oggetto del pulsante primario."
+          "name": "Secondary Button",
+          "description": "Secondary tappable button — same object shape as the Primary Button."
         }
       },
       "sections": {
         "labels": {
-          "name": "Etichette e icona",
-          "description": "Etichette di testo e icona facoltative. Validi per qualsiasi modello."
+          "name": "Labels & icon",
+          "description": "Optional text labels and icon. Apply to any template."
         },
         "alert_options": {
-          "name": "Opzioni alert",
-          "description": "Solo per il modello alert."
+          "name": "Alert options",
+          "description": "Only used by the alert template."
         },
         "action_buttons": {
-          "name": "Pulsanti azione",
-          "description": "Pulsanti URL selezionabili. Solo per i modelli steps e alert."
+          "name": "Action buttons",
+          "description": "Tappable URLs and rich button / tap actions for the activity."
         },
         "display_options": {
-          "name": "Visualizzazione, colore e suono",
-          "description": "Stile opzionale e sostituzioni per aggiornamento. Si applicano a qualsiasi modello."
+          "name": "Display, color & sound",
+          "description": "Optional styling and per-update overrides. Apply to any template."
         }
       }
     },
     "update_activity_gauge": {
-      "name": "Aggiorna attività (Gauge)",
-      "description": "Aggiornare lo stato e il contenuto di una PushWard Live Activity.",
+      "name": "Update Activity (Gauge)",
+      "description": "Update a PushWard Live Activity state and content.",
       "fields": {
         "slug": {
           "name": "Slug",
-          "description": "Identificatore slug dell'attività."
+          "description": "Activity slug identifier."
         },
         "state": {
-          "name": "Stato",
-          "description": "Stato desiderato dell'attività."
+          "name": "State",
+          "description": "Desired activity state."
         },
         "value": {
-          "name": "Valore",
-          "description": "Gauge: valore numerico. Timeline: oggetto con valori etichettati (es. Temp=22.5)."
+          "name": "Value",
+          "description": "Gauge: numeric value. Timeline: labeled values object (e.g. Temp=22.5)."
         },
         "min_value": {
-          "name": "Valore minimo",
-          "description": "Valore minimo del gauge."
+          "name": "Min Value",
+          "description": "Minimum gauge value."
         },
         "max_value": {
-          "name": "Valore massimo",
-          "description": "Valore massimo del gauge."
+          "name": "Max Value",
+          "description": "Maximum gauge value."
         },
         "unit": {
-          "name": "Unità",
-          "description": "Unità di visualizzazione per il valore (es. °C, %)."
+          "name": "Unit",
+          "description": "Display unit for the value (e.g. °C, %)."
         },
         "state_text": {
-          "name": "Testo stato",
-          "description": "Testo visualizzato come stato dell'attività."
+          "name": "State Text",
+          "description": "Text shown as the activity state."
         },
         "subtitle": {
-          "name": "Sottotitolo",
-          "description": "Testo del sottotitolo visualizzato nell'attività."
+          "name": "Subtitle",
+          "description": "Subtitle text shown on the activity."
         },
         "icon": {
-          "name": "Icona",
-          "description": "Nome icona SF Symbol o MDI (es. arrow.down.circle.fill, mdi:download)."
+          "name": "Icon",
+          "description": "SF Symbol or MDI icon name (e.g. arrow.down.circle.fill, mdi:download)."
         },
         "progress": {
-          "name": "Avanzamento",
-          "description": "Valore di avanzamento compreso tra 0.0 e 1.0."
+          "name": "Progress",
+          "description": "Progress value between 0.0 and 1.0."
         },
         "completion_message": {
-          "name": "Messaggio di completamento",
-          "description": "Messaggio visualizzato al termine dell'attività."
+          "name": "Completion Message",
+          "description": "Message shown when the activity ends."
         },
         "accent_color": {
-          "name": "Colore accento",
-          "description": "Nome del colore accento per l'attività."
+          "name": "Accent Color",
+          "description": "Accent color name for the activity."
         },
         "background_color": {
-          "name": "Colore sfondo",
-          "description": "Colore di sfondo della Live Activity. Esadecimale (#RRGGBB) o nome del colore."
+          "name": "Background Color",
+          "description": "Background color for the Live Activity. Hex (#RRGGBB) or named color."
         },
         "text_color": {
-          "name": "Colore testo",
-          "description": "Colore del testo della Live Activity. Esadecimale (#RRGGBB) o nome del colore."
+          "name": "Text Color",
+          "description": "Text color for the Live Activity. Hex (#RRGGBB) or named color."
         },
         "remaining_time": {
-          "name": "Tempo rimanente",
-          "description": "Tempo rimanente in secondi."
+          "name": "Remaining Time",
+          "description": "Remaining time in seconds."
         },
         "sound": {
-          "name": "Suono",
-          "description": "Suono di notifica riprodotto sul dispositivo per questo aggiornamento."
+          "name": "Sound",
+          "description": "Notification sound played on the device for this update."
         },
         "priority": {
-          "name": "Priorità temporanea",
-          "description": "Priorità per singolo aggiornamento (0-10). Sostituisce la priorità configurata dell'attività solo per questo push."
-        },
-        "url": {
-          "name": "URL",
-          "description": "URL primario mostrato come pulsante toccabile. http(s) o uno schema personalizzato come homeassistant://."
-        },
-        "secondary_url": {
-          "name": "URL secondario",
-          "description": "URL secondario mostrato come secondo pulsante toccabile."
+          "name": "Priority Override",
+          "description": "Per-update priority (0-10). Overrides the activity's configured priority for this push only."
         },
         "tap_action": {
-          "name": "Azione al tocco",
-          "description": "Bersaglio del tocco sull'intera attività come oggetto: url (obbligatorio), foreground facoltativo e, per un url http(s), un webhook silenzioso tramite method/headers/body."
+          "name": "Tap Action",
+          "description": "Whole-activity tap target as an object: url (required), optional foreground, and for an http(s) url a silent webhook via method/headers/body."
         },
         "url_action": {
-          "name": "Pulsante primario",
-          "description": "Pulsante primario toccabile come oggetto: url (obbligatorio), title, icon e foreground facoltativi, e method/headers/body http(s) per un webhook silenzioso."
+          "name": "Primary Button",
+          "description": "Primary tappable button as an object: url (required), optional title, icon, foreground, and http(s) method/headers/body for a silent webhook."
         },
         "secondary_url_action": {
-          "name": "Pulsante secondario",
-          "description": "Pulsante secondario toccabile — stessa forma di oggetto del pulsante primario."
+          "name": "Secondary Button",
+          "description": "Secondary tappable button — same object shape as the Primary Button."
         }
       },
       "sections": {
         "labels": {
-          "name": "Etichette e icona",
-          "description": "Etichette di testo e icona facoltative. Validi per qualsiasi modello."
+          "name": "Labels & icon",
+          "description": "Optional text labels and icon. Apply to any template."
         },
         "action_buttons": {
-          "name": "Pulsanti azione",
-          "description": "Pulsanti URL selezionabili. Solo per i modelli steps e alert."
+          "name": "Action buttons",
+          "description": "Tappable URLs and rich button / tap actions for the activity."
         },
         "display_options": {
-          "name": "Visualizzazione, colore e suono",
-          "description": "Stile opzionale e sostituzioni per aggiornamento. Si applicano a qualsiasi modello."
+          "name": "Display, color & sound",
+          "description": "Optional styling and per-update overrides. Apply to any template."
         }
       }
     },
     "update_activity_timeline": {
-      "name": "Aggiorna attività (Timeline)",
-      "description": "Aggiornare lo stato e il contenuto di una PushWard Live Activity.",
+      "name": "Update Activity (Timeline)",
+      "description": "Update a PushWard Live Activity state and content.",
       "fields": {
         "slug": {
           "name": "Slug",
-          "description": "Identificatore slug dell'attività."
+          "description": "Activity slug identifier."
         },
         "state": {
-          "name": "Stato",
-          "description": "Stato desiderato dell'attività."
-        },
-        "value": {
-          "name": "Valore",
-          "description": "Gauge: valore numerico. Timeline: oggetto con valori etichettati (es. Temp=22.5)."
-        },
-        "unit": {
-          "name": "Unità",
-          "description": "Unità di visualizzazione per il valore (es. °C, %)."
+          "name": "State",
+          "description": "Desired activity state."
         },
         "state_text": {
-          "name": "Testo stato",
-          "description": "Testo visualizzato come stato dell'attività."
+          "name": "State Text",
+          "description": "Text shown as the activity state."
         },
         "subtitle": {
-          "name": "Sottotitolo",
-          "description": "Testo del sottotitolo visualizzato nell'attività."
+          "name": "Subtitle",
+          "description": "Subtitle text shown on the activity."
         },
         "icon": {
-          "name": "Icona",
-          "description": "Nome icona SF Symbol o MDI (es. arrow.down.circle.fill, mdi:download)."
+          "name": "Icon",
+          "description": "SF Symbol or MDI icon name (e.g. arrow.down.circle.fill, mdi:download)."
         },
         "progress": {
-          "name": "Avanzamento",
-          "description": "Valore di avanzamento compreso tra 0.0 e 1.0."
+          "name": "Progress",
+          "description": "Progress value between 0.0 and 1.0."
         },
-        "units": {
-          "name": "Mappa unità",
-          "description": "Etichette delle unità per serie. Le chiavi devono corrispondere alle chiavi del value dict. Solo per il modello timeline."
+        "primary_series": {
+          "name": "Primary Series",
+          "description": "Label of the series shown as the headline value and used for the compact high/low range. Leave empty to keep the auto-picked series. Max 32 characters. Timeline template only."
         },
         "scale": {
-          "name": "Scala",
-          "description": "Modalità scala sull'asse Y (lineare o logaritmica). Solo per il modello timeline."
+          "name": "Scale",
+          "description": "Y-axis scale mode (linear or logarithmic). Timeline template only."
         },
         "decimals": {
-          "name": "Cifre decimali",
-          "description": "Cifre decimali per la visualizzazione del valore (0-10). Solo per il modello timeline."
+          "name": "Decimal Places",
+          "description": "Decimal places for value display (0-10). Timeline template only."
         },
         "smoothing": {
-          "name": "Linee smussate",
-          "description": "Abilitare l'interpolazione della curva tra i punti dati. Solo per il modello timeline."
+          "name": "Smooth Lines",
+          "description": "Enable curve interpolation between data points. Timeline template only."
         },
         "thresholds": {
-          "name": "Soglie",
-          "description": "Linee di riferimento orizzontali sul grafico sparkline. Solo per il modello timeline."
+          "name": "Thresholds",
+          "description": "Horizontal reference lines on the sparkline. Timeline template only."
         },
         "completion_message": {
-          "name": "Messaggio di completamento",
-          "description": "Messaggio visualizzato al termine dell'attività."
+          "name": "Completion Message",
+          "description": "Message shown when the activity ends."
         },
         "accent_color": {
-          "name": "Colore accento",
-          "description": "Nome del colore accento per l'attività."
+          "name": "Accent Color",
+          "description": "Accent color name for the activity."
         },
         "background_color": {
-          "name": "Colore sfondo",
-          "description": "Colore di sfondo della Live Activity. Esadecimale (#RRGGBB) o nome del colore."
+          "name": "Background Color",
+          "description": "Background color for the Live Activity. Hex (#RRGGBB) or named color."
         },
         "text_color": {
-          "name": "Colore testo",
-          "description": "Colore del testo della Live Activity. Esadecimale (#RRGGBB) o nome del colore."
+          "name": "Text Color",
+          "description": "Text color for the Live Activity. Hex (#RRGGBB) or named color."
         },
         "remaining_time": {
-          "name": "Tempo rimanente",
-          "description": "Tempo rimanente in secondi."
+          "name": "Remaining Time",
+          "description": "Remaining time in seconds."
         },
         "sound": {
-          "name": "Suono",
-          "description": "Suono di notifica riprodotto sul dispositivo per questo aggiornamento."
+          "name": "Sound",
+          "description": "Notification sound played on the device for this update."
         },
         "priority": {
-          "name": "Priorità temporanea",
-          "description": "Priorità per singolo aggiornamento (0-10). Sostituisce la priorità configurata dell'attività solo per questo push."
+          "name": "Priority Override",
+          "description": "Per-update priority (0-10). Overrides the activity's configured priority for this push only."
         },
         "history": {
-          "name": "Cronologia (seed)",
-          "description": "Seed iniziale dello sparkline: un oggetto che mappa il nome di una serie a un elenco di (timestamp, value). Solo seed — dopo il primo aggiornamento il server prende il controllo."
-        },
-        "url": {
-          "name": "URL",
-          "description": "URL primario mostrato come pulsante toccabile. http(s) o uno schema personalizzato come homeassistant://."
-        },
-        "secondary_url": {
-          "name": "URL secondario",
-          "description": "URL secondario mostrato come secondo pulsante toccabile."
+          "name": "History (seed)",
+          "description": "Initial sparkline seed: an object of series name to a list of (timestamp, value). Seed-only — the server takes over after the first update."
         },
         "tap_action": {
-          "name": "Azione al tocco",
-          "description": "Bersaglio del tocco sull'intera attività come oggetto: url (obbligatorio), foreground facoltativo e, per un url http(s), un webhook silenzioso tramite method/headers/body."
+          "name": "Tap Action",
+          "description": "Whole-activity tap target as an object: url (required), optional foreground, and for an http(s) url a silent webhook via method/headers/body."
         },
         "url_action": {
-          "name": "Pulsante primario",
-          "description": "Pulsante primario toccabile come oggetto: url (obbligatorio), title, icon e foreground facoltativi, e method/headers/body http(s) per un webhook silenzioso."
+          "name": "Primary Button",
+          "description": "Primary tappable button as an object: url (required), optional title, icon, foreground, and http(s) method/headers/body for a silent webhook."
         },
         "secondary_url_action": {
-          "name": "Pulsante secondario",
-          "description": "Pulsante secondario toccabile — stessa forma di oggetto del pulsante primario."
+          "name": "Secondary Button",
+          "description": "Secondary tappable button — same object shape as the Primary Button."
+        },
+        "series": {
+          "name": "Series",
+          "description": "Add 1-10 named current values, each with an optional display unit."
         }
       },
       "sections": {
         "labels": {
-          "name": "Etichette e icona",
-          "description": "Etichette di testo e icona facoltative. Validi per qualsiasi modello."
+          "name": "Labels & icon",
+          "description": "Optional text labels and icon. Apply to any template."
         },
         "gauge_timeline_options": {
-          "name": "Opzioni gauge e timeline",
-          "description": "Solo per i modelli gauge e timeline."
+          "name": "Gauge & Timeline options",
+          "description": "Only used by the gauge and timeline templates."
         },
         "action_buttons": {
-          "name": "Pulsanti azione",
-          "description": "Pulsanti URL selezionabili. Solo per i modelli steps e alert."
+          "name": "Action buttons",
+          "description": "Tappable URLs and rich button / tap actions for the activity."
         },
         "display_options": {
-          "name": "Visualizzazione, colore e suono",
-          "description": "Stile opzionale e sostituzioni per aggiornamento. Si applicano a qualsiasi modello."
+          "name": "Display, color & sound",
+          "description": "Optional styling and per-update overrides. Apply to any template."
+        }
+      }
+    },
+    "update_activity_board": {
+      "name": "Update Activity (Board)",
+      "description": "Update a PushWard board Live Activity (1–4 tiles).",
+      "fields": {
+        "slug": {
+          "name": "Slug",
+          "description": "Activity slug identifier."
+        },
+        "state": {
+          "name": "State",
+          "description": "Desired activity state."
+        },
+        "tiles": {
+          "name": "Tiles",
+          "description": "List of 1–4 tiles. Each: label (required, ≤32), value (required string, ≤16), and optional unit (≤8), icon (SF Symbol or mdi:), color (named or hex), trend (up/down/flat), url_action object."
+        },
+        "state_text": {
+          "name": "State Text",
+          "description": "Text shown as the activity state."
+        },
+        "subtitle": {
+          "name": "Subtitle",
+          "description": "Subtitle text shown on the activity."
+        },
+        "icon": {
+          "name": "Icon",
+          "description": "SF Symbol or MDI icon name (e.g. square.grid.2x2.fill, mdi:view-dashboard)."
+        },
+        "completion_message": {
+          "name": "Completion Message",
+          "description": "Message shown when the activity ends."
+        },
+        "accent_color": {
+          "name": "Accent Color",
+          "description": "Accent color name for the activity."
+        },
+        "background_color": {
+          "name": "Background Color",
+          "description": "Background color for the Live Activity. Hex (#RRGGBB) or named color."
+        },
+        "text_color": {
+          "name": "Text Color",
+          "description": "Text color for the Live Activity. Hex (#RRGGBB) or named color."
+        },
+        "tap_action": {
+          "name": "Tap Action",
+          "description": "Whole-activity tap target as an object: url (required), optional foreground, and for an http(s) url a silent webhook via method/headers/body. (Per-tile taps go in each tile's url_action.)"
+        },
+        "sound": {
+          "name": "Sound",
+          "description": "Notification sound played on the device for this update."
+        },
+        "priority": {
+          "name": "Priority Override",
+          "description": "Per-update priority (0-10). Overrides the activity's configured priority for this push only."
+        }
+      }
+    },
+    "update_activity_log": {
+      "name": "Update Activity (Log)",
+      "description": "Update a PushWard log Live Activity (1–20 newest-first lines).",
+      "fields": {
+        "slug": {
+          "name": "Slug",
+          "description": "Activity slug identifier."
+        },
+        "state": {
+          "name": "State",
+          "description": "Desired activity state."
+        },
+        "lines": {
+          "name": "Lines",
+          "description": "List of 1–20 newest-first log lines. Each: text (required, ≤512), and optional at (unix timestamp) and level (info/warn/error)."
+        },
+        "state_text": {
+          "name": "State Text",
+          "description": "Text shown as the activity state."
+        },
+        "subtitle": {
+          "name": "Subtitle",
+          "description": "Subtitle text shown on the activity."
+        },
+        "icon": {
+          "name": "Icon",
+          "description": "SF Symbol or MDI icon name (e.g. list.bullet.rectangle, mdi:format-list-bulleted)."
+        },
+        "completion_message": {
+          "name": "Completion Message",
+          "description": "Message shown when the activity ends."
+        },
+        "accent_color": {
+          "name": "Accent Color",
+          "description": "Accent color name for the activity."
+        },
+        "background_color": {
+          "name": "Background Color",
+          "description": "Background color for the Live Activity. Hex (#RRGGBB) or named color."
+        },
+        "text_color": {
+          "name": "Text Color",
+          "description": "Text color for the Live Activity. Hex (#RRGGBB) or named color."
+        },
+        "tap_action": {
+          "name": "Tap Action",
+          "description": "Whole-activity tap target as an object: url (required), optional foreground, and for an http(s) url a silent webhook via method/headers/body."
+        },
+        "sound": {
+          "name": "Sound",
+          "description": "Notification sound played on the device for this update."
+        },
+        "priority": {
+          "name": "Priority Override",
+          "description": "Per-update priority (0-10). Overrides the activity's configured priority for this push only."
         }
       }
     },
     "create_activity": {
-      "name": "Crea attività",
-      "description": "Creare una nuova PushWard Live Activity.",
+      "name": "Create Activity",
+      "description": "Create a new PushWard Live Activity.",
       "fields": {
         "slug": {
           "name": "Slug",
-          "description": "Identificatore slug univoco dell'attività."
+          "description": "Unique activity slug identifier."
         },
         "name": {
-          "name": "Nome",
-          "description": "Nome visualizzato per l'attività."
+          "name": "Name",
+          "description": "Display name for the activity."
         },
         "priority": {
-          "name": "Priorità",
-          "description": "Priorità dell'attività (0 = minima, 10 = massima)."
+          "name": "Priority",
+          "description": "Activity priority (0 = lowest, 10 = highest)."
         },
         "ended_ttl": {
-          "name": "TTL terminazione",
-          "description": "Secondi durante i quali conservare l'attività dopo la sua conclusione."
+          "name": "Ended TTL",
+          "description": "Seconds to keep the activity after it ends."
         },
         "stale_ttl": {
-          "name": "TTL inattività",
-          "description": "Secondi prima che l'attività venga considerata obsoleta."
+          "name": "Stale TTL",
+          "description": "Seconds before the activity is considered stale."
         }
       }
     },
     "end_activity": {
-      "name": "Termina attività",
-      "description": "Terminare una PushWard Live Activity.",
+      "name": "End Activity",
+      "description": "End a PushWard Live Activity.",
       "fields": {
         "slug": {
           "name": "Slug",
-          "description": "Identificatore slug dell'attività da terminare."
+          "description": "Activity slug identifier to end."
         },
         "completion_message": {
-          "name": "Messaggio di completamento",
-          "description": "Messaggio opzionale visualizzato al termine dell'attività."
+          "name": "Completion Message",
+          "description": "Optional message shown when the activity ends."
         }
       }
     },
     "delete_activity": {
-      "name": "Elimina attività",
-      "description": "Eliminare una PushWard Live Activity.",
+      "name": "Delete Activity",
+      "description": "Delete a PushWard Live Activity.",
       "fields": {
         "slug": {
           "name": "Slug",
-          "description": "Identificatore slug dell'attività da eliminare."
-        }
-      }
-    },
-    "send_notification": {
-      "name": "Invia notifica",
-      "description": "Inviare una notifica push tramite PushWard.",
-      "fields": {
-        "title": {
-          "name": "Titolo",
-          "description": "Titolo della notifica."
-        },
-        "body": {
-          "name": "Corpo",
-          "description": "Testo del corpo della notifica."
-        },
-        "subtitle": {
-          "name": "Sottotitolo",
-          "description": "Sottotitolo opzionale visualizzato sotto il titolo."
-        },
-        "level": {
-          "name": "Livello",
-          "description": "Livello di interruzione iOS. Controlla la modalità di consegna della notifica."
-        },
-        "thread_id": {
-          "name": "ID thread",
-          "description": "Raggruppa le notifiche nel Centro Notifiche."
-        },
-        "collapse_id": {
-          "name": "ID collasso",
-          "description": "Chiave di deduplicazione APNs. Sostituisce la notifica precedente con la stessa chiave."
-        },
-        "source": {
-          "name": "Sorgente",
-          "description": "Identificatore sorgente per il raggruppamento nella casella PushWard."
-        },
-        "source_display_name": {
-          "name": "Nome visualizzato sorgente",
-          "description": "Nome sorgente leggibile visualizzato nella casella PushWard."
-        },
-        "activity_slug": {
-          "name": "Slug attività",
-          "description": "Collegare questa notifica a una Live Activity esistente."
-        },
-        "push": {
-          "name": "Push",
-          "description": "Inviare come alert push APNs a tutti i dispositivi. Se falso, la notifica viene salvata solo nella casella."
-        },
-        "url": {
-          "name": "URL",
-          "description": "URL da aprire quando si tocca la notifica."
-        },
-        "icon_url": {
-          "name": "URL icona",
-          "description": "URL HTTPS di un'icona personalizzata per notifica."
-        },
-        "metadata": {
-          "name": "Metadati",
-          "description": "Coppie chiave-valore di metadati aggiuntivi allegati alla notifica."
-        },
-        "media": {
-          "name": "Media",
-          "description": "Allegato multimediale come oggetto con `url` (HTTPS) e `type` (image, video o audio)."
-        },
-        "actions": {
-          "name": "Azioni",
-          "description": "Elenco di pulsanti di azione. Ogni azione è un oggetto con id, title, e facoltativamente url, foreground, destructive, authentication_required e icon. Per un url http(s) puoi anche inviare un webhook silenzioso con method (GET/POST/PUT/PATCH/DELETE/HEAD), headers e body."
+          "description": "Activity slug identifier to delete."
         }
       }
     },
     "widget_refresh": {
-      "name": "Aggiorna widget",
-      "description": "Forza l'aggiornamento di un widget PushWard monitorato. Ignora la cache delle differenze in memoria, così il widget viene rigenerato e inviato a iOS anche quando il valore non è cambiato.",
+      "name": "Refresh Widget",
+      "description": "Force-refresh a tracked PushWard widget. Bypasses the in-memory diff cache so the widget is re-rendered and pushed to iOS even when the value hasn't changed.",
       "fields": {
         "slug": {
           "name": "Slug",
-          "description": "Identificatore slug del widget. È necessario fornire slug oppure entity_id."
+          "description": "Widget slug identifier. Either slug or entity_id must be provided."
         },
         "entity_id": {
-          "name": "Entità",
-          "description": "Entità HA associata al widget. È necessario fornire slug oppure entity_id."
+          "name": "Entity",
+          "description": "HA entity bound to the widget. Either slug or entity_id must be provided."
+        }
+      }
+    },
+    "send_notification": {
+      "name": "Send Notification",
+      "description": "Send a push notification via PushWard.",
+      "fields": {
+        "title": {
+          "name": "Title",
+          "description": "Notification title."
+        },
+        "body": {
+          "name": "Body",
+          "description": "Notification body text."
+        },
+        "subtitle": {
+          "name": "Subtitle",
+          "description": "Optional subtitle shown below the title."
+        },
+        "level": {
+          "name": "Level",
+          "description": "iOS interruption level. Controls how the notification is delivered."
+        },
+        "volume": {
+          "name": "Volume",
+          "description": "Sound volume for critical alerts (0.0-1.0). Only used when level is critical."
+        },
+        "thread_id": {
+          "name": "Thread ID",
+          "description": "Groups notifications together in Notification Center."
+        },
+        "collapse_id": {
+          "name": "Collapse ID",
+          "description": "APNs deduplication key. Replaces previous notification with the same key."
+        },
+        "source": {
+          "name": "Source",
+          "description": "Source identifier for grouping in the PushWard inbox."
+        },
+        "source_display_name": {
+          "name": "Source Display Name",
+          "description": "Human-readable source name shown in the PushWard inbox."
+        },
+        "activity_slug": {
+          "name": "Activity Slug",
+          "description": "Link this notification to an existing Live Activity."
+        },
+        "push": {
+          "name": "Push",
+          "description": "Send as an APNs push alert to all devices. When false, the notification is stored in the inbox only."
+        },
+        "url": {
+          "name": "URL",
+          "description": "URL to open when the notification is tapped."
+        },
+        "media": {
+          "name": "Media",
+          "description": "Media attachment as an object with `url` (HTTPS) and `type` (image, video, or audio)."
+        },
+        "icon_url": {
+          "name": "Icon URL",
+          "description": "HTTPS URL of a custom per-notification icon."
+        },
+        "metadata": {
+          "name": "Metadata",
+          "description": "Key-value pairs of additional metadata attached to the notification."
+        },
+        "actions": {
+          "name": "Actions",
+          "description": "List of action buttons. Each action is an object with id, title, optional url, foreground, destructive, authentication_required, and icon. For an http(s) url you can also send a silent webhook with method (GET/POST/PUT/PATCH/DELETE/HEAD), headers, and body."
         }
       }
     },
     "send_email": {
-      "name": "Invia email",
-      "description": "Invia un'email transazionale tramite PushWard. Fornisci un corpo di testo, un corpo HTML o entrambi. La chiave di integrazione deve avere la capacità \"emails\".",
+      "name": "Send Email",
+      "description": "Send a transactional email via PushWard. Provide a text body, an HTML body, or both. The integration key needs the \"emails\" capability.",
       "fields": {
         "to": {
-          "name": "A",
-          "description": "Indirizzo email del destinatario. Deve essere un indirizzo che hai già aggiunto e confermato nell'app PushWard per iOS — gli indirizzi non verificati vengono rifiutati."
+          "name": "To",
+          "description": "Recipient email address. Must be an address you have already added and confirmed in the PushWard iOS app — unverified addresses are rejected."
         },
         "subject": {
-          "name": "Oggetto",
-          "description": "Riga dell'oggetto dell'email."
+          "name": "Subject",
+          "description": "Email subject line."
         },
         "body": {
-          "name": "Corpo",
-          "description": "Corpo dell'email in testo semplice. Fornisci questo, un corpo HTML o entrambi."
+          "name": "Body",
+          "description": "Plain-text email body. Provide this, an HTML body, or both."
         },
         "html_body": {
-          "name": "Corpo HTML",
-          "description": "Corpo dell'email in HTML. Fornisci questo, un corpo in testo semplice o entrambi."
+          "name": "HTML Body",
+          "description": "HTML email body. Provide this, a plain-text body, or both."
         }
       }
     },
     "delete_widget": {
-      "name": "Elimina widget",
-      "description": "Elimina un widget PushWard dal server. Se una voce di configurazione widget monitorato continua a gestire questo slug, il widget viene ricreato al successivo riavvio/sincronizzazione — rimuovi la voce di configurazione per eliminarlo definitivamente. Fornisci slug oppure entity_id.",
+      "name": "Delete Widget",
+      "description": "Delete a PushWard widget from the server. If a tracked-widget config entry still drives this slug, the widget is recreated on the next restart/sync — remove the config entry to delete it permanently. Provide either slug or entity_id.",
       "fields": {
         "slug": {
           "name": "Slug",
-          "description": "Identificatore slug del widget. È necessario fornire slug oppure entity_id."
+          "description": "Widget slug identifier. Either slug or entity_id must be provided."
         },
         "entity_id": {
-          "name": "Entità",
-          "description": "Entità HA associata al widget. Risolta nel widget corrispondente in base alla configurazione. È necessario fornire slug oppure entity_id."
+          "name": "Entity",
+          "description": "HA entity bound to the widget. Resolved to the matching widget by config. Either slug or entity_id must be provided."
         }
       }
+    },
+    "dispatch": {
+      "name": "Send via PushWard",
+      "description": "Send any combination of a Live Activity, notification, widget, and email in one Home Assistant action.",
+      "sections": {
+        "activity_channel": {
+          "name": "Live Activity",
+          "description": "Upsert and update one Live Activity."
+        },
+        "notification_channel": {
+          "name": "Notification",
+          "description": "Optionally send an inbox/APNs notification in the same action."
+        },
+        "widget_channel": {
+          "name": "Widget",
+          "description": "Optionally create or replace a WidgetKit widget."
+        },
+        "email_channel": {
+          "name": "Email",
+          "description": "Optionally send an email to a verified recipient."
+        }
+      }
+    }
+  },
+  "exceptions": {
+    "widget_not_found": {
+      "message": "No PushWard widget matches slug={slug} entity_id={entity_id}."
     }
   },
   "config": {
     "step": {
       "user": {
-        "title": "Connetti a PushWard",
+        "title": "Connect to PushWard",
+        "description": "Enter your PushWard integration key to get started. Get the PushWard iOS app from the App Store: {app_store_url}",
         "data": {
-          "integration_key": "Chiave di integrazione"
+          "integration_key": "Integration Key"
         },
-        "description": "Inserisci la tua chiave di integrazione PushWard per iniziare. Scarica l'app PushWard per iOS dall'App Store: {app_store_url}",
         "data_description": {
-          "integration_key": "Apri l'app PushWard per iOS (App Store: {app_store_url}) → Impostazioni → Chiavi di integrazione. Puoi incollare la chiave predefinita o crearne una nuova con ambito 'ha-*'."
+          "integration_key": "Open the PushWard iOS app (App Store: {app_store_url}) → Settings → Integration Keys. You can paste the default key, or create a new one with scope 'ha-*'."
         }
       },
       "reconfigure": {
-        "title": "Riconfigura PushWard",
-        "description": "Aggiornare la chiave di integrazione PushWard.",
+        "title": "Reconfigure PushWard",
+        "description": "Update your PushWard integration key.",
         "data": {
-          "integration_key": "Chiave di integrazione"
+          "integration_key": "Integration Key"
         },
         "data_description": {
-          "integration_key": "Creare una chiave nell'app PushWard iOS in Impostazioni → Chiavi di integrazione con ambito 'ha-*'."
+          "integration_key": "Create one in the PushWard iOS app under Settings → Integration Keys with scope 'ha-*'."
         }
       },
       "reauth_confirm": {
-        "title": "Riautentica",
-        "description": "La chiave di integrazione PushWard non è valida. Fornire una nuova chiave.",
+        "title": "Reauthenticate",
+        "description": "The PushWard integration key is invalid. Please provide a new one.",
         "data": {
-          "integration_key": "Chiave di integrazione"
+          "integration_key": "Integration Key"
         },
         "data_description": {
-          "integration_key": "Creare una chiave nell'app PushWard iOS in Impostazioni → Chiavi di integrazione con ambito 'ha-*'."
+          "integration_key": "Create one in the PushWard iOS app under Settings → Integration Keys with scope 'ha-*'."
         }
       }
     },
     "error": {
-      "cannot_connect": "Connessione al server PushWard non riuscita.",
-      "invalid_auth": "Chiave di integrazione non valida.",
-      "invalid_url": "L'URL deve utilizzare lo schema http:// o https://.",
-      "unknown": "Si è verificato un errore imprevisto."
+      "cannot_connect": "Failed to connect to PushWard server.",
+      "invalid_auth": "Invalid integration key.",
+      "invalid_url": "URL must use http:// or https:// scheme.",
+      "unknown": "An unexpected error occurred."
     },
     "abort": {
-      "already_configured": "PushWard è già configurato.",
-      "reconfigure_successful": "Configurazione PushWard aggiornata.",
-      "reauth_successful": "Riautenticazione completata."
+      "already_configured": "PushWard is already configured.",
+      "reconfigure_successful": "PushWard configuration updated.",
+      "reauth_successful": "Reauthentication successful."
     }
   },
   "config_subentries": {
     "tracked_entity": {
-      "entry_type": "Entità monitorata",
+      "entry_type": "Tracked Entity",
       "initiate_flow": {
-        "user": "Aggiungi entità monitorata"
+        "user": "Add tracked entity"
       },
       "step": {
         "user": {
-          "title": "Aggiungi entità a PushWard",
+          "title": "Add tracked Live Activity",
           "data": {
-            "entity_id": "Entità",
-            "template": "Modello"
+            "entity_id": "Entity to track",
+            "template": "Live Activity layout"
           },
           "data_description": {
-            "template": "Modello di layout dell'attività. 'generic' è adatto alla maggior parte delle entità."
+            "entity_id": "The Home Assistant entity whose state starts, updates, and ends this Live Activity.",
+            "template": "Choose the visual layout. Only settings supported by that layout appear on the next page."
           }
         },
         "details": {
           "title": "Configure {template} activity",
           "data": {
-            "start_states": "Stati di avvio",
-            "end_states": "Stati di fine",
-            "progress_attribute": "Attributo avanzamento",
-            "remaining_time_attribute": "Attributo tempo rimanente",
-            "total_steps": "Passaggi totali",
-            "current_step_attribute": "Attributo passo corrente",
-            "severity": "Gravità",
-            "value_attribute": "Attributo valore",
-            "min_value": "Valore minimo",
-            "max_value": "Valore massimo",
-            "unit": "Unità",
-            "series": "Serie",
-            "scale": "Scala",
-            "decimals": "Cifre decimali",
-            "smoothing": "Linee smussate",
-            "thresholds": "Soglie",
-            "history_period": "Periodo cronologia precedente",
-            "slug": "Slug attività",
-            "activity_name": "Nome attività",
-            "icon": "Icona",
-            "icon_attribute": "Attributo icona",
-            "priority": "Priorità (0-10)",
-            "update_interval": "Intervallo minimo aggiornamento (secondi)",
-            "subtitle_attribute": "Attributo sottotitolo",
-            "state_labels": "Etichette stato",
-            "completion_message": "Messaggio di completamento",
-            "accent_color": "Colore accento",
-            "accent_color_attribute": "Attributo colore accento",
-            "url": "URL",
-            "secondary_url": "URL secondario",
-            "ended_ttl": "Eliminazione automatica dopo la fine (secondi)",
-            "stale_ttl": "Fine automatica dopo inattività (secondi)",
-            "sound": "Suono",
-            "background_color": "Colore sfondo",
-            "background_color_attribute": "Attributo colore sfondo",
-            "text_color": "Colore testo",
-            "text_color_attribute": "Attributo colore testo",
-            "warning_threshold": "Soglia di avviso (secondi)",
-            "alarm": "Sveglia (iOS 26+)",
-            "step_labels": "Etichette passi",
-            "step_rows": "Altezze righe passi",
-            "fired_at_attribute": "Attributo orario di attivazione",
-            "units": "Unità per serie",
-            "progress_entity": "Entità di avanzamento",
-            "remaining_time_entity": "Entità tempo rimanente",
-            "current_step_entity": "Entità passaggio corrente",
-            "value_entity": "Entità valore",
-            "subtitle_entity": "Entità sottotitolo",
-            "tap_action_url": "URL azione al tocco",
-            "tap_action_foreground": "Apri URL azione al tocco",
-            "url_foreground": "Apri URL pulsante primario",
-            "url_title": "Titolo pulsante primario",
-            "secondary_url_foreground": "Apri URL pulsante secondario",
-            "secondary_url_title": "Titolo pulsante secondario",
-            "snooze_seconds": "Secondi di posticipo (iOS 26+)",
-            "fired_at_entity": "Entità ora di attivazione",
-            "log_columns": "Colonne del registro",
+            "start_states": "Start States",
+            "end_states": "End States",
+            "progress_entity": "Progress Entity",
+            "progress_attribute": "Progress Attribute",
+            "remaining_time_entity": "Remaining Time Entity",
+            "remaining_time_attribute": "Remaining Time Attribute",
+            "live_progress": "Live Progress ETA",
+            "current_step_entity": "Current Step Entity",
+            "current_step_attribute": "Current Step Attribute",
+            "severity": "Severity",
+            "severity_label": "Severity Label",
+            "value_entity": "Value Entity",
+            "value_attribute": "Value Attribute",
+            "min_value": "Minimum Value",
+            "max_value": "Maximum Value",
+            "unit": "Unit",
+            "series": "Series",
+            "series_entities": "Series Entities",
+            "primary_series": "Primary Series",
+            "scale": "Scale",
+            "decimals": "Decimal Places",
+            "smoothing": "Smooth Lines",
+            "thresholds": "Thresholds",
+            "history_period": "Back-History Period",
+            "slug": "Activity Slug",
+            "activity_name": "Activity Name",
+            "icon": "Icon",
+            "icon_attribute": "Icon Attribute",
+            "priority": "Priority (0-10)",
+            "update_interval": "Min. Update Interval (seconds)",
+            "subtitle_entity": "Subtitle Entity",
+            "subtitle_attribute": "Subtitle Attribute",
+            "state_labels": "State Labels",
+            "completion_message": "Completion Message",
+            "accent_color": "Accent Color",
+            "accent_color_attribute": "Accent Color Attribute",
+            "tap_action_url": "Tap Action URL",
+            "tap_action_foreground": "Open Tap Action URL",
+            "url": "Primary Button URL",
+            "url_foreground": "Open Primary Button URL",
+            "url_title": "Primary Button Title",
+            "secondary_url": "Secondary Button URL",
+            "secondary_url_foreground": "Open Secondary Button URL",
+            "secondary_url_title": "Secondary Button Title",
+            "ended_ttl": "Auto-Delete After End (seconds)",
+            "stale_ttl": "Auto-End After Idle (seconds)",
+            "sound": "Sound",
+            "background_color": "Background Color",
+            "background_color_attribute": "Background Color Attribute",
+            "text_color": "Text Color",
+            "text_color_attribute": "Text Color Attribute",
+            "warning_threshold": "Warning Threshold (seconds)",
+            "alarm": "Alarm (iOS 26+)",
+            "snooze_seconds": "Snooze Seconds (iOS 26+)",
+            "fired_at_entity": "Fired At Entity",
+            "fired_at_attribute": "Fired At Attribute",
+            "tiles": "Board Tiles",
+            "log_columns": "Log Columns",
+            "log_level_attribute": "Log Level Attribute",
             "step_configuration": "Steps"
           },
           "data_description": {
-            "start_states": "Stati dell'entità che avviano la Live Activity. Selezionare dall'elenco o digitare valori personalizzati.",
-            "end_states": "Stati dell'entità che terminano la Live Activity. Selezionare dall'elenco o digitare valori personalizzati.",
-            "progress_attribute": "Attributo dell'entità che contiene un valore di avanzamento da 0 a 100. Esempio: percentage",
-            "remaining_time_attribute": "Attributo dell'entità che contiene il tempo rimanente in secondi. Esempio: remaining",
-            "total_steps": "Numero totale di steps.",
-            "current_step_attribute": "Attributo dell'entità che contiene il passo corrente come numero intero.",
-            "severity": "Livello di gravità alert.",
-            "value_attribute": "Attributo dell'entità che contiene il valore corrente del gauge come numero. Lasciare vuoto per utilizzare lo stato dell'entità.",
-            "min_value": "Valore minimo per l'intervallo del gauge.",
-            "max_value": "Valore massimo per l'intervallo del gauge.",
-            "unit": "Unità di visualizzazione mostrata accanto al valore (es. °C, %, kW). Massimo 32 caratteri.",
-            "series": "Mappare gli attributi dell'entità a serie con nome. Formato: attributo=Etichetta, attributo2=Etichetta2. Lasciare vuoto per utilizzare lo stato dell'entità come serie singola.",
-            "scale": "Modalità scala dell'asse Y per il grafico sparkline.",
-            "decimals": "Numero di cifre decimali visualizzate per i valori (0–10).",
-            "smoothing": "Abilitare l'interpolazione della curva tra i punti dati per uno sparkline più uniforme.",
-            "thresholds": "Linee di riferimento orizzontali sullo sparkline. Formato: valore:colore:etichetta. Esempio: 25:red:Caldo, 18:blue:Freddo. Massimo 5.",
-            "history_period": "Minuti di dati passati con cui inizializzare lo sparkline dal registratore di Home Assistant. Impostare 0 per iniziare senza cronologia.",
-            "slug": "Identificatore univoco per questa attività. Lasciare vuoto per generarlo automaticamente dall'ID entità. Esempio: ha-living-room-lamp",
-            "activity_name": "Nome visualizzato sulla Live Activity iPhone. Il valore predefinito è il nome descrittivo dell'entità.",
-            "icon": "Icona personalizzata. Lasciare vuoto per usare l'icona nativa dell'entità (es. mdi:thermometer). Sono supportati anche gli SF Symbols (es. lamp.desk.fill).",
-            "icon_attribute": "Attributo dell'entità per l'icona dinamica. Se impostato, sostituisce l'icona statica e quella dell'entità.",
-            "priority": "Le attività con priorità maggiore vengono conservate più a lungo quando si raggiunge il limite del dispositivo (0 = minima, 10 = massima).",
-            "update_interval": "Secondi minimi tra un aggiornamento e l'altro. I cambi di stato rapidi vengono limitati.",
-            "subtitle_attribute": "Attributo dell'entità da mostrare come sottotitolo. Lasciare vuoto per usare il nome descrittivo dell'entità.",
-            "state_labels": "Testo personalizzato per gli stati. Formato: stato=Etichetta, stato2=Etichetta 2. Esempio: heating=In riscaldamento, idle=In standby",
-            "completion_message": "Testo visualizzato al termine dell'attività. Lasciare vuoto per 'Completato'. Esempio: Lavaggio terminato",
-            "accent_color": "Colore accento per la Live Activity. Lasciare vuoto per il blu predefinito.",
-            "accent_color_attribute": "Attributo dell'entità per il colore accento dinamico. Sostituisce il colore statico. Supporta RGB, HS, XY, Kelvin, colori con nome ed esadecimale.",
-            "url": "Link aperto toccando la Live Activity. Deve iniziare con http:// o https://. Solo per i modelli steps e alert.",
-            "secondary_url": "Link secondario per la Live Activity. Solo per i modelli steps e alert.",
-            "ended_ttl": "Secondi trascorsi i quali l'attività viene eliminata automaticamente dal server dopo la conclusione. Lasciare vuoto per conservarla indefinitamente. Esempio: 300",
-            "stale_ttl": "Secondi di inattività dopo i quali il server termina automaticamente l'attività. Lasciare vuoto per disabilitare. Esempio: 1800",
-            "sound": "Suono riprodotto ad ogni aggiornamento per questa entità. Lasciare vuoto per non forzare alcun suono.",
-            "background_color": "Colore di sfondo della Live Activity. Lasciare vuoto per il valore predefinito.",
-            "background_color_attribute": "Attributo dell'entità per il colore di sfondo dinamico. Sostituisce il colore statico. Supporta RGB, HS, XY, Kelvin, colori con nome ed esadecimale.",
-            "text_color": "Colore del testo della Live Activity. Lasciare vuoto per il valore predefinito.",
-            "text_color_attribute": "Attributo dell'entità per il colore del testo dinamico. Sostituisce il colore statico.",
-            "warning_threshold": "Secondi prima della fine del countdown in cui il server invia un push di avviso. Lasciare vuoto per disabilitare. Solo per il modello countdown.",
-            "alarm": "Attivare la sveglia AlarmKit alla scadenza del countdown (iOS 26+). Solo per il modello countdown.",
-            "step_labels": "Etichette per ogni passo. Formato: 1=Primo Passo, 2=Secondo Passo. Deve coprire i passi 1..total_steps. Solo per il modello steps.",
-            "step_rows": "Altezza di riga (1–10) per ogni passo, separata da virgole. Deve avere total_steps voci. Solo per il modello steps.",
-            "fired_at_attribute": "Attributo dell'entità con il timestamp Unix di quando è stato attivato l'alert. Solo per il modello alert.",
-            "units": "Etichette delle unità per serie. Formato: EtichettaSerie=unità, Temperatura=°C, Umidità=%. Solo per il modello timeline.",
-            "progress_entity": "Legge l'avanzamento da un'entità separata anziché dall'entità monitorata. Lascia vuoto per usare l'entità monitorata. Se il campo attributo è impostato, legge quell'attributo di questa entità; altrimenti il suo stato.",
-            "remaining_time_entity": "Legge il tempo rimanente da un'entità separata (ad es. il sensore di tempo di una lavatrice). Lascia vuoto per usare l'entità monitorata. Analizza automaticamente un sensore timestamp (ora di fine), un sensore di durata con unità, una stringa H:MM:SS o semplici secondi.",
-            "current_step_entity": "Legge il passaggio corrente da un'entità separata. Lascia vuoto per usare l'entità monitorata.",
-            "value_entity": "Legge il valore dell'indicatore da un'entità separata. Lascia vuoto per usare l'entità monitorata. Usa lo stato dell'entità di origine a meno che non sia impostato un attributo.",
-            "subtitle_entity": "Mostra il sottotitolo da un'entità separata (ad es. un sensore di programma/modalità). Lascia vuoto per usare l'entità monitorata. Usa lo stato dell'entità di origine a meno che non sia impostato un attributo.",
-            "tap_action_url": "URL facoltativo aperto toccando lo sfondo della Live Activity. Supporta http(s) (apre Safari) o schemi personalizzati come homeassistant://navigate/lovelace/0 (apre quell'app).",
-            "tap_action_foreground": "Attivo: il tocco apre l'URL. Disattivo: webhook silenzioso (solo http(s)) — invia una POST in background senza uscire dalla schermata di blocco.",
-            "url_foreground": "Attivo: il tocco apre l'URL. Disattivo: webhook silenzioso (solo http(s)).",
-            "url_title": "Etichetta del pulsante primario (max 64 caratteri).",
-            "secondary_url_foreground": "Attivo: il tocco apre l'URL. Disattivo: webhook silenzioso (solo http(s)).",
-            "secondary_url_title": "Etichetta del pulsante secondario (max 64 caratteri).",
-            "snooze_seconds": "Di quanto il pulsante Posticipa di iOS estende il conto alla rovescia (60–3600). Lascia vuoto per il valore predefinito di 300s (5 min). Richiede una sveglia. Solo modello conto alla rovescia.",
-            "fired_at_entity": "Legge l'ora di attivazione dell'avviso da un'entità separata. Lascia vuoto per usare l'entità monitorata. Accetta un timestamp unix o un sensore con timestamp ISO. Solo modello avviso.",
-            "log_columns": "Valori aggiuntivi aggiunti a ogni riga del registro (max 6), separati da virgole. Formato: [Label=]source[|unit]. source = un attributo di questa entità (brightness), lo stato di un'altra entità (binary_sensor.door) o un attributo di un'altra entità (sensor.temp:temperature). Esempio: color_temp_kelvin|K, brightness → 'On · 4000K · 153'. Solo modello registro.",
-            "step_configuration": "Add one row per step. Parallel jobs controls the number of stacked rows; relative duration/width makes longer stages wider; color is optional."
+            "start_states": "Entity states that start the Live Activity. Select from the list or type custom values.",
+            "end_states": "Entity states that end the Live Activity. Select from the list or type custom values.",
+            "progress_entity": "Read progress from a separate entity instead of the tracked entity. Leave empty to use the tracked entity. With the attribute field set, reads that attribute of this entity; otherwise its state.",
+            "progress_attribute": "Attribute holding a 0–100 progress value (on the source entity, or the tracked entity if no source is set). Example: percentage",
+            "remaining_time_entity": "Read remaining time from a separate entity (e.g. a washer's time sensor). Leave empty to use the tracked entity. Auto-parses a timestamp (finish-time) sensor, a duration sensor with units, an H:MM:SS string, or plain seconds.",
+            "remaining_time_attribute": "Attribute holding remaining time (on the source entity, or the tracked entity if no source is set). Leave empty to use the source entity's state. Example: remaining",
+            "live_progress": "Animate progress toward the estimated finish time. Generic and Steps layouts require a remaining-time source.",
+            "current_step_entity": "Read the current step from a separate entity. Leave empty to use the tracked entity.",
+            "current_step_attribute": "Attribute holding the zero-based current-step index: 0 is the first step, 1 is the second, and total steps means complete.",
+            "severity": "Alert severity level.",
+            "severity_label": "Override the Info/Warning/Critical badge text shown on the alert. Leave empty to use the severity name. Max 32 characters. Alert template only.",
+            "value_entity": "Read the gauge value from a separate entity. Leave empty to use the tracked entity. Uses the source entity's state unless an attribute is set.",
+            "value_attribute": "Attribute holding the current gauge value as a number (on the source entity, or the tracked entity if no source is set). Leave empty to use the entity's state.",
+            "min_value": "Minimum value for the gauge range.",
+            "max_value": "Maximum value for the gauge range.",
+            "unit": "Display unit shown next to the value (e.g. °C, %, kW). Max 32 characters.",
+            "series": "Map entity attributes to named series. Format: attribute=Label, attribute2=Label2. Leave empty to use the entity's state as a single series.",
+            "series_entities": "Add one row for each entity-backed chart line. Give it a label and optionally select an attribute. Combines with the primary series; up to 10 lines total.",
+            "primary_series": "Label of the series shown as the headline value and used for the compact high/low range. Leave empty to use the tracked entity's own series (or the first configured series).",
+            "scale": "Y-axis scale mode for the sparkline chart.",
+            "decimals": "Number of decimal places shown for values (0–10).",
+            "smoothing": "Enable curve interpolation between data points for a smoother sparkline.",
+            "thresholds": "Add up to 5 horizontal reference lines, each with a value and optional color and label.",
+            "history_period": "Minutes of past data to seed the sparkline when the activity starts. Numeric-state entities (plain sensors, value entities, and state-sourced series entities) backfill from Home Assistant's recorder; attribute-based series fill only from samples collected while the integration runs, because Home Assistant stopped recording most attributes in 2024.8. Set to 0 to start with no history.",
+            "slug": "Unique identifier for this activity. Leave empty to auto-generate from entity ID. Example: ha-living-room-lamp",
+            "activity_name": "Display name shown on the iPhone Live Activity. Defaults to the entity's friendly name.",
+            "icon": "Override icon. Leave empty to use the entity’s native icon (e.g. mdi:thermometer). SF Symbols also supported (e.g. lamp.desk.fill).",
+            "icon_attribute": "Entity attribute for dynamic icon. Overrides static icon and entity icon when set.",
+            "priority": "Higher priority activities are kept longer when the device limit is reached (0 = lowest, 10 = highest).",
+            "update_interval": "Minimum seconds between updates. Rapid state changes are throttled.",
+            "subtitle_entity": "Show the subtitle from a separate entity (e.g. a program/mode sensor). Leave empty to use the tracked entity. Uses the source entity's state unless an attribute is set.",
+            "subtitle_attribute": "Attribute to show as subtitle (on the source entity, or the tracked entity if no source is set). Leave empty to use the source entity's state, or the friendly name when no source is set.",
+            "state_labels": "Add state-to-label mappings. For example, map heating to Heating Up and idle to Standby.",
+            "completion_message": "Text shown when the activity ends. Leave empty for 'Complete'. Example: Wash Done",
+            "accent_color": "Accent color for the Live Activity. Leave empty for default blue.",
+            "accent_color_attribute": "Entity attribute for dynamic accent color. Overrides static color. Supports RGB, HS, XY, Kelvin, named colors, and hex.",
+            "tap_action_url": "Optional URL opened when tapping the Live Activity background. Supports http(s) (opens Safari) or custom schemes like homeassistant://navigate/lovelace/0 (opens that app).",
+            "tap_action_foreground": "On: tap opens the URL. Off: silent webhook (http(s) only) — fires a POST in the background without leaving the Lock Screen.",
+            "url": "Primary button destination for any layout. Supports http(s) URLs and app schemes such as homeassistant://.",
+            "url_foreground": "On: tap opens the URL. Off: silent webhook (http(s) only).",
+            "url_title": "Primary button label (max 64 characters).",
+            "secondary_url": "Secondary button destination for any layout. Supports http(s) URLs and app schemes.",
+            "secondary_url_foreground": "On: tap opens the URL. Off: silent webhook (http(s) only).",
+            "secondary_url_title": "Secondary button label (max 64 characters).",
+            "ended_ttl": "Seconds after the activity ends before the server auto-deletes it. This also controls how soon the ended card leaves the iPhone Lock Screen (iOS caps it at 4 hours regardless). Leave empty to keep indefinitely. Example: 300",
+            "stale_ttl": "Seconds of inactivity before the server auto-ends the activity. Leave empty to disable. Example: 1800",
+            "sound": "Sound played on every update for this entity. Leave empty to use no override.",
+            "background_color": "Background color for the Live Activity. Leave empty for default.",
+            "background_color_attribute": "Entity attribute for dynamic background color. Overrides static color. Supports RGB, HS, XY, Kelvin, named colors, and hex.",
+            "text_color": "Text color for the Live Activity. Leave empty for default.",
+            "text_color_attribute": "Entity attribute for dynamic text color. Overrides static color.",
+            "warning_threshold": "Seconds before the end of a countdown when the server sends a warning push. Leave empty to disable. Countdown template only.",
+            "alarm": "Trigger an AlarmKit alarm when the countdown expires (iOS 26+). Countdown template only.",
+            "snooze_seconds": "How long the iOS Snooze button extends the countdown (60–3600). Leave empty for the 300s (5 min) default. Requires Alarm. Countdown template only.",
+            "fired_at_entity": "Read the alert's fired-at time from a separate entity. Leave empty to use the tracked entity. Accepts a unix timestamp or an ISO timestamp sensor. Alert template only.",
+            "fired_at_attribute": "Attribute holding the unix timestamp when the alert fired (on the source entity, or the tracked entity if no source is set). Alert template only.",
+            "tiles": "Add 1–4 board tiles. Each row selects an entity and label, with optional attribute, unit, and icon. Board template only.",
+            "log_columns": "Add up to 6 extra values to each log line. Each row selects an entity and optional attribute, label, and unit. Log template only.",
+            "log_level_attribute": "Attribute supplying each log line's level (info/warn/error). Leave empty for no level tag. Log template only.",
+            "step_configuration": "Add one named row per step. Parallel jobs creates stacked lanes. Relative step length is a ratio: weights 1, 4, 1 make the middle step four times wider. Color is optional."
           },
           "description": "Everything is on this page. Open only the sections you need.",
           "sections": {
             "lifecycle": {
-              "name": "Lifecycle and delivery",
-              "description": "Choose when the activity runs and how PushWard updates and retains it.",
+              "name": "Lifecycle and update behavior",
+              "description": "Choose when the activity runs, how often it updates, and how long PushWard retains it.",
               "data": {
-                "start_states": "Stati di avvio",
-                "end_states": "Stati di fine",
-                "slug": "Slug attività",
-                "activity_name": "Nome attività",
-                "priority": "Priorità (0-10)",
-                "sound": "Suono",
-                "update_interval": "Intervallo minimo aggiornamento (secondi)",
-                "ended_ttl": "Eliminazione automatica dopo la fine (secondi)",
-                "stale_ttl": "Fine automatica dopo inattività (secondi)"
+                "start_states": "States that start the activity",
+                "end_states": "States that end the activity",
+                "slug": "Activity slug",
+                "activity_name": "Activity display name",
+                "priority": "Priority (0-10)",
+                "sound": "Update sound",
+                "update_interval": "Minimum update interval",
+                "ended_ttl": "Delete after ending",
+                "stale_ttl": "End after no updates"
               },
               "data_description": {
-                "start_states": "Stati dell'entità che avviano la Live Activity. Selezionare dall'elenco o digitare valori personalizzati.",
-                "end_states": "Stati dell'entità che terminano la Live Activity. Selezionare dall'elenco o digitare valori personalizzati.",
-                "slug": "Identificatore univoco per questa attività. Lasciare vuoto per generarlo automaticamente dall'ID entità. Esempio: ha-living-room-lamp",
-                "activity_name": "Nome visualizzato sulla Live Activity iPhone. Il valore predefinito è il nome descrittivo dell'entità.",
-                "priority": "Le attività con priorità maggiore vengono conservate più a lungo quando si raggiunge il limite del dispositivo (0 = minima, 10 = massima).",
-                "sound": "Suono riprodotto ad ogni aggiornamento per questa entità. Lasciare vuoto per non forzare alcun suono.",
-                "update_interval": "Secondi minimi tra un aggiornamento e l'altro. I cambi di stato rapidi vengono limitati.",
-                "ended_ttl": "Secondi trascorsi i quali l'attività viene eliminata automaticamente dal server dopo la conclusione. Lasciare vuoto per conservarla indefinitamente. Esempio: 300",
-                "stale_ttl": "Secondi di inattività dopo i quali il server termina automaticamente l'attività. Lasciare vuoto per disabilitare. Esempio: 1800"
+                "start_states": "Entity states that start the Live Activity. Select from the list or type custom values.",
+                "end_states": "Entity states that end the Live Activity. Select from the list or type custom values.",
+                "slug": "Unique identifier for this activity. Leave empty to auto-generate from entity ID. Example: ha-living-room-lamp",
+                "activity_name": "Display name shown on the iPhone Live Activity. Defaults to the entity's friendly name.",
+                "priority": "Integer from 0 to 10. Higher-priority activities are retained first and receive a higher iOS relevance score.",
+                "sound": "Optional sound played for ongoing updates. Choose Silent for no sound; sounds are ignored when ending.",
+                "update_interval": "Minimum seconds between API updates, from 1 to 86,400. Faster entity changes are combined.",
+                "ended_ttl": "Seconds after an activity ends before PushWard deletes it and dismisses the ended card. Valid range: 1-2,592,000 seconds (30 days). Leave blank for the PushWard default.",
+                "stale_ttl": "Seconds without an update before PushWard automatically ends the activity. Valid range: 1-2,592,000 seconds (30 days). Leave blank to disable."
               }
             },
             "content": {
               "name": "Layout content",
               "description": "Values used by the selected Live Activity layout.",
               "data": {
-                "progress_attribute": "Attributo avanzamento",
-                "remaining_time_attribute": "Attributo tempo rimanente",
-                "total_steps": "Passaggi totali",
-                "current_step_attribute": "Attributo passo corrente",
-                "severity": "Gravità",
-                "value_attribute": "Attributo valore",
-                "min_value": "Valore minimo",
-                "max_value": "Valore massimo",
-                "unit": "Unità",
-                "series": "Serie",
-                "scale": "Scala",
-                "decimals": "Cifre decimali",
-                "smoothing": "Linee smussate",
-                "thresholds": "Soglie",
-                "history_period": "Periodo cronologia precedente",
-                "state_labels": "Etichette stato",
-                "completion_message": "Messaggio di completamento",
-                "warning_threshold": "Soglia di avviso (secondi)",
-                "alarm": "Sveglia (iOS 26+)",
-                "step_labels": "Etichette passi",
-                "step_rows": "Altezze righe passi",
-                "fired_at_attribute": "Attributo orario di attivazione",
-                "units": "Unità per serie",
-                "progress_entity": "Entità di avanzamento",
-                "remaining_time_entity": "Entità tempo rimanente",
-                "current_step_entity": "Entità passaggio corrente",
-                "value_entity": "Entità valore",
-                "snooze_seconds": "Secondi di posticipo (iOS 26+)",
-                "fired_at_entity": "Entità ora di attivazione",
-                "log_columns": "Colonne del registro",
-                "step_configuration": "Steps"
+                "progress_entity": "Progress source entity",
+                "progress_attribute": "Progress attribute",
+                "remaining_time_entity": "Remaining-time source entity",
+                "remaining_time_attribute": "Remaining-time attribute",
+                "live_progress": "Animate progress between updates",
+                "current_step_entity": "Current-step source entity",
+                "current_step_attribute": "Current-step attribute",
+                "severity": "Alert severity",
+                "severity_label": "Custom severity badge",
+                "value_entity": "Value source entity",
+                "value_attribute": "Value attribute",
+                "min_value": "Minimum value",
+                "max_value": "Maximum value",
+                "unit": "Display unit",
+                "series": "Attribute-backed chart series",
+                "series_entities": "Entity-backed chart series",
+                "primary_series": "Primary chart series",
+                "scale": "Y-axis scale",
+                "decimals": "Decimal places",
+                "smoothing": "Smooth chart lines",
+                "thresholds": "Chart thresholds",
+                "history_period": "Recorder history to load",
+                "state_labels": "State display labels",
+                "completion_message": "Completion message",
+                "warning_threshold": "Countdown warning threshold",
+                "alarm": "Ring an AlarmKit alarm",
+                "snooze_seconds": "Alarm snooze duration",
+                "fired_at_entity": "Fired-at source entity",
+                "fired_at_attribute": "Fired-at attribute",
+                "tiles": "Board tiles",
+                "log_columns": "Additional log values",
+                "log_level_attribute": "Log severity attribute",
+                "step_configuration": "Workflow steps"
               },
               "data_description": {
-                "progress_attribute": "Attributo dell'entità che contiene un valore di avanzamento da 0 a 100. Esempio: percentage",
-                "remaining_time_attribute": "Attributo dell'entità che contiene il tempo rimanente in secondi. Esempio: remaining",
-                "total_steps": "Numero totale di steps.",
-                "current_step_attribute": "Attributo dell'entità che contiene il passo corrente come numero intero.",
-                "severity": "Livello di gravità alert.",
-                "value_attribute": "Attributo dell'entità che contiene il valore corrente del gauge come numero. Lasciare vuoto per utilizzare lo stato dell'entità.",
-                "min_value": "Valore minimo per l'intervallo del gauge.",
-                "max_value": "Valore massimo per l'intervallo del gauge.",
-                "unit": "Unità di visualizzazione mostrata accanto al valore (es. °C, %, kW). Massimo 32 caratteri.",
-                "series": "Mappare gli attributi dell'entità a serie con nome. Formato: attributo=Etichetta, attributo2=Etichetta2. Lasciare vuoto per utilizzare lo stato dell'entità come serie singola.",
-                "scale": "Modalità scala dell'asse Y per il grafico sparkline.",
-                "decimals": "Numero di cifre decimali visualizzate per i valori (0–10).",
-                "smoothing": "Abilitare l'interpolazione della curva tra i punti dati per uno sparkline più uniforme.",
-                "thresholds": "Linee di riferimento orizzontali sullo sparkline. Formato: valore:colore:etichetta. Esempio: 25:red:Caldo, 18:blue:Freddo. Massimo 5.",
-                "history_period": "Minuti di dati passati con cui inizializzare lo sparkline dal registratore di Home Assistant. Impostare 0 per iniziare senza cronologia.",
-                "state_labels": "Testo personalizzato per gli stati. Formato: stato=Etichetta, stato2=Etichetta 2. Esempio: heating=In riscaldamento, idle=In standby",
-                "completion_message": "Testo visualizzato al termine dell'attività. Lasciare vuoto per 'Completato'. Esempio: Lavaggio terminato",
-                "warning_threshold": "Secondi prima della fine del countdown in cui il server invia un push di avviso. Lasciare vuoto per disabilitare. Solo per il modello countdown.",
-                "alarm": "Attivare la sveglia AlarmKit alla scadenza del countdown (iOS 26+). Solo per il modello countdown.",
-                "step_labels": "Etichette per ogni passo. Formato: 1=Primo Passo, 2=Secondo Passo. Deve coprire i passi 1..total_steps. Solo per il modello steps.",
-                "step_rows": "Altezza di riga (1–10) per ogni passo, separata da virgole. Deve avere total_steps voci. Solo per il modello steps.",
-                "fired_at_attribute": "Attributo dell'entità con il timestamp Unix di quando è stato attivato l'alert. Solo per il modello alert.",
-                "units": "Etichette delle unità per serie. Formato: EtichettaSerie=unità, Temperatura=°C, Umidità=%. Solo per il modello timeline.",
-                "progress_entity": "Legge l'avanzamento da un'entità separata anziché dall'entità monitorata. Lascia vuoto per usare l'entità monitorata. Se il campo attributo è impostato, legge quell'attributo di questa entità; altrimenti il suo stato.",
-                "remaining_time_entity": "Legge il tempo rimanente da un'entità separata (ad es. il sensore di tempo di una lavatrice). Lascia vuoto per usare l'entità monitorata. Analizza automaticamente un sensore timestamp (ora di fine), un sensore di durata con unità, una stringa H:MM:SS o semplici secondi.",
-                "current_step_entity": "Legge il passaggio corrente da un'entità separata. Lascia vuoto per usare l'entità monitorata.",
-                "value_entity": "Legge il valore dell'indicatore da un'entità separata. Lascia vuoto per usare l'entità monitorata. Usa lo stato dell'entità di origine a meno che non sia impostato un attributo.",
-                "snooze_seconds": "Di quanto il pulsante Posticipa di iOS estende il conto alla rovescia (60–3600). Lascia vuoto per il valore predefinito di 300s (5 min). Richiede una sveglia. Solo modello conto alla rovescia.",
-                "fired_at_entity": "Legge l'ora di attivazione dell'avviso da un'entità separata. Lascia vuoto per usare l'entità monitorata. Accetta un timestamp unix o un sensore con timestamp ISO. Solo modello avviso.",
-                "log_columns": "Valori aggiuntivi aggiunti a ogni riga del registro (max 6), separati da virgole. Formato: [Label=]source[|unit]. source = un attributo di questa entità (brightness), lo stato di un'altra entità (binary_sensor.door) o un attributo di un'altra entità (sensor.temp:temperature). Esempio: color_temp_kelvin|K, brightness → 'On · 4000K · 153'. Solo modello registro.",
-                "step_configuration": "Add one row per step. Parallel jobs controls the number of stacked rows; relative duration/width makes longer stages wider; color is optional."
+                "progress_entity": "Read progress from a separate entity instead of the tracked entity. Leave empty to use the tracked entity. With the attribute field set, reads that attribute of this entity; otherwise its state.",
+                "progress_attribute": "Numeric progress from 0 to 100. Leave blank to read the selected entity state.",
+                "remaining_time_entity": "Read remaining time from a separate entity (e.g. a washer's time sensor). Leave empty to use the tracked entity. Auto-parses a timestamp (finish-time) sensor, a duration sensor with units, an H:MM:SS string, or plain seconds.",
+                "remaining_time_attribute": "Remaining seconds, a Home Assistant duration, or an absolute date/time. Leave blank to read the selected entity state.",
+                "live_progress": "When enabled, iOS animates toward the estimated finish time. Generic and Steps layouts require a remaining-time source.",
+                "current_step_entity": "Read the current step from a separate entity. Leave empty to use the tracked entity.",
+                "current_step_attribute": "Zero-based step index: 0 is the first step, 1 is the second, and the total step count means complete. Leave blank to read the selected entity state.",
+                "severity": "Alert severity level.",
+                "severity_label": "Override the Info/Warning/Critical badge text shown on the alert. Leave empty to use the severity name. Max 32 characters. Alert template only.",
+                "value_entity": "Read the gauge value from a separate entity. Leave empty to use the tracked entity. Uses the source entity's state unless an attribute is set.",
+                "value_attribute": "Attribute holding the current gauge value as a number (on the source entity, or the tracked entity if no source is set). Leave empty to use the entity's state.",
+                "min_value": "Lower bound of the gauge. Uses the same unit as the source value.",
+                "max_value": "Upper bound of the gauge and must be greater than Minimum value.",
+                "unit": "Text displayed after the value, such as °C, %, kW, or rpm. Maximum 32 characters.",
+                "series": "Add tracked-entity attribute series. Each row has a display label, attribute, and optional unit.",
+                "series_entities": "Add entity-backed chart series. Each row has a label, entity, optional attribute, and optional unit. Up to 10 series total.",
+                "primary_series": "Label of the series shown as the headline value and used for the compact high/low range. Leave empty to use the tracked entity's own series (or the first configured series).",
+                "scale": "Y-axis scale mode for the sparkline chart.",
+                "decimals": "Integer from 0 to 10 controlling displayed precision.",
+                "smoothing": "Enable curve interpolation between data points for a smoother sparkline.",
+                "thresholds": "Add up to 5 horizontal reference lines, each with a value and optional color and label.",
+                "history_period": "Minutes of Home Assistant Recorder history loaded when the timeline starts. Valid range: 0-1,440 minutes; 0 disables backfill.",
+                "state_labels": "Add state-to-label mappings, such as heating → Heating Up and idle → Standby.",
+                "completion_message": "Text shown when the activity ends. Leave empty for 'Complete'. Example: Wash Done",
+                "warning_threshold": "Seconds before a countdown finishes when PushWard sends its warning update. Valid range: 0-86,400 seconds.",
+                "alarm": "Trigger an AlarmKit alarm when the countdown expires (iOS 26+). Countdown template only.",
+                "snooze_seconds": "AlarmKit snooze duration in seconds, from 60 to 3,600. It is ignored unless Alarm is enabled.",
+                "fired_at_entity": "Read the alert's fired-at time from a separate entity. Leave empty to use the tracked entity. Accepts a unix timestamp or an ISO timestamp sensor. Alert template only.",
+                "fired_at_attribute": "Attribute holding the unix timestamp when the alert fired (on the source entity, or the tracked entity if no source is set). Alert template only.",
+                "tiles": "Add 1–4 board tiles. Each row selects an entity and label, with optional attribute, unit, and icon. Board template only.",
+                "log_columns": "Add up to 6 extra values to each log line. Each row selects an entity and optional attribute, label, and unit. Log template only.",
+                "log_level_attribute": "Attribute supplying each log line's level (info/warn/error). Leave empty for no level tag. Log template only.",
+                "step_configuration": "Add one named row per step. Parallel jobs creates stacked lanes. Relative step length is a ratio: weights 1, 4, 1 make the middle step four times wider. Color is optional."
               }
             },
             "appearance": {
               "name": "Appearance and tap actions",
               "description": "Optional labels, icons, colors, buttons, and background tap behavior.",
               "data": {
-                "subtitle_entity": "Entità sottotitolo",
-                "subtitle_attribute": "Attributo sottotitolo",
-                "icon": "Icona",
-                "icon_attribute": "Attributo icona",
-                "accent_color": "Colore accento",
-                "accent_color_attribute": "Attributo colore accento",
-                "background_color": "Colore sfondo",
-                "background_color_attribute": "Attributo colore sfondo",
-                "text_color": "Colore testo",
-                "text_color_attribute": "Attributo colore testo",
-                "tap_action_url": "URL azione al tocco",
-                "tap_action_foreground": "Apri URL azione al tocco",
-                "url": "URL",
-                "url_foreground": "Apri URL pulsante primario",
-                "url_title": "Titolo pulsante primario",
-                "secondary_url": "URL secondario",
-                "secondary_url_foreground": "Apri URL pulsante secondario",
-                "secondary_url_title": "Titolo pulsante secondario"
+                "subtitle_entity": "Subtitle source entity",
+                "subtitle_attribute": "Subtitle attribute",
+                "icon": "Icon",
+                "icon_attribute": "Dynamic icon attribute",
+                "accent_color": "Accent color",
+                "accent_color_attribute": "Dynamic accent-color attribute",
+                "background_color": "Background color",
+                "background_color_attribute": "Dynamic background-color attribute",
+                "text_color": "Text color",
+                "text_color_attribute": "Dynamic text-color attribute",
+                "tap_action": "Background tap action",
+                "url_action": "Primary button",
+                "secondary_url_action": "Secondary button"
               },
               "data_description": {
-                "subtitle_entity": "Mostra il sottotitolo da un'entità separata (ad es. un sensore di programma/modalità). Lascia vuoto per usare l'entità monitorata. Usa lo stato dell'entità di origine a meno che non sia impostato un attributo.",
-                "subtitle_attribute": "Attributo dell'entità da mostrare come sottotitolo. Lasciare vuoto per usare il nome descrittivo dell'entità.",
-                "icon": "Icona personalizzata. Lasciare vuoto per usare l'icona nativa dell'entità (es. mdi:thermometer). Sono supportati anche gli SF Symbols (es. lamp.desk.fill).",
-                "icon_attribute": "Attributo dell'entità per l'icona dinamica. Se impostato, sostituisce l'icona statica e quella dell'entità.",
-                "accent_color": "Colore accento per la Live Activity. Lasciare vuoto per il blu predefinito.",
-                "accent_color_attribute": "Attributo dell'entità per il colore accento dinamico. Sostituisce il colore statico. Supporta RGB, HS, XY, Kelvin, colori con nome ed esadecimale.",
-                "background_color": "Colore di sfondo della Live Activity. Lasciare vuoto per il valore predefinito.",
-                "background_color_attribute": "Attributo dell'entità per il colore di sfondo dinamico. Sostituisce il colore statico. Supporta RGB, HS, XY, Kelvin, colori con nome ed esadecimale.",
-                "text_color": "Colore del testo della Live Activity. Lasciare vuoto per il valore predefinito.",
-                "text_color_attribute": "Attributo dell'entità per il colore del testo dinamico. Sostituisce il colore statico.",
-                "tap_action_url": "URL facoltativo aperto toccando lo sfondo della Live Activity. Supporta http(s) (apre Safari) o schemi personalizzati come homeassistant://navigate/lovelace/0 (apre quell'app).",
-                "tap_action_foreground": "Attivo: il tocco apre l'URL. Disattivo: webhook silenzioso (solo http(s)) — invia una POST in background senza uscire dalla schermata di blocco.",
-                "url": "Link aperto toccando la Live Activity. Deve iniziare con http:// o https://. Solo per i modelli steps e alert.",
-                "url_foreground": "Attivo: il tocco apre l'URL. Disattivo: webhook silenzioso (solo http(s)).",
-                "url_title": "Etichetta del pulsante primario (max 64 caratteri).",
-                "secondary_url": "Link secondario per la Live Activity. Solo per i modelli steps e alert.",
-                "secondary_url_foreground": "Attivo: il tocco apre l'URL. Disattivo: webhook silenzioso (solo http(s)).",
-                "secondary_url_title": "Etichetta del pulsante secondario (max 64 caratteri)."
+                "subtitle_entity": "Show the subtitle from a separate entity (e.g. a program/mode sensor). Leave empty to use the tracked entity. Uses the source entity's state unless an attribute is set.",
+                "subtitle_attribute": "Attribute to show as subtitle (on the source entity, or the tracked entity if no source is set). Leave empty to use the source entity's state, or the friendly name when no source is set.",
+                "icon": "Override icon. Leave empty to use the entity’s native icon (e.g. mdi:thermometer). SF Symbols also supported (e.g. lamp.desk.fill).",
+                "icon_attribute": "Entity attribute for dynamic icon. Overrides static icon and entity icon when set.",
+                "accent_color": "Choose a PushWard named color or enter 6/8-digit RGB/RGBA hex, with or without #. Leave blank for blue.",
+                "accent_color_attribute": "Entity attribute for dynamic accent color. Overrides static color. Supports RGB, HS, XY, Kelvin, named colors, and hex.",
+                "background_color": "Choose a PushWard named color or enter 6/8-digit RGB/RGBA hex, with or without #. Leave blank for the iOS default.",
+                "background_color_attribute": "Entity attribute for dynamic background color. Overrides static color. Supports RGB, HS, XY, Kelvin, named colors, and hex.",
+                "text_color": "Choose a PushWard named color or enter 6/8-digit RGB/RGBA hex, with or without #. Leave blank for the iOS default.",
+                "text_color_attribute": "Entity attribute for dynamic text color. Overrides static color.",
+                "tap_action": "Optional whole-card destination. Configure an app link/foreground URL or a silent HTTP webhook.",
+                "url_action": "Optional primary inline button with a title, icon, and visible link or silent webhook.",
+                "secondary_url_action": "Optional second inline button with a title, icon, and visible link or silent webhook."
               }
             }
           }
         },
         "reconfigure": {
-          "title": "Modifica configurazione entità",
+          "title": "Edit tracked Live Activity",
           "data": {
-            "entity_id": "Entità",
-            "template": "Modello"
+            "entity_id": "Entity",
+            "template": "Template"
           },
           "data_description": {
-            "template": "Modello di layout dell'attività. 'generic' è adatto alla maggior parte delle entità."
+            "template": "Activity layout template. 'generic' works for most entities."
           }
-        },
-        "content": {
-          "title": "3 of 4 · {template} content",
-          "data": {
-            "start_states": "Stati di avvio",
-            "end_states": "Stati di fine",
-            "progress_attribute": "Attributo avanzamento",
-            "remaining_time_attribute": "Attributo tempo rimanente",
-            "total_steps": "Passaggi totali",
-            "current_step_attribute": "Attributo passo corrente",
-            "severity": "Gravità",
-            "value_attribute": "Attributo valore",
-            "min_value": "Valore minimo",
-            "max_value": "Valore massimo",
-            "unit": "Unità",
-            "series": "Serie",
-            "scale": "Scala",
-            "decimals": "Cifre decimali",
-            "smoothing": "Linee smussate",
-            "thresholds": "Soglie",
-            "history_period": "Periodo cronologia precedente",
-            "slug": "Slug attività",
-            "activity_name": "Nome attività",
-            "icon": "Icona",
-            "icon_attribute": "Attributo icona",
-            "priority": "Priorità (0-10)",
-            "update_interval": "Intervallo minimo aggiornamento (secondi)",
-            "subtitle_attribute": "Attributo sottotitolo",
-            "state_labels": "Etichette stato",
-            "completion_message": "Messaggio di completamento",
-            "accent_color": "Colore accento",
-            "accent_color_attribute": "Attributo colore accento",
-            "url": "URL",
-            "secondary_url": "URL secondario",
-            "ended_ttl": "Eliminazione automatica dopo la fine (secondi)",
-            "stale_ttl": "Fine automatica dopo inattività (secondi)",
-            "sound": "Suono",
-            "background_color": "Colore sfondo",
-            "background_color_attribute": "Attributo colore sfondo",
-            "text_color": "Colore testo",
-            "text_color_attribute": "Attributo colore testo",
-            "warning_threshold": "Soglia di avviso (secondi)",
-            "alarm": "Sveglia (iOS 26+)",
-            "step_labels": "Etichette passi",
-            "step_rows": "Altezze righe passi",
-            "fired_at_attribute": "Attributo orario di attivazione",
-            "units": "Unità per serie",
-            "progress_entity": "Entità di avanzamento",
-            "remaining_time_entity": "Entità tempo rimanente",
-            "current_step_entity": "Entità passaggio corrente",
-            "value_entity": "Entità valore",
-            "subtitle_entity": "Entità sottotitolo",
-            "tap_action_url": "URL azione al tocco",
-            "tap_action_foreground": "Apri URL azione al tocco",
-            "url_foreground": "Apri URL pulsante primario",
-            "url_title": "Titolo pulsante primario",
-            "secondary_url_foreground": "Apri URL pulsante secondario",
-            "secondary_url_title": "Titolo pulsante secondario",
-            "snooze_seconds": "Secondi di posticipo (iOS 26+)",
-            "fired_at_entity": "Entità ora di attivazione",
-            "log_columns": "Colonne del registro"
-          },
-          "data_description": {
-            "start_states": "Stati dell'entità che avviano la Live Activity. Selezionare dall'elenco o digitare valori personalizzati.",
-            "end_states": "Stati dell'entità che terminano la Live Activity. Selezionare dall'elenco o digitare valori personalizzati.",
-            "progress_attribute": "Attributo dell'entità che contiene un valore di avanzamento da 0 a 100. Esempio: percentage",
-            "remaining_time_attribute": "Attributo dell'entità che contiene il tempo rimanente in secondi. Esempio: remaining",
-            "total_steps": "Numero totale di steps.",
-            "current_step_attribute": "Attributo dell'entità che contiene il passo corrente come numero intero.",
-            "severity": "Livello di gravità alert.",
-            "value_attribute": "Attributo dell'entità che contiene il valore corrente del gauge come numero. Lasciare vuoto per utilizzare lo stato dell'entità.",
-            "min_value": "Valore minimo per l'intervallo del gauge.",
-            "max_value": "Valore massimo per l'intervallo del gauge.",
-            "unit": "Unità di visualizzazione mostrata accanto al valore (es. °C, %, kW). Massimo 32 caratteri.",
-            "series": "Mappare gli attributi dell'entità a serie con nome. Formato: attributo=Etichetta, attributo2=Etichetta2. Lasciare vuoto per utilizzare lo stato dell'entità come serie singola.",
-            "scale": "Modalità scala dell'asse Y per il grafico sparkline.",
-            "decimals": "Numero di cifre decimali visualizzate per i valori (0–10).",
-            "smoothing": "Abilitare l'interpolazione della curva tra i punti dati per uno sparkline più uniforme.",
-            "thresholds": "Linee di riferimento orizzontali sullo sparkline. Formato: valore:colore:etichetta. Esempio: 25:red:Caldo, 18:blue:Freddo. Massimo 5.",
-            "history_period": "Minuti di dati passati con cui inizializzare lo sparkline dal registratore di Home Assistant. Impostare 0 per iniziare senza cronologia.",
-            "slug": "Identificatore univoco per questa attività. Lasciare vuoto per generarlo automaticamente dall'ID entità. Esempio: ha-living-room-lamp",
-            "activity_name": "Nome visualizzato sulla Live Activity iPhone. Il valore predefinito è il nome descrittivo dell'entità.",
-            "icon": "Icona personalizzata. Lasciare vuoto per usare l'icona nativa dell'entità (es. mdi:thermometer). Sono supportati anche gli SF Symbols (es. lamp.desk.fill).",
-            "icon_attribute": "Attributo dell'entità per l'icona dinamica. Se impostato, sostituisce l'icona statica e quella dell'entità.",
-            "priority": "Le attività con priorità maggiore vengono conservate più a lungo quando si raggiunge il limite del dispositivo (0 = minima, 10 = massima).",
-            "update_interval": "Secondi minimi tra un aggiornamento e l'altro. I cambi di stato rapidi vengono limitati.",
-            "subtitle_attribute": "Attributo dell'entità da mostrare come sottotitolo. Lasciare vuoto per usare il nome descrittivo dell'entità.",
-            "state_labels": "Testo personalizzato per gli stati. Formato: stato=Etichetta, stato2=Etichetta 2. Esempio: heating=In riscaldamento, idle=In standby",
-            "completion_message": "Testo visualizzato al termine dell'attività. Lasciare vuoto per 'Completato'. Esempio: Lavaggio terminato",
-            "accent_color": "Colore accento per la Live Activity. Lasciare vuoto per il blu predefinito.",
-            "accent_color_attribute": "Attributo dell'entità per il colore accento dinamico. Sostituisce il colore statico. Supporta RGB, HS, XY, Kelvin, colori con nome ed esadecimale.",
-            "url": "Link aperto toccando la Live Activity. Deve iniziare con http:// o https://. Solo per i modelli steps e alert.",
-            "secondary_url": "Link secondario per la Live Activity. Solo per i modelli steps e alert.",
-            "ended_ttl": "Secondi trascorsi i quali l'attività viene eliminata automaticamente dal server dopo la conclusione. Lasciare vuoto per conservarla indefinitamente. Esempio: 300",
-            "stale_ttl": "Secondi di inattività dopo i quali il server termina automaticamente l'attività. Lasciare vuoto per disabilitare. Esempio: 1800",
-            "sound": "Suono riprodotto ad ogni aggiornamento per questa entità. Lasciare vuoto per non forzare alcun suono.",
-            "background_color": "Colore di sfondo della Live Activity. Lasciare vuoto per il valore predefinito.",
-            "background_color_attribute": "Attributo dell'entità per il colore di sfondo dinamico. Sostituisce il colore statico. Supporta RGB, HS, XY, Kelvin, colori con nome ed esadecimale.",
-            "text_color": "Colore del testo della Live Activity. Lasciare vuoto per il valore predefinito.",
-            "text_color_attribute": "Attributo dell'entità per il colore del testo dinamico. Sostituisce il colore statico.",
-            "warning_threshold": "Secondi prima della fine del countdown in cui il server invia un push di avviso. Lasciare vuoto per disabilitare. Solo per il modello countdown.",
-            "alarm": "Attivare la sveglia AlarmKit alla scadenza del countdown (iOS 26+). Solo per il modello countdown.",
-            "step_labels": "Etichette per ogni passo. Formato: 1=Primo Passo, 2=Secondo Passo. Deve coprire i passi 1..total_steps. Solo per il modello steps.",
-            "step_rows": "Altezza di riga (1–10) per ogni passo, separata da virgole. Deve avere total_steps voci. Solo per il modello steps.",
-            "fired_at_attribute": "Attributo dell'entità con il timestamp Unix di quando è stato attivato l'alert. Solo per il modello alert.",
-            "units": "Etichette delle unità per serie. Formato: EtichettaSerie=unità, Temperatura=°C, Umidità=%. Solo per il modello timeline.",
-            "progress_entity": "Legge l'avanzamento da un'entità separata anziché dall'entità monitorata. Lascia vuoto per usare l'entità monitorata. Se il campo attributo è impostato, legge quell'attributo di questa entità; altrimenti il suo stato.",
-            "remaining_time_entity": "Legge il tempo rimanente da un'entità separata (ad es. il sensore di tempo di una lavatrice). Lascia vuoto per usare l'entità monitorata. Analizza automaticamente un sensore timestamp (ora di fine), un sensore di durata con unità, una stringa H:MM:SS o semplici secondi.",
-            "current_step_entity": "Legge il passaggio corrente da un'entità separata. Lascia vuoto per usare l'entità monitorata.",
-            "value_entity": "Legge il valore dell'indicatore da un'entità separata. Lascia vuoto per usare l'entità monitorata. Usa lo stato dell'entità di origine a meno che non sia impostato un attributo.",
-            "subtitle_entity": "Mostra il sottotitolo da un'entità separata (ad es. un sensore di programma/modalità). Lascia vuoto per usare l'entità monitorata. Usa lo stato dell'entità di origine a meno che non sia impostato un attributo.",
-            "tap_action_url": "URL facoltativo aperto toccando lo sfondo della Live Activity. Supporta http(s) (apre Safari) o schemi personalizzati come homeassistant://navigate/lovelace/0 (apre quell'app).",
-            "tap_action_foreground": "Attivo: il tocco apre l'URL. Disattivo: webhook silenzioso (solo http(s)) — invia una POST in background senza uscire dalla schermata di blocco.",
-            "url_foreground": "Attivo: il tocco apre l'URL. Disattivo: webhook silenzioso (solo http(s)).",
-            "url_title": "Etichetta del pulsante primario (max 64 caratteri).",
-            "secondary_url_foreground": "Attivo: il tocco apre l'URL. Disattivo: webhook silenzioso (solo http(s)).",
-            "secondary_url_title": "Etichetta del pulsante secondario (max 64 caratteri).",
-            "snooze_seconds": "Di quanto il pulsante Posticipa di iOS estende il conto alla rovescia (60–3600). Lascia vuoto per il valore predefinito di 300s (5 min). Richiede una sveglia. Solo modello conto alla rovescia.",
-            "fired_at_entity": "Legge l'ora di attivazione dell'avviso da un'entità separata. Lascia vuoto per usare l'entità monitorata. Accetta un timestamp unix o un sensore con timestamp ISO. Solo modello avviso.",
-            "log_columns": "Valori aggiuntivi aggiunti a ogni riga del registro (max 6), separati da virgole. Formato: [Label=]source[|unit]. source = un attributo di questa entità (brightness), lo stato di un'altra entità (binary_sensor.door) o un attributo di un'altra entità (sensor.temp:temperature). Esempio: color_temp_kelvin|K, brightness → 'On · 4000K · 153'. Solo modello registro."
-          },
-          "description": "Configure only the values used by the selected Live Activity layout."
-        },
-        "appearance": {
-          "title": "4 of 4 · Appearance and actions",
-          "data": {
-            "start_states": "Stati di avvio",
-            "end_states": "Stati di fine",
-            "progress_attribute": "Attributo avanzamento",
-            "remaining_time_attribute": "Attributo tempo rimanente",
-            "total_steps": "Passaggi totali",
-            "current_step_attribute": "Attributo passo corrente",
-            "severity": "Gravità",
-            "value_attribute": "Attributo valore",
-            "min_value": "Valore minimo",
-            "max_value": "Valore massimo",
-            "unit": "Unità",
-            "series": "Serie",
-            "scale": "Scala",
-            "decimals": "Cifre decimali",
-            "smoothing": "Linee smussate",
-            "thresholds": "Soglie",
-            "history_period": "Periodo cronologia precedente",
-            "slug": "Slug attività",
-            "activity_name": "Nome attività",
-            "icon": "Icona",
-            "icon_attribute": "Attributo icona",
-            "priority": "Priorità (0-10)",
-            "update_interval": "Intervallo minimo aggiornamento (secondi)",
-            "subtitle_attribute": "Attributo sottotitolo",
-            "state_labels": "Etichette stato",
-            "completion_message": "Messaggio di completamento",
-            "accent_color": "Colore accento",
-            "accent_color_attribute": "Attributo colore accento",
-            "url": "URL",
-            "secondary_url": "URL secondario",
-            "ended_ttl": "Eliminazione automatica dopo la fine (secondi)",
-            "stale_ttl": "Fine automatica dopo inattività (secondi)",
-            "sound": "Suono",
-            "background_color": "Colore sfondo",
-            "background_color_attribute": "Attributo colore sfondo",
-            "text_color": "Colore testo",
-            "text_color_attribute": "Attributo colore testo",
-            "warning_threshold": "Soglia di avviso (secondi)",
-            "alarm": "Sveglia (iOS 26+)",
-            "step_labels": "Etichette passi",
-            "step_rows": "Altezze righe passi",
-            "fired_at_attribute": "Attributo orario di attivazione",
-            "units": "Unità per serie",
-            "progress_entity": "Entità di avanzamento",
-            "remaining_time_entity": "Entità tempo rimanente",
-            "current_step_entity": "Entità passaggio corrente",
-            "value_entity": "Entità valore",
-            "subtitle_entity": "Entità sottotitolo",
-            "tap_action_url": "URL azione al tocco",
-            "tap_action_foreground": "Apri URL azione al tocco",
-            "url_foreground": "Apri URL pulsante primario",
-            "url_title": "Titolo pulsante primario",
-            "secondary_url_foreground": "Apri URL pulsante secondario",
-            "secondary_url_title": "Titolo pulsante secondario",
-            "snooze_seconds": "Secondi di posticipo (iOS 26+)",
-            "fired_at_entity": "Entità ora di attivazione",
-            "log_columns": "Colonne del registro"
-          },
-          "data_description": {
-            "start_states": "Stati dell'entità che avviano la Live Activity. Selezionare dall'elenco o digitare valori personalizzati.",
-            "end_states": "Stati dell'entità che terminano la Live Activity. Selezionare dall'elenco o digitare valori personalizzati.",
-            "progress_attribute": "Attributo dell'entità che contiene un valore di avanzamento da 0 a 100. Esempio: percentage",
-            "remaining_time_attribute": "Attributo dell'entità che contiene il tempo rimanente in secondi. Esempio: remaining",
-            "total_steps": "Numero totale di steps.",
-            "current_step_attribute": "Attributo dell'entità che contiene il passo corrente come numero intero.",
-            "severity": "Livello di gravità alert.",
-            "value_attribute": "Attributo dell'entità che contiene il valore corrente del gauge come numero. Lasciare vuoto per utilizzare lo stato dell'entità.",
-            "min_value": "Valore minimo per l'intervallo del gauge.",
-            "max_value": "Valore massimo per l'intervallo del gauge.",
-            "unit": "Unità di visualizzazione mostrata accanto al valore (es. °C, %, kW). Massimo 32 caratteri.",
-            "series": "Mappare gli attributi dell'entità a serie con nome. Formato: attributo=Etichetta, attributo2=Etichetta2. Lasciare vuoto per utilizzare lo stato dell'entità come serie singola.",
-            "scale": "Modalità scala dell'asse Y per il grafico sparkline.",
-            "decimals": "Numero di cifre decimali visualizzate per i valori (0–10).",
-            "smoothing": "Abilitare l'interpolazione della curva tra i punti dati per uno sparkline più uniforme.",
-            "thresholds": "Linee di riferimento orizzontali sullo sparkline. Formato: valore:colore:etichetta. Esempio: 25:red:Caldo, 18:blue:Freddo. Massimo 5.",
-            "history_period": "Minuti di dati passati con cui inizializzare lo sparkline dal registratore di Home Assistant. Impostare 0 per iniziare senza cronologia.",
-            "slug": "Identificatore univoco per questa attività. Lasciare vuoto per generarlo automaticamente dall'ID entità. Esempio: ha-living-room-lamp",
-            "activity_name": "Nome visualizzato sulla Live Activity iPhone. Il valore predefinito è il nome descrittivo dell'entità.",
-            "icon": "Icona personalizzata. Lasciare vuoto per usare l'icona nativa dell'entità (es. mdi:thermometer). Sono supportati anche gli SF Symbols (es. lamp.desk.fill).",
-            "icon_attribute": "Attributo dell'entità per l'icona dinamica. Se impostato, sostituisce l'icona statica e quella dell'entità.",
-            "priority": "Le attività con priorità maggiore vengono conservate più a lungo quando si raggiunge il limite del dispositivo (0 = minima, 10 = massima).",
-            "update_interval": "Secondi minimi tra un aggiornamento e l'altro. I cambi di stato rapidi vengono limitati.",
-            "subtitle_attribute": "Attributo dell'entità da mostrare come sottotitolo. Lasciare vuoto per usare il nome descrittivo dell'entità.",
-            "state_labels": "Testo personalizzato per gli stati. Formato: stato=Etichetta, stato2=Etichetta 2. Esempio: heating=In riscaldamento, idle=In standby",
-            "completion_message": "Testo visualizzato al termine dell'attività. Lasciare vuoto per 'Completato'. Esempio: Lavaggio terminato",
-            "accent_color": "Colore accento per la Live Activity. Lasciare vuoto per il blu predefinito.",
-            "accent_color_attribute": "Attributo dell'entità per il colore accento dinamico. Sostituisce il colore statico. Supporta RGB, HS, XY, Kelvin, colori con nome ed esadecimale.",
-            "url": "Link aperto toccando la Live Activity. Deve iniziare con http:// o https://. Solo per i modelli steps e alert.",
-            "secondary_url": "Link secondario per la Live Activity. Solo per i modelli steps e alert.",
-            "ended_ttl": "Secondi trascorsi i quali l'attività viene eliminata automaticamente dal server dopo la conclusione. Lasciare vuoto per conservarla indefinitamente. Esempio: 300",
-            "stale_ttl": "Secondi di inattività dopo i quali il server termina automaticamente l'attività. Lasciare vuoto per disabilitare. Esempio: 1800",
-            "sound": "Suono riprodotto ad ogni aggiornamento per questa entità. Lasciare vuoto per non forzare alcun suono.",
-            "background_color": "Colore di sfondo della Live Activity. Lasciare vuoto per il valore predefinito.",
-            "background_color_attribute": "Attributo dell'entità per il colore di sfondo dinamico. Sostituisce il colore statico. Supporta RGB, HS, XY, Kelvin, colori con nome ed esadecimale.",
-            "text_color": "Colore del testo della Live Activity. Lasciare vuoto per il valore predefinito.",
-            "text_color_attribute": "Attributo dell'entità per il colore del testo dinamico. Sostituisce il colore statico.",
-            "warning_threshold": "Secondi prima della fine del countdown in cui il server invia un push di avviso. Lasciare vuoto per disabilitare. Solo per il modello countdown.",
-            "alarm": "Attivare la sveglia AlarmKit alla scadenza del countdown (iOS 26+). Solo per il modello countdown.",
-            "step_labels": "Etichette per ogni passo. Formato: 1=Primo Passo, 2=Secondo Passo. Deve coprire i passi 1..total_steps. Solo per il modello steps.",
-            "step_rows": "Altezza di riga (1–10) per ogni passo, separata da virgole. Deve avere total_steps voci. Solo per il modello steps.",
-            "fired_at_attribute": "Attributo dell'entità con il timestamp Unix di quando è stato attivato l'alert. Solo per il modello alert.",
-            "units": "Etichette delle unità per serie. Formato: EtichettaSerie=unità, Temperatura=°C, Umidità=%. Solo per il modello timeline.",
-            "progress_entity": "Legge l'avanzamento da un'entità separata anziché dall'entità monitorata. Lascia vuoto per usare l'entità monitorata. Se il campo attributo è impostato, legge quell'attributo di questa entità; altrimenti il suo stato.",
-            "remaining_time_entity": "Legge il tempo rimanente da un'entità separata (ad es. il sensore di tempo di una lavatrice). Lascia vuoto per usare l'entità monitorata. Analizza automaticamente un sensore timestamp (ora di fine), un sensore di durata con unità, una stringa H:MM:SS o semplici secondi.",
-            "current_step_entity": "Legge il passaggio corrente da un'entità separata. Lascia vuoto per usare l'entità monitorata.",
-            "value_entity": "Legge il valore dell'indicatore da un'entità separata. Lascia vuoto per usare l'entità monitorata. Usa lo stato dell'entità di origine a meno che non sia impostato un attributo.",
-            "subtitle_entity": "Mostra il sottotitolo da un'entità separata (ad es. un sensore di programma/modalità). Lascia vuoto per usare l'entità monitorata. Usa lo stato dell'entità di origine a meno che non sia impostato un attributo.",
-            "tap_action_url": "URL facoltativo aperto toccando lo sfondo della Live Activity. Supporta http(s) (apre Safari) o schemi personalizzati come homeassistant://navigate/lovelace/0 (apre quell'app).",
-            "tap_action_foreground": "Attivo: il tocco apre l'URL. Disattivo: webhook silenzioso (solo http(s)) — invia una POST in background senza uscire dalla schermata di blocco.",
-            "url_foreground": "Attivo: il tocco apre l'URL. Disattivo: webhook silenzioso (solo http(s)).",
-            "url_title": "Etichetta del pulsante primario (max 64 caratteri).",
-            "secondary_url_foreground": "Attivo: il tocco apre l'URL. Disattivo: webhook silenzioso (solo http(s)).",
-            "secondary_url_title": "Etichetta del pulsante secondario (max 64 caratteri).",
-            "snooze_seconds": "Di quanto il pulsante Posticipa di iOS estende il conto alla rovescia (60–3600). Lascia vuoto per il valore predefinito di 300s (5 min). Richiede una sveglia. Solo modello conto alla rovescia.",
-            "fired_at_entity": "Legge l'ora di attivazione dell'avviso da un'entità separata. Lascia vuoto per usare l'entità monitorata. Accetta un timestamp unix o un sensore con timestamp ISO. Solo modello avviso.",
-            "log_columns": "Valori aggiuntivi aggiunti a ogni riga del registro (max 6), separati da virgole. Formato: [Label=]source[|unit]. source = un attributo di questa entità (brightness), lo stato di un'altra entità (binary_sensor.door) o un attributo di un'altra entità (sensor.temp:temperature). Esempio: color_temp_kelvin|K, brightness → 'On · 4000K · 153'. Solo modello registro."
-          },
-          "description": "Finish with labels, colors, icons, and tap behavior."
         }
       },
       "error": {
-        "invalid_url": "L'URL deve utilizzare lo schema http:// o https://.",
-        "invalid_gauge_range": "Il valore minimo deve essere inferiore al valore massimo.",
-        "silent_requires_http": "Il webhook silenzioso (primo piano disattivato) richiede un URL http:// o https://."
+        "invalid_url": "URL must include a valid scheme. Use http(s):// or a custom app scheme like homeassistant://.",
+        "silent_requires_http": "Silent webhook (foreground off) requires an http:// or https:// URL.",
+        "invalid_gauge_range": "Minimum value must be less than maximum value.",
+        "tiles_required": "At least one tile is required for the board template.",
+        "too_many_series": "A timeline supports at most 10 series in total (series attributes plus series entities)."
       },
       "abort": {
-        "already_configured": "Questa entità è già monitorata.",
-        "reconfigure_successful": "Configurazione entità aggiornata."
+        "already_configured": "This entity is already tracked.",
+        "reconfigure_successful": "Entity configuration updated."
       }
     },
     "tracked_widget": {
-      "entry_type": "Widget monitorato",
+      "entry_type": "Tracked Widget",
       "initiate_flow": {
-        "user": "Aggiungi widget monitorato"
+        "user": "Add tracked widget"
       },
       "step": {
         "user": {
-          "title": "Aggiungi widget a PushWard",
+          "title": "Add tracked PushWard widget",
           "data": {
-            "entity_id": "Entità",
-            "widget_template": "Modello",
-            "slug": "Slug del widget"
+            "entity_id": "Entity to display",
+            "widget_template": "Widget layout",
+            "slug": "Widget slug"
           },
           "data_description": {
-            "widget_template": "Layout del widget. Usa `value` per un singolo numero, `progress` per una barra 0–1, `gauge` per un valore in un intervallo, `status` per un badge di gravità o `stat_list` per un massimo di 6 righe.",
-            "slug": "Identificatore univoco per questo widget. Lascia vuoto per generarlo automaticamente dall'ID dell'entità."
+            "widget_template": "Widget layout. Use `value` for a single number, `progress` for a 0–1 bar, `gauge` for a value-in-range, `status` for a severity badge, or `stat_list` for up to 6 rows.",
+            "slug": "Unique identifier for this widget. Leave empty to auto-generate from entity ID.",
+            "entity_id": "The Home Assistant entity that supplies this widget’s value and update events."
           }
         },
         "reconfigure": {
-          "title": "Modifica widget",
+          "title": "Edit tracked PushWard widget",
           "data": {
-            "entity_id": "Entità",
-            "widget_template": "Modello",
-            "slug": "Slug del widget"
+            "entity_id": "Entity",
+            "widget_template": "Template",
+            "slug": "Widget Slug"
           },
           "data_description": {
-            "widget_template": "Layout del widget.",
-            "slug": "Identificatore univoco per questo widget."
+            "widget_template": "Widget layout.",
+            "slug": "Unique identifier for this widget."
           }
         },
         "details": {
           "title": "Configure {template} widget",
           "data": {
-            "widget_name": "Nome widget",
-            "value_attribute": "Attributo valore",
-            "unit": "Unità",
-            "min_value": "Valore minimo",
-            "max_value": "Valore massimo",
-            "severity": "Gravità",
-            "stat_rows": "Righe statistiche",
-            "label": "Etichetta",
-            "label_attribute": "Attributo etichetta",
-            "subtitle_attribute": "Attributo sottotitolo",
-            "icon": "Icona",
-            "icon_attribute": "Attributo icona",
-            "accent_color": "Colore d'accento",
-            "accent_color_attribute": "Attributo colore d'accento",
-            "background_color": "Colore di sfondo",
-            "text_color": "Colore del testo",
-            "widget_trigger_mode": "Modalità di attivazione",
-            "widget_poll_interval": "Intervallo di polling (secondi)",
-            "tap_action_url": "URL azione al tocco",
-            "tap_action_foreground": "Apri URL azione al tocco"
+            "widget_name": "Widget Name",
+            "value_attribute": "Value Attribute",
+            "unit": "Unit",
+            "min_value": "Minimum Value",
+            "max_value": "Maximum Value",
+            "severity": "Severity",
+            "stat_rows": "Stat Rows",
+            "label": "Label",
+            "label_attribute": "Label Attribute",
+            "subtitle_attribute": "Subtitle Attribute",
+            "icon": "Icon",
+            "icon_attribute": "Icon Attribute",
+            "accent_color": "Accent Color",
+            "accent_color_attribute": "Accent Color Attribute",
+            "background_color": "Background Color",
+            "text_color": "Text Color",
+            "widget_trigger_mode": "Trigger Mode",
+            "widget_poll_interval": "Poll Interval (seconds)",
+            "tap_action_url": "Tap Action URL",
+            "tap_action_foreground": "Open Tap Action URL"
           },
           "data_description": {
-            "widget_name": "Nome visualizzato mostrato nel selettore di widget di iOS. Per impostazione predefinita usa il nome descrittivo dell'entità.",
-            "value_attribute": "Attributo dell'entità che contiene il valore. Lascia vuoto per usare lo stato primario dell'entità.",
-            "unit": "Unità di visualizzazione mostrata accanto al valore. Max 32 caratteri.",
-            "min_value": "Valore minimo dell'intervallo dell'indicatore.",
-            "max_value": "Valore massimo dell'intervallo dell'indicatore.",
-            "severity": "Gravità dello stato (info, warning, critical, success).",
-            "stat_rows": "Fino a 6 righe. Formato: `Label=entity_id[:attribute[:unit]]`, separate da virgola. Esempio: `Users=sensor.user_count, Active=sensor.active_devices:count`.",
-            "label": "Etichetta statica mostrata sul widget. Lascia vuoto per derivarla dall'entità.",
-            "label_attribute": "Attributo dell'entità usato come etichetta. Ha la precedenza sull'etichetta statica.",
-            "subtitle_attribute": "Attributo dell'entità mostrato come sottotitolo del widget.",
-            "icon": "Icona statica. Sono supportati i nomi SF Symbols e MDI.",
-            "icon_attribute": "Attributo dell'entità per un'icona dinamica. Ha la precedenza sull'icona statica.",
-            "accent_color": "Colore d'accento per il widget. Lascia vuoto per il valore predefinito.",
-            "accent_color_attribute": "Attributo dell'entità per un colore d'accento dinamico.",
-            "background_color": "Colore di sfondo facoltativo.",
-            "text_color": "Colore del testo facoltativo.",
-            "widget_trigger_mode": "Come vengono attivati gli aggiornamenti. `event` reagisce alle modifiche di stato; `poll` rivaluta a intervalli fissi.",
-            "widget_poll_interval": "Intervallo tra i polling (10–3600 secondi). Usato solo quando la modalità di attivazione è `poll`.",
-            "tap_action_url": "URL facoltativo aperto toccando il widget. Supporta http(s) (apre Safari) o schemi personalizzati come homeassistant://navigate/lovelace/0.",
-            "tap_action_foreground": "Attivo: il tocco apre l'URL. Disattivo: webhook silenzioso (solo http(s)) — invia una POST in background."
+            "widget_name": "Display name shown in the iOS widget picker. Defaults to the entity's friendly name.",
+            "value_attribute": "Entity attribute holding the value. Leave empty to use the entity's primary state.",
+            "unit": "Display unit shown next to the value. Max 32 characters.",
+            "min_value": "Minimum value for the gauge range.",
+            "max_value": "Maximum value for the gauge range.",
+            "severity": "Status severity (info, warning, critical, success).",
+            "stat_rows": "Add up to 6 rows, each with a label, entity, and optional attribute and unit. Smaller widgets may show fewer rows depending on Row Density in the PushWard app.",
+            "label": "Static label shown on the widget. Leave empty to derive from the entity.",
+            "label_attribute": "Entity attribute used as the label. Overrides the static label.",
+            "subtitle_attribute": "Entity attribute shown as the widget subtitle.",
+            "icon": "Static icon. SF Symbols and MDI names supported.",
+            "icon_attribute": "Entity attribute for a dynamic icon. Overrides the static icon.",
+            "accent_color": "Accent color for the widget. Leave empty for the default.",
+            "accent_color_attribute": "Entity attribute for a dynamic accent color.",
+            "background_color": "Optional background color.",
+            "text_color": "Optional text color.",
+            "widget_trigger_mode": "How updates are triggered. `event` reacts to state changes; `poll` re-evaluates on a fixed interval.",
+            "widget_poll_interval": "Interval between polls (10–3600 seconds). Only used when trigger mode is `poll`.",
+            "tap_action_url": "Optional URL opened when tapping the widget. Supports http(s) (opens Safari) or custom schemes like homeassistant://navigate/lovelace/0.",
+            "tap_action_foreground": "On: tap opens the URL. Off: silent webhook (http(s) only) — fires a POST in the background."
           },
           "description": "Everything is on this page. Open only the sections you need.",
           "sections": {
@@ -1702,225 +1378,99 @@
               "name": "Widget content",
               "description": "Values rendered by the selected widget layout.",
               "data": {
-                "value_attribute": "Attributo valore",
-                "unit": "Unità",
-                "min_value": "Valore minimo",
-                "max_value": "Valore massimo",
-                "severity": "Gravità",
-                "stat_rows": "Righe statistiche"
+                "value_attribute": "Value Attribute",
+                "unit": "Unit",
+                "min_value": "Minimum Value",
+                "max_value": "Maximum Value",
+                "severity": "Severity",
+                "stat_rows": "Stat Rows"
               },
               "data_description": {
-                "value_attribute": "Attributo dell'entità che contiene il valore. Lascia vuoto per usare lo stato primario dell'entità.",
-                "unit": "Unità di visualizzazione mostrata accanto al valore. Max 32 caratteri.",
-                "min_value": "Valore minimo dell'intervallo dell'indicatore.",
-                "max_value": "Valore massimo dell'intervallo dell'indicatore.",
-                "severity": "Gravità dello stato (info, warning, critical, success).",
-                "stat_rows": "Fino a 6 righe. Formato: `Label=entity_id[:attribute[:unit]]`, separate da virgola. Esempio: `Users=sensor.user_count, Active=sensor.active_devices:count`."
+                "value_attribute": "Entity attribute holding the value. Leave empty to use the entity's primary state.",
+                "unit": "Display unit shown next to the value. Max 32 characters.",
+                "min_value": "Minimum value for the gauge range.",
+                "max_value": "Maximum value for the gauge range.",
+                "severity": "Status severity (info, warning, critical, success).",
+                "stat_rows": "Add up to 6 rows, each with a label, entity, and optional attribute and unit. Smaller widgets may show fewer rows depending on Row Density in the PushWard app."
               }
             },
             "appearance": {
               "name": "Appearance and tap action",
               "description": "Optional labels, icon, colors, and tap behavior.",
               "data": {
-                "widget_name": "Nome widget",
-                "label": "Etichetta",
-                "label_attribute": "Attributo etichetta",
-                "subtitle_attribute": "Attributo sottotitolo",
-                "icon": "Icona",
-                "icon_attribute": "Attributo icona",
-                "accent_color": "Colore d'accento",
-                "accent_color_attribute": "Attributo colore d'accento",
-                "background_color": "Colore di sfondo",
-                "text_color": "Colore del testo",
-                "tap_action_url": "URL azione al tocco",
-                "tap_action_foreground": "Apri URL azione al tocco"
+                "widget_name": "Widget Name",
+                "label": "Label",
+                "label_attribute": "Label Attribute",
+                "subtitle_attribute": "Subtitle Attribute",
+                "icon": "Icon",
+                "icon_attribute": "Icon Attribute",
+                "accent_color": "Accent Color",
+                "accent_color_attribute": "Accent Color Attribute",
+                "background_color": "Background Color",
+                "text_color": "Text Color",
+                "tap_action": "Background tap action",
+                "url_action": "Primary button",
+                "secondary_url_action": "Secondary button"
               },
               "data_description": {
-                "widget_name": "Nome visualizzato mostrato nel selettore di widget di iOS. Per impostazione predefinita usa il nome descrittivo dell'entità.",
-                "label": "Etichetta statica mostrata sul widget. Lascia vuoto per derivarla dall'entità.",
-                "label_attribute": "Attributo dell'entità usato come etichetta. Ha la precedenza sull'etichetta statica.",
-                "subtitle_attribute": "Attributo dell'entità mostrato come sottotitolo del widget.",
-                "icon": "Icona statica. Sono supportati i nomi SF Symbols e MDI.",
-                "icon_attribute": "Attributo dell'entità per un'icona dinamica. Ha la precedenza sull'icona statica.",
-                "accent_color": "Colore d'accento per il widget. Lascia vuoto per il valore predefinito.",
-                "accent_color_attribute": "Attributo dell'entità per un colore d'accento dinamico.",
-                "background_color": "Colore di sfondo facoltativo.",
-                "text_color": "Colore del testo facoltativo.",
-                "tap_action_url": "URL facoltativo aperto toccando il widget. Supporta http(s) (apre Safari) o schemi personalizzati come homeassistant://navigate/lovelace/0.",
-                "tap_action_foreground": "Attivo: il tocco apre l'URL. Disattivo: webhook silenzioso (solo http(s)) — invia una POST in background."
+                "widget_name": "Display name shown in the iOS widget picker. Defaults to the entity's friendly name.",
+                "label": "Static label shown on the widget. Leave empty to derive from the entity.",
+                "label_attribute": "Entity attribute used as the label. Overrides the static label.",
+                "subtitle_attribute": "Entity attribute shown as the widget subtitle.",
+                "icon": "Static icon. SF Symbols and MDI names supported.",
+                "icon_attribute": "Entity attribute for a dynamic icon. Overrides the static icon.",
+                "accent_color": "Choose a PushWard named color or enter 6/8-digit RGB/RGBA hex, with or without #.",
+                "accent_color_attribute": "Entity attribute for a dynamic accent color.",
+                "background_color": "Choose a PushWard named color or enter 6/8-digit RGB/RGBA hex, with or without #.",
+                "text_color": "Choose a PushWard named color or enter 6/8-digit RGB/RGBA hex, with or without #.",
+                "tap_action": "Optional whole-card destination. Configure an app link/foreground URL or a silent HTTP webhook.",
+                "url_action": "Optional primary inline button with a title, icon, and visible link or silent webhook.",
+                "secondary_url_action": "Optional second inline button with a title, icon, and visible link or silent webhook."
               }
             },
             "refresh": {
               "name": "Refresh behavior",
               "description": "Choose event-driven updates or periodic polling.",
               "data": {
-                "widget_trigger_mode": "Modalità di attivazione",
-                "widget_poll_interval": "Intervallo di polling (secondi)"
+                "widget_trigger_mode": "Trigger Mode",
+                "widget_poll_interval": "Polling interval"
               },
               "data_description": {
-                "widget_trigger_mode": "Come vengono attivati gli aggiornamenti. `event` reagisce alle modifiche di stato; `poll` rivaluta a intervalli fissi.",
-                "widget_poll_interval": "Intervallo tra i polling (10–3600 secondi). Usato solo quando la modalità di attivazione è `poll`."
+                "widget_trigger_mode": "How updates are triggered. `event` reacts to state changes; `poll` re-evaluates on a fixed interval.",
+                "widget_poll_interval": "Seconds between polls. Valid range: 10-3,600 seconds; used only with Poll on a schedule."
               }
             }
           }
-        },
-        "appearance": {
-          "title": "3 of 4 · Appearance and tap action",
-          "data": {
-            "widget_name": "Nome widget",
-            "value_attribute": "Attributo valore",
-            "unit": "Unità",
-            "min_value": "Valore minimo",
-            "max_value": "Valore massimo",
-            "severity": "Gravità",
-            "stat_rows": "Righe statistiche",
-            "label": "Etichetta",
-            "label_attribute": "Attributo etichetta",
-            "subtitle_attribute": "Attributo sottotitolo",
-            "icon": "Icona",
-            "icon_attribute": "Attributo icona",
-            "accent_color": "Colore d'accento",
-            "accent_color_attribute": "Attributo colore d'accento",
-            "background_color": "Colore di sfondo",
-            "text_color": "Colore del testo",
-            "widget_trigger_mode": "Modalità di attivazione",
-            "widget_poll_interval": "Intervallo di polling (secondi)",
-            "tap_action_url": "URL azione al tocco",
-            "tap_action_foreground": "Apri URL azione al tocco"
-          },
-          "data_description": {
-            "widget_name": "Nome visualizzato mostrato nel selettore di widget di iOS. Per impostazione predefinita usa il nome descrittivo dell'entità.",
-            "value_attribute": "Attributo dell'entità che contiene il valore. Lascia vuoto per usare lo stato primario dell'entità.",
-            "unit": "Unità di visualizzazione mostrata accanto al valore. Max 32 caratteri.",
-            "min_value": "Valore minimo dell'intervallo dell'indicatore.",
-            "max_value": "Valore massimo dell'intervallo dell'indicatore.",
-            "severity": "Gravità dello stato (info, warning, critical, success).",
-            "stat_rows": "Fino a 6 righe. Formato: `Label=entity_id[:attribute[:unit]]`, separate da virgola. Esempio: `Users=sensor.user_count, Active=sensor.active_devices:count`.",
-            "label": "Etichetta statica mostrata sul widget. Lascia vuoto per derivarla dall'entità.",
-            "label_attribute": "Attributo dell'entità usato come etichetta. Ha la precedenza sull'etichetta statica.",
-            "subtitle_attribute": "Attributo dell'entità mostrato come sottotitolo del widget.",
-            "icon": "Icona statica. Sono supportati i nomi SF Symbols e MDI.",
-            "icon_attribute": "Attributo dell'entità per un'icona dinamica. Ha la precedenza sull'icona statica.",
-            "accent_color": "Colore d'accento per il widget. Lascia vuoto per il valore predefinito.",
-            "accent_color_attribute": "Attributo dell'entità per un colore d'accento dinamico.",
-            "background_color": "Colore di sfondo facoltativo.",
-            "text_color": "Colore del testo facoltativo.",
-            "widget_trigger_mode": "Come vengono attivati gli aggiornamenti. `event` reagisce alle modifiche di stato; `poll` rivaluta a intervalli fissi.",
-            "widget_poll_interval": "Intervallo tra i polling (10–3600 secondi). Usato solo quando la modalità di attivazione è `poll`.",
-            "tap_action_url": "URL facoltativo aperto toccando il widget. Supporta http(s) (apre Safari) o schemi personalizzati come homeassistant://navigate/lovelace/0.",
-            "tap_action_foreground": "Attivo: il tocco apre l'URL. Disattivo: webhook silenzioso (solo http(s)) — invia una POST in background."
-          },
-          "description": "Set the widget labels, icon, colors, and tap behavior."
-        },
-        "refresh": {
-          "title": "4 of 4 · Refresh behavior",
-          "data": {
-            "widget_name": "Nome widget",
-            "value_attribute": "Attributo valore",
-            "unit": "Unità",
-            "min_value": "Valore minimo",
-            "max_value": "Valore massimo",
-            "severity": "Gravità",
-            "stat_rows": "Righe statistiche",
-            "label": "Etichetta",
-            "label_attribute": "Attributo etichetta",
-            "subtitle_attribute": "Attributo sottotitolo",
-            "icon": "Icona",
-            "icon_attribute": "Attributo icona",
-            "accent_color": "Colore d'accento",
-            "accent_color_attribute": "Attributo colore d'accento",
-            "background_color": "Colore di sfondo",
-            "text_color": "Colore del testo",
-            "widget_trigger_mode": "Modalità di attivazione",
-            "widget_poll_interval": "Intervallo di polling (secondi)",
-            "tap_action_url": "URL azione al tocco",
-            "tap_action_foreground": "Apri URL azione al tocco"
-          },
-          "data_description": {
-            "widget_name": "Nome visualizzato mostrato nel selettore di widget di iOS. Per impostazione predefinita usa il nome descrittivo dell'entità.",
-            "value_attribute": "Attributo dell'entità che contiene il valore. Lascia vuoto per usare lo stato primario dell'entità.",
-            "unit": "Unità di visualizzazione mostrata accanto al valore. Max 32 caratteri.",
-            "min_value": "Valore minimo dell'intervallo dell'indicatore.",
-            "max_value": "Valore massimo dell'intervallo dell'indicatore.",
-            "severity": "Gravità dello stato (info, warning, critical, success).",
-            "stat_rows": "Fino a 6 righe. Formato: `Label=entity_id[:attribute[:unit]]`, separate da virgola. Esempio: `Users=sensor.user_count, Active=sensor.active_devices:count`.",
-            "label": "Etichetta statica mostrata sul widget. Lascia vuoto per derivarla dall'entità.",
-            "label_attribute": "Attributo dell'entità usato come etichetta. Ha la precedenza sull'etichetta statica.",
-            "subtitle_attribute": "Attributo dell'entità mostrato come sottotitolo del widget.",
-            "icon": "Icona statica. Sono supportati i nomi SF Symbols e MDI.",
-            "icon_attribute": "Attributo dell'entità per un'icona dinamica. Ha la precedenza sull'icona statica.",
-            "accent_color": "Colore d'accento per il widget. Lascia vuoto per il valore predefinito.",
-            "accent_color_attribute": "Attributo dell'entità per un colore d'accento dinamico.",
-            "background_color": "Colore di sfondo facoltativo.",
-            "text_color": "Colore del testo facoltativo.",
-            "widget_trigger_mode": "Come vengono attivati gli aggiornamenti. `event` reagisce alle modifiche di stato; `poll` rivaluta a intervalli fissi.",
-            "widget_poll_interval": "Intervallo tra i polling (10–3600 secondi). Usato solo quando la modalità di attivazione è `poll`.",
-            "tap_action_url": "URL facoltativo aperto toccando il widget. Supporta http(s) (apre Safari) o schemi personalizzati come homeassistant://navigate/lovelace/0.",
-            "tap_action_foreground": "Attivo: il tocco apre l'URL. Disattivo: webhook silenzioso (solo http(s)) — invia una POST in background."
-          },
-          "description": "Choose whether Home Assistant pushes changes or the PushWard app polls for them."
         }
       },
       "error": {
-        "invalid_url": "L'URL deve includere uno schema valido. Usa http(s):// o uno schema di app personalizzato come homeassistant://.",
-        "silent_requires_http": "Il webhook silenzioso (primo piano disattivato) richiede un URL http:// o https://.",
-        "invalid_gauge_range": "Il valore minimo deve essere inferiore al valore massimo.",
-        "stat_rows_required": "È necessaria almeno una riga statistica per il modello stat_list."
+        "invalid_url": "URL must include a valid scheme. Use http(s):// or a custom app scheme like homeassistant://.",
+        "silent_requires_http": "Silent webhook (foreground off) requires an http:// or https:// URL.",
+        "invalid_gauge_range": "Minimum value must be less than maximum value.",
+        "stat_rows_required": "At least one stat row is required for the stat_list template."
       },
       "abort": {
-        "already_configured": "Esiste già un widget con questo slug.",
-        "reconfigure_successful": "Configurazione del widget aggiornata."
+        "already_configured": "A widget with this slug already exists.",
+        "reconfigure_successful": "Widget configuration updated."
       }
-    }
-  },
-  "entity": {
-    "sensor": {
-      "notifications_used": {
-        "name": "Notifiche utilizzate"
-      },
-      "live_activity_updates_used": {
-        "name": "Aggiornamenti Live Activity utilizzati"
-      },
-      "widget_updates_used": {
-        "name": "Aggiornamenti widget utilizzati"
-      },
-      "emails_used": {
-        "name": "Email utilizzate"
-      },
-      "subscription_tier": {
-        "name": "Livello di abbonamento",
-        "state": {
-          "free": "Gratuito",
-          "premium": "Premium"
-        }
-      }
-    }
-  },
-  "exceptions": {
-    "widget_not_found": {
-      "message": "Nessun widget PushWard corrisponde a slug={slug} entity_id={entity_id}."
     }
   },
   "issues": {
-    "deprecated_update_activity": {
-      "title": "L'azione PushWard update_activity è deprecata",
-      "description": "L'azione `pushward_hacs.update_activity` è deprecata. Passa invece le tue automazioni all'azione specifica per modello — ad esempio `pushward_hacs.update_activity_countdown` o `pushward_hacs.update_activity_gauge`. Per ora la vecchia azione continua a funzionare, ma verrà rimossa in una versione futura."
-    },
     "usage_limit_notifications": {
-      "title": "Limite di notifiche PushWard raggiunto",
-      "description": "Il tuo account PushWard ha utilizzato {used} delle sue {limit} notifiche per il periodo corrente, quindi le nuove notifiche verranno rifiutate finché la quota non si reimposta ({resets_at}). Aggiorna il tuo abbonamento nell'app PushWard per iOS per aumentare il limite."
+      "title": "PushWard notification limit reached",
+      "description": "Your PushWard account has used {used} of its {limit} notifications for the current period, so new notifications will be rejected until the quota resets ({resets_at}). Upgrade your subscription in the PushWard iOS app to raise the limit."
     },
     "usage_limit_live_activity": {
-      "title": "Limite di aggiornamenti Live Activity PushWard raggiunto",
-      "description": "Il tuo account PushWard ha utilizzato {used} dei suoi {limit} aggiornamenti Live Activity per il periodo corrente, quindi i nuovi aggiornamenti verranno rifiutati finché la quota non si reimposta ({resets_at}). Aggiorna il tuo abbonamento nell'app PushWard per iOS per aumentare il limite."
+      "title": "PushWard Live Activity update limit reached",
+      "description": "Your PushWard account has used {used} of its {limit} Live Activity updates for the current period, so new updates will be rejected until the quota resets ({resets_at}). Upgrade your subscription in the PushWard iOS app to raise the limit."
     },
     "usage_limit_widgets": {
-      "title": "Limite di aggiornamenti widget PushWard raggiunto",
-      "description": "Il tuo account PushWard ha utilizzato {used} dei suoi {limit} aggiornamenti widget per il periodo corrente, quindi i nuovi aggiornamenti verranno rifiutati finché la quota non si reimposta ({resets_at}). Aggiorna il tuo abbonamento nell'app PushWard per iOS per aumentare il limite."
+      "title": "PushWard widget update limit reached",
+      "description": "Your PushWard account has used {used} of its {limit} widget updates for the current period, so new updates will be rejected until the quota resets ({resets_at}). Upgrade your subscription in the PushWard iOS app to raise the limit."
     },
     "usage_limit_emails": {
-      "title": "Limite di email PushWard raggiunto",
-      "description": "Il tuo account PushWard ha utilizzato {used} delle sue {limit} email per il periodo corrente, quindi le nuove email verranno rifiutate finché la quota non si reimposta ({resets_at}). Aggiorna il tuo abbonamento nell'app PushWard per iOS per aumentare il limite."
+      "title": "PushWard email limit reached",
+      "description": "Your PushWard account has used {used} of its {limit} emails for the current period, so new emails will be rejected until the quota resets ({resets_at}). Upgrade your subscription in the PushWard iOS app to raise the limit."
     }
   }
 }

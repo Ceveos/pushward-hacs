@@ -9,7 +9,6 @@ import voluptuous as vol
 from homeassistant.config_entries import ConfigEntryState, ConfigSubentryData
 from homeassistant.core import HomeAssistant
 from homeassistant.exceptions import HomeAssistantError, ServiceValidationError
-from homeassistant.helpers import issue_registry as ir
 from pytest_homeassistant_custom_component.common import MockConfigEntry
 
 from custom_components.pushward_hacs import async_remove_entry
@@ -59,6 +58,7 @@ def _mock_api() -> AsyncMock:
     api.update_activity = AsyncMock()
     api.delete_activity = AsyncMock()
     api.create_notification = AsyncMock()
+    api.create_widget = AsyncMock()
     api.send_email = AsyncMock()
     api.delete_widget = AsyncMock()
     return api
@@ -80,12 +80,13 @@ async def _setup_entry(hass: HomeAssistant, mock_api: AsyncMock) -> MockConfigEn
 
 
 _BASE_SERVICES = (
-    "update_activity",
+    "update_activity_generic",
     "create_activity",
     "end_activity",
     "delete_activity",
     "send_notification",
     "send_email",
+    "dispatch",
 )
 
 
@@ -115,7 +116,7 @@ async def test_service_update_activity(hass: HomeAssistant) -> None:
 
     await hass.services.async_call(
         DOMAIN,
-        "update_activity",
+        "update_activity_generic",
         {"slug": "ha-washer", "state": "ongoing", "state_text": "Running", "progress": 0.5},
         blocking=True,
     )
@@ -200,6 +201,38 @@ async def test_service_delete_activity(hass: HomeAssistant) -> None:
     )
 
     api.delete_activity.assert_awaited_once_with("ha-washer")
+
+
+async def test_dispatch_sends_activity_and_notification_together(hass: HomeAssistant) -> None:
+    """The combined action deliberately links a notification to its activity."""
+    api = _mock_api()
+    await _setup_entry(hass, api)
+
+    await hass.services.async_call(
+        DOMAIN,
+        "dispatch",
+        {
+            "activity_enabled": True,
+            "activity_slug": "ha-washer",
+            "activity_state": "ongoing",
+            "activity_template": "generic",
+            "activity_content": {"progress": 0.5, "state": "Washing"},
+            "notification_enabled": True,
+            "notification_title": "Washer",
+            "notification_body": "Cycle is halfway done",
+        },
+        blocking=True,
+    )
+
+    api.update_activity.assert_awaited_once_with(
+        "ha-washer",
+        "ongoing",
+        {"progress": 0.5, "state": "Washing", "template": "generic"},
+        sound=None,
+        priority=None,
+        upsert=True,
+    )
+    assert api.create_notification.call_args.kwargs["activity_slug"] == "ha-washer"
 
 
 # --- Setup health check tests ---
@@ -511,8 +544,8 @@ async def test_update_activity_service_passes_sound_top_level(hass: HomeAssistan
 
     await hass.services.async_call(
         DOMAIN,
-        "update_activity",
-        {"slug": "x", "state": "ongoing", "template": "generic", "sound": "chime"},
+        "update_activity_generic",
+        {"slug": "x", "state": "ongoing", "sound": "chime"},
         blocking=True,
     )
 
@@ -530,7 +563,7 @@ async def test_update_activity_service_passes_priority_top_level(hass: HomeAssis
 
     await hass.services.async_call(
         DOMAIN,
-        "update_activity",
+        "update_activity_generic",
         {"slug": "x", "state": "ongoing", "priority": 7},
         blocking=True,
     )
@@ -550,7 +583,7 @@ async def test_update_activity_service_rejects_invalid_sound(hass: HomeAssistant
     with pytest.raises(vol.MultipleInvalid):
         await hass.services.async_call(
             DOMAIN,
-            "update_activity",
+            "update_activity_generic",
             {"slug": "x", "state": "ongoing", "sound": "badvalue"},
             blocking=True,
         )
@@ -564,7 +597,7 @@ async def test_update_activity_service_rejects_priority_out_of_range(hass: HomeA
     with pytest.raises(vol.MultipleInvalid):
         await hass.services.async_call(
             DOMAIN,
-            "update_activity",
+            "update_activity_generic",
             {"slug": "x", "state": "ongoing", "priority": 11},
             blocking=True,
         )
@@ -577,7 +610,7 @@ async def test_update_activity_service_accepts_background_and_text_color(hass: H
 
     await hass.services.async_call(
         DOMAIN,
-        "update_activity",
+        "update_activity_generic",
         {"slug": "x", "state": "ongoing", "background_color": "#123456", "text_color": "red"},
         blocking=True,
     )
@@ -586,6 +619,20 @@ async def test_update_activity_service_accepts_background_and_text_color(hass: H
     content = api.update_activity.call_args[0][2]
     assert content["background_color"] == "#123456"
     assert content["text_color"] == "red"
+
+
+async def test_update_activity_service_rejects_invalid_color(hass: HomeAssistant) -> None:
+    """Invalid named/hex colors fail before reaching PushWard."""
+    api = _mock_api()
+    await _setup_entry(hass, api)
+    with pytest.raises(vol.MultipleInvalid):
+        await hass.services.async_call(
+            DOMAIN,
+            "update_activity_generic",
+            {"slug": "x", "state": "ongoing", "accent_color": "not-a-color"},
+            blocking=True,
+        )
+    api.update_activity.assert_not_awaited()
 
 
 # --- per-template update_activity_<template> services ---
@@ -683,7 +730,7 @@ async def test_update_activity_countdown_forwards_fields(hass: HomeAssistant) ->
 
 
 async def test_update_activity_alert_forwards_fields(hass: HomeAssistant) -> None:
-    """Alert-specific fields (severity, fired_at, url, secondary_url) are forwarded into content."""
+    """Alert-specific fields and structured buttons are forwarded into content."""
     api = _mock_api()
     await _setup_entry(hass, api)
 
@@ -695,8 +742,8 @@ async def test_update_activity_alert_forwards_fields(hass: HomeAssistant) -> Non
             "state": "ongoing",
             "severity": "critical",
             "fired_at": 1700000000,
-            "url": "https://example.com",
-            "secondary_url": "https://example.com/details",
+            "url_action": {"url": "https://example.com", "title": "Open"},
+            "secondary_url_action": {"url": "https://example.com/details", "title": "Details"},
         },
         blocking=True,
     )
@@ -705,8 +752,8 @@ async def test_update_activity_alert_forwards_fields(hass: HomeAssistant) -> Non
     assert content["template"] == "alert"
     assert content["severity"] == "critical"
     assert content["fired_at"] == 1700000000
-    assert content["url"] == "https://example.com"
-    assert content["secondary_url"] == "https://example.com/details"
+    assert content["url_action"]["title"] == "Open"
+    assert content["secondary_url_action"]["title"] == "Details"
 
 
 async def test_update_activity_gauge_forwards_fields(hass: HomeAssistant) -> None:
@@ -755,46 +802,60 @@ async def test_update_activity_timeline_forwards_fields(hass: HomeAssistant) -> 
         {
             "slug": "t",
             "state": "ongoing",
-            "value": {"Temp": 22.5, "Humidity": 40},
-            "units": {"Temp": "°C"},
+            "series": [
+                {"label": "Temp", "value": 22.5, "unit": "°C"},
+                {"label": "Humidity", "value": 40},
+            ],
             "primary_series": "Humidity",
             "scale": "linear",
             "decimals": 2,
             "smoothing": True,
-            "thresholds": [10, 20],
+            "thresholds": [{"value": 10}, {"value": 20, "label": "High", "color": "red"}],
         },
         blocking=True,
     )
 
     content = api.update_activity.call_args[0][2]
     assert content["template"] == "timeline"
+    assert content["value"] == {"Temp": 22.5, "Humidity": 40}
     assert content["units"] == {"Temp": "°C"}
     assert content["primary_series"] == "Humidity"
     assert content["scale"] == "linear"
     assert content["decimals"] == 2
     assert content["smoothing"] is True
-    assert content["thresholds"] == [10, 20]
+    assert content["thresholds"] == [{"value": 10}, {"value": 20, "label": "High", "color": "red"}]
 
 
-async def test_update_activity_steps_accepts_list_step_labels(hass: HomeAssistant) -> None:
-    """step_labels is an ordered list and is forwarded verbatim (matches the server contract)."""
+async def test_update_activity_steps_maps_structured_rows(hass: HomeAssistant) -> None:
+    """Friendly step rows map to the API's parallel arrays."""
     api = _mock_api()
     await _setup_entry(hass, api)
 
     await hass.services.async_call(
         DOMAIN,
         "update_activity_steps",
-        {"slug": "s", "state": "ongoing", "total_steps": 3, "step_labels": ["A", "B", "C"]},
+        {
+            "slug": "s",
+            "state": "ongoing",
+            "steps": [
+                {"label": "A", "parallel_jobs": 1, "weight": 1, "color": "blue"},
+                {"label": "B", "parallel_jobs": 3, "weight": 4, "color": "orange"},
+                {"label": "C"},
+            ],
+        },
         blocking=True,
     )
 
     content = api.update_activity.call_args[0][2]
     assert content["template"] == "steps"
     assert content["step_labels"] == ["A", "B", "C"]
+    assert content["step_rows"] == [1, 3, 1]
+    assert content["step_weights"] == [1.0, 4.0, 1.0]
+    assert content["step_colors"] == ["blue", "orange", ""]
 
 
-async def test_update_activity_steps_rejects_dict_step_labels(hass: HomeAssistant) -> None:
-    """A dict for step_labels is rejected — the schema requires a list (the old docs were wrong)."""
+async def test_update_activity_steps_rejects_invalid_structured_step(hass: HomeAssistant) -> None:
+    """Step names and parallel-job limits are validated locally."""
     api = _mock_api()
     await _setup_entry(hass, api)
 
@@ -802,7 +863,7 @@ async def test_update_activity_steps_rejects_dict_step_labels(hass: HomeAssistan
         await hass.services.async_call(
             DOMAIN,
             "update_activity_steps",
-            {"slug": "s", "state": "ongoing", "step_labels": {"1": "A", "2": "B"}},
+            {"slug": "s", "state": "ongoing", "steps": [{"label": "", "parallel_jobs": 11}]},
             blocking=True,
         )
     api.update_activity.assert_not_awaited()
@@ -823,27 +884,6 @@ async def test_update_activity_gauge_has_no_countdown_fields(hass: HomeAssistant
     api.update_activity.assert_not_awaited()
 
 
-async def test_deprecated_update_activity_raises_repair_issue(hass: HomeAssistant) -> None:
-    """The legacy update_activity action still forwards, and surfaces a deprecation Repair issue."""
-    api = _mock_api()
-    await _setup_entry(hass, api)
-
-    await hass.services.async_call(
-        DOMAIN,
-        "update_activity",
-        {"slug": "x", "state": "ongoing", "template": "generic"},
-        blocking=True,
-    )
-
-    api.update_activity.assert_awaited_once()
-    slug, state, content = api.update_activity.call_args[0]
-    assert (slug, state) == ("x", "ongoing")
-    assert content["template"] == "generic"
-
-    issue = ir.async_get(hass).async_get_issue(DOMAIN, "deprecated_update_activity")
-    assert issue is not None
-    assert issue.severity == ir.IssueSeverity.WARNING
-
 
 async def test_update_activity_service_accepts_warning_threshold(hass: HomeAssistant) -> None:
     """warning_threshold appears in content dict."""
@@ -852,7 +892,7 @@ async def test_update_activity_service_accepts_warning_threshold(hass: HomeAssis
 
     await hass.services.async_call(
         DOMAIN,
-        "update_activity",
+        "update_activity_countdown",
         {"slug": "x", "state": "ongoing", "warning_threshold": 60},
         blocking=True,
     )
@@ -861,20 +901,21 @@ async def test_update_activity_service_accepts_warning_threshold(hass: HomeAssis
     assert content["warning_threshold"] == 60
 
 
-async def test_update_activity_service_accepts_step_labels_list(hass: HomeAssistant) -> None:
-    """step_labels list appears in content dict."""
+async def test_update_activity_service_accepts_simple_step_rows(hass: HomeAssistant) -> None:
+    """Omitted row options receive clear one-job/one-weight defaults."""
     api = _mock_api()
     await _setup_entry(hass, api)
 
     await hass.services.async_call(
         DOMAIN,
-        "update_activity",
-        {"slug": "x", "state": "ongoing", "step_labels": ["Init", "Build"]},
+        "update_activity_steps",
+        {"slug": "x", "state": "ongoing", "steps": [{"label": "Init"}, {"label": "Build"}]},
         blocking=True,
     )
 
     content = api.update_activity.call_args[0][2]
     assert content["step_labels"] == ["Init", "Build"]
+    assert content["step_rows"] == [1, 1]
 
 
 async def test_update_activity_service_accepts_alarm_bool(hass: HomeAssistant) -> None:
@@ -884,7 +925,7 @@ async def test_update_activity_service_accepts_alarm_bool(hass: HomeAssistant) -
 
     await hass.services.async_call(
         DOMAIN,
-        "update_activity",
+        "update_activity_countdown",
         {"slug": "x", "state": "ongoing", "alarm": True},
         blocking=True,
     )
@@ -900,7 +941,7 @@ async def test_update_activity_service_accepts_snooze_seconds(hass: HomeAssistan
 
     await hass.services.async_call(
         DOMAIN,
-        "update_activity",
+        "update_activity_countdown",
         {"slug": "x", "state": "ongoing", "alarm": True, "snooze_seconds": 600},
         blocking=True,
     )
@@ -920,7 +961,7 @@ async def test_update_activity_service_rejects_out_of_range_snooze_seconds(
         with pytest.raises(vol.MultipleInvalid):
             await hass.services.async_call(
                 DOMAIN,
-                "update_activity",
+                "update_activity_countdown",
                 {"slug": "x", "state": "ongoing", "alarm": True, "snooze_seconds": bad},
                 blocking=True,
             )
@@ -933,7 +974,7 @@ async def test_update_activity_service_accepts_fired_at(hass: HomeAssistant) -> 
 
     await hass.services.async_call(
         DOMAIN,
-        "update_activity",
+        "update_activity_alert",
         {"slug": "x", "state": "ongoing", "fired_at": 1700000000},
         blocking=True,
     )
@@ -942,19 +983,20 @@ async def test_update_activity_service_accepts_fired_at(hass: HomeAssistant) -> 
     assert content["fired_at"] == 1700000000
 
 
-async def test_update_activity_service_accepts_units_dict(hass: HomeAssistant) -> None:
-    """units dict appears in content dict."""
+async def test_update_activity_service_builds_timeline_units_from_series(hass: HomeAssistant) -> None:
+    """Structured series rows become the API value and units mappings."""
     api = _mock_api()
     await _setup_entry(hass, api)
 
     await hass.services.async_call(
         DOMAIN,
-        "update_activity",
-        {"slug": "x", "state": "ongoing", "units": {"Temp": "°C"}},
+        "update_activity_timeline",
+        {"slug": "x", "state": "ongoing", "series": [{"label": "Temp", "value": 22.5, "unit": "°C"}]},
         blocking=True,
     )
 
     content = api.update_activity.call_args[0][2]
+    assert content["value"] == {"Temp": 22.5}
     assert content["units"] == {"Temp": "°C"}
 
 
@@ -1085,17 +1127,12 @@ async def test_update_activity_countdown_rejects_zero_duration(hass: HomeAssista
     api.update_activity.assert_not_awaited()
 
 
-# --- universal action fields (all templates that render button slots) ---
-
-# board/log use a lean schema: only the whole-activity tap_action, no url /
-# secondary_url / url_action / secondary_url_action slots (board uses per-tile
-# url_action; log has no buttons).
-_UNIVERSAL_ACTION_TEMPLATES = [t for t in TEMPLATES if t not in ("board", "log")]
+# --- universal action fields ---
 
 
-@pytest.mark.parametrize("template", _UNIVERSAL_ACTION_TEMPLATES)
+@pytest.mark.parametrize("template", TEMPLATES)
 async def test_action_fields_forwarded_on_every_template(hass: HomeAssistant, template: str) -> None:
-    """url / secondary_url / tap_action / url_action / secondary_url_action reach content on all templates."""
+    """All three structured action slots reach every activity layout."""
     api = _mock_api()
     await _setup_entry(hass, api)
 
@@ -1105,8 +1142,6 @@ async def test_action_fields_forwarded_on_every_template(hass: HomeAssistant, te
         {
             "slug": "x",
             "state": "ongoing",
-            "url": "https://example.com",
-            "secondary_url": "https://example.com/more",
             "tap_action": {"url": "homeassistant://navigate/lovelace/0"},
             "url_action": {"url": "https://example.com", "title": "Open", "method": "POST", "body": "go"},
             "secondary_url_action": {"url": "https://example.com/more", "title": "More"},
@@ -1115,43 +1150,10 @@ async def test_action_fields_forwarded_on_every_template(hass: HomeAssistant, te
     )
 
     content = api.update_activity.call_args[0][2]
-    assert content["url"] == "https://example.com"
-    assert content["secondary_url"] == "https://example.com/more"
     assert content["tap_action"] == {"url": "homeassistant://navigate/lovelace/0"}
     assert content["url_action"]["method"] == "POST"
     assert content["url_action"]["title"] == "Open"
     assert content["secondary_url_action"]["title"] == "More"
-
-
-@pytest.mark.parametrize("template", ["board", "log"])
-async def test_board_log_accept_only_tap_action(hass: HomeAssistant, template: str) -> None:
-    """board/log forward the whole-activity tap_action but reject the button-slot fields."""
-    api = _mock_api()
-    await _setup_entry(hass, api)
-
-    # tap_action (whole-activity) is accepted and forwarded.
-    await hass.services.async_call(
-        DOMAIN,
-        f"update_activity_{template}",
-        {
-            "slug": "x",
-            "state": "ongoing",
-            "tap_action": {"url": "homeassistant://navigate/lovelace/0"},
-        },
-        blocking=True,
-    )
-    content = api.update_activity.call_args[0][2]
-    assert content["tap_action"] == {"url": "homeassistant://navigate/lovelace/0"}
-
-    # The button-slot fields are not part of the lean schema → rejected.
-    for field in ("url", "secondary_url", "url_action", "secondary_url_action", "progress", "remaining_time"):
-        with pytest.raises(vol.Invalid):
-            await hass.services.async_call(
-                DOMAIN,
-                f"update_activity_{template}",
-                {"slug": "x", "state": "ongoing", field: "https://example.com"},
-                blocking=True,
-            )
 
 
 async def test_log_line_at_rejects_non_positive(hass: HomeAssistant) -> None:
@@ -1268,7 +1270,7 @@ async def test_update_activity_timeline_forwards_history(hass: HomeAssistant) ->
     await hass.services.async_call(
         DOMAIN,
         "update_activity_timeline",
-        {"slug": "t", "state": "ongoing", "value": {"Temp": 22.5}, "history": history},
+        {"slug": "t", "state": "ongoing", "series": [{"label": "Temp", "value": 22.5}], "history": history},
         blocking=True,
     )
 
@@ -1425,8 +1427,6 @@ async def test_action_objects_satisfy_server_contract(hass: HomeAssistant) -> No
         {
             "slug": "x",
             "state": "ongoing",
-            "url": "https://example.com",
-            "secondary_url": "homeassistant://navigate/lovelace/0",
             "tap_action": {"url": "homeassistant://navigate/lovelace/0"},
             "url_action": {"url": "https://example.com", "title": "Open", "method": "POST", "body": "go"},
             "secondary_url_action": {"url": "https://example.com/more", "title": "More"},
@@ -1450,7 +1450,7 @@ async def test_timeline_history_seed_satisfies_server_contract(hass: HomeAssista
         {
             "slug": "t",
             "state": "ongoing",
-            "value": {"Temp": 22.5},
+            "series": [{"label": "Temp", "value": 22.5}],
             "history": {"Temp": [{"timestamp": 1700000000, "value": 21.0}]},
         },
         blocking=True,
@@ -1583,30 +1583,6 @@ async def test_send_notification_action_accepts_custom_scheme_url(hass: HomeAssi
     assert api.create_notification.call_args[1]["actions"][0]["url"] == "homeassistant://navigate/lovelace/0"
 
 
-async def test_deprecated_update_activity_accepts_action_and_template_fields(hass: HomeAssistant) -> None:
-    """The deprecated update_activity union still accepts the new action + countdown fields."""
-    api = _mock_api()
-    await _setup_entry(hass, api)
-
-    await hass.services.async_call(
-        DOMAIN,
-        "update_activity",
-        {
-            "slug": "x",
-            "state": "ongoing",
-            "template": "countdown",
-            "duration": "30m",
-            "tap_action": {"url": "homeassistant://x"},
-            "url_action": {"url": "https://example.com", "method": "POST"},
-        },
-        blocking=True,
-    )
-
-    content = api.update_activity.call_args[0][2]
-    assert content["duration"] == "30m"
-    assert content["tap_action"] == {"url": "homeassistant://x"}
-    assert content["url_action"]["method"] == "POST"
-
 
 # --- service error surfacing tests ---
 
@@ -1624,7 +1600,7 @@ async def test_update_activity_api_error_becomes_home_assistant_error(hass: Home
     with pytest.raises(HomeAssistantError, match="activity not found") as exc:
         await hass.services.async_call(
             DOMAIN,
-            "update_activity",
+            "update_activity_generic",
             {"slug": "missing", "state": "ongoing"},
             blocking=True,
         )
@@ -1645,7 +1621,7 @@ async def test_update_activity_forbidden_becomes_validation_error(hass: HomeAssi
     with pytest.raises(ServiceValidationError, match="capability"):
         await hass.services.async_call(
             DOMAIN,
-            "update_activity",
+            "update_activity_generic",
             {"slug": "x", "state": "ongoing"},
             blocking=True,
         )

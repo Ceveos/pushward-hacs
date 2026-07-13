@@ -54,7 +54,7 @@ combination:
 | --- | --- |
 | Live Activity only | `pushward_hacs.update_activity_<layout>` (upserts automatically) |
 | Notification only | `pushward_hacs.send_notification` |
-| Live Activity and notification | Call both actions in the same automation sequence |
+| Any combination of channels | `pushward_hacs.dispatch` |
 | Email only | `pushward_hacs.send_email` |
 | Entity-driven Live Activity | Add a tracked entity in Devices & services |
 | Entity-driven widget | Add a tracked widget in Devices & services |
@@ -66,8 +66,10 @@ Activity actions cover every layout plus structured tap targets, priority,
 sound, lifecycle, TTLs, AlarmKit, timelines, boards, logs, and current-step live
 progress.
 
-For both channels, add the two actions consecutively in one automation. The
-Live Activity update uses API upsert automatically, so a separate create action
+`Send via PushWard` puts Live Activity, notification, widget, and email channels
+in collapsed sections; enable only the channels that automation needs. The
+focused layout actions remain the clearest choice for a single Live Activity.
+All activity updates use API upsert automatically, so a separate create action
 is optional unless you want to set a display name or TTL metadata first:
 
 ```yaml
@@ -76,10 +78,20 @@ actions:
     data:
       slug: dishwasher
       state: ongoing
-      total_steps: 3
       current_step: 1
-      step_labels: [Wash, Rinse, Dry]
-      step_weights: [4, 1, 2]
+      steps:
+        - label: Wash
+          parallel_jobs: 1
+          weight: 4
+          color: blue
+        - label: Rinse
+          parallel_jobs: 1
+          weight: 1
+          color: cyan
+        - label: Dry
+          parallel_jobs: 1
+          weight: 2
+          color: orange
       progress: 0.25
   - action: pushward_hacs.send_notification
     data:
@@ -135,7 +147,7 @@ Restart Home Assistant and add **PushWard HACS** from **Devices & services**.
 
 ## Development
 
-The project targets Home Assistant 2026.6 or newer and Python 3.13.
+The project targets Home Assistant 2026.6 or newer and Python 3.14.2 or newer.
 
 ```bash
 python -m pip install -e . --group dev

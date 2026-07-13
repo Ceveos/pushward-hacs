@@ -266,6 +266,17 @@ PUSHWARD_NAMED_COLORS = (
     "mint",
     "brown",
 )
+_COLOR_HEX_RE = re.compile(r"^#?[0-9a-fA-F]{6}(?:[0-9a-fA-F]{2})?$")
+
+
+def validate_color(value: object) -> str:
+    """Validate and normalize a PushWard named or RGB/RGBA hex color."""
+    color = str(value).strip()
+    if color.lower() in PUSHWARD_NAMED_COLORS:
+        return color.lower()
+    if _COLOR_HEX_RE.fullmatch(color):
+        return color
+    raise vol.Invalid("use a PushWard named color or 6/8-digit RGB/RGBA hex value")
 
 # Usage/quota coordinator poll interval (seconds). Usage moves slowly and
 # /auth/me is per-IP rate-limited, so poll conservatively.
