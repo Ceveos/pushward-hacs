@@ -3,9 +3,10 @@
 ## 0.3.0
 
 - Replace raw Steps arrays with named repeatable rows for parallel jobs,
-  relative step length, and color; collapsed rows now show only the step name.
+  relative step length, and color; collapsed rows summarize all four values.
 - Replace state-label and Timeline mini-languages with structured rows and
-  improve summaries for thresholds, tiles, log columns, and widget statistics.
+  improve source/value summaries for thresholds, series, tiles, log columns,
+  and widget statistics.
 - Add all three structured foreground/deep-link/silent-webhook action slots to
   every Live Activity layout and every widget layout.
 - Add guided notification media/actions, Board tiles, Log lines, Timeline

@@ -293,7 +293,7 @@
         },
         "steps": {
           "name": "Steps",
-          "description": "One row per step. Parallel jobs creates stacked lanes; relative step length controls proportional width."
+          "description": "One row per step. Collapsed rows summarize the name, parallel jobs, relative length, and color. Parallel jobs create stacked lanes; relative length controls proportional width."
         }
       },
       "sections": {

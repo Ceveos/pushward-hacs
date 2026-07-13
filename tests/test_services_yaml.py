@@ -95,9 +95,17 @@ def test_steps_action_uses_structured_repeatable_rows() -> None:
     assert set(fields) >= {"steps", "live_progress", "duration", "end_date"}
     selector = fields["steps"]["selector"]["object"]
     assert selector["multiple"] is True
-    assert selector["label_field"] == "label"
+    assert "label_field" not in selector
     assert "description_field" not in selector
     assert set(selector["fields"]) == {"label", "parallel_jobs", "weight", "color"}
+    assert selector["fields"]["parallel_jobs"]["selector"]["select"]["options"][0] == {
+        "value": "1",
+        "label": "1 parallel job",
+    }
+    assert selector["fields"]["weight"]["selector"]["select"]["options"][3] == {
+        "value": "1",
+        "label": "1x relative length",
+    }
 
 
 def test_sections_have_matching_translations_in_every_locale() -> None:

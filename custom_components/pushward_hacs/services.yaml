@@ -593,12 +593,10 @@ update_activity_steps:
       collapsed: true
       fields:
         steps:
-          description: Add one row per step. The step name is shown when collapsed; expand it to set parallel jobs, relative
-            length, and color.
+          description: Add one row per step. Collapsed rows summarize the name, parallel jobs, relative length, and color.
           selector:
             object:
               multiple: true
-              label_field: label
               fields:
                 label:
                   label: Step name
@@ -608,18 +606,54 @@ update_activity_steps:
                 parallel_jobs:
                   label: Parallel jobs (1-10; default 1)
                   selector:
-                    number:
-                      min: 1
-                      max: 10
-                      mode: box
+                    select:
+                      options:
+                      - value: '1'
+                        label: 1 parallel job
+                      - value: '2'
+                        label: 2 parallel jobs
+                      - value: '3'
+                        label: 3 parallel jobs
+                      - value: '4'
+                        label: 4 parallel jobs
+                      - value: '5'
+                        label: 5 parallel jobs
+                      - value: '6'
+                        label: 6 parallel jobs
+                      - value: '7'
+                        label: 7 parallel jobs
+                      - value: '8'
+                        label: 8 parallel jobs
+                      - value: '9'
+                        label: 9 parallel jobs
+                      - value: '10'
+                        label: 10 parallel jobs
                 weight:
                   label: Relative step length (ratio; default 1)
                   selector:
-                    number:
-                      min: 0.1
-                      max: 10000
-                      step: 0.1
-                      mode: box
+                    select:
+                      custom_value: true
+                      options:
+                      - value: '0.25'
+                        label: 0.25x relative length
+                      - value: '0.5'
+                        label: 0.5x relative length
+                      - value: '0.75'
+                        label: 0.75x relative length
+                      - value: '1'
+                        label: 1x relative length
+                      - value: '1.5'
+                        label: 1.5x relative length
+                      - value: '2'
+                        label: 2x relative length
+                      - value: '3'
+                        label: 3x relative length
+                      - value: '4'
+                        label: 4x relative length
+                      - value: '5'
+                        label: 5x relative length
+                      - value: '10'
+                        label: 10x relative length
                 color:
                   label: Color
                   selector:
@@ -1762,6 +1796,7 @@ update_activity_board:
         object:
           multiple: true
           label_field: label
+          description_field: value
           fields:
             label:
               label: Tile label (1-32 characters)

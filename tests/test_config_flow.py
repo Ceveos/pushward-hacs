@@ -158,7 +158,7 @@ def _mock_details_input(template: str = "generic", **overrides) -> dict:
         data[CONF_REMAINING_TIME_ATTR] = ""
     if template == "steps":
         data[CONF_STEP_CONFIGURATION] = [
-            {"label": "Step 1", "parallel_jobs": 1, "weight": 1, "color": ""}
+            {"label": "Step 1", "parallel_jobs": "1", "weight": "1", "color": ""}
         ]
         data[CONF_CURRENT_STEP_ATTR] = ""
     if template == "alert":
@@ -634,7 +634,7 @@ async def test_subentry_add_steps_entity(hass: HomeAssistant) -> None:
         template="steps",
         details_overrides={
             CONF_STEP_CONFIGURATION: [
-                {"label": label, "parallel_jobs": 1, "weight": weight, "color": ""}
+                {"label": label, "parallel_jobs": "1", "weight": str(weight), "color": ""}
                 for label, weight in [("Pre-wash", 1), ("Wash", 4), ("Rinse", 1), ("Dry", 2), ("Done", 1)]
             ],
             CONF_CURRENT_STEP_ATTR: "step",
@@ -1719,7 +1719,7 @@ def test_compound_layouts_use_repeatable_form_selectors() -> None:
 
 
 def test_steps_repeatable_rows_have_clear_collapsed_summary() -> None:
-    """A collapsed step shows its name, never an unexplained numeric subtitle."""
+    """A collapsed step uses HA's all-field summary with self-describing choices."""
     schema = _details_schema("sensor.dishwasher", "steps", defaults={})
     validator = next(
         value
@@ -1727,8 +1727,36 @@ def test_steps_repeatable_rows_have_clear_collapsed_summary() -> None:
         if str(key.schema if isinstance(key, vol.Marker) else key) == CONF_STEP_CONFIGURATION
     )
     assert isinstance(validator, ObjectSelector)
-    assert validator.config["label_field"] == "label"
+    assert "label_field" not in validator.config
     assert "description_field" not in validator.config
+    fields = validator.config["fields"]
+    parallel_options = fields["parallel_jobs"]["selector"].config["options"]
+    weight_options = fields["weight"]["selector"].config["options"]
+    assert parallel_options[0] == {"value": "1", "label": "1 parallel job"}
+    assert weight_options[3] == {"value": "1", "label": "1x relative length"}
+
+
+def test_repeatable_rows_expose_useful_collapsed_subtitles() -> None:
+    """Source-backed rows use their source as supporting text when collapsed."""
+    timeline = _details_schema("sensor.temperature", "timeline", defaults={})
+    board = _details_schema("binary_sensor.home", "board", defaults={})
+    log = _details_schema("sensor.log", "log", defaults={})
+    widget_content, _, _ = _widget_staged_schemas(
+        "sensor.users", WIDGET_TEMPLATE_STAT_LIST, defaults={}
+    )
+
+    def object_config(schema: vol.Schema, field: str) -> dict:
+        return next(
+            value.config
+            for key, value in schema.schema.items()
+            if str(key.schema if isinstance(key, vol.Marker) else key) == field
+        )
+
+    assert object_config(timeline, CONF_SERIES)["description_field"] == "attribute"
+    assert object_config(timeline, CONF_SERIES_ENTITIES)["description_field"] == CONF_ENTITY_ID
+    assert object_config(board, CONF_TILES)["description_field"] == CONF_ENTITY_ID
+    assert object_config(log, CONF_LOG_COLUMNS)["description_field"] == "attribute"
+    assert object_config(widget_content, CONF_STAT_ROWS)["description_field"] == CONF_ENTITY_ID
 
 
 # --- _parse_int_list tests ---

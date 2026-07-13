@@ -463,10 +463,20 @@ def _details_schema(
                 if index <= len(colors):
                     item["color"] = colors[index - 1]
                 step_default.append(item)
+        # Select selectors need string values. Omitting label_field intentionally
+        # makes Home Assistant summarize every field in the collapsed row.
+        step_default = [
+            {
+                **item,
+                "parallel_jobs": str(item.get("parallel_jobs") or 1),
+                "weight": str(item.get("weight") or 1),
+            }
+            for item in step_default
+            if isinstance(item, dict)
+        ]
         fields[vol.Required(CONF_STEP_CONFIGURATION, default=step_default)] = ObjectSelector(
             ObjectSelectorConfig(
                 multiple=True,
-                label_field="label",
                 fields={
                     "label": {
                         "label": "Step name (1-32 characters)",
@@ -475,15 +485,11 @@ def _details_schema(
                     },
                     "parallel_jobs": {
                         "label": "Parallel jobs (1-10; default 1)",
-                        "selector": NumberSelector(
-                            NumberSelectorConfig(min=1, max=10, mode=NumberSelectorMode.BOX)
-                        ),
+                        "selector": _step_parallel_jobs_selector(),
                     },
                     "weight": {
                         "label": "Relative step length (ratio; default 1)",
-                        "selector": NumberSelector(
-                            NumberSelectorConfig(min=0.1, max=10000, step=0.1, mode=NumberSelectorMode.BOX)
-                        ),
+                        "selector": _step_weight_selector(),
                     },
                     "color": {"label": "Color (named or RGB/RGBA hex)", "selector": _color_selector()},
                 },
@@ -561,6 +567,7 @@ def _details_schema(
             ObjectSelectorConfig(
                 multiple=True,
                 label_field=CONF_LABEL,
+                description_field="attribute",
                 fields={
                     CONF_LABEL: {"label": "Series label", "required": True, "selector": TextSelector()},
                     "attribute": {
@@ -581,6 +588,7 @@ def _details_schema(
             ObjectSelectorConfig(
                 multiple=True,
                 label_field=CONF_LABEL,
+                description_field=CONF_ENTITY_ID,
                 fields={
                     CONF_LABEL: {"label": "Series label", "selector": TextSelector()},
                     CONF_ENTITY_ID: {
@@ -682,6 +690,7 @@ def _details_schema(
             ObjectSelectorConfig(
                 multiple=True,
                 label_field=CONF_LABEL,
+                description_field=CONF_ENTITY_ID,
                 fields={
                     CONF_LABEL: {
                         "label": "Tile label (max 32 characters)",
@@ -724,6 +733,7 @@ def _details_schema(
             ObjectSelectorConfig(
                 multiple=True,
                 label_field=CONF_LABEL,
+                description_field="attribute",
                 fields={
                     CONF_LABEL: {"label": "Column label", "required": True, "selector": TextSelector()},
                     CONF_ENTITY_ID: {"label": "Source entity (optional)", "selector": entity_selector},
@@ -1900,6 +1910,7 @@ def _widget_details_schema(
             ObjectSelectorConfig(
                 multiple=True,
                 label_field=CONF_LABEL,
+                description_field=CONF_ENTITY_ID,
                 fields={
                     CONF_LABEL: {"label": "Row label", "required": True, "selector": TextSelector()},
                     CONF_ENTITY_ID: {
@@ -2257,6 +2268,36 @@ def _color_selector() -> SelectSelector:
                     {"value": color, "label": f"{color.title()} ({_COLOR_HEX_LABELS[color]})"}
                     for color in PUSHWARD_NAMED_COLORS
                 ],
+            ],
+            custom_value=True,
+            mode=SelectSelectorMode.DROPDOWN,
+        )
+    )
+
+
+def _step_parallel_jobs_selector() -> SelectSelector:
+    """Return self-describing choices for a step's parallel lanes."""
+    return SelectSelector(
+        SelectSelectorConfig(
+            options=[
+                {
+                    "value": str(count),
+                    "label": f"{count} parallel {'job' if count == 1 else 'jobs'}",
+                }
+                for count in range(1, 11)
+            ],
+            mode=SelectSelectorMode.DROPDOWN,
+        )
+    )
+
+
+def _step_weight_selector() -> SelectSelector:
+    """Return common self-describing relative lengths while allowing any valid ratio."""
+    return SelectSelector(
+        SelectSelectorConfig(
+            options=[
+                {"value": value, "label": f"{value}x relative length"}
+                for value in ("0.25", "0.5", "0.75", "1", "1.5", "2", "3", "4", "5", "10")
             ],
             custom_value=True,
             mode=SelectSelectorMode.DROPDOWN,

@@ -42,8 +42,9 @@ Compound layouts use repeatable forms:
 - Log columns: add source entity/attribute/label/unit rows.
 - Widget stat lists: add label/entity/attribute/unit rows.
 - Steps: add one row per step with separate controls for parallel jobs, relative
-  duration/width, and color. This makes a long dishwasher wash stage independent
-  from the number of visual job rows.
+  duration/width, and color. Collapsed rows summarize all four values, so a long
+  dishwasher wash stage remains both easy to scan and independent from the
+  number of visual job rows.
 
 ## Delivery channels
 
