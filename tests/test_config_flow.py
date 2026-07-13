@@ -160,9 +160,9 @@ def _mock_details_input(template: str = "generic", **overrides) -> dict:
         data[CONF_STEP_CONFIGURATION] = [
             {
                 "label": "Step 1",
-                "parallel_jobs": "1 parallel job",
-                "weight": "1x relative length",
-                "color": "Automatic color (PushWard default)",
+                "parallel_jobs": 1,
+                "weight": 1,
+                "color": "Auto",
             }
         ]
         data[CONF_CURRENT_STEP_ATTR] = ""
@@ -641,9 +641,9 @@ async def test_subentry_add_steps_entity(hass: HomeAssistant) -> None:
             CONF_STEP_CONFIGURATION: [
                 {
                     "label": label,
-                    "parallel_jobs": "1 parallel job",
-                    "weight": f"{weight}x relative length",
-                    "color": "Automatic color (PushWard default)",
+                    "parallel_jobs": 1,
+                    "weight": weight,
+                    "color": "Auto",
                 }
                 for label, weight in [("Pre-wash", 1), ("Wash", 4), ("Rinse", 1), ("Dry", 2), ("Done", 1)]
             ],
@@ -1636,7 +1636,7 @@ def test_details_schema_steps_has_structured_step_configuration() -> None:
 
 
 def test_parse_entity_input_structured_steps_separates_rows_and_weights() -> None:
-    """Parallel job rows and relative duration weights persist independently."""
+    """Parallel jobs and whole-number relative-width parts persist independently."""
     result = _parse_entity_input(
         _base_user_input(
             **{
@@ -1644,15 +1644,15 @@ def test_parse_entity_input_structured_steps_separates_rows_and_weights() -> Non
                 CONF_STEP_CONFIGURATION: [
                     {
                         "label": "Wash",
-                        "parallel_jobs": "1 parallel job",
-                        "weight": "4x relative length",
-                        "color": "Blue color (#007AFF)",
+                        "parallel_jobs": 1,
+                        "weight": 4,
+                        "color": "Blue",
                     },
                     {
                         "label": "Rinse",
-                        "parallel_jobs": "2 parallel jobs",
-                        "weight": "1x relative length",
-                        "color": "Teal color (#30B0C7)",
+                        "parallel_jobs": 2,
+                        "weight": 1,
+                        "color": "Teal",
                     },
                 ],
             }
@@ -1662,6 +1662,26 @@ def test_parse_entity_input_structured_steps_separates_rows_and_weights() -> Non
     assert result[CONF_STEP_ROWS] == [1, 2]
     assert result[CONF_STEP_WEIGHTS] == [4.0, 1.0]
     assert result[CONF_STEP_COLORS] == ["blue", "teal"]
+
+
+def test_parse_entity_input_rejects_fractional_step_width_parts() -> None:
+    """The guided form uses clearer whole-number relative-width parts."""
+    with pytest.raises(vol.Invalid, match="whole number"):
+        _parse_entity_input(
+            _base_user_input(
+                **{
+                    CONF_TEMPLATE: "steps",
+                    CONF_STEP_CONFIGURATION: [
+                        {
+                            "label": "Wash",
+                            "parallel_jobs": 1,
+                            "weight": 0.5,
+                            "color": "Blue",
+                        }
+                    ],
+                }
+            )
+        )
 
 
 def test_details_schema_alert_has_fired_at_attribute() -> None:
@@ -1738,8 +1758,8 @@ def test_compound_layouts_use_repeatable_form_selectors() -> None:
     assert stat_rows_validator.config["multiple"] is True
 
 
-def test_steps_repeatable_rows_have_clear_collapsed_summary() -> None:
-    """A collapsed step uses HA's all-field summary with self-describing choices."""
+def test_steps_repeatable_rows_have_compact_peer_summary() -> None:
+    """A collapsed step lets HA join four compact peer values with middle dots."""
     schema = _details_schema("sensor.dishwasher", "steps", defaults={})
     validator = next(
         value
@@ -1750,10 +1770,9 @@ def test_steps_repeatable_rows_have_clear_collapsed_summary() -> None:
     assert "label_field" not in validator.config
     assert "description_field" not in validator.config
     fields = validator.config["fields"]
-    parallel_options = fields["parallel_jobs"]["selector"].config["options"]
-    weight_options = fields["weight"]["selector"].config["options"]
-    assert parallel_options[0] == {"value": "1 parallel job", "label": "1 parallel job"}
-    assert weight_options[3] == {"value": "1x relative length", "label": "1x relative length"}
+    assert set(fields) == {"label", "parallel_jobs", "weight", "color"}
+    assert fields["parallel_jobs"]["selector"].config["unit_of_measurement"] == "jobs"
+    assert fields["weight"]["selector"].config["unit_of_measurement"] == "parts"
 
 
 def test_repeatable_rows_expose_useful_collapsed_subtitles() -> None:

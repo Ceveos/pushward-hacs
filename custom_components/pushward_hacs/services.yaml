@@ -593,7 +593,8 @@ update_activity_steps:
       collapsed: true
       fields:
         steps:
-          description: Add one row per step. Collapsed rows summarize the name, parallel jobs, relative length, and color.
+          description: Add one row per step. Collapsed rows summarize the name, parallel jobs, whole-number relative-width parts,
+            and color.
           selector:
             object:
               multiple: true
@@ -604,75 +605,45 @@ update_activity_steps:
                   selector:
                     text: null
                 parallel_jobs:
-                  label: Parallel jobs (1-10; default 1)
+                  label: Parallel jobs (1-10)
+                  required: true
                   selector:
-                    select:
-                      options:
-                      - value: 1 parallel job
-                        label: 1 parallel job
-                      - value: 2 parallel jobs
-                        label: 2 parallel jobs
-                      - value: 3 parallel jobs
-                        label: 3 parallel jobs
-                      - value: 4 parallel jobs
-                        label: 4 parallel jobs
-                      - value: 5 parallel jobs
-                        label: 5 parallel jobs
-                      - value: 6 parallel jobs
-                        label: 6 parallel jobs
-                      - value: 7 parallel jobs
-                        label: 7 parallel jobs
-                      - value: 8 parallel jobs
-                        label: 8 parallel jobs
-                      - value: 9 parallel jobs
-                        label: 9 parallel jobs
-                      - value: 10 parallel jobs
-                        label: 10 parallel jobs
+                    number:
+                      min: 1
+                      max: 10
+                      step: 1
+                      mode: box
+                      unit_of_measurement: jobs
                 weight:
-                  label: Relative step length (ratio; default 1)
+                  label: Relative width (whole-number parts)
+                  required: true
                   selector:
-                    select:
-                      custom_value: true
-                      options:
-                      - value: 0.25x relative length
-                        label: 0.25x relative length
-                      - value: 0.5x relative length
-                        label: 0.5x relative length
-                      - value: 0.75x relative length
-                        label: 0.75x relative length
-                      - value: 1x relative length
-                        label: 1x relative length
-                      - value: 1.5x relative length
-                        label: 1.5x relative length
-                      - value: 2x relative length
-                        label: 2x relative length
-                      - value: 3x relative length
-                        label: 3x relative length
-                      - value: 4x relative length
-                        label: 4x relative length
-                      - value: 5x relative length
-                        label: 5x relative length
-                      - value: 10x relative length
-                        label: 10x relative length
+                    number:
+                      min: 1
+                      max: 10000
+                      step: 1
+                      mode: box
+                      unit_of_measurement: parts
                 color:
                   label: Color
+                  required: true
                   selector:
                     select:
                       custom_value: true
                       options:
-                      - Automatic color (PushWard default)
-                      - Red color
-                      - Orange color
-                      - Yellow color
-                      - Green color
-                      - Blue color
-                      - Purple color
-                      - Pink color
-                      - Indigo color
-                      - Teal color
-                      - Cyan color
-                      - Mint color
-                      - Brown color
+                      - Auto
+                      - Red
+                      - Orange
+                      - Yellow
+                      - Green
+                      - Blue
+                      - Purple
+                      - Pink
+                      - Indigo
+                      - Teal
+                      - Cyan
+                      - Mint
+                      - Brown
         live_progress:
           description: Animate progress within the current step. Requires an end date or duration.
           selector:

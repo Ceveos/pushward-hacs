@@ -840,15 +840,15 @@ async def test_update_activity_steps_maps_structured_rows(hass: HomeAssistant) -
             "steps": [
                 {
                     "label": "A",
-                    "parallel_jobs": "1 parallel job",
-                    "weight": "1x relative length",
-                    "color": "Blue color",
+                    "parallel_jobs": 1,
+                    "weight": 1,
+                    "color": "Blue",
                 },
                 {
                     "label": "B",
-                    "parallel_jobs": "3 parallel jobs",
-                    "weight": "4x relative length",
-                    "color": "Orange color",
+                    "parallel_jobs": 3,
+                    "weight": 4,
+                    "color": "Orange",
                 },
                 {"label": "C"},
             ],
@@ -873,7 +873,37 @@ async def test_update_activity_steps_rejects_invalid_structured_step(hass: HomeA
         await hass.services.async_call(
             DOMAIN,
             "update_activity_steps",
-            {"slug": "s", "state": "ongoing", "steps": [{"label": "", "parallel_jobs": 11}]},
+            {
+                "slug": "s",
+                "state": "ongoing",
+                "steps": [{"label": "", "parallel_jobs": 11}],
+            },
+            blocking=True,
+        )
+    api.update_activity.assert_not_awaited()
+
+
+async def test_update_activity_steps_rejects_fractional_width_parts(hass: HomeAssistant) -> None:
+    """The service action keeps relative-width input to clear whole-number parts."""
+    api = _mock_api()
+    await _setup_entry(hass, api)
+
+    with pytest.raises(vol.MultipleInvalid):
+        await hass.services.async_call(
+            DOMAIN,
+            "update_activity_steps",
+            {
+                "slug": "s",
+                "state": "ongoing",
+                "steps": [
+                    {
+                        "label": "Wash",
+                        "parallel_jobs": 1,
+                        "weight": 0.5,
+                        "color": "Blue",
+                    }
+                ],
+            },
             blocking=True,
         )
     api.update_activity.assert_not_awaited()
@@ -919,7 +949,14 @@ async def test_update_activity_service_accepts_simple_step_rows(hass: HomeAssist
     await hass.services.async_call(
         DOMAIN,
         "update_activity_steps",
-        {"slug": "x", "state": "ongoing", "steps": [{"label": "Init"}, {"label": "Build"}]},
+        {
+            "slug": "x",
+            "state": "ongoing",
+            "steps": [
+                {"label": "Init"},
+                {"label": "Build"},
+            ],
+        },
         blocking=True,
     )
 

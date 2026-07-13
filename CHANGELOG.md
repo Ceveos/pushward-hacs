@@ -3,7 +3,8 @@
 ## 0.3.0
 
 - Replace raw Steps arrays with named repeatable rows for parallel jobs,
-  relative step length, and color; collapsed rows summarize all four values.
+  whole-number relative-width parts, and color; collapsed rows use the compact
+  peer summary `Wash · 2 jobs · 4 parts · Red`.
 - Replace state-label and Timeline mini-languages with structured rows and
   improve source/value summaries for thresholds, series, tiles, log columns,
   and widget statistics.
@@ -23,7 +24,7 @@
 - Replace the multi-page post-template setup with one form containing
   collapsible lifecycle, content, appearance, and refresh sections.
 - Replace ambiguous Steps lists with per-step rows that distinguish parallel
-  jobs from relative duration/width and optional color.
+  jobs from relative-width parts and optional color.
 - Add current-step live progress, duration weighting, and per-step colors.
 - Require Home Assistant 2026.6 or newer for native config-flow sections.
 - Add friendly field titles, valid ranges, units, and named-option labels across

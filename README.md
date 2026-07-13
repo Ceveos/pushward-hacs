@@ -41,8 +41,9 @@ Compound layouts use repeatable forms:
 - Board tiles: add label/entity/attribute/unit/icon rows.
 - Log columns: add source entity/attribute/label/unit rows.
 - Widget stat lists: add label/entity/attribute/unit rows.
-- Steps: add one row per step with separate controls for parallel jobs, relative
-  duration/width, and color. Collapsed rows summarize all four values, so a long
+- Steps: add one row per step with freeform whole-number controls for parallel
+  jobs and relative-width parts, plus a guided or custom color. Collapsed rows
+  summarize all four values, so a long
   dishwasher wash stage remains both easy to scan and independent from the
   number of visual job rows.
 
@@ -84,15 +85,15 @@ actions:
         - label: Wash
           parallel_jobs: 1
           weight: 4
-          color: blue
+          color: Blue
         - label: Rinse
           parallel_jobs: 1
           weight: 1
-          color: cyan
+          color: Cyan
         - label: Dry
           parallel_jobs: 1
           weight: 2
-          color: orange
+          color: Orange
       progress: 0.25
   - action: pushward_hacs.send_notification
     data:

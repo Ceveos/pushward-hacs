@@ -187,19 +187,25 @@ _GENERIC_TEMPLATE_FIELDS = {
 
 
 def _coerce_step_parallel_jobs(value: object) -> int:
-    """Accept a numeric count or the self-describing service-selector value."""
-    return int(str(value).split()[0])
+    """Accept a whole-number parallel-job count."""
+    number = float(value)
+    if not number.is_integer():
+        raise vol.Invalid("Parallel jobs must be a whole number")
+    return int(number)
 
 
-def _coerce_step_weight(value: object) -> float:
-    """Accept a numeric ratio or the self-describing service-selector value."""
-    return float(str(value).split()[0].removesuffix("x"))
+def _coerce_step_weight(value: object) -> int:
+    """Accept a whole-number relative-width weight."""
+    number = float(value)
+    if not number.is_integer():
+        raise vol.Invalid("Relative width must be a whole number")
+    return int(number)
 
 
 def _coerce_step_color(value: object) -> str:
     """Accept a PushWard color or a self-describing service-selector value."""
     raw = str(value).strip()
-    if not raw or raw.lower().startswith("automatic color"):
+    if not raw or raw.lower() in ("auto", "automatic") or raw.lower().startswith("automatic color"):
         return ""
     if " color" in raw.lower():
         raw = raw[: raw.lower().index(" color")].lower()
@@ -210,7 +216,7 @@ _STEP_SCHEMA = vol.Schema(
     {
         vol.Required("label"): vol.All(str, vol.Length(min=1, max=32)),
         vol.Optional("parallel_jobs", default=1): vol.All(_coerce_step_parallel_jobs, vol.Range(min=1, max=10)),
-        vol.Optional("weight", default=1): vol.All(_coerce_step_weight, vol.Range(min=0.1, max=10000)),
+        vol.Optional("weight", default=1): vol.All(_coerce_step_weight, vol.Range(min=1, max=10000)),
         vol.Optional("color"): _coerce_step_color,
     }
 )
