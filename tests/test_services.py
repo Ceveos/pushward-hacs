@@ -838,8 +838,18 @@ async def test_update_activity_steps_maps_structured_rows(hass: HomeAssistant) -
             "slug": "s",
             "state": "ongoing",
             "steps": [
-                {"label": "A", "parallel_jobs": 1, "weight": 1, "color": "blue"},
-                {"label": "B", "parallel_jobs": 3, "weight": 4, "color": "orange"},
+                {
+                    "label": "A",
+                    "parallel_jobs": "1 parallel job",
+                    "weight": "1x relative length",
+                    "color": "Blue color",
+                },
+                {
+                    "label": "B",
+                    "parallel_jobs": "3 parallel jobs",
+                    "weight": "4x relative length",
+                    "color": "Orange color",
+                },
                 {"label": "C"},
             ],
         },

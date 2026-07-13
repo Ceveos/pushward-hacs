@@ -99,11 +99,11 @@ def test_steps_action_uses_structured_repeatable_rows() -> None:
     assert "description_field" not in selector
     assert set(selector["fields"]) == {"label", "parallel_jobs", "weight", "color"}
     assert selector["fields"]["parallel_jobs"]["selector"]["select"]["options"][0] == {
-        "value": "1",
+        "value": "1 parallel job",
         "label": "1 parallel job",
     }
     assert selector["fields"]["weight"]["selector"]["select"]["options"][3] == {
-        "value": "1",
+        "value": "1x relative length",
         "label": "1x relative length",
     }
 

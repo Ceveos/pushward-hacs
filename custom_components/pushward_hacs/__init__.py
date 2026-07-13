@@ -184,12 +184,34 @@ _GENERIC_TEMPLATE_FIELDS = {
     vol.Optional("duration"): validate_duration,
     vol.Optional("live_progress"): cv.boolean,
 }
+
+
+def _coerce_step_parallel_jobs(value: object) -> int:
+    """Accept a numeric count or the self-describing service-selector value."""
+    return int(str(value).split()[0])
+
+
+def _coerce_step_weight(value: object) -> float:
+    """Accept a numeric ratio or the self-describing service-selector value."""
+    return float(str(value).split()[0].removesuffix("x"))
+
+
+def _coerce_step_color(value: object) -> str:
+    """Accept a PushWard color or a self-describing service-selector value."""
+    raw = str(value).strip()
+    if not raw or raw.lower().startswith("automatic color"):
+        return ""
+    if " color" in raw.lower():
+        raw = raw[: raw.lower().index(" color")].lower()
+    return validate_color(raw)
+
+
 _STEP_SCHEMA = vol.Schema(
     {
         vol.Required("label"): vol.All(str, vol.Length(min=1, max=32)),
-        vol.Optional("parallel_jobs", default=1): vol.All(vol.Coerce(int), vol.Range(min=1, max=10)),
-        vol.Optional("weight", default=1): vol.All(vol.Coerce(float), vol.Range(min=0.1, max=10000)),
-        vol.Optional("color"): validate_color,
+        vol.Optional("parallel_jobs", default=1): vol.All(_coerce_step_parallel_jobs, vol.Range(min=1, max=10)),
+        vol.Optional("weight", default=1): vol.All(_coerce_step_weight, vol.Range(min=0.1, max=10000)),
+        vol.Optional("color"): _coerce_step_color,
     }
 )
 _STEPS_TEMPLATE_FIELDS = {

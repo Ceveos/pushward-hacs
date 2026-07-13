@@ -468,8 +468,9 @@ def _details_schema(
         step_default = [
             {
                 **item,
-                "parallel_jobs": str(item.get("parallel_jobs") or 1),
-                "weight": str(item.get("weight") or 1),
+                "parallel_jobs": _step_parallel_jobs_value(item.get("parallel_jobs") or 1),
+                "weight": _step_weight_value(item.get("weight") or 1),
+                "color": _step_color_value(item.get("color") or ""),
             }
             for item in step_default
             if isinstance(item, dict)
@@ -491,7 +492,7 @@ def _details_schema(
                         "label": "Relative step length (ratio; default 1)",
                         "selector": _step_weight_selector(),
                     },
-                    "color": {"label": "Color (named or RGB/RGBA hex)", "selector": _color_selector()},
+                    "color": {"label": "Color (named or RGB/RGBA hex)", "selector": _step_color_selector()},
                 },
             )
         )
@@ -1464,8 +1465,8 @@ def _parse_entity_input(user_input: dict, hass: HomeAssistant | None = None) -> 
                 )
             item["label"] = label
             try:
-                parallel_jobs = int(item.get("parallel_jobs") or 1)
-                weight = float(item.get("weight") or 1)
+                parallel_jobs = int(str(item.get("parallel_jobs") or 1).split()[0])
+                weight = float(str(item.get("weight") or 1).split()[0].removesuffix("x"))
             except (TypeError, ValueError) as err:
                 raise vol.Invalid(f"Step {index} has an invalid numeric value", path=[CONF_STEP_CONFIGURATION]) from err
             if not 1 <= parallel_jobs <= 10:
@@ -1475,7 +1476,7 @@ def _parse_entity_input(user_input: dict, hass: HomeAssistant | None = None) -> 
                     f"Step {index} relative length must be from 0.1 to 10,000",
                     path=[CONF_STEP_CONFIGURATION],
                 )
-            color = _validate_color_input(item.get("color"), allow_empty=True)
+            color = _parse_step_color(item.get("color"))
             item.update(parallel_jobs=parallel_jobs, weight=weight, color=color)
     step_labels = {
         str(index): str(item.get("label") or "")
@@ -2281,7 +2282,7 @@ def _step_parallel_jobs_selector() -> SelectSelector:
         SelectSelectorConfig(
             options=[
                 {
-                    "value": str(count),
+                    "value": _step_parallel_jobs_value(count),
                     "label": f"{count} parallel {'job' if count == 1 else 'jobs'}",
                 }
                 for count in range(1, 11)
@@ -2296,13 +2297,65 @@ def _step_weight_selector() -> SelectSelector:
     return SelectSelector(
         SelectSelectorConfig(
             options=[
-                {"value": value, "label": f"{value}x relative length"}
+                {"value": _step_weight_value(value), "label": f"{value}x relative length"}
                 for value in ("0.25", "0.5", "0.75", "1", "1.5", "2", "3", "4", "5", "10")
             ],
             custom_value=True,
             mode=SelectSelectorMode.DROPDOWN,
         )
     )
+
+
+def _step_color_selector() -> SelectSelector:
+    """Return colors whose stored values remain meaningful in collapsed rows."""
+    return SelectSelector(
+        SelectSelectorConfig(
+            options=[
+                {"value": "Automatic color (PushWard default)", "label": "Automatic / PushWard default"},
+                *[
+                    {
+                        "value": _step_color_value(color),
+                        "label": f"{color.title()} ({_COLOR_HEX_LABELS[color]})",
+                    }
+                    for color in PUSHWARD_NAMED_COLORS
+                ],
+            ],
+            custom_value=True,
+            mode=SelectSelectorMode.DROPDOWN,
+        )
+    )
+
+
+def _step_parallel_jobs_value(value: object) -> str:
+    """Format a parallel-job count for both storage and collapsed display."""
+    count = int(float(str(value).split()[0]))
+    return f"{count} parallel {'job' if count == 1 else 'jobs'}"
+
+
+def _step_weight_value(value: object) -> str:
+    """Format a relative-length ratio for both storage and collapsed display."""
+    number = str(value).split()[0].removesuffix("x")
+    return f"{number}x relative length"
+
+
+def _step_color_value(value: object) -> str:
+    """Format a step color for both storage and collapsed display."""
+    color = str(value).strip().lower()
+    if not color:
+        return "Automatic color (PushWard default)"
+    if color in PUSHWARD_NAMED_COLORS:
+        return f"{color.title()} color ({_COLOR_HEX_LABELS[color]})"
+    return str(value).strip()
+
+
+def _parse_step_color(value: object) -> str:
+    """Convert a self-describing step color back to the PushWard API value."""
+    raw = str(value or "").strip()
+    if not raw or raw.lower().startswith("automatic color"):
+        return ""
+    if " color" in raw.lower():
+        raw = raw[: raw.lower().index(" color")].lower()
+    return _validate_color_input(raw, allow_empty=True)
 
 
 def _action_selector(*, button: bool) -> ObjectSelector:

@@ -158,7 +158,12 @@ def _mock_details_input(template: str = "generic", **overrides) -> dict:
         data[CONF_REMAINING_TIME_ATTR] = ""
     if template == "steps":
         data[CONF_STEP_CONFIGURATION] = [
-            {"label": "Step 1", "parallel_jobs": "1", "weight": "1", "color": ""}
+            {
+                "label": "Step 1",
+                "parallel_jobs": "1 parallel job",
+                "weight": "1x relative length",
+                "color": "Automatic color (PushWard default)",
+            }
         ]
         data[CONF_CURRENT_STEP_ATTR] = ""
     if template == "alert":
@@ -634,7 +639,12 @@ async def test_subentry_add_steps_entity(hass: HomeAssistant) -> None:
         template="steps",
         details_overrides={
             CONF_STEP_CONFIGURATION: [
-                {"label": label, "parallel_jobs": "1", "weight": str(weight), "color": ""}
+                {
+                    "label": label,
+                    "parallel_jobs": "1 parallel job",
+                    "weight": f"{weight}x relative length",
+                    "color": "Automatic color (PushWard default)",
+                }
                 for label, weight in [("Pre-wash", 1), ("Wash", 4), ("Rinse", 1), ("Dry", 2), ("Done", 1)]
             ],
             CONF_CURRENT_STEP_ATTR: "step",
@@ -1632,8 +1642,18 @@ def test_parse_entity_input_structured_steps_separates_rows_and_weights() -> Non
             **{
                 CONF_TEMPLATE: "steps",
                 CONF_STEP_CONFIGURATION: [
-                    {"label": "Wash", "parallel_jobs": 1, "weight": 4, "color": "blue"},
-                    {"label": "Rinse", "parallel_jobs": 2, "weight": 1, "color": "teal"},
+                    {
+                        "label": "Wash",
+                        "parallel_jobs": "1 parallel job",
+                        "weight": "4x relative length",
+                        "color": "Blue color (#007AFF)",
+                    },
+                    {
+                        "label": "Rinse",
+                        "parallel_jobs": "2 parallel jobs",
+                        "weight": "1x relative length",
+                        "color": "Teal color (#30B0C7)",
+                    },
                 ],
             }
         )
@@ -1732,8 +1752,8 @@ def test_steps_repeatable_rows_have_clear_collapsed_summary() -> None:
     fields = validator.config["fields"]
     parallel_options = fields["parallel_jobs"]["selector"].config["options"]
     weight_options = fields["weight"]["selector"].config["options"]
-    assert parallel_options[0] == {"value": "1", "label": "1 parallel job"}
-    assert weight_options[3] == {"value": "1", "label": "1x relative length"}
+    assert parallel_options[0] == {"value": "1 parallel job", "label": "1 parallel job"}
+    assert weight_options[3] == {"value": "1x relative length", "label": "1x relative length"}
 
 
 def test_repeatable_rows_expose_useful_collapsed_subtitles() -> None:

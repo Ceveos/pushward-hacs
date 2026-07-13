@@ -608,25 +608,25 @@ update_activity_steps:
                   selector:
                     select:
                       options:
-                      - value: '1'
+                      - value: 1 parallel job
                         label: 1 parallel job
-                      - value: '2'
+                      - value: 2 parallel jobs
                         label: 2 parallel jobs
-                      - value: '3'
+                      - value: 3 parallel jobs
                         label: 3 parallel jobs
-                      - value: '4'
+                      - value: 4 parallel jobs
                         label: 4 parallel jobs
-                      - value: '5'
+                      - value: 5 parallel jobs
                         label: 5 parallel jobs
-                      - value: '6'
+                      - value: 6 parallel jobs
                         label: 6 parallel jobs
-                      - value: '7'
+                      - value: 7 parallel jobs
                         label: 7 parallel jobs
-                      - value: '8'
+                      - value: 8 parallel jobs
                         label: 8 parallel jobs
-                      - value: '9'
+                      - value: 9 parallel jobs
                         label: 9 parallel jobs
-                      - value: '10'
+                      - value: 10 parallel jobs
                         label: 10 parallel jobs
                 weight:
                   label: Relative step length (ratio; default 1)
@@ -634,25 +634,25 @@ update_activity_steps:
                     select:
                       custom_value: true
                       options:
-                      - value: '0.25'
+                      - value: 0.25x relative length
                         label: 0.25x relative length
-                      - value: '0.5'
+                      - value: 0.5x relative length
                         label: 0.5x relative length
-                      - value: '0.75'
+                      - value: 0.75x relative length
                         label: 0.75x relative length
-                      - value: '1'
+                      - value: 1x relative length
                         label: 1x relative length
-                      - value: '1.5'
+                      - value: 1.5x relative length
                         label: 1.5x relative length
-                      - value: '2'
+                      - value: 2x relative length
                         label: 2x relative length
-                      - value: '3'
+                      - value: 3x relative length
                         label: 3x relative length
-                      - value: '4'
+                      - value: 4x relative length
                         label: 4x relative length
-                      - value: '5'
+                      - value: 5x relative length
                         label: 5x relative length
-                      - value: '10'
+                      - value: 10x relative length
                         label: 10x relative length
                 color:
                   label: Color
@@ -660,18 +660,19 @@ update_activity_steps:
                     select:
                       custom_value: true
                       options:
-                      - red
-                      - orange
-                      - yellow
-                      - green
-                      - blue
-                      - purple
-                      - pink
-                      - indigo
-                      - teal
-                      - cyan
-                      - mint
-                      - brown
+                      - Automatic color (PushWard default)
+                      - Red color
+                      - Orange color
+                      - Yellow color
+                      - Green color
+                      - Blue color
+                      - Purple color
+                      - Pink color
+                      - Indigo color
+                      - Teal color
+                      - Cyan color
+                      - Mint color
+                      - Brown color
         live_progress:
           description: Animate progress within the current step. Requires an end date or duration.
           selector:
