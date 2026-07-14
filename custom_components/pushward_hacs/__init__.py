@@ -221,11 +221,11 @@ _STEP_SCHEMA = vol.Schema(
     }
 )
 _STEPS_TEMPLATE_FIELDS = {
-    vol.Optional("current_step"): vol.Coerce(int),
-    vol.Optional("steps"): vol.All([_STEP_SCHEMA], vol.Length(min=1, max=20)),
+    vol.Required("current_step", default=0): vol.Coerce(int),
+    vol.Required("steps"): vol.All([_STEP_SCHEMA], vol.Length(min=1, max=20)),
     vol.Optional("end_date"): vol.Coerce(int),
     vol.Optional("duration"): validate_duration,
-    vol.Optional("live_progress"): cv.boolean,
+    vol.Required("live_progress", default=False): cv.boolean,
 }
 _ALERT_TEMPLATE_FIELDS = {
     vol.Optional("severity"): vol.In(SEVERITIES),

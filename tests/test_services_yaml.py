@@ -48,6 +48,17 @@ def _leaf_fields(service: dict) -> list[str]:
     return out
 
 
+def _leaf_nodes(service: dict) -> dict[str, dict]:
+    """All field definitions, flattening collapsible UI sections."""
+    out: dict[str, dict] = {}
+    for key, value in (service.get("fields") or {}).items():
+        if isinstance(value, dict) and "fields" in value:
+            out.update(value.get("fields") or {})
+        else:
+            out[key] = value
+    return out
+
+
 def test_services_yaml_parses() -> None:
     """services.yaml is valid YAML with no duplicate keys (HA's loader rejects dupes)."""
     assert isinstance(_services(), dict)
@@ -151,8 +162,14 @@ def test_deprecated_update_activity_removed_before_release() -> None:
 
 def test_steps_action_uses_structured_repeatable_rows() -> None:
     """Users configure one coherent row per step, not four parallel arrays."""
-    fields = _services()["update_activity_steps"]["fields"]["steps_options"]["fields"]
+    action_fields = _services()["update_activity_steps"]["fields"]
+    assert action_fields["current_step"]["required"] is True
+    assert action_fields["current_step"]["default"] == 0
+    fields = action_fields["steps_options"]["fields"]
     assert set(fields) >= {"steps", "live_progress", "duration", "end_date"}
+    assert fields["steps"]["required"] is True
+    assert fields["live_progress"]["required"] is True
+    assert fields["live_progress"]["default"] is False
     selector = fields["steps"]["selector"]["object"]
     assert selector["multiple"] is True
     assert "label_field" not in selector
@@ -160,6 +177,26 @@ def test_steps_action_uses_structured_repeatable_rows() -> None:
     assert set(selector["fields"]) == {"label", "parallel_jobs", "weight", "color"}
     assert selector["fields"]["parallel_jobs"]["selector"]["text"]["prefix"] == "Rows: "
     assert selector["fields"]["weight"]["selector"]["text"]["prefix"] == "Width: "
+
+
+def test_boolean_actions_use_one_clear_toggle() -> None:
+    """Boolean fields must not render HA's optional-field checkbox plus a switch."""
+    for action, body in _services().items():
+        for field, node in _leaf_nodes(body).items():
+            if "boolean" in (node.get("selector") or {}):
+                assert node.get("required") is True, f"{action}.{field}: optional boolean renders two controls"
+
+
+def test_all_action_fields_have_friendly_names_and_descriptions() -> None:
+    """Never expose raw payload keys such as ``live_progress`` in the action UI."""
+    english = json.loads((_TRANSLATIONS / "en.json").read_text())["services"]
+    for action, body in _services().items():
+        translated = english.get(action, {}).get("fields", {})
+        for field, node in _leaf_nodes(body).items():
+            assert node.get("name") or translated.get(field, {}).get("name"), f"{action}.{field}: missing name"
+            assert node.get("description") or translated.get(field, {}).get("description"), (
+                f"{action}.{field}: missing description"
+            )
 
 
 def test_sections_have_matching_translations_in_every_locale() -> None:

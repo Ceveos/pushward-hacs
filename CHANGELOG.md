@@ -4,6 +4,9 @@
 
 - Fix the Board tile trend selector so its action form renders correctly in
   Home Assistant automations, and validate every shipped selector in tests.
+- Remove redundant optional-field checkboxes from boolean controls, make the
+  Steps workflow definition explicit, and replace raw payload keys with clear
+  action-field names and descriptions.
 - Replace raw Steps arrays with named repeatable rows for parallel rows,
   whole-number relative width, and color; collapsed rows use the compact peer
   summary `Wash · Rows: 2 · Width: 4 · Red`.

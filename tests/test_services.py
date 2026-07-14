@@ -93,6 +93,13 @@ _ALL_SERVICES = (
 )
 
 
+def _required_template_data(template: str) -> dict:
+    """Return fields required by a template-specific update action."""
+    if template == "steps":
+        return {"current_step": 0, "steps": [{"label": "Step"}]}
+    return {}
+
+
 async def test_services_registered_on_setup(hass: HomeAssistant) -> None:
     """Services register at component setup and persist after an entry unloads.
 
@@ -671,7 +678,7 @@ async def test_update_activity_service_rejects_invalid_color(hass: HomeAssistant
 
 
 async def test_per_template_services_registered_and_persist(hass: HomeAssistant) -> None:
-    """All six update_activity_<template> services register on setup and persist after unload."""
+    """All eight update_activity_<template> services register on setup and persist after unload."""
     api = _mock_api()
     entry = await _setup_entry(hass, api)
 
@@ -694,7 +701,12 @@ async def test_update_activity_template_injects_template(hass: HomeAssistant, te
     await hass.services.async_call(
         DOMAIN,
         f"update_activity_{template}",
-        {"slug": "x", "state": "ongoing", "state_text": "Running"},
+        {
+            "slug": "x",
+            "state": "ongoing",
+            "state_text": "Running",
+            **_required_template_data(template),
+        },
         blocking=True,
     )
 
@@ -715,7 +727,13 @@ async def test_per_template_keeps_sound_priority_top_level(hass: HomeAssistant, 
     await hass.services.async_call(
         DOMAIN,
         f"update_activity_{template}",
-        {"slug": "x", "state": "ongoing", "sound": "chime", "priority": 7},
+        {
+            "slug": "x",
+            "state": "ongoing",
+            "sound": "chime",
+            "priority": 7,
+            **_required_template_data(template),
+        },
         blocking=True,
     )
 
@@ -910,6 +928,21 @@ async def test_update_activity_steps_rejects_invalid_structured_step(hass: HomeA
                 "state": "ongoing",
                 "steps": [{"label": "", "parallel_jobs": 11}],
             },
+            blocking=True,
+        )
+    api.update_activity.assert_not_awaited()
+
+
+async def test_update_activity_steps_requires_workflow_definition(hass: HomeAssistant) -> None:
+    """The guided Steps action cannot send an invalid upsert with no steps."""
+    api = _mock_api()
+    await _setup_entry(hass, api)
+
+    with pytest.raises(vol.MultipleInvalid):
+        await hass.services.async_call(
+            DOMAIN,
+            "update_activity_steps",
+            {"slug": "s", "state": "ongoing", "current_step": 0},
             blocking=True,
         )
     api.update_activity.assert_not_awaited()
@@ -1224,6 +1257,7 @@ async def test_action_fields_forwarded_on_every_template(hass: HomeAssistant, te
             "tap_action": {"url": "homeassistant://navigate/lovelace/0"},
             "url_action": {"url": "https://example.com", "title": "Open", "method": "POST", "body": "go"},
             "secondary_url_action": {"url": "https://example.com/more", "title": "More"},
+            **_required_template_data(template),
         },
         blocking=True,
     )

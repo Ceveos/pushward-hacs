@@ -163,14 +163,19 @@ update_activity_generic:
       collapsed: true
       fields:
         live_progress:
+          name: Animate progress
           description: Animate progress toward the estimated completion between pushes. Requires an end date or duration.
+          required: true
+          default: false
           selector:
             boolean: null
         duration:
+          name: Estimated duration
           description: Estimated remaining duration in seconds or a value such as 10m or 1h30m.
           selector:
             text: null
         end_date:
+          name: Estimated finish time
           description: Estimated completion as a Unix timestamp. Overrides duration.
           selector:
             number:
@@ -328,6 +333,8 @@ update_activity_countdown:
               mode: box
               unit_of_measurement: seconds
         alarm:
+          required: true
+          default: false
           selector:
             boolean: null
         snooze_seconds:
@@ -561,7 +568,11 @@ update_activity_steps:
           - ongoing
           - ended
     current_step:
-      example: 2
+      name: Current step position
+      description: Zero-based position. Use 0 for the first step, 1 for the second, or the total number of steps when complete.
+      required: true
+      default: 0
+      example: 1
       selector:
         number:
           min: 0
@@ -593,8 +604,10 @@ update_activity_steps:
       collapsed: true
       fields:
         steps:
-          description: Add one row per step. Collapsed rows summarize the name, parallel rows, relative width,
+          name: Workflow steps
+          description: Add one row for every step, in display order. Each row defines its name, stacked rows, relative width,
             and color.
+          required: true
           selector:
             object:
               multiple: true
@@ -639,14 +652,19 @@ update_activity_steps:
                       - Mint
                       - Brown
         live_progress:
+          name: Animate current step
           description: Animate progress within the current step. Requires an end date or duration.
+          required: true
+          default: false
           selector:
             boolean: null
         duration:
+          name: Current-step duration
           description: Expected duration of the current step, such as 90m.
           selector:
             text: null
         end_date:
+          name: Current-step finish time
           description: Expected finish time of the current step as a Unix timestamp.
           selector:
             number:
@@ -1486,6 +1504,8 @@ update_activity_timeline:
               max: 10
               mode: box
         smoothing:
+          required: true
+          default: false
           selector:
             boolean: null
         thresholds:
@@ -1950,6 +1970,7 @@ update_activity_board:
                   multiline: true
       description: Optional background tap destination. Configure a visible link/app deep link or a silent HTTP webhook.
     url_action:
+      name: Primary button
       description: Optional button with a visible destination or silent HTTP webhook.
       example: '{"url": "https://example.com/ack", "title": "Acknowledge", "method": "POST"}'
       selector:
@@ -1993,6 +2014,7 @@ update_activity_board:
                 text:
                   multiline: true
     secondary_url_action:
+      name: Secondary button
       description: Optional button with a visible destination or silent HTTP webhook.
       example: '{"url": "https://example.com/details", "title": "Details", "foreground": true}'
       selector:
@@ -2205,6 +2227,7 @@ update_activity_log:
                   multiline: true
       description: Optional background tap destination. Configure a visible link/app deep link or a silent HTTP webhook.
     url_action:
+      name: Primary button
       description: Optional button with a visible destination or silent HTTP webhook.
       example: '{"url": "https://example.com/ack", "title": "Acknowledge", "method": "POST"}'
       selector:
@@ -2248,6 +2271,7 @@ update_activity_log:
                 text:
                   multiline: true
     secondary_url_action:
+      name: Secondary button
       description: Optional button with a visible destination or silent HTTP webhook.
       example: '{"url": "https://example.com/details", "title": "Details", "foreground": true}'
       selector:
@@ -2563,6 +2587,7 @@ send_notification:
     push:
       name: Push
       description: Send as an APNs push alert to all devices. When false, the notification is stored in the inbox only.
+      required: true
       default: true
       selector:
         boolean: null
@@ -2647,6 +2672,7 @@ dispatch:
         activity_enabled:
           name: Send Live Activity
           description: Enable this section to upsert and update a Live Activity.
+          required: true
           default: false
           selector:
             boolean: {}
@@ -2712,20 +2738,24 @@ dispatch:
         notification_enabled:
           name: Send notification
           description: Enable this section to send a PushWard inbox/APNs notification.
+          required: true
           default: false
           selector:
             boolean: {}
         notification_title:
           name: Notification title
+          description: Title shown in the notification.
           selector:
             text: {}
         notification_body:
           name: Notification body
+          description: Main notification message.
           selector:
             text:
               multiline: true
         notification_subtitle:
           name: Notification subtitle
+          description: Optional secondary line below the title.
           selector:
             text: {}
         notification_level:
@@ -2741,6 +2771,7 @@ dispatch:
         notification_push:
           name: Send APNs alert
           description: Disable to store the notification only in the PushWard inbox.
+          required: true
           default: true
           selector:
             boolean: {}
@@ -2750,19 +2781,23 @@ dispatch:
         widget_enabled:
           name: Upsert widget
           description: Enable this section to create or replace a PushWard widget.
+          required: true
           default: false
           selector:
             boolean: {}
         widget_slug:
           name: Widget slug
+          description: Unique URL-safe widget identifier. Required when Widget is enabled.
           selector:
             text: {}
         widget_name:
           name: Widget display name
+          description: Human-readable name shown for the widget.
           selector:
             text: {}
         widget_template:
           name: Widget layout
+          description: Layout expected by the widget content object below.
           selector:
             select:
               options:
@@ -2791,16 +2826,19 @@ dispatch:
         email_enabled:
           name: Send email
           description: Enable this section to send to a recipient verified in the PushWard app.
+          required: true
           default: false
           selector:
             boolean: {}
         email_to:
           name: Recipient
+          description: Email address verified in the PushWard app.
           selector:
             text:
               type: email
         email_subject:
           name: Subject
+          description: Email subject line.
           selector:
             text: {}
         email_body:
