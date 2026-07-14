@@ -9,6 +9,7 @@ import voluptuous as vol
 from homeassistant.config_entries import ConfigEntryState, ConfigSubentryData
 from homeassistant.core import HomeAssistant
 from homeassistant.exceptions import HomeAssistantError, ServiceValidationError
+from homeassistant.setup import async_setup_component
 from pytest_homeassistant_custom_component.common import MockConfigEntry
 
 from custom_components.pushward_hacs import async_remove_entry
@@ -79,13 +80,15 @@ async def _setup_entry(hass: HomeAssistant, mock_api: AsyncMock) -> MockConfigEn
     return entry
 
 
-_BASE_SERVICES = (
-    "update_activity_generic",
+_ALL_SERVICES = (
+    *(f"update_activity_{template}" for template in TEMPLATES),
     "create_activity",
     "end_activity",
     "delete_activity",
     "send_notification",
     "send_email",
+    "widget_refresh",
+    "delete_widget",
     "dispatch",
 )
 
@@ -99,14 +102,43 @@ async def test_services_registered_on_setup(hass: HomeAssistant) -> None:
     api = _mock_api()
     entry = await _setup_entry(hass, api)
 
-    for name in _BASE_SERVICES:
+    for name in _ALL_SERVICES:
         assert hass.services.has_service(DOMAIN, name)
 
     await hass.config_entries.async_unload(entry.entry_id)
     await hass.async_block_till_done()
 
-    for name in _BASE_SERVICES:
+    for name in _ALL_SERVICES:
         assert hass.services.has_service(DOMAIN, name)
+
+
+async def test_action_runs_from_an_automation(hass: HomeAssistant) -> None:
+    """A PushWard action can be selected and executed by HA's automation engine."""
+    api = _mock_api()
+    await _setup_entry(hass, api)
+
+    assert await async_setup_component(
+        hass,
+        "automation",
+        {
+            "automation": {
+                "alias": "PushWard automation action test",
+                "triggers": [{"trigger": "event", "event_type": "pushward_test"}],
+                "actions": [
+                    {
+                        "action": f"{DOMAIN}.send_notification",
+                        "data": {"title": "Automation", "body": "It works"},
+                    }
+                ],
+            }
+        },
+    )
+
+    hass.bus.async_fire("pushward_test")
+    await hass.async_block_till_done()
+
+    api.create_notification.assert_awaited_once()
+    assert api.create_notification.call_args.kwargs["title"] == "Automation"
 
 
 async def test_service_update_activity(hass: HomeAssistant) -> None:

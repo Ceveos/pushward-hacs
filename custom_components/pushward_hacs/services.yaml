@@ -1795,9 +1795,12 @@ update_activity_board:
                   options:
                   - label: None
                     value: ''
-                  - up
-                  - down
-                  - flat
+                  - label: Up
+                    value: up
+                  - label: Down
+                    value: down
+                  - label: Flat
+                    value: flat
             url_action:
               label: Tile tap action (advanced object)
               selector:

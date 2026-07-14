@@ -15,8 +15,12 @@ from __future__ import annotations
 import json
 from pathlib import Path
 
+import voluptuous as vol
 import yaml
+from homeassistant.helpers import selector
+from homeassistant.helpers.service import _SERVICES_SCHEMA
 
+import custom_components.pushward_hacs as integration
 from custom_components.pushward_hacs.const import TEMPLATES
 
 _COMPONENT = Path(__file__).parent.parent / "custom_components" / "pushward_hacs"
@@ -49,6 +53,32 @@ def test_services_yaml_parses() -> None:
     assert isinstance(_services(), dict)
 
 
+def test_home_assistant_accepts_every_action_description() -> None:
+    """HA's complete service-description schema accepts all automation forms."""
+    assert set(_SERVICES_SCHEMA(_services())) == set(_services())
+
+
+def test_every_service_selector_is_valid() -> None:
+    """Every action field must use a selector schema accepted by Home Assistant.
+
+    A single invalid nested selector can prevent the frontend from rendering the
+    surrounding action form, even though ``services.yaml`` itself is valid YAML.
+    """
+
+    def validate(value: object, path: tuple[str, ...]) -> None:
+        if isinstance(value, dict):
+            if "selector" in value:
+                configured = selector.selector(value["selector"])
+                configured.serialize()
+            for key, child in value.items():
+                validate(child, (*path, str(key)))
+        elif isinstance(value, list):
+            for index, child in enumerate(value):
+                validate(child, (*path, str(index)))
+
+    validate(_services(), ())
+
+
 def test_no_duplicate_field_keys() -> None:
     """Moving fields into sections must never duplicate a field key within a service.
 
@@ -58,6 +88,36 @@ def test_no_duplicate_field_keys() -> None:
     for name, body in _services().items():
         leaves = _leaf_fields(body)
         assert len(leaves) == len(set(leaves)), f"{name}: duplicate field key(s) {sorted(leaves)}"
+
+
+def test_action_forms_match_registered_payload_schemas() -> None:
+    """Every displayed form field is accepted at runtime, and vice versa."""
+
+    def schema_fields(schema: object) -> set[str]:
+        if isinstance(schema, vol.All):
+            schema = next(validator for validator in schema.validators if isinstance(validator, vol.Schema))
+        assert isinstance(schema, vol.Schema)
+        return {str(key) for key in schema.schema}
+
+    schemas = {
+        **{
+            f"update_activity_{template}": schema
+            for template, schema in integration._UPDATE_TEMPLATE_SCHEMAS.items()
+        },
+        "create_activity": integration.SCHEMA_CREATE_ACTIVITY,
+        "end_activity": integration.SCHEMA_END_ACTIVITY,
+        "delete_activity": integration.SCHEMA_DELETE_ACTIVITY,
+        "send_notification": integration.SCHEMA_SEND_NOTIFICATION,
+        "send_email": integration.SCHEMA_SEND_EMAIL,
+        "widget_refresh": integration.SCHEMA_WIDGET_REFRESH,
+        "delete_widget": integration.SCHEMA_DELETE_WIDGET,
+        "dispatch": integration.SCHEMA_DISPATCH,
+    }
+
+    services = _services()
+    assert set(services) == set(schemas)
+    for name, schema in schemas.items():
+        assert set(_leaf_fields(services[name])) == schema_fields(schema), f"{name}: form/schema field mismatch"
 
 
 def test_sections_are_well_formed() -> None:
